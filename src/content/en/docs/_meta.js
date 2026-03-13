@@ -1,18 +1,34 @@
 export default {
-  "doc-divider": { "type": "separator", "title": "DOCUMENTATION" },
-  index: {
-    title: 'Overview',
-    theme: {
-      toc: false,
-      layout: 'full'
-    }
+  setup: {
+    title: "Installing Datasuite",
+    display: "normal"
   },
-  setup: 'Setup',
-  'get-started': 'Get Started',
-  'data-extractor': 'Data Extractor App',
-  vaxx: 'Vaxx App',
-  rmncah: 'RMNCAH App',
+  apps: {
+    title: "Datasuite Apps",
+    display: "normal"
+  },
+  framework: {
+    title: "Analytical Framework",
+    display: "normal"
+  },
+  "getting-started": {
+    title: "Getting Started",
+    display: "hidden"
+  },
+  methods: {
+    title: "Methods",
+    display: "hidden"
+  },
   supporting: {
-    display: 'hidden'
+    title: "Supporting Resources",
+    display: "hidden"
+  },
+  outputs: {
+    title: "Outputs & Reporting",
+    display: "hidden"
+  },
+  troubleshooting: {
+    title: "Troubleshooting",
+    display: "hidden"
   }
 }

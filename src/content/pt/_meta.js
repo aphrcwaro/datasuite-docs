@@ -17,7 +17,7 @@ export default {
   },
   downloads: {
     type: 'page',
-    display: 'hidden',
+    display: 'normal',
     theme: {
       copyPage: false,
       toc: false

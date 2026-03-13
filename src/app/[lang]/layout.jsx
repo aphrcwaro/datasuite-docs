@@ -9,7 +9,9 @@ import 'nextra-theme-docs/style.css'
 import '../../../public/css/custom.css'
 
 export default async function RootLayout({ children, params }) {
-  const { lang } = await params
+
+  const resolvedParams = await params
+  const lang = resolvedParams.lang
 
   if (!locales.includes(lang)) {
     notFound()

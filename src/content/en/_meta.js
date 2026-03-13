@@ -10,14 +10,16 @@ export default {
   },
   docs: {
     type: 'page',
-    title: 'Documentation',
+      title: 'Documentation',
+    display: 'normal',
     theme: {
-      copyPage: false
+      copyPage: false,
+      toc: false
     }
   },
   downloads: {
     type: 'page',
-    display: 'hidden',
+    display: 'normal',
     theme: {
       copyPage: false,
       toc: false
