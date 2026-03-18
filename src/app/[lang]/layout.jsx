@@ -3,6 +3,7 @@ import { Footer, Layout, Navbar } from 'nextra-theme-docs'
 import { Search } from 'nextra/components'
 import { getPageMap } from 'nextra/page-map'
 import { notFound } from 'next/navigation'
+import { Analytics } from "@vercel/analytics/next"
 import Image from 'next/image'
 import { locales } from '@/proxy'
 import 'nextra-theme-docs/style.css'
@@ -85,6 +86,7 @@ export default async function RootLayout({ children, params }) {
           >
             {children}
           </Layout>
+          <Analytics />
         </body>
       </html>
     )

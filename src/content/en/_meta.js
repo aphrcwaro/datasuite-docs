@@ -10,8 +10,15 @@ export default {
   },
   docs: {
     type: 'page',
-      title: 'Documentation',
-    display: 'normal',
+    title: 'Documentation',
+    theme: {
+      copyPage: false,
+      toc: false
+    }
+  },
+  resources: {
+    type: 'page',
+    title: 'Resources',
     theme: {
       copyPage: false,
       toc: false
@@ -19,7 +26,7 @@ export default {
   },
   downloads: {
     type: 'page',
-    display: 'normal',
+    display: 'hidden',
     theme: {
       copyPage: false,
       toc: false

@@ -1,5 +1,59 @@
-# Documentation
+import {HomeCards } from '@/components/HomeCards'
 
-Welcome to the Datasuite documentation.
+# DataSuite documentation
 
-Use the navigation on the left to explore the guide.
+Learn how to use DataSuite and explore its modules.
+
+## Getting started
+
+<HomeCards
+  items={[
+    {
+      title: 'Download DataSuite',
+      description: 'Download DataSuite for Windows.',
+      href: '/en/downloads',
+      icon: 'tools'
+    },
+    {
+      title: 'Setup',
+      description: 'Install and configure DataSuite on your system.',
+      href: '/en/docs/setup',
+      icon: 'desktop-download'
+    },
+    {
+      title: 'Getting started',
+      description: 'Discover the key features of DataSuite with the step-by-step tutorial.',
+      href: '/en/docs/get-started',
+      icon: 'rocket'
+    }
+  ]}
+/>
+
+## Learn about the apps
+
+<HomeCards
+  items={[
+    {
+      title: 'Data Extractor',
+      description: 'Extract and prepare DHIS2 data for analysis.',
+      href: '/en/docs/data-extractor',
+      icon: 'database'
+    },
+    {
+      title: 'Vaxx',
+      description: 'Explore immunization indicators and analysis tools.',
+      href: '/en/docs/vaxx',
+      icon: 'pulse'
+    },
+    {
+      title: 'RMNCAH',
+      description: 'Analyse reproductive, maternal and child health indicators.',
+      href: '/en/docs/rmncah',
+      icon: 'person'
+    }
+  ]}
+/>
+
+## Privacy
+
+By default, DataSuite auto-updates to new versions, and does not collects usage data and crash report information.

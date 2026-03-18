@@ -1,20 +1,15 @@
 export default {
-  setup: {
-    title: "Installing Datasuite",
-    display: "normal"
+  "doc-divider": { "type": "separator", "title": "DOCUMENTATION" },
+  index: {
+    title: 'Overview',
+    theme: {
+      layout: 'full'
+    }
   },
-  apps: {
-    title: "Datasuite Apps",
-    display: "normal"
-  },
-  framework: {
-    title: "Analytical Framework",
-    display: "normal"
-  },
-  "getting-started": {
-    title: "Getting Started",
-    display: "hidden"
-  },
+  setup: "Installing Datasuite",
+  "getting-started":"Getting Started",
+  apps: "Datasuite Apps",
+  framework: "Analytical Framework",
   methods: {
     title: "Methods",
     display: "hidden"
