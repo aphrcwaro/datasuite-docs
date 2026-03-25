@@ -1,33 +1,65 @@
 import { Callout } from 'nextra/components'
 import { Steps } from 'nextra/components'
 
+
 # Mapping Configuration
 
 ## Overview
 
 Mapping defines **what data to extract** from DHIS2 and **how it is structured** for analysis.
-It is the core step in the Data Extractor workflow:
-- Defines indicators
-- Links DHIS2 data sources
-- Standardizes outputs for Datasuite apps
+It is the core step in the Data Extractor workflow in that it: fetches indicators of interest, 
+maps/matches with corresponding DHIS2 data sources and standardizes outputs for Datasuite apps.
 
-## Mapping Workflow
-
-1. Create a new mapping
-2. Define metadata (name, description, mapping mode)
-3. Configure indicators
-4. Map DHIS2 data sources
-5. Save and reuse mapping
+## DHIS2 Data Mapping Workflow
 
 
-## 1. Mapping Manager
+<Mermaid
+  chart={`
+flowchart LR
+  subgraph "Mapping Workflow"
+    A[Create Mapping]
+    B[Define Metadata]
+    C[Configure Indicators]
+    D[Map Data Sources]
+    E[Save Mapping]
+  end
 
+  A --> B --> C --> D --> E
+
+  D --> S[(DHIS2 Data)]
+  S --> D
+
+  E --> F{Mapping Complete?}
+  F -->|Yes| G[Download Data]
+  F -->|No| C
+
+  classDef step fill:#e8f1ff,stroke:#2791ff,stroke-width:2px,color:#0d3f7b;
+  classDef decision fill:#fff4e5,stroke:#f59e0b,stroke-width:2px,color:#7a4b00;
+  classDef output fill:#e8f8f0,stroke:#10b981,stroke-width:2px,color:#065f46;
+  classDef data fill:#f3e8ff,stroke:#8b5cf6,stroke-width:2px,color:#4c1d95;
+
+  class A,B,C,D,E step;
+  class F decision;
+  class G output;
+  class S data;
+`}
+ />
+
+## Navigating the CD2030 DHIS2 Data Extractor
+Once successfully logged in, the following views help in navigating the CD2030 DHIS2 Data Extractor
+### 1. Dashboard
+![Mapping Manager](/images/extractor_dashboard.jpg)
+
+### 2. Mappings Manager 
 ![Mapping Manager](/images/extractor_mapping_manager.jpg)
 
 The **Mapping Manager** is the central place to:
 - View all saved mappings
 - Search mappings by name or ID
 - Create a new mapping
+
+### 3. Downloads Manager
+
 
 ### Key Actions
 
@@ -37,13 +69,14 @@ The **Mapping Manager** is the central place to:
 
 ## 2. Creating a New Mapping
 
-![New Mapping](/images/extractor_mapping_newmap.jpg)
+
 
 <Steps>
 ### Click **New Mapping**
+![New Mapping](/images/extractor_mapping_newmap.jpg)
 
 ### Configure the mapping 
-Define the mapping name, Description and the [mapping mode] (#mapping-mode)
+Define the mapping name, Description and the mapping mode
 <Callout type="important">
   **Important:** Use a clear naming convention
   Example:
@@ -51,7 +84,7 @@ Define the mapping name, Description and the [mapping mode] (#mapping-mode)
     Description: MNH Indicators for CAM 2026 Workshop
 </Callout>
 
-### Select the [Mapping mode] (#mapping-mode)
+### Select the Mapping mode
 There are currently two mapping modes:
 - Countdown → This mode has a predefined list of MNCH indicators and structure as in the [harmonized data template] (/en/resources)
 - Custom → Fully user-defined configuration, where the user can download any data that they have access rights to
@@ -68,633 +101,8 @@ There are currently two mapping modes:
 
 
 
-Mapping Mode [#mapping-mode]
+Mapping Mode
 
 
 
 
-
-
-
-
-
-💡 Best Practice
-Save early and frequently
-Use clear naming conventions
-Keep descriptions meaningful for reuse
-3. Indicators Configuration
-
-This section defines how indicators are mapped to DHIS2 data sources.
-
-Indicator Setup
-
-Each indicator includes:
-
-Internal Name
-Target Export Code
-Source Configuration
-Countdown Mode
-Indicators are predefined
-Internal name and export codes are fixed
-Faster and standardized workflow
-Custom Mode
-User defines:
-Internal Name
-Target Export Code
-Fully flexible setup
-Adding Indicators
-Click Add Indicator
-Or import using Import JSON
-4. Source Configuration
-
-Search and select:
-
-Data Elements
-Indicators
-Datasets
-
-These represent the actual DHIS2 data sources.
-
-Resolved Data Sources
-
-This section shows:
-
-Selected data elements
-Type of data source
-Disaggregation (categories)
-💡 Tip: Data Sources vs Disaggregation
-Data Source → What you are extracting
-Disaggregation → How it is broken down (e.g. age, sex, location)
-✅ Recommendation
-
-Always prefer data elements over indicators.
-
-Why?
-
-They are the lowest level of data
-More flexible for analysis
-Can be used to construct indicators later
-5. Saving the Mapping
-
-Once configuration is complete:
-
-Click Save Mapping
-Mapping is stored for:
-Reuse
-Editing
-Sharing
-6. Reusing a Mapping
-
-To continue work:
-
-Go to Mappings
-Select an existing mapping
-Open and edit
-Summary
-
-Mapping enables:
-
-Standardized data extraction
-Reproducible workflows
-Consistency across countries
-Next Step
-
-👉 Proceed to:
-
-Data Downloads
-
----
-
-# 🔥 What this gives you
-
-✔ Single clean page (no fragmentation)  
-✔ Internal logical sections  
-✔ Nextra-friendly Markdown  
-✔ Ready for multilingual translation  
-✔ Consistent with Datasuite workflow  
-✔ No duplication with other pages  
-
----
-
-# 🚀 Next
-
-When you share the **downloads screenshots**, I’ll generate:
-
-👉 `data-download.mdx`  
-→ same style  
-→ linked back to mapping  
-→ includes logs, queue, export handling  
-
-And we’ll make the docs feel like **a real product (not just documentation)** 😄
-include all the info including the recommendations in the mdx file, formatted for callouts, etc
-
-Perfect — here’s an enhanced, production-ready mapping.mdx with:
-
-✅ Nextra-friendly formatting (callouts, tips, warnings)
-✅ All your instructions fully incorporated
-✅ Clear structure + internal anchors
-✅ Best practices + recommendations embedded
-✅ Clean UX for readers (like Vercel/Supabase docs)
-
-You can paste this directly.
-
-# Mapping Configuration
-
-## Overview
-
-Mapping defines **what data to extract** from DHIS2 and **how it is structured** for analysis.
-
-It is the most important step in the Data Extractor workflow because it:
-
-- Defines indicators to extract  
-- Links DHIS2 data sources  
-- Standardizes outputs for use in Datasuite (Vaxx & RMNCAH Apps)  
-
----
-
-## Mapping Workflow
-
-```text
-Create Mapping → Define Metadata → Configure Indicators → Map Data Sources → Save → Extract Data
-1. Mapping Manager
-
-The Mappings Manager is the entry point for all mapping activities.
-
-What you can do here
-View all saved mappings
-Search mappings by name or ID
-Create a new mapping
-Edit existing mappings
-▶️ Getting Started
-
-Mapping always begins by creating a new mapping.
-
-Click:
-
-+ New Mapping
-2. Creating a New Mapping
-
-When creating a mapping for the first time, you need to define the basic metadata.
-
-Step 1: Mapping Name
-
-Use a clear and consistent naming convention:
-
-CAM2026_CountryName
-
-💡 Tip
-
-Use structured naming to allow easy identification and reuse across teams.
-
-Step 2: Description
-
-Provide a short explanation of the mapping:
-
-MNH Indicators for CAM 2026 Workshop
-
-💡 Tip
-
-Good descriptions help collaborators understand the purpose of the mapping.
-
-Step 3: Mapping Mode
-
-Select one of the following:
-
-Countdown Mode
-Predefined indicators
-Standardized across countries
-Recommended for CAM workflows
-Custom Mode
-Fully user-defined
-Flexible configuration
-⚠️ Important Warning
-
-Changing the mapping mode will reset your progress if the mapping is not saved.
-
-👉 Always save your mapping before switching modes
-
-💡 Best Practice
-
-Save your mapping early and frequently to avoid losing progress and to allow resumption later.
-
-3. Indicators Configuration
-
-This section defines how indicators are constructed and mapped to DHIS2 data sources.
-
-What is an Indicator?
-
-An indicator represents a measurable variable such as:
-
-Penta1 coverage
-Institutional deliveries
-ANC visits
-Indicator Components
-
-Each indicator contains:
-
-Internal Name
-Target Export Code
-Source Configuration
-Countdown vs Custom Mode
-Countdown Mode
-Indicators are predefined
-Internal names are fixed
-Export codes are standardized
-Custom Mode
-User defines:
-Internal Name
-Target Export Code
-Full flexibility
-Adding Indicators
-
-You can:
-
-Click Add Indicator
-Or use Import JSON for bulk configurations
-4. Source Configuration
-
-This is where you link indicators to actual DHIS2 data.
-
-Search and select:
-
-Data Elements
-Indicators
-Datasets
-🔍 How it Works
-Search for data items
-Select relevant sources
-Assign them to the indicator
-5. Resolved Data Sources & Disaggregation
-
-This section shows how your indicator is constructed.
-
-It includes:
-Selected data sources
-Type of source (data element / indicator / dataset)
-Disaggregation categories
-💡 Tip: Understanding This Section
-
-Data Sources = What data you are extracting
-Disaggregation = How the data is broken down (e.g. age, sex, location)
-
-✅ Recommendation
-
-Always prefer data elements over indicators.
-
-Why?
-
-They are the lowest level of data
-More flexible for analysis
-Can be used to construct indicators later
-💡 Advanced Tip
-
-Avoid mixing multiple aggregation levels (e.g. indicators + data elements) unless necessary, as this may introduce inconsistencies.
-
-6. Saving the Mapping
-
-Once configuration is complete:
-
-Click Save Mapping
-The mapping is stored for:
-Reuse
-Editing
-Sharing
-💡 Best Practice
-Save after adding indicators
-Save before switching modes
-Save before leaving the page
-7. Reusing a Mapping
-
-To continue working on a mapping:
-
-Navigate to Mappings
-Search or select an existing mapping
-Open and continue editing
-💡 Recommendation
-
-Use saved mappings as templates for future work to ensure consistency across countries.
-
-8. Key Recommendations
-✔ Use Standard Naming
-
-Ensure mappings follow a consistent naming format.
-
-✔ Prefer Countdown Mode
-
-Use Countdown mode for:
-
-CAM workshops
-Multi-country analysis
-Standard reporting
-✔ Validate Data Sources
-
-Always confirm:
-
-Correct DHIS2 elements selected
-Correct disaggregation applied
-✔ Keep Mappings Reusable
-
-Design mappings that:
-
-Can be reused across years
-Can be adapted for multiple countries
-Summary
-
-Mapping is the foundation of the Data Extractor.
-
-A well-defined mapping ensures:
-
-Accurate data extraction
-Consistent analysis
-Reliable outputs for Vaxx and RMNCAH Apps
-Next Step
-
-👉 Proceed to:
-
-Data Downloads
-
----
-
-# 🚀 What You Now Have
-
-This page is now:
-
-✔ Fully structured  
-✔ Professional (like product docs)  
-✔ Self-contained (no need for multiple pages)  
-✔ Includes warnings, tips, and best practices  
-✔ Ready for translation (FR/PT)  
-✔ Aligned with Datasuite workflow  
-
----
-
-# Next Move
-
-Send the **downloads screenshots** and I’ll generate:
-
-👉 `data-download.mdx`  
-→ with queue, logs, exports, troubleshooting  
-→ connected nicely to this mapping page  
-
-We’re building a **serious, production-grade documentation site here** 🔥
-
-1\. Mapping Manager ------------------- The **Mappings Manager** is the entry point for all mapping activities. ### What you can do here * View all saved mappings * Search mappings by name or ID * Create a new mapping * Edit existing mappings * * * ### ▶️ Getting Started > Mapping always begins by creating a new mapping. Click: \+ New Mapping * * * 2\. Creating a New Mapping -------------------------- When creating a mapping for the first time, you need to define the basic metadata. * * * ### Step 1: Mapping Name Use a clear and consistent naming convention: CAM2026\_CountryName > 💡 **Tip** > > Use structured naming to allow easy identification and reuse across teams. * * * ### Step 2: Description Provide a short explanation of the mapping: MNH Indicators for CAM 2026 Workshop > 💡 **Tip** > > Good descriptions help collaborators understand the purpose of the mapping. * * * ### Step 3: Mapping Mode Select one of the following: #### Countdown Mode * Predefined indicators * Standardized across countries * Recommended for CAM workflows #### Custom Mode * Fully user-defined * Flexible configuration * * * ### ⚠️ Important Warning > Changing the mapping mode will reset your progress if the mapping is not saved. 👉 **Always save your mapping before switching modes** * * * ### 💡 Best Practice > Save your mapping early and frequently to avoid losing progress and to allow resumption later. * * * 3\. Indicators Configuration ---------------------------- This section defines **how indicators are constructed and mapped to DHIS2 data sources**. * * * ### What is an Indicator? An indicator represents a measurable variable such as: * Penta1 coverage * Institutional deliveries * ANC visits * * * ### Indicator Components Each indicator contains: * **Internal Name** * **Target Export Code** * **Source Configuration** * * * ### Countdown vs Custom Mode #### Countdown Mode * Indicators are predefined * Internal names are fixed * Export codes are standardized #### Custom Mode * User defines: * Internal Name * Target Export Code * Full flexibility * * * ### Adding Indicators You can: * Click **Add Indicator** * Or use **Import JSON** for bulk configurations * * * 4\. Source Configuration ------------------------ This is where you link indicators to actual DHIS2 data. Search and select: * Data Elements * Indicators * Datasets * * * ### 🔍 How it Works * Search for data items * Select relevant sources * Assign them to the indicator * * * 5\. Resolved Data Sources & Disaggregation ------------------------------------------ This section shows how your indicator is constructed. ### It includes: * Selected data sources * Type of source (data element / indicator / dataset) * Disaggregation categories * * * ### 💡 Tip: Understanding This Section > **Data Sources** = What data you are extracting > **Disaggregation** = How the data is broken down (e.g. age, sex, location) * * * ### ✅ Recommendation > Always prefer **data elements** over indicators. **Why?** * They are the **lowest level of data** * More flexible for analysis * Can be used to construct indicators later * * * ### 💡 Advanced Tip > Avoid mixing multiple aggregation levels (e.g. indicators + data elements) unless necessary, as this may introduce inconsistencies. * * * 6\. Saving the Mapping ---------------------- Once configuration is complete: 1. Click **Save Mapping** 2. The mapping is stored for: * Reuse * Editing * Sharing * * * ### 💡 Best Practice * Save after adding indicators * Save before switching modes * Save before leaving the page * * * 7\. Reusing a Mapping --------------------- To continue working on a mapping: 1. Navigate to **Mappings** 2. Search or select an existing mapping 3. Open and continue editing * * * ### 💡 Recommendation > Use saved mappings as templates for future work to ensure consistency across countries. * * * 8\. Key Recommendations ----------------------- ### ✔ Use Standard Naming Ensure mappings follow a consistent naming format. * * * ### ✔ Prefer Countdown Mode Use Countdown mode for: * CAM workshops * Multi-country analysis * Standard reporting * * * ### ✔ Validate Data Sources Always confirm: * Correct DHIS2 elements selected * Correct disaggregation applied * * * ### ✔ Keep Mappings Reusable Design mappings that: * Can be reused across years * Can be adapted for multiple countries * * * Summary ------- Mapping is the foundation of the Data Extractor. A well-defined mapping ensures: * Accurate data extraction * Consistent analysis * Reliable outputs for Vaxx and RMNCAH Apps
-
-generate a downloadable mapping.mdx file with all these details, styled as specified, using the documentation in: https://nextra.site/docs
-Analyzed
-# Create the mapping.mdx file with Nextra-friendly markdown content
-
-content = """---
-title: Mapping Configuration
----
-
-# Mapping Configuration
-
-## Overview
-
-Mapping defines **what data to extract** from DHIS2 and **how it is structured** for analysis.
-
-It is the most important step in the Data Extractor workflow because it:
-
-- Defines indicators to extract  
-- Links DHIS2 data sources  
-- Standardizes outputs for use in Datasuite (Vaxx & RMNCAH Apps)  
-
----
-
-## Mapping Workflow
-
-```text
-Create Mapping → Define Metadata → Configure Indicators → Map Data Sources → Save → Extract Data
-1. Mapping Manager
-
-The Mappings Manager is the entry point for all mapping activities.
-
-What you can do here
-View all saved mappings
-Search mappings by name or ID
-Create a new mapping
-Edit existing mappings
-▶️ Getting Started
-
-Note
-
-Mapping always begins by creating a new mapping.
-
-Click:
-
-+ New Mapping
-2. Creating a New Mapping
-
-When creating a mapping for the first time, you need to define the basic metadata.
-
-Step 1: Mapping Name
-
-Use a clear and consistent naming convention:
-
-CAM2026_CountryName
-
-Tip
-
-Use structured naming to allow easy identification and reuse across teams.
-
-Step 2: Description
-
-Provide a short explanation of the mapping:
-
-MNH Indicators for CAM 2026 Workshop
-
-Tip
-
-Good descriptions help collaborators understand the purpose of the mapping.
-
-Step 3: Mapping Mode
-
-Select one of the following:
-
-Countdown Mode
-Predefined indicators
-Standardized across countries
-Recommended for CAM workflows
-Custom Mode
-Fully user-defined
-Flexible configuration
-⚠️ Warning
-
-Changing the mapping mode will reset your progress if the mapping is not saved.
-
-👉 Always save your mapping before switching modes
-
-💡 Best Practice
-
-Save your mapping early and frequently to avoid losing progress and to allow resumption later.
-
-3. Indicators Configuration
-
-This section defines how indicators are constructed and mapped to DHIS2 data sources.
-
-What is an Indicator?
-
-An indicator represents a measurable variable such as:
-
-Penta1 coverage
-Institutional deliveries
-ANC visits
-Indicator Components
-
-Each indicator contains:
-
-Internal Name
-Target Export Code
-Source Configuration
-Countdown vs Custom Mode
-Countdown Mode
-Indicators are predefined
-Internal names are fixed
-Export codes are standardized
-Custom Mode
-User defines:
-Internal Name
-Target Export Code
-Full flexibility
-Adding Indicators
-
-You can:
-
-Click Add Indicator
-Or use Import JSON for bulk configurations
-4. Source Configuration
-
-This is where you link indicators to actual DHIS2 data.
-
-Search and select:
-
-Data Elements
-Indicators
-Datasets
-🔍 How it Works
-Search for data items
-Select relevant sources
-Assign them to the indicator
-5. Resolved Data Sources & Disaggregation
-
-This section shows how your indicator is constructed.
-
-It includes:
-Selected data sources
-Type of source (data element / indicator / dataset)
-Disaggregation categories
-💡 Tip: Understanding This Section
-
-Data Sources = What data you are extracting
-Disaggregation = How the data is broken down (e.g. age, sex, location)
-
-✅ Recommendation
-
-Always prefer data elements over indicators.
-
-Why?
-
-They are the lowest level of data
-More flexible for analysis
-Can be used to construct indicators later
-💡 Advanced Tip
-
-Avoid mixing multiple aggregation levels (e.g. indicators + data elements) unless necessary, as this may introduce inconsistencies.
-
-6. Saving the Mapping
-
-Once configuration is complete:
-
-Click Save Mapping
-The mapping is stored for:
-Reuse
-Editing
-Sharing
-💡 Best Practice
-Save after adding indicators
-Save before switching modes
-Save before leaving the page
-7. Reusing a Mapping
-
-To continue working on a mapping:
-
-Navigate to Mappings
-Search or select an existing mapping
-Open and continue editing
-💡 Recommendation
-
-Use saved mappings as templates for future work to ensure consistency across countries.
-
-8. Key Recommendations
-✔ Use Standard Naming
-
-Ensure mappings follow a consistent naming format.
-
-✔ Prefer Countdown Mode
-
-Use Countdown mode for:
-
-CAM workshops
-Multi-country analysis
-Standard reporting
-✔ Validate Data Sources
-
-Always confirm:
-
-Correct DHIS2 elements selected
-Correct disaggregation applied
-✔ Keep Mappings Reusable
-
-Design mappings that:
-
-Can be reused across years
-Can be adapted for multiple countries
-Summary
-
-Mapping is the foundation of the Data Extractor.
-
-A well-defined mapping ensures:
-
-Accurate data extraction
-Consistent analysis
-Reliable outputs for Vaxx and RMNCAH Apps
-"""
-
-file_path = "/mnt/data/mapping.mdx"
-with open(file_path, "w") as f:
-f.write(content)
-
-file_path
-
-Result
-'/mnt/data/mapping.mdx'
-
-Your file is ready:
-
-👉 Download mapping.mdx
-
-What I’ve done (aligned with Nextra best practices)
-Added frontmatter (title) for clean sidebar rendering
-Used callouts (> Tip, > Warning, > Note) compatible with Nextra
-Structured sections for single-page navigation
-Kept content reusable for Vaxx + RMNCAH
-Ensured clean markdown (no heavy custom components needed)
-Next step
-
-Once you plug this into:
-
-src/content/en/docs/apps/data-extractor/mapping.mdx
-
-👉 test locally:
-
-npm run dev
-
-When you're ready, send the downloads screenshots and I’ll generate:
-
-👉 data-download.mdx
-→ same quality
-→ includes queue, logs, exports, troubleshooting
-→ cross-linked with mapping
-
-We’re almost at a full production-grade documentation system 🚀 

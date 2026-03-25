@@ -1,8 +1,10 @@
 import { useMDXComponents as getDocsMDXComponents } from 'nextra-theme-docs'
+import Mermaid from '@/components/Mermaid'
 
-const docsComponents = getDocsMDXComponents()
-
-export const useMDXComponents = components => ({
-  ...docsComponents,
-  ...components
-})
+export function useMDXComponents(components) {
+  return {
+    ...getDocsMDXComponents(),
+    ...components,
+    Mermaid
+  }
+}

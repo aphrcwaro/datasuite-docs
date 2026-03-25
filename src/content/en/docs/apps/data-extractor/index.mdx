@@ -17,27 +17,36 @@ It is designed to support large, multi-period downloads while reducing server st
 
 The extractor supports a practical end-to-end workflow:
 
-1. Sign in to a DHIS2 instance with valid user credentials.
-2. Read and cache metadata needed for extraction.
-3. Map source metadata to the required analytical structure.
-4. Download routine data in manageable requests.
-5. Reuse cached metadata and completed download chunks to minimize repeated work.
+```mermaid
+flowchart LR
+  A[Sign in to DHIS2] --> B[Sync, Read and cache metadata]
+  B --> C[Map source metadata to indicator]
+  C --> D[Download routine data]
+  D --> E[Save the mapping for export/reuse]
+
+
+  classDef step fill:#e6f7ff,stroke:#1e7ec8,stroke-width:2px;
+  class A,B,C,D,E,F step;
+```
 
 This process helps analysts produce a cleaner and more reproducible starting point for downstream analysis in DataSuite.
 
 ## Quick start steps
 
 <Steps>
-### [Login to DHIS2] (/en/docs/apps/data-extractor/dhis2-login)
+### [Login to DHIS2](/en/docs/apps/data-extractor/dhis2-login)
 Connect to the correct DHIS2 instance using your server URL and valid account credentials.
 
 ### Cache metadata
 Done automatically following a successful login, this loads and locally caches the metadata needed for mapping and extraction.
 
-### [Choose a mapping mode] (/en/docs/apps/data-extractor/mapping)
+> [!TIP]
+> If you think the DHIS2 data might have changed since the last metadata sync, **Sync** to ensure the metadata is updated.
+
+### [Choose a mapping mode](/en/docs/apps/data-extractor/mapping)
 Use Countdown mapping for the harmonized MNCH template or Custom mapping for other programs.
 
-### [Download efficiently] (/en/docs/apps/data-extractor/data-download)
+### [Download efficiently](/en/docs/apps/data-extractor/data-download)
 Run extraction with smaller requests and reuse cached metadata to minimize repeat downloads.
 </Steps>
 
