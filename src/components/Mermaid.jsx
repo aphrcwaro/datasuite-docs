@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react'
 import mermaid from 'mermaid'
 
 let idCounter = 0
+let isInitialized = false
 
 export default function Mermaid({ chart }) {
   const ref = useRef(null)
@@ -11,19 +12,43 @@ export default function Mermaid({ chart }) {
   useEffect(() => {
     if (!chart || !ref.current) return
 
-    mermaid.initialize({
-      startOnLoad: false,
-      theme: 'default',
-      securityLevel: 'loose'
-    })
+    let cancelled = false
 
-    const id = `mermaid-${idCounter++}`
-
-    mermaid.render(id, chart, (svgCode) => {
-      if (ref.current) {
-        ref.current.innerHTML = svgCode
+    async function renderChart() {
+      if (!isInitialized) {
+        mermaid.initialize({
+          startOnLoad: false,
+          theme: 'default',
+          securityLevel: 'loose'
+        })
+        isInitialized = true
       }
-    })
+
+      const id = `mermaid-${idCounter++}`
+      const element = ref.current
+
+      if (!element) return
+
+      try {
+        const { svg, bindFunctions } = await mermaid.render(id, chart, element)
+
+        if (cancelled || !ref.current) return
+
+        ref.current.innerHTML = svg
+        bindFunctions?.(ref.current)
+      } catch (error) {
+        if (!cancelled && ref.current) {
+          ref.current.innerHTML = '<pre>Unable to render diagram.</pre>'
+        }
+        console.error('Mermaid render failed', error)
+      }
+    }
+
+    renderChart()
+
+    return () => {
+      cancelled = true
+    }
   }, [chart])
 
   return (

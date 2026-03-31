@@ -7,11 +7,10 @@ import { Steps } from 'nextra/components'
 ## Overview
 
 Mapping defines **what data to extract** from DHIS2 and **how it is structured** for analysis.
-It is the core step in the Data Extractor workflow in that it: fetches indicators of interest, 
+It is the core step in the Data Extractor workflow in that it: fetches indicators of interest,
 maps/matches with corresponding DHIS2 data sources and standardizes outputs for Datasuite apps.
 
 ## DHIS2 Data Mapping Workflow
-
 
 <Mermaid
   chart={`
@@ -50,7 +49,7 @@ Once successfully logged in, the following views help in navigating the CD2030 D
 ### 1. Dashboard
 ![Mapping Manager](/images/extractor_dashboard.jpg)
 
-### 2. Mappings Manager 
+### 2. Mappings Manager
 ![Mapping Manager](/images/extractor_mapping_manager.jpg)
 
 The **Mapping Manager** is the central place to:
@@ -63,19 +62,17 @@ The **Mapping Manager** is the central place to:
 
 ### Key Actions
 
-- **New Mapping** → Start a new configuration
-- **Search bar** → Locate existing mappings
-- **Actions column** → Edit, download clone or delete the selected mapping
+- **New Mapping** â†’ Start a new configuration
+- **Search bar** â†’ Locate existing mappings
+- **Actions column** â†’ Edit, download clone or delete the selected mapping
 
 ## 2. Creating a New Mapping
-
-
 
 <Steps>
 ### Click **New Mapping**
 ![New Mapping](/images/extractor_mapping_newmap.jpg)
 
-### Configure the mapping 
+### Configure the mapping
 Define the mapping name, Description and the mapping mode
 <Callout type="important">
   **Important:** Use a clear naming convention
@@ -86,11 +83,11 @@ Define the mapping name, Description and the mapping mode
 
 ### Select the Mapping mode
 There are currently two mapping modes:
-- Countdown → This mode has a predefined list of MNCH indicators and structure as in the [harmonized data template] (/en/resources)
-- Custom → Fully user-defined configuration, where the user can download any data that they have access rights to
+- Countdown â†’ This mode has a predefined list of MNCH indicators and structure as in the [harmonized data template](/en/resources)
+- Custom â†’ Fully user-defined configuration, where the user can download any data that they have access rights to
 
 <Callout type="warning">
-  **Warning:** Changing the mapping mode will reset your progress if the mapping is not saved.
+  **Warning:** Changing the mapping mode midway will reset your progress if the mapping is not saved.
      Always save your mapping before switching modes
 </Callout>
 
@@ -102,7 +99,3 @@ There are currently two mapping modes:
 
 
 Mapping Mode
-
-
-
-

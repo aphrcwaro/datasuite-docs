@@ -1,5 +1,32 @@
+import { Steps } from 'nextra/components'
+import { Callout } from 'nextra/components'
 import { Bleed } from 'nextra/components'
 
 ### Logging in to DHIS2
+
+The first step is to connect the application to the relevant DHIS2 server. Users provide the DHIS2 instance URL together with their username and password. Once authenticated, the extractor can read only the metadata and data that the logged-in user is already authorized to access in that DHIS2 environment.
+
+![DHIS2 login screen](/images/extractor_login.jpg)
+
+<Callout type="info">
+  **Important:** Access rights are controlled by DHIS2, not by the extractor. If a user cannot see a dataset, organisation unit, or indicator in DHIS2, the extractor will not bypass those permissions.
+</Callout>
+
+
+![DHIS2 server URL login screen](/images/extractor_login_url.jpg)
+
+
+
+Why this matters:
+
+- It confirms the extractor is working against the correct DHIS2 instance.
+- It ensures all subsequent mapping and download steps use the user's approved permissions.
+- It avoids offline template matching against the wrong server configuration.
+
+<Callout type="info">
+  **Tip:** Start by confirming the DHIS2 base URL before entering credentials. A correct URL prevents login failures caused by pointing to the wrong server environment.
+</Callout>
+
+<a id="step-2-read-and-cache-metadata"></a>
 
 <Bleed>![DataSuite Dashboard](/images/datasuite.jpg)</Bleed>
