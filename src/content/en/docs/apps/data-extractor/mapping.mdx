@@ -1,0 +1,127 @@
+import { Callout } from 'nextra/components'
+import { Steps } from 'nextra/components'
+
+
+## Mapping Configuration
+
+
+Mapping defines **what data to extract** from DHIS2 and **how it is structured** for analysis.
+It is the core step in the Data Extractor workflow in that it: fetches indicators of interest,
+maps/matches with corresponding DHIS2 data sources and standardizes outputs for Datasuite apps and other analyses.
+
+## DHIS2 Data Mapping Workflow
+
+<Mermaid
+  chart={`
+flowchart LR
+  subgraph "Mapping Workflow"
+    A[Create Mapping]
+    B[Define Metadata]
+    C[Configure Indicators]
+    D[Map Data Sources]
+    E[Save Mapping]
+  end
+
+  A --> B --> C --> D --> E
+
+  D --> S[(DHIS2 Data)]
+  S --> D
+
+  E --> F{Mapping Complete?}
+  F -->|Yes| G[Download Data]
+  F -->|No| C
+
+  classDef step fill:#e8f1ff,stroke:#2791ff,stroke-width:2px,color:#0d3f7b;
+  classDef decision fill:#fff4e5,stroke:#f59e0b,stroke-width:2px,color:#7a4b00;
+  classDef output fill:#e8f8f0,stroke:#10b981,stroke-width:2px,color:#065f46;
+  classDef data fill:#f3e8ff,stroke:#8b5cf6,stroke-width:2px,color:#4c1d95;
+
+  class A,B,C,D,E step;
+  class F decision;
+  class G output;
+  class S data;
+`}
+ />
+
+## Navigating the CD2030 DHIS2 Data Extractor
+Once successfully logged in, the following views help in navigating the CD2030 DHIS2 Data Extractor
+### 1. Dashboard
+![Mapping Manager](/images/extractor_dashboard.jpg)
+
+### 2. Mappings Manager
+![Mapping Manager](/images/extractor_mapping_manager.jpg)
+
+The **Mapping Manager** is the central place to:
+- View all saved mappings
+- Search mappings by name or ID
+- Create a new mapping
+
+### 3. Downloads Manager
+
+
+### Key Actions
+
+- **New Mapping** â†’ Start a new configuration
+- **Search bar** â†’ Locate existing mappings
+- **Actions column** â†’ Edit, download clone or delete the selected mapping
+
+## 2. Creating a New Mapping
+
+<Steps>
+### Click **New Mapping**
+![New Mapping](/images/extractor_mapping_newmap.jpg)
+
+### Configure the mapping
+Define the mapping name, Description and the mapping mode
+<Callout type="important">
+  **Important:** Use a clear naming convention
+  Example:
+    Mapping name: CAM2026_CountryName
+    Description: MNH Indicators for CAM 2026 Workshop
+</Callout>
+
+<a id="map-metadata"/>
+### Select the Mapping mode
+</Steps>
+Mapping is the stage where DHIS2 source metadata is linked to the structure needed for downstream analysis. 
+The extractor supports two mapping approaches depending on the use case.
+### 1. Countdown option
+
+The **Countdown** option maps indicators and related metadata to the **Countdown harmonized MNCH [data template](/en/resources)**. 
+This is the preferred approach when teams are preparing data for Countdown to 2030 workflows and want a standardized structure that aligns with the embedded resource template used by the application.
+
+This option is useful when:
+
+- the analysis is focused on harmonized MNCH indicators,
+- teams want consistency across countries or time periods,
+- outputs are intended for Countdown-aligned analytical workflows.
+
+<Callout type="info">
+  **Recommended for standardization:** Use the Countdown option when your goal is to produce data aligned with the harmonized MNCH template embedded in the extractor resources.
+</Callout>
+
+### 2. Custom option
+
+The **Custom** option allows users to create mappings for other programs or use cases that do not fit the Countdown harmonized template. This gives teams flexibility to work with country-specific program structures, additional service areas, or bespoke indicator sets.
+
+This option is useful when:
+
+- The program area goes beyond the Countdown MNCH scope,
+- Users need a country-defined mapping structure,
+- The extraction supports another analytical workflow outside the standard [harmonized template](/en/resources).
+
+<Callout type="info">
+  **Flexible mapping:** Choose the Custom option when you need to prepare data for other health programs, local reporting needs, or non-Countdown analytical pipelines.
+</Callout>
+
+<Callout type="info">
+**Mapping Summary**
+There are currently two mapping modes:
+- Countdown: This mode has a predefined list of MNCH indicators and structure as in the [harmonized data template](/en/resources)
+- Custom:  Fully user-defined configuration, where the user can download any data that they have access rights to
+**Warning:** 
+- Changing the mapping mode midway will reset your progress if the mapping is not saved.Always save your mapping before switching Mapping modes
+</Callout>
+
+
+### Indicators Configuration

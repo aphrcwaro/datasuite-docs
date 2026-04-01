@@ -23,7 +23,9 @@ export default {
     display: "hidden"
   },
   troubleshooting: {
-    title: "Troubleshooting",
-    display: "hidden"
+    title: "FAQ & Troubleshooting",
+     theme: {
+      layout: 'full'
+    }
   }
 }

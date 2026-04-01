@@ -1,1 +1,72 @@
-# Page under development and coming up soon
+import { HomeCards } from '@/components/HomeCards'
+
+# Framework Overview
+
+This page summarizes the CD2030 DataSuite analytical framework.
+It is intended to help teams move from raw facility and survey data to defensible national and sub-national coverage findings.
+
+## End-to-end workflow
+
+The framework follows a practical sequence:
+
+1. Load and configure facility and survey data.
+2. Calibrate key national benchmark rates.
+3. Assess data quality before estimating coverage.
+4. Adjust incomplete, unstable, or unreliable data.
+5. Select the best-performing denominator.
+6. Interpret national, equity, and sub-national results.
+7. Use findings for planning, review, and action.
+
+See the [workflow page](/en/docs/framework/workflow) for the process view.
+
+## Framework modules
+
+<HomeCards
+  items={[
+    {
+      title: 'Data Quality Assessment',
+      description: 'Review reporting completeness, outliers, missingness, internal consistency, and annual quality scores.',
+      href: '/en/docs/framework/data-quality-assessment',
+      icon: 'checklist'
+    },
+    {
+      title: 'Data Adjustment',
+      description: 'Remove unreliable periods, apply adjustment factors, and compare values before and after cleaning.',
+      href: '/en/docs/framework/data-adjustment',
+      icon: 'settings-gear'
+    },
+    {
+      title: 'Denominator Selection',
+      description: 'Compare DHIS2, UN, ANC1-derived, and Penta1-derived denominator options.',
+      href: '/en/docs/framework/denominator-selection',
+      icon: 'symbol-number'
+    },
+    {
+      title: 'Coverage Estimation',
+      description: 'Estimate levels and trends, compare with survey benchmarks, and review progress toward targets.',
+      href: '/en/docs/framework/coverage-estimation',
+      icon: 'graph'
+    },
+    {
+      title: 'Equity Analysis',
+      description: 'Assess inequality by residence, wealth, and maternal education using survey-based comparisons.',
+      href: '/en/docs/framework/equity-analysis',
+      icon: 'graph-scatter'
+    },
+    {
+      title: 'Sub-National Analysis',
+      description: 'Examine regional and district variation, target attainment, and geographic inequality.',
+      href: '/en/docs/framework/subnational-analysis',
+      icon: 'globe'
+    }
+  ]}
+/>
+
+
+The final purpose of the framework is practical use. Findings should inform country review processes, planning discussions, and technical working groups so that the analysis leads to concrete RMNCAH action rather than standing alone as a report.
+
+## Supporting pages
+
+- [Workflow](/en/docs/framework/workflow)
+- [Indicator Definitions](/en/docs/framework/indicator-definitions)
+

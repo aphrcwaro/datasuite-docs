@@ -1,30 +1,61 @@
-import { Callout, Cards } from 'nextra/components'
+import { Callout } from 'nextra/components'
+import { withGitHubAlert } from 'nextra/components'
+import { HomeCards } from '@/components/HomeCards'
+import { Steps } from 'nextra/components'
 
-# CD2030 DHIS2 Data Extractor: Overview
+## CD2030 DHIS2 Data Extractor
 
-The **Data Extractor** is the foundational application within the DataSuite ecosystem. It is specifically engineered to solve the most common bottleneck in DHIS2 analytics: **extracting massive, multi-year datasets without crashing the server or experiencing timeouts.**
+The **CD2030 DHIS2 Data Extractor** helps teams connect to DHIS2, prepare metadata, map indicators, and download routine data in a way that is more stable and easier to reproduce than manual extraction.
 
-
-
-## The Extraction Problem
-
-Native DHIS2 APIs strictly limit the amount of data you can pull in a single request to protect the server's database. 
-
-If an analyst attempts to download five years of facility-level data simultaneously via the standard DHIS2 interface or a basic API script, the server will almost always fail, returning a `504 Gateway Timeout` or a `500 Internal Server Error`. This leaves the user with missing, incomplete, or corrupted data.
-
-## How DataSuite Solves This
-
-The Data Extractor bypasses these limitations by acting as an intelligent, asynchronous intermediary between your local machine and your DHIS2 server.
-
-### 1. The Smart Chunking Engine
-Instead of asking for the entire dataset at once, the Extractor automatically mathematically slices your massive query into hundreds (or thousands) of tiny, manageable "chunks" (for example, querying one specific region for one specific month at a time).
-
-### 2. Multi-Threaded Processing
-It safely sends multiple small requests simultaneously. If the DHIS2 server begins to struggle or slow down under heavy load, the Extractor dynamically throttles its requests to keep the server stable while maintaining maximum download speed.
-
-### 3. Local Caching & Resumability
-If your internet connection drops midway through a 3-hour extraction, you **do not lose your progress**. The Extractor caches every successful chunk locally on your hard drive. When you reconnect, it resumes exactly where it left off.
+It is designed to support large, multi-period downloads while reducing server strain, avoiding unnecessary repeat requests, and preserving progress through local caching.
 
 <Callout type="info">
-  **Automated Assembly:** Once all chunks are successfully downloaded to your local cache, the Extractor automatically stitches them together into a single, perfectly formatted CSV or JSON file—ready for immediate analysis or pooling.
+   **Access disclaimer:** The CD2030 DHIS2 Data Extractor does not allow unauthorized access to DHIS2 data.
 </Callout>
+
+## What the extractor does
+
+The extractor supports a practical end-to-end workflow:
+
+```mermaid
+flowchart LR
+  A[Sign in to DHIS2] --> B[Sync, Read and cache metadata]
+  B --> C[Map source metadata to indicator]
+  C --> D[Download routine data]
+  D --> E[Save the mapping for export/reuse]
+
+
+  classDef step fill:#e6f7ff,stroke:#1e7ec8,stroke-width:2px;
+  class A,B,C,D,E,F step;
+```
+
+This process helps analysts produce a cleaner and more reproducible starting point for downstream analysis in DataSuite.
+
+## Quick start steps
+
+<Steps>
+### [Login to DHIS2](/en/docs/apps/data-extractor/dhis2-login)
+Connect to the correct DHIS2 instance using your server URL and valid account credentials.
+
+### [Cache metadata](/en/docs/apps/data-extractor/dhis2-login#read-and-cache-metadata)
+Temporarily cache(store)  metadata locally for fast access and efficient downloading
+
+### [Choose a mapping mode](/en/docs/apps/data-extractor/mapping#map-metadata)
+Use Countdown mapping for the harmonized MNCH template or Custom mapping for other programs.
+
+### [Download data](/en/docs/apps/data-extractor/data-download)
+Run extraction with smaller requests and reuse cached metadata to minimize repeat downloads.
+</Steps>
+
+
+
+
+
+
+## Summary
+
+The CD2030 DHIS2 Data Extractor is built to make DHIS2 extraction more systematic and dependable. It does this by combining authenticated access, metadata caching, structured mapping, and more efficient download behavior.
+
+Its two mapping modes support both standardized Countdown MNCH extraction and more flexible custom program workflows, while local caching helps reduce repeated metadata downloads and keeps the extraction process lighter and more resilient.
+
+

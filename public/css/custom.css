@@ -102,3 +102,28 @@ h2.nextra-border {
 .dark .download-btn:hover {
   background: #007a56;
 }
+/* Mermaid diagram styling*/
+.mermaid-wrapper {
+  width: 100%;
+  margin: 2rem 0;
+  padding: 1rem;
+  border-radius: 12px;
+  background: #ffffff;
+  overflow-x: auto;
+}
+
+/* Make SVG responsive */
+.mermaid-wrapper svg {
+  width: 100% !important;
+  height: auto !important;
+}
+
+/* Smooth zoom */
+.mermaid-wrapper {
+  transition: transform 0.25s ease;
+  transform-origin: center;
+}
+
+.mermaid-wrapper:hover {
+  transform: scale(1.05);
+}
