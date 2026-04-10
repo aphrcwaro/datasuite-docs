@@ -6,20 +6,26 @@ import { Bleed } from 'nextra/components'
 Once login, metadata retrieval, and mapping are complete, the extractor can begin data download. 
 Instead of relying on a single large DHIS2 request, the extractor is designed to handle extraction in smaller and more manageable batches.
 ![DHIS2 login dashboard](/images/extractor_dashboard.jpg)
-This has the following advantages:
-
-- it lowers the risk of timeouts for large requests,
-- it reduces the chance of incomplete downloads,
-- it allows previously completed work to be reused,
-- it supports a more efficient download process after metadata has already been cached.
-
-Because metadata has already been prepared and cached, the extractor can focus on the data values themselves rather than repeatedly reloading the full structural context before each extraction.
+This approach lowers the risk of timeouts for large download requests, thus reducing the chances of incomplete downloads.
 
 <Callout type="warning">
-  **Large extractions still need planning:** Even with caching and chunked processing, very large downloads may take time depending on server performance, user permissions, internet stability, and the size of the requested organisation unit and period ranges.
+  **Large extractions still need planning:** 
+  - Even with caching and chunked processing, very large downloads may take time depending on server performance, user permissions, internet stability, and the size of the requested organisation unit and period ranges.
 </Callout>
 
-## Step 5: Resume and reuse cached work
+## Download Steps
+<Steps>
+### [Complete and save your mapping](/docs/apps/data-extractor/mapping)
+### Go to the Download Manager and click **+ New Download Task**
+![download_configuration](/images/extractor_download_config.jpg)
+### Configure the download parameters: name of the mapping(in case you have multiple mappings), period(Start &End) and the Admin level.
+<Callout type="important">
+  **Countdown download configuration** 
+  - Date Range -> To be the last five years (e.g. January 1st 2020 to December 31st 2025).
+  - Admin Level -> To be Level 3
+</Callout>
+
+</Steps>
 
 Caching is not only useful for metadata. It also helps the extractor preserve progress and reduce unnecessary repeated work where extraction tasks are interrupted or revisited.
 

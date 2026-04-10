@@ -127,3 +127,7 @@ h2.nextra-border {
 .mermaid-wrapper:hover {
   transform: scale(1.05);
 }
+
+.heading-highlight {
+  color: #09d8a4;
+}

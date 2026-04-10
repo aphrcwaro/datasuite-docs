@@ -6,7 +6,12 @@ export default {
       layout: 'full'
     }
   },
-  setup: "Installing Datasuite",
+  setup: {
+    title: "Installing Datasuite",
+     theme: {
+      layout: 'full'
+    }
+  },
   "getting-started":"Getting Started",
   apps: "Datasuite Apps",
   framework: "Analytical Framework",
