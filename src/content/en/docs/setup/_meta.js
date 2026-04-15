@@ -1,5 +1,5 @@
 export default {
   index: 'Overview',
-  windows: 'Windows',
+  windows: 'Download and Install for Windows',
   uninstall: 'Uninstall'
 }

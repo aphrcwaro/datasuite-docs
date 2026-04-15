@@ -1,5 +1,7 @@
 import { DownloadGrid } from '@/components/DownloadGrid'
 import styles from './downloads.module.css'
+import { Callout } from 'nextra/components'
+
 
 <div className={styles.cdsuiteGrid}>
 
@@ -44,3 +46,29 @@ The standalone analytics suite. Free and built on open source.
   />
 
 </div>
+
+## Installer options [#installer-options]
+
+DataSuite provides both Windows **user** and **system** level setups, as well as **portable (.zip)** installation option.
+
+| Setup Type | Description |
+|------------|-------------|
+| [User setup](https://github.com/aphrcwaro/datasuite_public/releases/download/1.0.0-beta2/DataSuiteUserSetup-win32-x64-1.0.0-beta2.exe) | **Recommended for most users.** Installs to your Local AppData folder without requiring administrator privileges. Enables seamless background updates. 
+| [System setup](https://github.com/aphrcwaro/datasuite_public/releases/download/1.0.0-beta2/DataSuiteSetup-x64-1.0.0-beta2.exe) | Installs to `Program Files` and requires administrator privileges. Available to all system users, but updates also require elevation. Use this if you need multi-user access. |
+| [Portable mode](https://github.com/aphrcwaro/datasuite_public/releases/download/1.0.0-beta1/DataSuite-win32-x64-1.0.0-beta1.zip) | Installs as a standalone folder that can be moved between environments. All DataSuite data stays within the folder. Ideal for portable usage across different machines. See [Portable mode](/en/docs/supporting/portable) for setup instructions. |
+
+<Callout type="info">
+   **Note:** 
+   - Using the `Portable mode` the user cannot save their
+</Callout>
+
+
+
+
+## Update
+
+When a new version of CD2030 DataSuite is released with new features and important bug fixes you will be prompted to 
+install the new release when you launch the `CD2030 Datasuite` App.
+
+You can also manually check for updates by running **Help** > **Check for Updates** on Windows.
+

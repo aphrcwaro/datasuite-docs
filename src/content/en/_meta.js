@@ -28,6 +28,7 @@ export default {
     type: 'page',
     display: 'hidden',
     theme: {
+      layout: 'full',
       copyPage: false,
       toc: false
     }
