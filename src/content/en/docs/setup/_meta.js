@@ -1,5 +1,11 @@
 export default {
   index: 'Overview',
   windows: 'Download and Install for Windows',
-  uninstall: 'Uninstall'
+  uninstall: {
+    title: 'Uninstall',
+    display: 'hidden',
+    theme: {
+      layout: 'full'
+    }
+  }
 }

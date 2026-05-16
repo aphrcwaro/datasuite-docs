@@ -1,7 +1,35 @@
 export default {
 
-  index: 'Overview',
-  "dhis2-login": 'DHIS2 Login',
-  mapping: 'Mapping Indicators',
-  "data-download": 'Downloading Data'
+  index: {
+    title: 'Overview',
+    theme: {
+      layout: 'full',
+      copyPage: false,
+      toc: true
+    }
+  },
+  "dhis2-login": {
+    title: 'DHIS2 Login',
+    theme: {
+        layout: 'full',
+        copyPage: false,
+        toc: false
+    }
+  },
+  mapping: {
+    title: 'Mapping Indicators',
+    theme: {
+      layout: 'full',
+      copyPage: false,
+      toc: false
+    }
+  },
+  "data-download": {
+    title: 'Downloading Data',
+    theme: {
+      layout: 'full',
+      copyPage: false,
+      toc: false
+    }
+  },
 }

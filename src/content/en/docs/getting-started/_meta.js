@@ -1,4 +1,10 @@
 export default {
-  index: 'DataSuite Tutorial',
-  'user-interface': 'User Interface'
+  index: 'Navigating `CD2030 Datasuite',
+  'user-interface': {
+    title: 'User Interface',
+    display: 'hidden',
+    theme: {
+      layout: 'full'
+    }
+  }
 }
