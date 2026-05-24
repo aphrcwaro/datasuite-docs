@@ -26,11 +26,5 @@ export default {
   outputs: {
     title: "Outputs & Reporting",
     display: "hidden"
-  },
-  troubleshooting: {
-    title: "FAQ & Troubleshooting",
-     theme: {
-      layout: 'full'
-    }
   }
 }

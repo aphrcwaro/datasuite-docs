@@ -1,13 +1,174 @@
+import { Callout } from 'nextra/components'
 
 ## Countdown Analytical Approach[#countdown-approach]
 
 ---
 ## Data Quality Assessment[#data-quality-assessment]
 
-### Reporting completeness
-### Outlier detection
-### Internal consistency
-### Data completeness
+### Reporting completeness[#reporting-completeness]
+**Scientific Foundation:** 
+- Incomplete reporting creates systematic underestimation of true coverage. Assuming non-reporting facilities delivered zero services is statistically implausible; they simply didn't submit data. 
+- Adjustment factors account for this gap using a defensible assumption: non-reporting facilities operate at lower capacity (typically 25% of reporting facility volume).
+
+---
+
+## Rationale: Scientific basis for the analysis
+
+The completeness of reporting may affect the analysis, especially if completeness is low or varies between years. 
+Extreme outliers, such as an accidental extra zero in a number, can have a large impact, especially on subnational numbers. 
+Following the assessments, several steps are necessary to obtain a clean data set for analysis. This implies adjusting for incomplete reporting and correcting for extreme outliers.
+
+If we do not consider reporting completeness that means we assume all non-reporting facilities provided zero services, which is not likely to be true. 
+Adjustments depend on how much services (e.g., pregnancy care, vaccinations) were provided at non-reporting facilities compared to those that reported. 
+The adjustment factor $$k$$ - defined as _the ratio of the volume of services provided by non-reporting facilities to the volume of services provided by reporting facilities_ - is used to adjust the reported numbers for incomplete reporting.
+
+---
+To account for incomplete reporting, the reported number of events can be adjusted using completeness and facility reporting ratio, with the following formula:
+$$
+N_{\text{adjusted}} = N_{\text{reported}} + N_{\text{reported}} \cdot \left(\frac{1}{c} - 1\right) \cdot k
+$$
+
+---
+
+**Where**:
+
+- $N_{\text{adjusted}}$- Total number of events adjusted for incomplete reporting  
+- $N_{\text{reported}}$ - Number of events reported  
+- $C$ - Reporting completeness (e.g., proportion of facilities that reported)  
+- $k$ - Adjustment factor to account for lower service volume in non-reporting facilities  
+
+---
+
+The following k-values are used depending on the reporting used to adjust the reported numbers for incomplete reporting:
+
+- **`k = 0`** : No services in non-reporting facilities (default k-value)  
+- **`k = 0.25`** : Some services, but much lower than reporting facilities  
+- **`k = 0.50`** : Half the rate compared to reporting facilities  
+- **`k = 0.75`** : Nearly as much as reporting facilities  
+- **`k = 1.0`** : Same rate of services as reporting facilities  
+
+---
+<Callout type="info">
+- As a default value, we use $$k=0.25$$, which means the non-reporting facilities provided services but only at a volume which was a quarter of the reporting health facilities.
+- The factor `k` can be different for different services. For instance, if private facility reporting is poor but they are in the national system and they provide a considerable number of deliveries, `k` maybe greater than 0.25 or even as high as 1.0.
+- If the facility reporting rate is below 75%, it becomes more difficult to impute district data. Therefore, no adjustments are made if reporting is lower than 75%. In that case, further analysis to determine coverage with the facility data is not considered sufficiently reliable.
+</Callout>
+---
+
+#### Adjustment Action summary
+
+| Problem | Action | Adjustment |
+|--------|--------|-----------|
+| Low reporting rates: identifying low rates that were adjusted | If below 75% (default), data were imputed | Median monthly value for the district year was imputed for the month with low reporting |
+| Incomplete reporting by districts, variable over time, affecting trend assessment | If reporting rates were >=75% and &le; 100% (default), an assumption was made about the volume of services provided by the non-reporting facilities | Adjustment factor k value was used to adjust for incomplete reporting k default value 0.25 (replace if different value used; state if used for all reporting forms or different k factors between forms) |
+| Extreme outliers can greatly affect coverage trend assessments | If a monthly value was greater or smaller than 5 times the median absolute deviation (MAD) from district monthly median value, an adjustment was made | Extreme monthly outliers are corrected and given the district median value for the same year |
+| Missing values | If there is a missing value, data were imputed | District median monthly value for the year was imputed for the month with missing value |
+
+### Outlier detection[#outlier-detection]
+- An extreme outlier is defined as a monthly value that is 5 times the median absolute deviation (MAD) from the monthly median value for a particular year.
+---
+
+### Internal Consistency[#internal-consistency]
+- Internal consistency assesses the degree to which related indicators are aligned within the dataset, based on expected epidemiological and service delivery relationships. 
+- Within the CD2030 analytical framework, this step complements other (DQA) metrics by evaluating whether indicators that are biologically or programmatically linked follow plausible patterns.
+- Unlike standalone indicator checks, internal consistency focuses on **relationships between indicators**, ensuring that reported values reflect realistic service delivery pathways across the continuum of care.
+
+---
+
+<details>
+  <summary>**Key indicator relationships assessed for internal consistency**</summary>
+
+- #### 1. **ANC1 vs Penta1**  
+  
+These indicators are expected to follow a consistent pattern, as both represent entry points into maternal and child health services. After adjusting for expected losses (e.g., stillbirths, neonatal deaths), the ratio should fall within a plausible range.
+
+The relationship between **ANC1** (first antenatal care visit) and **Penta1** (first dose of pentavalent vaccine) reflects continuity between maternal and child health services.
+
+The expected ratio is derived from biological and demographic assumptions, including:
+- Pregnancy loss (~3%)  
+- Stillbirths (~2%)  
+- Twinning (~1.5%)  
+- Neonatal mortality (~3%)  
+
+These factors yield a baseline expected ratio of:
+
+$$
+Expected\ Ratio = 1.07
+$$
+
+This is further adjusted using survey coverage:
+
+$$
+Expected\ Ratio = 1.07 \times \left(\frac{\text{Survey ANC1 Coverage}}{\text{Survey Penta1 Coverage}}\right)
+$$
+
+*Threshold:* 
+A tolerance range of **±0.05** around the expected ratio is considered acceptable.
+
+*Example:*
+- If ANC1 coverage = 90% and Penta1 = 95%:
+
+$$
+1.07 \times \left(\frac{0.90}{0.95}\right) = 1.01
+$$
+
+*Acceptable range*: **0.96 – 1.06**
+
+---
+-  **Penta1 vs Penta3** 
+
+This ratio reflects **immunization programme continuity** and is primarily driven by drop-out rates rather than biological factors.
+
+The expected ratio is based on survey coverage:
+
+$$
+Expected\ Ratio = \frac{\text{Survey Penta1 Coverage}}{\text{Survey Penta3 Coverage}}
+$$
+
+*Threshold:* 
+A tolerance range of **±0.05** is applied.
+
+*Example:*
+- If Penta1 = 95% and Penta3 = 85%:
+
+$$
+\frac{0.95}{0.85} = 1.12
+$$
+
+Acceptable range: **1.07 – 1.17**
+- **Institutional Deliveries vs Penta1**  
+  The number of facility-based deliveries should broadly align with subsequent child health service uptake, including immunization.
+---
+- **Institutional Deliveries vs Penta1**
+
+ </details>
+
+### Interpretation in the DQA Process
+
+Internal consistency should be interpreted alongside:
+
+- Reporting completeness  
+- Outlier detection  
+- Data completeness  
+
+<Callout type="info" title="Key Insight">
+Strong alignment between related indicators increases confidence in the reliability of the data. Significant deviations from expected ratios should be investigated within the local context before making adjustments.
+</Callout>
+
+<Callout type="warning" title="Contextual Interpretation">
+Not all deviations indicate poor data quality. Programme changes, campaigns, or service disruptions may explain observed differences.
+</Callout>
+
+
+
+
+
+
+
+
+
+
+### Data missingness
 ### Ratio calculations
 ### Overall quality score
 

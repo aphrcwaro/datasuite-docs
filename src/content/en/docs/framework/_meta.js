@@ -4,7 +4,7 @@ export default {
     theme: {
       layout: 'full',
       copyPage: false,
-      toc: true
+      toc: false
     }
   },
   "0-workflow": {
@@ -79,5 +79,29 @@ export default {
       copyPage: false,
       toc: false
     }
-  }
+  },
+    "9-mortality": {
+    title: "Mortality",
+    theme: { 
+      layout: 'full',
+      copyPage: false,
+      toc: true
+    }
+  },
+  "10-service-utilisation": {
+    title: "Service Utilisation",
+    theme: { 
+      layout: 'full',
+      copyPage: true,
+      toc: true
+    }
+  },
+  "11-health-system-performance": {
+    title: "Health System Performance",
+    theme: { 
+      layout: 'full',
+      copyPage: false,
+      toc: true
+    }
+  }, 
 }

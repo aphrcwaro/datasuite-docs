@@ -16,6 +16,15 @@ export default {
       toc: false
     }
   },
+  troubleshooting: {
+    type: 'page',
+    title: 'Troubleshooting',
+    theme: {
+      copyPage: false,
+      toc: true,
+      layout: 'full'
+    }
+  },
   resources: {
     type: 'page',
     title: 'Resources',

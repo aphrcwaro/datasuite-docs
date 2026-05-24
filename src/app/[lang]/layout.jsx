@@ -52,21 +52,25 @@ export default async function RootLayout({ children, params }) {
         <body>
           <Layout
             navbar={
-            <Navbar 
-              logo={
-                <>
-                  <Image src="/images/suite-icon.svg" alt="DataSuite" width={48} height={48} />
-                  <span style={{ marginLeft: '0', fontWeight: 800, fontSize: '24px',  }}>
-                    DataSuite
-                  </span>
-                </>
-              }
-              align = 'left'
-              projectLink={`/${lang}/downloads`}
-              projectIcon={<span className="download-btn">{t.download}</span>}
-            />
-          }
-            footer={<Footer>{new Date().getFullYear()} © African Population Health and Research Center.</Footer>}
+              <Navbar 
+                logo={
+                  <>
+                    <Image src="/images/suite-icon.svg" alt="DataSuite" width={48} height={48} />
+                    <span style={{ marginLeft: '0', fontWeight: 800, fontSize: '24px' }}>
+                      DataSuite
+                    </span>
+                  </>
+                }
+                align='left'
+                projectLink={`/${lang}/downloads`}
+                projectIcon={<span className="download-btn">{t.download}</span>}
+              />
+            }
+            footer={
+              <Footer>
+                {new Date().getFullYear()} © African Population Health and Research Center.
+              </Footer>
+            }
             docsRepositoryBase="https://github.com/aphrcwaro/datasuite_public"
             sidebar={{ defaultMenuCollapseLevel: 1 }}
             pageMap={pageMap}
@@ -79,10 +83,7 @@ export default async function RootLayout({ children, params }) {
             toc={t.toc}
             feedback={t.feedback}
             editLink={null}
-            search={
-              <Search 
-                placeholder={t.searchPlaceholder} 
-              />}
+            search={<Search placeholder={t.searchPlaceholder} />}
           >
             {children}
           </Layout>
@@ -93,6 +94,4 @@ export default async function RootLayout({ children, params }) {
   } catch (e) {
     notFound()
   }
-
-  
 }

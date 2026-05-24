@@ -1,225 +1,89 @@
+import { Steps } from 'nextra/components'
 import { Callout } from 'nextra/components'
+import { Bleed } from 'nextra/components'
 
-# Numerator Assessment
+## Overview
 
-High-quality health facility data form the foundation of reliable coverage estimates. This module systematically evaluates your data for completeness, accuracy, and internal consistency—identifying potential issues before they distort coverage calculations. By assessing reporting rates, detecting outliers, and verifying logical relationships between indicators, the Data Suite ensures your analysis builds on robust evidence.
-
-The data quality assessment uses standardized metrics across a six-year period (2019–2024) to track progress and identify systemic problems. Key checks include comparing reported ratios of linked indicators (e.g., ANC1 to Penta1), identifying facilities with implausibly high or low values, and calculating an overall data quality score. This rigorous screening prevents garbage-in-garbage-out analyses while highlighting which districts or years require additional scrutiny or exclusion.
-
----
-
-## 5.1 Rationale, Approach, and Implementation
-
-
-### Rationale: Scientific Basis for the Analysis
-
-<details>
-<summary><b>Click to read full rationale (Health Facility Data Overview)</b></summary>
-
-<br/>
-
-Routinely reported health facility data are an important source for health indicators at both facility and population levels. These data capture events such as immunizations administered and live births attended.
-
-As with any data source, quality is a critical concern. Data must be assessed for:
-- Completeness of reporting
-- Presence of extreme outliers
-- Internal consistency
-
-A standardized approach to data quality assessment enables tracking of progress over time.
-
-</details>
-
----
-
-### Approach: Description of Analytical Steps
-
-The analysis of monthly data by district for **2019–2024** is used to assess annual data quality using the following standard indicators:
-
+High-quality health facility data form the foundation of reliable coverage estimates. 
+This module systematically evaluates health facility data by considering the standard data quality metrics that include: 
 - Reporting completeness  
 - Outlier detection  
 - Internal consistency  
-- Data completeness  
+- Data missingness  
 - Ratio calculations  
 - Overall quality score  
 
----
+## DQA metrics in CD2030 Analytical approach
+<Steps>
 
-### Implementation: Conducting Analysis in Datasuite
-
-Follow the steps in the interface to:
-
-- Load datasets  
-- Configure parameters  
-- Execute background processing scripts  
-
-<Callout type="info" title="Tip">
-Ensure all datasets are fully loaded and validated before running the analysis.
-</Callout>
-
----
-
-## 5.2 DQA Metrics Calculation and Interpretation
-
----
-
-### 5.2.1 Reporting Completeness
-
-| Indicator | Numerator | Denominator | Interpretation |
+###  [Reporting Completeness](/docs/methods/#reporting-completeness)
+For further reading on the scientific basis and methods used to assess reporting completeness, go to **[Reporting completeness: rationale](/docs/methods/#reporting-completeness)**
+| Metric | Numerator | Denominator | Interpretation |
 |----------|----------|-------------|---------------|
 | **1a** | Number of monthly facility reports received | Total expected reports *(12 × number of facilities)* | ≥90% is good; affects trend interpretation |
 | **1b** | Districts with ≥90% reporting completeness | Total districts | Identifies low-performing districts |
-| **1c** | Districts with no missing values across all forms | Total districts | Not used in overall score |
+| **1c** | Districts with no missing values across all forms | Total districts | Identifies distribution of  |
 
 <Callout type="info">
 Statistics for **1a** and **1b** are based on the mean of four reporting forms (ANC, delivery, immunization, OPD).
 </Callout>
 
----
+    - *insert output screenshot Output*
+ ---
 
-### Configuration in Datasuite
+### [Outlier detection](/docs/methods/#outlier-detection)
+An extreme outlier is defined as a **monthly value that is 5 times the median absolute deviation (MAD) from the monthly median value for a particular year**.
+For further reading on the scientific basis and methods used to assess and adjust for Extreme outliers , go to **[Extreme outliers: rationale](/docs/methods/#outlier-detection)**
 
-- **Indicator of Interest:** Select metric to evaluate  
-- **Performance Threshold:** Default = 90%  
-- **Analysis Level:** Admin level (Region) or District  
-
- *Insert Reporting Rate Screenshot*
-
----
-
-### 5.2.2 Data Completeness
-
- *Insert Data Completeness Output*
-
----
-
-### 5.2.3 Extreme Outliers
-
-| Indicator | Numerator | Denominator | Interpretation |
+|Metric | Numerator | Denominator | Interpretation |
 |----------|----------|-------------|---------------|
 | **2a** | Monthly values not classified as outliers | Total monthly values | ≥99% expected |
 | **2b** | Districts with no outliers | Total districts | ≥90% expected |
 
-<Callout type="warning" title="Outlier Interpretation">
+<Callout type="warning" >
 Outliers are identified statistically. Always assess whether deviations reflect real-world events (e.g., campaigns) or data errors.
 </Callout>
 
-Datasuite provides interactive visualization to explore:
-- Which districts have outliers  
-- When they occur  
+    - *insert output screenshot Output*
+ ---
+### [Internal consistency](/docs/methods/#internal-consistency)
+- Internal consistency assesses the degree to which related indicators are aligned within the dataset, based on expected epidemiological and service delivery relationships. 
+- Within the CD2030 analytical framework, this step complements other (DQA) metrics by evaluating whether indicators that are biologically or programmatically linked follow plausible patterns.
+- Unlike standalone indicator checks, internal consistency focuses on **relationships between indicators**, ensuring that reported values reflect realistic service delivery pathways across the continuum of care.
 
- *Insert Extreme Outlier Visualization*
+The following metrics are considered when assessing internal consistency:
 
----
-
-### 5.2.4 Internal Consistency
-
-| Indicator | Numerator | Denominator | Interpretation |
+|Metric | Numerator | Denominator | Interpretation |
 |----------|----------|-------------|---------------|
 | **3a** | ANC1 reported | Penta1 reported | Expected ratio range |
 | **3b** | Penta1 reported | Penta3 reported | Based on survey data |
 | **3c** | Districts within expected ratio | Total districts | Wider acceptable range |
 | **3d** | Districts within expected range | Total districts | Same as above |
 
-<Callout type="info" title="Key Insight">
-ANC1 and Penta1 should trend together. Their relationship is a strong indicator of data consistency.
-</Callout>
+    - *insert output screenshot Output*
+ ---
 
- *Insert Internal Consistency Output*
+### Data missingness
+- TBC
+    - *insert output screenshot Output*
+ ---
+### Ratio calculations
+- TBC
+    - *insert output screenshot Output*
+ ---
+### Overall quality score
 
----
-
-#### Key Considerations for Ratio Calculations
-
-##### 1. ANC1 to Penta1 Ratio
-
-Baseline assumptions:
-- Pregnancy loss: **3%**  
-- Stillbirth rate: **2%**  
-- Twinning rate: **+1.5%**  
-- Neonatal mortality: **3%**
-
-Baseline expected ratio:
-
-$$Expected\ Ratio = 1.07$$
-
-Adjusted using survey coverage:
-
-$$Expected\ Ratio = 1.07 \times \left(\frac{ANC1\ Coverage}{Penta1\ Coverage}\right)$$
-
-**Examples:**
-- Equal coverage → **1.07**  
-- 90% vs 95% → **1.01**
-
-<Callout type="warning">
-Acceptable range: **±0.05** from expected value.
-</Callout>
-
----
-
-##### 2. Penta1 to Penta3 Ratio
-
-Driven by immunization drop-out rates:
-
-Example:
-
-$$\frac{0.95}{0.85} = 1.12$$
-
-<Callout type="warning">
-Acceptable range: **±0.05**
-</Callout>
-
----
-
-##### 3. Visualization in Datasuite
-
-Tracks ratios across **2019–2024** alongside expected values.
-
-<Callout type="error" title="Interpretation">
-Investigate deviations >10% from expected baseline.
-</Callout>
-
- *Insert Internal Consistency Graph*
-
----
-
-### 5.2.5 Overall DQA Score
-
-| Indicator | Numerator | Denominator | Interpretation |
+| Metric | Numerator | Denominator | Interpretation |
 |----------|----------|-------------|---------------|
 | **Overall Score** | Computed automatically | Computed automatically | Mean of indicators **1a, 1b, 2a, 2b, 3c, 3d** |
 
+ *insert output screenshot Output*
 <Callout type="success">
 Datasuite automatically computes the overall data quality score.
 </Callout>
 
----
 
-### Downloading the Report
-
-After computation:
-
-- Click **Generate Report**
-- Download summary output
-
- *Insert DQA Table*
+ ---
+</Steps>
 
 ---
-
-### 5.2.6 DQA Report and Interpretation
-
-#### Interpretation Framework
-
-When reviewing results, assess:
-
-- **Yearly patterns:** Are trends explainable?  
-- **Geographical variation:** Are certain districts problematic?  
-- **Service-specific issues:** Are some services consistently weak?  
-- **Indicator alignment:** Do ANC1 and Penta1 align?  
-
----
-
-### Statistical Definition
-
-<Callout type="info">
-An **extreme outlier** is defined as a value exceeding **5 × Median Absolute Deviation (MAD)** from the yearly median.
-</Callout>

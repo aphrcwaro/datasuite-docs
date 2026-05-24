@@ -9,15 +9,13 @@ It is intended to help teams move from raw facility and survey data to defensibl
 
 The framework follows a practical sequence:
 
-1. [Load and configure](/en/docs/framework/1-analysis-setup) facility and survey data.
-2. Calibrate key national benchmark rates.
-3. Assess data quality before estimating coverage.
-4. Adjust incomplete, unstable, or unreliable data.
-5. Select the best-performing denominator.
-6. Interpret national, equity, and sub-national results.
-7.
+1. [Load and configure](/docs/framework/1-analysis-setup) facility and survey data.
+2. [Calibrate key national benchmark rates](/docs/framework/1-analysis-setup/#survey-params).
+3. [Assess data quality](/docs/framework/2-data-quality-assessment) before estimating coverage.
+4. [Adjust](/docs/framework/3-data-adjustment) incomplete, unstable, or unreliable data.
+5. [Select the best-performing denominator](/docs/framework/4-denominator-selection).
+6. Generate and interprete **[coverage](/docs/framework/5-coverage-estimation)** , **[equity](/docs/framework/6-equity-analysis)**, **[sub-national](/docs/framework/7-subnational-analysis)**, **[mortality](/docs/framework/mortality)**, **[Service utilisation](/docs/framework/10-service-utilisation)** and **[Health system performance](/docs/framework/11-health-system-performance)** results.
 
-See the [workflow page](/en/docs/framework/workflow) for the process view.
 
 ## Framework modules
 
@@ -70,7 +68,8 @@ The final purpose of the framework is practical use. Findings should inform coun
 
 ### Step 1: Data Quality Assessment
 
-**Scientific Foundation:** Routine facility data are an indispensable source for population-level health indicators, but quality varies widely due to reporting inconsistencies, data entry errors, and systemic gaps. Standardized assessment enables tracking of progress over time and prevents unreliable data from contaminating coverage estimates.
+**Scientific Foundation:** Routine facility data are an indispensable source for population-level health indicators, but quality varies widely due to reporting inconsistencies, data entry errors, and systemic gaps. 
+Standardized assessment enables tracking of progress over time and prevents unreliable data from contaminating coverage estimates.
 
 **Approach:** The Data Suite evaluates monthly district-level data across a six-year period (2019–2024) using five core quality metrics:
 
@@ -88,23 +87,11 @@ The final purpose of the framework is practical use. Findings should inform coun
 
 ---
 
+
+
 ### Step 2: Data Adjustment
 
-**Scientific Foundation:** Incomplete reporting creates systematic underestimation of true coverage. Assuming non-reporting facilities delivered zero services is statistically implausible; they simply didn't submit data. Adjustment factors account for this gap using a defensible assumption: non-reporting facilities operate at lower capacity (typically 25% of reporting facility volume).
 
-**Adjustment Formula:**
-$$N_{\text{adj}} = N_{\text{rep}} \times \left[ 1 + \left( (1 - C) \times k \right) \right]$$
-
-Where:
-- $N_{\text{adj}}$ = Adjusted total number of health events
-- $N_{\text{rep}}$ = Raw reported numbers
-- $C$ = Reporting completeness (as a proportion)
-- $k$ = Adjustment factor (default 0.25, range 0–1.0)
-
-**Approach:** The module applies tiered business rules:
-
-1. **Critically Low Reporting (&lt;75%)** – No adjustment applied; data flagged as insufficiently reliable
-2. **Incomplete Reporting (75–100%)** – Adjustment factor applied to scale up numbers
 3. **Extreme Outliers** – Erroneous values replaced with district-year median
 4. **Missing Values** – Imputed using district median monthly values
 
