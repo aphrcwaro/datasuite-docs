@@ -1,0 +1,99 @@
+import { Steps } from 'nextra/components'
+import { Callout } from 'nextra/components'
+import { Bleed } from 'nextra/components'
+
+## Curative Health Services Utilization for Sick Children
+
+## Curative Health Services Utilization in CD2030 Analytical approach
+
+### Rationale and Approach
+**Scientific basis for the analysis:**
+
+There is limited routine information regarding curative service utilization, even though diarrhea and pneumonia remain leading causes of child mortality. Service utilization statistics on care-seeking behavior among children with recent illnesses (diarrhea, acute respiratory infection, or fever in the preceding 2 weeks) are traditionally obtained from household surveys, which rely on maternal recall.
+
+Routine health facility data on outpatient department (OPD) visits serves as a direct indicator of access to curative services: fewer than one visit per person per year is generally considered an indicator of poor geographic or financial access. Similarly, data on hospital admissions reflects service access, while institutional facility-based mortality (case fatality) serves as a proxy indicator for the quality of clinical care.
+
+**Description of analytical steps:**
+
+The data on OPD visits must include both new visits and re-visits. These data are usually stratified into two main cohorts: children under 5 years of age, and individuals 5 years and older. 
+
+As with maternal care, newborn care, and immunization metrics, data quality is systematically assessed first. Adjustments are applied to correct for incomplete reporting, and extreme outliers are resolved. This adjusted, clean dataset is then utilized for trends and comparative analyses at both national and sub-national tiers.
+
+---
+
+<Steps>
+
+### [Outpatient Service Utilization](/docs/methods/#outpatient-service-utilization)
+
+Outpatient department data inputs must include both new visits and re-visits combined.
+
+**Mean Number of OPD Visits per Child per Year**
+To track the frequency of care-seeking coverage, the metric is structured as follows:
+
+* **Numerator:** Adjusted number of under-5 OPD visits within a calendar year.
+* **Denominator:** Total projected population of children under 5 years of age extracted from the DHIS2 projections.
+
+Mathematically, this rate is expected to remain highly stable over time, with an expected variance of **less than 0.2 visits per child per year** between consecutive reporting periods. A gradual, steady increase over time points to either genuine improvements in physical access to OPD services or an escalating disease burden within the pediatric population. 
+
+While there is no rigid global cut-off threshold, an attendance rate of **fewer than 1 visit per year per child** indicates that access barriers are likely restricting service utilization. OPD statistics are routinely calculated and tracked at the national and regional/provincial levels.
+
+    - *[insert map of opd utilization by region or province Output]*
+
+<Callout type="info">
+**OPD Interpretation Considerations:**
+When compiling the interpretation narrative for the OPD sub-module, answer the following evaluation questions directly:
+* **Data Quality Baseline:** What can be concluded about the data quality for OPD visits? Is there a high level of consistency in the reported raw numbers between consecutive years?
+* **Temporal Trends:** What is the exact calculated number of OPD visits per child per year across the 2019–2023 timeline, and is it demonstrating an upward trend?
+* **Access Barriers:** Is the national or sub-national rate lower than 1 visit per year, confirming low access to services?
+* **Geographical Disparities:** What do the data reveal about OPD visits per child per year across different regions or provinces in 2023? How large is the absolute margin between the top-performing and bottom-performing sub-national units?
+</Callout>
+
+**Percent of OPD Visits Contributed by Children Under Five Years**
+This metric serves as an internal check for data consistency. The proportion of under-5 visits typically accounts for **15% to 45%** of all recorded outpatient consultations. 
+* In high-fertility settings *(e.g., countries with a Total Fertility Rate > 4)*, this proportion is expected to sit on the higher end of the spectrum, frequently exceeding **30%**.
+* **Data Quality Flags:** If the calculated percentage falls completely outside the 15%–45% boundary, a data quality issue may be present. Furthermore, a sudden shift between years exceeding **5 percentage points** flags potential reporting inconsistency.
+
+---
+
+### [Inpatient Service Utilization](/docs/methods/#inpatient-service-utilization)
+
+The data on hospital admissions include both new admissions and re-admissions. These records are stratified by age into under-5 and 5 years and over cohorts. Where available, patient discharge data *(calculated as: $\text{Discharges} = \text{Admissions} - \text{Deaths}$)* is the preferred analytical input.
+
+A review of reporting completeness and the presence of extreme outliers is used to evaluate inpatient data quality. Because reporting rates from hospitals and facilities with inpatient departments (IPD) can be more complex to track than routine outpatient data, the decision to adjust for incomplete reporting relies heavily on the technical judgment of the country team regarding registry reliability.
+
+Extreme monthly outliers are common in inpatient data due to compilation errors; corrective adjustments must be applied cautiously. It is highly recommended to assess and compare both the unadjusted and adjusted data outputs side-by-side.
+
+**Number of Admissions per 100 Children Under-5 per Year**
+This serves as a core indicator of inpatient access capacity. A calculated value of **fewer than 2 admissions per 100 children under-5 per year** indicates very low access to acute inpatient services. For context, the median baseline across sub-Saharan African countries for the 2018–2022 period was **4.5 admissions per year**. 
+
+Annual fluctuations are expected to be minimal; a year-to-year shift of **1 or more admissions per 100 children** is highly unlikely under normal circumstances unless tied to a documented emergency, such as an epidemic or outbreak.
+
+    - *[insert map of ipd admissions among under five by region or province Output]*
+
+<Callout type="info">
+**IPD Interpretation Considerations:**
+Your narrative analysis for the inpatient sub-module must explicitly evaluate the following parameters:
+* **Data Consistency:** Is there internal consistency in the reported raw numbers of admissions and overall admission rates over time?
+* **Access Metrics:** What is the absolute number of admissions per 100 children under 5 per year across the 2019–2023 trend lines?
+* **Sub-national Spread:** Is the observed rate high or low compared to historical benchmarks? What specific sub-national patterns emerge when evaluating admissions per 100 children under 5 across regions or provinces?
+</Callout>
+
+**Percent of Admissions Contributed by Children Under Five Years**
+This is used as a data quality validation indicator. The percentage typically ranges between **10% and 40%** of all recorded facility admissions. 
+
+If the value falls outside this specific reference interval, it points to either an underlying data quality issue or an exceptional epidemiological event. A year-to-year fluctuation exceeding **5 percentage points** flags an active data quality problem.
+
+**Case Fatality Rate**
+The case fatality rate serves as a key proxy indicator for the quality of clinical care within facility wards. It is mathematically defined as:
+
+$$\text{Pediatric Case Fatality Rate} = \frac{\text{Number of Children Who Die in Hospital}}{\text{Total Number of Admissions (Discharges + Deaths)}}$$
+
+<Callout type="warning">
+**Methodological Rule:** Case fatality calculations must be performed using **unadjusted data inputs exclusively**. The platform does not apply reporting completeness adjustments or outlier corrections to either the raw number of institutional deaths or total admissions in this module. 
+</Callout>
+
+A lower case fatality rate within health facilities corresponds directly to a higher standard of acute clinical care.
+
+</Steps>
+
+---

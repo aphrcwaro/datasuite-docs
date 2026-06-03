@@ -1,0 +1,144 @@
+import { Steps } from 'nextra/components'
+import { Callout } from 'nextra/components'
+import { Bleed } from 'nextra/components'
+
+## Health Systems Performance
+
+### Introduction
+
+This section focuses on analyzing health systems performance, including the availability and quality of health services, the health workforce, and health financing. The analysis aims to identify gaps and challenges in the health system that may affect the delivery of reproductive, maternal, newborn, child, adolescent health, and nutrition (RMNCAH-N) services.
+
+It contains the following subsections:
+* Health system inputs (national and subnational)
+* Health system outputs (national and subnational)
+* Private sector and RMNCAH-N services
+
+---
+
+## Health Systems Performance in CD2030 Analytical approach
+
+**Description of analytical steps:**
+
+The analytical scope is restricted to a direct, descriptive comparison of health system outputs (coverage of tracer interventions) against system inputs (infrastructure, workforce, and financing metrics) at the sub-national tier (Admin1 level). More complex methodologies—such as data envelopment analysis, frontier efficiency modeling, or composite indexing controlling for multi-sectoral socioeconomic development factors—fall outside the scope of this operational section.
+
+The core objective remains isolating specific sub-national bottlenecks where high system inputs fail to translate into expected RMNCAH-N service coverage outputs, or conversely, identifying high-performing regions exhibiting strong service delivery efficiency.
+
+<Steps>
+
+### [Implementation](/docs/methods/#implementation-health-systems-performance)
+
+The analysis for these sub-modules is conducted entirely within the **Health System Performance** section of the **Data Suite**. 
+
+Navigate to the main module tab to configure your analytical parameters, select your cross-tabulation inputs, and review the resulting scatter plots and dashboard matrices.
+
+    - *[insert health_system_performance_module_interface Output]*
+
+</Steps>
+
+---
+
+## Health Systems Inputs Evaluation Framework
+
+First, the assessment focuses on the quality of data for the health system indicators at both national and sub-national levels. For selected indicators, the evaluation must target:
+* **Global Benchmarking:** Comparison with global data repositories for selected indicators *(national level only)*.
+* **Plausibility Auditing:** Assessing the plausibility of indicator values across sub-national units to identify major outliers or improbable patterns.
+
+In addition, it is highly useful to explore the cross-correlations of health system inputs with one another *(e.g., workforce density plotted against inpatient bed capacity)*. This correlation mapping is effective for detecting systemic data inconsistencies across Admin1 units (provinces, regions, or counties).
+
+Finally, assessing the alignment of health system performance metrics across different administrative levels *(e.g., comparing Admin1 aggregates directly against nested district values)* helps isolate structural anomalies, reporting discrepancies, or geographical outliers.
+
+---
+
+## Input Indicators and Analytical Benchmarks
+
+### Health Financing
+Health financing indicators at the district or Admin1 levels are difficult to obtain and are frequently limited to budgeted allocations rather than actual expenditures. These datasets also tend to capture government resources exclusively, missing out on external donor aid, private insurance, or out-of-pocket spending. 
+
+<Callout type="warning">
+**System Rule:** These financial tracking data are not loaded as default parameters here. However, if reliable sub-national expenditure data are available to the country team, they should be utilized to enrich the health system inputs baseline.
+</Callout>
+
+### Core Health Professionals per 10,000 Population
+Health workforce trackers are often of poor data quality and can be operationally difficult to extract. The primary indicator used by the platform is the **density of core health professionals per 10,000 population**. This cohort includes:
+* Physicians (Medical Doctors)
+* Non-physician clinicians *(e.g., clinical officers or health officers with surgical training and multi-year certifications, but lacking a full academic medical degree)*
+* Professional Nurses
+* Certified Midwives
+
+<Callout type="info">
+**Density Threshold Benchmarks:**
+* **Historical Threshold (2006 WHO Guidance):** A minimum baseline of **23 core health professionals per 10,000 population** was designated as the critical tipping point required to achieve the skilled birth attendance volumes necessary to reduce maternal and child mortality.
+* **Modern Threshold (UHC Era):** Updated global targets establish a significantly higher baseline of at least **44.5 core health professionals per 10,000 population** to successfully achieve Universal Health Coverage (UHC) goals.
+</Callout>
+
+### Number of Health Facilities per 10,000 Population
+This metric serves as a baseline indicator of physical health infrastructure and includes all tiers of care: hospitals, comprehensive health centers, and lower-level primary points of care such as health posts and dispensaries. Both private and public sectors must be accounted for. 
+
+$$\text{Health Facility Density} = \left( \frac{\text{Total Number of Health Facilities}}{\text{Total Population}} \right) \times 10,000$$
+
+This is a crude indicator because it weighs small primary dispensaries identically to tertiary referral hospitals. 
+* *Indicative Benchmark:* A value of **2 facilities per 10,000 population** is used as an indicative reference baseline. A sub-national unit dropping below 2 is categorized as having low infrastructure access.
+
+### Number of Hospitals per 100,000 Population
+To gain specific insights into the infrastructure capacity available for acute inpatient services, the platform computes the density of hospitals scaled per 100,000 individuals:
+
+$$\text{Hospital Density} = \left( \frac{\text{Total Number of Hospitals}}{\text{Total Population}} \right) \times 100,000$$
+
+### Inpatient Bed Density per 10,000 Population
+This indicator serves as an additional measure of structural healthcare capacity and is calculated as the absolute number of official inpatient beds across all functioning health facilities per 10,000 population:
+
+$$\text{Inpatient Bed Density} = \left( \frac{\text{Total Inpatient Beds}}{\text{Total Population}} \right) \times 10,000$$
+
+    - *[insert subnational_health_inputs_scatter_matrix Output]*
+
+---
+
+## Health Systems Outputs by Inputs at the Sub-national Level
+
+The second part of the analysis explores the statistical association between health system inputs and matching service utilization or coverage indicators across sub-national units (Admin1 level). 
+
+---
+
+### Association: Inpatient Infrastructure and Under-5 Hospital Admissions
+The platform evaluates the association between hospital density (per 100,000 population) or inpatient bed density (per 10,000 population) plotted against the annual hospital admission rates for children under 5, stratified by Admin1 unit.
+
+**Theoretical Expectation**
+We expect that regions with lower hospital or bed density will exhibit lower pediatric admission rates, while regions with higher structural capacity will show higher admission rates. Visually, this trend should reflect a positive slope on a linear regression line.
+
+    - *[insert 6-ipd_use Output]*
+
+**Identifying and Interpreting Outliers**
+When reviewing the scatter plot, teams must look for major outliers, such as regions with very low infrastructure density but unusually high pediatric admission rates. Potential operational explanations include:
+* **Infrastructure Under-reporting:** Active hospitals or bed capacities are under-reported in the system by these specific regions.
+* **High Clinical Throughput:** The existing hospitals in these low-density regions operate at exceptionally high admission turnover and bed occupancy rates.
+* **Numerator Inflation:** Hospital admissions are over-reported or double-counted in these areas.
+
+The technical narrative should be based on contextual knowledge of the actual situation in these sub-national units.
+
+---
+
+### Association: Health Workforce Density and Under-5 Outpatient Utilization
+This model checks the association between health workforce density (core health professionals per 10,000 population) and the mean number of outpatient department (OPD) visits among children under 5, by region.
+
+**Theoretical Expectation**
+We expect that regions with lower health workforce density will have lower OPD utilization rates for children, and those with a higher workforce density will have higher utilization rates. This relationship is demonstrated by a positive slope on a linear regression line.
+
+**Identifying and Interpreting Outliers**
+If a region displays low health workforce density alongside high OPD utilization rates, the country team should evaluate whether:
+* **Workforce Under-reporting:** The count of core health professionals is under-reported by these regions.
+* **High Staff Workload:** Health workers in these areas experience an exceptionally high clinical workload and patient volume.
+* **Numerator Inflation:** OPD visits are over-reported due to data quality or documentation issues.
+
+The final interpretation must reconcile these data points with the ground reality of the affected regions.
+
+---
+
+### Association: Health Workforce Density and Institutional Live Birth Coverage
+This component cross-tabulates health workforce density (core health professionals per 10,000 population) against institutional live birth coverage by region. For delivery coverage inputs, teams can utilize data from a recent household survey or the preferred DHIS2 facility-derived estimate.
+
+**Theoretical Expectation**
+We expect that regions with lower health workforce density will experience lower institutional delivery coverage rates, while those with a higher concentration of core professionals will show higher coverage. This will reflect a positive slope on a linear regression line.
+
+The structural and data-quality considerations for interpreting outliers in this model match the analytical steps outlined in the sections above.
+
+    - *[insert 8-health_system_ratio_opd_u5_hwf.png Output]*

@@ -9,11 +9,13 @@ Three data categories organize the requirements: administrative data (facility i
 ## Indicator definitions
 
 For cross-country standardization of the analysis, this section describes the indicators/variables extracted from the countries' HMIS, that are required for the Datasuite analysis.  
-The data is grouped into three main categories:
+The data is grouped into the following main categories:
 
 - **Admin Data**
 - **Population Data**
-- **Service data**
+- **Reporting Completeness**
+- **Service Data (1, 2, and 3)**
+- **Data Checks**
 
 ---
 
@@ -23,6 +25,7 @@ The following variables describe health system infrastructure and workforce.
 
 | Variable Name | Description |
 |--------------|------------|
+| `Num_order` | Nº |
 | `District_name` | District |
 | `First_admin_level` | Region |
 | `Country` | Your country name |
@@ -47,17 +50,136 @@ The following variables describe demographic and population estimates.
 |--------------|------------|
 | `District_name` | District name |
 | `Year` | Year |
-| `Pop_growth_rate` | Annual population growth rate |
-| `Total_Population` | Total population |
-| `Population_under_5years` | Population under 5 years |
+| `Pop_growth_rate` | Annual Population growth rate |
+| `Total_Population` | Total Population |
+| `Population_ under_5years` | Population under 5 years |
 | `Population_under_1year` | Population under 1 year |
-| `Live_births` | Projected total live births (estimated from census) |
-| `Total_births` | Projected total births (estimated from census) |
-| `Women_15_49_years` | Total women aged 15–49 years |
+| `Live_births` | Projected total Live births (Estimated live births from census) |
+| `Total_births` | Projected total births (Estimated births from census) |
+| `Women_15_49_years` | Total women 15-49 years |
 
 ---
 
-### Service Data
+### Reporting Completeness
 
+The following variables track facility reporting rates and expected submissions for various health service categories.
+
+| Variable Name | Description |
+|--------------|------------|
+| `District` | District name |
+| `Year` | Year |
+| `Month` | Month |
+| `ANC_reporting_expected` | ANC reporting: Expected number (#) |
+| `ANC_reporting_received` | ANC reporting: Received number (#) |
+| `ANC_reporting_rate` | ANC reporting: Reporting completeness rate (%) |
+| `Instdelivey_reporting_expected` | Institutional delivery reporting: Expected number (#) |
+| `Instdelivey_reporting_received` | Institutional delivery reporting: Received number (#) |
+| `Instdelivey_reporting_rate` | Institutional delivery reporting: Reporting completeness rate (%) |
+| `Vacc_reporting_expected` | Vaccinations reporting: Expected number (#) |
+| `Vacc_reporting_received` | Vaccinations reporting: Received number (#) |
+| `Vacc_reporting_rate` | Vaccinations reporting: Reporting completeness rate (%) |
+| `OPD_reporting_expected` | OPD visits reporting: Expected number (#) |
+| `OPD_reporting_received` | OPD visits reporting: Received number (#) |
+| `OPD_reporting_rate` | OPD visits reporting: Reporting completeness rate (%) |
+| `IPD_reporting_expected` | IPD admissions reporting: Expected number (#) |
+| `IPD_reporting_received` | IPD admissions reporting: Received number (#) |
+| `IPD_reporting_rate` | IPD admissions reporting: Reporting completeness rate (%) |
 
 ---
+
+### Service Data 1
+
+General admissions, deaths, and initial child vaccinations.
+
+| Variable Name | Description |
+|--------------|------------|
+| `District` | District name |
+| `Year` | Year |
+| `Month` | Month |
+| `BCG` | Total number of BCG doses administered &lt;1 year |
+| `Penta1` | Total number of Pentavalent vaccination 1st dose (infants) |
+| `Penta3` | Total number of Pentavalent vaccination 3rd dose (infants) |
+| `Measles1` | Total number of Measles vaccination 1st dose (infants) |
+| `Measles2` | Total number of Measles vaccination 2nd dose |
+| `OPD_total` | Total number of OPD visits all ages (new and re-visit) |
+| `OPD_under5` | Number of OPD visits for children under-5 years |
+| `IPD_total` | Total number of IPD admissions, all ages |
+| `IPD_under5` | Number of IPD admissions of children under-5 years |
+| `under5_deaths` | Total number of under-5 deaths in health facilities |
+| `total_deaths` | Total number of all age deaths in health facilities |
+
+---
+
+### Service Data 2
+
+Maternal, newborn, and reproductive health indicators.
+
+| Variable Name | Description |
+|--------------|------------|
+| `District` | District name |
+| `Year` | Year |
+| `Month` | Month |
+| `ANC1` | Total number of ANC 1st visit |
+| `ANC_1trimester` | Total number of ANC during the 1st trimester of pregnancy |
+| `ANC4` | Total number of Pregnant women completing 4 ANC visits |
+| `IPT2` | Total number of pregnant women receiving IPT 2nd dose |
+| `IPT3` | Total number of pregnant women receiving IPT 3rd dose |
+| `IFA90` | Total number of pregnant women who received iron folic acid (IFA) supplementation for 90 or more days during the pregnancy |
+| `Syphilis_test` | Total number of pregnant women tested for syphilis during pregnancy |
+| `HIV_test` | Total number of pregnant women tested for HIV during pregnancy |
+| `SBA` | Total number of skilled birth attendance in health facilities |
+| `Instdelivery` | Total number of deliveries in health facilities |
+| `Instlivebirths` | Total number of live births in health facilities |
+| `Csection` | Total number of Caesarian Sections |
+| `Low_BWeight` | Total number of newborns with low birth weight (&lt;2500g) |
+| `PNC_48h` | Total number of mothers attending PNC visit within 48 hours after delivery |
+| `Stillbirth_total` | Total number of stillbirths in health facilities (all) |
+| `Stillbirth_fresh` | Total number of fresh stillbirths in health facilities |
+| `Stillbirth_macerated` | Total number of macerated stillbirths in health facilities |
+| `maternal_deaths` | Total number of maternal deaths reported |
+| `neonatal_deaths` | Total number of neonatal deaths reported |
+
+---
+
+### Service Data 3
+
+Additional immunizations and disease cases.
+
+| Variable Name | Description |
+|--------------|------------|
+| `District` | District name |
+| `Year` | Year |
+| `Month` | Month |
+| `opv1` | Total number of &lt;1 year who received Polio 1 vaccine |
+| `opv2` | Total number of &lt;1 year who received Polio 2 vaccine |
+| `opv3` | Total number of &lt;1 year who received Polio 3 vaccine |
+| `penta2` | Total number of Pentavalent vaccination 2nd dose (infants) |
+| `pcv1` | Total number &lt;1 year who received Pneumococcal Conjugate 1 vaccine |
+| `pcv2` | Total number of &lt;1 year who received Pneumococcal Conjugate 2 vaccine |
+| `pcv3` | Total number of &lt;1 year who received Pneumococcal Conjugate 3 vaccine |
+| `rota1` | Total number of &lt;1 year who received Rotavirus 1 vaccine |
+| `rota2` | Total number of &lt;1 year who received Rotavirus 2 vaccine |
+| `ipv1` | Total number of children who received inactivated poliovirus 1 vaccine |
+| `ipv2` | Total number of children who received inactivated poliovirus 2 vaccine |
+| `hpv1` | Total number of children who received human papillomavirus vaccine 1 |
+| `hpv2` | Total number of children who received human papillomavirus vaccine 2 |
+| `measles_cases` | Total number of Measles cases reported |
+
+---
+
+### Data Checks
+
+Automated diagnostic variables used for validation of completeness and consistency across sheets.
+
+| Variable Name | Description |
+|--------------|------------|
+| `District` | District Name |
+| `# of occurrences in 'Admin data'` | Verification count of district presence in the Admin Data sheet |
+| `Is the district missing in 'Population_data'?` | Status flag checking if the district is missing in Population Data |
+| `# of occurrences in 'Population_data'?` | Verification count of district presence in Population Data |
+| `Is the district missing in 'Reporting_completeness'?` | Status flag checking if the district is missing in Reporting Completeness |
+| `# of occurrences in 'Reporting completeness'` | Verification count of district presence in Reporting Completeness |
+| `Is the district missing in 'Service_data_1'?` | Status flag checking if the district is missing in Service Data 1 |
+| `# of occurrences in 'Service_data_1'` | Verification count of district presence in Service Data 1 |
+| `Is the district missing in 'Service_data_2'?` | Status flag checking if the district is missing in Service Data 2 |
+| `# of occurrences in 'Service_data_2'` | Verification count of district presence in Service Data 2 |

@@ -1,6 +1,8 @@
-# 13 Coverage
+import { Steps } from 'nextra/components'
+import { Callout } from 'nextra/components'
+import { Bleed } from 'nextra/components'
 
-# 14 Sub-national Coverage
+## Sub-national Coverage
 
 Sub-national analysis reveals the geographic distribution of health service access—critical for identifying underperforming districts that drag down national averages and for targeting resources where they are most needed. This module estimates coverage at regional (Admin1) and district (Admin2) levels using the same denominator and adjustment methodology as national analysis, then visualizes how coverage varies across geography. Expect more volatility at district level due to small populations, referral patterns, and facility location choices (hospitals in towns serve surrounding rural areas), but this noise contains actionable intelligence about where health systems fail.
 
@@ -8,26 +10,32 @@ The Data Suite generates district-level "one-pagers"—visual summaries pairing 
 
 ---
 
-## 14.1 Rationale, Approach, and Implementation
+## Sub-national Coverage in CD2030 Analytical approach
 
-### Rationale: Scientific basis for the analysis
+### Rationale and Approach
+**Scientific basis for the analysis:**
+
 Sub-national analysis of health intervention coverage is essential for advancing universal health coverage (UHC), which aims to ensure equitable access to quality health services for all populations. National averages often mask critical disparities that exist across regions, districts, or population subgroups.
 
 Monitoring sub-national data helps identify geographical areas where coverage is low, signaling potential inequities in health service access and prompting targeted interventions. This is particularly important for drawing attention to populations who are left behind and ensuring resources are directed where they are most needed.
 
-### Approach: Description of analytical steps
+**Description of analytical steps:**
+
 The focus here is to assess the coverage estimates (e.g., ANC4, institutional deliveries, Penta3) at Admin1 and Admin2 levels using the best performing denominator for the coverage computations, as decided from the analysis in section 2 on denominators.
 
 There will be more “noise” in the sub-national data with improbably high or low coverage rates, compared to the national analyses, and more so in the district analyses than in the regional (admin1) analyses. This is because district analyses are affected by small numbers (more fluctuations which may be random or due to data quality issues) and by the health service utilization patterns by women and children. For instance, a municipal district may get more deliveries than an adjacent rural district because of the location of the hospitals in the municipal district.
 
-### Implementation: Conducting analysis in the Data Suite
+<Steps>
+
+### [Implementation](/docs/methods/#implementation-subnational)
+
 Navigate to the **Subnational Analysis** tab -> **Subnational Coverage** and select the admin level of interest (Region (Admin Level1) or District). Then select the indicator of interest from the key indicators (ANC4, Institutional deliveries, Low Birth Weight, Penta 1 and Measles 1). You can also use the **Custom Check** tab to select any other indicator of interest.
 
+    - *[insert subnational trends Output]*
 
+---
 
-***insert subnational trends***
-
-### 14.2 Sub-national Statistical Summaries (One-Pager)
+### [Sub-national Statistical Summaries (One-Pager)](/docs/methods/#sub-national-statistical-summaries)
 
 The aim is to produce a one-pager for each admin1 unit (generally region, province or county) that contains the regional information as well as a summary of the districts within the region. We refer to this as the regional sub-national statistical summary.
 
@@ -39,37 +47,80 @@ The following components are included:
 
 Other indicators can be used as prioritized by the country (e.g., ANC4, measles1).
 
-
 Template layout of the regional sub-national statistical summary one-pager
 
-****insert fig Alaotra magoro*******
+    - *[insert fig Alaotra magoro Output]*
 
 To summarize the coverage situation according to the health facility statistics for 2024 can be done for the regional level and shown on a map. A composite coverage index is computed as an average in seven mother and child health indicators: ANC4, institutional live birth coverage, SBA, IPT2, postnatal care, pentavalent vaccine 3rd dosage and measles 1 vaccination coverage. Equal weight is given to all indicators.
 
+</Steps>
 
-# 14 Inequality
+---
 
-## 14.1 Rationale, Approach, and Implementation
+## Inequality
 
-### Rationale: Scientific basis for the analysis
+## Inequality in CD2030 Analytical approach
+
+### Rationale and Approach
+**Scientific basis for the analysis:**
+
 Reducing geographic inequality is essential for equitable health systems and achieving the SDGs. Subnational inequalities reveal inconsistencies in service delivery and highlight systemic barriers to healthcare access. Tracking inequality indicators helps assess whether health systems are becoming more equitable and whether targeted interventions are working.
 
-### Approach: Description of analytical steps
+**Description of analytical steps:**
+
 Here we calculate the Median Absolute Deviation from the Median (MADM) to quantify the spread in coverage among districts within an Admin1 level, compared with the coverage at that specific Admin1 subnational unit.
 
 The key statistical measures for sub-national inequalities are:
 * **MADM (Median Absolute Deviation from the Median):** This measure gives an indication of whether the country has been successful in reducing inequalities between sub-national units.
 * **Percent of sub-national units with coverage above a specific target or threshold:** This indicator provides information on the extent to which a country has been successful in reaching universal coverage at the sub-national level.
 
-#### Summary of District and Regional Performance
+**Summary of District and Regional Performance:**
+
 Progress towards international and national targets can be measured by computing the percentage of regions and districts that have achieved these targets. The goal is for all regions and districts to have met the target. Higher percentages mean less inequality.
 
----
+<Steps>
 
-## 14.2 Implementation: Conducting Analysis in the Data Suite
+### [Implementation](/docs/methods/#implementation-inequality)
 
 Navigate to the **Subnational Analysis** tab => **Subnational Inequality** and inspect the plotted regional and district results by year, with the median absolute deviation from the median (MADM), as the summary measure to assess if inequalities have reduced.
 
-***insert subnational chart***
+    - *[insert subnational chart Output]*
 
+</Steps>
 
+---
+
+## Global Coverage Targets
+
+## Global Coverage Targets in CD2030 Analytical approach
+
+### Rationale and Approach
+**Scientific basis for the analysis:**
+
+Reducing geographic inequality is essential for equitable health systems and achieving the SDGs. Subnational inequalities reveal inconsistencies in service delivery and highlight systemic barriers to healthcare access. Tracking inequality indicators helps assess whether health systems are becoming more equitable and whether targeted interventions are working.
+
+**Description of analytical steps:**
+
+Here we calculate the Median Absolute Deviation from the Median (MADM) to quantify the spread in coverage among districts within an Admin1 level, compared with the coverage at that specific Admin1 subnational unit.
+
+The key statistical measures for sub-national inequalities are:
+* **MADM (Median Absolute Deviation from the Median):** This measure gives an indication of whether the country has been successful in reducing inequalities between sub-national units.
+* **Percent of sub-national units with coverage above a specific target or threshold:** This indicator provides information on the extent to which a country has been successful in reaching universal coverage at the sub-national level.
+
+**Summary of District and Regional Performance:**
+
+Progress towards international and national targets can be measured by computing the percentage of regions and districts that have achieved these targets. The goal is for all regions and districts to have met the target. Higher percentages mean less inequality.
+
+<Steps>
+
+### [Implementation](/docs/methods/#implementation-global-targets)
+
+Navigate to the **Subnational Analysis** tab => **Subnational Inequality** and inspect the plotted regional and district results by year, with the median absolute deviation from the median (MADM), as the summary measure to assess if inequalities have reduced.
+
+!*[Subnational Inequality module showing performance against global coverage targets](images/global_targets_screenshot.png)
+
+    - *[insert coverage inequality for ANC4 Output]*
+
+</Steps>
+
+---

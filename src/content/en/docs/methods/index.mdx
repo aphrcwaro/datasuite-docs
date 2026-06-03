@@ -172,14 +172,227 @@ Not all deviations indicate poor data quality. Programme changes, campaigns, or 
 ### Ratio calculations
 ### Overall quality score
 
----
-## Denominator Selection[#denominator-selection]
-
----
 ## Coverage Analysis[#coverage-analysis]
 
----
-## Equity Analysis[#equity-analysis]
+### Rationale: Scientific basis for the analysis[#coverage-rationale]
+**Scientific Foundation:**
+- Coverage of interventions is a critical and direct output of health systems. Regular tracking of coverage at national and sub-national levels has become the mainstay of monitoring progress in national health plans and international initiatives. 
+- Reproductive, maternal, newborn, child and adolescent health indicators with targets are the most common indicators of national health plans and global monitoring. 
+- Both health facility data and household surveys can provide coverage statistics, and an integrated analytical approach is desirable.
+
+Many coverage indicators can be estimated in both surveys and from health facility data. Both are critical pieces of information and need to be considered in conjunction with each other. The facility data can be used to generate annual coverage estimates, and the coverage results should be compared and interpreted alongside the results from recent surveys.
+
+<details>
+  <summary>**Key Coverage Indicators (Survey vs. Facility Denominators)**</summary>
+
+| Indicator | Survey denominator | Facility data denominator |
+|-----------|--------------------|---------------------------|
+| **Antenatal care (ANC1, ANC1 Trimester, ANC4)** | Women aged 15-49 years with a live birth in the last 2 years | Estimated total pregnant women in the population |
+| **Intermittent preventive therapy (IPT2, IPT3)** | Women aged 15-49 years with a live birth in the last 2 years | Estimated total pregnant women in the population |
+| **Institutional deliveries & SBA** | Live births in the last 2 years | Estimated livebirths as denominator |
+| **Low birth weight & C-section** | Low birth weight / C-section counts | Estimated livebirths as denominator |
+| **Postnatal care within 48 hours (PNC48h)** | Postnatal care within 48 hours | Estimated livebirths as denominator |
+| **BCG, Penta1, Penta3** | Children 12-23 months | N of surviving infants (beyond neonatal period) |
+| **Measles1** | Children 12-23 months | N of surviving infants (beyond post-NN period) |
+| **Measles2** | Children 24-35 months | N of surviving infants (beyond postneonatal period) |
+
+</details>
 
 ---
-## Subnational Analysis[#subnational-analysis]
+
+### Antenatal care (ANC)[#antenatal-care]
+Most countries have at least one ANC indicator with a target in the national plan. The global ENAP/EPMM coverage targets for 2025 are: globally, at least 90% of pregnant women with 4 or more ANC care visits, and 90% of countries with at least 70% coverage. 
+
+ANC1 is often considered an indicator of basic access to health services. It is high in most countries, and in many instances, the numbers of ANC1 visits in the routine health facility data can provide a better denominator for the ANC and delivery indicators than population projections.
+
+<Callout type="warning" title="Coverage Overestimation">
+Sometimes, an indicator may reach an unlikely high coverage at the national level, say over 125%. This may be because the data quality of the numerator of the coverage indicator is poor, the denominator is wrong, or the intervention is given and recorded more than once during pregnancy (e.g., IFA supplementation). 
+
+In that case, the computation of coverage is not useful. It is better to express it differently. For instance, if coverage is 200%, it is better to compute the average number of courses of 90 IFA tablets that a pregnant woman received (in this case 2.0 per pregnant woman in the population).
+</Callout>
+
+    **** [insert ANC facility vs survey graphs Output] ****
+
+---
+
+### Delivery Care[#delivery-care]
+All countries have at least one delivery care indicator with a target in the national plan. Institutional (live) birth coverage and SBA are closely related, as almost all deliveries with a skilled attendant occur in health facilities. From the analytical perspective, institutional birth coverage is preferred because it is a more objective measure and avoids issues with varying national definitions of what constitutes a skilled birth.
+
+<Callout type="info" title="C-Section Benchmarks">
+Caesarean section is a life-saving intervention and an important indicator. A general rule of thumb put forward by the World Health Organization (WHO) is that the population-level need for Caesarean section is in the range of **10–15%** of all deliveries. 
+- **Below 10%:** Indicates an unmet need for surgical delivery care.
+- **Over 10–15%:** Implies a likely overuse of Caesarean section. It may also imply a combination of unmet need among certain population groups (e.g., the poorest or rural women) alongside overuse in other subgroups.
+</Callout>
+
+    **** [insert institutional delivery coverage charts Output] ****
+
+---
+
+### Immunization[#immunization]
+Immunization coverage indicators are included in virtually every country’s health sector monitoring plan. A general target is at least 90% coverage for essential vaccines given in childhood and adolescence.
+
+**Denominator Formulations for Facility Data:**
+The number of vaccinations given to infants is used as the numerator. The denominator is the number of eligible children in the population, approximated as:
+
+$$
+\text{Denominator (BCG, Penta)} = \text{Live Births} - \text{Neonatal Deaths}
+$$
+
+$$
+\text{Measles 1 Denominator} = \text{Live Births} - \text{Neonatal Deaths} - \text{Postneonatal Deaths}
+$$
+
+$$
+\text{Measles 2 Denominator} = \text{Live Births} - \text{Neonatal Deaths} - (2 \times \text{Postneonatal Deaths})
+$$
+
+    **** [insert immunization coverage charts Output] ****
+
+---
+
+### Family Planning[#family-planning]
+Family planning coverage estimates are derived from a collaboration between Countdown to 2030 and Track20, using the Family Planning Estimation Tool (FPET).
+
+$$
+\text{Demand Satisfied (Coverage)} = \frac{\text{Use of Modern Contraceptives}}{\text{Unmet Need} + \text{Use of Modern Contraceptives}}
+$$
+
+    **** [insert figure FPET projection Output] ****
+
+---
+
+## Equity Analysis (Equiplots)[#equity-analysis]
+
+### Rationale: Scientific basis for the analysis[#equity-rationale]
+**Scientific Foundation:**
+- National coverage averages mask critical disparities that determine whether health systems are truly leaving no one behind. 
+- Household surveys provide critical information on inequalities across three major dimensions: area of residence (urban/rural), wealth (richest-to-poorest quintiles), and education of the mother.
+- Equiplots are used to assess whether the country has made progress in reducing the poor-rich gap or the education gap over time.
+
+For wealth quintiles, it can be assessed what the type of inequality is, as all categories are of the same size. Each pattern requires a different strategy of health programming and targeting:
+
+- **Top inequality (mass deprivation):** If the richest are well ahead of all other wealth quintiles, only the rich escape.
+- **Linear inequality:** If the coverage differences are equidistant, this is a linear pattern where the increasing household wealth is linearly associated with higher coverage.
+- **Bottom inequality (marginalization):** If the poorest are left behind, this means marginalization of the poorest.
+
+<Callout type="info" title="Interpretation Guide">
+The interpretation should focus on whether inequalities have reduced over time. The following questions should guide interpretation:
+1. What is the level of inequality in the most recent data point?
+2. How have inequalities changed over time?
+3. Is there any inequality pattern that can be observed?
+4. What will be the best approaches to reduce inequalities?
+</Callout>
+
+    **** [insert equiplots Output] ****
+    **** [insert wealth equiplot Output] ****
+    **** [insert area equiplot Output] ****
+    **** [insert residence-penta3 equiplot Output] ****
+
+---
+
+## Health Systems Performance[#health-systems]
+
+### Rationale: Scientific basis for the analysis[#health-systems-rationale]
+**Scientific Foundation:**
+- The assessment of the burden of disease, intervention coverage, quality, equity, and health system inputs should directly guide policy-making and program targeting. 
+- A comprehensive evaluation requires a baseline comparison of health system inputs (such as financing, health workforce density, and infrastructure availability) against the corresponding outputs of the system (including service utilization and coverage rates) at the sub-national tier (Admin1 level).
+- The core objective remains isolating specific sub-national bottlenecks where high system inputs fail to translate into expected RMNCAH-N service coverage outputs, or conversely, identifying high-performing regions exhibiting strong service delivery efficiency.
+
+---
+
+### Health Systems Inputs[#health-inputs]
+The assessment focuses on the quality of data for the health system indicators at both national and sub-national levels, targeting global benchmarking and plausibility auditing. 
+
+<details>
+  <summary>**Core Health System Input Indicators**</summary>
+
+- **Health Financing:** Frequently limited to budgeted government allocations. 
+- **Core Health Professionals per 10,000 Population:** Includes physicians, non-physician clinicians, nurses, and midwives. 
+  - *Historical Threshold (WHO 2006):* Minimum baseline of 23 per 10,000.
+  - *Modern Threshold (UHC Era):* At least 44.5 per 10,000.
+  
+- **Health Facility Density:**
+$$
+\text{Health Facility Density} = \left( \frac{\text{Total Number of Health Facilities}}{\text{Total Population}} \right) \times 10,000
+$$
+
+- **Hospital Density:**
+$$
+\text{Hospital Density} = \left( \frac{\text{Total Number of Hospitals}}{\text{Total Population}} \right) \times 100,000
+$$
+
+- **Inpatient Bed Density:**
+$$
+\text{Inpatient Bed Density} = \left( \frac{\text{Total Inpatient Beds}}{\text{Total Population}} \right) \times 10,000
+$$
+
+</details>
+
+    **** [insert subnational_health_inputs_scatter_matrix Output] ****
+
+---
+
+### Health Systems Outputs by Inputs[#outputs-by-inputs]
+The analysis explores the statistical association between health system inputs and matching service utilization or coverage indicators across sub-national units (Admin1 level):
+
+- **Inpatient Infrastructure vs. Under-5 Hospital Admissions:** We expect regions with lower hospital/bed density to exhibit lower pediatric admission rates. Outliers may indicate infrastructure under-reporting or high clinical throughput.
+- **Health Workforce Density vs. Under-5 Outpatient Utilization:** We expect a positive slope on a linear regression line. Outliers may flag staff workload burdens or numerator inflation.
+- **Health Workforce Density vs. Institutional Live Birth Coverage:** Assesses if workforce availability translates directly into institutional delivery coverage.
+
+    **** [insert 6-ipd_use Output] ****
+    **** [insert 8-health_system_ratio_opd_u5_hwf.png Output] ****
+
+---
+
+## Institutional Mortality[#institutional-mortality]
+
+### Rationale: Scientific basis for the analysis[#mortality-rationale]
+**Scientific Foundation:**
+- Maternal and perinatal mortality in health facilities are critical indicators of the quality of care (institutional mortality). 
+- If coverage of births in health facilities is high (e.g., over 75%), the facility-based statistics become a useful input into the estimation of population levels of mortality.
+- The main challenge with mortality data from health facilities is **under-reporting of deaths**. Maternal deaths do not only occur during birth, but also in pregnancy and post-partum. Reporting of stillbirth deaths requires well-maintained maternity registers and cross-checks to operation theatre registers.
+
+<details>
+  <summary>**Institutional vs. Population Mortality Definitions**</summary>
+
+| Indicator | Numerator | Denominator |
+| :--- | :--- | :--- |
+| **Institutional maternal mortality ratio (iMMR)** | Number of maternal deaths in health facilities | $\frac{\text{Live births in health facilities}}{100,000}$ |
+| **Population maternal mortality (MMR)** | Number of maternal deaths in the population | $\frac{\text{Live births in the population}}{100,000}$ |
+| **Institutional stillbirth rate (iSBR)** | Number of stillbirths in health facilities | $\frac{\text{Births in health facilities}}{1,000}$ |
+| **Neonatal mortality (before discharge)** | Number of neonatal deaths before discharge | $\frac{\text{Live births in health facilities}}{1,000}$ |
+
+</details>
+
+---
+
+### Data Interpretation and Quality Metrics[#mortality-interpretation]
+When interpreting iMMR and iSBR, assess extreme high outliers (data entry errors) and implausibly low rates (e.g., iMMR &lt; 25 per 100,000 or iSBR &lt; 6 per 1,000), which strongly indicate major under-reporting rather than superior clinical outcomes.
+
+**Ratio stillbirth to maternal deaths:**
+We expect maternal mortality and stillbirth to be positively correlated. We expect the ratio of stillbirth to maternal death to be in the range of **5 to 25** for countries in sub-Saharan Africa.
+
+<Callout type="warning" title="Data Quality Flags">
+- **Ratio &lt; 5:** Under-reporting of stillbirths is likely greater than under-reporting of maternal deaths.
+- **Ratio ≥ 25:** Under-reporting of maternal deaths is likely to be the main issue.
+</Callout>
+
+    **** [insert immr_trends_screenshot Output] ****
+    **** [insert isbr_trends_screenshot Output] ****
+    **** [insert ratio of stillbirth chart Output] ****
+
+---
+
+### Consistency with Population Estimates[#mortality-modeling]
+The population MMR ($M_p$), community MMR ($M_c$), and institutional MMR ($M_i$) must be mathematically consistent. 
+
+$$
+M_p = (M_i \times P_i) + (M_c \times (1 - P_i))
+$$
+
+Where $P_i$ is the proportion of live births occurring in a health institution. 
+
+Given a baseline estimate for the population MMR ($M_p$) and an assumed community-to-institutional variance ratio ($R = \frac{M_c}{M_i}$), the expected institutional MMR is calculated as:
+
+$$
+\text{Expected } M_i = \frac{M_p}{P_i + \left( \frac{M_c}{M_i} \times (1 - P_i) \
