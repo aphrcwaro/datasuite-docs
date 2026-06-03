@@ -1,5 +1,8 @@
+import { Steps } from 'nextra/components'
+import { Callout } from 'nextra/components'
+import { Bleed } from 'nextra/components'
 
-# 8 Coverage
+## Coverage
 
 Once data quality is assured, denominators selected, and numerators adjusted, the Data Suite synthesizes everything into coverage estimates—the core metric that answers: *What proportion of the population needing a health service actually received it?* This module generates annual coverage estimates for reproductive, maternal, newborn, child, and adolescent health indicators by dividing adjusted numerators from facility reports by the best-performing population denominators. Coverage estimates are then compared with recent household survey results to validate findings and identify areas of systematic bias.
 
@@ -7,81 +10,53 @@ Coverage estimation must account for operational realities: some indicators (ins
 
 ---
 
-## 8.1 Rationale, Approach and implementation
-Rationale: Scientific basis for the analysis
+## Coverage in CD2030 Analytical approach
 
-Coverage of interventions is a critical and direct output of health systems. Regular tracking of coverage at national and sub-national levels has become the mainstay of monitoring progress in national health plans and international initiatives. Reproductive, maternal, newborn, child and adolescent health indicators with targets are the most common indicators of national health plans and global monitoring. Both health facility data and household surveys can provide coverage statistics, and an integrated analytical approach is desirable.
+<Steps>
 
-Approach: Description of analytical steps
+### [Antenatal care (ANC)](/docs/methods/#antenatal-care)
 
-Many coverage indicators can be estimated in both surveys and from health facility data. Both are critical pieces of information and need to be considered in conjunction with each other. The Table below lists the indicators, for antenatal and delivery care and child immunization, considered in the health facility data analysis in the workshop, including the variable names (in R) in the first column.
-
-Name (in R)	Indicator title	Survey denominator	Facility data denominator
-Antenatal care			
-anc1	Antenatal care at least one or more visits among all pregnant women (%)	Women aged 15-49 years with a live birth in the last 2 years	Estimated total pregnant women in the population
-anc_1 trimester	Antenatal care 1+ visits in 1st trimester of pregnancy among all pregnant women (%)	Women aged 15-49 years with a live birth in the last 2 years	Estimated total pregnant women in the population
-anc4	Antenatal care 4+ visits among all pregnant women (%)	Women aged 15-49 years with a live birth in the last 2 years	Estimated total pregnant women in the population
-ipt2
-
-ipt3
-
-Intermittent preventive therapy for malaria - 2nd dose / 3rd dose during pregnancy among all pregnant women (%)	Women aged 15-49 years with a live birth in the last 2 years	Estimated total pregnant women in the population
-ifa90	Iron folic acid supplementation given (90 days supply) during pregnancy among all pregnant women (%)	Women aged 15-49 years with a live birth in the last 2 years	Estimated total pregnant women in the population
-hiv_test	HIV test conducted among pregnant women (%)	Women aged 15-49 years with a live birth in the last 2 years	Estimated total pregnant women in the population
-syph ilis_test	Syphilis test conducted among pregnant women (%)	Women aged 15-49 years with a live birth in the last 2 years	Estimated total pregnant women in the population
-Delivery care			
-instd eliveries	Institutional live births among all live births	Live births in the last 2 years	Estimated livebirths as denominator.
-sba	Skilled birth attendance	Skilled birth attendance	Estimated livebirths as denominator.
-low_bweight	Low birth weight (below 2500 grams) among all live births	Low birth weight (below 2500 grams)	Estimated livebirths as denominator.
-c-section	C-section among all live births	C-section	Estimated livebirths as denominator.
-pnc48h	Postnatal care within 48 hours	Postnatal care within 48 hours	Estimated livebirths as denominator.
-Immunization			
-bcg	BCG vaccination to infants	Children 12-23 months	N of surviving infants (beyond neonatal period)
-penta1	Penta vaccine - 1st dose to infants	Children 12-23 months	N of surviving infants (beyond neonatal period)
-penta3	Penta vaccine - 3rd dose to infants	Children 12-23 months	N of surviving infants (beyond neonatal period)
-measles1	Measles vaccine - 1st dose (to infants)	Children 12-23 months	N of surviving infants (beyond post-NN period)
-measles2	Measles vaccine - 1st dose (older children)	Children 24-35 months	N of surviving infants (beyond postneonatal period) (or age 1)
-The facility data can be used to generate annual coverage estimates, and the coverage results should be compared and interpreted alongside the results from recent surveys. The analysis results will include both coverage estimates.
-
-Implementation: Conducting analysis in the Shiny App
-
-8.1.1 Antenatal care (ANC)
 Most countries have at least one ANC indicator with a target in the national plan. The global ENAP/EPMM coverage targets for 2025 are: globally, at least 90% of pregnant women with 4 or more ANC care visits, and 90% of countries with at least 70% coverage. There are several ANC indicators that capture:
 
-contact with health services during pregnancy (ANC 1st visit, ANC 4 or more visits, ANC first visit in first trimester). ANC1 is often considered an indicator of basic access to health services. It is high in most countries, and in many instances, the numbers of ANC1 visits in the routine health facility data can provide a better denominator for the ANC and delivery indicators than population projections (see section 2 on denominators).
-
-contents of services provided (intermittent preventive therapy (IPT2 or IPT3) against malaria, HIV testing, syphilis testing and iron-folic acid (IFA) supplementation (at least 90 tablets given to the pregnant woman)). Some countries will not have policies for all of these diagnostic or therapeutic interventions during pregnancy (e.g., no IPT if no malaria risk).
+- **Contact with health services during pregnancy** (ANC 1st visit, ANC 4 or more visits, ANC first visit in first trimester). ANC1 is often considered an indicator of basic access to health services. It is high in most countries, and in many instances, the numbers of ANC1 visits in the routine health facility data can provide a better denominator for the ANC and delivery indicators than population projections (see section 2 on denominators).
+- **Contents of services provided** (intermittent preventive therapy (IPT2 or IPT3) against malaria, HIV testing, syphilis testing and iron-folic acid (IFA) supplementation (at least 90 tablets given to the pregnant woman)). Some countries will not have policies for all of these diagnostic or therapeutic interventions during pregnancy (e.g., no IPT if no malaria risk).
 
 For most indicators, the surveys also provide coverage estimates for the national level, with 95% confidence intervals. For most coverage indicators the data refer to a period before the survey: e.g., institutional birth coverage for the live births in the two years preceding the survey. This means that the midpoint of the coverage estimate lies one year before the survey.
 
-An example of two graphs for ANC, based on facility and survey data, is shown below, showing both good concordance between the facility-based and survey results for coverage of ANC first visit in the first trimester and poor concordance in case of ANC4 visits. In the latter case, it is evident that ANC4 is overreported in the facility data as coverage is much higher than the survey and unlikely to be high (over 90% during 2021-23 and even 101% in 2023). Poor recording and reporting of ANC 4th visits in the DHIS2 data is likely the main cause.
+<Callout type="warning">
+Sometimes, an indicator may reach an unlikely high coverage at the national level, say over 125%. This may be because the data quality of the numerator of the coverage indicator is poor, the denominator is wrong, or the intervention is given and recorded more than once during pregnancy. An example is IFA supplementation. In that case, the computation of coverage is not useful. It is better to express it differently. For instance, if coverage is 200%, it is better to compute the average number of courses of 90 IFA tablets that a pregnant woman received (in this case 2.0 per pregnant woman in the population).
+</Callout>
 
-Sometimes, an indicator may reach an unlikely high coverage at the national level, say over 125%. This may be because the data quality of the numerator of the coverage indicator is poor, the denominator is wrong, or the intervention is given and recorded more than once during pregnancy. An example is IFA supplementation. In that case, the computation of coverage is not useful. It is better to express it differently. For instance, if coverage is 200%, it is better to compute the average number of courses of 90 IFA tablets that a pregnant woman received (in this case 2.0 per pregnant woman in the population)
+    - *[insert ANC facility vs survey graphs Output]*
 
+---
 
-*****insert figure FPET projection***
-
-### 8.1.2 Delivery Care
+### [Delivery Care](/docs/methods/#delivery-care)
 
 All countries have at least one delivery care indicator with a target in the national plan. The global Every Newborn Action Plan (ENAP) and Ending Preventable Maternal Mortality (EPMM) coverage target for 2025 is at least 90% global average coverage, and 90% of countries with at least 80% coverage of skilled birth attendance (SBA). For postnatal care (PNC) within 2 days, the global coverage target is 80%, and 90% of countries with at least 60% coverage.
 
 Institutional (live) birth coverage and SBA are closely related, as almost all deliveries with a skilled attendant occur in health facilities. From the analytical perspective, institutional birth coverage is preferred because it is a more objective measure and avoids issues with varying national definitions of what constitutes a skilled birth. SBA is often preferred from the healthcare perspective because it includes an element of quality; obviously, an institutional delivery without skilled attendance is not desirable, and in some countries, home SBA may be part of the healthcare delivery strategy. Either indicator works well to capture delivery care.
 
+<Callout type="info">
 Caesarean section is a life-saving intervention and an important indicator. A general rule of thumb put forward by the World Health Organization (WHO) is that the population-level need for Caesarean section is in the range of 10–15% of all deliveries. 
 * **Below 10%:** Indicates an unmet need for surgical delivery care.
 * **Over 10–15%:** Implies a likely overuse of Caesarean section. It may also imply a combination of unmet need among certain population groups (e.g., the poorest or rural women) alongside overuse in other subgroups (such as urban and wealthier women).
+</Callout>
 
 Postnatal care (PNC) within 48 hours is provided to the mother and newborn. Country systems vary in how they record the type of PNC, and household surveys are known to have data quality issues regarding PNC for the mother or the baby. Some countries use multiple definitions for the timing of the PNC visit (e.g., within the first week).
 
 Low birthweight is a critical indicator of neonatal health. It is most meaningful if the distinction between prematurity and small-for-gestational-age is made, but most facility reporting systems and surveys lack such granular data. All babies are supposed to be weighed immediately after birth, and the percentage of newborns weighing less than 2,500 grams is typically reported in the DHIS2 system. As general guidance for data interpretation, low birthweight prevalence in sub-Saharan Africa was estimated at 13.9% (95% credibility interval: 12.4–15.7%) for 2020.
 
+    - *[insert output screenshot Output]*
+
 ---
 
-### 8.1.3 Immunization
+### [Immunization](/docs/methods/#immunization)
 
 Immunization coverage indicators are included in virtually every country’s health sector monitoring plan. A general target is at least 90% coverage for essential vaccines given in childhood and adolescence.
 
 For national coverage analyses, the focus is on BCG, the first and third doses of pentavalent/DTP (penta1/DTP1 and penta3/DTP3), and the first and second doses of the measles vaccine (often co-administered as measles-rubella). BCG and penta/DTP vaccinations are recommended at birth (BCG), 6 weeks (penta1), and 14 weeks (penta3). 
+
 * **Facility Data:** The number of vaccinations given to infants is used as the numerator. The denominator is the number of eligible children in the population, approximated as:
   $$\text{Denominator} = \text{Live Births} - \text{Neonatal Deaths}$$
 * **Survey Data:** Generally provide vaccination coverage among children aged 12–23 months (and may include the age at which the vaccination was administered, typically before the first birthday).
@@ -94,9 +69,11 @@ $$\text{Measles 2 Denominator} = \text{Live Births} - \text{Neonatal Deaths} - (
 
 WHO and UNICEF collaborate with countries to produce annual estimates of immunization coverage using all data sources. These national estimates, called WUENIC, are published and available for 2020–2024. These time trends are included in the analysis outputs to compare the 2019–2024 annual facility data estimates produced in the workshop against the survey results.
 
+    - *[insert output screenshot Output]*
+
 ---
 
-### 8.1.4 Family Planning
+### [Family Planning](/docs/methods/#family-planning)
 
 Family planning coverage estimates are derived from a collaboration between Countdown to 2030 and Track20. Track20 developed the Family Planning Estimation Tool (FPET), an advanced model focusing on three indicators: modern contraceptive use, unmet need for modern contraceptives, and demand satisfied with modern methods. These three indicators are closely related because:
 
@@ -104,41 +81,33 @@ $$\text{Demand Satisfied (Coverage)} = \frac{\text{Use of Modern Contraceptives}
 
 FPET uses statistical modeling that incorporates all available survey data and can integrate facility data if the quality is sufficient. FPET allows various types of survey data to be combined, fitting a trend line that draws strength from multiple data points and minimizes the risks associated with directly comparing different surveys.
 
-****insert FPET FP Projection****
-
-1.Surveys can provide coverage of IFA supplementation, as here the unit of data analysis is individual pregnant women.↩︎
-
-2. Amouzou A, Hazel E, Vaz L, Sanni Y, Moran A. Discordance in postnatal care between mothers and newborns: Measurement artifact or missed opportunity? J Glob Health. 2020 Jun;10(1):010505.↩︎
-
-3. Okwaraji YB, et al. National, regional, and global estimates of low birthweight in 2020, with trends from 2000: a systematic analysis. Lancet. 2024 Mar 16;403(10431):1071-1080.↩︎
-
-4. Therefore, the survey data on immunization roughly refer to the program performance in the year before the survey↩︎
-
-5. https://www.track20.org/pages/data_analysis/publications/methodological/family_planning_estimation_tool.php
-
-
-
-# 14 Inequality
-
-## 14.1 Rationale, Approach, and Implementation
-
-### Rationale: Scientific basis for the analysis
-Reducing geographic inequality is essential for equitable health systems and achieving the Sustainable Development Goals (SDGs). Subnational inequalities reveal inconsistencies in service delivery and highlight systemic barriers to healthcare access. Tracking inequality indicators helps assess whether health systems are becoming more equitable and whether targeted interventions are working.
-
-### Approach: Description of analytical steps
-Here we calculate the Median Absolute Deviation from the Median (MADM) to quantify the spread in coverage among districts within an Admin1 level, compared with the coverage at that specific Admin1 subnational unit.
-
-The key statistical measures for sub-national inequalities are:
-* **MADM (Median Absolute Deviation from the Median):** This measure gives an indication of whether the country has been successful in reducing inequalities between sub-national units.
-* **Percent of sub-national units with coverage above a specific target or threshold:** This indicator provides information on the extent to which a country has been successful in reaching universal coverage at the sub-national level.
-
-#### Summary of District and Regional Performance
-Progress towards international and national targets can be measured by computing the percentage of regions and districts that have achieved these targets. The goal is for all regions and districts to have met the target. Higher percentages mean less inequality.
+    - *[insert figure FPET projection Output]*
 
 ---
 
-## 14.2 Implementation: Conducting Analysis in the Data Suite
+</Steps>
+
+<Callout type="info">
+**References & Notes:**
+1. Surveys can provide coverage of IFA supplementation, as here the unit of data analysis is individual pregnant women.
+2. Amouzou A, Hazel E, Vaz L, Sanni Y, Moran A. Discordance in postnatal care between mothers and newborns: Measurement artifact or missed opportunity? J Glob Health. 2020 Jun;10(1):010505.
+3. Okwaraji YB, et al. National, regional, and global estimates of low birthweight in 2020, with trends from 2000: a systematic analysis. Lancet. 2024 Mar 16;403(10431):1071-1080.
+4. Therefore, the survey data on immunization roughly refer to the program performance in the year before the survey.
+5. https://www.track20.org/pages/data_analysis/publications/methodological/family_planning_estimation_tool.php
+</Callout>
+
+---
+
+## Inequality in CD2030 Analytical approach
+
+<Steps>
+
+### [Subnational Analysis](/docs/methods/#subnational-analysis)
 
 Navigate to the **Subnational Analysis** tab => **Subnational Inequality** and inspect the plotted regional and district results by year, with the median absolute deviation from the median (MADM), as the summary measure to assess if inequalities have reduced.
 
-****insert graph on sub national inequality***
+    - *[insert graph on sub national inequality Output]*
+
+</Steps>
+
+---
