@@ -1,3 +1,10 @@
 export default {
-  index: 'Overview'
+  index: {
+    title: 'RMNCAH App Overview',
+    theme: {
+      layout: 'full',
+      copyPage: false,
+      toc: true
+    }
+  }
 }
