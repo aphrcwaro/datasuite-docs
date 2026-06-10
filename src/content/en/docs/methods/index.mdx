@@ -11,10 +11,6 @@ import { Callout } from 'nextra/components'
 - Incomplete reporting creates systematic underestimation of true coverage. Assuming non-reporting facilities delivered zero services is statistically implausible; they simply didn't submit data. 
 - Adjustment factors account for this gap using a defensible assumption: non-reporting facilities operate at lower capacity (typically 25% of reporting facility volume).
 
----
-
-## Rationale: Scientific basis for the analysis
-
 The completeness of reporting may affect the analysis, especially if completeness is low or varies between years. 
 Extreme outliers, such as an accidental extra zero in a number, can have a large impact, especially on subnational numbers. 
 Following the assessments, several steps are necessary to obtain a clean data set for analysis. This implies adjusting for incomplete reporting and correcting for extreme outliers.
@@ -25,18 +21,31 @@ The adjustment factor $$k$$ - defined as _the ratio of the volume of services pr
 
 ---
 To account for incomplete reporting, the reported number of events can be adjusted using completeness and facility reporting ratio, with the following formula:
-$$
-N_{\text{adjusted}} = N_{\text{reported}} + N_{\text{reported}} \cdot \left(\frac{1}{c} - 1\right) \cdot k
-$$
+
+$N_{\text{adjusted}} = N_{\text{reported}} + N_{\text{reported}} \times \left(\frac{1}{c} - 1\right) \times k $
 
 ---
 
-**Where**:
+### Where:
 
-- $N_{\text{adjusted}}$- Total number of events adjusted for incomplete reporting  
-- $N_{\text{reported}}$ - Number of events reported  
-- $C$ - Reporting completeness (e.g., proportion of facilities that reported)  
-- $k$ - Adjustment factor to account for lower service volume in non-reporting facilities  
+- $N_{\text{adjusted}}$ — Total number of events adjusted for incomplete reporting  
+- $N_{\text{reported}}$ — Number of events reported  
+- $c$ — Reporting completeness (e.g., proportion of facilities that reported)  
+- $k$ — Adjustment factor to account for lower service volume in non-reporting facilities  
+
+---
+
+<Callout type="info" title="Default assumption">
+
+ **Interpretation:**
+- As a default value, we use $$k=0.25$$, which means the non-reporting facilities provided services but only at a volume which was a quarter of the reporting health facilities.
+- The adjustment assumes that non-reporting facilities still provide services, but at a lower volume compared to reporting facilities. The factor $k$ controls the magnitude of this adjustment.
+- The factor `k` can be different for different services. For instance, if private facility reporting is poor but they are in the national system and they provide a considerable number of deliveries, `k` maybe greater than 0.25 or even as high as 1.0.
+- If the facility reporting rate is below 75%, it becomes more difficult to impute district data. Therefore, no adjustments are made if reporting is lower than 75%. In that case, further analysis to determine coverage with the facility data is not considered sufficiently reliable.
+</Callout>
+
+---
+
 
 ---
 
@@ -48,12 +57,6 @@ The following k-values are used depending on the reporting used to adjust the re
 - **`k = 0.75`** : Nearly as much as reporting facilities  
 - **`k = 1.0`** : Same rate of services as reporting facilities  
 
----
-<Callout type="info">
-- As a default value, we use $$k=0.25$$, which means the non-reporting facilities provided services but only at a volume which was a quarter of the reporting health facilities.
-- The factor `k` can be different for different services. For instance, if private facility reporting is poor but they are in the national system and they provide a considerable number of deliveries, `k` maybe greater than 0.25 or even as high as 1.0.
-- If the facility reporting rate is below 75%, it becomes more difficult to impute district data. Therefore, no adjustments are made if reporting is lower than 75%. In that case, further analysis to determine coverage with the facility data is not considered sufficiently reliable.
-</Callout>
 ---
 
 #### Adjustment Action summary
@@ -162,20 +165,10 @@ Not all deviations indicate poor data quality. Programme changes, campaigns, or 
 
 
 
-
-
-
-
-
-
-
-### Data missingness
-### Ratio calculations
-### Overall quality score
-
 ## Coverage Analysis[#coverage-analysis]
 
-### Rationale: Scientific basis for the analysis[#coverage-rationale]
+**Rationale: Scientific basis for the analysis[#coverage-rationale]**
+
 **Scientific Foundation:**
 - Coverage of interventions is a critical and direct output of health systems. Regular tracking of coverage at national and sub-national levels has become the mainstay of monitoring progress in national health plans and international initiatives. 
 - Reproductive, maternal, newborn, child and adolescent health indicators with targets are the most common indicators of national health plans and global monitoring. 
@@ -395,5 +388,4 @@ Where $P_i$ is the proportion of live births occurring in a health institution.
 
 Given a baseline estimate for the population MMR ($M_p$) and an assumed community-to-institutional variance ratio ($R = \frac{M_c}{M_i}$), the expected institutional MMR is calculated as:
 
-$$
-\text{Expected } M_i = \frac{M_p}{P_i + \left( \frac{M_c}{M_i} \times (1 - P_i) \
+

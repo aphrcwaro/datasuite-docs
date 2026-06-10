@@ -1,4 +1,12 @@
 export default {
+  index: {
+    title: 'Apps Overview',
+    theme: {
+      layout: 'full',
+      copyPage: false,
+      toc: true
+    }
+  },
   "data-extractor": "CD2030 Data Extractor",
 
   "rmncah": {
