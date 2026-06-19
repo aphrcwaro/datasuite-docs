@@ -1,0 +1,208 @@
+import { Steps } from 'nextra/components'
+import { Callout } from 'nextra/components'
+import { Bleed } from 'nextra/components'
+
+## Mortalité institutionnelle dans l'approche analytique CD2030
+
+Les définitions de la mortalité maternelle institutionnelle, communautaire et au sein de la population, ainsi que des mortinaissances, sont présentées dans la matrice ci-dessous.
+
+| Indicateur | Numérateur | Dénominateur |
+| :--- | :--- | :--- |
+| **Ratio de mortalité maternelle en établissement (iMMR)** | Nombre de décès maternels dans les établissements de santé | $\frac{\text{Nombre de naissances vivantes dans les établissements de santé}}{\text{100 000}}$ |
+| **Mortalité maternelle dans la population (MMR)** | Nombre de décès maternels dans la population | $\frac{\text{Nombre de naissances vivantes dans la population}}{\text{100 000}}$ |
+| **Ratio de mortalité maternelle communautaire (cMMR)** | Nombre de décès maternels dans la communauté | $\frac{\text{Nombre de naissances vivantes dans la communauté}}{\text{100 000}}$ |
+| **Taux de mortinatalité en établissement (iSBR)** | Nombre de mortinaissances dans les établissements de santé | $\frac{\text{Nombre de naissances dans les établissements de santé}}{\text{1 000}}$ |
+| **Taux de mortinatalité dans la population (SBR)** | Nombre de mortinaissances dans la population | $\frac{\text{Nombre de naissances dans la population}}{\text{1 000}}$ |
+| **Taux de mortinatalité communautaire (cSBR)** | Nombre de mortinaissances dans la communauté | $\frac{\text{Nombre de naissances dans la communauté}}{\text{1 000}}$ |
+| **Mortalité néonatale (avant la sortie)** | Nombre de décès néonatals avant la sortie | $\frac{\text{Nombre de naissances vivantes dans les établissements de santé}}{\text{1 000}}$ |
+
+---
+
+<Steps>
+
+### [Examen de l'iMMR et de l'iSBR](/docs/methods/#immr-and-isbr-review)
+
+Les taux de mortalité annuels sont calculés en utilisant les données non ajustées sur les décès et les naissances/naissances vivantes signalés dans les établissements de santé. Nous ne procédons à aucun ajustement pour les taux de notification ou les valeurs aberrantes (comme cela est fait pour d'autres interventions) car il est difficile d'ajuster les décès maternels et les mortinaissances, où le nombre de décès est faible et fluctuant. 
+
+Il est cependant conseillé de vérifier les données pour repérer toute valeur aberrante extrême dans les données annuelles (par exemple, des nombres de décès qui indiquent clairement des erreurs de saisie de données) et de les remplacer par la moyenne des années environnantes.
+
+La figure ci-dessous affiche la mortalité maternelle en établissement pour 100 000 naissances vivantes pour les régions (points) et pour le pays dans son ensemble (ligne et valeurs annuelles) par année.
+
+    - *[insert immr_trends_screenshot Output]*
+    - *[insert maternal mortality per 1000 Output]*
+
+---
+
+### [Considérations relatives à l'interprétation des données](/docs/methods/#data-interpretation-considerations)
+
+Lors de l'interprétation du ratio de mortalité maternelle en établissement ($iMMR$), plusieurs considérations critiques liées à la qualité des données et à la structure doivent être prises en compte :
+
+* **Valeurs aberrantes extrêmement élevées :** Évaluer s'il y a des valeurs aberrantes extrêmes à la hausse qui pourraient être dues à des erreurs majeures de saisie de données. Celles-ci doivent être signalées pour une éventuelle correction ou exclusion.
+* **Taux invraisemblablement bas :** Identifier combien de régions ont un $iMMR$ invraisemblablement bas, qui est défini arbitrairement comme **inférieur à 25 pour 100 000 naissances vivantes** *(25 correspond à environ deux fois le MMR moyen dans les pays à revenu élevé, qui est de 12,5)*. 
+* **Validation contextuelle :** Déterminer si ces régions à faible taux sont des zones plus avancées où une mortalité plus faible est démographiquement attendue, ou s'il s'agit de régions moins développées. Une faible mortalité dans les régions moins développées indique fortement une sous-déclaration majeure des décès en établissement plutôt que des résultats cliniques supérieurs.
+
+Pour compléter cette analyse, une cartographie géographique de l'indicateur est fortement recommandée.
+
+---
+
+### [Distribution géographique](/docs/methods/#geographic-distribution)
+
+Une carte affichant le $iMMR$ par région est un ajout utile pour guider l'interprétation des données, aidant les équipes à se concentrer rapidement sur les modèles spatiaux et à identifier les problèmes potentiels de sous-déclaration ou de qualité des données dans les unités infranationales.
+
+    - *[insert Insitutitonal MMR by region Output]*
+    - *[insert immr_regional_map Output]*
+
+La figure ci-dessous présente le taux de mortinatalité pour 1 000 naissances pour les régions et le pays, en utilisant le même format que pour la mortalité maternelle. 
+
+---
+
+### [Considérations relatives à l'interprétation des données pour les mortinaissances](/docs/methods/#data-interpretation-considerations-for-stillbirths)
+
+Lors de l'analyse du taux de mortinatalité en établissement ($iSBR$), l'interprétation écrite doit aborder explicitement les questions d'évaluation suivantes :
+
+* **Taux invraisemblablement bas :** Combien de régions ont un $iSBR$ invraisemblablement bas, défini comme **inférieur à 6 pour 1 000 naissances** *(6 correspond à environ deux fois le SBR moyen dans les pays à revenu élevé)* ?
+* **Qualité des données vs Développement :** Ces zones identifiées sont-elles des régions plus avancées où la mortalité devrait être plus faible grâce à de meilleures infrastructures cliniques, ou est-ce un signe clair de sous-déclaration majeure des décès dans les régions moins développées du pays ?
+
+    - *[insert stillbirth rate chart Output]*
+    - *[insert isbr_trends_screenshot Output]*
+
+De plus, les niveaux de mortalité en établissement peuvent être comparés aux estimations de mortalité les plus récentes pour la population. Ces estimations de la population pourraient provenir d'une enquête nationale ou d'un recensement récent, ou nous pouvons utiliser les estimations de l'ONU pour la mortalité maternelle (pour 2020) et les taux de mortinatalité (pour 2021).
+
+L'objectif est d'avoir une idée de la différence entre la mortalité en établissement et la mortalité dans la population. L'interprétation doit chercher à expliquer :
+* À quelle distance se trouve l'iMMR (ou l'iSBR) des estimations de l'ONU de la mortalité dans la population, y compris la marge d'incertitude des estimations mondiales : cette différence sera utilisée par la suite pour évaluer la qualité des données.
+
+Les taux de mortalité néonatale en établissement (pour 1 000 naissances vivantes) basés sur les décès néonatals signalés peuvent également être représentés sous forme de graphique, de la même manière que l'iMMR et l'iSBR, mais doivent être interprétés avec une prudence accrue. Presque tous les bébés restent au moins 24 heures après l'accouchement à l'hôpital, mais par la suite beaucoup sont libérés et le temps d'observation dans les établissements de santé est variable. Par conséquent, cette statistique est le plus souvent appelée décès néonatals avant la sortie pour 1 000 naissances vivantes, ce qui inclut le jour 1, quelques décès le jour 2, moins de décès le jour 3, etc.
+
+Une règle générale pour évaluer l'exhaustivité des rapports est que la mortalité attendue des décès néonatals avant la sortie dans les établissements de santé devrait représenter au moins la moitié de la mortalité néonatale dans la population. Par exemple, si la mortalité néonatale dans la population est de 20 pour 1 000 naissances vivantes, nous nous attendons à une mortalité néonatale en établissement d'au moins 10 pour 1 000 naissances vivantes dans les établissements de santé.
+
+    - *[insert Neonatal deaths chart Output]*
+
+---
+
+### [Mesures de la qualité des données](/docs/methods/#data-quality-metrics)
+
+**Ratio des mortinaissances par rapport aux décès maternels dans les données des établissements de santé au niveau national**
+
+Nous nous attendons à ce que la mortalité maternelle et la mortinatalité soient corrélées positivement étant donné les points communs dans leurs causes. Sur la base d'un examen des estimations mondiales, des données historiques et des études sur les établissements de santé, nous prévoyons que le ratio des mortinaissances par rapport aux décès maternels se situe dans une fourchette de 5 à 25 pour les pays d'Afrique subsaharienne. Nous calculons le ratio comme le nombre de mortinaissances signalées divisé par le nombre de décès maternels signalés dans le DHIS2 ou le MPDSR, au cours d'une période spécifique (généralement un an) et nous levons un « drapeau de qualité des données » si le ratio se situe en dehors de la plage de 5 à 25.
+
+<Callout type="info">
+**Interprétation :**
+* **Si le ratio est inférieur à 5 :** la sous-déclaration des mortinaissances est probablement plus importante que la sous-déclaration des décès maternels.
+* **Si le ratio est égal ou supérieur à 25 :** la sous-déclaration des décès maternels est probablement le principal problème, la sous-déclaration des mortinaissances étant moins grave que celle des décès maternels.
+* **Si le ratio se situe entre 5 et 25 :** la sous-déclaration des décès maternels et la sous-déclaration des mortinaissances sont toutes deux possibles, ou la notification des deux est de bonne qualité (cela exige que le niveau soit également dans la fourchette attendue - composante 1).
+</Callout>
+
+    - *[insert ratio of stillbirth chart Output]*
+
+---
+
+### [Cohérence de l'MMR en établissement avec les estimations de la population et de la communauté](/docs/methods/#consistency-of-institutional-mmr)
+
+L'exhaustivité des rapports par les établissements de santé peut être estimée en comparant le $iMMR$ signalé sur la base des données des établissements avec un $iMMR$ attendu. L'MMR de la population, l'MMR communautaire et l'MMR en établissement doivent être mathématiquement cohérents. Bien que des variations se produisent entre différentes populations, il est statistiquement improbable d'observer un MMR communautaire de 1 000 lorsque l'MMR en établissement est signalé à 100.
+
+Un MMR attendu dans les établissements de santé peut être modélisé à partir de deux ensembles principaux de paramètres :
+1. **Ratio de mortalité maternelle dans l'ensemble de la population ($M_p$) :** Cela tient compte à la fois des décès communautaires et en établissement. Les équipes peuvent utiliser la limite inférieure, la médiane ou les limites supérieures des estimations mondiales pour chaque pays *(par exemple, les estimations de l'ONU)*, ou les résultats d'une récente enquête nationale auprès des ménages.
+2. **Ratio de la mortalité maternelle communautaire par rapport à la mortalité maternelle en établissement ($\frac{M_c}{M_i}$) :** Ce modèle évalue des hypothèses allant de `1,0` *(où l'MMR communautaire est égal à l'MMR en établissement)* jusqu'à `2,0` ou `3,0` *(où $M_c$ est 2 à 3 fois plus élevé que $M_i$)*. La sélection de ce ratio dépend de la proportion locale de naissances ayant lieu dans des établissements de santé ($P_i$). Les données probantes suggèrent que le ratio communautaire/établissement a tendance à augmenter à mesure que les taux de naissances en établissement et les taux d'utilisation globale des établissements augmentent.
+
+---
+
+### [Modélisation mathématique et formulations](/docs/methods/#mathematical-modeling-and-formulations)
+
+Le MMR total de la population ($M_p$) représente la somme des ratios de mortalité en établissement et communautaire, pondérée par la proportion de naissances vivantes survenant dans chaque milieu respectif :
+
+$$M_p = (M_i \times P_i) + (M_c \times (1 - P_i))$$
+
+Où :
+* $M_p$ : Ratio de mortalité maternelle dans la population
+* $M_i$ : Ratio de mortalité maternelle en établissement
+* $M_c$ : Ratio de mortalité maternelle dans la communauté
+* $P_i$ : La proportion de naissances vivantes survenant dans une institution de santé
+
+**Calcul rétroactif de la mortalité communautaire**
+Étant donné que $M_i$ est dérivé des données brutes du DHIS2 et que $M_p$ est fourni par les estimations indépendantes de la population de l'ONU, le véritable MMR communautaire ($M_c$) peut être isolé et résolu comme suit :
+
+$$M_c = \frac{M_p - (M_i \times P_i)}{1 - P_i}$$
+
+* **Exemple :** Si $M_i = 100$, $M_c = 200$, et que $75 \%$ des naissances ont lieu dans des établissements de santé ($P_i = 0,75$), l'MMR absolu de la population est calculé comme suit :
+  $$M_p = (100 \times 0.75) + (200 \times 0.25) = 75 + 50 = 125$$
+  Dans ce scénario, le ratio de mortalité communautaire/établissement ($\frac{M_c}{M_i}$) est égal à $\frac{200}{100} = 2,0$.
+
+**Calcul de la mortalité en établissement attendue**
+Inversement, si nous établissons une estimation de base pour l'MMR de la population ($M_p$) et supposons un ratio de variance communautaire/établissement spécifique ($R = \frac{M_c}{M_i}$), nous pouvons calculer l'MMR en établissement mathématiquement attendu en utilisant la formule suivante :
+
+$$\text{M_i attendu} = \frac{M_p}{P_i + \left( \frac{M_c}{M_i} \times (1 - P_i) \right)}$$
+
+* **Exemple :** Si $75 \%$ des femmes accouchent dans des établissements de santé ($P_i = 0,75$), que le $M_p$ véritable de la population est connu pour être de 200, et que le ratio communautaire/établissement supposé ($\frac{M_c}{M_i}$) est de 2, l'MMR en établissement attendu est :
+  $$\text{M_i attendu} = \frac{200}{0.75 + (2 \times 0.25)} = \frac{200}{1.25} = 160$$
+
+**Calcul de l'exhaustivité des rapports**
+Enfin, le niveau estimé d'exhaustivité des rapports des établissements est calculé en divisant l'iMMR brut signalé (du DHIS2) par l'iMMR attendu :
+
+$$\text{Exhaustivité des rapports des établissements} = \frac{\text{M_i signalé}}{\text{M_i attendu}}$$
+
+* **Exemple :** Si l'MMR brut signalé dans le DHIS2 était de 100, mais que l'MMR attendu modélisé était de 160, le niveau final d'exhaustivité des rapports des établissements est de :
+  $$\text{Exhaustivité} = \frac{100}{160} = 62.5\%$$
+
+---
+
+### [Scénarios d'évaluation et interprétation](/docs/methods/#evaluation-scenarios-and-interpretation)
+
+La Data Suite modélise l'exhaustivité des rapports selon plusieurs scénarios simultanément. Le graphique de diagnostic ci-dessous illustre l'exhaustivité des rapports à travers trois niveaux distincts de MMR de la population (limite inférieure, médiane/meilleure estimation, et limite supérieure) cartographiés par rapport à une plage variable de ratios de mortalité communautaire/établissement (0,5 à 2,0) sur l'axe des abscisses (X).
+
+    - *[insert mmr_completeness_scenarios Output]*
+    - *[insert completeness of facility maternal death Output]*
+
+<Callout type="info">
+**Directives d'interprétation**
+Tous les scénarios modélisés ne s'appliquent pas de manière égale au contexte de chaque pays. Les équipes doivent évaluer et restreindre les résultats sur la base des preuves locales :
+* Si une validation externe indique que le véritable MMR de la population nationale se situe en dessous de la base de référence médiane de l'ONU, choisissez le scénario correspondant à la limite inférieure du MMR de la population (la ligne de limite inférieure).
+* Si les données contextuelles du pays indiquent que la mortalité maternelle communautaire est environ 1,5 à 2,0 fois plus élevée que la mortalité en établissement, la plage d'exhaustivité des rapports correspondante est réduite à **62 %–69 %**.
+
+Par défaut, la Data Suite traite les calculs en utilisant des ratios communautaire/établissement de **1,0, 2,0 et 3,0** pour établir des limites de suivi de base.
+</Callout>
+
+Une approche similaire peut être utilisée pour les mortinaissances en utilisant l'ensemble des naissances au lieu des naissances vivantes. Les estimations mondiales de la mortinatalité de l'ONU pour 2021 avec les marges d'incertitude peuvent être utilisées (les limites inférieure et supérieure sont des intervalles d'incertitude à 90 % issus du modèle). Il y a peu de recherches sur le ratio de mortinatalité communautaire/établissement (en partie parce que la déclaration des mortinaissances au niveau communautaire est plus incertaine), mais il est probable que les ratios soient inférieurs à ceux de la mortalité maternelle, car les niveaux de mortalité en établissement sont beaucoup plus élevés pour les taux de mortinatalité que pour l'MMR. Une plage de 0,5 à 2,0 peut être utilisée pour l'estimation du niveau d'exhaustivité des rapports des établissements.
+
+    - *[insert completness of facility stillbirth Output]*
+
+</Steps>
+
+---
+
+## Notes méthodologiques et définitions techniques
+
+Cette section rassemble les définitions cliniques fondamentales, les hypothèses mathématiques et les mesures de sauvegarde pour le nettoyage des données référencées tout au long des modules sur la mortalité en établissement et la qualité des données.
+
+### Définitions cliniques
+
+**Décès maternel**
+* **Définition :** Le décès d'une femme survenu au cours de la grossesse ou dans un délai de 42 jours après sa terminaison, quelle qu'en soit la durée ou la localisation, pour une cause quelconque déterminée ou aggravée par la grossesse ou les soins qu'elle a motivés (à l'exclusion des causes accidentelles ou fortuites).
+
+**Mortinaissance**
+* **Définition :** Un bébé qui décède après 28 semaines de grossesse (gestation), mais avant ou pendant la naissance. 
+* **Classification :** Les dossiers cliniques distinguent généralement :
+  * **Mortinaissances prénatales (macérées) :** Décès survenant avant le début du travail, présentant des signes de détérioration des tissus.
+  * **Mortinaissances intra-partum (récentes/fraîches) :** Décès survenant pendant le travail ou l'accouchement.
+
+---
+
+### Mesures de sauvegarde pour la qualité des données et l'imputation
+
+**Seuils de détection des valeurs aberrantes**
+Bien que les données annuelles de mortalité soient généralement conservées non ajustées en raison des nombres de cas faibles et fluctuants, les utilisateurs doivent inspecter manuellement les données brutes pour détecter les erreurs de saisie extrêmes. Les valeurs aberrantes sont définies à l'aide de deux seuils statistiques :
+1. Tout point de données annuel s'écartant de plus de **3 écarts-types** ($\sigma$) par rapport à la moyenne annuelle à long terme.
+2. Tout point de données mensuel dépassant **5 fois** l'écart absolu médian ($MAD$) par rapport à la médiane de base calculée.
+
+---
+
+### Hypothèses de modélisation et limites du système
+
+**Ratios MMR communautaire/établissement**
+Les ratios de base ($\frac{M_c}{M_i}$) préconfigurés dans le moteur de modélisation (limites par défaut fixées à 1,0, 2,0 et 3,0) sont dérivés d'études empiriques sur le terrain. Ces études ont recoupé les décès en établissement avec les estimations de la mortalité de l'ensemble de la population, en tenant compte de :
+* La proportion absolue de tous les décès maternels nationaux survenus au sein d'infrastructures de santé formelles.
+* Le pourcentage correspondant du total des naissances ayant eu lieu dans des établissements de santé.
+
+**MPDSR vs Déclaration des établissements toutes causes confondues**
+Un facteur structurel principal faussant les ratios de mortalité maternelle en établissement ($iMMR$) est le lieu physique du décès au sein d'un complexe hospitalier :
+* Si la collecte de données repose strictement sur les registres du service de maternité ou sur les audits de surveillance des décès maternels et périnatals et riposte (SDSRM / MPDSR), les décès survenant lors d'une réadmission clinique ou en dehors de la salle de travail (par exemple, en soins intensifs, dans les blocs d'urgence ou les services de chirurgie générale en raison d'une septicémie post-abortive ou d'une hémorragie retardée) sont fréquemment omis.
+* Si le moteur de données s'appuie sur un **registre de mortalité toutes causes confondues** exhaustif à l'échelle de l'établissement, où les causes maternelles sous-jacentes sont codées avec précision, ce biais de sous-déclaration systémique est atténué.

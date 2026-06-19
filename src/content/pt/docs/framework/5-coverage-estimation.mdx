@@ -1,0 +1,113 @@
+import { Steps } from 'nextra/components'
+import { Callout } from 'nextra/components'
+import { Bleed } from 'nextra/components'
+
+## Cobertura
+
+Uma vez assegurada a qualidade dos dados, selecionados os denominadores e ajustados os numeradores, o Data Suite sintetiza tudo em estimativas de cobertura — a métrica central que responde a: *Que proporção da população que necessita de um serviço de saúde o recebeu de facto?* Este módulo gera estimativas anuais de cobertura para indicadores de saúde reprodutiva, materna, neonatal, infantil e do adolescente, dividindo os numeradores ajustados dos relatórios das unidades de saúde pelos denominadores populacionais com melhor desempenho. As estimativas de cobertura são depois comparadas com os resultados de inquéritos recentes aos agregados familiares para validar as conclusões e identificar áreas de viés sistemático.
+
+A estimativa da cobertura deve ter em conta as realidades operacionais: alguns indicadores (partos institucionais, imunizações) atingem níveis implausivelmente elevados (>100%) devido a problemas de qualidade de dados ou duplicação de registos, o que requer uma reformulação para serviços médios per capita em vez de percentagens. A cobertura do planeamento familiar é gerida através de modelação demográfica especializada (FPET) que integra múltiplas fontes de dados de inquéritos e pode incorporar dados das unidades de saúde, se a qualidade o permitir. O módulo produz linhas de tendência, comparações com metas globais (por exemplo, 90% de partos institucionais até 2025) e visualizações lado a lado das unidades de saúde versus inquéritos para avaliação de credibilidade.
+
+---
+
+## A cobertura na abordagem analítica CD2030
+
+<Steps>
+
+### [Cuidados pré-natais (CPN)](/docs/methods/#antenatal-care)
+
+A maioria dos países tem pelo menos um indicador de CPN com uma meta no plano nacional. As metas globais de cobertura do ENAP/EPMM para 2025 são: a nível global, pelo menos 90% das mulheres grávidas com 4 ou mais visitas de CPN, e 90% dos países com pelo menos 70% de cobertura. Existem vários indicadores de CPN que captam:
+
+- **Contacto com os serviços de saúde durante a gravidez** (1ª visita de CPN, 4 ou mais visitas de CPN, primeira visita de CPN no primeiro trimestre). A CPN1 é frequentemente considerada um indicador de acesso básico aos serviços de saúde. É elevada na maioria dos países e, em muitos casos, os números de visitas de CPN1 nos dados de rotina das unidades de saúde podem fornecer um melhor denominador para os indicadores de CPN e de parto do que as projeções populacionais (ver secção 2 sobre denominadores).
+- **Conteúdo dos serviços prestados** (terapêutica preventiva intermitente (TPI2 ou TPI3) contra a malária, testagem do VIH, testagem da sífilis e suplementação de ferro-ácido fólico (IFA) (pelo menos 90 comprimidos administrados à mulher grávida)). Alguns países não terão políticas para todas estas intervenções diagnósticas ou terapêuticas durante a gravidez (por exemplo, sem TPI se não houver risco de malária).
+
+Para a maioria dos indicadores, os inquéritos também fornecem estimativas de cobertura a nível nacional, com intervalos de confiança de 95%. Para a maioria dos indicadores de cobertura, os dados referem-se a um período anterior ao inquérito: por exemplo, cobertura de partos institucionais para os nascidos vivos nos dois anos anteriores ao inquérito. Isto significa que o ponto médio da estimativa de cobertura se situa um ano antes do inquérito.
+
+<Callout type="warning">
+Por vezes, um indicador pode atingir uma cobertura invariavelmente elevada a nível nacional, digamos, superior a 125%. Isto pode acontecer porque a qualidade dos dados do numerador do indicador de cobertura é fraca, o denominador está errado ou a intervenção é administrada e registada mais do que uma vez durante a gravidez. Um exemplo é a suplementação de IFA. Nesses casos, o cálculo da cobertura não é útil. É preferível expressá-lo de forma diferente. Por exemplo, se a cobertura for de 200%, é melhor calcular o número médio de ciclos de 90 comprimidos de IFA que uma mulher grávida recebeu (neste caso, 2,0 por mulher grávida na população).
+</Callout>
+
+    - *[insert ANC facility vs survey graphs Output]*
+
+---
+
+### [Cuidados de Parto](/docs/methods/#delivery-care)
+
+Todos os países têm pelo menos um indicador de cuidados de parto com uma meta no plano nacional. A meta de cobertura global do Plano de Ação Todos os Recém-Nascidos (ENAP) e do Fim da Mortalidade Materna Evitável (EPMM) para 2025 é de, pelo menos, 90% de cobertura média global, e 90% dos países com, pelo menos, 80% de cobertura de assistência qualificada ao parto (SBA). Para os cuidados pós-natais (CPoN) nos primeiros 2 dias, a meta de cobertura global é de 80%, e 90% dos países com, pelo menos, 60% de cobertura.
+
+A cobertura de partos (vivos) institucionais e a SBA estão intimamente relacionadas, uma vez que quase todos os partos com um assistente qualificado ocorrem em unidades de saúde. Do ponto de vista analítico, prefere-se a cobertura de partos institucionais porque é uma medida mais objetiva e evita problemas com definições nacionais variadas sobre o que constitui um parto qualificado. A SBA é frequentemente preferida do ponto de vista dos cuidados de saúde porque inclui um elemento de qualidade; obviamente, um parto institucional sem assistência qualificada não é desejável e, nalguns países, a SBA domiciliária pode fazer parte da estratégia de prestação de cuidados de saúde. Qualquer um dos indicadores funciona bem para captar os cuidados de parto.
+
+<Callout type="info">
+A cesariana é uma intervenção que salva vidas e um indicador importante. Uma regra geral apresentada pela Organização Mundial da Saúde (OMS) é que a necessidade de cesariana ao nível da população situa-se entre 10-15% de todos os partos. 
+* **Abaixo de 10%:** Indica uma necessidade não satisfeita de cuidados de parto cirúrgico.
+* **Acima de 10–15%:** Implica uma provável utilização excessiva de cesarianas. Pode também implicar uma combinação de necessidades não satisfeitas em determinados grupos populacionais (por exemplo, as mulheres mais pobres ou rurais) a par da utilização excessiva noutros subgrupos (tais como as mulheres urbanas e mais ricas).
+</Callout>
+
+Os cuidados pós-natais (CPoN) nas primeiras 48 horas são prestados à mãe e ao recém-nascido. Os sistemas dos países variam na forma como registam o tipo de CPoN, e sabe-se que os inquéritos aos agregados familiares apresentam problemas de qualidade de dados no que diz respeito aos CPoN para a mãe ou para o bebé. Alguns países utilizam múltiplas definições para o momento da visita de CPoN (por exemplo, na primeira semana).
+
+O baixo peso ao nascer é um indicador crítico da saúde neonatal. É mais significativo se for feita a distinção entre prematuridade e pequeno para a idade gestacional, mas a maioria dos sistemas de notificação das unidades e inquéritos não dispõe de dados tão granulares. Supõe-se que todos os bebés sejam pesados imediatamente após o nascimento, e a percentagem de recém-nascidos com peso inferior a 2.500 gramas é tipicamente notificada no sistema DHIS2. Como orientação geral para a interpretação de dados, a prevalência de baixo peso ao nascer na África Subsariana foi estimada em 13,9% (intervalo de credibilidade de 95%: 12,4–15,7%) para 2020.
+
+    - *[insert output screenshot Output]*
+
+---
+
+### [Imunização (Vacinação)](/docs/methods/#immunization)
+
+Os indicadores de cobertura vacinal estão incluídos no plano de monitorização do setor da saúde de praticamente todos os países. Uma meta geral é de, pelo menos, 90% de cobertura para vacinas essenciais administradas na infância e na adolescência.
+
+Para as análises de cobertura nacional, o foco recai sobre a BCG, a primeira e terceira doses da pentavalente/DTP (penta1/DTP1 e penta3/DTP3), e a primeira e segunda doses da vacina contra o sarampo (frequentemente coadministrada como sarampo-rubéola). As vacinas BCG e penta/DTP são recomendadas ao nascer (BCG), às 6 semanas (penta1) e às 14 semanas (penta3). 
+
+* **Dados das Unidades de Saúde:** O número de vacinas administradas a lactentes é usado como numerador. O denominador é o número de crianças elegíveis na população, aproximado como:
+  $$\text{Denominador} = \text{Nascidos Vivos} - \text{Óbitos Neonatais}$$
+* **Dados do Inquérito:** Geralmente fornecem a cobertura vacinal entre crianças dos 12 aos 23 meses de idade (e podem incluir a idade em que a vacinação foi administrada, tipicamente antes do primeiro aniversário).
+
+A primeira dose da vacina contra o sarampo é geralmente recomendada aos 9 meses de idade. Para os dados das unidades, o registo e a notificação geralmente separam as doses de sarampo administradas a crianças com menos de 1 ano das administradas a crianças com 1 ano ou mais, embora a qualidade do registo por grupo etário varie (há frequentemente uma tendência para registar as vacinas contra o sarampo administradas após os 12 meses como sendo administradas a lactentes). Aqui, o denominador usado para medir a cobertura representa as crianças que sobreviveram ao primeiro ano de vida:
+$$\text{Denominador Sarampo 1} = \text{Nascidos Vivos} - \text{Óbitos Neonatais} - \text{Óbitos Pós-Neonatais}$$
+
+A segunda dose da vacina contra o sarampo usa como denominador as crianças com idades entre os 24–35 meses, estimado como:
+$$\text{Denominador Sarampo 2} = \text{Nascidos Vivos} - \text{Óbitos Neonatais} - (2 \times \text{Óbitos Pós-Neonatais})$$
+
+A OMS e a UNICEF colaboram com os países para produzir estimativas anuais de cobertura vacinal utilizando todas as fontes de dados. Estas estimativas nacionais, chamadas WUENIC, são publicadas e estão disponíveis para 2020–2024. Estas tendências temporais estão incluídas nos resultados da análise para comparar as estimativas anuais de dados das unidades de 2019–2024 produzidas no workshop com os resultados dos inquéritos.
+
+    - *[insert output screenshot Output]*
+
+---
+
+### [Planeamento Familiar](/docs/methods/#family-planning)
+
+As estimativas de cobertura do planeamento familiar derivam de uma colaboração entre a Countdown to 2030 e o Track20. O Track20 desenvolveu a Ferramenta de Estimativa de Planeamento Familiar (FPET), um modelo avançado centrado em três indicadores: uso de contracetivos modernos, necessidades não satisfeitas de contracetivos modernos, e procura satisfeita com métodos modernos. Estes três indicadores estão intimamente relacionados porque:
+
+$$\text{Procura Satisfeita (Cobertura)} = \frac{\text{Uso de Contracetivos Modernos}}{\text{Necessidade Não Satisfeita} + \text{Uso de Contracetivos Modernos}}$$
+
+O FPET utiliza uma modelação estatística que incorpora todos os dados de inquérito disponíveis e pode integrar dados das unidades de saúde se a qualidade for suficiente. O FPET permite combinar vários tipos de dados de inquérito, ajustando uma linha de tendência que ganha força a partir de múltiplos pontos de dados e minimiza os riscos associados à comparação direta de diferentes inquéritos.
+
+    - *[insert figure FPET projection Output]*
+
+---
+
+</Steps>
+
+<Callout type="info">
+**Referências e Notas:**
+1. Os inquéritos podem fornecer a cobertura da suplementação de IFA, pois aqui a unidade de análise de dados são as mulheres grávidas individualmente.
+2. Amouzou A, Hazel E, Vaz L, Sanni Y, Moran A. Discordance in postnatal care between mothers and newborns: Measurement artifact or missed opportunity? J Glob Health. 2020 Jun;10(1):010505.
+3. Okwaraji YB, et al. National, regional, and global estimates of low birthweight in 2020, with trends from 2000: a systematic analysis. Lancet. 2024 Mar 16;403(10431):1071-1080.
+4. Portanto, os dados de inquérito sobre imunização referem-se grosso modo ao desempenho do programa no ano anterior ao inquérito.
+5. https://www.track20.org/pages/data_analysis/publications/methodological/family_planning_estimation_tool.php
+</Callout>
+
+---
+
+## A desigualdade na abordagem analítica CD2030
+
+<Steps>
+
+### [Análise Infranacional](/docs/methods/#subnational-analysis)
+
+Navegue para o separador **Análise Infranacional** (Subnational Analysis) => **Desigualdade Infranacional** (Subnational Inequality) e inspecione os resultados regionais e distritais traçados por ano, com o desvio absoluto da mediana (MADM) como medida de síntese para avaliar se as desigualdades foram reduzidas.
+
+    - *[insert graph on sub national inequality Output]*
+
+</Steps>
+
+---

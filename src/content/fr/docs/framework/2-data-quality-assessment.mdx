@@ -1,0 +1,89 @@
+import { Steps } from 'nextra/components'
+import { Callout } from 'nextra/components'
+import { Bleed } from 'nextra/components'
+
+## Aperçu
+
+Des données d'établissements de santé de haute qualité constituent le fondement d'estimations de couverture fiables. 
+Ce module évalue systématiquement les données des établissements de santé en tenant compte des mesures standard de qualité des données qui incluent : 
+- L'exhaustivité des rapports  
+- La détection des valeurs aberrantes  
+- La cohérence interne  
+- Les données manquantes  
+- Les calculs de ratios  
+- Le score de qualité global  
+
+## Mesures d'évaluation de la qualité des données (DQA) dans l'approche analytique CD2030
+<Steps>
+
+###  [Exhaustivité des rapports](/docs/methods/#reporting-completeness)
+Pour en savoir plus sur les bases scientifiques et les méthodes utilisées pour évaluer l'exhaustivité des rapports, consultez **[Exhaustivité des rapports : justification](/docs/methods/#reporting-completeness)**
+| Mesure | Numérateur | Dénominateur | Interprétation |
+|----------|----------|-------------|---------------|
+| **1a** | Nombre de rapports mensuels d'établissements reçus | Total des rapports attendus *(12 × nombre d'établissements)* | ≥ 90 % est bon ; affecte l'interprétation des tendances |
+| **1b** | Districts avec ≥ 90 % d'exhaustivité des rapports | Total des districts | Identifie les districts peu performants |
+| **1c** | Districts sans valeurs manquantes dans tous les formulaires | Total des districts | Identifie la distribution de  |
+
+<Callout type="info">
+Les statistiques pour **1a** et **1b** sont basées sur la moyenne de quatre formulaires de rapport (CPN, accouchement, vaccination, consultations externes).
+</Callout>
+
+    - *insert output screenshot Output*
+ ---
+
+### [Détection des valeurs aberrantes](/docs/methods/#outlier-detection)
+Une valeur aberrante extrême est définie comme une **valeur mensuelle qui correspond à 5 fois l'écart absolu médian (MAD) par rapport à la valeur médiane mensuelle d'une année donnée**.
+Pour en savoir plus sur les bases scientifiques et les méthodes utilisées pour évaluer et corriger les valeurs aberrantes extrêmes, consultez **[Valeurs aberrantes extrêmes : justification](/docs/methods/#outlier-detection)**
+
+| Mesure | Numérateur | Dénominateur | Interprétation |
+|----------|----------|-------------|---------------|
+| **2a** | Valeurs mensuelles non classées comme aberrantes | Total des valeurs mensuelles | ≥ 99 % attendu |
+| **2b** | Districts sans valeurs aberrantes | Total des districts | ≥ 90 % attendu |
+
+<Callout type="warning" >
+Les valeurs aberrantes sont identifiées de manière statistique. Évaluez toujours si les écarts reflètent des événements du monde réel (par exemple, des campagnes) ou des erreurs de données.
+</Callout>
+
+    - *insert output screenshot Output*
+ ---
+### [Cohérence interne](/docs/methods/#internal-consistency)
+- La cohérence interne évalue le degré d'alignement des indicateurs liés au sein du jeu de données, sur la base des relations épidémiologiques et de prestation de services attendues. 
+- Dans le cadre analytique CD2030, cette étape complète d'autres mesures (DQA) en évaluant si les indicateurs qui sont biologiquement ou programmatiquement liés suivent des modèles plausibles.
+- Contrairement aux vérifications d'indicateurs isolés, la cohérence interne se concentre sur les **relations entre les indicateurs**, en s'assurant que les valeurs déclarées reflètent des parcours de prestation de services réalistes tout au long du continuum de soins.
+
+Les mesures suivantes sont prises en compte lors de l'évaluation de la cohérence interne :
+
+| Mesure | Numérateur | Dénominateur | Interprétation |
+|----------|----------|-------------|---------------|
+| **3a** | CPN1 déclaré | Penta1 déclaré | Plage de ratio attendue |
+| **3b** | Penta1 déclaré | Penta3 déclaré | Basé sur les données d'enquête |
+| **3c** | Districts dans le ratio attendu | Total des districts | Plage acceptable plus large |
+| **3d** | Districts dans la plage attendue | Total des districts | Identique à ci-dessus |
+
+    - *insert output screenshot Output*
+ ---
+
+### Données manquantes
+- À confirmer (TBC)
+    - *insert output screenshot Output*
+ ---
+### Calculs de ratios
+- À confirmer (TBC)
+    - *insert output screenshot Output*
+ ---
+### Score de qualité global
+
+| Mesure | Numérateur | Dénominateur | Interprétation |
+|----------|----------|-------------|---------------|
+| **Score global** | Calculé automatiquement | Calculé automatiquement | Moyenne des indicateurs **1a, 1b, 2a, 2b, 3c, 3d** |
+
+ *insert output screenshot Output*
+<Callout type="success">
+Datasuite calcule automatiquement le score de qualité des données global.
+</Callout>
+
+
+ ---
+</Steps>
+
+---

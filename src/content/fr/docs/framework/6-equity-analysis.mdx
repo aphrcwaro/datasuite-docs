@@ -1,0 +1,59 @@
+import { Steps } from 'nextra/components'
+import { Callout } from 'nextra/components'
+import { Bleed } from 'nextra/components'
+
+## Évaluation de l'équité (Equiplots)
+
+Les moyennes nationales de couverture masquent des disparités critiques qui déterminent si les systèmes de santé ne laissent vraiment personne de côté. Ce module utilise les données des enquêtes auprès des ménages pour évaluer les inégalités à travers trois dimensions principales : le lieu de résidence (urbain/rural), la richesse (quintiles des plus riches aux plus pauvres) et l'éducation maternelle. En visualisant les trajectoires de couverture séparément pour chaque sous-groupe de population parallèlement à la tendance nationale, les equiplots révèlent si les écarts se réduisent ou se creusent — une information essentielle pour cibler équitablement les investissements en santé.
+
+Trois modèles d'inégalité distincts émergent des données : *l'inégalité par le haut* (seuls les plus riches s'en sortent), *l'inégalité linéaire* (gradients associés à la richesse) et *l'inégalité par le bas* (les plus pauvres sont laissés pour compte). Chaque modèle signale des priorités de programmation différentes : respectivement, des campagnes d'accès de masse, un ciblage pro-pauvres ou des initiatives d'éducation. Le suivi de ces modèles au fil du temps révèle si les interventions en faveur de l'équité fonctionnent et si votre système de santé progresse vers une couverture universelle pour tous les groupes de population, et non seulement pour les moyennes nationales.
+
+---
+
+## Évaluation de l'équité dans l'approche analytique CD2030
+
+### Justification et approche
+**Base scientifique de l'analyse :**
+
+Les enquêtes auprès des ménages fournissent des informations critiques sur les inégalités. Nous nous concentrons sur trois dimensions principales de l'inégalité : le milieu de résidence, la richesse et l'éducation.
+
+Pour le milieu de résidence, nous nous concentrons sur les zones urbaines/rurales, pour la richesse, nous utilisons les quintiles de richesse des ménages et pour l'éducation, nous nous concentrons sur l'éducation de la mère. Les equiplots sont utilisés pour évaluer si le pays a fait des progrès depuis 2010 dans la réduction de l'écart pauvres-riches ou de l'écart entre les femmes sans éducation ou avec un faible niveau d'éducation et les femmes avec un niveau d'éducation plus élevé.
+
+Pour les quintiles de richesse, il est possible d'évaluer quel est le type d'inégalité, car toutes les catégories sont de la même taille. Chaque modèle nécessite une stratégie différente de programmation et de ciblage en matière de santé :
+
+* **Inégalité par le haut (privation de masse) :** Si les plus riches sont bien en avance sur tous les autres quintiles de richesse, seuls les riches s'en sortent.
+* **Inégalité linéaire :** Si les différences de couverture sont équidistantes, il s'agit d'un modèle linéaire où l'augmentation de la richesse des ménages est linéairement associée à une couverture plus élevée.
+* **Inégalité par le bas (marginalisation) :** Si les plus pauvres sont laissés pour compte, cela signifie la marginalisation des plus pauvres.
+
+---
+
+<Steps>
+
+### [Interprétation des equiplots](/docs/methods/#interpretation-of-equiplots)
+
+L'interprétation doit se concentrer sur la question de savoir si les inégalités se sont réduites au fil du temps et dans quelle mesure les cibles mondiales de couverture ont été atteintes. Tenez compte de votre (vos) public(s) et des messages clés et informations que vous souhaitez transmettre.
+
+<Callout type="info">
+Les questions suivantes doivent guider l'interprétation et y trouver réponse :
+* Quel est le niveau d'inégalité dans le point de données le plus récent ?
+* Comment les inégalités ont-elles évolué au fil du temps ?
+* Y a-t-il un modèle d'inégalité qui peut être observé ?
+* Quelles seront les meilleures approches pour réduire les inégalités ?
+</Callout>
+
+---
+
+### [Mise en œuvre](/docs/methods/#implementation)
+
+Ceci sera analysé dans la section **National analyses -> Equity Assessment** (Analyses nationales -> Évaluation de l'équité) de l'application Shiny.
+
+Vous devriez voir les résultats ci-dessous :
+
+    - *[insert equiplots Output]*
+    - *[insert wealth equiplot Output]*
+    - *[insert area equiplot Output]*
+    - *[insert residence-penta3 equiplot Output]*
+
+</Steps>
+
+---

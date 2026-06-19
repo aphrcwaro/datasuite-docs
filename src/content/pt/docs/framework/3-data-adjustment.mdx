@@ -1,0 +1,22 @@
+# 6 Ajustes de Numerador
+
+Relatórios em falta e erros de dados distorcem a análise de cobertura, especialmente quando as taxas de notificação são baixas ou esporádicas. Este módulo aplica correções baseadas em evidências para transformar os números brutos notificados em estimativas defensáveis, contabilizando as unidades de saúde que não enviaram notificações e removendo valores atípicos extremos. Utilizando um fator de ajuste com base científica — fundamentado em pressupostos sobre os volumes relativos de serviços nas unidades notificadoras em comparação com as não notificadoras — o Data Suite aumenta os números proporcionalmente para refletir a verdadeira cobertura ao nível da população.
+
+A estratégia de ajuste é pragmática: se assumirmos que todas as unidades não notificadoras forneceram zero serviços, subestimaremos drasticamente a cobertura real. Em vez disso, o módulo estima qual a proporção de serviços que provavelmente ocorreu nas unidades silenciosas (tipicamente 25% do volume das unidades notificadoras, por padrão) e ajusta em conformidade. Para períodos de dados com notificação criticamente baixa (abaixo de 75%), não é aplicado qualquer ajuste e esses anos são sinalizados como não confiáveis — protegendo a sua análise contra estimativas impossíveis baseadas em dados insuficientes.
+
+---
+
+## 6.1 Fundamentação, Abordagem e Implementação
+
+
+### Fundamentação: Base científica para a análise
+A completude da notificação institucional pode distorcer fortemente a análise de cobertura, particularmente se os níveis de notificação forem baixos ou flutuarem significativamente de um ano para o outro. 
+
+Da mesma forma, valores atípicos (outliers) extremos — como um zero extra inserido acidentalmente durante a digitação dos dados — podem exercer um impacto desproporcional, especialmente nas métricas infranacionais. Após as nossas avaliações da qualidade dos dados de base, são necessárias medidas corretivas para gerar um conjunto de dados limpo e padronizado para a análise final. Isto exige um ajuste matemático para notificações incompletas e a resolução de valores atípicos extremos.
+
+### Abordagem: Descrição dos passos analíticos
+Se não ajustarmos a completude da notificação, assumimos implicitamente que todas as unidades não notificadoras prestaram zero serviços de saúde durante os seus períodos de silêncio, o que é estatisticamente improvável. 
+
+Os ajustes dependem de estimar o verdadeiro volume de serviços *(por exemplo, cuidados pré-natais, vacinações)* prestados em unidades não notificadoras em relação àquelas que submeteram dados. Para isso, estabelecemos um fator de ajuste, denotado como $k$. 
+
+O fator de ajuste $k$ é definido como o rácio (ou proporção) entre o volume de serviços prestados por unidades não notificadoras e o volume de serviços prestados por unidades notificadoras. Este fator é usado diretamente para aumentar os números not

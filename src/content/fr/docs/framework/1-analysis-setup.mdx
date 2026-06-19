@@ -1,0 +1,88 @@
+import { Steps } from 'nextra/components'
+import { Callout } from 'nextra/components'
+import { Bleed } from 'nextra/components'
+
+Cette page décrit les étapes nécessaires pour configurer l'espace de travail d'analyse
+
+---
+<Steps>
+### Créer un dossier de travail[#working-folder]
+La première étape du flux de travail d'analyse consiste à préparer un dossier de travail dédié. Ce dossier est l'endroit où vous conservez les fichiers d'entrée pour l'application, et où le système crée le fichier de données dérivé utilisé pour des chargements futurs plus rapides.
+
+- Choisissez un nom de répertoire clair dont vous vous souviendrez facilement et auquel vous pourrez vous référer, de préférence dans votre environnement local.
+- Placez les fichiers de téléchargement bruts (Excel) dans ce dossier avant de démarrer l'application.
+- Conservez ensemble toute documentation, données ou fichiers spécifiques au pays afin que le dossier de travail soit autonome.
+
+### Importation des données HMIS
+Pour le téléchargement initial, utilisez le classeur Excel généré à partir des exportations HMIS/DHIS2. Pour les téléchargements ultérieurs, utilisez le [fichier .RDS mis en cache](#rds), qui est généré et stocké automatiquement dans le dossier de travail lorsque le fichier Excel est téléchargé.
+
+L'application accepte les formats de données tabulaires courants pour le téléchargement DHIS2 :
+
+- Classeur Excel : `.xlsx` ou `.xls`
+- Valeurs séparées par des virgules : `.csv`
+
+<Callout type="info">
+- Les indicateurs de données DHIS2 sont définis [ici](/en/docs/framework/8-indicator-definitions).
+</Callout>
+### Création automatique de RDS[#rds]
+
+- Lorsque vous chargez un fichier Excel pour la première fois, l'application convertit et enregistre automatiquement un fichier `.rds` compagnon dans le même dossier de travail.
+- Lors des chargements ultérieurs, l'application vérifie l'existence du fichier `.rds` et l'utilise pour accélérer le rechargement des données.
+
+Cela signifie que le premier chargement peut prendre un peu plus de temps pendant que le fichier Excel est lu et transformé. Ensuite, l'application ouvre le fichier `.rds` enregistré beaucoup plus rapidement.
+</Steps>
+
+
+---
+### Jeux de données intégrés
+
+En plus du jeu de données DHIS2 téléchargé, l'application inclut des jeux de données de référence internes qui sont liés au pays dont les données ont été téléchargées.
+
+Ces jeux de données intégrés sont :
+- Estimations de l'ONU
+- Données d'enquête
+- Estimations WUENIC
+- Données de mortalité de l'ONU
+- Données de l'Outil d'estimation de la planification familiale (FPET)
+
+
+Étant donné que ces jeux de données sont nommés en fonction du pays dont les données DHIS2 sont chargées, l'application peut automatiquement associer le fichier téléchargé au bon ensemble de référence.
+
+<Callout type="important">
+**Bonne pratique**
+- Utilisez un dossier de travail par pays ou par lot d'exportation DHIS2.
+- Conservez ensemble le fichier source Excel d'origine et le fichier `.rds` généré.
+- Ne renommez pas le fichier `.rds` manuellement ; l'application gère ce fichier automatiquement.
+</Callout>
+
+## Paramètres nationaux pour le calcul du dénominateur[#survey-params]
+- Ces paramètres sont utilisés pour faciliter **la sélection des dénominateurs** pour l'analyse de la couverture des services dans le cadre analytique RMNCAH.  
+- Ils sont généralement dérivés de **l'enquête nationale la plus récente** (par exemple, EDS, MICS) et sont appliqués uniformément aux unités infranationales.
+
+<Callout type="important">
+**Astuce**
+- Les valeurs par défaut sont extraites des données d'enquête disponibles du pays. Les utilisateurs peuvent mettre à jour ces valeurs s'ils disposent de valeurs plus récentes et validées. 
+</Callout>
+![Paramètres d'analyse](/images/rmncah-analysis-params.jpg)
+
+---
+
+| Paramètre | Définition |
+|----------|-----------|
+| `Enquête CPN1 (%)` | Pourcentage de femmes âgées de 15 à 49 ans ayant eu une naissance vivante et ayant reçu au moins une visite de soins prénatals (CPN) pendant leur dernière grossesse. (Exemple : si 940 femmes sur 1 000 ont eu au moins une visite CPN, la couverture CPN1 est de 94 %.) |
+| `CPN4` | Pourcentage de femmes âgées de 15 à 49 ans ayant eu une naissance vivante et ayant reçu quatre visites de soins prénatals ou plus pendant leur dernière grossesse. (Exemple : si 680 femmes sur 1 000 ont eu ≥ 4 visites CPN, la couverture CPN4 est de 68 %.) |
+| `Perte de grossesse (proportion)` | Proportion de grossesses qui se sont terminées par une fausse couche, un avortement ou une mortinaissance par rapport à l'ensemble des issues de grossesse signalées. (Exemple : si 80 grossesses sur 1 000 se sont soldées par une perte, la proportion est de 0,08) |
+| `Naissances gémellaires (proportion)` | Proportion de naissances vivantes qui sont des jumeaux par rapport à toutes les naissances vivantes. (Exemple : si 30 naissances vivantes sur 1 500 étaient des jumeaux (soit 15 paires de jumeaux), la proportion est de 0,02) |
+| `Mortalité néonatale (proportion)` | Proportion de naissances vivantes qui décèdent au cours des 28 premiers jours de vie par rapport à toutes les naissances vivantes. (Exemple : si 20 naissances vivantes sur 1 000 sont décédées au cours des 28 premiers jours, la proportion est de 0,02) |
+| `Mortalité post-néonatale (proportion)` | Proportion de naissances vivantes qui décèdent entre 28 jours et 11 mois de vie par rapport à toutes les naissances vivantes. (Exemple : si 15 naissances vivantes sur 1 000 sont décédées entre 28 jours et 11 mois, la proportion est de 0,015) |
+| `Taux de mortinatalité (proportion)` | Proportion de grossesses qui se sont terminées par une mortinaissance par rapport à toutes les issues de grossesse signalées. (Exemple : si 10 grossesses sur 1 000 se sont terminées par une mortinaissance, la proportion est de 0,01) |
+| `Accouchement en établissement` | Pourcentage de naissances vivantes qui ont eu lieu dans un établissement de santé. (Exemple : si 850 naissances vivantes sur 1 000 ont eu lieu dans un établissement de santé, la couverture des accouchements en établissement est de 85 %.) |
+| `Couverture BCG (%)` | Pourcentage de nourrissons âgés de 12 à 23 mois qui ont reçu le vaccin bacille de Calmette-Guérin (BCG). (Exemple : si 950 nourrissons sur 1 000 ont reçu le vaccin BCG, la couverture BCG est de 95 %.) |
+| `Couverture Penta 1 (%)` | Pourcentage de nourrissons âgés de 12 à 23 mois qui ont reçu la première dose du vaccin pentavalent. (Exemple : si 920 nourrissons sur 1 000 ont reçu la première dose, la couverture Penta 1 est de 92 %.) |
+| `Penta 3` | Pourcentage de nourrissons âgés de 12 à 23 mois qui ont reçu la troisième dose du vaccin pentavalent. (Exemple : si 850 nourrissons sur 1 000 ont reçu la troisième dose, la couverture Penta 3 est de 85 %.) |
+| `Couverture Rougeole 1 (%)` | Pourcentage de nourrissons âgés de 12 à 23 mois qui ont reçu la première dose du vaccin contre la rougeole. (Exemple : si 900 nourrissons sur 1 000 ont reçu la première dose, la couverture Rougeole 1 est de 90 %.) |
+| `Taux de césarienne (%)` | Pourcentage de naissances vivantes qui ont été accouchées par césarienne. (Exemple : si 150 naissances vivantes sur 1 000 ont été par césarienne, la couverture par césarienne est de 15 %.) |
+| `Insuffisance pondérale à la naissance` | Pourcentage de naissances vivantes présentant une insuffisance pondérale à la naissance (moins de 2 500 grammes). (Exemple : si 100 naissances vivantes sur 1 000 avaient un faible poids à la naissance, la couverture de l'insuffisance pondérale à la naissance est de 10 %.) |
+| `Année de l'enquête récente` | L'année civile au cours de laquelle l'enquête a été menée et à partir de laquelle les estimations de couverture vaccinale (par exemple, BCG, Penta1/3, Rougeole 1) sont tirées. (Exemple : si l'enquête a été menée en 2022, c'est l'année de l'enquête vaccinale). |
+| `Année de début des données d'enquête` | L'année civile à partir de laquelle commencent les données de l'enquête. Ceci est utilisé pour déterminer la période pour laquelle les données d'enquête sont pertinentes. Idéalement, il est recommandé d'utiliser les deux enquêtes les plus récentes pour cette analyse. (Exemple : si un pays a des données d'enquête pour 2008, 2013, 2018 et 2023 ; le début des données d'enquête devrait être 2018 (les deux plus récentes)). |
+---

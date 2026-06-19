@@ -1,0 +1,88 @@
+import { Steps } from 'nextra/components'
+import { Callout } from 'nextra/components'
+import { Bleed } from 'nextra/components'
+
+Esta página descreve os passos necessários para configurar o ambiente de análise
+
+---
+<Steps>
+### Criar uma pasta de trabalho[#working-folder]
+O primeiro passo no fluxo de trabalho de análise é preparar uma pasta de trabalho dedicada. É nesta pasta que você guarda os arquivos de entrada para o aplicativo, e onde o sistema cria o arquivo de dados derivado utilizado para carregamentos futuros mais rápidos.
+
+- Escolha um nome de diretório claro que você possa lembrar e referenciar facilmente, de preferência em seu ambiente local.
+- Coloque os arquivos brutos de upload (Excel) nessa pasta antes de iniciar o aplicativo.
+- Mantenha qualquer documentação relacionada, dados ou arquivos específicos do país juntos para que a pasta de trabalho seja independente (autocontida).
+
+### Upload de dados do HMIS
+Para o upload inicial, use a pasta de trabalho do Excel gerada a partir das exportações do HMIS/DHIS2. Para uploads subsequentes, use o [arquivo .RDS em cache](#rds), que é gerado e armazenado automaticamente na pasta de trabalho quando o arquivo Excel é carregado.
+
+O aplicativo aceita formatos de dados tabulares comuns para o upload do DHIS2:
+
+- Pasta de trabalho do Excel: `.xlsx` ou `.xls`
+- Valores separados por vírgula: `.csv`
+
+<Callout type="info">
+- Os indicadores de dados do DHIS2 estão definidos [aqui](/en/docs/framework/8-indicator-definitions).
+</Callout>
+### Criação automática de RDS[#rds]
+
+- Quando você carrega um arquivo Excel pela primeira vez, o aplicativo converte e salva automaticamente um arquivo `.rds` complementar na mesma pasta de trabalho.
+- Em carregamentos subsequentes, o aplicativo verifica a existência do arquivo `.rds` e o utiliza para acelerar a recarga dos dados.
+
+Isso significa que o primeiro carregamento pode demorar um pouco mais enquanto o arquivo Excel é lido e transformado. Depois disso, o aplicativo abre o arquivo `.rds` salvo muito mais rápido.
+</Steps>
+
+
+---
+### Conjuntos de dados incorporados
+
+Além do conjunto de dados do DHIS2 carregado, o aplicativo inclui conjuntos de dados de referência internos que estão vinculados ao país cujos dados foram carregados.
+
+Esses conjuntos de dados incorporados são:
+- Estimativas da ONU
+- Dados de inquéritos (pesquisas)
+- Estimativas do WUENIC
+- Dados de mortalidade da ONU
+- Dados da Ferramenta de Estimativa de Planejamento Familiar (FPET)
+
+
+Como esses conjuntos de dados são nomeados de acordo com o país cujos dados do DHIS2 são carregados, o aplicativo pode associar automaticamente o arquivo carregado ao conjunto de referência correto.
+
+<Callout type="important">
+**Prática recomendada**
+- Use uma pasta de trabalho por país ou lote de exportação do DHIS2.
+- Mantenha o arquivo de origem original do Excel e o arquivo `.rds` gerado juntos.
+- Não renomeie o arquivo `.rds` manualmente; o aplicativo gerencia esse arquivo automaticamente.
+</Callout>
+
+## Parâmetros Nacionais para Cálculo do Denominador[#survey-params]
+- Estes parâmetros são usados para apoiar a **seleção de denominadores** para a análise de cobertura de serviços dentro da estrutura analítica SRMNIA (RMNCAH).  
+- Eles são tipicamente derivados do **inquérito nacional mais recente** (por exemplo, DHS, MICS) e são aplicados uniformemente em todas as unidades infranacionais.
+
+<Callout type="important">
+**Dica**
+- Os valores padrão são extraídos dos dados de inquérito disponíveis do país. Os usuários podem atualizar esses valores se tiverem valores validados mais recentes. 
+</Callout>
+![Parâmetros de análise](/images/rmncah-analysis-params.jpg)
+
+---
+
+| Parâmetro | Definição |
+|----------|-----------|
+| `Inquérito CPN1 (%)` | Porcentagem de mulheres de 15 a 49 anos com um nascido vivo que receberam pelo menos uma visita de cuidados pré-natais (CPN) durante a última gravidez. (Exemplo: Se 940 de 1.000 mulheres tiveram pelo menos uma visita de CPN, a cobertura de CPN1 é de 94%.) |
+| `CPN4` | Porcentagem de mulheres de 15 a 49 anos com um nascido vivo que receberam quatro ou mais visitas de cuidados pré-natais durante a última gravidez. (Exemplo: Se 680 de 1.000 mulheres tiveram ≥4 visitas de CPN, a cobertura de CPN4 é de 68%.) |
+| `Perda de Gravidez (proporção)` | Proporção de gestações que terminaram em aborto espontâneo, aborto induzido ou natimorto em relação a todos os desfechos de gravidez relatados. (Exemplo: Se 80 em 1.000 gestações terminaram em perda, a proporção é 0,08) |
+| `Nascimentos Gemelares (proporção)` | Proporção de nascidos vivos que são gêmeos em relação a todos os nascidos vivos. (Exemplo: Se 30 em 1.500 nascidos vivos eram gêmeos (ou seja, 15 pares de gêmeos), a proporção é 0,02) |
+| `Mortalidade Neonatal (proporção)` | Proporção de nascidos vivos que morrem nos primeiros 28 dias de vida em relação a todos os nascidos vivos. (Exemplo: Se 20 de 1.000 nascidos vivos morreram nos primeiros 28 dias, a proporção é 0,02) |
+| `Mortalidade Pós-Neonatal (proporção)` | Proporção de nascidos vivos que morrem entre 28 dias e 11 meses de vida em relação a todos os nascidos vivos. (Exemplo: Se 15 de 1.000 nascidos vivos morreram entre 28 dias e 11 meses, a proporção é 0,015) |
+| `Taxa de Natimortalidade (proporção)` | Proporção de gestações que terminaram em natimorto em relação a todos os desfechos de gravidez relatados. (Exemplo: Se 10 de 1.000 gestações terminaram em natimorto, a proporção é 0,01) |
+| `Parto institucional` | Porcentagem de nascidos vivos que ocorreram em uma unidade de saúde. (Exemplo: Se 850 de 1.000 nascidos vivos foram em uma unidade de saúde, a cobertura de parto institucional é de 85%.) |
+| `Cobertura BCG (%)` | Porcentagem de lactentes de 12 a 23 meses que receberam a vacina Bacilo de Calmette-Guérin (BCG). (Exemplo: Se 950 de 1.000 lactentes receberam a vacina BCG, a cobertura de BCG é de 95%.) |
+| `Cobertura Penta 1 (%)` | Porcentagem de lactentes de 12 a 23 meses que receberam a primeira dose da vacina pentavalente. (Exemplo: Se 920 de 1.000 lactentes receberam a primeira dose, a cobertura da Penta 1 é de 92%.) |
+| `Penta 3` | Porcentagem de lactentes de 12 a 23 meses que receberam a terceira dose da vacina pentavalente. (Exemplo: Se 850 de 1.000 lactentes receberam a terceira dose, a cobertura da Penta 3 é de 85%.) |
+| `Cobertura Sarampo 1 (%)` | Porcentagem de lactentes de 12 a 23 meses que receberam a primeira dose da vacina contra o sarampo. (Exemplo: Se 900 de 1.000 lactentes receberam a primeira dose, a cobertura do Sarampo 1 é de 90%.) |
+| `Taxa de Cesariana (%)` | Porcentagem de nascidos vivos que nasceram de cesariana. (Exemplo: Se 150 de 1.000 nascidos vivos foram por cesariana, a taxa de cesariana é de 15%.) |
+| `Baixo peso ao nascer` | Porcentagem de nascidos vivos que tiveram baixo peso ao nascer (menos de 2.500 gramas). (Exemplo: Se 100 de 1.000 nascidos vivos tiveram baixo peso, a proporção de baixo peso ao nascer é de 10%.) |
+| `Ano do inquérito recente` | O ano civil em que o inquérito foi realizado e do qual são extraídas as estimativas de cobertura vacinal (por exemplo, BCG, Penta1/3, Sarampo 1). (Exemplo: Se o inquérito foi realizado em 2022, esse é o ano do inquérito vacinal). |
+| `Ano de início dos dados do inquérito` | O ano civil a partir do qual os dados do inquérito começam. Isso é usado para determinar o período de tempo para o qual os dados do inquérito são relevantes. O ideal é usar os dois inquéritos mais recentes para esta análise. (Exemplo: Se um país tem dados de inquéritos de 2008, 2013, 2018 e 2023; o início dos dados do inquérito deve ser 2018 (os dois mais recentes)). |
+---

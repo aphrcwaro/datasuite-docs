@@ -1,0 +1,89 @@
+import { Steps } from 'nextra/components'
+import { Callout } from 'nextra/components'
+import { Bleed } from 'nextra/components'
+
+## Visão Geral
+
+Dados de unidades de saúde de alta qualidade formam a base de estimativas de cobertura confiáveis. 
+Este módulo avalia sistematicamente os dados das unidades de saúde considerando as métricas padrão de qualidade de dados que incluem: 
+- Completude dos relatórios  
+- Detecção de valores atípicos (outliers)  
+- Consistência interna  
+- Dados ausentes  
+- Cálculos de razões  
+- Pontuação geral de qualidade  
+
+## Métricas de DQA (Avaliação da Qualidade dos Dados) na abordagem analítica CD2030
+<Steps>
+
+###  [Completude dos relatórios](/docs/methods/#reporting-completeness)
+Para leitura adicional sobre a base científica e os métodos usados para avaliar a completude dos relatórios, acesse **[Completude dos relatórios: fundamentação](/docs/methods/#reporting-completeness)**
+| Métrica | Numerador | Denominador | Interpretação |
+|----------|----------|-------------|---------------|
+| **1a** | Número de relatórios mensais de unidades recebidos | Total de relatórios esperados *(12 × número de unidades)* | ≥90% é bom; afeta a interpretação de tendências |
+| **1b** | Distritos com completude de relatórios ≥90% | Total de distritos | Identifica distritos com baixo desempenho |
+| **1c** | Distritos sem valores ausentes em todos os formulários | Total de distritos | Identifica a distribuição de  |
+
+<Callout type="info">
+As estatísticas para **1a** e **1b** baseiam-se na média de quatro formulários de relatório (CPN, parto, vacinação, consultas externas/OPD).
+</Callout>
+
+    - *insert output screenshot Output*
+ ---
+
+### [Detecção de valores atípicos](/docs/methods/#outlier-detection)
+Um valor atípico extremo é definido como um **valor mensal que é 5 vezes o desvio absoluto da mediana (MAD) em relação ao valor mediano mensal de um determinado ano**.
+Para leitura adicional sobre a base científica e os métodos usados para avaliar e ajustar os valores atípicos extremos, acesse **[Valores atípicos extremos: fundamentação](/docs/methods/#outlier-detection)**
+
+| Métrica | Numerador | Denominador | Interpretação |
+|----------|----------|-------------|---------------|
+| **2a** | Valores mensais não classificados como atípicos | Total de valores mensais | ≥99% esperado |
+| **2b** | Distritos sem valores atípicos | Total de distritos | ≥90% esperado |
+
+<Callout type="warning" >
+Os valores atípicos são identificados estatisticamente. Avalie sempre se os desvios refletem eventos do mundo real (por exemplo, campanhas) ou erros de dados.
+</Callout>
+
+    - *insert output screenshot Output*
+ ---
+### [Consistência interna](/docs/methods/#internal-consistency)
+- A consistência interna avalia o grau de alinhamento dos indicadores relacionados no conjunto de dados, com base nas relações esperadas de epidemiologia e de prestação de serviços. 
+- Dentro da estrutura analítica CD2030, esta etapa complementa outras métricas de DQA avaliando se os indicadores que estão biológica ou programaticamente interligados seguem padrões plausíveis.
+- Ao contrário das verificações de indicadores isolados, a consistência interna centra-se nas **relações entre indicadores**, garantindo que os valores relatados refletem percursos realistas de prestação de serviços ao longo do continuum de cuidados.
+
+As seguintes métricas são consideradas ao avaliar a consistência interna:
+
+| Métrica | Numerador | Denominador | Interpretação |
+|----------|----------|-------------|---------------|
+| **3a** | CPN1 relatado | Penta1 relatado | Intervalo de proporção esperado |
+| **3b** | Penta1 relatado | Penta3 relatado | Com base nos dados do inquérito |
+| **3c** | Distritos dentro da proporção esperada | Total de distritos | Intervalo aceitável mais amplo |
+| **3d** | Distritos dentro do intervalo esperado | Total de distritos | O mesmo que acima |
+
+    - *insert output screenshot Output*
+ ---
+
+### Dados ausentes
+- A confirmar (TBC)
+    - *insert output screenshot Output*
+ ---
+### Cálculos de razões
+- A confirmar (TBC)
+    - *insert output screenshot Output*
+ ---
+### Pontuação geral de qualidade
+
+| Métrica | Numerador | Denominador | Interpretação |
+|----------|----------|-------------|---------------|
+| **Pontuação Geral** | Calculado automaticamente | Calculado automaticamente | Média dos indicadores **1a, 1b, 2a, 2b, 3c, 3d** |
+
+ *insert output screenshot Output*
+<Callout type="success">
+O Datasuite calcula automaticamente a pontuação geral de qualidade dos dados.
+</Callout>
+
+
+ ---
+</Steps>
+
+---

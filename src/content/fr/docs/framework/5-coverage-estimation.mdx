@@ -1,0 +1,113 @@
+import { Steps } from 'nextra/components'
+import { Callout } from 'nextra/components'
+import { Bleed } from 'nextra/components'
+
+## Couverture
+
+Une fois la qualité des données assurée, les dénominateurs sélectionnés et les numérateurs ajustés, la Data Suite synthétise le tout en estimations de couverture — la mesure principale qui répond à la question : *Quelle proportion de la population ayant besoin d'un service de santé l'a réellement reçu ?* Ce module génère des estimations annuelles de la couverture pour les indicateurs de santé de la reproduction, de la mère, du nouveau-né, de l'enfant et de l'adolescent en divisant les numérateurs ajustés des rapports d'établissements par les dénominateurs de population les plus performants. Les estimations de couverture sont ensuite comparées aux résultats des enquêtes récentes auprès des ménages pour valider les conclusions et identifier les zones de biais systématique.
+
+L'estimation de la couverture doit tenir compte des réalités opérationnelles : certains indicateurs (accouchements en établissement, vaccinations) atteignent des niveaux improbablement élevés (> 100 %) en raison de problèmes de qualité des données ou d'enregistrements en double, ce qui nécessite de les recadrer en tant que moyenne de services par habitant plutôt qu'en pourcentages. La couverture de la planification familiale est gérée par une modélisation démographique spécialisée (FPET) qui intègre de multiples sources de données d'enquête et peut intégrer les données des établissements si la qualité le permet. Le module produit des courbes de tendance, des comparaisons avec les cibles mondiales (par exemple, 90 % d'accouchements en établissement d'ici 2025) et des visualisations côte à côte des données des établissements par rapport aux enquêtes pour évaluer la crédibilité.
+
+---
+
+## La couverture dans l'approche analytique CD2030
+
+<Steps>
+
+### [Soins prénatals (CPN)](/docs/methods/#antenatal-care)
+
+La plupart des pays ont au moins un indicateur de CPN (soins prénatals) avec une cible dans leur plan national. Les cibles mondiales de couverture ENAP/EPMM pour 2025 sont : à l'échelle mondiale, au moins 90 % des femmes enceintes avec 4 visites de soins prénatals ou plus, et 90 % des pays avec au moins 70 % de couverture. Il existe plusieurs indicateurs de CPN qui capturent :
+
+- **Le contact avec les services de santé pendant la grossesse** (1re visite CPN, 4 visites CPN ou plus, 1re visite CPN au premier trimestre). La CPN1 est souvent considérée comme un indicateur de l'accès de base aux services de santé. Elle est élevée dans la plupart des pays, et dans de nombreux cas, le nombre de visites CPN1 dans les données de routine des établissements de santé peut fournir un meilleur dénominateur pour les indicateurs de CPN et d'accouchement que les projections de population (voir la section 2 sur les dénominateurs).
+- **Le contenu des services fournis** (traitement préventif intermittent (TPI2 ou TPI3) contre le paludisme, dépistage du VIH, dépistage de la syphilis et supplémentation en fer-acide folique (IFA) (au moins 90 comprimés administrés à la femme enceinte)). Certains pays n'auront pas de politiques pour toutes ces interventions diagnostiques ou thérapeutiques pendant la grossesse (par exemple, pas de TPI s'il n'y a pas de risque de paludisme).
+
+Pour la plupart des indicateurs, les enquêtes fournissent également des estimations de couverture au niveau national, avec des intervalles de confiance à 95 %. Pour la plupart des indicateurs de couverture, les données se réfèrent à une période précédant l'enquête : par ex., la couverture des accouchements en établissement pour les naissances vivantes au cours des deux années précédant l'enquête. Cela signifie que le point médian de l'estimation de la couverture se situe un an avant l'enquête.
+
+<Callout type="warning">
+Parfois, un indicateur peut atteindre une couverture improbablement élevée au niveau national, disons plus de 125 %. Cela peut s'expliquer par le fait que la qualité des données du numérateur de l'indicateur de couverture est mauvaise, que le dénominateur est erroné, ou que l'intervention est administrée et enregistrée plus d'une fois pendant la grossesse. La supplémentation en IFA en est un exemple. Dans ce cas, le calcul de la couverture n'est pas utile. Il vaut mieux l'exprimer différemment. Par exemple, si la couverture est de 200 %, il est préférable de calculer le nombre moyen de cures de 90 comprimés d'IFA qu'une femme enceinte a reçues (dans ce cas 2,0 par femme enceinte dans la population).
+</Callout>
+
+    - *[insert ANC facility vs survey graphs Output]*
+
+---
+
+### [Soins d'accouchement](/docs/methods/#delivery-care)
+
+Tous les pays ont au moins un indicateur de soins d'accouchement avec une cible dans le plan national. La cible mondiale de couverture du Plan d'action Chaque nouveau-né (ENAP) et de l'initiative Mettre fin à la mortalité maternelle évitable (EPMM) pour 2025 est d'au moins 90 % de couverture moyenne mondiale, et 90 % des pays avec au moins 80 % de couverture d'assistance par du personnel qualifié à la naissance (SBA). Pour les soins postnatals (CPoN) dans les 2 jours, la cible mondiale de couverture est de 80 %, et 90 % des pays avec au moins 60 % de couverture.
+
+La couverture des naissances (vivantes) en établissement et la SBA sont étroitement liées, car presque tous les accouchements assistés par du personnel qualifié ont lieu dans des établissements de santé. Du point de vue analytique, la couverture des accouchements en établissement est privilégiée car il s'agit d'une mesure plus objective qui évite les problèmes liés aux différentes définitions nationales de ce qui constitue une naissance assistée par du personnel qualifié. La SBA est souvent privilégiée du point de vue des soins de santé car elle inclut un élément de qualité ; évidemment, un accouchement en établissement sans assistance qualifiée n'est pas souhaitable, et dans certains pays, la SBA à domicile peut faire partie de la stratégie de prestation des soins de santé. L'un ou l'autre indicateur fonctionne bien pour capturer les soins d'accouchement.
+
+<Callout type="info">
+La césarienne est une intervention vitale et un indicateur important. Une règle empirique générale mise en avant par l'Organisation mondiale de la Santé (OMS) est que le besoin d'accouchements par césarienne au niveau de la population se situe entre 10 et 15 % de tous les accouchements. 
+* **Moins de 10 % :** Indique un besoin non satisfait en matière de soins chirurgicaux d'accouchement.
+* **Plus de 10 à 15 % :** Implique une surutilisation probable de la césarienne. Cela peut également impliquer une combinaison de besoins non satisfaits au sein de certains groupes de population (par exemple, les femmes les plus pauvres ou rurales) parallèlement à une surutilisation dans d'autres sous-groupes (comme les femmes urbaines et plus aisées).
+</Callout>
+
+Les soins postnatals (CPoN) dans les 48 heures sont fournis à la mère et au nouveau-né. Les systèmes nationaux varient dans la façon dont ils enregistrent le type de CPoN, et les enquêtes auprès des ménages sont connues pour avoir des problèmes de qualité des données concernant les CPoN pour la mère ou le bébé. Certains pays utilisent de multiples définitions pour le moment de la visite CPoN (par exemple, au cours de la première semaine).
+
+L'insuffisance pondérale à la naissance est un indicateur critique de la santé néonatale. Il est plus significatif si la distinction entre la prématurité et le retard de croissance intra-utérin (petit pour l'âge gestationnel) est faite, mais la plupart des systèmes de déclaration des établissements et des enquêtes manquent de données aussi granulaires. Tous les bébés sont censés être pesés immédiatement après la naissance, et le pourcentage de nouveau-nés pesant moins de 2 500 grammes est généralement déclaré dans le système DHIS2. À titre indicatif pour l'interprétation des données, la prévalence de l'insuffisance pondérale à la naissance en Afrique subsaharienne a été estimée à 13,9 % (intervalle de crédibilité à 95 % : 12,4–15,7 %) pour 2020.
+
+    - *[insert output screenshot Output]*
+
+---
+
+### [Vaccination](/docs/methods/#immunization)
+
+Les indicateurs de couverture vaccinale sont inclus dans le plan de suivi du secteur de la santé de presque tous les pays. Une cible générale est d'au moins 90 % de couverture pour les vaccins essentiels administrés pendant l'enfance et l'adolescence.
+
+Pour les analyses de couverture nationale, l'accent est mis sur le BCG, les première et troisième doses du vaccin pentavalent/DTC (penta1/DTC1 et penta3/DTC3), et les première et deuxième doses du vaccin contre la rougeole (souvent co-administré sous forme de rougeole-rubéole). Les vaccinations par le BCG et le penta/DTC sont recommandées à la naissance (BCG), à 6 semaines (penta1) et à 14 semaines (penta3). 
+
+* **Données des établissements :** Le nombre de vaccinations administrées aux nourrissons est utilisé comme numérateur. Le dénominateur est le nombre d'enfants éligibles dans la population, approximé comme suit :
+  $$\text{Dénominateur} = \text{Naissances Vivantes} - \text{Décès Néonatals}$$
+* **Données d'enquête :** Fournissent généralement la couverture vaccinale chez les enfants âgés de 12 à 23 mois (et peuvent inclure l'âge auquel le vaccin a été administré, généralement avant le premier anniversaire).
+
+La première dose du vaccin contre la rougeole est généralement recommandée à l'âge de 9 mois. Pour les données des établissements, l'enregistrement et la notification séparent généralement les doses de rougeole administrées aux enfants de moins d'un an de celles administrées aux enfants d'un an et plus, bien que la qualité de l'enregistrement par groupe d'âge varie (il y a souvent une tendance à enregistrer les vaccinations contre la rougeole administrées après 12 mois comme étant administrées à des nourrissons). Ici, le dénominateur utilisé pour mesurer la couverture représente les enfants qui ont survécu à la première année de vie :
+$$\text{Dénominateur Rougeole 1} = \text{Naissances Vivantes} - \text{Décès Néonatals} - \text{Décès Postnéonatals}$$
+
+La deuxième dose de rougeole utilise les enfants âgés de 24 à 35 mois comme dénominateur, estimé comme suit :
+$$\text{Dénominateur Rougeole 2} = \text{Naissances Vivantes} - \text{Décès Néonatals} - (2 \times \text{Décès Postnéonatals})$$
+
+L'OMS et l'UNICEF collaborent avec les pays pour produire des estimations annuelles de la couverture vaccinale en utilisant toutes les sources de données. Ces estimations nationales, appelées WUENIC, sont publiées et disponibles pour la période 2020-2024. Ces tendances temporelles sont incluses dans les résultats de l'analyse pour comparer les estimations annuelles des données d'établissements de 2019-2024 produites lors de l'atelier avec les résultats de l'enquête.
+
+    - *[insert output screenshot Output]*
+
+---
+
+### [Planification familiale](/docs/methods/#family-planning)
+
+Les estimations de la couverture de la planification familiale sont issues d'une collaboration entre Countdown to 2030 et Track20. Track20 a développé l'outil d'estimation de la planification familiale (FPET), un modèle avancé axé sur trois indicateurs : l'utilisation de contraceptifs modernes, les besoins non satisfaits en contraceptifs modernes et la demande satisfaite par des méthodes modernes. Ces trois indicateurs sont étroitement liés car :
+
+$$\text{Demande satisfaite (Couverture)} = \frac{\text{Utilisation de contraceptifs modernes}}{\text{Besoins non satisfaits} + \text{Utilisation de contraceptifs modernes}}$$
+
+Le FPET utilise une modélisation statistique qui intègre toutes les données d'enquête disponibles et peut intégrer les données des établissements si la qualité est suffisante. Le FPET permet de combiner divers types de données d'enquête, en ajustant une courbe de tendance qui tire sa force de multiples points de données et minimise les risques associés à la comparaison directe de différentes enquêtes.
+
+    - *[insert figure FPET projection Output]*
+
+---
+
+</Steps>
+
+<Callout type="info">
+**Références et notes :**
+1. Les enquêtes peuvent fournir la couverture de la supplémentation en IFA, car ici l'unité d'analyse des données est la femme enceinte individuelle.
+2. Amouzou A, Hazel E, Vaz L, Sanni Y, Moran A. Discordance in postnatal care between mothers and newborns: Measurement artifact or missed opportunity? J Glob Health. 2020 Jun;10(1):010505.
+3. Okwaraji YB, et al. National, regional, and global estimates of low birthweight in 2020, with trends from 2000: a systematic analysis. Lancet. 2024 Mar 16;403(10431):1071-1080.
+4. Par conséquent, les données d'enquête sur la vaccination se réfèrent approximativement à la performance du programme de l'année précédant l'enquête.
+5. https://www.track20.org/pages/data_analysis/publications/methodological/family_planning_estimation_tool.php
+</Callout>
+
+---
+
+## L'inégalité dans l'approche analytique CD2030
+
+<Steps>
+
+### [Analyse infranationale](/docs/methods/#subnational-analysis)
+
+Naviguez vers l'onglet **Analyse infranationale** (Subnational Analysis) => **Inégalité infranationale** (Subnational Inequality) et inspectez les résultats régionaux et de district tracés par année, avec l'écart absolu médian par rapport à la médiane (MADM), comme mesure de synthèse pour évaluer si les inégalités ont diminué.
+
+    - *[insert graph on sub national inequality Output]*
+
+</Steps>
+
+---

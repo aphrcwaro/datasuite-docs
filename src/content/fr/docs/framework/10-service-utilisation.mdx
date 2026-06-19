@@ -1,0 +1,99 @@
+import { Steps } from 'nextra/components'
+import { Callout } from 'nextra/components'
+import { Bleed } from 'nextra/components'
+
+## Utilisation des services de santé curatifs pour les enfants malades
+
+## Utilisation des services de santé curatifs dans l'approche analytique CD2030
+
+### Justification et approche
+**Base scientifique de l'analyse :**
+
+Il existe peu d'informations de routine concernant l'utilisation des services curatifs, même si la diarrhée et la pneumonie restent les principales causes de mortalité infantile. Les statistiques d'utilisation des services sur les comportements de recours aux soins chez les enfants ayant eu des maladies récentes (diarrhée, infection respiratoire aiguë ou fièvre au cours des 2 semaines précédentes) sont traditionnellement obtenues à partir d'enquêtes auprès des ménages, qui reposent sur les souvenirs des mères.
+
+Les données de routine des établissements de santé sur les visites en consultation externe (OPD) servent d'indicateur direct de l'accès aux services curatifs : moins d'une visite par personne et par an est généralement considéré comme un indicateur d'un faible accès géographique ou financier. De même, les données sur les admissions à l'hôpital reflètent l'accès aux services, tandis que la mortalité institutionnelle en établissement (létalité) sert d'indicateur indirect de la qualité des soins cliniques.
+
+**Description des étapes analytiques :**
+
+Les données sur les visites OPD doivent inclure à la fois les nouvelles visites et les visites de suivi. Ces données sont généralement stratifiées en deux cohortes principales : les enfants de moins de 5 ans et les personnes de 5 ans et plus. 
+
+Comme pour les indicateurs de soins maternels, de soins aux nouveau-nés et de vaccination, la qualité des données est d'abord systématiquement évaluée. Des ajustements sont appliqués pour corriger les rapports incomplets, et les valeurs aberrantes extrêmes sont résolues. Cet ensemble de données propre et ajusté est ensuite utilisé pour les tendances et les analyses comparatives aux niveaux national et infranational.
+
+---
+
+<Steps>
+
+### [Utilisation des services de consultation externe](/docs/methods/#outpatient-service-utilization)
+
+Les données d'entrée du service des consultations externes doivent inclure les nouvelles visites et les visites de suivi combinées.
+
+**Nombre moyen de visites OPD par enfant et par an**
+Pour suivre la fréquence de la couverture du recours aux soins, l'indicateur est structuré comme suit :
+
+* **Numérateur :** Nombre ajusté de visites OPD des moins de 5 ans au cours d'une année civile.
+* **Dénominateur :** Population totale projetée d'enfants de moins de 5 ans extraite des projections du DHIS2.
+
+Mathématiquement, on s'attend à ce que ce taux reste très stable dans le temps, avec une variance attendue **inférieure à 0,2 visite par enfant et par an** entre des périodes de déclaration consécutives. Une augmentation graduelle et constante au fil du temps indique soit de véritables améliorations de l'accès physique aux services OPD, soit une charge de morbidité croissante au sein de la population pédiatrique. 
+
+Bien qu'il n'y ait pas de seuil mondial rigide, un taux de fréquentation **inférieur à 1 visite par an et par enfant** indique que des obstacles à l'accès restreignent probablement l'utilisation des services. Les statistiques OPD sont calculées et suivies en routine aux niveaux national et régional/provincial.
+
+    - *[insert map of opd utilization by region or province Output]*
+
+<Callout type="info">
+**Considérations pour l'interprétation des OPD :**
+Lors de la compilation du récit d'interprétation pour le sous-module OPD, répondez directement aux questions d'évaluation suivantes :
+* **Base de référence de la qualité des données :** Que peut-on conclure sur la qualité des données pour les visites OPD ? Y a-t-il un niveau élevé de cohérence dans les nombres bruts déclarés entre des années consécutives ?
+* **Tendances temporelles :** Quel est le nombre exact calculé de visites OPD par enfant et par an sur la période 2019-2023, et montre-t-il une tendance à la hausse ?
+* **Obstacles à l'accès :** Le taux national ou infranational est-il inférieur à 1 visite par an, confirmant un faible accès aux services ?
+* **Disparités géographiques :** Que révèlent les données sur les visites OPD par enfant et par an à travers les différentes régions ou provinces en 2023 ? Quelle est la marge absolue entre les unités infranationales les plus performantes et les moins performantes ?
+</Callout>
+
+**Pourcentage de visites OPD imputables aux enfants de moins de cinq ans**
+Cette mesure sert de vérification interne de la cohérence des données. La proportion de visites des moins de 5 ans représente généralement de **15 % à 45 %** de toutes les consultations externes enregistrées. 
+* Dans les contextes à forte fécondité *(par exemple, les pays avec un indice synthétique de fécondité > 4)*, cette proportion devrait se situer dans la fourchette haute, dépassant fréquemment **30 %**.
+* **Indicateurs de qualité des données :** Si le pourcentage calculé se situe complètement en dehors de la limite de 15 % à 45 %, un problème de qualité des données peut être présent. De plus, un changement soudain entre les années dépassant **5 points de pourcentage** signale une potentielle incohérence des rapports.
+
+---
+
+### [Utilisation des services d'hospitalisation](/docs/methods/#inpatient-service-utilization)
+
+Les données sur les admissions à l'hôpital incluent à la fois les nouvelles admissions et les réadmissions. Ces dossiers sont stratifiés par âge en cohortes de moins de 5 ans et de 5 ans et plus. Lorsqu'elles sont disponibles, les données sur les sorties de patients *(calculées comme suit : $\text{Sorties} = \text{Admissions} - \text{Décès}$)* constituent l'entrée analytique privilégiée.
+
+Un examen de l'exhaustivité des rapports et de la présence de valeurs aberrantes extrêmes est utilisé pour évaluer la qualité des données d'hospitalisation. Étant donné que les taux de notification des hôpitaux et des établissements dotés de services d'hospitalisation (IPD) peuvent être plus complexes à suivre que les données de routine des consultations externes, la décision d'ajuster pour les rapports incomplets repose fortement sur le jugement technique de l'équipe de pays concernant la fiabilité des registres.
+
+Les valeurs aberrantes mensuelles extrêmes sont courantes dans les données d'hospitalisation en raison d'erreurs de compilation ; les ajustements correctifs doivent être appliqués avec prudence. Il est fortement recommandé d'évaluer et de comparer côte à côte les sorties de données non ajustées et ajustées.
+
+**Nombre d'admissions pour 100 enfants de moins de 5 ans par an**
+Cela sert d'indicateur fondamental de la capacité d'accès à l'hospitalisation. Une valeur calculée **inférieure à 2 admissions pour 100 enfants de moins de 5 ans par an** indique un très faible accès aux services d'hospitalisation de courte durée. Pour le contexte, la base de référence médiane dans les pays d'Afrique subsaharienne pour la période 2018-2022 était de **4,5 admissions par an**. 
+
+Les fluctuations annuelles devraient être minimes ; un changement d'une année sur l'autre de **1 admission ou plus pour 100 enfants** est très improbable dans des circonstances normales, à moins qu'il ne soit lié à une urgence documentée, comme une épidémie ou une flambée de cas.
+
+    - *[insert map of ipd admissions among under five by region or province Output]*
+
+<Callout type="info">
+**Considérations pour l'interprétation des IPD :**
+Votre analyse narrative pour le sous-module d'hospitalisation doit évaluer explicitement les paramètres suivants :
+* **Cohérence des données :** Y a-t-il une cohérence interne dans les nombres bruts d'admissions déclarés et les taux d'admission globaux au fil du temps ?
+* **Mesures d'accès :** Quel est le nombre absolu d'admissions pour 100 enfants de moins de 5 ans par an sur les lignes de tendance 2019-2023 ?
+* **Répartition infranationale :** Le taux observé est-il élevé ou faible par rapport aux références historiques ? Quels modèles infranationaux spécifiques émergent lors de l'évaluation des admissions pour 100 enfants de moins de 5 ans à travers les régions ou les provinces ?
+</Callout>
+
+**Pourcentage d'admissions imputables aux enfants de moins de cinq ans**
+Ceci est utilisé comme indicateur de validation de la qualité des données. Le pourcentage varie généralement entre **10 % et 40 %** de toutes les admissions en établissement enregistrées. 
+
+Si la valeur se situe en dehors de cet intervalle de référence spécifique, cela indique soit un problème sous-jacent de qualité des données, soit un événement épidémiologique exceptionnel. Une fluctuation d'une année sur l'autre dépassant **5 points de pourcentage** signale un problème actif de qualité des données.
+
+**Taux de létalité**
+Le taux de létalité sert d'indicateur indirect clé pour la qualité des soins cliniques dans les services de l'établissement. Il est mathématiquement défini comme suit :
+
+$$\text{Taux de létalité pédiatrique} = \frac{\text{Nombre d'enfants qui décèdent à l'hôpital}}{\text{Nombre total d'admissions (Sorties + Décès)}}$$
+
+<Callout type="warning">
+**Règle méthodologique :** Les calculs de létalité doivent être effectués en utilisant **exclusivement des données d'entrée non ajustées**. La plateforme n'applique pas d'ajustements d'exhaustivité des rapports ou de corrections des valeurs aberrantes au nombre brut de décès institutionnels ou aux admissions totales dans ce module. 
+</Callout>
+
+Un taux de létalité plus faible au sein des établissements de santé correspond directement à un niveau plus élevé de soins cliniques actifs (aigus).
+
+</Steps>
+
+---

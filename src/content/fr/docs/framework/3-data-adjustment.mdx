@@ -1,0 +1,103 @@
+# 6 Ajustements du numérateur
+
+Les rapports manquants et les erreurs de données faussent l'analyse de la couverture, en particulier lorsque les taux de notification sont faibles ou sporadiques. Ce module applique des corrections fondées sur des preuves pour transformer les nombres bruts déclarés en estimations justifiables en tenant compte des établissements qui ne font pas de déclaration et en supprimant les valeurs aberrantes extrêmes. En utilisant un facteur d'ajustement fondé sur des bases scientifiques — basé sur des hypothèses concernant les volumes de services relatifs dans les établissements déclarants par rapport aux non-déclarants — la Data Suite augmente proportionnellement les nombres pour refléter la véritable couverture au niveau de la population.
+
+La stratégie d'ajustement est pragmatique : si nous supposons que tous les établissements non déclarants ont fourni zéro service, nous sous-estimons considérablement la couverture réelle. Au lieu de cela, le module estime la proportion de services qui ont probablement eu lieu dans les établissements silencieux (généralement 25 % des volumes des établissements déclarants, par défaut) et s'ajuste en conséquence. Pour les périodes de données avec une notification extrêmement faible (inférieure à 75 %), aucun ajustement n'est appliqué et ces années sont signalées comme non fiables, protégeant ainsi votre analyse d'estimations impossibles basées sur des données insuffisantes.
+
+---
+
+## 6.1 Justification, approche et mise en œuvre
+
+
+### Justification : Base scientifique de l'analyse
+L'exhaustivité des rapports institutionnels peut fortement fausser l'analyse de la couverture, en particulier si les niveaux de notification sont faibles ou fluctuent considérablement d'une année à l'autre. 
+
+De même, les valeurs aberrantes extrêmes — comme un zéro supplémentaire saisi accidentellement lors de la saisie des données — peuvent avoir un impact disproportionné, en particulier sur les mesures infranationales. Suite à nos évaluations de base de la qualité des données, des mesures correctives sont nécessaires pour générer un ensemble de données propre et standardisé pour l'analyse finale. Cela nécessite un ajustement mathématique pour les rapports incomplets et la résolution des valeurs aberrantes extrêmes.
+
+### Approche : Description des étapes analytiques
+Si nous n'ajustons pas l'exhaustivité des rapports, nous supposons implicitement que tous les établissements non déclarants ont fourni zéro service de santé pendant leurs périodes de silence, ce qui est statistiquement improbable. 
+
+Les ajustements dépendent de l'estimation du volume réel de services *(par exemple, soins prénatals, vaccinations)* fournis dans les établissements non déclarants par rapport à ceux qui ont soumis des données. Pour ce faire, nous établissons un facteur d'ajustement, noté $k$. 
+
+Le facteur d'ajustement $k$ est défini comme le rapport entre le volume de services fournis par les établissements non déclarants et le volume de services fournis par les établissements déclarants. Ce facteur est utilisé directement pour augmenter les nombres déclarés afin de compenser les lacunes des rapports incomplets.
+
+---
+
+## 6.2 Formules et paramètres d'ajustement du numérateur
+
+Pour tenir compte avec précision des rapports incomplets, le nombre brut d'événements déclarés est ajusté en utilisant à la fois la proportion d'exhaustivité des rapports et le ratio du volume de services des établissements via l'équation suivante :
+
+$$N_{\text{adj}} = N_{\text{rep}} \times \left[ 1 + \left( (1 - C) \times k \right) \right]$$
+
+Où :
+- **$N_{\text{adj}}$** : Nombre total estimé d'événements de santé ajusté pour les rapports incomplets.
+* $N_{\text{rep}}$ : Nombre brut d'événements signalés dans le système.
+* $C$ : Exhaustivité des rapports *(exprimée comme la proportion de rapports d'établissements attendus réellement reçus)*.
+* $k$ : Le facteur d'ajustement tenant compte des volumes de services relatifs plus faibles dans les établissements non déclarants.
+
+### Configuration du facteur $k$
+Par défaut, la plateforme définit une valeur de base de **$k = 0.25$**. Cela suppose que les établissements non déclarants sont actifs mais fonctionnent à une capacité inférieure, fournissant un volume de services équivalent à exactement **un quart (25 %)** d'un établissement déclarant moyen.
+
+Cependant, le facteur $k$ peut être ajusté manuellement pour différents services en fonction du contexte du système. Par exemple, si les établissements de santé privés ont un faible respect des obligations de déclaration mais gèrent une grande part des accouchements au niveau national, $k$ peut être augmenté au-dessus de 0,25, ou fixé jusqu'à 1,0.
+
+Selon les infrastructures locales, vous pouvez choisir parmi les niveaux de valeur k suivants :
+- **$k = 0.00$** – Aucun service fourni dans les établissements non déclarants.
+- **$k = 0.25$** – Quelques services fournis, mais à un volume bien inférieur à celui des établissements déclarants *(Défaut)*.
+- **$k = 0.50$** – Services fournis à la moitié du taux par rapport aux établissements déclarants.
+- **$k = 0.75$** – Services fournis à un taux presque identique à celui des établissements déclarants.
+- **$k = 1.00$** – Services fournis exactement au même taux que les établissements déclarants.
+
+### Règles de seuil de données critiques
+* **La règle des 75 % d'exhaustivité :** Si le taux de déclaration des établissements d'un district tombe en dessous de **75 %**, il devient mathématiquement non fiable d'imputer les données manquantes. Par conséquent, **aucun ajustement n'est appliqué si la déclaration est inférieure à 75 %**. Dans ces scénarios, les calculs de couverture ultérieurs utilisant les données de l'établissement sont signalés comme insuffisamment fiables pour l'évaluation finale.
+* **Correction des valeurs aberrantes :** Les valeurs aberrantes extrêmes sont corrigées en supprimant la valeur erronée et en imputant la valeur mensuelle médiane calculée pour cet établissement/district spécifique au cours de la même année civile.
+
+---
+
+### Tableau 2 : Résumé des règles de gestion de l'ajustement des données
+
+| Problème observé | Critères d'identification et de seuil | Action corrective imputée |
+| :--- | :--- | :--- |
+| **Taux de notification extrêmement faibles** | Tout taux de notification de district tombant **en dessous de 75 %** (Seuil par défaut). | Les données sont imputées en utilisant la **valeur mensuelle médiane** pour ce district-année pour le mois silencieux spécifique. |
+| **Lacunes de rapports incomplets** | Les taux de notification se situent **entre $\ge$ 75 % et $\le$ 100 %**. | Le **Facteur d'ajustement $k$** (Défaut `0.25`) est appliqué pour augmenter les nombres bruts et compenser les établissements non déclarants. |
+| **Valeurs aberrantes extrêmes** | Une valeur mensuelle est supérieure ou inférieure à **5 fois l'écart absolu médian ($MAD$)** par rapport à la médiane mensuelle du district. | La valeur extrême est rejetée et remplacée par la **valeur médiane du district** pour cette même année civile. |
+| **Valeurs manquantes** | Champs de données nuls ou vides découverts au cours d'une période de notification active. | Le champ manquant est imputé avec la **valeur mensuelle médiane du district** pour cette année spécifique. |
+
+---
+
+## 6.3 Mise en œuvre : Réalisation d'une analyse dans la Data Suite
+
+Les sorties et configurations pour cette phase sont gérées directement via la section **Ajustement des données** de la **Data Suite**.
+
+Dans l'interface utilisateur de ce module, sélectionnez la valeur spécifique du **facteur $k$** jugée appropriée compte tenu de votre contexte national unique et de l'écosystème de vos établissements afin d'exécuter le pipeline de nettoyage des données.
+
+****Insert fig. Data Adjustment****
+
+### 6.3.1 Supprimer des années
+
+Le panneau de configuration **Supprimer des années** vous permet d'exclure complètement des années civiles spécifiques du pipeline de traitement actif. Cet outil est conçu pour supprimer les années qui ne contiennent aucune donnée de notification, ou dont les données ont été explicitement signalées comme inaptes à l'analyse par l'équipe technique nationale en raison de problèmes de qualité graves et systémiques.
+
+Il est fortement recommandé d'utiliser cette fonctionnalité lorsque :
+* La base de référence quantitative de la qualité des données se situe bien en dessous des seuils standard acceptables.
+* L'équipe de pays possède des informations contextuelles suffisantes et vérifiées *(par exemple, des échecs majeurs de déploiement à l'échelle du système, des pannes de réseau prolongées ou des événements de corruption de base de données)* qui rendent les données de cette année spécifique complètement non fiables ou inexactes.
+
+La suppression stratégique de ces blocs historiques corrompus garantit que vos chronologies de couverture et évaluations de tendances ultérieures sont construites exclusivement sur une base de données robuste et fiable.
+
+***insert after adjustment fig.****
+
+### 6.3.2 Sorties d'ajustement
+
+Cette section produit un jeu de données maître ajusté (`.dta`) prêt pour l'analyse, ainsi que des graphiques pour différents indicateurs montrant l'effet des ajustements de données. L'image ci-dessous montre la sortie d'ajustement après n'avoir effectué aucun ajustement sur les données.
+
+****Insert adjustment with k factors & adjusted data****
+
+
+### 6.3.3 Rapport
+
+L'interprétation doit inclure le facteur d'ajustement sélectionné (facteur k) qui a été utilisé pour ajuster les rapports incomplets (si nécessaire, par service). Si le facteur par défaut est utilisé, signalez-le et expliquez ce que cela signifie pour le lecteur.
+
+Rapportez la variation en pourcentage que l'ajustement a produite dans les nombres déclarés d'accouchements en établissement et de penta1 sur la période de six ans.
+
+Vous pouvez souhaiter :
+* Mettre en évidence l'année avec le plus grand impact de l'ajustement s'il y en a une.
+* Interpréter si l'impact de l'ajustement sur les taux de couverture est grand ou petit.
+* Faire la même description et les mêmes interprétations pour les vaccinations penta1.
