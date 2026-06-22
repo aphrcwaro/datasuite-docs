@@ -1,0 +1,177 @@
+import { Steps } from 'nextra/components'
+import { Callout } from 'nextra/components'
+import { Bleed } from 'nextra/components'
+
+## Planificação para a Disseminação, Decisões e Ação
+
+O objetivo da sessão final do workshop é identificar ações concretas para levar por diante o trabalho que concluiu. Ao longo da preparação e interpretação das suas análises, foi encorajado a pensar sobre o ciclo completo da tomada de decisão baseada em dados. (Ver o diagrama abaixo.) Este começa com a identificação dos utilizadores de dados e a compreensão das questões ou problemas que visam abordar, e de seguida a preparação da análise, interpretação e principais conclusões que seriam mais úteis para dar resposta a essas questões ou problemas. 
+
+Os produtos de informação e as estratégias de disseminação devem ser adaptados para se alinharem com as preferências dos utilizadores e devem ser complementados com apoio aos decisores na utilização da análise e no acompanhamento das ações acordadas. Isto requer um envolvimento contínuo entre fornecedores de dados e utilizadores para compreender as necessidades e aprender o que é mais útil na resposta a essas necessidades.
+
+***insert data driven cycle**
+
+Ao preparar os seus planos de disseminação, tenha em consideração os seus casos de uso e potenciais públicos-alvo, bem como as plataformas e reuniões que podem ser aproveitadas para chegar a esses públicos. Será importante fazer mais do que apenas partilhar a análise como um evento único; pense, portanto, em como alimentar os fóruns de rotina onde os dados e análises são utilizados e as decisões são tomadas. Uma utilização primordial será a contribuição para revisões de rotina do progresso e desempenho lideradas pelo Ministério da Saúde, como relatórios analíticos para revisões anuais ou para o reporte global sobre SRMNIA-N (RMNCAH-N).
+
+Considere também como isto se articulará com a colaboração no país do Countdown e os planos existentes para capacitar a análise e utilização de dados de SRMNIA. Por exemplo, se tiver sessões de trabalho com os seus públicos-alvo para partilhar os resultados, poderá também usar isso como uma oportunidade para explorar alguns dos conceitos aprendidos durante o workshop e para fortalecer competências para interpretar as análises e identificar oportunidades de ação (ver sugestões adicionais abaixo). 
+
+Se participou nas Reuniões Anuais de País (CAM) em anos anteriores, considere quais foram as formas mais impactantes de como a análise da CAM foi utilizada no seu país e como pode construir sobre elas. Considere também se existem novos casos de uso, públicos ou abordagens de disseminação que poderia explorar, inspirando-se nas suas experiências e nas de outros países.
+
+| Propósito da atividade | Exemplos |
+| :--- | :--- |
+| **Apoiar a utilização de dados e ação** | * Apresentar resultados, interpretação e principais perspetivas à plataforma SRMNIA do país e grupos de trabalho técnicos relacionados para que os revejam e interpretem. Apoiá-los na identificação de oportunidades para tomar medidas com base em dados e evidências - por exemplo, abordar desigualdades geográficas ou de género, testar pilotos com investigação de implementação ou avaliação, defender mudanças políticas ou recursos, etc. <br/> * Incluir a análise como parte da base de evidências para informar o desenvolvimento da nova estratégia SRMNIA-N, uma revisão intercalar e uma avaliação, se alguma destas estiver em curso. <br/> * Produzir um artigo ou nota analítica para públicos direcionados com as principais aprendizagens, pontos essenciais e ações propostas após o workshop, como ponto de entrada para acompanhamento. |
+| **Capacitação** | * Realizar formação em cascata aos níveis nacional e distrital sobre os conceitos, interpretação e utilização de análises específicas, através da colaboração Countdown do país. <br/> * Realizar sessões de sensibilização para o pessoal do instituto nacional de estatística sobre a metodologia Countdown para promover a apropriação. <br/> * Partilhar os conceitos e resultados da avaliação da qualidade dos dados das unidades de saúde com o pessoal do SIGS (HMIS) e da M&A para promover a sua compreensão e como uma oportunidade para fortalecer os sistemas de rotina de qualidade de dados. <br/> * Capacitar o pessoal do SIGS e da M&A para compreender a relevância dos indicadores e análises relacionados com o género e a equidade. <br/> * Capacitar o pessoal para incorporar algumas das novas técnicas e abordagens analíticas em painéis de controlo (dashboards), notas informativas, relatórios estatísticos, etc. |
+| **Identificar necessidades para análises adicionais** | * Identificar oportunidades para investigação de implementação para lidar com estrangulamentos ou para informar o potencial de expansão/replicação de sucessos com base nas conclusões da análise. <br/> * Identificar oportunidades para investigação ou análise adicional, a fim de compreender melhor as tendências de género e equidade que foram observadas na análise e para informar opções de ação. |
+
+---
+
+## Aproveitar a IA para análise e interpretação 
+
+A inteligência artificial (IA) pode ser uma ferramenta poderosa para aumentar a eficiência, a profundidade e a acessibilidade da análise e interpretação de dados. Pode apoiar os analistas na exploração rápida de conjuntos de dados, na identificação de padrões, no resumo de tendências e na geração de visualizações e perspetivas iniciais. A IA também pode ajudar a estruturar explicações escritas, traduzir resultados técnicos para diferentes públicos e sintetizar evidências relevantes a partir de grandes volumes de informação. Quando bem utilizada, a IA pode permitir que os analistas gastem menos tempo em tarefas rotineiras ou morosas e mais tempo no pensamento crítico, como a contextualização de resultados, a construção de entendimentos partilhados e a adaptação de mensagens às necessidades dos decisores.
+
+No entanto, a IA deve ser utilizada de forma ponderada, com um bom julgamento profissional e responsabilização clara. Não deve substituir o papel do analista na interpretação de resultados, na avaliação das limitações dos dados ou em julgamentos específicos do contexto. Os resultados gerados pela IA podem conter imprecisões, ignorar nuances importantes ou refletir enviesamentos nos dados subjacentes. Portanto, os resultados devem ser sempre revistos, validados e adaptados.
+
+A colaboração entre produtores de dados, analistas e utilizadores de dados para interpretar os resultados também é essencial para construir uma compreensão e apropriação partilhadas. As interpretações finais, conclusões e recomendações devem sempre permanecer ancoradas na especialização humana, na especialização no assunto e na compreensão do contexto local. Portanto, a IA deve ser considerada uma ferramenta de apoio que amplia e fortalece a análise e interpretação, mas não é um substituto para o pensamento crítico, o julgamento e a tomada de decisão partilhada.
+
+| A IA pode ampliar | A IA não deve substituir |
+| :--- | :--- |
+| **Análise – Compreender o que os dados mostram** | |
+| O aprofundamento da definição do problema ou questão a que a análise deve responder | A formulação do problema ou questão a que a análise deve responder |
+| A revelação de problemas de qualidade dos dados (ex: dados incompletos, inconsistências, valores atípicos, etc.) | A avaliação da qualidade dos dados e a sua adequação para uso, incluindo fiabilidade, comparabilidade, limitações |
+| A deteção mais rápida e profunda de padrões; a ligação de sinais entre fontes | A decisão sobre os padrões a procurar nos dados e porquê |
+| Comparações estruturadas ao longo do tempo, geografias, e subgrupos, etc. | A determinação de que comparações são válidas e relevantes |
+| A geração de resumos visuais claros | A seleção de visualizações adequadas e a definição do que deve ser mostrado e comparado |
+| **Interpretação – Compreender o que os dados significam** | |
+| A geração de possíveis explicações e hipóteses para tendências e padrões, testando pressupostos | O uso do contexto, conhecimento e experiência coletivos para identificar as explicações prováveis; se as relações são causais e acionáveis |
+| A apresentação de conjuntos de opções e cenários para priorização | A ponderação de opções, a decisão sobre prioridades; a apropriação de decisões e a justificação de escolhas |
+| A revelação de contra-argumentos e a verificação de enviesamentos | A integração das perspetivas das partes interessadas, a navegação nas dinâmicas de poder |
+| O refinamento de mensagens-chave e a adaptação de linguagem, tom e formatos para diferentes públicos | O julgamento de quais as mensagens mais apropriadas e úteis para cada público, garantindo a precisão |
+
+<Callout type="info">
+**O que torna uma instrução (prompt) eficaz?**
+
+* **Seja claro no propósito** - ex: identificar tendências, mostrar anomalias, interpretar tendências
+* **Defina o público** - ex: análise aprofundada para analistas vs resumo para decisores políticos
+* **Especifique geografia, tempo e âmbito** - ex: país, nível administrativo, indicadores, período de tempo
+* **Forneça orientação para interpretação** - ex: destacar lacunas de género e equidade, sugerir explicações possíveis
+* **Especifique o formato de saída** - ex: uma apresentação (slide deck), uma narrativa curta, uma tabela de comparação
+* **Defina limites (guardrails)** - ex: cingir-se aos dados mostrados; assinalar incertezas ou problemas de qualidade dos dados; evitar a especulação além das evidências; anotar pressupostos e inferências
+</Callout>
+
+**Exemplo de instrução (prompt) eficaz**
+> “Utilizando apenas os dados fornecidos, resuma as principais tendências, identifique padrões e valores atípicos a nível nacional, e destaque as diferenças de género e equidade. Distinga claramente entre o que os dados mostram (análise) e o que podem significar (interpretação). Identifique explicitamente as limitações dos dados, pressupostos e fontes de incerteza.”
+
+---
+
+## Utilizar instruções (prompts) de IA para apoiar a análise e interpretação de género
+
+Abaixo encontra um exemplo de uma instrução (prompt) que pode adaptar e colar na IA da aplicação Shiny para gerar uma análise e interpretação inicial de género. Por favor, incorpore os dados do seu país na instrução.
+
+O resultado da IA foi concebido para fornecer apenas um ponto de partida. Irá destacar pressupostos chave e sugerir questões de reflexão que a sua equipa pode usar para orientar as suas discussões. Todos os resultados da IA devem ser cuidadosamente revistos e refinados com base no conhecimento, experiência e contexto do país da sua equipa, concentrando-se nos resultados que são mais relevantes para o seu público-alvo.
+
+Estas instruções podem ser utilizadas para gerar resultados para o seu relatório analítico da CAM ou para criar um pequeno resumo para o livro de gráficos (chartbook). Por favor, contacte Lior Idit Miller (lmiller9@worldbank.org) e/ou Elizabeth Hazel (ehazel1@jhu.edu) para questões/apoio na CAM ou posteriormente. Mais detalhes sobre o projeto MAGE podem ser encontrados aqui.
+
+### Instrução (Prompt) para Equipas Analíticas de País
+
+Utilizando apenas os pontos de dados abaixo, gere uma interpretação sob a perspetiva de género da saúde materna neste país. A IA deve fornecer uma interpretação inicial que requeira revisão, validação e refinamento pela equipa do país. A interpretação deve ser breve e concisa. Para cada secção, a IA deve assinalar pressupostos e colocar questões de reflexão para que as equipas considerem com base no seu conhecimento contextual.
+
+**Dados do país:**
+* **Nome do país:** [Adicione o nome do país aqui]
+* **Procura de planeamento familiar satisfeita por contracetivos modernos:** [Adicione os dados do país aqui]
+* **Necessidade não satisfeita de planeamento familiar:** [Adicione os dados do país aqui]
+* **Cobertura de 4+ visitas de CPN:** [Adicione os dados do país aqui]
+* **Cobertura de CPN no primeiro trimestre:** [Adicione os dados do país aqui]
+* **Cobertura de parto institucional:** [Adicione os dados do país aqui]
+* **Cobertura de cuidados pós-natais:** [Adicione os dados do país aqui]
+* **Taxa de cesariana:** [Adicione os dados do país aqui]
+* **Diferença entre parto institucional urbano/rural (pontos percentuais):** [Adicione os dados do país aqui]
+* **Diferença no parto institucional pela educação materna (pontos percentuais):** [Adicione os dados do país aqui]
+
+**Formato de saída:** Crie um título em negrito para esta secção chamado "Rascunho de Interpretação para Revisão pela Equipa do País". Inclua este texto de abertura: O acesso a serviços essenciais de saúde materna reflete desigualdades de género mais amplas que moldam a autonomia das mulheres sobre a sua saúde reprodutiva e a sua capacidade de procurar cuidados.
+
+Organize as conclusões por subtítulos: Planeamento familiar; Cuidados pré-natais; Parto e cuidados pós-natais; Equidade. Depois, para cada subtítulo inclua “Interpretação”, “Pressupostos para validação pela equipa” e “Questões de reflexão”. As questões de reflexão devem limitar-se aos pressupostos específicos mencionados e não devem ser mais do que 3.
+
+**Gerar Opções de Mensagens Políticas:** Com base nos dados fornecidos, gere 4-5 mensagens políticas ilustrativas em tópicos que as equipas dos países podem utilizar como ponto de partida para a discussão. Estas devem ser:
+* Diretamente ligadas a pontos de dados específicos fornecidos
+* Relevantes em termos de políticas e potencialmente acionáveis
+* Enquadradas através de uma perspetiva de género e equidade
+* Concisas (1-2 frases cada)
+
+Cada tópico deve identificar o resultado baseado em dados e a sua implicação em termos de género/equidade. Apresente-as como sugestões em vez de recomendações.
+
+Inclua este texto final: Estes são exemplos ilustrativos com a intenção de suscitar a discussão. As equipas de país devem validar a sua precisão e relevância para as prioridades políticas atuais, adaptar a linguagem ao contexto local ou desenvolver mensagens alternativas que reflitam melhor os seus objetivos estratégicos. As equipas podem selecionar, combinar, rever ou substituir inteiramente estas opções.
+
+---
+
+### Exemplo de um resultado da IA a partir da instrução acima utilizando os dados da CAM do Malawi 2025 – APENAS PARA FINS ILUSTRATIVOS
+
+**Rascunho de Interpretação para Revisão pela Equipa do País**
+
+O acesso a serviços essenciais de saúde materna reflete desigualdades de género mais amplas que moldam a autonomia das mulheres sobre a sua saúde reprodutiva e a sua capacidade de procurar cuidados.
+
+**Planeamento Familiar**
+
+**Interpretação:** O Malawi demonstra um desempenho relativamente forte na adesão a contracetivos modernos (80,6% da procura satisfeita), sugerindo progressos no acesso das mulheres ao controlo da fertilidade. No entanto, a persistente necessidade não satisfeita de 20% indica que uma em cada cinco mulheres que desejam adiar ou evitar uma gravidez não o conseguem fazer. Esta lacuna pode refletir barreiras de género, incluindo poder de decisão limitado, oposição do parceiro ou acesso restrito para determinados grupos, como adolescentes e mulheres solteiras.
+
+**Pressupostos para Validação pela Equipa:**
+* O valor das necessidades não satisfeitas capta de forma igual as mulheres em todos os grupos etários e estados civis
+* As elevadas taxas de satisfação com contracetivos refletem uma escolha genuína em vez de limitações do método
+* O consentimento do parceiro/cônjuge não é uma barreira significativa ao acesso a contracetivos
+
+**Questões de Reflexão:**
+1.  Os 20% de necessidades não satisfeitas concentram-se em populações específicas (adolescentes, mulheres rurais, mulheres solteiras) que enfrentam barreiras de acesso adicionais relacionadas com o género?
+2.  Até que ponto o envolvimento do parceiro masculino — seja de apoio ou restritivo — influencia a adoção de contracetivos no Malawi?
+3.  Os atuais serviços de planeamento familiar foram concebidos para acomodar mulheres com autonomia limitada na tomada de decisões do agregado familiar?
+
+**Cuidados Pré-Natais**
+
+**Interpratação:** O hiato significativo entre a cobertura de CPN no primeiro trimestre (27,6%) e as visitas de CPN 4+ (62,4%) sugere que as mulheres iniciam os cuidados numa fase tardia da gravidez. Este padrão pode refletir restrições de género, incluindo o controlo limitado das mulheres sobre os recursos do agregado familiar para transporte, pobreza de tempo devido às responsabilidades domésticas ou normas culturais em torno da revelação da gravidez. O início tardio dos CPN também ocorre devido a opções limitadas de diagnóstico de gravidez, tanto a nível individual como do sistema de saúde. O início tardio dos CPN reduz as oportunidades de deteção precoce de riscos e preparação para o parto.
+
+**Pressupostos para Validação pela Equipa:**
+* O início tardio dos CPN é impulsionado principalmente por barreiras do lado da procura, em vez de disponibilidade do lado da oferta
+* As mulheres têm autonomia para procurar cuidados independentemente assim que a gravidez é confirmada
+* O número de CPN 4+ reflete a qualidade do calendário de contactos recomendado
+
+**Questões de Reflexão:**
+1.  Quais as barreiras específicas de género (dependência financeira, constrangimentos de tempo, necessidade de autorização) que atrasam a primeira visita de CPN das mulheres no Malawi?
+2.  Existem práticas culturais em torno da dissimulação da gravidez que afetam de forma desproporcionada a procura atempada de cuidados pelas mulheres?
+3.  De que forma é que as responsabilidades domésticas e de prestação de cuidados das mulheres influenciam a sua capacidade de assistir a múltiplas visitas de CPN?
+
+**Parto e Cuidados Pós-Natais**
+
+**Interpretação:** A elevada taxa de partos institucionais do Malawi (95,2%) representa um feito significativo para garantir o acesso das mulheres a assistência qualificada ao parto. A taxa de cesariana de 9,6% situa-se ligeiramente abaixo dos intervalos recomendados pela OMS (10-15%), sugerindo um acesso algo apropriado aos cuidados obstétricos de urgência sem excesso de medicalização. A forte cobertura de cuidados pós-natais (84,1%) indica um envolvimento contínuo com o sistema de saúde pós-parto. Estes números sugerem que os investimentos no sistema de saúde abordaram com sucesso as principais barreiras de acesso aos cuidados nas unidades de saúde.
+
+**Pressupostos para Validação pela Equipa:**
+* As elevadas taxas de partos institucionais refletem um acesso e qualidade genuínos em vez de políticas coercitivas
+* A taxa de cesariana é distribuída equitativamente por grupos geográficos e de riqueza
+* Os cuidados pós-natais incluem um conteúdo significativo que atende às necessidades de saúde materna e neonatal
+
+**Questões de Reflexão:**
+1.  Será que a alta taxa de parto institucional oculta variações na qualidade ou nas práticas respeitosas de cuidados de maternidade?
+2.  A taxa de cesariana está equitativamente disponível para as mulheres de áreas rurais que enfrentam emergências obstétricas?
+3.  O CPoN aborda adequadamente as necessidades de saúde das próprias mulheres, ou foca-se predominantemente nos cuidados com o recém-nascido?
+
+**Equidade**
+
+**Interpretação:** A diferença de 25 pontos percentuais entre zonas urbanas e rurais no parto institucional revela uma significativa desigualdade geográfica, refletindo provavelmente as desvantagens acumuladas das mulheres rurais, incluindo distância das unidades de saúde, custos de transporte e infraestrutura limitada. A diferença educacional de 15 pontos percentuais demonstra como o nível de escolaridade das mulheres — ele próprio moldado pelas normas de género — influencia os resultados da saúde materna. As mulheres com menor escolaridade podem enfrentar maiores barreiras, incluindo uma literacia em saúde limitada, menor autonomia e restrições económicas que se cruzam com as desigualdades baseadas no género.
+
+**Pressupostos para Validação pela Equipa:**
+* O fosso urbano/rural reflete principalmente fatores do lado da oferta (disponibilidade de infraestruturas) em vez de preferências do lado da procura
+* O nível de escolaridade serve como um indicador (proxy) do empoderamento e capacidade de decisão das mulheres
+* Esses fossos têm permanecido estáveis e não estão a ser já abordados por intervenções recentes
+
+**Questões de Reflexão:**
+1.  Para as mulheres rurais que têm os seus filhos fora de instituições de saúde, quais são as principais barreiras de género — distância, custo, permissão, ou preferência por cuidados tradicionais?
+2.  Como é que um baixo nível de instrução se cruza com outras dimensões de marginalização (pobreza, idade, paridade) para agravar as barreiras a grupos específicos de mulheres?
+3.  Os programas existentes são concebidos especificamente para chegar a mulheres que enfrentam múltiplas desvantagens que se intersetam?
+
+**Opções Sugeridas para Mensagens de Políticas**
+
+Com base nos dados fornecidos, as seguintes mensagens ilustrativas são oferecidas como pontos de partida para discussão pelas equipas dos países:
+
+* **Fechar a lacuna de necessidades não satisfeitas:** Com 20% das mulheres sem acesso a planeamento familiar desejado apesar da taxa de satisfação de 80.6%, intervenções direcionadas abordando barreiras de género—incluindo envolvimento de parceiros e serviços adaptados aos adolescentes—podem acelerar progressos rumo à plena autonomia reprodutiva.
+* **CPN precoce como prioridade para a equidade de género:** O fosso de 35 pontos percentuais entre a cobertura no primeiro trimestre (27.6%) e as CPN 4+ (62.4%) sugere que as mulheres enfrentam barreiras no início da gravidez; lidar com a dependência financeira das mulheres e a pobreza de tempo pode melhorar a iniciação atempada dos cuidados.
+* **Sustentar os ganhos no parto enquanto se aborda a qualidade:** A taxa de 95,2% no parto institucional demonstra um forte nível de acesso no Malawi; a próxima fronteira envolve a garantia de que os cuidados serão respeitosos, focados na mulher e manterão a dignidade e a autonomia no decurso do parto.
+* **Imperativo de acesso para as mulheres rurais:** O fosso de 25 pontos percentuais na taxa de partos urbano/rural revela que as mulheres rurais enfrentam uma conjugação de barreiras geográficas e de género; estratégias ao nível comunitário e soluções para os transportes podem ajudar a ultrapassar estas desvantagens intercetantes.
+* **Abordagens sensíveis à educação:** A lacuna de 15 pontos na educação no parto institucional sugere que as mulheres com menor escolaridade necessitam de uma abordagem personalizada que contemple a sua literacia em saúde mais reduzida, bem como possíveis restrições sobre as decisões autónomas.
+
+Estes são exemplos ilustrativos com a intenção de suscitar discussão. As equipas do país devem validar a sua precisão e relevância para as prioridades políticas do momento, de modo a moldar a linguagem para os contextos locais e propor mensagens ou alternativas capazes de mostrar quais os melhores objetivos de caráter estratégico. As equipas podem selecionar, conjugar, emendar, ou suprimir por completo algumas opções.

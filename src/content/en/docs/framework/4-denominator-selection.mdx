@@ -1,271 +1,68 @@
 ## Denominator Assessment and Selection
 
-Coverage is fundamentally a ratio: services delivered divided by the population needing those services. 
-While routine data capture numerators reliably, denominators are far more uncertain—especially at district level where population estimates may be outdated, unreliable, or absent. This module compares five candidate denominators (DHIS2 projections, UN projections, and three facility-derived estimates) by testing how closely each produces coverage levels matching gold-standard household surveys like DHS or MICS.
-The science behind denominator selection rests on linked demographic relationships. A pregnant woman is connected to deliveries, neonatal survival, and eligible infants for vaccination—relationships quantified through demographic assumptions (pregnancy loss, stillbirth, twinning, neonatal mortality). 
-By reverse-engineering population targets from facility reports on highly-utilized services (ANC1 and Penta1 visits), the Data Suite produces empirical denominators grounded in real coverage patterns rather than speculative population projections. The winner: whichever method reduces the gap between facility-based and survey coverage estimates.
+import { Steps } from 'nextra/components'
+import { Callout } from 'nextra/components'
+import { Bleed } from 'nextra/components'
+
+## Objective
+
+**Service coverage** is defined as the population who received the service divided by the population who need the services (also referred to as the target population). 
+
+The numerators of coverage statistics (e.g., number of live births in health facilities) are derived from the health facility data and need to be adjusted as shown in the previous section. The denominator of the coverage statistics (e.g., number of live births in the population) needs to be estimated for national and sub-national levels (regions/provinces and districts).
+
+This section on **denominator selection** helps you select the most appropriate approach for denominator estimation for the computation of the coverage indicators at the national and sub-national levels. For more information, please refer to the guidebook on the Countdown DataSuite. 
 
 ---
 
-**Rationale, Approach, and Implementation**
+### Denominator Options
 
-Rationale: Scientific basis for the analysis
-Service coverage is defined as the population who received a service divided by the population who need that service (also referred to as the **target population**). 
+There are six denominator options that are analyzed to determine the most accurate baseline:
 
-The numerators of coverage statistics (e.g., number of live births in health facilities) are derived from routine health facility data and must be adjusted as shown in previous sections. Conversely, the denominator of these coverage statistics (e.g., the total number of live births in the population) needs to be carefully estimated for both national and sub-national levels (regions and districts).
-
-Approach: Description of analytical steps
-The objective of the health facility denominator analysis is twofold:
-1. **Quality Assessment:** Evaluate the quality of the population projections in DHIS2 by comparing them with UN population projections and checking for internal consistency.
-2. **Performance Evaluation:** Assess the performance of multiple denominator options for computing population-based service coverage indicators from health facility data.
-
-This process culminates in a final selection of denominators to be used for the calculation and tracking of population-based coverage indicators within the Data Suite. Each health indicator relies on its own distinct denominator baseline, as detailed in the matrix below.
-
- **Table 3**: Selected Indicators with Numerators and Demonstrators
-
-| Indicator Category | Indicators | Numerator | Denominator |
-| :--- | :--- | :--- | :--- |
-| **SERVICE UTILIZATION** | Outpatient visits, children under 5, per year (N) | N of OPD visits for under-5 | Total mid-year population under 5 |
-| | Inpatient admissions, children under 5, per year (N) | N of admissions for under-5 | Total mid-year population under 5 |
-| **PREVENTIVE INTERVENTIONS** | % of pregnant women with 4 antenatal care visits | N of women with ANC 4th visit | Total N of pregnant women in the whole population |
-| | % of live births in health facilities | N of live births in health facilities | Total N of live births in the whole population |
-| | % of infants receiving 3 doses of pentavalent vaccine | N of infants receiving 3 doses | N of infants eligible for 3 doses of the vaccine |
-| **CURATIVE INTERVENTIONS** | % of children under 5 with malaria who receive ACT | N of children under 5 with malaria receiving ACT | Total N of children who had malaria in the last year |
-| | % of deliveries that were by C-section (population) | N of C-sections reported | Total N of deliveries in the population |
-| | % of deliveries that were by C-section (institutional) | N of C-sections reported | Total N of deliveries in health facilities |
-| **MORTALITY** | Institutional maternal mortality ratio | N of maternal deaths in health facilities | Total number of live births in health facilities |
-| | Stillbirth rate | N of stillbirths in health facilities | Total N of births in health facilities |
-| | Neonatal mortality before discharge | N of neonatal deaths before discharge (after birth) | Total N of live births in the health facilities |
-| **FAMILY PLANNING (FP)** | Ratio FP visits to women of reproductive age | N of FP new and revisits | Total N of women 15-49 years |
-| | Estimated modern use of contraceptives | Couple years of protection | Total N of women 15-49 years |
-| | FP coverage (demand satisfied) | N of women using modern methods | Total N of women in need of FP |
+1. **The UN estimates of live births** (UN projections)
+2. **The DHIS-2 projection of live births** (DHIS-2 projections)
+3. **Derivation of denominators from ANC-1 services utilization** (ANC-1 derived)
+4. **Derivation of denominators from Penta-1 immunization** (Penta-1 derived)
+5. **Derivation of denominators from ANC-1 services utilization, with adjustment for annual population growth** (ANC-1 population growth)
+6. **Derivation of denominators from Penta-1 immunization, with adjustment for annual population growth** (Penta-1 population growth)
 
 ---
 
-### Part 1: Quality Assessment of Population Projections in DHIS2
+### Selecting the Best Denominator Option
 
-In the first phase, we assess the data quality of the DHIS2 population projections at the national level using two core evaluation tracks:
+The goal here is to identify the best denominator option for the computation of the coverage indicators. To identify the best baseline for each indicator, follow these steps:
 
-**Track 1**: Internal Consistency of DHIS2 Projections
-We analyze the trajectory of DHIS2 population growth over time. First, the population growth rate is computed:
+<Steps>
 
-$$\text{Population Growth Rate} = \ln\left(\frac{\text{Population}_{t}}{\text{Population}_{t-1}}\right)$$
+### Population Trend Comparison
 
-Next, we calculate the **Crude Birth Rate (CBR)**, defined as the number of projected live births in DHIS2 per 1,000 total population. Both calculated rates are expected to remain stable and consistent over time, showing a variance of **less than 2 per 1,000** between consecutive baseline years.
+Under the **“Population Trend”** section, compare the trends in the total population, total live births, and under-1 population between the UN and the DHIS-2 projections. 
 
-**Track 2**: Comparison with UN Population Projections
-We benchmark the DHIS2 population data directly against the independent United Nations population projections at the national level. While minor variances are expected, large discrepancies point to structural data quality issues in DHIS2. 
+Select the indicator trends (total population, live births, or under-1 population) that are consistent across the two sources, with estimates generally close. 
 
-The Data Suite flags abnormal values across four specific target metrics:
+* **Example:** You may select the under-1 population if the UN estimates and the DHIS-2 projections for that demographic are very close.
 
-* **Population Size:**
-  $$\text{Relative Difference} = \frac{\text{Population}_{\text{DHIS2}} - \text{Population}_{\text{UN}}}{\text{Population}_{\text{UN}}}$$
-  *Acceptable Threshold:* A relative difference between DHIS2 and UN-projected population sizes greater than **5%** is flagged as an active data quality issue.
+![Population Trend](/images/pt-denominator-population-trend.png)
 
-* **Population Growth (2023–2024):**
-  Annual growth is computed utilizing a natural logarithm approach.
-  *Acceptable Threshold:* An absolute difference greater than **0.3%** between the DHIS2 and UN growth estimates indicates an underlying consistency issue.
+<Callout type="info">
+The indicator selected in this step will be used to adjust the ANC-1-derived and Penta-1-derived options with population growth.
+</Callout>
 
-* **Crude Birth Rate (CBR):**
-  This measures the number of live births per 1,000 population. The DHIS2-derived CBR is formulated as:
-  $$\text{CBR}_{\text{DHIS2}} = \left( \frac{\text{Projected Live Births}}{\text{Total Population}} \right) \times 1,000$$
-  *Acceptable Threshold:* The calculated DHIS2 CBR is benchmarked against the UN estimate for the identical year. A difference exceeding **5 per 1,000 population** suggests a structural data issue.
+### Denominator Selection Examination
 
-* **Crude Death Rate (CDR):**
-  Defined as the number of deaths per 1,000 population. Assuming no massive net migration forces are active, it represents the statistical difference between the CBR and absolute population growth:
-  $$\text{CDR}_{\text{DHIS2}} = \text{CBR}_{\text{DHIS2}} - \text{Population Growth Rate}$$
-  *Acceptable Threshold:* A negative CDR calculation or a CDR value **&lt; 5 per 1,000** indicates clear internal inconsistency and potential projection failure.
+Under **“Denominator Selection”**, examine the consistency between the survey estimates and the computed estimate from DHIS-2 data using each denominator method. This is done by comparing three sets of graphs at national and sub-national levels:
 
----
+**a. Comparison of national estimates:** First, compare the national estimate of each indicator between the routine data and the survey data by examining the first bar graph for the survey year. The figure shows a horizontal dotted line indicating the survey estimate and a bar corresponding to the routine estimate. In making this comparison, note down the best denominator options (there may be more than one viable option). 
 
-### Part 2: Denominator Selection
+**b. Sub-national level comparison on the survey year:** In the second set of figures, the horizontal bars represent the coverage estimate from the routine data compared to the “diamond” which represents the survey estimate. A figure is produced for each denominator option. Review each figure and identify the best denominator option based on the closeness of the coverage estimate from the survey to that of the routine data. Similarly, examine estimates that are implausible (e.g., coverage estimates above 100%). Note down the best denominator option. 
 
-The second objective is to isolate and select the optimal denominator method for tracking population coverage metrics via routine facility data. 
+**c. Trends in national estimates:** Examine the trend estimate for each denominator option by looking for consistency and overall plausibility in the historical trends. 
 
-#### Method Overview
-At the national level, the Data Suite dynamically evaluates **five distinct denominator methods**:
-1. **DHIS2 Projections** (Projection-based)
-2. **UN Projections** (Projection-based)
-3. **ANC1-derived Target** (Facility data-based)
-4. **Penta1-derived Target** (Facility data-based)
-5. **Penta1-derived Adjusted for Population Growth** (Facility data-based)
+### Final Selection and Synthesis
 
->  **Note:** For sub-national assessments (regions and districts), UN projections are unavailable. Therefore, the engine scales down to evaluate **four methods** only.
+**Combine your notes** from sub-steps (a), (b), and (c) above to select the single best-performing denominator for each coverage indicator. 
 
-#### Demographic Cascades and Assumptions
-Maternal and newborn denominators are mathematically linked. Starting with total pregnancies, the expected number of live births can be mapped by factoring in standard demographic assumptions. While country-specific values from the WHO repository are preferred, the Data Suite establishes the following global default assumptions:
+**Summarize your choice** in a short paragraph, documenting the justification for your selected denominator option for each coverage indicator.
 
-* **Pregnancy Loss (4 to 7 months / 28 weeks gestation):** `3%`
-* **Stillbirths (28 weeks gestation up to birth):** `2%`
-* **Twinning Rate:** `+1.5%`
-* *The combination of these first three steps converts total pregnancies into the live births baseline.*
-* **Neonatal Mortality (under 28 days):** `3%` *(30 per 1,000 live births)*
-* **Post-Neonatal Mortality (1 to 11 months):** `2.4%` *(24 per 1,000 live births)*
+![Selecting best denominator](/images/best_denominator.png)
 
-**Selecting the best denominator**
-The selection of the best-performing denominator is determined by testing how closely the DHIS2 projection and facility-derived methods match population coverage rates from a recent gold-standard population survey (e.g., DHS or MICS). 
-
-The Data Suite calculates the absolute difference between the survey coverage and facility-based coverage for two tracer indicators: **institutional live births** and **penta3 immunization**. The method yielding the lowest absolute variance across national and sub-national tiers is selected as the active denominator configuration.
-
----
-
-**Denominators Derived from Population Estimates**
-These models leverage estimated target live births utilizing the two pure demographic projection datasets:
-1. **The UN Population Projections**
-2. **Population Projections from the Core DHIS2 Database**
-
----
-
-**Denominators Derived from Routine Health Facility Data**
-The underlying logic is straightforward: if true population level coverage of an indicator is known to be very high (e.g., exceeding 90%), then the total number of raw events reported by health facilities must sit mathematically close to the true target population. 
-
-By adjusting the facility numbers upward to account for the unreached population found in household surveys, we can back-calculate highly accurate denominators directly from DHIS2. The optimal tracers for this methodology are **ANC1** and **DPT/penta1** visits.
-
-#### Practical Examples
-
-* **Calculating Total Pregnant Women (via ANC1):**
-  If survey coverage is `95%` ($0.95$) and total facility ANC1 visits equal `100,000`, the adjusted total target population of pregnant women is computed as:
-  $$\text{Target Population (Pregnancies)} = \frac{100,000}{0.95} = 105,263$$
-
-* **Calculating Total Eligible Infants (via Penta1):**
-  If survey coverage for children aged 12–23 months receiving a first pentavalent dose is `92%` ($0.92$) and facility records show `100,000` doses administered, the target infant population is:
-  $$\text{Target Population (Infants)} = \frac{100,000}{0.92} = 108,696$$
-
-By executing these baseline calculations and running them forward or backward through our demographic cascade assumptions, the Data Suite builds an empirical, facility-derived estimate for total live births. This logical flow is illustrated in the diagnostic path diagram below.
-
-*insert image* Denominator Derivation Flow Chart
-
-
-An example of ANC1:
-
-Above we computed 105,263 pregnant women in the population.
-
-* At 3% abortion, this implies `105,263 * (1 - 0.03) = 102,454` deliveries.
-* At 1.5% twinning rate, this implies `102,454 / (1 - (0.015 / 2)) = 103,229` births.
-* At 2% stillbirth rate, this implies `103,229 * (1 - 0.02) = 101,164` live births.
-* At 3% neonatal mortality, this implies `101,164 * (1 - 0.03) = 98,129` children eligible for DPT1/penta1.
-
-
-
-
-**Core Indicator Definitions and Survey Parameters**
-
-Below is the technical breakdown of the tracer coverage indicators and operational configuration parameters utilized within the Data Suite.
-
- Maternal and Child Health Indicators
-
- ANC4 (Antenatal Care 4+ Visits)
-
-* **Definition:** The percentage of women aged 15–49 with a live birth who received four or more antenatal care visits during their last pregnancy.
-* **Calculation Example:** If `680` out of `1,000` surveyed women had ≥ 4 ANC visits, the calculated ANC4 coverage is **68%**.
-
- Institutional Delivery
-
-* **Definition:** The percentage of live births that occurred within a formal health facility.
-* **Calculation Example:** If `850` out of `1,000` live births took place in a health facility, the institutional delivery coverage is **85%**.
-
- Low Birth Weight
-
-* **Definition:** The percentage of live births where the infant weighed less than 2,500 grams at birth.
-* **Calculation Example:** If `100` out of `1,000` recorded live births were low birth weight, the low birth weight proportion is **10%**.
-
- Caesarean Section (C-Section)
-
-* **Definition:** The percentage of live births that were delivered via surgical caesarean section.
-* **Calculation Example:** If `150` out of `1,000` total live births were delivered by C-section, the population-level C-section coverage is **15%**.
-
----
-
-### Immunization Coverage Indicators
-
-**Penta 3 (Pentavalent Vaccine Dose 3)**
-
-* **Definition:** The percentage of infants aged 12–23 months who received the third recommended dose of the pentavalent vaccine.
-* **Calculation Example:** If `850` out of `1,000` infants in the cohort received the third dose, the Penta 3 coverage is **85%**.
-
-** Measles1 (Measles Vaccine Dose 1)**
-
-* **Definition:** The percentage of infants aged 12–23 months who received the first dose of the measles-containing vaccine.
-* **Calculation Example:** If `900` out of `1,000` infants in the cohort received the first dose, the Measles1 coverage is **90%**.
-
-** BCG (Bacillus Calmette-Guérin Vaccine)**
-
-* **Definition:** The percentage of infants aged 12–23 months who received the BCG vaccine protecting against tuberculosis.
-* **Calculation Example:** If `950` out of `1,000` infants received the vaccine, the BCG coverage is **95%**.
-
----
-
-** Survey Metadata Configuration Parameters**
-
-** Vaccines Survey Year**
-
-* **Definition:** The specific calendar year in which the population-based household survey was conducted, from which active vaccine coverage benchmarks (e.g., BCG, Penta1/3, Measles1) are extracted.
-* **Example:** If your national survey was fielded and finalized in 2022, the parameter input value for the configuration field is **2022**.
-
-* **Survey Data Start Year** *
-
-* **Definition:** The baseline calendar year marking the beginning of the comparative survey timeline. This parameter helps anchor the relevant historical trend window for the analysis.
-* **Implementation Best Practice:** For optimal baseline estimation, it is highly recommended to include data spanning the **two most recent available surveys** for your country.
-* **Example:** If a country has historical survey datasets from 2008, 2013, 2018, and 2023, the *Survey Data Start Year* parameter configuration should be set to **2018** (isolating the two most recent data cycles: 2018 and 2023).
-
-
-###  Denominator assessment
-
-The first part is to assess the accuracy and consistency of the projected population numbers in DHIS2 by comparing them to external sources.
-
-#### Interpretation
-
-The interpretation should focus on the extent to which the DHIS2 projections are considered robust, which is the case when:
-
-1. The DHIS2 total population projection is consistent over time with regular population growth.
-2. The DHIS2 total live birth projection is consistent over time (regular trend).
-3. The projected numbers of total population and live births are close to the UN population projection.
-4. The DHIS2 population projections are consistent with UN estimates for crude birth rate and crude death rate.
-5. The second part is to compare results from the different methods, both at the national and sub-national levels.
-
-#### Denominator assessment trend
-
-**Interpretation and Denominator Selection Rules**
-
-**Interpretation of DHIS2 Projections Robustness**
-The primary analytical focus when evaluating these metrics must be to determine the absolute robustness and stability of your platform's active population figures. The baseline DHIS2 projections are considered **robust** only when they satisfy the following criteria simultaneously:
-
-* **Internal Population Consistency:** The DHIS2 total population projection remains highly consistent over time, demonstrating a smooth, regular population growth trajectory without sudden spikes or drops.
-* **Internal Birth Consistency:** The DHIS2 total live birth projection exhibits a stable, regular trend across consecutive reporting years.
-* **External Alignment:** The absolute projected numbers for both total population and live births align closely with independent UN population estimates.
-* **Demographic Rate Harmony:** The underlying DHIS2 projections yield a Crude Birth Rate (CBR) and Crude Death Rate (CDR) that are highly consistent with the corresponding UN estimated rates.
-
-Once national robustness is determined, users should proceed to the second phase of the analysis: performing a direct comparative evaluation of the different denominator estimation methods at both the national and sub-national (regional/district) tiers.
-
----
-
-**Final Selection Criteria**
-The final step in this module is to officially select the best-performing denominator model for your population-based coverage calculations. 
-
-To ensure the highest accuracy across all tiers of the health system, the selection framework must weigh two primary statistical variables simultaneously:
-
-1. **The National Gap:** The absolute variance between your facility-based coverage and the national survey target.
-2. **The Median Sub-National Gap:** The median absolute variance across all individual regions or districts.
-
-The method that successfully minimizes both the national and sub-national gaps against the gold-standard survey data will be chosen by the Data Suite engine as your primary active denominator mapping.
-
-
-*****Insert best denominator chart****
-
->  **Core Rule:** The best-performing denominator methods are always those that demonstrate the smallest numerical gaps when benchmarked directly against your gold-standard survey results.
-
-### Important Operational Note
-Ideally, a single unified denominator method is chosen across the entire platform. However, the system architecture allows you to select **one specialized denominator method for Maternal and Newborn Health (MNH) indicators** (ANC, institutional delivery, PNC) and a **separate denominator method for immunization coverage analyses**. 
-
-It is critically important to explicitly declare and state your chosen denominator configurations here. Please ensure that your final selections are saved within your workspace's cached `.RDS` file to preserve them across sessions.
-
-The selected denominators—for both maternal and immunization tracks—will automatically carry over and populate all subsequent analytical modules in the system. Note that the highlighted configuration tabs within this module interface are the only locations where you can modify your chosen denominator settings.
-
----
-
-### Interpretation
-Your final written interpretation narrative must use the generated diagnostic graphs to explicitly answer the following evaluation questions:
-
-1. **National Performance:** Which specific denominator methods demonstrated the highest accuracy (smallest gaps) at the national level for the two primary tracer indicators?
-2. **Sub-National Performance:** Which denominator model performed best when evaluated across sub-national administrative tiers for the two tracer indicators?
-3. **Final System Selection:** What explicit selection and justification is being made for the indicators across your final coverage analyses?
+</Steps>
