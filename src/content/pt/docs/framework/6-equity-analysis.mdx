@@ -1,0 +1,59 @@
+import { Steps } from 'nextra/components'
+import { Callout } from 'nextra/components'
+import { Bleed } from 'nextra/components'
+
+## Avaliação da Equidade (Equiplots)
+
+As médias nacionais de cobertura mascaram disparidades críticas que determinam se os sistemas de saúde não estão verdadeiramente a deixar ninguém para trás. Este módulo utiliza dados de inquéritos aos agregados familiares para avaliar as desigualdades através de três grandes dimensões: residência (urbana/rural), riqueza (quintis dos mais ricos aos mais pobres) e escolaridade materna. Ao visualizar as trajetórias de cobertura separadamente para cada subgrupo populacional juntamente com a tendência nacional, os equiplots revelam se as lacunas estão a diminuir ou a aumentar — informação essencial para direcionar equitativamente os investimentos em saúde.
+
+Três padrões distintos de desigualdade emergem dos dados: *desigualdade de topo* (apenas os ricos escapam), *desigualdade linear* (gradientes associados à riqueza) e *desigualdade de base* (os mais pobres são deixados para trás). Cada padrão sinaliza diferentes prioridades de programação: campanhas de acesso em massa, direcionamento a favor dos pobres ou iniciativas de educação, respetivamente. O acompanhamento destes padrões ao longo do tempo revela se as intervenções de equidade funcionam e se o seu sistema de saúde está a progredir em direção à cobertura universal para todos os grupos populacionais, e não apenas nas médias nacionais.
+
+---
+
+## Avaliação da Equidade na abordagem analítica CD2030
+
+### Fundamentação e Abordagem
+**Base científica para a análise:**
+
+Os inquéritos aos agregados familiares fornecem informações cruciais sobre as desigualdades. O nosso foco centra-se em três grandes dimensões de desigualdade: área de residência, riqueza e educação.
+
+Para a área de residência, concentramo-nos nas áreas urbanas/rurais; para a riqueza, utilizamos os quintis de riqueza do agregado familiar; e para a educação, focamo-nos na escolaridade da mãe. Os equiplots são utilizados para avaliar se o país registou progressos desde 2010 na redução do fosso entre pobres e ricos, ou do fosso entre mulheres sem escolaridade ou com baixa escolaridade e mulheres com ensino superior.
+
+Para os quintis de riqueza, é possível avaliar qual é o tipo de desigualdade, uma vez que todas as categorias têm a mesma dimensão. Cada padrão requer uma estratégia diferente de programação e direcionamento em saúde:
+
+* **Desigualdade de topo (privação em massa):** Se os mais ricos estiverem muito à frente de todos os outros quintis de riqueza, apenas os ricos escapam.
+* **Desigualdade linear:** Se as diferenças de cobertura forem equidistantes, trata-se de um padrão linear onde o aumento da riqueza do agregado familiar está linearmente associado a uma maior cobertura.
+* **Desigualdade de base (marginalização):** Se os mais pobres forem deixados para trás, isto significa a marginalização dos mais pobres.
+
+---
+
+<Steps>
+
+### [Interpretação dos equiplots](/docs/methods/#interpretation-of-equiplots)
+
+A interpretação deve focar-se na questão de saber se as desigualdades se reduziram ao longo do tempo e em que medida as metas globais de cobertura foram alcançadas. Tenha em consideração o(s) seu(s) público(s) e quais as principais mensagens e perspetivas que pretende transmitir.
+
+<Callout type="info">
+As seguintes questões devem guiar a interpretação e ser respondidas pela mesma:
+* Qual é o nível de desigualdade no ponto de dados mais recente?
+* Como é que as desigualdades se alteraram ao longo do tempo?
+* Existe algum padrão de desigualdade que possa ser observado?
+* Quais serão as melhores abordagens para reduzir as desigualdades?
+</Callout>
+
+---
+
+### [Implementação](/docs/methods/#implementation)
+
+Isto será analisado na secção **National analyses -> Equity Assessment** (Análises Nacionais -> Avaliação da Equidade) da Aplicação Shiny.
+
+Espera-se que veja os resultados conforme abaixo:
+
+    - *[insert equiplots Output]*
+    - *[insert wealth equiplot Output]*
+    - *[insert area equiplot Output]*
+    - *[insert residence-penta3 equiplot Output]*
+
+</Steps>
+
+---

@@ -1,0 +1,185 @@
+## Définitions des indicateurs
+
+La Data Suite normalise les définitions des indicateurs dans les systèmes d'information de gestion de la santé (SIGS / HMIS) pour permettre une analyse cohérente d'un pays à l'autre. Cette section précise exactement quelles variables du SIGS correspondent aux indicateurs de santé de la reproduction, de la mère, du nouveau-né, de l'enfant et de l'adolescent (SRMNIA / RMNCAH) — évitant ainsi toute mauvaise interprétation et garantissant que les données de vos établissements alimentent les bons numérateurs et dénominateurs. Des définitions normalisées permettent également des comparaisons entre les pays et dans le temps, rendant mesurables les progrès mondiaux vers la couverture sanitaire universelle.
+
+Trois catégories de données organisent les exigences : les données administratives (inventaire des établissements, personnel), les données de population (estimations démographiques, taux de survie) et les données de service (événements signalés par les établissements, stratifiés par indicateur et niveau administratif). Étant donné que les structures des SIGS des pays varient considérablement, cette référence vous permet d'extraire ou de mapper systématiquement vos données vers les noms de variables standardisés attendus par la Data Suite. Le respect strict de ces définitions est fondamental pour une analyse fiable.
+
+---
+
+## Définitions des indicateurs
+
+Pour la normalisation transnationale de l'analyse, cette section décrit les indicateurs/variables extraits du SIGS des pays, qui sont requis pour l'analyse Datasuite.  
+Les données sont regroupées dans les catégories principales suivantes :
+
+- **Données administratives (Admin Data)**
+- **Données de population (Population Data)**
+- **Exhaustivité des rapports (Reporting Completeness)**
+- **Données de service 1, 2 et 3 (Service Data)**
+- **Vérifications des données (Data Checks)**
+
+---
+
+### Données administratives (Admin Data)
+
+Les variables suivantes décrivent l'infrastructure du système de santé et le personnel.
+
+| Nom de la variable | Description |
+|--------------|------------|
+| `Num_order` | Nº |
+| `District_name` | District |
+| `First_admin_level` | Région |
+| `Country` | Le nom de votre pays |
+| `Number_hospitals` | Nombre total d'hôpitaux (selon la définition du pays) |
+| `Number_hcenters` | Nombre total de centres de santé (non-hôpitaux ; selon la définition du pays) |
+| `Total_number_health_facilities` | Nombre total d'établissements de santé (tous types/catégories confondus) |
+| `Number_pfacilities_profit` | Nombre total d'établissements de santé privés à but lucratif |
+| `Number_pfacilities_nonprofit` | Nombre total d'établissements de santé privés à but non lucratif |
+| `Total_physicians` | Nombre total de médecins / médecins-chefs |
+| `Total_nurses_midwives` | Nombre total d'infirmières / sages-femmes |
+| `Total_clinical_officers` | Nombre total d'agents cliniques / assistants médicaux |
+| `Total_nonclinique_physicians` | Nombre total de médecins non cliniciens |
+| `Number_hospital_beds` | Nombre de lits d'hôpital |
+
+---
+
+### Données de population (Population Data)
+
+Les variables suivantes décrivent les estimations démographiques et de population.
+
+| Nom de la variable | Description |
+|--------------|------------|
+| `District_name` | Nom du district |
+| `Year` | Année |
+| `Pop_growth_rate` | Taux de croissance annuel de la population |
+| `Total_Population` | Population totale |
+| `Population_ under_5years` | Population de moins de 5 ans |
+| `Population_under_1year` | Population de moins d'un an |
+| `Live_births` | Total projeté des naissances vivantes (naissances vivantes estimées à partir du recensement) |
+| `Total_births` | Total projeté des naissances (naissances estimées à partir du recensement) |
+| `Women_15_49_years` | Total des femmes de 15 à 49 ans |
+
+---
+
+### Exhaustivité des rapports (Reporting Completeness)
+
+Les variables suivantes suivent les taux de notification des établissements et les soumissions attendues pour diverses catégories de services de santé.
+
+| Nom de la variable | Description |
+|--------------|------------|
+| `District` | Nom du district |
+| `Year` | Année |
+| `Month` | Mois |
+| `ANC_reporting_expected` | Rapports CPN : Nombre attendu (#) |
+| `ANC_reporting_received` | Rapports CPN : Nombre reçu (#) |
+| `ANC_reporting_rate` | Rapports CPN : Taux d'exhaustivité des rapports (%) |
+| `Instdelivey_reporting_expected` | Rapports d'accouchement en établissement : Nombre attendu (#) |
+| `Instdelivey_reporting_received` | Rapports d'accouchement en établissement : Nombre reçu (#) |
+| `Instdelivey_reporting_rate` | Rapports d'accouchement en établissement : Taux d'exhaustivité des rapports (%) |
+| `Vacc_reporting_expected` | Rapports de vaccinations : Nombre attendu (#) |
+| `Vacc_reporting_received` | Rapports de vaccinations : Nombre reçu (#) |
+| `Vacc_reporting_rate` | Rapports de vaccinations : Taux d'exhaustivité des rapports (%) |
+| `OPD_reporting_expected` | Rapports de visites externes (OPD) : Nombre attendu (#) |
+| `OPD_reporting_received` | Rapports de visites externes (OPD) : Nombre reçu (#) |
+| `OPD_reporting_rate` | Rapports de visites externes (OPD) : Taux d'exhaustivité des rapports (%) |
+| `IPD_reporting_expected` | Rapports d'admissions hospitalières (IPD) : Nombre attendu (#) |
+| `IPD_reporting_received` | Rapports d'admissions hospitalières (IPD) : Nombre reçu (#) |
+| `IPD_reporting_rate` | Rapports d'admissions hospitalières (IPD) : Taux d'exhaustivité des rapports (%) |
+
+---
+
+### Données de service 1 (Service Data 1)
+
+Admissions générales, décès et premières vaccinations des enfants.
+
+| Nom de la variable | Description |
+|--------------|------------|
+| `District` | Nom du district |
+| `Year` | Année |
+| `Month` | Mois |
+| `BCG` | Nombre total de doses de BCG administrées à &lt 1 an |
+| `Penta1` | Nombre total de 1re dose de vaccination pentavalente (nourrissons) |
+| `Penta3` | Nombre total de 3e dose de vaccination pentavalente (nourrissons) |
+| `Measles1` | Nombre total de 1re dose de vaccination contre la rougeole (nourrissons) |
+| `Measles2` | Nombre total de 2e dose de vaccination contre la rougeole |
+| `OPD_total` | Nombre total de visites externes (OPD) tous âges (nouvelles et de suivi) |
+| `OPD_under5` | Nombre de visites externes (OPD) pour les enfants de moins de 5 ans |
+| `IPD_total` | Nombre total d'admissions hospitalières (IPD), tous âges |
+| `IPD_under5` | Nombre d'admissions hospitalières (IPD) pour les enfants de moins de 5 ans |
+| `under5_deaths` | Nombre total de décès de moins de 5 ans dans les établissements de santé |
+| `total_deaths` | Nombre total de décès de tous âges dans les établissements de santé |
+
+---
+
+### Données de service 2 (Service Data 2)
+
+Indicateurs de santé maternelle, néonatale et reproductive.
+
+| Nom de la variable | Description |
+|--------------|------------|
+| `District` | Nom du district |
+| `Year` | Année |
+| `Month` | Mois |
+| `ANC1` | Nombre total de 1re visite CPN |
+| `ANC_1trimester` | Nombre total de CPN au cours du 1er trimestre de grossesse |
+| `ANC4` | Nombre total de femmes enceintes effectuant 4 visites CPN |
+| `IPT2` | Nombre total de femmes enceintes recevant la 2e dose de TPI |
+| `IPT3` | Nombre total de femmes enceintes recevant la 3e dose de TPI |
+| `IFA90` | Nombre total de femmes enceintes ayant reçu une supplémentation en fer-acide folique (IFA) pendant 90 jours ou plus au cours de la grossesse |
+| `Syphilis_test` | Nombre total de femmes enceintes testées pour la syphilis pendant la grossesse |
+| `HIV_test` | Nombre total de femmes enceintes testées pour le VIH pendant la grossesse |
+| `SBA` | Nombre total d'accouchements assistés par du personnel qualifié (SBA) dans les établissements de santé |
+| `Instdelivery` | Nombre total d'accouchements dans les établissements de santé |
+| `Instlivebirths` | Nombre total de naissances vivantes dans les établissements de santé |
+| `Csection` | Nombre total de césariennes |
+| `Low_BWeight` | Nombre total de nouveau-nés présentant une insuffisance pondérale à la naissance (< 2500g) |
+| `PNC_48h` | Nombre total de mères se rendant à une visite CPoN dans les 48 heures suivant l'accouchement |
+| `Stillbirth_total` | Nombre total de mortinaissances dans les établissements de santé (toutes) |
+| `Stillbirth_fresh` | Nombre total de mortinaissances récentes (fraîches) dans les établissements de santé |
+| `Stillbirth_macerated` | Nombre total de mortinaissances macérées dans les établissements de santé |
+| `maternal_deaths` | Nombre total de décès maternels signalés |
+| `neonatal_deaths` | Nombre total de décès néonatals signalés |
+
+---
+
+### Données de service 3 (Service Data 3)
+
+Vaccinations supplémentaires et cas de maladies.
+
+| Nom de la variable | Description |
+|--------------|------------|
+| `District` | Nom du district |
+| `Year` | Année |
+| `Month` | Mois |
+| `opv1` | Nombre total d'enfants de < 1 an ayant reçu le vaccin Polio 1 |
+| `opv2` | Nombre total d'enfants de < 1 an ayant reçu le vaccin Polio 2 |
+| `opv3` | Nombre total d'enfants de < 1 an ayant reçu le vaccin Polio 3 |
+| `penta2` | Nombre total de 2e dose de vaccination pentavalente (nourrissons) |
+| `pcv1` | Nombre total d'enfants de < 1 an ayant reçu le 1er vaccin conjugué pneumococcique |
+| `pcv2` | Nombre total d'enfants de < 1 an ayant reçu le 2e vaccin conjugué pneumococcique |
+| `pcv3` | Nombre total d'enfants de < 1 an ayant reçu le 3e vaccin conjugué pneumococcique |
+| `rota1` | Nombre total d'enfants de < 1 an ayant reçu le vaccin Rotavirus 1 |
+| `rota2` | Nombre total d'enfants de < 1 an ayant reçu le vaccin Rotavirus 2 |
+| `ipv1` | Nombre total d'enfants ayant reçu le vaccin antipoliomyélitique inactivé 1 |
+| `ipv2` | Nombre total d'enfants ayant reçu le vaccin antipoliomyélitique inactivé 2 |
+| `hpv1` | Nombre total d'enfants ayant reçu le vaccin contre le papillomavirus humain 1 |
+| `hpv2` | Nombre total d'enfants ayant reçu le vaccin contre le papillomavirus humain 2 |
+| `measles_cases` | Nombre total de cas de rougeole signalés |
+
+---
+
+### Vérifications des données (Data Checks)
+
+Variables de diagnostic automatisées utilisées pour la validation de l'exhaustivité et de la cohérence entre les feuilles.
+
+| Nom de la variable | Description |
+|--------------|------------|
+| `District` | Nom du district |
+| `# of occurrences in 'Admin data'` | Décompte de vérification de la présence du district dans la feuille de données administratives (Admin Data) |
+| `Is the district missing in 'Population_data'?` | Indicateur de statut vérifiant si le district est manquant dans les données de population (Population Data) |
+| `# of occurrences in 'Population_data'?` | Décompte de vérification de la présence du district dans les données de population (Population Data) |
+| `Is the district missing in 'Reporting_completeness'?` | Indicateur de statut vérifiant si le district est manquant dans l'exhaustivité des rapports (Reporting Completeness) |
+| `# of occurrences in 'Reporting completeness'` | Décompte de vérification de la présence du district dans l'exhaustivité des rapports (Reporting Completeness) |
+| `Is the district missing in 'Service_data_1'?` | Indicateur de statut vérifiant si le district est manquant dans les données de service 1 (Service Data 1) |
+| `# of occurrences in 'Service_data_1'` | Décompte de vérification de la présence du district dans les données de service 1 (Service Data 1) |
+| `Is the district missing in 'Service_data_2'?` | Indicateur de statut vérifiant si le district est manquant dans les données de service 2 (Service Data 2) |
+| `# of occurrences in 'Service_data_2'` | Décompte de vérification de la présence du district dans les données de service 2 (Service Data 2) |

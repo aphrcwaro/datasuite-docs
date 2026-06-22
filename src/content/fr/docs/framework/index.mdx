@@ -1,0 +1,227 @@
+import { HomeCards } from '@/components/HomeCards'
+
+# Aperçu du cadre
+
+Cette page résume le cadre analytique de la DataSuite CD2030.
+Elle est conçue pour aider les équipes à passer des données brutes des établissements et des enquêtes à des résultats de couverture nationaux et infranationaux justifiables.
+
+## Flux de travail de bout en bout
+
+Le cadre suit une séquence pratique :
+
+1. [Charger et configurer](/docs/framework/1-analysis-setup) les données des établissements et des enquêtes.
+2. [Calibrer les taux de référence nationaux clés](/docs/framework/1-analysis-setup/#survey-params).
+3. [Évaluer la qualité des données](/docs/framework/2-data-quality-assessment) avant d'estimer la couverture.
+4. [Ajuster](/docs/framework/3-data-adjustment) les données incomplètes, instables ou peu fiables.
+5. [Sélectionner le dénominateur le plus performant](/docs/framework/4-denominator-selection).
+6. Générer et interpréter les résultats de **[couverture](/docs/framework/5-coverage-estimation)**, d'**[équité](/docs/framework/6-equity-analysis)**, **[infranationaux](/docs/framework/7-subnational-analysis)**, de **[mortalité](/docs/framework/mortality)**, d'**[utilisation des services](/docs/framework/10-service-utilisation)** et de **[performance du système de santé](/docs/framework/11-health-system-performance)**.
+
+
+## Modules du cadre
+
+<HomeCards
+  items={[
+    {
+      title: 'Évaluation de la qualité des données',
+      description: 'Examiner l\'exhaustivité des rapports, les valeurs aberrantes, les données manquantes, la cohérence interne et les scores de qualité annuels.',
+      href: '/en/docs/framework/2-data-quality-assessment',
+      icon: 'checklist'
+    },
+    {
+      title: 'Ajustement des données',
+      description: 'Supprimer les périodes non fiables, appliquer des facteurs d\'ajustement et comparer les valeurs avant et après nettoyage.',
+      href: '/en/docs/framework/3-data-adjustment',
+      icon: 'settings-gear'
+    },
+    {
+      title: 'Sélection du dénominateur',
+      description: 'Comparer les options de dénominateurs DHIS2, ONU, dérivés de la CPN1 et dérivés du Penta1.',
+      href: '/en/docs/framework/4-denominator-selection',
+      icon: 'symbol-number'
+    },
+    {
+      title: 'Estimation de la couverture',
+      description: 'Estimer les niveaux et les tendances, comparer avec les références d\'enquête et examiner les progrès vers les cibles.',
+      href: '/en/docs/framework/5-coverage-estimation',
+      icon: 'graph'
+    },
+    {
+      title: 'Analyse de l\'équité',
+      description: 'Évaluer l\'inégalité selon la résidence, la richesse et l\'éducation maternelle à l\'aide de comparaisons basées sur des enquêtes.',
+      href: '/en/docs/framework/6-equity-analysis',
+      icon: 'graph-scatter'
+    },
+    {
+      title: 'Analyse infranationale',
+      description: 'Examiner les variations régionales et de district, l\'atteinte des cibles et les inégalités géographiques.',
+      href: '/en/docs/framework/7-subnational-analysis',
+      icon: 'globe'
+    }
+  ]}
+/>
+
+L'objectif final du cadre est une utilisation pratique. Les conclusions doivent éclairer les processus d'examen des pays, les discussions de planification et les groupes de travail techniques afin que l'analyse débouche sur des actions concrètes en matière de SRMNIA (RMNCAH) plutôt que de rester un simple rapport isolé.
+
+---
+
+## Méthodes analytiques
+
+### Étape 1 : Évaluation de la qualité des données
+
+**Fondement scientifique :** Les données de routine des établissements sont une source indispensable pour les indicateurs de santé au niveau de la population, mais leur qualité varie considérablement en raison d'incohérences de notification, d'erreurs de saisie et de lacunes systémiques. 
+Une évaluation standardisée permet de suivre les progrès au fil du temps et évite que des données peu fiables ne contaminent les estimations de couverture.
+
+**Approche :** La Data Suite évalue les données mensuelles au niveau des districts sur une période de six ans (2019-2024) à l'aide de cinq mesures de qualité fondamentales :
+
+- **Exhaustivité des rapports** – Pourcentage des rapports d'établissements attendus réellement reçus (&ge; 90 % est considéré comme acceptable). Calculée comme la moyenne de quatre formulaires de rapport (CPN, accouchement, vaccination, consultations externes/OPD).
+2. **Valeurs aberrantes extrêmes** – Valeurs mensuelles dépassant 5 fois l'écart absolu médian (MAD), signalées pour investigation. Les erreurs de saisie de données (par exemple, des zéros accidentels) sont des causes fréquentes.
+3. **Cohérence interne** – Les ratios logiques entre les indicateurs liés sont vérifiés :
+   - Ratio CPN1 / Penta1 attendu d'environ 1,07 (tenant compte des pertes de grossesse, des mortinaissances, de la gémellité, de la mortalité néonatale)
+   - Le ratio Penta1 / Penta3 varie selon les taux d'abandon mais devrait être stable
+4. **Données manquantes (Complétude)** – Les valeurs manquantes au sein des périodes de déclaration actives sont identifiées.
+5. **Score global de qualité des données** – Calculé automatiquement comme la moyenne des mesures clés pour permettre la comparaison entre les années et les districts.
+
+**Mise en œuvre dans la DataSuite :** Naviguez vers le module d'évaluation de la qualité des données, sélectionnez votre indicateur et votre niveau d'analyse (région ou district), configurez les seuils de performance (taux de déclaration par défaut de 90 %), et lancez l'analyse. La plateforme génère des tableaux de bord interactifs identifiant les districts à problèmes, visualise les distributions des valeurs aberrantes, suit les tendances des ratios et télécharge des rapports de synthèse.
+
+**Exemples :** Si un district tombe à 60 % de déclaration en 2022 en raison d'une panne de système, cette année-là est signalée comme non fiable. Si les rapports de CPN1 dépassent soudainement ceux du Penta1 de &gt; 50 %, une enquête plus approfondie révèle soit de véritables lacunes d'accès, soit des anomalies de notification nécessitant une résolution.
+
+---
+
+
+
+### Étape 2 : Ajustement des données
+
+
+3. **Valeurs aberrantes extrêmes** – Valeurs erronées remplacées par la médiane du district-année
+4. **Valeurs manquantes** – Imputées en utilisant les valeurs mensuelles médianes du district
+
+Le facteur k est configurable par service. Par exemple, si les établissements privés gèrent 40 % des accouchements maternels mais ont une mauvaise notification (rendant k=0,25 invraisemblablement bas), augmentez k à 0,5–0,75 sur la base des connaissances contextuelles.
+
+**Mise en œuvre dans la DataSuite :** Dans le module d'ajustement des données, sélectionnez votre niveau de facteur k, excluez éventuellement les années corrompues à l'aide de « Supprimer des années » (Remove Years), exécutez le pipeline et téléchargez le jeu de données ajusté aux côtés des graphiques de comparaison avant/après. La plateforme met en évidence les années ayant le plus grand impact d'ajustement.
+
+**Exemples :** Un district déclare 50 000 accouchements à 80 % d'exhaustivité avec k=0,25 : $N_{\text{adj}} = 50 000 \times [1 + (0,20 \times 0,25)] = 52 500$. L'ajustement à la hausse de 5 % reflète les services probables dans les établissements ne faisant pas de déclaration.
+
+---
+
+### Étape 3 : Sélection du dénominateur
+
+**Fondement scientifique :** Les ratios de couverture nécessitent à la fois des numérateurs précis (issus des rapports d'établissements) et des dénominateurs précis (estimations de la population). Les projections démographiques sont souvent peu fiables, en particulier au niveau des districts. La Data Suite compare cinq options de dénominateurs en testant laquelle produit les estimations de couverture correspondant le mieux aux enquêtes de référence auprès des ménages (EDS, MICS).
+
+**Cinq méthodes de dénominateurs :**
+
+1. **Projections de population DHIS2** – Estimations intégrées au système ; la qualité varie considérablement
+2. **Projections de population de l'ONU** – Norme internationale ; disponibles uniquement au niveau national
+3. **Cible dérivée de la CPN1** – Recalcule le nombre de femmes enceintes à partir des visites en établissement à forte utilisation : $\text{Grossesses} = \frac{\text{Visites CPN1 en établissement}}{\text{Couverture CPN1 de l'enquête}}$
+4. **Cible dérivée du Penta1** – Recalcule les nourrissons éligibles de manière similaire
+5. **Penta1 ajusté pour la croissance** – Affine les estimations Penta1 en appliquant les taux de croissance annuels
+
+**Logique de cascade démographique :** Les dénominateurs maternels et infantiles sont liés par des hypothèses démographiques standard (appliquées mondialement, personnalisables par pays) :
+
+- Perte de grossesse : 3 %
+- Taux de mortinatalité : 2 %
+- Taux de gémellité : 1,5 %
+- Mortalité néonatale : 3 %
+- Mortalité post-néonatale : 2,4 %
+
+En commençant par les visites CPN1 en établissement et la couverture de l'enquête, la cascade se déroule ainsi : grossesses → accouchements (après perte) → naissances vivantes (après ajustements pour mortinatalité et gémellité) → nourrissons éligibles (après mortalité néonatale).
+
+**Règle de sélection du dénominateur :** Comparer la couverture ajustée basée sur les établissements pour deux indicateurs traceurs (accouchements en établissement, Penta3) à travers chaque option de dénominateur par rapport aux références d'enquêtes récentes. La méthode minimisant les écarts absolus de couverture est sélectionnée comme dénominateur actif pour toutes les analyses ultérieures.
+
+**Mise en œuvre dans la DataSuite :** Chargez les projections de l'ONU, les données DHIS2 et les données d'enquêtes récentes. Le module calcule automatiquement les cinq dénominateurs, calcule les estimations de couverture en utilisant chacun d'eux, et visualise une comparaison côte à côte avec les intervalles de confiance de l'enquête. Les résultats mettent en évidence le dénominateur gagnant.
+
+**Exemples :** Si les dénominateurs dérivés du Penta1 produisent une couverture en établissement de 85 % ± 2 % contre 86 % ± 4 % pour l'enquête, tandis que ceux dérivés du DHIS2 produisent 92 % ± 5 %, le dénominateur dérivé du Penta1 est sélectionné comme supérieur.
+
+---
+
+### Étape 4 : Estimation de la couverture
+
+**Fondement scientifique :** La couverture — la proportion de la population recevant un service nécessaire — est la principale mesure permettant de suivre les progrès vers la couverture sanitaire universelle. L'estimation nécessite des numérateurs validés (issus de données d'établissements évaluées pour leur qualité et ajustées) et des dénominateurs fondés sur des preuves (sélectionnés par comparaison avec des enquêtes). La couverture est comparée aux cibles mondiales (par exemple, 90 % d'accouchements en établissement d'ici 2025) et aux estimations d'enquêtes pour évaluer sa crédibilité.
+
+**Calcul de la couverture :**
+$$\text{Couverture (\%)} = \frac{\text{Numérateur (Ajusté)}}{\text{Dénominateur (Sélectionné)}} \times 100$$
+
+**Règles de traitement clés :**
+
+- **Couverture invraisemblable > 100 % :** Indique des problèmes de qualité des données ou des enregistrements en double. Recadrer en tant que moyenne de services par habitant (par exemple, 1,2 dose par enfant plutôt que 120 % de couverture).
+- **Planification familiale :** Utilise un modèle démographique FPET spécialisé intégrant plusieurs sources de données d'enquête ; les données des établissements sont incluses si la qualité le permet.
+- **Vaccination :** Les dénominateurs tiennent compte de la survie de l'enfant : Nourrissons éligibles = Naissances vivantes − Décès néonatals (− Décès post-néonatals pour Rougeole 1).
+
+**Concordance Établissements vs Enquête :** Les tendances de couverture à partir des données des établissements sont tracées parallèlement aux estimations des enquêtes (avec intervalles de confiance) pour évaluer visuellement la concordance. Des écarts importants signalent un biais systématique dans les numérateurs, les dénominateurs, ou les deux, justifiant une investigation.
+
+**Mise en œuvre dans la DataSuite :** Naviguez vers Estimation de la couverture, sélectionnez vos indicateurs, confirmez le choix du dénominateur, et générez des lignes de tendance annuelles (2019-2024) parallèlement aux graphiques de comparaison d'enquête. Le module exporte les estimations annuelles, les intervalles de confiance et les évaluations de concordance.
+
+**Exemples :** Accouchement en établissement basé sur les établissements : 82 % (2024). Enquête récente : 85 % ± 3 %. Écart de 3 points de pourcentage dans l'intervalle de confiance — une bonne concordance indique des estimations fiables.
+
+---
+
+### Étape 5 : Analyse de l'équité
+
+**Fondement scientifique :** Les moyennes nationales de couverture masquent des disparités qui déterminent si les systèmes de santé desservent équitablement toutes les populations. Trois dimensions de l'inégalité sont essentielles : la résidence (urbaine/rurale), la richesse (quintiles des plus riches aux plus pauvres) et l'éducation maternelle. Les inégalités révèlent les défaillances des systèmes de santé et guident les interventions ciblées.
+
+**Modèles d'inégalité :**
+
+1. **Inégalité par le haut** – Seuls les riches s'en sortent ; les plus pauvres sont laissés loin derrière. Signale une privation de masse nécessitant des campagnes d'accès universel.
+2. **Inégalité linéaire** – Gradients associés à la richesse ; chaque quintile montre une amélioration incrémentielle. Suggère que le ciblage pro-pauvres fonctionne partiellement.
+3. **Inégalité par le bas** – Les plus riches sont loin devant ; les classes moyennes/pauvres sont regroupées. Signale une marginalisation des plus pauvres nécessitant une approche spécifique.
+
+**Approche :** Les equiplots visualisent les trajectoires de couverture par sous-groupe de population parallèlement à la tendance nationale, permettant une évaluation visuelle de :
+
+- Le niveau d'inégalité actuel (écart entre les plus riches et les plus pauvres)
+- La direction de la tendance (réduction ou élargissement au fil du temps)
+- Les progrès vers la couverture universelle (tous les sous-groupes ≥ seuil cible)
+
+**Mise en œuvre dans la DataSuite :** Dans Évaluation de l'équité (Equiplots), sélectionnez votre indicateur et la dimension de l'inégalité (résidence, richesse, éducation). Le module génère des graphiques interactifs stratifiés par année d'enquête, permettant un suivi sur des périodes de 6 à 10 ans. Téléchargez des tableaux récapitulatifs montrant la couverture par quintile/sous-groupe et le pourcentage atteignant les cibles.
+
+**Guide d'interprétation :** Répondre à : (1) L'inégalité actuelle est-elle grande ou petite ? (2) S'améliore-t-telle ? (3) Quel modèle émerge et qu'indique-t-il sur les priorités du programme ?
+
+---
+
+### Étape 6 : Analyse infranationale
+
+**Fondement scientifique :** Les variations géographiques de la couverture révèlent les inégalités du système de santé et les inefficacités d'allocation. Des moyennes nationales de 80 % peuvent cacher une région à 95 % et une autre à 60 % — un écart d'actionnabilité critique. L'analyse infranationale identifie les unités administratives sous-performantes pour des investissements ciblés et vérifie si le renforcement du système d'établissements réduit les disparités géographiques.
+
+**Niveaux analytiques :**
+
+- **Régional (Admin1) :** Juridictions plus grandes avec des estimations plus stables ; niveau de référence pour cibler les districts
+- **District (Admin2) :** Unités plus petites avec plus de volatilité en raison de petites populations et de modèles de référence (les hôpitaux municipaux desservent les zones rurales environnantes)
+
+**Principaux résultats :**
+
+1. **Résumés de district d'une page (One-Pagers)** – Résumés visuels par région associant :
+   - Lignes de tendance basées sur les établissements (2019-2024)
+   - Aperçu d'une enquête récente avec intervalle de confiance
+   - Diagramme à barres comparant les performances régionales par rapport à toutes les autres régions
+   - Tableau au niveau du district avec la couverture de 2024 pour les accouchements en établissement et le Penta3
+
+2. **Indice de couverture composite** – Moyenne de sept indicateurs SRMNIA (CPN4, accouchement en établissement, SBA, TPI2, soins postnatals, Penta3, Rougeole 1) cartographiés géographiquement pour identifier les régions les plus fortes/faibles
+
+3. **Indice d'inégalité infranationale** – L'écart absolu médian par rapport à la médiane (MADM) quantifie la dispersion de la couverture entre les districts ; permet de suivre si les disparités géographiques se réduisent
+
+**Mise en œuvre dans la DataSuite :** Naviguez vers Analyse infranationale, sélectionnez le niveau administratif (région ou district), choisissez un indicateur ou utilisez "Custom Check" (Vérification personnalisée) pour n'importe quelle mesure. Le module génère des visualisations de tendances, des résumés téléchargeables d'une page et des synthèses d'inégalités. L'interface cartographique montre l'indice de couverture composite par géographie.
+
+**Exemples :** District A : Accouchement en établissement 88 % (2024) avec une tendance à la hausse sur 3 ans. District B (voisin) : 62 %, tendance statique. Le District B est prioritaire pour les investissements de renforcement des établissements.
+
+---
+
+### Étape 7 : Interprétation & Action
+
+**Fondement scientifique :** L'analyse n'a de valeur que si les conclusions guident la prise de décision. L'interprétation fait le pont entre la rigueur technique et l'actionnabilité en synthétisant les résultats, en soulignant les messages clés et en reliant explicitement les résultats aux options de programmes/politiques.
+
+**Cadre d'interprétation :**
+
+1. **Verdict sur la qualité des données** – Les résultats sont-ils crédibles ? Des années atypiques ou des districts problématiques invalident-ils les estimations ?
+2. **Statut de la couverture vs Cibles** – À quelle distance des cibles nationales/mondiales ? En bonne voie ou à la traîne ?
+3. **Tendances** – En amélioration, en stagnation ou en déclin ? Rythme de changement ?
+4. **Portrait de l'équité** – Quelles populations sont laissées pour compte ? Les modèles suggèrent-ils : un écart d'accès de masse, un besoin de ciblage pro-pauvres, ou une marginalisation des plus pauvres ?
+5. **Priorité géographique** – Quelles régions/districts ont le plus besoin d'investissements ?
+6. **Anomalies** – Les discordances entre établissements et enquêtes, les ratios inattendus ou les districts atypiques nécessitent une explication (par exemple, centre de référence, campagne récente, conflit local).
+7. **Recommandations** – Pour chaque conclusion, proposer une action spécifique : changement de politique, renforcement des établissements, investissement en équipement, formation, campagne, etc.
+
+**Rapports de la DataSuite :** La plateforme génère des tableaux récapitulatifs standardisés et des visualisations prêts à être présentés aux responsables ministériels, aux partenaires donateurs et aux groupes de travail techniques. Personnalisez les messages pour chaque public tout en maintenant l'intégrité analytique.
+
+---
+
+## Pages de support
+
+- [Flux de travail](/en/docs/framework/workflow)
+- [Définitions des indicateurs](/en/docs/framework/indicator-definitions)

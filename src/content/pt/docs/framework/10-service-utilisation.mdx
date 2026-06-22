@@ -1,0 +1,99 @@
+import { Steps } from 'nextra/components'
+import { Callout } from 'nextra/components'
+import { Bleed } from 'nextra/components'
+
+## Curative Health Services Utilization for Sick Children
+
+## Utilização de Serviços de Saúde Curativos na abordagem analítica CD2030
+
+### Fundamentação e Abordagem
+**Base científica para a análise:**
+
+Existe informação de rotina limitada sobre a utilização de serviços curativos, embora a diarreia e a pneumonia continuem a ser as principais causas de mortalidade infantil. As estatísticas de utilização de serviços sobre o comportamento de procura de cuidados entre crianças com doenças recentes (diarreia, infeção respiratória aguda ou febre nas 2 semanas anteriores) são tradicionalmente obtidas a partir de inquéritos aos agregados familiares, que dependem da recordação materna.
+
+Os dados de rotina das unidades de saúde sobre as visitas ao serviço de consultas externas (ambulatório/OPD) servem como um indicador direto do acesso aos serviços curativos: menos de uma visita por pessoa, por ano, é geralmente considerado um indicador de fraco acesso geográfico ou financeiro. Da mesma forma, os dados sobre os internamentos hospitalares refletem o acesso aos serviços, enquanto a mortalidade institucional na unidade (letalidade) serve como um indicador indireto (proxy) da qualidade dos cuidados clínicos.
+
+**Descrição dos passos analíticos:**
+
+Os dados sobre as visitas OPD devem incluir tanto as novas visitas como as visitas de seguimento. Estes dados são habitualmente estratificados em duas coortes principais: crianças com menos de 5 anos de idade e indivíduos com 5 anos ou mais. 
+
+Tal como acontece com as métricas de cuidados maternos, cuidados ao recém-nascido e imunização, a qualidade dos dados é primeiramente avaliada de forma sistemática. São aplicados ajustes para corrigir notificações incompletas e os valores atípicos (outliers) extremos são resolvidos. Este conjunto de dados limpo e ajustado é depois utilizado para análises de tendências e comparativas, tanto a nível nacional como infranacional.
+
+---
+
+<Steps>
+
+### [Utilização de Serviços de Ambulatório](/docs/methods/#outpatient-service-utilization)
+
+Os dados de entrada do serviço de consultas externas (ambulatório) devem incluir as novas visitas e as visitas de seguimento combinadas.
+
+**Número Médio de Visitas OPD por Criança por Ano**
+Para acompanhar a frequência da cobertura da procura de cuidados, a métrica está estruturada da seguinte forma:
+
+* **Numerador:** Número ajustado de visitas OPD de menores de 5 anos num ano civil.
+* **Denominador:** População total projetada de crianças menores de 5 anos extraída das projeções do DHIS2.
+
+Matematicamente, espera-se que esta taxa permaneça altamente estável ao longo do tempo, com uma variação esperada de **menos de 0,2 visitas por criança por ano** entre períodos de notificação consecutivos. Um aumento gradual e constante ao longo do tempo aponta para melhorias genuínas no acesso físico aos serviços OPD ou para uma crescente carga de doenças na população pediátrica. 
+
+Embora não exista um limiar de corte global rígido, uma taxa de frequência de **menos de 1 visita por ano por criança** indica que as barreiras de acesso estão provavelmente a restringir a utilização dos serviços. As estatísticas OPD são rotineiramente calculadas e acompanhadas aos níveis nacional e regional/provincial.
+
+    - *[insert map of opd utilization by region or province Output]*
+
+<Callout type="info">
+**Considerações sobre a Interpretação OPD:**
+Ao compilar a narrativa de interpretação para o submódulo OPD, responda diretamente às seguintes questões de avaliação:
+* **Linha de Base da Qualidade dos Dados:** O que se pode concluir sobre a qualidade dos dados das visitas OPD? Existe um elevado nível de consistência nos números brutos reportados entre anos consecutivos?
+* **Tendências Temporais:** Qual é o número exato calculado de visitas OPD por criança, por ano, ao longo do período de 2019 a 2023, e este demonstra uma tendência ascendente?
+* **Barreiras de Acesso:** A taxa nacional ou infranacional é inferior a 1 visita por ano, confirmando um baixo acesso aos serviços?
+* **Disparidades Geográficas:** O que revelam os dados sobre as visitas OPD por criança, por ano, nas diferentes regiões ou províncias em 2023? Qual a dimensão da margem absoluta entre as unidades infranacionais com melhor e pior desempenho?
+</Callout>
+
+**Percentagem de Visitas OPD Atribuídas a Crianças Menores de Cinco Anos**
+Esta métrica serve como uma verificação interna para a consistência dos dados. A proporção de visitas de menores de 5 anos representa tipicamente **15% a 45%** de todas as consultas externas registadas. 
+* Em contextos de alta fecundidade *(por exemplo, países com uma Taxa de Fecundidade Total > 4)*, espera-se que esta proporção se situe no limite superior do espetro, excedendo frequentemente os **30%**.
+* **Alertas de Qualidade de Dados:** Se a percentagem calculada se situar completamente fora do limite de 15%–45%, pode existir um problema de qualidade de dados. Além disso, uma mudança súbita entre anos que exceda **5 pontos percentuais** assinala uma potencial inconsistência na notificação.
+
+---
+
+### [Utilização de Serviços de Internamento](/docs/methods/#inpatient-service-utilization)
+
+Os dados sobre os internamentos hospitalares incluem novas admissões e readmissões. Estes registos são estratificados por idade em coortes de menores de 5 anos e de 5 anos ou mais. Quando disponíveis, os dados de altas de pacientes *(calculados como: $\text{Altas} = \text{Admissões} - \text{Óbitos}$)* constituem o dado de entrada analítico preferencial.
+
+A revisão da completude da notificação e a presença de valores atípicos (outliers) extremos são utilizadas para avaliar a qualidade dos dados de internamento. Como as taxas de notificação de hospitais e unidades com serviços de internamento (IPD) podem ser mais complexas de monitorizar do que os dados de rotina de ambulatório, a decisão de ajustar devido a notificação incompleta depende muito do julgamento técnico da equipa do país quanto à fiabilidade dos registos.
+
+Valores atípicos mensais extremos são comuns nos dados de internamento devido a erros de compilação; os ajustes corretivos devem ser aplicados com cautela. É altamente recomendável avaliar e comparar lado a lado os resultados dos dados ajustados e não ajustados.
+
+**Número de Admissões por 100 Crianças Menores de 5 Anos por Ano**
+Isto serve como um indicador central da capacidade de acesso a internamentos. Um valor calculado **inferior a 2 admissões por 100 crianças menores de 5 anos por ano** indica um acesso muito baixo aos serviços de internamento agudo. Para contextualização, a linha de base mediana nos países da África Subsariana para o período de 2018–2022 foi de **4,5 admissões por ano**. 
+
+Espera-se que as flutuações anuais sejam mínimas; uma alteração de um ano para o outro de **1 ou mais admissões por 100 crianças** é altamente improvável em circunstâncias normais, a menos que esteja ligada a uma emergência documentada, como uma epidemia ou surto.
+
+    - *[insert map of ipd admissions among under five by region or province Output]*
+
+<Callout type="info">
+**Considerações sobre a Interpretação IPD:**
+A sua análise narrativa para o submódulo de internamento deve avaliar explicitamente os seguintes parâmetros:
+* **Consistência dos Dados:** Existe consistência interna nos números brutos notificados de admissões e nas taxas globais de admissão ao longo do tempo?
+* **Métricas de Acesso:** Qual é o número absoluto de admissões por 100 crianças menores de 5 anos por ano ao longo das linhas de tendência de 2019 a 2023?
+* **Dispersão Infranacional:** A taxa observada é alta ou baixa em comparação com os valores de referência históricos? Que padrões infranacionais específicos emergem ao avaliar as admissões por 100 crianças menores de 5 anos nas diferentes regiões ou províncias?
+</Callout>
+
+**Percentagem de Admissões Atribuídas a Crianças Menores de Cinco Anos**
+Isto é utilizado como um indicador de validação da qualidade dos dados. A percentagem varia tipicamente entre **10% e 40%** de todas as admissões registadas na unidade de saúde. 
+
+Se o valor se situar fora deste intervalo de referência específico, isso aponta para um problema subjacente de qualidade de dados ou para um evento epidemiológico excecional. Uma flutuação interanual que exceda os **5 pontos percentuais** assinala um problema ativo de qualidade de dados.
+
+**Taxa de Letalidade (Case Fatality Rate)**
+A taxa de letalidade serve como um indicador indireto (proxy) chave para a qualidade dos cuidados clínicos nas enfermarias das unidades. É matematicamente definida como:
+
+$$\text{Taxa de Letalidade Pediátrica} = \frac{\text{Número de Crianças que Morrem no Hospital}}{\text{Número Total de Admissões (Altas + Óbitos)}}$$
+
+<Callout type="warning">
+**Regra Metodológica:** Os cálculos de letalidade devem ser realizados utilizando **exclusivamente dados de entrada não ajustados**. A plataforma não aplica ajustes de completude de notificação ou correções de valores atípicos ao número bruto de óbitos institucionais ou ao total de admissões neste módulo. 
+</Callout>
+
+Uma menor taxa de letalidade nas unidades de saúde corresponde diretamente a um padrão mais elevado de cuidados clínicos agudos.
+
+</Steps>
+
+---

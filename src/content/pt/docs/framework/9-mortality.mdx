@@ -1,0 +1,100 @@
+import { Steps } from 'nextra/components'
+import { Callout } from 'nextra/components'
+import { Bleed } from 'nextra/components'
+
+## Mortalidade Institucional na abordagem analítica CD2030
+
+As definições para mortalidade materna institucional, comunitária e populacional e para nados-mortos (natimortos) estão descritas na matriz abaixo.
+
+| Indicador | Numerador | Denominador |
+| :--- | :--- | :--- |
+| **Rácio de mortalidade materna institucional (iMMR)** | Número de mortes maternas nas unidades de saúde | $\frac{\text{Número de nascidos vivos nas unidades de saúde}}{\text{100.000}}$ |
+| **Mortalidade materna na população (MMR)** | Número de mortes maternas na população | $\frac{\text{Número de nascidos vivos na população}}{\text{100.000}}$ |
+| **Rácio de mortalidade materna comunitária (cMMR)** | Número de mortes maternas na comunidade | $\frac{\text{Número de nascidos vivos na comunidade}}{\text{100.000}}$ |
+| **Taxa de natimortalidade institucional (iSBR)** | Número de natimortos nas unidades de saúde | $\frac{\text{Número de nascimentos nas unidades de saúde}}{\text{1.000}}$ |
+| **Taxa de natimortalidade na população (SBR)** | Número de natimortos na população | $\frac{\text{Número de nascimentos na população}}{\text{1.000}}$ |
+| **Taxa de natimortalidade comunitária (cSBR)** | Número de natimortos na comunidade | $\frac{\text{Número de nascimentos na comunidade}}{\text{1.000}}$ |
+| **Mortalidade neonatal (antes da alta)** | Número de óbitos neonatais antes da alta | $\frac{\text{Número de nascidos vivos nas unidades de saúde}}{\text{1.000}}$ |
+
+---
+
+<Steps>
+
+### [Revisão do iMMR e iSBR](/docs/methods/#immr-and-isbr-review)
+
+As taxas anuais de mortalidade são calculadas utilizando os dados não ajustados sobre óbitos e nascimentos/nascidos vivos notificados nas unidades de saúde. Não ajustamos as taxas de notificação e os valores atípicos (como é feito para outras intervenções) porque é difícil ajustar as mortes maternas e os natimortos, onde o número de mortes é pequeno e flutuante. 
+
+No entanto, é aconselhável verificar os dados quanto a valores atípicos extremos nos dados anuais (por exemplo, números de mortes que indicam claramente erros de introdução de dados) e substituí-los pela média dos anos circundantes.
+
+A figura abaixo apresenta a mortalidade materna institucional por 100.000 nascidos vivos para as regiões (pontos) e para o país como um todo (linha e valores anuais) por ano.
+
+    - *[insert immr_trends_screenshot Output]*
+    - *[insert maternal mortality per 1000 Output]*
+
+---
+
+### [Considerações sobre a Interpretação de Dados](/docs/methods/#data-interpretation-considerations)
+
+Ao interpretar o rácio de mortalidade materna institucional ($iMMR$), devem ser feitas várias considerações críticas estruturais e sobre a qualidade dos dados:
+
+* **Valores Atípicos Extremos Elevados:** Avaliar se existem valores atípicos extremos no limite superior que possam ser devidos a grandes erros de introdução de dados. Estes devem ser sinalizados para potencial correção ou exclusão.
+* **Taxas Implausivelmente Baixas:** Identificar quantas regiões têm um $iMMR$ implausivelmente baixo, que é arbitrariamente definido como **menos de 25 por 100.000 nascidos vivos** *(25 é aproximadamente o dobro do MMR médio em países de rendimento elevado, que é de 12,5)*. 
+* **Validação Contextual:** Determinar se estas regiões de taxas baixas são áreas mais avançadas onde se espera demograficamente uma mortalidade mais baixa, ou se são regiões menos desenvolvidas. A baixa mortalidade em regiões menos desenvolvidas indica fortemente uma grande subnotificação de mortes institucionais em vez de resultados clínicos superiores.
+
+Para complementar esta análise, recomenda-se vivamente o mapeamento geográfico do indicador.
+
+---
+
+### [Distribuição Geográfica](/docs/methods/#geographic-distribution)
+
+Um mapa exibindo o $iMMR$ por região é uma adição útil para guiar a interpretação dos dados, ajudando as equipas a focarem-se rapidamente em padrões espaciais e a identificar potenciais problemas de subnotificação ou de qualidade dos dados nas unidades infranacionais.
+
+    - *[insert Insitutitonal MMR by region Output]*
+    - *[insert immr_regional_map Output]*
+
+A figura abaixo apresenta a taxa de natimortalidade por 1.000 nascimentos para as regiões e para o país, utilizando o mesmo formato que para a mortalidade materna. 
+
+---
+
+### [Considerações sobre a Interpretação de Dados para Natimortos](/docs/methods/#data-interpretation-considerations-for-stillbirths)
+
+Ao analisar a taxa de natimortalidade institucional ($iSBR$), a interpretação escrita deve abordar explicitamente as seguintes questões de avaliação:
+
+* **Taxas Implausivelmente Baixas:** Quantas regiões têm um $iSBR$ implausivelmente baixo, definido como **menos de 6 por 1.000 nascimentos** *(6 é aproximadamente o dobro do SBR médio em países de rendimento elevado)*?
+* **Qualidade dos Dados vs. Desenvolvimento:** Estas áreas identificadas são regiões mais avançadas onde se espera que a mortalidade seja mais baixa devido a melhores infraestruturas clínicas, ou será este um sinal claro de grande subnotificação de mortes em regiões menos desenvolvidas do país?
+
+    - *[insert stillbirth rate chart Output]*
+    - *[insert isbr_trends_screenshot Output]*
+
+Além disso, os níveis de mortalidade institucional podem ser comparados com as estimativas de mortalidade mais recentes para a população. Estas estimativas populacionais podem ser provenientes de um inquérito nacional ou censo recente, ou podemos utilizar as estimativas da ONU para a mortalidade materna (para 2020) e as taxas de natimortalidade (para 2021).
+
+O objetivo é ter uma ideia da diferença entre a mortalidade institucional e a mortalidade populacional. A interpretação deve procurar explicar:
+* Quão distante está o iMMR (ou iSBR) das estimativas da ONU para a mortalidade populacional, incluindo o intervalo de incerteza das estimativas globais: esta diferença será utilizada posteriormente para avaliar a qualidade dos dados.
+
+As taxas de mortalidade neonatal institucional (por 1.000 nascidos vivos) baseadas em mortes neonatais notificadas também podem ser representadas num gráfico semelhante ao do iMMR e do iSBR, mas devem ser interpretadas com cautela adicional. Quase todos os bebés ficam pelo menos 24 horas após o parto no hospital, mas depois disso muitos recebem alta e o tempo de observação nas unidades de saúde é variável. Portanto, a estatística é maioritariamente referida como óbitos neonatais antes da alta por 1.000 nascidos vivos, o que inclui o dia 1, alguns óbitos no dia 2, menos óbitos no dia 3, etc.
+
+Um guia aproximado para avaliar a completude da notificação é que a mortalidade esperada de óbitos neonatais antes da alta nas unidades de saúde deve ser pelo menos metade da mortalidade neonatal na população. Assim, por exemplo, se a mortalidade neonatal da população for de 20 por 1.000 nascidos vivos, esperamos que a mortalidade neonatal institucional seja de pelo menos 10 por 1.000 nascidos vivos nas unidades de saúde.
+
+    - *[insert Neonatal deaths chart Output]*
+
+---
+
+### [Métricas de Qualidade de Dados](/docs/methods/#data-quality-metrics)
+
+**Rácio de natimortos para mortes maternas nos dados das unidades de saúde a nível nacional**
+
+Esperamos que a mortalidade materna e a natimortalidade estejam positivamente correlacionadas, dadas as causas comuns. Com base numa revisão das estimativas globais, dados históricos e estudos em unidades de saúde, esperamos que o rácio de natimortos para mortes maternas esteja na faixa de 5 a 25 para os países da África Subsariana. Calculamos o rácio como o número de natimortos notificados dividido pelo número de mortes maternas notificadas no DHIS2 ou no MPDSR, num período de tempo específico (geralmente um ano) e levantamos um "alerta de qualidade de dados" se o rácio estiver fora do intervalo de 5-25.
+
+<Callout type="info">
+**Interpretação:**
+* **Se o rácio for inferior a 5:** é provável que a subnotificação de natimortos seja maior do que a subnotificação de mortes maternas.
+* **Se o rácio for igual ou superior a 25:** a subnotificação de mortes maternas é provavelmente o principal problema, sendo a subnotificação de natimortos menos grave do que para as mortes maternas.
+* **Se o rácio estiver entre 5 e 25:** tanto a subnotificação de mortes maternas como a subnotificação de natimortos são possíveis, ou a notificação de ambos é de boa qualidade (isto requer que o nível também esteja dentro da faixa esperada - componente 1).
+</Callout>
+
+    - *[insert ratio of stillbirth chart Output]*
+
+---
+
+### [Consistência do MMR Institucional com as Estimativas Populacionais e Comunitárias](/docs/methods/#consistency-of-institutional-mmr
+</Steps>

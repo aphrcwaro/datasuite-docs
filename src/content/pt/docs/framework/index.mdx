@@ -1,0 +1,227 @@
+import { HomeCards } from '@/components/HomeCards'
+
+# Visão Geral da Estrutura
+
+Esta página resume a estrutura analítica do CD2030 DataSuite.
+Destina-se a ajudar as equipas a passar dos dados brutos das unidades de saúde e dos inquéritos para resultados defensáveis de cobertura a nível nacional e infranacional.
+
+## Fluxo de trabalho de ponta a ponta
+
+A estrutura segue uma sequência prática:
+
+1. [Carregar e configurar](/docs/framework/1-analysis-setup) os dados das unidades de saúde e inquéritos.
+2. [Calibrar as principais taxas de referência nacionais](/docs/framework/1-analysis-setup/#survey-params).
+3. [Avaliar a qualidade dos dados](/docs/framework/2-data-quality-assessment) antes de estimar a cobertura.
+4. [Ajustar](/docs/framework/3-data-adjustment) os dados incompletos, instáveis ou pouco fiáveis.
+5. [Selecionar o denominador com melhor desempenho](/docs/framework/4-denominator-selection).
+6. Gerar e interpretar os resultados de **[cobertura](/docs/framework/5-coverage-estimation)**, **[equidade](/docs/framework/6-equity-analysis)**, **[infranationais](/docs/framework/7-subnational-analysis)**, **[mortalidade](/docs/framework/mortality)**, **[utilização de serviços](/docs/framework/10-service-utilisation)** e **[desempenho do sistema de saúde](/docs/framework/11-health-system-performance)**.
+
+
+## Módulos da estrutura
+
+<HomeCards
+  items={[
+    {
+      title: 'Avaliação da Qualidade dos Dados',
+      description: 'Rever a completude da notificação, valores atípicos, dados ausentes, consistência interna e pontuações anuais de qualidade.',
+      href: '/en/docs/framework/2-data-quality-assessment',
+      icon: 'checklist'
+    },
+    {
+      title: 'Ajuste de Dados',
+      description: 'Remover períodos não fiáveis, aplicar fatores de ajuste e comparar valores antes e depois da limpeza.',
+      href: '/en/docs/framework/3-data-adjustment',
+      icon: 'settings-gear'
+    },
+    {
+      title: 'Seleção do Denominador',
+      description: 'Comparar as opções de denominador do DHIS2, da ONU, derivadas de CPN1 e derivadas da Penta1.',
+      href: '/en/docs/framework/4-denominator-selection',
+      icon: 'symbol-number'
+    },
+    {
+      title: 'Estimativa de Cobertura',
+      description: 'Estimar níveis e tendências, comparar com as referências dos inquéritos e rever o progresso em direção às metas.',
+      href: '/en/docs/framework/5-coverage-estimation',
+      icon: 'graph'
+    },
+    {
+      title: 'Análise de Equidade',
+      description: 'Avaliar a desigualdade por residência, riqueza e educação materna usando comparações baseadas em inquéritos.',
+      href: '/en/docs/framework/6-equity-analysis',
+      icon: 'graph-scatter'
+    },
+    {
+      title: 'Análise Infranacional',
+      description: 'Examinar a variação regional e distrital, o alcance de metas e a desigualdade geográfica.',
+      href: '/en/docs/framework/7-subnational-analysis',
+      icon: 'globe'
+    }
+  ]}
+/>
+
+O objetivo final da estrutura é a utilização prática. As conclusões devem informar os processos de revisão do país, as discussões de planeamento e os grupos de trabalho técnicos, para que a análise conduza a ações concretas de SRMNIA (RMNCAH) em vez de permanecer apenas como um relatório isolado.
+
+---
+
+## Métodos Analíticos
+
+### Passo 1: Avaliação da Qualidade dos Dados
+
+**Fundamentação Científica:** Os dados de rotina das unidades de saúde são uma fonte indispensável para os indicadores de saúde ao nível da população, mas a qualidade varia muito devido a inconsistências de notificação, erros de introdução de dados e lacunas sistémicas. 
+A avaliação padronizada permite acompanhar o progresso ao longo do tempo e impede que dados pouco fiáveis contaminem as estimativas de cobertura.
+
+**Abordagem:** O Data Suite avalia os dados mensais ao nível do distrito ao longo de um período de seis anos (2019–2024) utilizando cinco métricas de qualidade centrais:
+
+- **Completude de Notificação** – Percentagem de relatórios esperados das unidades que foram efetivamente recebidos (&ge;90% é considerado aceitável). Calculada como a média de quatro formulários de notificação (CPN, parto, vacinação, ambulatório/OPD).
+2. **Valores Atípicos Extremos (Outliers)** – Valores mensais que excedam 5 vezes o desvio absoluto da mediana (MAD), sinalizados para investigação. Os erros de introdução de dados (por exemplo, zeros acidentais) são os culpados mais comuns.
+3. **Consistência Interna** – Os rácios lógicos entre os indicadores interligados são verificados:
+   - Rácio CPN1 para Penta1 esperado em ~1.07 (contabilizando a perda de gravidez, natimortalidade, nascimentos gemelares, mortalidade neonatal)
+   - Rácio Penta1 para Penta3 varia com as taxas de abandono, mas deve ser estável
+4. **Completude dos Dados** – São identificados valores em falta durante períodos ativos de notificação.
+5. **Pontuação Geral da Qualidade dos Dados** – Calculada automaticamente como a média das métricas principais para permitir a comparação entre anos e distritos.
+
+**Implementação no DataSuite:** Navegue para o módulo Avaliação da Qualidade dos Dados, selecione o seu indicador e o nível de análise (região ou distrito), configure os limiares de desempenho (taxa de notificação padrão de 90%) e execute a análise. A plataforma gera painéis interativos identificando distritos com problemas, visualiza as distribuições de valores atípicos, acompanha as tendências de rácio e descarrega relatórios resumidos.
+
+**Exemplos:** Se um distrito descer para 60% de notificação em 2022 devido a uma falha do sistema, esse ano é sinalizado como não fiável. Se os relatórios de CPN1 excederem subitamente os de Penta1 em &gt;50%, a investigação aprofundada revelará falhas de acesso genuínas ou anomalias de notificação que exigem resolução.
+
+---
+
+
+
+### Passo 2: Ajuste de Dados
+
+
+3. **Valores Atípicos Extremos** – Valores errados substituídos pela mediana do distrito-ano
+4. **Valores Ausentes** – Imputados utilizando os valores mensais medianos do distrito
+
+O fator k é configurável por serviço. Por exemplo, se as unidades de saúde privadas gerem 40% dos partos maternos, mas têm uma notificação fraca (tornando k=0.25 implausivelmente baixo), aumente k para 0.5–0.75 com base no conhecimento contextual.
+
+**Implementação no DataSuite:** No módulo de Ajuste de Dados, selecione o seu nível de fator k, opcionalmente exclua anos corrompidos utilizando "Remover Anos", execute o processo e descarregue o conjunto de dados ajustado juntamente com gráficos de comparação antes/depois. A plataforma destaca os anos com maior impacto de ajuste.
+
+**Exemplos:** Um distrito reporta 50.000 partos com 80% de completude com k=0.25: $N_{\text{adj}} = 50.000 \times [1 + (0.20 \times 0.25)] = 52.500$. O ajuste ascendente de 5% reflete os serviços que provavelmente ocorreram em unidades que não reportaram.
+
+---
+
+### Passo 3: Seleção do Denominador
+
+**Fundamentação Científica:** Os rácios de cobertura exigem tanto numeradores precisos (dos relatórios das unidades) como denominadores precisos (estimativas populacionais). As projeções populacionais são frequentemente pouco fiáveis, especialmente a nível distrital. O Data Suite compara cinco opções de denominadores testando qual delas produz as estimativas de cobertura que mais se aproximam dos inquéritos aos agregados familiares de referência (DHS, MICS).
+
+**Cinco Métodos de Denominadores:**
+
+1. **Projeções Populacionais do DHIS2** – Estimativas integradas do sistema; a qualidade varia amplamente
+2. **Projeções Populacionais da ONU** – Padrão internacional; disponíveis apenas a nível nacional
+3. **Meta Derivada da CPN1** – Recalcula retroativamente o número de mulheres grávidas a partir das visitas às unidades de saúde com alta utilização: $\text{Gestações} = \frac{\text{Visitas CPN1 na unidade}}{\text{Cobertura CPN1 do inquérito}}$
+4. **Meta Derivada da Penta1** – Recalcula retroativamente os lactentes elegíveis de forma semelhante
+5. **Penta1 Ajustada ao Crescimento** – Refina as estimativas de Penta1 aplicando taxas de crescimento anual
+
+**Lógica da Cascata Demográfica:** Os denominadores maternos e infantis estão interligados através de pressupostos demográficos padrão (aplicados globalmente, personalizáveis por país):
+
+- Perda de gravidez: 3%
+- Taxa de natimortalidade: 2%
+- Taxa de nascimentos gemelares: 1.5%
+- Mortalidade neonatal: 3%
+- Mortalidade pós-neonatal: 2.4%
+
+Começando pelas visitas de CPN1 nas unidades e cobertura do inquérito, a cascata flui: gestações → partos (após perdas) → nascidos vivos (após ajustes de natimortalidade, gemelares) → lactentes elegíveis (após mortalidade neonatal).
+
+**Regra de Seleção do Denominador:** Compare a cobertura baseada em unidades de saúde ajustada para dois indicadores rastreadores (partos institucionais, Penta3) através de cada opção de denominador com as referências recentes do inquérito. O método que minimizar as lacunas absolutas de cobertura é selecionado como o denominador ativo para todas as análises subsequentes.
+
+**Implementação no DataSuite:** Carregue as projeções da ONU, dados do DHIS2 e dados de inquéritos recentes. O módulo calcula automaticamente todos os cinco denominadores, calcula estimativas de cobertura usando cada um e visualiza comparações lado a lado com os intervalos de confiança dos inquéritos. Os resultados destacam o denominador vencedor.
+
+**Exemplos:** Se os denominadores derivados da Penta1 produzirem uma cobertura nas unidades de 85% ± 2% vs. 86% ± 4% no inquérito, enquanto os derivados do DHIS2 produzirem 92% ± 5%, o derivado da Penta1 é selecionado como o melhor.
+
+---
+
+### Passo 4: Estimativa de Cobertura
+
+**Fundamentação Científica:** A cobertura—a proporção da população que recebe um serviço necessário—é a principal métrica para acompanhar o progresso em direção à cobertura universal de saúde. A estimativa requer numeradores validados (a partir de dados de unidades avaliados e ajustados em qualidade) e denominadores baseados em evidências (selecionados por comparação com inquéritos). A cobertura é comparada com as metas globais (por exemplo, 90% de partos institucionais até 2025) e com estimativas de inquéritos para avaliar a credibilidade.
+
+**Cálculo da Cobertura:**
+$$\text{Cobertura (\%)} = \frac{\text{Numerador (Ajustado)}}{\text{Denominador (Selecionado)}} \times 100$$
+
+**Principais Regras de Tratamento:**
+
+- **Cobertura Implausível >100%:** Indica problemas de qualidade dos dados ou registos duplicados. Reformular como serviços médios per capita (por exemplo, 1.2 doses por criança em vez de 120% de cobertura).
+- **Planeamento Familiar:** Usa o modelo demográfico especializado FPET que integra várias fontes de dados de inquéritos; dados das unidades são incluídos se a qualidade o permitir.
+- **Vacinação:** Os denominadores têm em conta a sobrevivência infantil: Lactentes elegíveis = Nascidos vivos − Óbitos neonatais (− Óbitos pós-neonatais para o Sarampo1).
+
+**Concordância entre Unidades de Saúde e Inquérito:** As tendências de cobertura baseadas nos dados das unidades de saúde são traçadas juntamente com as estimativas dos inquéritos (com intervalos de confiança) para avaliar visualmente a concordância. Grandes diferenças sinalizam um viés sistemático em numeradores, denominadores ou em ambos, o que justifica uma investigação.
+
+**Implementação no DataSuite:** Navegue para Estimativa de Cobertura, selecione os seus indicadores, confirme a escolha do denominador e gere linhas de tendência anuais (2019–2024) juntamente com gráficos de comparação de inquéritos. O módulo exporta estimativas anuais, intervalos de confiança e avaliações de concordância.
+
+**Exemplos:** Parto institucional baseado na unidade de saúde: 82% (2024). Inquérito recente: 85% ± 3%. Diferença de 3 pontos percentuais dentro do intervalo de confiança—uma boa concordância indica estimativas fiáveis.
+
+---
+
+### Passo 5: Análise de Equidade
+
+**Fundamentação Científica:** As médias nacionais de cobertura escondem disparidades que determinam se os sistemas de saúde servem todas as populações de forma equitativa. Três dimensões de desigualdade são cruciais: residência (urbano/rural), riqueza (quintis do mais rico ao mais pobre) e escolaridade materna. As desigualdades revelam onde os sistemas de saúde falham e orientam intervenções direcionadas.
+
+**Padrões de Desigualdade:**
+
+1. **Desigualdade de Topo** – Apenas os mais ricos escapam; os mais pobres são deixados muito atrás. Sinaliza privação em massa exigindo campanhas de acesso universal.
+2. **Desigualdade Linear** – Gradientes associados à riqueza; cada quintil mostra melhorias incrementais. Sugere que o direcionamento a favor dos pobres está a funcionar parcialmente.
+3. **Desigualdade de Base** – Os mais ricos muito à frente; média/pobres agrupados. Sinaliza a marginalização dos mais pobres, exigindo um alcance específico.
+
+**Abordagem:** Os Equiplots visualizam as trajetórias de cobertura por subgrupo populacional juntamente com a tendência nacional, permitindo a avaliação visual de:
+
+- Nível de desigualdade atual (fosso entre os mais ricos e os mais pobres)
+- Direção da tendência (se está a diminuir ou a aumentar ao longo do tempo)
+- Progresso rumo à cobertura universal (todos os subgrupos ≥limiar da meta)
+
+**Implementação no DataSuite:** Na Avaliação da Equidade (Equiplots), selecione o seu indicador e a dimensão de desigualdade (residência, riqueza, escolaridade). O módulo gera gráficos interativos estratificados pelo ano do inquérito, permitindo o acompanhamento em períodos de 6–10 anos. Descarregue as tabelas de resumo que mostram a cobertura por quintil/subgrupo e a percentagem que atinge as metas.
+
+**Guia de Interpretação:** Responda: (1) A desigualdade atual é grande ou pequena? (2) Está a melhorar? (3) Que padrão emerge e o que sinaliza sobre as prioridades do programa?
+
+---
+
+### Passo 6: Análise Infranacional
+
+**Fundamentação Científica:** A variação geográfica na cobertura revela desigualdades no sistema de saúde e ineficiências alocativas. As médias nacionais de 80% podem ocultar uma região com 95% e outra com 60%—uma lacuna crítica para a capacidade de agir. A análise infranacional identifica unidades administrativas com baixo desempenho para investimento direcionado e monitoriza se o reforço do sistema de saúde reduz as disparidades geográficas.
+
+**Níveis Analíticos:**
+
+- **Regional (Admin1):** Jurisdições maiores com estimativas mais estáveis; nível de referência para o direcionamento de distritos
+- **Distrital (Admin2):** Unidades menores com maior volatilidade devido a populações pequenas e padrões de encaminhamento (hospitais municipais servem áreas rurais circundantes)
+
+**Principais Resultados:**
+
+1. **Resumos Distritais (One-Pagers)** – Resumos visuais por região combinando:
+   - Linhas de tendência com base nas unidades (2019–2024)
+   - Instantâneo (snapshot) de inquéritos recentes com intervalo de confiança
+   - Gráfico de barras comparando o desempenho regional com o de todas as outras regiões
+   - Tabela a nível distrital com a cobertura de 2024 para partos institucionais e Penta3
+
+2. **Índice Composto de Cobertura** – Média de sete indicadores de SRMNIA (CPN4, parto institucional, SBA, TPI2, cuidados pós-natais, Penta3, Sarampo1) mapeados geograficamente para identificar as regiões mais fortes/fracas
+
+3. **Índice de Desigualdade Infranacional** – O Desvio Absoluto da Mediana (MADM) quantifica a dispersão na cobertura entre os distritos; rastreia se as disparidades geográficas estão a diminuir
+
+**Implementação no DataSuite:** Navegue para Análise Infranacional, selecione o nível administrativo (região ou distrito), escolha o indicador ou utilize a Verificação Personalizada (Custom Check) para qualquer métrica. O módulo gera visualizações de tendências, resumos transferíveis e resumos de desigualdades. A interface de mapa apresenta o índice de cobertura composto por região geográfica.
+
+**Exemplos:** Distrito A: Parto institucional com 88% (2024) com tendência de crescimento há 3 anos. Distrito B (vizinho): 62%, tendência estática. O Distrito B é prioritário no investimento para fortalecimento das unidades de saúde.
+
+---
+
+### Passo 7: Interpretação e Ação
+
+**Fundamentação Científica:** A análise só tem valor se as conclusões orientarem a tomada de decisões. A interpretação faz a ponte entre o rigor técnico e a capacidade de agir, ao sintetizar resultados, realçar mensagens-chave e relacionar explicitamente as conclusões a opções de programas ou políticas.
+
+**Estrutura de Interpretação:**
+
+1. **Veredito da Qualidade dos Dados** – As conclusões são fiáveis? Existem anos atípicos ou distritos com problemas que invalidem as estimativas?
+2. **Situação da Cobertura face às Metas** – Quão perto das metas nacionais/globais? No rumo certo ou em atraso?
+3. **Tendências** – A melhorar, estagnado ou a diminuir? Ritmo da mudança?
+4. **Cenário de Equidade** – Que populações estão a ser deixadas para trás? Os padrões sugerem: falha no acesso em massa, necessidade de direcionamento pró-pobres, ou marginalização dos mais pobres?
+5. **Foco Geográfico** – Quais são as regiões/distritos que mais necessitam de investimento?
+6. **Anomalias** – A discordância entre unidades de saúde e inquéritos, rácios inesperados ou distritos com valores atípicos requerem explicação (por exemplo, centro de referência, campanha recente, conflito local).
+7. **Recomendações** – Para cada conclusão, proponha uma ação específica: mudança de política, reforço de infraestruturas, investimento em equipamento, formação, campanhas, etc.
+
+**Relatórios do DataSuite:** A plataforma gera tabelas de resumo e visualizações padronizadas prontas para apresentação a funcionários do Ministério, parceiros financiadores e grupos de trabalho técnicos. Personalize as mensagens para cada público, mantendo a integridade analítica.
+
+---
+
+## Páginas de apoio
+
+- [Fluxo de trabalho](/en/docs/framework/workflow)
+- [Definições dos Indicadores](/en/docs/framework/indicator-definitions)

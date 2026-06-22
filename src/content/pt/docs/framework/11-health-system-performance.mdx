@@ -1,0 +1,83 @@
+import { Steps } from 'nextra/components'
+import { Callout } from 'nextra/components'
+import { Bleed } from 'nextra/components'
+
+## Desempenho dos Sistemas de Saúde
+
+### Introdução
+
+Esta secção centra-se na análise do desempenho dos sistemas de saúde, incluindo a disponibilidade e qualidade dos serviços de saúde, a força de trabalho em saúde e o financiamento da saúde. A análise visa identificar lacunas e desafios no sistema de saúde que possam afetar a prestação de serviços de saúde reprodutiva, materna, neonatal, infantil, do adolescente e de nutrição (SRMNIA-N).
+
+Contém as seguintes subsecções:
+* Insumos do sistema de saúde (nacionais e infranacionais)
+* Resultados do sistema de saúde (nacionais e infranacionais)
+* Setor privado e serviços de SRMNIA-N
+
+---
+
+## Desempenho dos Sistemas de Saúde na abordagem analítica CD2030
+
+**Descrição dos passos analíticos:**
+
+O âmbito analítico restringe-se a uma comparação direta e descritiva dos resultados do sistema de saúde (cobertura de intervenções rastreadoras) face aos insumos do sistema (métricas de infraestrutura, força de trabalho e financiamento) ao nível infranacional (nível Admin1). Metodologias mais complexas — como a análise envoltória de dados, a modelação de fronteira de eficiência ou a indexação composta controlando fatores de desenvolvimento socioeconómico multissetoriais — estão fora do âmbito desta secção operacional.
+
+O objetivo central continua a ser isolar estrangulamentos infranacionais específicos onde elevados insumos do sistema não se traduzem nos resultados esperados de cobertura de serviços de SRMNIA-N, ou, inversamente, identificar regiões de elevado desempenho que exibam uma forte eficiência na prestação de serviços.
+
+<Steps>
+
+### [Implementação](/docs/methods/#implementation-health-systems-performance)
+
+A análise para estes submódulos é conduzida inteiramente dentro da secção **Desempenho do Sistema de Saúde** do **Data Suite**. 
+
+Navegue até ao separador do módulo principal para configurar os seus parâmetros analíticos, selecionar os seus insumos de tabulação cruzada e rever os gráficos de dispersão e as matrizes do painel de controlo resultantes.
+
+    - *[insert health_system_performance_module_interface Output]*
+
+</Steps>
+
+---
+
+## Quadro de Avaliação de Insumos dos Sistemas de Saúde
+
+Primeiro, a avaliação foca-se na qualidade dos dados para os indicadores do sistema de saúde a nível nacional e infranacional. Para os indicadores selecionados, a avaliação deve visar:
+* **Benchmarking Global:** Comparação com repositórios globais de dados para indicadores selecionados *(apenas a nível nacional)*.
+* **Auditoria de Plausibilidade:** Avaliar a plausibilidade dos valores dos indicadores nas unidades infranacionais para identificar grandes valores atípicos (outliers) ou padrões improváveis.
+
+Além disso, é muito útil explorar as correlações cruzadas dos insumos do sistema de saúde entre si *(por exemplo, densidade da força de trabalho traçada contra a capacidade de camas de internamento)*. Esta cartografia de correlação é eficaz para detetar inconsistências sistémicas de dados entre unidades Admin1 (províncias, regiões ou condados).
+
+Por fim, a avaliação do alinhamento das métricas de desempenho do sistema de saúde entre diferentes níveis administrativos *(por exemplo, comparando os agregados Admin1 diretamente com os valores aninhados dos distritos)* ajuda a isolar anomalias estruturais, discrepâncias de notificação ou valores atípicos geográficos.
+
+---
+
+## Indicadores de Insumos e Marcos Analíticos
+
+### Financiamento da Saúde
+Os indicadores de financiamento da saúde aos níveis distrital ou Admin1 são difíceis de obter e limitam-se frequentemente a alocações orçamentadas em vez de despesas reais. Estes conjuntos de dados também tendem a captar recursos governamentais exclusivamente, deixando de fora a ajuda de doadores externos, os seguros privados ou as despesas do próprio bolso. 
+
+<Callout type="warning">
+**Regra do Sistema:** Estes dados de acompanhamento financeiro não são carregados como parâmetros padrão aqui. No entanto, se existirem dados fiáveis de despesas infranacionais à disposição da equipa do país, estes devem ser utilizados para enriquecer a linha de base dos insumos do sistema de saúde.
+</Callout>
+
+### Profissionais de Saúde Essenciais por 10.000 Habitantes
+Os sistemas de rastreio da força de trabalho em saúde são frequentemente de fraca qualidade de dados e podem ser operacionalmente difíceis de extrair. O indicador principal utilizado pela plataforma é a **densidade de profissionais de saúde essenciais por 10.000 habitantes**. Esta coorte inclui:
+* Médicos
+* Clínicos não médicos *(por exemplo, oficiais clínicos ou oficiais de saúde com formação cirúrgica e certificações plurianuais, mas sem um diploma médico académico completo)*
+* Enfermeiros Profissionais
+* Parteiras Certificadas
+
+<Callout type="info">
+**Referências de Limite de Densidade:**
+* **Limite Histórico (Orientação da OMS de 2006):** Uma linha de base mínima de **23 profissionais de saúde essenciais por 10.000 habitantes** foi designada como o ponto de viragem crítico necessário para alcançar os volumes de assistência qualificada ao parto necessários para reduzir a mortalidade materna e infantil.
+* **Limite Moderno (Era da CUS):** As metas globais atualizadas estabelecem uma linha de base significativamente mais elevada de, pelo menos, **44,5 profissionais de saúde essenciais por 10.000 habitantes** para alcançar com sucesso os objetivos da Cobertura Universal de Saúde (CUS).
+</Callout>
+
+### Número de Unidades de Saúde por 10.000 Habitantes
+Esta métrica serve como um indicador de base da infraestrutura física de saúde e inclui todos os níveis de cuidados: hospitais, centros de saúde abrangentes e pontos de cuidados primários de nível inferior, tais como postos de saúde e dispensários. Tanto o setor privado como o público devem ser contabilizados. 
+
+$$\text{Densidade de Unidades de Saúde} = \left( \frac{\text{Número Total de Unidades de Saúde}}{\text{População Total}} \right) \times 10.000$$
+
+Este é um indicador bruto porque pondera os pequenos dispensários primários de forma idêntica aos hospitais de referência terciários. 
+* *Marco Indicativo:* Um valor de **2 unidades por 10.000 habitantes** é utilizado como linha de base de referência indicativa. Uma unidade infranacional que caia abaixo de 2 é categorizada como tendo baixo acesso a infraestruturas.
+
+### Número de Hospitais por 100.000 Habitantes
+Para obter perceções específicas sobre a capacidade

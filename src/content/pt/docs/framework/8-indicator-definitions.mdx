@@ -1,0 +1,185 @@
+## Definições dos indicadores
+
+O Data Suite padroniza as definições de indicadores em todos os sistemas de informação de gestão de saúde (HMIS / SIGS) para permitir uma análise consistente entre países. Esta secção especifica exatamente quais as variáveis do HMIS que mapeiam para os indicadores de saúde reprodutiva, materna, neonatal, infantil e do adolescente (SRMNIA) — prevenindo erros de interpretação e garantindo que os dados das suas unidades de saúde alimentam os numeradores e denominadores corretos. As definições padronizadas também permitem a comparação entre países e ao longo do tempo, tornando mensurável o progresso global em direção à cobertura universal de saúde.
+
+Três categorias de dados organizam os requisitos: dados administrativos (inventário de unidades de saúde, força de trabalho), dados populacionais (estimativas demográficas, taxas de sobrevivência) e dados de serviço (eventos notificados por unidades, estratificados por indicador e nível administrativo). Uma vez que as estruturas do HMIS dos países variam muito, esta referência permite-lhe extrair ou mapear sistematicamente os seus dados para os nomes de variáveis padronizados que o Data Suite espera. A adesão rigorosa a estas definições é fundamental para uma análise fiável.
+
+---
+
+## Definições dos indicadores
+
+Para a padronização da análise entre países, esta secção descreve os indicadores/variáveis extraídos dos HMIS dos países, que são necessários para a análise do Datasuite.  
+Os dados estão agrupados nas seguintes categorias principais:
+
+- **Dados Administrativos (Admin Data)**
+- **Dados Populacionais (Population Data)**
+- **Completude de Notificação (Reporting Completeness)**
+- **Dados de Serviço 1, 2 e 3 (Service Data)**
+- **Verificações de Dados (Data Checks)**
+
+---
+
+### Dados Administrativos (Admin Data)
+
+As variáveis seguintes descrevem a infraestrutura do sistema de saúde e os profissionais.
+
+| Nome da Variável | Descrição |
+|--------------|------------|
+| `Num_order` | Nº |
+| `District_name` | Distrito |
+| `First_admin_level` | Região |
+| `Country` | O nome do seu país |
+| `Number_hospitals` | Número total de hospitais (com base na definição do país) |
+| `Number_hcenters` | Número total de centros de saúde (não hospitais; com base na definição do país) |
+| `Total_number_health_facilities` | Número total de unidades de saúde (todos os tipos/categorias) |
+| `Number_pfacilities_profit` | Número total de unidades de saúde que são privadas com fins lucrativos |
+| `Number_pfacilities_nonprofit` | Número total de unidades de saúde que são privadas sem fins lucrativos |
+| `Total_physicians` | Número total de médicos / oficiais médicos |
+| `Total_nurses_midwives` | Número total de enfermeiros / parteiras |
+| `Total_clinical_officers` | Número total de oficiais clínicos / assistentes médicos |
+| `Total_nonclinique_physicians` | Número total de médicos não clínicos |
+| `Number_hospital_beds` | Número de camas hospitalares |
+
+---
+
+### Dados Populacionais (Population Data)
+
+As variáveis seguintes descrevem estimativas demográficas e populacionais.
+
+| Nome da Variável | Descrição |
+|--------------|------------|
+| `District_name` | Nome do distrito |
+| `Year` | Ano |
+| `Pop_growth_rate` | Taxa anual de crescimento populacional |
+| `Total_Population` | População total |
+| `Population_ under_5years` | População menor de 5 anos |
+| `Population_under_1year` | População menor de 1 ano |
+| `Live_births` | Total projetado de nascidos vivos (Nascidos vivos estimados a partir do censo) |
+| `Total_births` | Total projetado de nascimentos (Nascimentos estimados a partir do censo) |
+| `Women_15_49_years` | Total de mulheres dos 15 aos 49 anos |
+
+---
+
+### Completude de Notificação (Reporting Completeness)
+
+As variáveis seguintes rastreiam as taxas de notificação das unidades e os envios esperados para várias categorias de serviços de saúde.
+
+| Nome da Variável | Descrição |
+|--------------|------------|
+| `District` | Nome do distrito |
+| `Year` | Ano |
+| `Month` | Mês |
+| `ANC_reporting_expected` | Notificação de CPN: Número esperado (#) |
+| `ANC_reporting_received` | Notificação de CPN: Número recebido (#) |
+| `ANC_reporting_rate` | Notificação de CPN: Taxa de completude da notificação (%) |
+| `Instdelivey_reporting_expected` | Notificação de partos institucionais: Número esperado (#) |
+| `Instdelivey_reporting_received` | Notificação de partos institucionais: Número recebido (#) |
+| `Instdelivey_reporting_rate` | Notificação de partos institucionais: Taxa de completude da notificação (%) |
+| `Vacc_reporting_expected` | Notificação de vacinações: Número esperado (#) |
+| `Vacc_reporting_received` | Notificação de vacinações: Número recebido (#) |
+| `Vacc_reporting_rate` | Notificação de vacinações: Taxa de completude da notificação (%) |
+| `OPD_reporting_expected` | Notificação de visitas de ambulatório (OPD): Número esperado (#) |
+| `OPD_reporting_received` | Notificação de visitas de ambulatório (OPD): Número recebido (#) |
+| `OPD_reporting_rate` | Notificação de visitas de ambulatório (OPD): Taxa de completude da notificação (%) |
+| `IPD_reporting_expected` | Notificação de internamentos (IPD): Número esperado (#) |
+| `IPD_reporting_received` | Notificação de internamentos (IPD): Número recebido (#) |
+| `IPD_reporting_rate` | Notificação de internamentos (IPD): Taxa de completude da notificação (%) |
+
+---
+
+### Dados de Serviço 1 (Service Data 1)
+
+Admissões gerais, óbitos e vacinações infantis iniciais.
+
+| Nome da Variável | Descrição |
+|--------------|------------|
+| `District` | Nome do distrito |
+| `Year` | Ano |
+| `Month` | Mês |
+| `BCG` | Número total de doses de BCG administradas a &lt;1 ano |
+| `Penta1` | Número total da 1ª dose da vacina Pentavalente (lactentes) |
+| `Penta3` | Número total da 3ª dose da vacina Pentavalente (lactentes) |
+| `Measles1` | Número total da 1ª dose da vacina contra o Sarampo (lactentes) |
+| `Measles2` | Número total da 2ª dose da vacina contra o Sarampo |
+| `OPD_total` | Número total de visitas de ambulatório (OPD) para todas as idades (novas e de seguimento) |
+| `OPD_under5` | Número de visitas de ambulatório (OPD) para crianças menores de 5 anos |
+| `IPD_total` | Número total de internamentos (IPD), todas as idades |
+| `IPD_under5` | Número de internamentos (IPD) de crianças menores de 5 anos |
+| `under5_deaths` | Número total de óbitos de menores de 5 anos em unidades de saúde |
+| `total_deaths` | Número total de óbitos de todas as idades em unidades de saúde |
+
+---
+
+### Dados de Serviço 2 (Service Data 2)
+
+Indicadores de saúde materna, neonatal e reprodutiva.
+
+| Nome da Variável | Descrição |
+|--------------|------------|
+| `District` | Nome do distrito |
+| `Year` | Ano |
+| `Month` | Mês |
+| `ANC1` | Número total da 1ª visita de CPN |
+| `ANC_1trimester` | Número total de CPN durante o 1º trimestre de gravidez |
+| `ANC4` | Número total de mulheres grávidas que completam 4 visitas de CPN |
+| `IPT2` | Número total de mulheres grávidas que recebem a 2ª dose de TPI |
+| `IPT3` | Número total de mulheres grávidas que recebem a 3ª dose de TPI |
+| `IFA90` | Número total de mulheres grávidas que receberam suplementação de ferro e ácido fólico (IFA) durante 90 ou mais dias durante a gravidez |
+| `Syphilis_test` | Número total de mulheres grávidas testadas para sífilis durante a gravidez |
+| `HIV_test` | Número total de mulheres grávidas testadas para o VIH durante a gravidez |
+| `SBA` | Número total de partos com assistência qualificada em unidades de saúde |
+| `Instdelivery` | Número total de partos em unidades de saúde |
+| `Instlivebirths` | Número total de nascidos vivos em unidades de saúde |
+| `Csection` | Número total de Cesarianas |
+| `Low_BWeight` | Número total de recém-nascidos com baixo peso ao nascer (&lt;2500g) |
+| `PNC_48h` | Número total de mães que comparecem a uma visita de CPoN nas primeiras 48 horas após o parto |
+| `Stillbirth_total` | Número total de natimortos em unidades de saúde (todos) |
+| `Stillbirth_fresh` | Número total de natimortos recentes (intraparto) em unidades de saúde |
+| `Stillbirth_macerated` | Número total de natimortos macerados em unidades de saúde |
+| `maternal_deaths` | Número total de óbitos maternos notificados |
+| `neonatal_deaths` | Número total de óbitos neonatais notificados |
+
+---
+
+### Dados de Serviço 3 (Service Data 3)
+
+Vacinações adicionais e casos de doenças.
+
+| Nome da Variável | Descrição |
+|--------------|------------|
+| `District` | Nome do distrito |
+| `Year` | Ano |
+| `Month` | Mês |
+| `opv1` | Número total de crianças com &lt;1 ano que receberam a vacina Pólio 1 |
+| `opv2` | Número total de crianças com &lt;1 ano que receberam a vacina Pólio 2 |
+| `opv3` | Número total de crianças com &lt;1 ano que receberam a vacina Pólio 3 |
+| `penta2` | Número total da 2ª dose da vacina Pentavalente (lactentes) |
+| `pcv1` | Número total de crianças com &lt;1 ano que receberam a vacina Conjugada Pneumocócica 1 |
+| `pcv2` | Número total de crianças com &lt;1 ano que receberam a vacina Conjugada Pneumocócica 2 |
+| `pcv3` | Número total de crianças com &lt;1 ano que receberam a vacina Conjugada Pneumocócica 3 |
+| `rota1` | Número total de crianças com &lt;1 ano que receberam a vacina contra o Rotavírus 1 |
+| `rota2` | Número total de crianças com &lt;1 ano que receberam a vacina contra o Rotavírus 2 |
+| `ipv1` | Número total de crianças que receberam a vacina inativada contra o poliovírus 1 |
+| `ipv2` | Número total de crianças que receberam a vacina inativada contra o poliovírus 2 |
+| `hpv1` | Número total de crianças que receberam a vacina contra o papilomavírus humano 1 |
+| `hpv2` | Número total de crianças que receberam a vacina contra o papilomavírus humano 2 |
+| `measles_cases` | Número total de casos de Sarampo notificados |
+
+---
+
+### Verificações de Dados (Data Checks)
+
+Variáveis de diagnóstico automatizadas utilizadas para validação de completude e consistência em todas as folhas.
+
+| Nome da Variável | Descrição |
+|--------------|------------|
+| `District` | Nome do Distrito |
+| `# of occurrences in 'Admin data'` | Contagem de verificação da presença do distrito na folha de Dados Administrativos (Admin Data) |
+| `Is the district missing in 'Population_data'?` | Sinalizador de estado verificando se o distrito está em falta nos Dados Populacionais |
+| `# of occurrences in 'Population_data'?` | Contagem de verificação da presença do distrito nos Dados Populacionais |
+| `Is the district missing in 'Reporting_completeness'?` | Sinalizador de estado verificando se o distrito está em falta na Completude de Notificação |
+| `# of occurrences in 'Reporting completeness'` | Contagem de verificação da presença do distrito na Completude de Notificação |
+| `Is the district missing in 'Service_data_1'?` | Sinalizador de estado verificando se o distrito está em falta nos Dados de Serviço 1 |
+| `# of occurrences in 'Service_data_1'` | Contagem de verificação da presença do distrito nos Dados de Serviço 1 |
+| `Is the district missing in 'Service_data_2'?` | Sinalizador de estado verificando se o distrito está em falta nos Dados de Serviço 2 |
+| `# of occurrences in 'Service_data_2'` | Contagem de verificação da presença do distrito nos Dados de Serviço 2 |

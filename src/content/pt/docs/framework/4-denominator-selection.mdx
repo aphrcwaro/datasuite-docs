@@ -1,0 +1,288 @@
+# 7 Avaliação e Seleção de Denominador
+
+A cobertura é fundamentalmente um rácio (ou proporção): serviços prestados divididos pela população que necessita desses serviços. Enquanto os dados de rotina capturam os numeradores de forma fiável, os denominadores são muito mais incertos — especialmente a nível distrital, onde as estimativas populacionais podem estar desatualizadas, não ser fiáveis ou estar ausentes. Este módulo compara cinco denominadores candidatos (projeções do DHIS2, projeções da ONU e três estimativas derivadas de unidades de saúde) testando quão próximo cada um produz níveis de cobertura correspondentes aos inquéritos aos agregados familiares de referência (gold-standard), como o DHS ou o MICS.
+
+A ciência por trás da seleção do denominador baseia-se em relações demográficas interligadas. Uma mulher grávida está ligada aos partos, à sobrevivência neonatal e aos lactentes elegíveis para vacinação — relações quantificadas através de pressupostos demográficos (perda de gravidez, natimortalidade, gémelos, mortalidade neonatal). Através da engenharia reversa das metas populacionais a partir dos relatórios das unidades de saúde sobre serviços altamente utilizados (visitas de CPN1 e Penta1), a Data Suite produz denominadores empíricos baseados em padrões reais de cobertura em vez de projeções populacionais especulativas. O vencedor: qualquer método que reduza a lacuna entre as estimativas de cobertura baseadas nas unidades de saúde e nos inquéritos.
+
+---
+
+## 7.1 Fundamentação, Abordagem e Implementação
+
+### Fundamentação: Base científica para a análise
+A cobertura de serviços é definida como a população que recebeu um serviço dividida pela população que necessita desse serviço (também referida como a **população-alvo**). 
+
+Os numeradores das estatísticas de cobertura (por exemplo, número de nascidos vivos nas unidades de saúde) são derivados de dados de rotina das unidades de saúde e devem ser ajustados conforme demonstrado nas secções anteriores. Por outro lado, o denominador destas estatísticas de cobertura (por exemplo, o número total de nascidos vivos na população) precisa de ser cuidadosamente estimado tanto a nível nacional como infranacional (regiões e distritos).
+
+### Abordagem: Descrição dos passos analíticos
+O objetivo da análise do denominador das unidades de saúde é duplo:
+1. **Avaliação da Qualidade:** Avaliar a qualidade das projeções populacionais no DHIS2, comparando-as com as projeções populacionais da ONU e verificando a consistência interna.
+2. **Avaliação de Desempenho:** Avaliar o desempenho de várias opções de denominadores para calcular indicadores de cobertura de serviços de base populacional a partir dos dados das unidades de saúde.
+
+Este processo culmina numa seleção final de denominadores a utilizar para o cálculo e acompanhamento de indicadores de cobertura de base populacional dentro da Data Suite. Cada indicador de saúde baseia-se na sua própria linha de base de denominador distinta, conforme detalhado na matriz abaixo.
+
+#### Tabela 3: Indicadores Selecionados com Numeradores e Denominadores
+
+| Categoria do Indicador | Indicadores | Numerador | Denominador |
+| :--- | :--- | :--- | :--- |
+| **UTILIZAÇÃO DE SERVIÇOS** | Visitas de ambulatório (externas), crianças menores de 5 anos, por ano (N) | Nº de visitas OPD para menores de 5 anos | População total a meio do ano menor de 5 anos |
+| | Internamentos (admissões hospitalares), crianças menores de 5 anos, por ano (N) | Nº de internamentos para menores de 5 anos | População total a meio do ano menor de 5 anos |
+| **INTERVENÇÕES PREVENTIVAS** | % de mulheres grávidas com 4 visitas de cuidados pré-natais | Nº de mulheres com a 4ª visita de CPN | Nº total de mulheres grávidas em toda a população |
+| | % de nascidos vivos nas unidades de saúde | Nº de nascidos vivos nas unidades de saúde | Nº total de nascidos vivos em toda a população |
+| | % de lactentes que recebem 3 doses da vacina pentavalente | Nº de lactentes que recebem 3 doses | Nº de lactentes elegíveis para 3 doses da vacina |
+| **INTERVENÇÕES CURATIVAS** | % de crianças menores de 5 anos com malária que recebem ACT | Nº de crianças menores de 5 anos com malária que recebem ACT | Nº total de crianças que tiveram malária no último ano |
+| | % de partos que foram por cesariana (população) | Nº de cesarianas notificadas | Nº total de partos na população |
+| | % de partos que foram por cesariana (institucional) | Nº de cesarianas notificadas | Nº total de partos nas unidades de saúde |
+| **MORTALIDADE** | Rácio de mortalidade materna institucional | Nº de mortes maternas nas unidades de saúde | Número total de nascidos vivos nas unidades de saúde |
+| | Taxa de natimortalidade | Nº de natimortos nas unidades de saúde | Nº total de nascimentos nas unidades de saúde |
+| | Mortalidade neonatal antes da alta | Nº de mortes neonatais antes da alta (após o nascimento) | Nº total de nascidos vivos nas unidades de saúde |
+| **PLANEAMENTO FAMILIAR (PF)** | Rácio de visitas de PF em relação a mulheres em idade reprodutiva | Nº de visitas novas e de acompanhamento de PF | Nº total de mulheres dos 15 aos 49 anos |
+| | Uso moderno estimado de contracetivos | Anos-casal de proteção | Nº total de mulheres dos 15 aos 49 anos |
+| | Cobertura de PF (procura satisfeita) | Nº de mulheres que utilizam métodos modernos | Nº total de mulheres com necessidade de PF |
+
+---
+
+### 7.1.1 Parte 1: Avaliação da Qualidade das Projeções Populacionais no DHIS2
+
+Na primeira fase, avaliamos a qualidade dos dados das projeções populacionais do DHIS2 a nível nacional utilizando duas vias principais de avaliação:
+
+#### Via 1: Consistência Interna das Projeções do DHIS2
+Analisamos a trajetória do crescimento populacional do DHIS2 ao longo do tempo. Primeiro, é calculada a taxa de crescimento populacional:
+
+$$\text{Population Growth Rate} = \ln\left(\frac{\text{Population}_{t}}{\text{Population}_{t-1}}\right)$$
+
+Em seguida, calculamos a **Taxa Bruta de Natalidade (TBN)**, definida como o número de nascidos vivos projetados no DHIS2 por cada 1.000 habitantes (população total). Espera-se que ambas as taxas calculadas permaneçam estáveis e consistentes ao longo do tempo, mostrando uma variação **inferior a 2 por 1.000** entre anos de base consecutivos.
+
+#### Via 2: Comparação com as Projeções Populacionais da ONU
+Comparamos os dados populacionais do DHIS2 diretamente com as projeções populacionais independentes das Nações Unidas a nível nacional. Embora sejam esperadas pequenas variações, grandes discrepâncias apontam para problemas estruturais de qualidade de dados no DHIS2. 
+
+O Data Suite sinaliza valores anormais em quatro métricas alvo específicas:
+
+* **Tamanho da População:**
+  $$\text{Relative Difference} = \frac{\text{Population}_{\text{DHIS2}} - \text{Population}_{\text{UN}}}{\text{Population}_{\text{UN}}}$$
+  *Limiar Aceitável:* Uma diferença relativa entre o DHIS2 e os tamanhos populacionais projetados pela ONU superior a **5%** é sinalizada como um problema ativo de qualidade de dados.
+
+* **Crescimento Populacional (2023–2024):**
+  O crescimento anual é calculado utilizando uma abordagem de logaritmo natural.
+  *Limiar Aceitável:* Uma diferença absoluta superior a **0,3%** entre as estimativas de crescimento do DHIS2 e da ONU indica um problema subjacente de consistência.
+
+* **Taxa Bruta de Natalidade (TBN/CBR):**
+  Mede o número de nascidos vivos por 1.000 habitantes. A TBN derivada do DHIS2 é formulada da seguinte forma:
+  $$\text{CBR}_{\text{DHIS2}} = \left( \frac{\text{Projected Live Births}}{\text{Total Population}} \right) \times 1,000$$
+  *Limiar Aceitável:* A TBN calculada no DHIS2 é comparada com a estimativa da ONU para o mesmo ano. Uma diferença que exceda **5 por 1.000 habitantes** sugere um problema estrutural de dados.
+
+* **Taxa Bruta de Mortalidade (TBM/CDR):**
+  Definida como o número de óbitos por 1.000 habitantes. Assumindo que não existem forças maciças de migração líquida ativas, representa a diferença estatística entre a TBN e o crescimento populacional absoluto:
+  $$\text{CDR}_{\text{DHIS2}} = \text{CBR}_{\text{DHIS2}} - \text{Population Growth Rate}$$
+  *Limiar Aceitável:* Um cálculo de TBM negativo ou um valor de TBM **< 5 por 1.000** indica uma clara inconsistência interna e potencial falha na projeção.
+
+---
+
+### 7.1.2 Parte 2: Seleção do Denominador
+
+O segundo objetivo é isolar e selecionar o melhor método de denominador para acompanhar as métricas de cobertura populacional através de dados de rotina das unidades de saúde. 
+
+#### Visão Geral do Método
+A nível nacional, o Data Suite avalia dinamicamente **cinco métodos distintos de denominadores**:
+1. **Projeções do DHIS2** (Baseado em projeções)
+2. **Projeções da ONU** (Baseado em projeções)
+3. **Meta derivada da CPN1** (Baseado em dados das unidades de saúde)
+4. **Meta derivada da Penta1** (Baseado em dados das unidades de saúde)
+5. **Derivada da Penta1 Ajustada ao Crescimento Populacional** (Baseado em dados das unidades de saúde)
+
+>  **Nota:** Para avaliações infranacionais (regiões e distritos), as projeções da ONU não estão disponíveis. Portanto, o motor de análise reduz-se para avaliar apenas **quatro métodos**.
+
+#### Cascatas Demográficas e Pressupostos
+Os denominadores maternos e dos recém-nascidos estão matematicamente ligados. Começando pelo total de gestações, o número esperado de nascidos vivos pode ser mapeado integrando os pressupostos demográficos padrão. Embora os valores específicos por país do repositório da OMS sejam preferíveis, o Data Suite estabelece os seguintes pressupostos globais por defeito:
+
+* **Perda de Gravidez (4 a 7 meses / 28 semanas de gestação):** `3%`
+* **Natimortos (28 semanas de gestação até ao nascimento):** `2%`
+* **Taxa de Gémelos:** `+1,5%`
+* *A combinação destes três primeiros passos converte o total de gestações na linha de base de nascidos vivos.*
+* **Mortalidade Neonatal (menos de 28 dias):** `3%` *(30 por 1.000 nascidos vivos)*
+* **Mortalidade Pós-Neonatal (1 a 11 meses):** `2,4%` *(24 por 1.000 nascidos vivos)*
+
+#### Selecionar o Vencedor
+A seleção do denominador com melhor desempenho é determinada testando até que ponto a projeção do DHIS2 e os métodos derivados das unidades de saúde correspondem às taxas de cobertura populacional de um inquérito populacional recente de referência (por exemplo, DHS ou MICS). 
+
+O Data Suite calcula a diferença absoluta entre a cobertura do inquérito e a cobertura baseada nas unidades de saúde para dois indicadores rastreadores: **nascidos vivos institucionais** e **imunização penta3**. O método que produzir a menor variância absoluta nos níveis nacional e infranacional é selecionado como a configuração de denominador ativa.
+
+---
+
+### 7.1.3 Denominadores Derivados de Estimativas Populacionais
+Estes modelos tiram partido das metas estimadas de nascidos vivos utilizando os dois conjuntos de dados de projeção puramente demográficos:
+1. **As Projeções Populacionais da ONU**
+2. **Projeções Populacionais da Base de Dados Central do DHIS2**
+
+---
+
+### 7.1.4 Denominadores Derivados de Dados de Rotina das Unidades de Saúde
+A lógica subjacente é simples: se se souber que a verdadeira cobertura ao nível da população de um indicador é muito elevada (por exemplo, superior a 90%), então o número total de eventos brutos reportados pelas unidades de saúde deve situar-se matematicamente próximo da verdadeira população-alvo. 
+
+Ao ajustar os números das unidades de saúde para cima para contabilizar a população não alcançada encontrada nos inquéritos aos agregados familiares, podemos calcular de forma inversa (back-calculate) denominadores altamente precisos diretamente a partir do DHIS2. Os rastreadores ideais para esta metodologia são as visitas de **CPN1** e **DTP/penta1**.
+
+#### Exemplos Práticos
+
+* **Calcular o Total de Mulheres Grávidas (via CPN1):**
+  Se a cobertura do inquérito for de 95% ($0,95$) e o total de visitas de CPN1 nas unidades de saúde for igual a 100.000, a população-alvo total ajustada de mulheres grávidas é calculada como:
+  $$\text{Target Population (Pregnancies)} = \frac{100,000}{0.95} = 105,263$$
+
+* **Calcular o Total de Lactentes Elegíveis (via Penta1):**
+  Se a cobertura do inquérito para crianças dos 12 aos 23 meses que recebem uma primeira dose pentavalente for de 92% ($0,92$) e os registos das unidades de saúde mostrarem 100.000 doses administradas, a população infantil alvo é:
+  $$\text{Target Population (Infants)} = \frac{100,000}{0.92} = 108,696$$
+
+Ao executar estes cálculos de base e ao aplicá-los para a frente ou para trás através dos nossos pressupostos de cascata demográfica, o Data Suite constrói uma estimativa empírica, derivada das unidades de saúde, para o total de nascidos vivos. Este fluxo lógico é ilustrado no diagrama de percurso diagnóstico abaixo.
+
+*insert image*
+#### Fluxograma da Derivação do Denominador
+
+
+Um exemplo da CPN1:
+
+Acima calculámos 105.263 mulheres grávidas na população.
+
+* Com 3% de aborto, isto implica `105.263 * (1 - 0,03) = 102.454` partos.
+* Com uma taxa de gémelos de 1,5%, isto implica `102.454 / (1 - (0,015 / 2)) = 103.229` nascimentos.
+* Com uma taxa de natimortalidade de 2%, isto implica `103.229 * (1 - 0,02) = 101.164` nascidos vivos.
+* Com uma mortalidade neonatal de 3%, isto implica `101.164 * (1 - 0,03) = 98.129` crianças elegíveis para DTP1/penta1.
+
+## 7.2 Implementação na Aplicação Shiny
+
+Para obter resultados para esta análise, primeiro configure a análise introduzindo informações essenciais na secção de configuração de análise (analysis setup) da Aplicação Shiny.
+
+### 7.2.1 Configuração da análise
+
+Os parâmetros necessários estão listados [aqui](/en/docs/4-denominator-selection[#survey-params])
+
+
+
+## 7.2 Definições dos Indicadores Principais e Parâmetros do Inquérito
+
+Abaixo encontra-se a discriminação técnica dos indicadores rastreadores de cobertura e dos parâmetros de configuração operacionais utilizados no Data Suite.
+
+### Indicadores de Saúde Materna e Infantil
+
+#### CPN4 (Cuidados Pré-Natais 4+ Visitas)
+
+* **Definição:** A percentagem de mulheres com idades compreendidas entre os 15 e os 49 anos com um nado-vivo que receberam quatro ou mais visitas de cuidados pré-natais durante a última gravidez.
+* **Exemplo de Cálculo:** Se 680 de 1.000 mulheres inquiridas tiveram ≥ 4 visitas de CPN, a cobertura de CPN4 calculada é de **68%**.
+
+#### Parto Institucional
+
+* **Definição:** A percentagem de nascidos vivos que ocorreram numa unidade de saúde formal.
+* **Exemplo de Cálculo:** Se 850 de 1.000 nascidos vivos ocorreram numa unidade de saúde, a cobertura de parto institucional é de **85%**.
+
+#### Baixo Peso ao Nascer
+
+* **Definição:** A percentagem de nascidos vivos em que o lactente pesava menos de 2.500 gramas à nascença.
+* **Exemplo de Cálculo:** Se 100 de 1.000 nascidos vivos registados tiveram baixo peso ao nascer, a proporção de baixo peso ao nascer é de **10%**.
+
+#### Cesariana
+
+* **Definição:** A percentagem de nascidos vivos que nasceram através de cesariana cirúrgica.
+* **Exemplo de Cálculo:** Se 150 de um total de 1.000 nascidos vivos nasceram por cesariana, a cobertura de cesariana ao nível da população é de **15%**.
+
+---
+
+### Indicadores de Cobertura Vacinal
+
+#### Penta 3 (Vacina Pentavalente 3ª Dose)
+
+* **Definição:** A percentagem de lactentes dos 12 aos 23 meses de idade que receberam a terceira dose recomendada da vacina pentavalente.
+* **Exemplo de Cálculo:** Se 850 de 1.000 lactentes na coorte receberam a terceira dose, a cobertura da Penta 3 é de **85%**.
+
+#### Sarampo1 (Vacina contra o Sarampo 1ª Dose)
+
+* **Definição:** A percentagem de lactentes dos 12 aos 23 meses de idade que receberam a primeira dose da vacina contendo a valência do sarampo.
+* **Exemplo de Cálculo:** Se 900 de 1.000 lactentes na coorte receberam a primeira dose, a cobertura de Sarampo1 é de **90%**.
+
+#### BCG (Vacina Bacilo de Calmette-Guérin)
+
+* **Definição:** A percentagem de lactentes dos 12 aos 23 meses de idade que receberam a vacina BCG, que protege contra a tuberculose.
+* **Exemplo de Cálculo:** Se 950 de 1.000 lactentes receberam a vacina, a cobertura de BCG é de **95%**.
+
+---
+
+### Parâmetros de Configuração de Metadados de Inquérito
+
+#### Ano do Inquérito de Vacinas
+
+* **Definição:** O ano civil específico em que foi realizado o inquérito de base populacional aos agregados familiares, a partir do qual são extraídos os valores de referência da cobertura vacinal ativa (por exemplo, BCG, Penta1/3, Sarampo1).
+* **Exemplo:** Se o seu inquérito nacional foi realizado e concluído em 2022, o valor de entrada do parâmetro para o campo de configuração é **2022**.
+
+#### Ano de Início dos Dados do Inquérito
+
+* **Definição:** O ano civil de base que marca o início da cronologia do inquérito comparativo. Este parâmetro ajuda a ancorar a janela de tendência histórica relevante para a análise.
+* **Melhor Prática de Implementação:** Para uma estimativa de base ideal, recomenda-se vivamente que se incluam dados que abranjam os **dois inquéritos mais recentes disponíveis** para o seu país.
+* **Exemplo:** Se um país tem conjuntos de dados de inquéritos históricos de 2008, 2013, 2018 e 2023, a configuração do parâmetro *Ano de Início dos Dados do Inquérito* (Survey Data Start Year) deve ser definida para **2018** (isolando os dois ciclos de dados mais recentes: 2018 e 2023).
+
+#### Conjuntos de dados do inquérito
+
+Além de definir estes parâmetros, ser-lhe-á exigido que faça o upload dos seguintes conjuntos de dados de inquéritos, em complemento aos dados das unidades de saúde carregados no início da sessão de análise:
+
+1. Dados das estimativas da ONU
+2. Dados de mortalidade da ONU
+3. Dados das estimativas WUENIC
+4. Dados do inquérito (carregados como uma pasta)
+5. Dados do FPET
+6. Dados da quota público/privado (carregados como uma pasta)
+
+### 7.2.2 Avaliação do denominador
+
+A primeira parte consiste em avaliar a exatidão e a consistência dos números populacionais projetados no DHIS2 comparando-os com fontes externas.
+
+#### Interpretação
+
+A interpretação deve focar-se na medida em que as projeções do DHIS2 são consideradas robustas, o que acontece quando:
+
+1. A projeção da população total do DHIS2 é consistente ao longo do tempo com um crescimento populacional regular.
+2. A projeção do total de nascidos vivos do DHIS2 é consistente ao longo do tempo (tendência regular).
+3. Os números projetados da população total e dos nascidos vivos estão próximos da projeção populacional da ONU.
+4. As projeções populacionais do DHIS2 são consistentes com as estimativas da ONU para a taxa bruta de natalidade e a taxa bruta de mortalidade.
+5. A segunda parte consiste em comparar os resultados dos diferentes métodos, tanto a nível nacional como infranacional.
+
+#### Tendência da avaliação do denominador
+
+## 7.3 Interpretação e Regras de Seleção do Denominador
+
+### 7.3.1 Interpretação da Robustez das Projeções do DHIS2
+O foco analítico principal ao avaliar estas métricas deve ser o de determinar a robustez absoluta e a estabilidade dos números populacionais ativos da sua plataforma. As projeções de base do DHIS2 são consideradas **robustas** apenas quando satisfazem os seguintes critérios em simultâneo:
+
+* **Consistência Interna da População:** A projeção da população total do DHIS2 permanece altamente consistente ao longo do tempo, demonstrando uma trajetória de crescimento populacional suave e regular, sem picos ou quedas repentinas.
+* **Consistência Interna de Nascimentos:** A projeção do total de nascidos vivos do DHIS2 exibe uma tendência estável e regular ao longo de anos de notificação consecutivos.
+* **Alinhamento Externo:** Os números absolutos projetados tanto para a população total como para os nascidos vivos alinham-se estreitamente com as estimativas populacionais independentes da ONU.
+* **Harmonia das Taxas Demográficas:** As projeções subjacentes do DHIS2 produzem uma Taxa Bruta de Natalidade (TBN) e uma Taxa Bruta de Mortalidade (TBM) que são altamente consistentes com as taxas estimadas correspondentes da ONU.
+
+Assim que a robustez nacional for determinada, os utilizadores devem avançar para a segunda fase da análise: realizar uma avaliação comparativa direta dos diferentes métodos de estimativa do denominador aos níveis nacional e infranacional (regional/distrital).
+
+---
+
+### 7.3.2 Critérios Finais de Seleção
+O passo final neste módulo é selecionar oficialmente o modelo de denominador com melhor desempenho para os seus cálculos de cobertura de base populacional. 
+
+Para garantir a maior precisão em todos os níveis do sistema de saúde, a estrutura de seleção deve ponderar duas variáveis estatísticas principais em simultâneo:
+
+1. **O Desvio (Gap) Nacional:** A variância absoluta entre a sua cobertura baseada nas unidades de saúde e a meta do inquérito nacional.
+2. **O Desvio Infranacional Mediano:** A variância absoluta mediana em todas as regiões ou distritos individuais.
+
+O método que consiga minimizar eficazmente tanto os desvios nacionais como os infranationais face aos dados do inquérito de referência (gold-standard) será escolhido pelo motor do Data Suite como o seu mapeamento de denominador ativo principal.
+
+
+*****Insert best denominator chart****
+
+>  **Regra Central:** Os métodos de denominadores com melhor desempenho são sempre aqueles que demonstram os menores desvios numéricos quando comparados diretamente com os resultados do seu inquérito de referência.
+
+### Nota Operacional Importante
+Idealmente, é escolhido um único método de denominador unificado em toda a plataforma. No entanto, a arquitetura do sistema permite selecionar **um método de denominador especializado para os indicadores de Saúde Materna e Neonatal (SMN)** (CPN, parto institucional, cuidados pós-natais) e um **método de denominador separado para as análises de cobertura vacinal**. 
+
+É de importância crítica declarar e indicar explicitamente as configurações de denominador escolhidas aqui. Certifique-se de que as suas seleções finais são guardadas no ficheiro `.RDS` em cache do seu espaço de trabalho para as preservar entre sessões.
+
+Os denominadores selecionados — tanto para o eixo materno como para o de imunização — transitarão automaticamente e preencherão todos os módulos analíticos subsequentes no sistema. Tenha em atenção que os separadores de configuração destacados dentro da interface deste módulo são os únicos locais onde pode modificar as definições de denominador escolhidas.
+
+---
+
+### 7.3.3 Interpretação
+A sua narrativa de interpretação escrita final deve utilizar os gráficos de diagnóstico gerados para responder explicitamente às seguintes questões de avaliação:
+
+1. **Desempenho Nacional:** Quais os métodos de denominador específicos que demonstraram a maior precisão (menores desvios) a nível nacional para os dois principais indicadores rastreadores?
+2. **Desempenho Infranacional:** Qual o modelo de denominador que obteve o melhor desempenho quando avaliado ao longo dos níveis administrativos infranationais para os dois indicadores rastreadores?
+3. **Seleção Final do Sistema:** Que seleção e justificação explícita estão a ser feitas para os indicadores ao longo das suas análises de cobertura finais?

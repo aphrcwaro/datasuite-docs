@@ -1,0 +1,72 @@
+import { Steps } from 'nextra/components'
+import { Callout } from 'nextra/components'
+import { Bleed } from 'nextra/components'
+
+## Performance des systèmes de santé
+
+### Introduction
+
+Cette section se concentre sur l'analyse de la performance des systèmes de santé, y compris la disponibilité et la qualité des services de santé, le personnel de santé et le financement de la santé. L'analyse vise à identifier les lacunes et les défis du système de santé qui peuvent affecter la prestation des services de santé de la reproduction, de la mère, du nouveau-né, de l'enfant, de l'adolescent et de la nutrition (SRMNIA-N / RMNCAH-N).
+
+Elle contient les sous-sections suivantes :
+* Intrants du système de santé (nationaux et infranationaux)
+* Extrants du système de santé (nationaux et infranationaux)
+* Secteur privé et services SRMNIA-N
+
+---
+
+## La performance des systèmes de santé dans l'approche analytique CD2030
+
+**Description des étapes analytiques :**
+
+La portée analytique se limite à une comparaison descriptive directe des extrants du système de santé (couverture des interventions traceuses) par rapport aux intrants du système (infrastructures, personnel et mesures de financement) au niveau infranational (niveau Admin1). Des méthodologies plus complexes — telles que l'analyse d'enveloppement des données, la modélisation de l'efficacité frontalière ou l'indexation composite contrôlant les facteurs de développement socio-économique multisectoriels — n'entrent pas dans le cadre de cette section opérationnelle.
+
+L'objectif principal reste d'isoler les goulots d'étranglement infranationaux spécifiques où des intrants élevés du système ne parviennent pas à se traduire par les extrants de couverture des services SRMNIA-N attendus, ou inversement, d'identifier les régions très performantes présentant une forte efficacité de prestation de services.
+
+<Steps>
+
+### [Mise en œuvre](/docs/methods/#implementation-health-systems-performance)
+
+L'analyse de ces sous-modules est entièrement réalisée dans la section **Performance du système de santé** (Health System Performance) de la **Data Suite**. 
+
+Naviguez vers l'onglet du module principal pour configurer vos paramètres analytiques, sélectionnez vos entrées de tableau croisé, et examinez les nuages de points et les matrices de tableau de bord qui en résultent.
+
+    - *[insert health_system_performance_module_interface Output]*
+
+</Steps>
+
+---
+
+## Cadre d'évaluation des intrants des systèmes de santé
+
+Dans un premier temps, l'évaluation se concentre sur la qualité des données pour les indicateurs du système de santé aux niveaux national et infranational. Pour les indicateurs sélectionnés, l'évaluation doit cibler :
+* **Analyse comparative mondiale (Benchmarking) :** Comparaison avec les référentiels de données mondiaux pour les indicateurs sélectionnés *(au niveau national uniquement)*.
+* **Audit de plausibilité :** Évaluer la plausibilité des valeurs des indicateurs à travers les unités infranationales pour identifier les valeurs aberrantes majeures ou les modèles improbables.
+
+De plus, il est très utile d'explorer les corrélations croisées des intrants du système de santé entre eux *(par exemple, la densité du personnel tracée par rapport à la capacité en lits d'hospitalisation)*. Cette cartographie des corrélations est efficace pour détecter les incohérences systémiques des données à travers les unités Admin1 (provinces, régions ou comtés).
+
+Enfin, l'évaluation de l'alignement des mesures de performance du système de santé à travers les différents niveaux administratifs *(par exemple, la comparaison directe des agrégats Admin1 par rapport aux valeurs imbriquées des districts)* aide à isoler les anomalies structurelles, les divergences de déclaration ou les valeurs aberrantes géographiques.
+
+---
+
+## Indicateurs d'intrants et références analytiques
+
+### Financement de la santé
+Les indicateurs de financement de la santé aux niveaux des districts ou Admin1 sont difficiles à obtenir et se limitent fréquemment aux allocations budgétées plutôt qu'aux dépenses réelles. Ces jeux de données ont également tendance à capturer exclusivement les ressources gouvernementales, omettant l'aide des donateurs externes, l'assurance privée ou les dépenses directes des ménages. 
+
+<Callout type="warning">
+**Règle du système :** Ces données de suivi financier ne sont pas chargées comme paramètres par défaut ici. Cependant, si des données de dépenses infranationales fiables sont disponibles pour l'équipe de pays, elles doivent être utilisées pour enrichir la base de référence des intrants du système de santé.
+</Callout>
+
+### Professionnels de la santé essentiels pour 10 000 habitants
+Les outils de suivi du personnel de santé sont souvent de mauvaise qualité de données et peuvent être opérationnellement difficiles à extraire. L'indicateur principal utilisé par la plateforme est la **densité des professionnels de la santé essentiels pour 10 000 habitants**. Cette cohorte comprend :
+* Médecins
+* Cliniciens non médecins *(par exemple, agents cliniques ou agents de santé ayant une formation chirurgicale et des certifications pluriannuelles, mais n'ayant pas de diplôme médical universitaire complet)*
+* Infirmières professionnelles
+* Sages-femmes diplômées
+
+<Callout type="info">
+**Références de seuil de densité :**
+* **Seuil historique :** Un seuil de base de densité de référence.
+* **Seuil moderne :** Une cible plus élevée utilisée dans l'évaluation contemporaine de la couverture des services.
+</Callout>
