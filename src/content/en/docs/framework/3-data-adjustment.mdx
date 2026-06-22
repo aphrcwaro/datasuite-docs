@@ -1,12 +1,14 @@
-# 6 Numerator Adjustments
+import { Steps } from 'nextra/components'
+import { Callout } from 'nextra/components'
+import { Bleed } from 'nextra/components'
 
-Missing reports and data errors distort coverage analysis, particularly when reporting rates are low or sporadic. This module applies evidence-based corrections to transform raw reported numbers into defensible estimates by accounting for non-reporting facilities and removing extreme outliers. Using a scientifically grounded adjustment factor—based on assumptions about relative service volumes in reporting versus non-reporting facilities—the Data Suite scales up numbers proportionally to reflect the true population-level coverage.
+## Introduction
+Missing reports and data errors distort coverage analysis, particularly when reporting rates are low or sporadic. 
+Using a scientifically grounded adjustment factor—based on assumptions about relative service volumes in reporting versus non-reporting facilities—the Data Suite scales up numbers proportionally to reflect the true population-level coverage.
 
 The adjustment strategy is pragmatic: if we assume all non-reporting facilities provided zero services, we dramatically underestimate true coverage. Instead, the module estimates what proportion of services likely occurred in silent facilities (typically 25% of reporting facility volumes, by default) and adjusts accordingly. For data periods with critically low reporting (below 75%), no adjustment is applied and those years are flagged as unreliable—protecting your analysis from impossible estimates based on insufficient data.
 
 ---
-
-## 6.1 Rationale, Approach, and Implementation
 
 
 ### Rationale: Scientific basis for the analysis

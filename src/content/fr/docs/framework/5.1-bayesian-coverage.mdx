@@ -1,0 +1,27 @@
+import { Steps } from 'nextra/components'
+import { Callout } from 'nextra/components'
+import { Bleed } from 'nextra/components'
+
+## Approche de modélisation bayésienne.
+
+### Contexte
+Des informations fiables sur les indicateurs de couverture de santé sont essentielles pour suivre les progrès, orienter les programmes et guider les décisions politiques. Cependant, s'appuyer uniquement sur les données d'enquêtes et de routine est souvent difficile. Les données de routine des établissements peuvent souffrir d'une sous-déclaration ou d'une qualité de données incohérente, tandis que les données d'enquêtes peuvent être incertaines ou ne pas être récentes. 
+
+Pour relever ces défis, des modèles statistiques peuvent être utilisés pour produire des estimations et des prévisions au fil du temps, en combinant plusieurs sources de données et en tenant compte de leurs limites. Cela permet d'obtenir des estimations de couverture chaque année (entre les points de données et les données passées) avec une indication de notre degré de certitude/incertitude pour chaque année. Par conséquent, les modèles permettent des évaluations plus complètes, précises et opportunes de la couverture de santé, en particulier dans les contextes où les données sont limitées.
+
+---
+
+### Production d'estimations et de prévisions à court terme
+Nous avons développé un modèle statistique pour estimer la couverture de santé au niveau national et pour les régions infranationales jusqu'à l'année la plus récente disposant de données, et pour faire des prévisions à court terme pour les années à venir. 
+
+Le modèle examine les données disponibles et identifie différentes manières dont la couverture a pu évoluer au fil du temps. Chacune de ces voies possibles est appelée une **trajectoire** (voir figure). Pour chaque année, nous rapportons une meilleure estimation (la valeur médiane de toutes les trajectoires) et une fourchette qui montre l'incertitude (en omettant les possibilités les plus extrêmes à la marge).
+
+Éclairé par des analyses mondiales, le modèle capture le fait qu'au fil du temps, la couverture passe généralement de niveaux bas à des niveaux élevés, suivant une tendance en forme de S, avec des périodes de progrès plus ou moins rapides en cours de route selon ce que les données indiquent. Il utilise les données d'enquêtes et de routine pour choisir les trajectoires qui correspondent à ce qui a été observé. Le modèle s'appuie également sur les tendances observées dans d'autres régions ayant des niveaux de couverture similaires.
+
+---
+
+<Steps>
+
+### Comment les données d'enquête sont-elles utilisées ?
+Les données d'enquêtes nous aident à comprendre la couverture, mais elles comportent une
+</Steps>

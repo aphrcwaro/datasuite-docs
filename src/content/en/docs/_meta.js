@@ -13,8 +13,9 @@ export default {
     }
   },
   "getting-started":"Getting Started",
-  apps: "Datasuite Apps",
+ 
   framework: "Analytical Framework",
+  
   methods: {
     title: "Methods",
     display: "hidden"

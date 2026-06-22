@@ -16,9 +16,17 @@ export default {
       toc: false
     }
   },
+  apps: {
+    type: 'page',
+    title: 'Datasuite Apps',
+    theme: {
+      copyPage: false,
+      toc: false
+    }
+  },
   troubleshooting: {
     type: 'page',
-    title: 'Troubleshooting',
+    title: 'FAQs',
     theme: {
       copyPage: false,
       toc: true,

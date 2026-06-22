@@ -44,11 +44,19 @@ export default {
     theme: {
       layout: 'full',
       copyPage: false,
-      toc: true
+      toc: false
     }
   },
   "5-coverage-estimation": {
     title: "Coverage Estimation",
+    theme: {
+      layout: 'full',
+      copyPage: false,
+      toc: true
+    }
+  },
+  "5.1-bayesian-coverage": {
+    title: "Bayesian Coverage Estimation",
     theme: {
       layout: 'full',
       copyPage: false,
@@ -103,5 +111,13 @@ export default {
       copyPage: false,
       toc: true
     }
-  }, 
+  },
+  "12-dissemination": {
+    title: "Planning for Dissemination, Decisions & Action",
+    theme: { 
+      layout: 'full', 
+      copyPage: false,
+      toc: true
+    } 
+}
 }

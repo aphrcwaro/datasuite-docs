@@ -1,0 +1,72 @@
+import { Steps } from 'nextra/components'
+import { Callout } from 'nextra/components'
+import { Bleed } from 'nextra/components'
+
+## Abordagem de Modelação Bayesiana
+
+
+### Contexto
+Informações fiáveis sobre os indicadores de cobertura de saúde são essenciais para monitorizar o progresso, informar programas e orientar as decisões políticas. Contudo, depender apenas de dados de inquéritos e de rotina é frequentemente desafiador. Os dados de rotina das unidades de saúde podem sofrer de subnotificação ou de qualidade de dados inconsistente, enquanto os dados dos inquéritos podem ser incertos ou não ser recentes. 
+
+Para enfrentar estes desafios, podem ser utilizados modelos estatísticos para produzir estimativas e previsões ao longo do tempo, combinando múltiplas fontes de dados e contabilizando as suas limitações. Isto resulta em estimativas de cobertura todos os anos (entre pontos de dados e dados passados) com uma indicação do nosso grau de certeza/incerteza em relação a cada ano. Como resultado, os modelos permitem avaliações mais completas, precisas e oportunas da cobertura de saúde, especialmente em contextos com dados limitados.
+
+---
+
+### Produção de Estimativas e Previsões a Curto Prazo
+Desenvolvemos um modelo estatístico para estimar a cobertura de saúde a nível nacional e para as regiões infranacionais até ao ano mais recente com dados, e para fazer previsões a curto prazo para os anos seguintes. 
+
+O modelo analisa os dados disponíveis e identifica diferentes formas como a cobertura pode ter mudado ao longo do tempo. Cada um destes caminhos possíveis é chamado de **trajetória** (ver figura). Para cada ano, reportamos uma melhor estimativa (o valor médio de todas as trajetórias) e um intervalo que mostra a incerteza (excluindo as possibilidades mais extremas nas margens).
+
+Informado por análises globais, o modelo capta que, ao longo do tempo, a cobertura aumenta geralmente de níveis baixos para níveis altos, seguindo uma tendência em forma de S, com períodos de progresso mais rápido ou mais lento pelo caminho, dependendo do que os dados indicam. Utiliza dados de inquéritos e de rotina para escolher as trajetórias que correspondem ao que foi observado. O modelo baseia-se também em tendências observadas noutras áreas com níveis de cobertura semelhantes.
+
+---
+
+<Steps>
+
+### Como são utilizados os dados de inquérito?
+Os dados dos inquéritos ajudam-nos a compreender a cobertura, mas acarretam alguma incerteza. Isto acontece porque os inquéritos incluem apenas uma amostra da população, e não todos, e podem ocorrer erros durante a recolha de dados.
+
+Para utilizar da melhor forma os dados dos inquéritos, o modelo tenta encontrar o equilíbrio certo — suavizando subidas e descidas aleatórias que provavelmente não são reais, ao mesmo tempo que capta os padrões importantes nos dados. Para o fazer, o modelo analisa o grau de incerteza de cada ponto de dados:
+* **Elevada incerteza:** Se um ponto de dados for muito incerto, terá menos impacto na cobertura estimada (o modelo atribui-lhe menos peso e é mais provável que o suavize). 
+* **Elevada fiabilidade:** Se um ponto de dados for mais fiável, as estimativas alinhar-se-ão de forma mais próxima com esse valor.
+
+Para as regiões infranacionais, o modelo utiliza dados de inquéritos da região específica quando disponíveis. 
+
+****Insert Figure 1 coverage change over time****
+
+---
+
+### Como são utilizados os dados de rotina?
+As estimativas de cobertura a partir de dados de rotina podem ser enviesadas, por isso o modelo trata-as de forma diferente dos dados de inquéritos. Para os inquéritos, o modelo utiliza os níveis de cobertura reais. Por exemplo, se um inquérito indica uma cobertura de 60% para um determinado ano, o modelo utiliza esse valor diretamente. 
+
+Pelo contrário, os dados de rotina podem ser enviesados devido a problemas como a notificação incompleta e inconsistências na recolha de dados. Devido a isto, o modelo não se baseia nos níveis de cobertura observados nos dados de rotina. Em vez disso, o modelo centra-se na **tendência ao longo do tempo** — especificamente, como a cobertura muda de ano para ano. 
+
+* **Exemplo:** Se os dados de rotina mostram que a cobertura aumentou de 50% em 2020 para 53% em 2021, o modelo interpreta isto como um aumento de 3 pontos percentuais. Se os dados de rotina mostrarem mudanças mais rápidas ou mais lentas do que o esperado, o modelo ajusta as estimativas — mas apenas na medida em que se possa confiar nos dados.
+
+<Callout type="info">
+**Contabilização da Qualidade dos Dados**
+O modelo contabiliza a qualidade dos dados de rotina ajustando a incerteza das estimativas de tendência. As observações com menor qualidade de dados são tratadas como sendo mais incertas e recebem menos peso na determinação das verdadeiras taxas de mudança. Especificamente, a incerteza na taxa de mudança estimada aumenta à medida que a pontuação média de qualidade de dados do Countdown diminui. Consequentemente, dados de menor qualidade exercem menos influência na taxa de mudança modelada.
+</Callout>
+
+</Steps>
+
+---
+
+### Exemplos Ilustrativos
+
+São produzidas estimativas para:
+* A proporção de mulheres que recebem o mínimo recomendado de pelo menos quatro visitas de cuidados pré-natais durante a gravidez (**CPN4**).
+* A proporção de nascidos vivos que ocorrem numa unidade de saúde (**Partos institucionais**).
+* A proporção de crianças que recebem as três doses recomendadas da vacina pentavalente (**Cobertura vacinal**).
+
+A figura abaixo mostra exemplos de dados e estimativas obtidos a partir do modelo para um indicador de cobertura em quatro regiões diferentes. Os gráficos mostram que as estimativas do modelo geralmente seguem os dados do inquérito, a menos que um ponto de dados seja muito incerto e não corresponda à tendência geral. Por exemplo, na Região B, o ponto do inquérito MICS mais recente é mais baixo do que o esperado e muito incerto, pelo que as estimativas recentes do modelo não se alinham exatamente com este inquérito.
+
+Vemos também que os dados de rotina ajudam a informar sobre a rapidez com que a cobertura está a mudar ao longo do tempo, particularmente após o inquérito mais recente, quando não existem novos dados de inquérito disponíveis. 
+* **Região C:** Os dados de rotina mostram um aumento na cobertura. Como resultado, as estimativas que incluem dados de rotina mostram uma taxa de mudança mais rápida durante esse período em comparação com as estimativas baseadas apenas em dados de inquéritos. 
+* **Região D:** Os dados de rotina sugerem que a cobertura não aumentou recentemente, e as estimativas que incluem dados de rotina refletem essa informação.
+
+****insert illustrative example****
+
+<Callout type="default">
+**Exemplo de dados e estimativas:** Os dados de inquéritos do DHS e do MICS são apresentados a vermelho e azul, com barras verticais indicando o grau de incerteza de cada ponto do inquérito. Os dados de rotina são apresentados a preto. As linhas representam as estimativas pontuais do modelo com áreas sombreadas destacando a incerteza (a vermelho se os dados de rotina foram incluídos, preto/verde caso contrário).
+</Callout>
