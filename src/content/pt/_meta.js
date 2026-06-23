@@ -10,15 +10,42 @@ export default {
   },
   docs: {
     type: 'page',
-    title: 'Documentação',
+    title: 'Documentation',
     theme: {
-      copyPage: false
+      copyPage: false,
+      toc: false
+    }
+  },
+  apps: {
+    type: 'page',
+    title: 'Datasuite Apps',
+    theme: {
+      copyPage: false,
+      toc: false
+    }
+  },
+  troubleshooting: {
+    type: 'page',
+    title: 'FAQs',
+    theme: {
+      copyPage: false,
+      toc: true,
+      layout: 'full'
+    }
+  },
+  resources: {
+    type: 'page',
+    title: 'Resources',
+    theme: {
+      copyPage: false,
+      toc: false
     }
   },
   downloads: {
     type: 'page',
-    display: 'normal',
+    display: 'hidden',
     theme: {
+      layout: 'full',
       copyPage: false,
       toc: false
     }

@@ -119,5 +119,13 @@ export default {
       copyPage: false,
       toc: true
     } 
-}
+},
+"13-ai-leverage": {
+    title: "Leveraging AI for Analysis",
+    theme: {
+      layout: 'full',
+      copyPage: false,
+      toc: true
+    }
+  },
 }
