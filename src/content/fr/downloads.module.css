@@ -1,0 +1,138 @@
+/* Center the main Markdown heading inside the grid container */
+.cdsuiteGrid :global(h1) {
+  text-align: center !important;
+  margin-top: 1rem !important;
+}
+
+/* Center and style the Markdown paragraph immediately following the heading */
+.cdsuiteGrid :global(h1 + p) {
+  text-align: center !important;
+  font-size: 1.25rem !important;
+  color: #666 !important;
+  margin-bottom: 1.5rem !important; /* Reduced from 3rem */
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* 2. Reduce the margin above the grid */
+.cdsuiteGrid :global(.download-grid) {
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+  flex-wrap: wrap;
+  margin-top: 1.5rem; /* Reduced from 3rem */
+  margin-bottom: 4rem;
+}
+
+/* 3. Give the icon container a fixed height so it collapses cleanly if the icon is missing */
+.cdsuiteGrid :global(.download-platform-icon) {
+  font-size: 6rem;
+  margin-bottom: 1.5rem;
+  line-height: 1;
+  color: #0066cc; 
+  min-height: 6rem; /* Ensures the layout doesn't break if the font fails to load */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cdsuiteGrid :global(.download-platform) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 340px; 
+}
+
+.cdsuiteGrid :global(.download-primary-container) {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  width: 100%;
+}
+
+/* The massive primary download button */
+.cdsuiteGrid :global(.download-primary-btn) {
+  background-color: #0066cc !important;
+  color: white !important;
+  text-decoration: none !important;
+  padding: 12px 24px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  transition: background-color 0.2s ease;
+  flex: 1;
+}
+
+.cdsuiteGrid :global(.download-primary-btn:hover) {
+  background-color: #005bb5 !important;
+}
+
+.cdsuiteGrid :global(.download-primary-btn i) {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.cdsuiteGrid :global(.download-primary-btn span:last-child) {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.cdsuiteGrid :global(.download-primary-btn strong) {
+  font-size: 1.25rem;
+  line-height: 1.2;
+}
+
+.cdsuiteGrid :global(.download-primary-btn small) {
+  font-size: 0.8rem;
+  opacity: 0.9;
+  font-weight: normal;
+}
+
+.cdsuiteGrid :global(.download-links) {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* Increased the vertical gap between rows */
+  margin-top: 0.5rem; /* Pushes the list down from the main button */
+}
+
+.cdsuiteGrid :global(.download-row) {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px; /* Ensures a clean gap between text and tags */
+  align-items: center;
+}
+
+.cdsuiteGrid :global(.download-row-label) {
+  text-align: right;
+  font-size: 0.9rem;
+  font-weight: 500;
+  line-height: 1.4; /* Adds spacing between wrapped lines of text */
+  color: inherit;
+}
+
+.cdsuiteGrid :global(.download-tags) {
+  display: flex;
+  gap: 6px;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+/* The tiny blue download badges [x64] */
+.cdsuiteGrid :global(.download-tag) {
+  background-color: #0066cc !important;
+  color: white !important;
+  font-size: 0.75rem;
+  padding: 2px 6px;
+  border-radius: 2px;
+  text-decoration: none !important;
+  transition: opacity 0.2s;
+}
+
+.cdsuiteGrid :global(.download-tag:hover) {
+  opacity: 0.8;
+}

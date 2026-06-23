@@ -1,37 +1,36 @@
 import { Callout } from 'nextra/components'
 import { AutoDownload } from '@/components/AutoDownload' 
-import { HomeCards } from '@/components/HomeCards'
+import {HomeCards } from '@/components/HomeCards'
 
-<AutoDownload 
-  messageText="Seu download do DataSuite deve começar em breve."
-  linkText="Link de download direto."
-/>
+<AutoDownload />
 
-## Começar
+
+
+## Get started
 
 <HomeCards
   items={[
     {
-      title: 'Baixar DataSuite',
-      description: 'Baixe o DataSuite para Windows.',
-      href: '/pt/downloads',
+      title: 'Download DataSuite',
+      description: 'Download DataSuite for Windows.',
+      href: '/en/downloads',
       icon: 'tools'
     },
     {
-      title: 'Instalação',
-      description: 'Instale e configure o DataSuite no seu sistema.',
-      href: '/pt/docs/setup',
+      title: 'Setup',
+      description: 'Install and configure DataSuite on your system.',
+      href: '/en/docs/setup/index',
       icon: 'desktop-download'
     },
     {
-      title: 'Primeiros passos',
-      description: 'Descubra os principais recursos do DataSuite com o tutorial passo a passo.',
-      href: '/pt/docs/get-started',
+      title: 'Getting started',
+      description: 'Discover the key features of DataSuite with the step-by-step tutorial.',
+      href: '/en/docs/getting-started/index',
       icon: 'rocket'
     }
   ]}
 />
 
 <Callout type="info">
-  **Instalação bloqueada?** Se o instalador do sistema for bloqueado pelo seu administrador de TI, pode ser necessário cancelá-lo e baixar a versão **User Setup** em vez disso. Confira nossa página de [Solução de problemas](/pt/docs/troubleshooting) para mais detalhes.
+  **Installation blocked?** If the system installer is blocked by your IT administrator, you may need to cancel it and download the **User Setup** version instead. Check out our [Troubleshooting](/docs/troubleshooting) page for details.
 </Callout>

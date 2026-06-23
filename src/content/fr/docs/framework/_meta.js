@@ -1,6 +1,6 @@
 export default {
   index: {
-    title: "Overview",
+    title: "Aperçu",
     theme: {
       layout: 'full',
       copyPage: false,
@@ -8,7 +8,7 @@ export default {
     }
   },
   "0-workflow": {
-    title: "Workflow Overview",
+    title: "Présentation du workflow",
     theme: {
       layout: 'full',
       copyPage: false,
@@ -16,7 +16,7 @@ export default {
     }
   },
   "1-analysis-setup": {
-    title: "Analysis Setup",
+    title: "Configuration de l'analyse",
     theme: {
       layout: 'full',
       copyPage: false,
@@ -24,7 +24,7 @@ export default {
     }
   },
   "2-data-quality-assessment": {
-    title: "Data Quality Assessment",
+    title: "Évaluation de la qualité des données",
     theme: {
       layout: 'full',
       copyPage: false,
@@ -32,7 +32,7 @@ export default {
     }
   },
   "3-data-adjustment": {
-    title: "Data Adjustment",
+    title: "Ajustement des données",
     theme: {
       layout: 'full',
       copyPage: false,
@@ -40,7 +40,7 @@ export default {
     }
   },
   "4-denominator-selection": {
-    title: "Denominator Selection",
+    title: "Sélection du dénominateur",
     theme: {
       layout: 'full',
       copyPage: false,
@@ -48,7 +48,15 @@ export default {
     }
   },
   "5-coverage-estimation": {
-    title: "Coverage Estimation",
+    title: "Estimation de la couverture",
+    theme: {
+      layout: 'full',
+      copyPage: false,
+      toc: true
+    }
+  },
+    "5.1-bayesian-coverage": {
+    title: "Estimation de la couverture bayésienne",
     theme: {
       layout: 'full',
       copyPage: false,
@@ -56,7 +64,7 @@ export default {
     }
   },
   "6-equity-analysis": {
-    title: "Equity Analysis",
+    title: "Analyse de l'équité",
     theme: {
       layout: 'full',
       copyPage: false,
@@ -64,7 +72,7 @@ export default {
     }
   },
   "7-subnational-analysis": {
-    title: "Subnational Analysis",
+    title: "Analyse infranationale",
     theme: {
       layout: 'full',
       copyPage: false,
@@ -72,7 +80,7 @@ export default {
     }
   },
   "8-indicator-definitions": {
-    title: "Indicator Definition",
+    title: "Définition des indicateurs",
     display: "hidden",
     theme: {
       layout: 'full',
@@ -81,7 +89,7 @@ export default {
     }
   },
     "9-mortality": {
-    title: "Mortality",
+    title: "Mortalité",
     theme: { 
       layout: 'full',
       copyPage: false,
@@ -89,7 +97,7 @@ export default {
     }
   },
   "10-service-utilisation": {
-    title: "Service Utilisation",
+    title: "Utilisation des services",
     theme: { 
       layout: 'full',
       copyPage: true,
@@ -97,11 +105,27 @@ export default {
     }
   },
   "11-health-system-performance": {
-    title: "Health System Performance",
+    title: "Performance du système de santé",
     theme: { 
       layout: 'full',
       copyPage: false,
       toc: true
     }
   }, 
+  "12-dissemination": {
+    title: "Planification de la diffusion, des décisions et de l'action",
+    theme: { 
+      layout: 'full', 
+      copyPage: false,
+      toc: false
+    } 
+},
+"13-ai-leverage": {
+    title: "Exploiter l'IA pour l'analyse",
+    theme: {
+      layout: 'full',
+      copyPage: false,
+      toc: false
+    }
+  },
 }
