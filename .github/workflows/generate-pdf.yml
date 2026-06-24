@@ -29,7 +29,23 @@ jobs:
 
       - name: Build PDF source
         run: node scripts/build-pdf.js
-
+      - name: Upload generated markdown
+        uses: actions/upload-artifact@v4
+        with:
+          name: generated-markdown
+          path: pdf/output/datasuite-book.md
+      
+      - name: Show markdown statistics
+        run: |
+          echo "===== LAST 200 LINES ====="
+          tail -200 pdf/output/datasuite-book.md
+      
+          echo "===== ASTERISK COUNT ====="
+          grep -o '\*\*' pdf/output/datasuite-book.md | wc -l
+      
+          echo "===== SINGLE ASTERISK COUNT ====="
+          grep -o '\*' pdf/output/datasuite-book.md | wc -l
+          
       - name: Install Pandoc
         run: |
           sudo apt-get update
