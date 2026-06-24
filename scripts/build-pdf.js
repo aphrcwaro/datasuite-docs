@@ -1,48 +1,28 @@
 const fs = require("fs");
 const glob = require("glob");
 
-// ============================================================================
-// Configuration
-// ============================================================================
-
-// English documentation only
 const files = glob.sync("src/content/en/**/*.mdx");
 
-// Output markdown
 const outputFile = "pdf/output/datasuite-book.md";
-
-// ============================================================================
-// Helpers
-// ============================================================================
 
 function cleanContent(content) {
 return content
 
-```
-// ------------------------------------------------------------------------
-// Remove MDX frontmatter
-// ------------------------------------------------------------------------
+
+// Frontmatter
 .replace(/^---[\s\S]*?---/gm, "")
 
-// ------------------------------------------------------------------------
-// Remove imports and exports
-// ------------------------------------------------------------------------
+// Imports / exports
 .replace(/^import .*$/gm, "")
 .replace(/^export .*$/gm, "")
 
-// ------------------------------------------------------------------------
-// Remove markdown images
-// ------------------------------------------------------------------------
+// Images
 .replace(/!\[.*?\]\(.*?\)/g, "")
 
-// ------------------------------------------------------------------------
-// Remove HTML comments
-// ------------------------------------------------------------------------
+// HTML comments
 .replace(/<!--[\s\S]*?-->/g, "")
 
-// ------------------------------------------------------------------------
-// Remove common Nextra components
-// ------------------------------------------------------------------------
+// Nextra components
 .replace(/<Callout[\s\S]*?<\/Callout>/g, "")
 .replace(/<Steps[\s\S]*?<\/Steps>/g, "")
 .replace(/<Tabs[\s\S]*?<\/Tabs>/g, "")
@@ -51,14 +31,10 @@ return content
 .replace(/<HomeCards[\s\S]*?<\/HomeCards>/g, "")
 .replace(/<Details[\s\S]*?<\/Details>/g, "")
 
-// ------------------------------------------------------------------------
-// Remove remaining JSX tags
-// ------------------------------------------------------------------------
+// Remaining JSX / HTML
 .replace(/<[^>]+>/g, "")
 
-// ------------------------------------------------------------------------
 // Unicode normalization
-// ------------------------------------------------------------------------
 .replace(/≥/g, ">=")
 .replace(/≤/g, "<=")
 .replace(/→/g, "->")
@@ -74,12 +50,11 @@ return content
 .replace(/′/g, "'")
 .replace(/″/g, '"')
 
-// ------------------------------------------------------------------------
-// Common LaTeX cleanup
-// ------------------------------------------------------------------------
+// Math delimiters
 .replace(/\$\$/g, "")
 .replace(/\$/g, "")
 
+// Common LaTeX
 .replace(/\\times/g, " x ")
 .replace(/\\left/g, "")
 .replace(/\\right/g, "")
@@ -93,7 +68,7 @@ return content
 .replace(/\\mathbf\{([^}]*)\}/g, "$1")
 .replace(/\\operatorname\{([^}]*)\}/g, "$1")
 
-// Common Greek symbols
+// Greek letters
 .replace(/\\alpha/g, "alpha")
 .replace(/\\beta/g, "beta")
 .replace(/\\gamma/g, "gamma")
@@ -103,7 +78,7 @@ return content
 .replace(/\\mu/g, "mu")
 .replace(/\\sigma/g, "sigma")
 
-// Superscripts and subscripts
+// Subscripts / superscripts
 .replace(/_\{([^}]*)\}/g, "_$1")
 .replace(/\^\{([^}]*)\}/g, "^$1")
 
@@ -111,29 +86,23 @@ return content
 .replace(/N_\{reported\}/g, "N_reported")
 .replace(/N_\{expected\}/g, "N_expected")
 
-// Remove any remaining LaTeX commands
+// Remaining LaTeX commands
 .replace(/\\[a-zA-Z]+\*?/g, "")
 
-// Remove orphan braces
+// Remove braces
 .replace(/[{}]/g, "")
 
-// ------------------------------------------------------------------------
-// Markdown cleanup
-// ------------------------------------------------------------------------
+// Markdown emphasis
 .replace(/\*\*/g, "")
 .replace(/\*/g, "")
 
-// Collapse excessive blank lines
+// Excess whitespace
 .replace(/\n{4,}/g, "\n\n\n")
 
 .trim();
-```
+
 
 }
-
-// ============================================================================
-// Main
-// ============================================================================
 
 console.log(`Found ${files.length} MDX files`);
 
@@ -143,44 +112,32 @@ files.sort().forEach((file) => {
 try {
 console.log(`Processing ${file}`);
 
-```
-let content = fs.readFileSync(file, "utf8");
 
+let content = fs.readFileSync(file, "utf8");
 content = cleanContent(content);
 
-output += "\n\n";
-output += "---\n\n";
+output += "\n\n\\newpage\n\n";
 output += `# Source: ${file}\n\n`;
 output += content;
 output += "\n\n";
-```
 
 } catch (error) {
 console.error(`Error processing ${file}`);
 console.error(error);
 
 ```
-output += "\n\n";
-output += `# Error processing ${file}\n\n`;
+output += `\n\n# Error processing ${file}\n\n`;
 output += `${error.message}\n\n`;
 ```
 
 }
 });
 
-// ============================================================================
-// Create output directory
-// ============================================================================
-
 const outputDir = "pdf/output";
 
 if (!fs.existsSync(outputDir)) {
 fs.mkdirSync(outputDir, { recursive: true });
 }
-
-// ============================================================================
-// Write output
-// ============================================================================
 
 fs.writeFileSync(outputFile, output);
 
