@@ -6,5 +6,13 @@ export default {
       copyPage: false,
       toc: true
     }
+  },
+  "analysis-steps": {
+    title: 'Analysis Steps',
+    theme: {
+      layout: 'full',
+      copyPage: false,
+      toc: true
+    }
   }
 }

@@ -1,8 +1,6 @@
-
 export default {
   index: {
-    title: "Outputs",
-    display: "hidden",
+    title: "Methods",
     theme: {
       layout: 'full',
       copyPage: false,

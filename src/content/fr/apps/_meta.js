@@ -1,16 +1,16 @@
 export default {
   index: {
-    title: 'Aperçu des applications',
+    title: 'Apps Overview',
     theme: {
       layout: 'full',
       copyPage: false,
       toc: true
     }
   },
-  "data-extractor": "Application CD2030 Extracteur",
+  "data-extractor": "CD2030 Data Extractor",
 
   "rmncah": {
-  title: "Application RMNCAH",
+  title: "RMNCAH App",
   theme: {
   layout: 'full',
   copyPage: false,
@@ -18,7 +18,7 @@ export default {
   },
   }
   ,"vaxx": {
-    title: "Application Vaxx",
+    title: "Vaxx App",
     display: "hidden"
   }
 }
