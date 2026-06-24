@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const glob = require("glob");
 
-const files = glob.sync("content/**/*.mdx");
+const files = glob.sync("src/content/**/*.mdx");
 
 let output = "# Datasuite Documentation\n\n";
 
