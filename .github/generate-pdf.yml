@@ -1,0 +1,48 @@
+name: Generate Documentation PDF
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  build-pdf:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Packages
+        run: npm install
+
+      - name: Build Markdown Book
+        run: node scripts/build-pdf.js
+
+      - name: Install Pandoc
+        run: |
+          sudo apt-get update
+          sudo apt-get install pandoc texlive-xetex -y
+
+      - name: Generate PDF
+        run: |
+          pandoc \
+          scripts/pdf-template.md \
+          pdf/output/datasuite-book.md \
+          -o datasuite-en.pdf
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest-docs
+          files: datasuite-en.pdf
