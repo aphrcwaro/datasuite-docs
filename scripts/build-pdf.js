@@ -26,7 +26,14 @@ files.sort().forEach((file) => {
   .replace(/<[^>]+>/g, "") 
   .replace(/<Callout[\s\S]*?<\/Callout>/g, "")
   .replace(/<Steps[\s\S]*?<\/Steps>/g, "")
-  .replace(/<HomeCards[\s\S]*?<\/HomeCards>/g, "");
+  .replace(/<HomeCards[\s\S]*?<\/HomeCards>/g, "")
+    // Remove LaTex formular
+   .replace(/\\times/g, " x ")
+  .replace(/\\left/g, "")
+  .replace(/\\right/g, "")
+  .replace(/N_\{reported\}/g, "N_reported")
+  .replace(/_\{/g, "(")
+  .replace(/\}/g, ")");
   output += content + "\n\n";
 });
 
