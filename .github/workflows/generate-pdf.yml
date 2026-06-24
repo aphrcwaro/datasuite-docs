@@ -44,6 +44,7 @@ jobs:
 
           pandoc \
           pdf/output/datasuite-book.md \
+          --pdf-engine=xelatex \
           -o pdf/output/datasuite-en.pdf
 
       - name: Upload PDF
