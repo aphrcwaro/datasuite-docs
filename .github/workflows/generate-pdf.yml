@@ -1,73 +1,73 @@
 name: Generate Documentation PDF
 
 on:
-push:
-branches:
-- main
+  push:
+    branches:
+      - main
 
 permissions:
-contents: read
+  contents: read
 
 jobs:
   build-pdf:
     runs-on: ubuntu-latest
-  steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-  
-    - name: Setup Node
-      uses: actions/setup-node@v4
-      with:
-        node-version: 20
-  
-    - name: Install dependencies
-      run: npm install
-  
-    - name: Build PDF source
-      run: node scripts/build-pdf.js
-  
-    - name: Upload generated markdown
-      uses: actions/upload-artifact@v4
-      with:
-        name: generated-markdown
-        path: pdf/output/datasuite-book.md
-  
-    - name: Markdown diagnostics
-      run: |
-        echo "===== FILE SIZE ====="
-        wc -l pdf/output/datasuite-book.md
-  
-        echo "===== FIRST 50 LINES ====="
-        head -50 pdf/output/datasuite-book.md
-  
-        echo "===== LAST 100 LINES ====="
-        tail -100 pdf/output/datasuite-book.md
-  
-        echo "===== DOUBLE ASTERISKS ====="
-        grep -o '\*\*' pdf/output/datasuite-book.md | wc -l
-  
-        echo "===== SINGLE ASTERISKS ====="
-        grep -o '\*' pdf/output/datasuite-book.md | wc -l
-  
-    - name: Install Pandoc
-      run: |
-        sudo apt-get update
-        sudo apt-get install pandoc texlive-xetex -y
-  
-    - name: Generate PDF
-      run: |
-        mkdir -p pdf/output
-  
-        pandoc \
-          pdf/output/datasuite-book.md \
-          --pdf-engine=xelatex \
-          --verbose \
-          -o pdf/output/datasuite-en.pdf
-  
-    - name: Upload PDF
-      if: success()
-      uses: actions/upload-artifact@v4
-    with:
-      name: datasuite-documentation
-      path: pdf/output/datasuite-en.pdf
 
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build PDF source
+        run: node scripts/build-pdf.js
+
+      - name: Upload generated markdown
+        uses: actions/upload-artifact@v4
+        with:
+          name: generated-markdown
+          path: pdf/output/datasuite-book.md
+
+      - name: Markdown diagnostics
+        run: |
+          echo "===== FILE SIZE ====="
+          wc -l pdf/output/datasuite-book.md
+
+          echo "===== FIRST 50 LINES ====="
+          head -50 pdf/output/datasuite-book.md
+
+          echo "===== LAST 100 LINES ====="
+          tail -100 pdf/output/datasuite-book.md
+
+          echo "===== DOUBLE ASTERISKS ====="
+          grep -o '\*\*' pdf/output/datasuite-book.md | wc -l
+
+          echo "===== SINGLE ASTERISKS ====="
+          grep -o '\*' pdf/output/datasuite-book.md | wc -l
+
+      - name: Install Pandoc
+        run: |
+          sudo apt-get update
+          sudo apt-get install pandoc texlive-xetex -y
+
+      - name: Generate PDF
+        run: |
+          mkdir -p pdf/output
+
+          pandoc \
+            pdf/output/datasuite-book.md \
+            --pdf-engine=xelatex \
+            --verbose \
+            -o pdf/output/datasuite-en.pdf
+
+      - name: Upload PDF
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: datasuite-documentation
+          path: pdf/output/datasuite-en.pdf
