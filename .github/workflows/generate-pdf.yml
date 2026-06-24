@@ -40,8 +40,14 @@ jobs:
           head -100 pdf/output/datasuite-book.md
       - name: Search for LaTeX
         run: |
-          grep -n "N_" pdf/output/datasuite-book.md || true
+      - name: Find unmatched emphasis
+        run: |
+          grep -n "\*\*" pdf/output/datasuite-book.md | tail -50 || true
+          grep -n "_" pdf/output/datasuite-book.md | tail -50 || true
           grep -n "\\\\times" pdf/output/datasuite-book.md || true  
+      - name: Show end of markdown
+        run: |
+          tail -100 pdf/output/datasuite-book.md
       - name: Generate PDF
         run: |
           mkdir -p pdf/output
