@@ -1,12 +1,12 @@
 const fs = require("fs");
-const path = require("path");
 const glob = require("glob");
 
-const files = glob.sync("src/content/**/*.mdx");
+// English documentation only
+const files = glob.sync("src/content/en/**/*.mdx");
 
 let output = "# Datasuite Documentation\n\n";
 
-files.sort().forEach(file => {
+files.sort().forEach((file) => {
   let content = fs.readFileSync(file, "utf8");
 
   content = content
@@ -16,4 +16,18 @@ files.sort().forEach(file => {
   output += content + "\n\n";
 });
 
-fs.writeFileSync("pdf/output/datasuite-book.md", output);
+// Create output directory if it doesn't exist
+const outputDir = "pdf/output";
+
+if (!fs.existsSync(outputDir)) {
+  fs.mkdirSync(outputDir, { recursive: true });
+}
+
+fs.writeFileSync(
+  "pdf/output/datasuite-book.md",
+  output
+);
+
+console.log(
+  `Processed ${files.length} MDX files and created datasuite-book.md`
+);
