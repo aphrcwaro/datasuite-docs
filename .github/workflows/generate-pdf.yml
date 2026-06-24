@@ -35,6 +35,9 @@ jobs:
           sudo apt-get update
           sudo apt-get install pandoc texlive-xetex -y
 
+      - name: Show generated markdown
+        run: |
+          head -100 pdf/output/datasuite-book.md
       - name: Generate PDF
         run: |
           mkdir -p pdf/output
