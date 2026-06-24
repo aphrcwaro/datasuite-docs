@@ -10,19 +10,12 @@ files.sort().forEach((file) => {
   let content = fs.readFileSync(file, "utf8");
 
   content = content
-  // Remove frontmatter
-  .replace(/^---[\s\S]*?---/gm, "")
-
-  // Remove import statements
-  .replace(/^import .*$/gm, "")
-
-  // Remove export statements
-  .replace(/^export .*$/gm, "")
-
+  .replace(/^---[\s\S]*?---/gm, "")   // Remove frontmatter
+  .replace(/^import .*$/gm, "")   // Remove import statements
+  .replace(/^export .*$/gm, "")   // Remove export statements
+  .replace(/!\[.*?\]\(.*?\)/g, "")  // Remove image references
   // Remove JSX tags
-  .replace(/<[^>]+>/g, "");
-  
-content = content
+  .replace(/<[^>]+>/g, "") 
   .replace(/<Callout[\s\S]*?<\/Callout>/g, "")
   .replace(/<Steps[\s\S]*?<\/Steps>/g, "")
   .replace(/<HomeCards[\s\S]*?<\/HomeCards>/g, "");
