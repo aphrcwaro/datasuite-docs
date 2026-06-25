@@ -44,7 +44,7 @@ export default {
     theme: {
       layout: 'full',
       copyPage: false,
-      toc: false
+      toc: true
     }
   },
   "5-coverage-estimation": {
