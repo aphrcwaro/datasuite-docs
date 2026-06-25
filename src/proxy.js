@@ -37,6 +37,6 @@ export const config = {
      * - api, _next, .well-known (system)
      * - images, favicon, robots.txt (static)
      */
-    '/((?!api|_next/static|_next/image|.well-known|_pagefind|images|favicon.ico).*)',
+    '/((?!api|_vercel|_next/static|_next/image|.well-known|_pagefind|images|favicon.ico).*)',
   ],
 }

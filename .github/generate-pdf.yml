@@ -1,4 +1,10 @@
-name: Generate Documentation PDF
+- name: Generate PDF
+  run: |
+    pandoc \
+    scripts/pdf-template.md \
+    pdf/output/datasuite-book.md \
+    --include-in-header=pdf/custom.tex \
+    -o datasuite-en.pdf
 
 on:
   push:

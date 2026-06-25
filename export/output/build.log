@@ -1,0 +1,98 @@
+[2026-06-25T07:41:13.232Z] INFO: Starting exporter...
+[2026-06-25T07:41:13.251Z] SUCCESS: Configuration loaded.
+[2026-06-25T07:41:13.252Z] WARNING: This is a warning.
+[2026-06-25T07:41:13.252Z] ERROR: This is a test error.
+[2026-06-25T07:46:25.753Z] INFO: Discovering documentation...
+[2026-06-25T07:46:25.760Z] INFO: Found G:\GitHub\APHRC\datasuite-docs_pk\src\content\en\index.mdx
+[2026-06-25T07:46:25.764Z] INFO: Found G:\GitHub\APHRC\datasuite-docs_pk\src\content\en\docs\index.mdx
+[2026-06-25T07:46:25.774Z] INFO: Found G:\GitHub\APHRC\datasuite-docs_pk\src\content\en\docs\setup\index.mdx
+[2026-06-25T07:46:25.775Z] INFO: Found G:\GitHub\APHRC\datasuite-docs_pk\src\content\en\docs\setup\windows.mdx
+[2026-06-25T07:46:25.776Z] INFO: Found G:\GitHub\APHRC\datasuite-docs_pk\src\content\en\docs\setup\uninstall.mdx
+[2026-06-25T07:46:25.779Z] INFO: Found G:\GitHub\APHRC\datasuite-docs_pk\src\content\en\docs\getting-started\index.mdx
+[2026-06-25T07:46:25.781Z] INFO: Found G:\GitHub\APHRC\datasuite-docs_pk\src\content\en\docs\getting-started\user-interface.mdx
+[2026-06-25T07:46:25.785Z] INFO: Found G:\GitHub\APHRC\datasuite-docs_pk\src\content\en\docs\framework\index.mdx
+[2026-06-25T07:46:25.787Z] INFO: Found G:\GitHub\APHRC\datasuite-docs_pk\src\content\en\docs\framework\0-workflow.mdx
+[2026-06-25T07:46:25.788Z] INFO: Found G:\GitHub\APHRC\datasuite-docs_pk\src\content\en\docs\framework\1-analysis-setup.mdx
+[2026-06-25T07:46:25.789Z] INFO: Found G:\GitHub\APHRC\datasuite-docs_pk\src\content\en\docs\framework\2-data-quality-assessment.mdx
+[2026-06-25T07:46:25.790Z] INFO: Found G:\GitHub\APHRC\datasuite-docs_pk\src\content\en\docs\framework\3-data-adjustment.mdx
+[2026-06-25T07:46:25.791Z] INFO: Found G:\GitHub\APHRC\datasuite-docs_pk\src\content\en\docs\framework\4-denominator-selection.mdx
+[2026-06-25T07:46:25.793Z] INFO: Found G:\GitHub\APHRC\datasuite-docs_pk\src\content\en\docs\framework\5-coverage-estimation.mdx
+[2026-06-25T07:46:25.794Z] INFO: Found G:\GitHub\APHRC\datasuite-docs_pk\src\content\en\docs\framework\5.1-bayesian-coverage.mdx
+[2026-06-25T07:46:25.795Z] INFO: Found G:\GitHub\APHRC\datasuite-docs_pk\src\content\en\docs\framework\6-equity-analysis.mdx
+[2026-06-25T07:46:25.797Z] INFO: Found G:\GitHub\APHRC\datasuite-docs_pk\src\content\en\docs\framework\7-subnational-analysis.mdx
+[2026-06-25T07:46:25.799Z] INFO: Found G:\GitHub\APHRC\datasuite-docs_pk\src\content\en\docs\framework\8-indicator-definitions.mdx
+[2026-06-25T07:46:25.800Z] INFO: Found G:\GitHub\APHRC\datasuite-docs_pk\src\content\en\docs\framework\9-mortality.mdx
+[2026-06-25T07:46:25.803Z] INFO: Found G:\GitHub\APHRC\datasuite-docs_pk\src\content\en\docs\framework\10-service-utilisation.mdx
+[2026-06-25T07:46:25.804Z] INFO: Found G:\GitHub\APHRC\datasuite-docs_pk\src\content\en\docs\framework\11-health-system-performance.mdx
+[2026-06-25T07:46:25.805Z] INFO: Found G:\GitHub\APHRC\datasuite-docs_pk\src\content\en\docs\framework\12-dissemination.mdx
+[2026-06-25T07:46:25.805Z] INFO: Found G:\GitHub\APHRC\datasuite-docs_pk\src\content\en\docs\framework\13-ai-leverage.mdx
+[2026-06-25T07:46:25.808Z] INFO: Found G:\GitHub\APHRC\datasuite-docs_pk\src\content\en\docs\methods\index.mdx
+[2026-06-25T07:46:25.812Z] INFO: Found G:\GitHub\APHRC\datasuite-docs_pk\src\content\en\docs\supporting\portable.mdx
+[2026-06-25T07:46:25.813Z] INFO: Found G:\GitHub\APHRC\datasuite-docs_pk\src\content\en\docs\supporting\requirements.mdx
+[2026-06-25T07:46:25.815Z] INFO: Found G:\GitHub\APHRC\datasuite-docs_pk\src\content\en\apps\index.mdx
+[2026-06-25T07:46:25.819Z] INFO: Found G:\GitHub\APHRC\datasuite-docs_pk\src\content\en\apps\data-extractor\index.mdx
+[2026-06-25T07:46:25.821Z] INFO: Found G:\GitHub\APHRC\datasuite-docs_pk\src\content\en\apps\data-extractor\dhis2-login.mdx
+[2026-06-25T07:46:25.822Z] INFO: Found G:\GitHub\APHRC\datasuite-docs_pk\src\content\en\apps\data-extractor\mapping.mdx
+[2026-06-25T07:46:25.823Z] INFO: Found G:\GitHub\APHRC\datasuite-docs_pk\src\content\en\apps\data-extractor\data-download.mdx
+[2026-06-25T07:46:25.827Z] INFO: Found G:\GitHub\APHRC\datasuite-docs_pk\src\content\en\apps\rmncah\index.mdx
+[2026-06-25T07:46:25.828Z] INFO: Found G:\GitHub\APHRC\datasuite-docs_pk\src\content\en\apps\rmncah\analysis-steps.mdx
+[2026-06-25T07:46:25.830Z] INFO: Found G:\GitHub\APHRC\datasuite-docs_pk\src\content\en\apps\vaxx\index.mdx
+[2026-06-25T07:46:25.832Z] INFO: Found G:\GitHub\APHRC\datasuite-docs_pk\src\content\en\troubleshooting\index.mdx
+[2026-06-25T07:46:25.834Z] INFO: Found G:\GitHub\APHRC\datasuite-docs_pk\src\content\en\resources.mdx
+[2026-06-25T07:46:25.836Z] INFO: Found G:\GitHub\APHRC\datasuite-docs_pk\src\content\en\downloads.mdx
+[2026-06-25T07:46:25.837Z] INFO: Found G:\GitHub\APHRC\datasuite-docs_pk\src\content\en\thank-you.mdx
+[2026-06-25T07:46:25.857Z] SUCCESS: Discovered 38 pages
+[2026-06-25T07:46:25.858Z] SUCCESS: Saved G:\GitHub\APHRC\datasuite-docs_pk\export\output\contents.json
+[2026-06-25T08:03:21.959Z] INFO: Discovering documentation...
+[2026-06-25T08:03:21.960Z] WARNING: Cannot read src\content\en\_meta.js
+[2026-06-25T08:03:21.962Z] WARNING: Cannot read src\content\en\apps\_meta.js
+[2026-06-25T08:03:21.963Z] WARNING: Cannot read src\content\en\apps\data-extractor\_meta.js
+[2026-06-25T08:03:21.964Z] INFO: Found src\content\en\apps\data-extractor\data-download.mdx
+[2026-06-25T08:03:21.966Z] INFO: Found src\content\en\apps\data-extractor\dhis2-login.mdx
+[2026-06-25T08:03:21.968Z] INFO: Found src\content\en\apps\data-extractor\index.mdx
+[2026-06-25T08:03:21.969Z] INFO: Found src\content\en\apps\data-extractor\mapping.mdx
+[2026-06-25T08:03:21.972Z] WARNING: Cannot read src\content\en\apps\rmncah\_meta.js
+[2026-06-25T08:03:21.972Z] INFO: Found src\content\en\apps\rmncah\analysis-steps.mdx
+[2026-06-25T08:03:21.974Z] INFO: Found src\content\en\apps\rmncah\index.mdx
+[2026-06-25T08:03:21.977Z] WARNING: Cannot read src\content\en\apps\vaxx\_meta.js
+[2026-06-25T08:03:21.977Z] INFO: Found src\content\en\apps\vaxx\index.mdx
+[2026-06-25T08:03:21.978Z] INFO: Found src\content\en\apps\index.mdx
+[2026-06-25T08:03:21.981Z] WARNING: Cannot read src\content\en\docs\_meta.js
+[2026-06-25T08:03:21.982Z] WARNING: Cannot read src\content\en\docs\framework\_meta.js
+[2026-06-25T08:03:21.983Z] INFO: Found src\content\en\docs\framework\0-workflow.mdx
+[2026-06-25T08:03:21.985Z] INFO: Found src\content\en\docs\framework\1-analysis-setup.mdx
+[2026-06-25T08:03:21.987Z] INFO: Found src\content\en\docs\framework\10-service-utilisation.mdx
+[2026-06-25T08:03:21.987Z] INFO: Found src\content\en\docs\framework\11-health-system-performance.mdx
+[2026-06-25T08:03:21.988Z] INFO: Found src\content\en\docs\framework\12-dissemination.mdx
+[2026-06-25T08:03:21.989Z] INFO: Found src\content\en\docs\framework\13-ai-leverage.mdx
+[2026-06-25T08:03:21.990Z] INFO: Found src\content\en\docs\framework\2-data-quality-assessment.mdx
+[2026-06-25T08:03:21.991Z] INFO: Found src\content\en\docs\framework\3-data-adjustment.mdx
+[2026-06-25T08:03:21.992Z] INFO: Found src\content\en\docs\framework\4-denominator-selection.mdx
+[2026-06-25T08:03:21.992Z] INFO: Found src\content\en\docs\framework\5-coverage-estimation.mdx
+[2026-06-25T08:03:21.993Z] INFO: Found src\content\en\docs\framework\5.1-bayesian-coverage.mdx
+[2026-06-25T08:03:21.994Z] INFO: Found src\content\en\docs\framework\6-equity-analysis.mdx
+[2026-06-25T08:03:21.995Z] INFO: Found src\content\en\docs\framework\7-subnational-analysis.mdx
+[2026-06-25T08:03:21.996Z] INFO: Found src\content\en\docs\framework\8-indicator-definitions.mdx
+[2026-06-25T08:03:21.998Z] INFO: Found src\content\en\docs\framework\9-mortality.mdx
+[2026-06-25T08:03:22.000Z] INFO: Found src\content\en\docs\framework\index.mdx
+[2026-06-25T08:03:22.001Z] WARNING: Cannot read src\content\en\docs\getting-started\_meta.js
+[2026-06-25T08:03:22.002Z] INFO: Found src\content\en\docs\getting-started\index.mdx
+[2026-06-25T08:03:22.003Z] INFO: Found src\content\en\docs\getting-started\user-interface.mdx
+[2026-06-25T08:03:22.004Z] WARNING: Cannot read src\content\en\docs\methods\_meta.js
+[2026-06-25T08:03:22.005Z] INFO: Found src\content\en\docs\methods\index.mdx
+[2026-06-25T08:03:22.007Z] WARNING: Cannot read src\content\en\docs\setup\_meta.js
+[2026-06-25T08:03:22.008Z] INFO: Found src\content\en\docs\setup\index.mdx
+[2026-06-25T08:03:22.009Z] INFO: Found src\content\en\docs\setup\uninstall.mdx
+[2026-06-25T08:03:22.011Z] INFO: Found src\content\en\docs\setup\windows.mdx
+[2026-06-25T08:03:22.013Z] WARNING: Cannot read src\content\en\docs\supporting\_meta.js
+[2026-06-25T08:03:22.014Z] INFO: Found src\content\en\docs\supporting\portable.mdx
+[2026-06-25T08:03:22.015Z] INFO: Found src\content\en\docs\supporting\requirements.mdx
+[2026-06-25T08:03:22.016Z] INFO: Found src\content\en\docs\index.mdx
+[2026-06-25T08:03:22.023Z] WARNING: Cannot read src\content\en\troubleshooting\_meta.js
+[2026-06-25T08:03:22.024Z] INFO: Found src\content\en\troubleshooting\index.mdx
+[2026-06-25T08:03:22.025Z] INFO: Found src\content\en\downloads.mdx
+[2026-06-25T08:03:22.026Z] INFO: Found src\content\en\index.mdx
+[2026-06-25T08:03:22.026Z] INFO: Found src\content\en\resources.mdx
+[2026-06-25T08:03:22.027Z] INFO: Found src\content\en\thank-you.mdx
+[2026-06-25T08:03:22.046Z] SUCCESS: Discovered 38 pages
+[2026-06-25T08:03:22.047Z] SUCCESS: Saved export\output\contents.json
