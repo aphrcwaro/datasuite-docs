@@ -4,8 +4,10 @@ const puppeteer = require('puppeteer');
 const fs = require('fs');
 const path = require('path');
 
-const BASE_URL = 'http://localhost:3000/pt';
-const OUTPUT_FILE = path.join(process.cwd(), 'datasuite-documentation.pdf-pt');
+
+======
+const BASE_URL = 'http://localhost:3000';
+const OUTPUT_FILE = path.join(process.cwd(), 'datasuite-documentation.pdf');
 
 // ==========================================
 // 🎨 PRINT SPECIFIC BEAUTIFICATION CSS
@@ -304,4 +306,5 @@ async function generatePDF() {
 }
 
 generatePDF();
+
 
