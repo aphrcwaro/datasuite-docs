@@ -1,8 +1,11 @@
+
 const { PDFDocument, rgb, PDFName, PDFDict, PDFArray, PDFNumber } = require('pdf-lib');
 const puppeteer = require('puppeteer');
 const fs = require('fs');
 const path = require('path');
 
+
+======
 const BASE_URL = 'http://localhost:3000';
 const OUTPUT_FILE = path.join(process.cwd(), 'datasuite-documentation.pdf');
 
@@ -303,3 +306,5 @@ async function generatePDF() {
 }
 
 generatePDF();
+
+
