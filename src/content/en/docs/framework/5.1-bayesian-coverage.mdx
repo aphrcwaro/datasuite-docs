@@ -5,16 +5,22 @@ import { Bleed } from 'nextra/components'
 ## Bayesian Modeling Approach
 
 ### Background
-Reliable information on health coverage indicators is essential for monitoring progress, informing programs, and guiding policy decisions. However, relying on survey and routine data alone is often challenging. Routine data from facilities may suffer from underreporting or inconsistent data quality, while survey data may be uncertain or not recent. 
+Reliable information on health coverage indicators is essential for monitoring progress, informing programs, and guiding policy decisions. 
+However, relying on survey and routine data alone is often challenging. 
+Routine data from facilities may suffer from underreporting or inconsistent data quality, while survey data may be uncertain or not recent. 
 
-To address these challenges, statistical models can be used to produce estimates and forecasts over time, combining multiple data sources and accounting for their limitations. This results in estimates of coverage every year (between data points and past data) with an indication of how certain/uncertain we are about each year. As a result, models enable more complete, accurate, and timely assessments of health coverage, especially in data-limited settings.
+To address these challenges, statistical models can be used to produce estimates and forecasts over time, combining multiple data sources and accounting for their limitations. 
+This results in estimates of coverage every year (between data points and past data) with an indication of how certain/uncertain we are about each year. 
+As a result, models enable more complete, accurate, and timely assessments of health coverage, especially in data-limited settings.
 
 ---
 
 ### Producing Estimates and Short-Term Forecasts
 We developed a statistical model to estimate health coverage at the national level and for subnational regions up to the most recent year with data, and to make short-term forecasts for the years ahead. 
 
-The model looks at the available data and identifies different ways coverage could have changed over time. Each of these possible paths is called a **trajectory** (see Figure). For each year, we report a best estimate (the middle value across all trajectories) and a range that shows the uncertainty (leaving out the most extreme possibilities at the edge).
+The model looks at the available data and identifies different ways coverage could have changed over time. Each of these possible paths is called a **trajectory** (see Figure 1). 
+
+For each year, we report a best estimate (the middle value across all trajectories) and a range that shows the uncertainty (leaving out the most extreme possibilities at the edge).
 
 Informed by global analyses, the model captures that over time coverage usually rises from low to high levels, following an S-shaped trend, with periods of faster or slower progress along the way depending on what the data indicates. It uses survey and routine data to choose trajectories that match what has been observed. The model also draws on trends seen in other areas with similar coverage levels.
 
@@ -31,7 +37,7 @@ To best use survey data, the model tries to strike the right balance—smoothing
 
 For subnational regions, the model uses survey data from the specific region when available. 
 
-****Insert Figure 1 coverage change over time****
+![**Figure 1: Illustration of how coverage could have changed over time based on survey data**](/images/bayesian1-coverage-over-time.png)
 
 ---
 
@@ -44,6 +50,7 @@ In contrast, routine data can be biased due to issues such as incomplete reporti
 
 <Callout type="info">
 **Accounting for Data Quality**
+
 The model accounts for routine data quality by adjusting the uncertainty of the trend estimates. Observations with lower data quality are treated as more uncertain and given less weight in determining true rates of change. Specifically, uncertainty in the estimated rate of change increases as the Countdown mean data quality score decreases. Consequently, lower-quality data exerts less influence on the modeled rate of change.
 </Callout>
 
@@ -58,14 +65,31 @@ Estimates are produced for:
 * The proportion of live births that take place in a health facility (**Institutional deliveries**).
 * The proportion of children who receive the recommended three doses of pentavalent vaccine (**Vaccination coverage**).
 
-The figure below shows example data and estimates obtained from the model for a coverage indicator in four different regions. The plots show that the model’s estimates usually follow the survey data, unless a data point is very uncertain and does not match the overall trend. For example, in Region B, the most recent MICS survey point is lower than expected and very uncertain, so the model’s recent estimates do not exactly align with this survey.
+<Steps>
+#### Example 1: ANC4 coverage
+- An example of the output for ANC4 coverage at the national level is shown in the figure below. The graph displays survey data and routine data as dots (grey for routine data, red for survey data). 
+- The red line represents the modeled point estimates, and the red shaded areas represent the 95% uncertainty intervals. 
+![ANC4 Coverage](/images/bayesian-ANC4-national.png)
 
-We also see that routine data help inform how quickly coverage is changing over time, particularly after the most recent survey, when no new survey data is available. 
-* **Region C:** The routine data show an increase in coverage. As a result, the estimates that include routine data show a faster rate of change during that period compared to the estimates based only on survey data. 
-* **Region D:** Routine data suggest that coverage has not increased recently, and estimates that include routine data reflect that information.
+#### Example 2: ANC4 Subnational Coverage 
+Example outputs for subnational coverage estimation for 2025 are shown in Figure 4. 
 
-****insert illustrative example****
+Red dots represent point estimates, and horizontal lines represent 95% uncertainty intervals.
+![ANC4 Coverage -Subnational](/images/bayesian-ANC4-subnational.png)
 
-<Callout type="default">
-**Example data and estimates:** Survey data from DHS and MICS are shown in red and blue, with vertical bars indicating how uncertain each survey point is. Routine data are shown in black. The lines represent the model’s point estimates with shaded areas highlighting uncertainty (in red if routine data were included, black/green otherwise).
+#### Example 3: Data and Bayesian estimates
+The figure below shows example data and estimates obtained from the model for a coverage indicator in four different regions. 
+![Figure 2 Data and Bayesian estimates.: bayesian regions](/images/bayesian-regions.png)
+
+<Callout type="info">
+** Interpretation**
+- Survey data from DHS and MICS are shown in red and blue, with vertical bars indicating how uncertain each survey point is. Routine data are shown in black. The lines represent the model’s point estimates with shaded areas highlighting uncertainty (in red if routine data were included, black/green otherwise).
+- The plots show that the model’s estimates usually follow the survey data, unless a data point is very uncertain and does not match the overall trend. 
+- For example, in **Region B**, the most recent MICS survey point is lower than expected and very uncertain, so the model’s recent estimates do not exactly align with this survey.
+- We also see that routine data help inform how quickly coverage is changing over time, particularly after the most recent survey, when no new survey data is available. 
+- **Region C:** The routine data show an increase in coverage. As a result, the estimates that include routine data show a faster rate of change during that period compared to the estimates based only on survey data. 
+- **Region D:** Routine data suggest that coverage has not increased recently, and estimates that include routine data reflect that information.
+
 </Callout>
+
+</Steps>
