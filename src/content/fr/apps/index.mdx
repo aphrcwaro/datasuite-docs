@@ -1,35 +1,35 @@
-## Datasuite Applications
+# Applications DataSuite
 
-The CD2030 Datasuite includes a set of integrated applications designed to support the analysis of routine health facility data. 
-Each app plays a specific role within the analytical workflow, from data extraction to analysis and reporting.
+Le CD2030 DataSuite comprend un ensemble d'applications intégrées conçues pour soutenir l'analyse des données de routine des établissements de santé.
+Chaque application joue un rôle précis dans le flux de travail analytique, de l'extraction des données à l'analyse et à la production de rapports.
 
----
+| Application | À utiliser pour | Entrée |
+| --- | --- | --- |
+| [Data Extractor](/fr/apps/data-extractor) | Extraire les données de routine de DHIS2 et les mapper vers des indicateurs standard | Une instance DHIS2 |
+| [RMNCAH App](/fr/apps/rmncah) | Analyser de bout en bout les indicateurs de santé reproductive, maternelle, néonatale, infantile et adolescente | `.xls`, `.xlsx`, `.dta`, `.rds` |
+| [Vaxx App](/fr/apps/vaxx) | Analyser la couverture vaccinale et les inégalités | `.xls`, `.xlsx`, `.dta`, `.rds` |
+| [Pooled App](/fr/apps/pooled) | Regrouper les analyses enregistrées de plusieurs pays ou jeux de données pour une comparaison régionale | Un dossier de caches `.rds` |
 
+## [CD2030 Data Extractor](/fr/apps/data-extractor)
 
-### [CD2030 Data Extractor](/apps/data-extractor)
+Le Data Extractor se connecte aux systèmes DHIS2 et permet aux utilisateurs d'extraire et de mapper les données de routine des établissements de santé dans des formats standardisés en vue de leur analyse.
 
-The Data Extractor connects to DHIS2 systems and allows users to extract and map routine health facility data into standardized formats for analysis.
+[Accéder au Data Extractor →](/fr/apps/data-extractor)
 
-[Go to Data Extractor →](/apps/data-extractor)
+## [RMNCAH App](/fr/apps/rmncah)
 
----
+RMNCAH App soutient l'analyse des indicateurs de santé reproductive, maternelle, néonatale, infantile et adolescente, en appliquant l'approche analytique standardisée du CD2030. Elle couvre la qualité des données, les dénominateurs, la couverture, l'équité et l'analyse infranationale, et ajoute des pages d'analyse bayésienne, de continuum de soins, de planification familiale, de mortalité, d'utilisation des services et de système de santé.
 
+[Accéder à RMNCAH App →](/fr/apps/rmncah)
 
-### RMNCAH App
+## [Vaxx App](/fr/apps/vaxx)
 
-The RMNCAH App supports analysis across reproductive, maternal, newborn, child, and adolescent health indicators, applying the standardized CD2030 analytical approach.
+Vaxx App est centrée sur la vaccination. Elle suit les mêmes étapes analytiques que RMNCAH App (qualité des données, ajustement, dénominateurs, couverture, inégalités et cibles, aux niveaux national et infranational) pour les indicateurs de vaccination.
 
-[Go to RMNCAH App →](/apps/rmncah)
+[Accéder à Vaxx App →](/fr/apps/vaxx)
 
----
+## [Pooled App](/fr/apps/pooled)
 
+Pooled App sert à l'**analyse régionale et multi-pays**. Elle charge depuis un dossier les caches enregistrés par les applications RMNCAH et Vaxx, vous permet de choisir le domaine (RMNCAH ou Vaccination), traite le jeu de données sélectionné et exporte le résultat regroupé en CSV ou en Excel.
 
-
----
-
-## Additional Applications
-
-Datasuite also includes additional tools used for **regional and multi-country analysis**, enabling comparison, aggregation, and synthesis of results across countries.
-
----
-
+[Accéder à Pooled App →](/fr/apps/pooled)

@@ -1,63 +1,113 @@
----
-title: DataSuite documentation
----
+import { HomeCards } from '@/components/HomeCards'
 
-import {HomeCards } from '@/components/HomeCards'
+# Documentação do DataSuite
 
-# DataSuite documentation
+Saiba como utilizar o DataSuite e explorar os respetivos módulos.
 
-Learn how to use DataSuite and explore its modules.
-
-## Getting started
+## Primeiros passos
 
 <HomeCards
   items={[
     {
-      title: 'Download DataSuite',
-      description: 'Download DataSuite for Windows.',
-      href: '/en/downloads',
+      title: 'Transferir o DataSuite',
+      description: 'Transfira o DataSuite para Windows.',
+      href: '/pt/downloads',
       icon: 'tools'
     },
     {
-      title: 'Setup',
-      description: 'Install and configure DataSuite on your system.',
-      href: '/en/docs/setup',
+      title: 'Instalação',
+      description: 'Instale e configure o DataSuite no seu sistema.',
+      href: '/pt/docs/setup',
       icon: 'desktop-download'
     },
     {
-      title: 'Getting started',
-      description: 'Discover the key features of DataSuite with the step-by-step tutorial.',
-      href: '/en/docs/getting-started',
+      title: 'Primeiros passos',
+      description: 'Conheça as principais funcionalidades do DataSuite com o tutorial passo a passo.',
+      href: '/pt/docs/getting-started',
       icon: 'rocket'
     }
   ]}
 />
 
-## Learn about the apps
+## Metodologia
+
+A metodologia Countdown é a própria análise: cada etapa, como é feita e como ler os resultados.
+
+<HomeCards
+  items={[
+    {
+      title: 'Metodologia Countdown',
+      description: 'O quadro analítico, etapa a etapa, da qualidade dos dados à disseminação.',
+      href: '/pt/docs/framework',
+      icon: 'book'
+    },
+    {
+      title: 'Fluxo de trabalho',
+      description: 'A ordem da análise, do carregamento dos dados à partilha dos resultados.',
+      href: '/pt/docs/framework/0-workflow',
+      icon: 'list-ordered'
+    }
+  ]}
+/>
+
+## Referência
+
+Consultar: onde está uma etapa nas aplicações, o que significa um indicador.
+
+<HomeCards
+  items={[
+    {
+      title: 'Referência rápida',
+      description: 'Cada etapa da análise, a sua página de método e onde está nas aplicações.',
+      href: '/pt/docs/reference',
+      icon: 'library'
+    },
+    {
+      title: 'Definições de indicadores',
+      description: 'O que cada indicador mede e como é calculado.',
+      href: '/pt/docs/reference/indicator-definitions',
+      icon: 'symbol-number'
+    }
+  ]}
+/>
+
+## Conhecer as aplicações
 
 <HomeCards
   items={[
     {
       title: 'Data Extractor',
-      description: 'Extract and prepare DHIS2 data for analysis.',
-      href: '/en/apps/data-extractor',
+      description: 'Extraia e prepare os dados do DHIS2 para análise.',
+      href: '/pt/apps/data-extractor',
       icon: 'database'
     },
     {
       title: 'Vaxx',
-      description: 'Explore immunization indicators and analysis tools.',
-      href: '/en/apps/vaxx',
+      description: 'Explore os indicadores de imunização e as ferramentas de análise.',
+      href: '/pt/apps/vaxx',
       icon: 'pulse'
     },
     {
       title: 'RMNCAH',
-      description: 'Analyse reproductive, maternal and child health indicators.',
-      href: '/en/apps/rmncah',
+      description: 'Analise os indicadores de saúde reprodutiva, materna e infantil.',
+      href: '/pt/apps/rmncah',
       icon: 'person'
+    },
+    {
+      title: 'Pooled',
+      description: 'Combine os conjuntos de dados guardados de vários países e exporte-os.',
+      href: '/pt/apps/pooled',
+      icon: 'layers'
+    },
+    {
+      title: 'Assistente de IA',
+      description: 'O que o assistente do DataSuite faz, e boas práticas de IA na análise.',
+      href: '/pt/apps/ai-assistant',
+      icon: 'sparkle'
     }
   ]}
 />
 
-## Privacy
+## Privacidade
 
-By default, DataSuite auto-updates to new versions, and does not collects usage data and crash report information.
+Por predefinição, o DataSuite atualiza-se automaticamente para novas versões e não recolhe dados de utilização nem relatórios de falhas.

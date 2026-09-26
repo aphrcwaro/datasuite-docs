@@ -1,0 +1,48 @@
+import { Callout } from 'nextra/components'
+
+# Exporter les résultats
+
+Pooled peut exporter un seul tableau en CSV ou en Excel, ou une partie choisie du fichier agrégé dans plusieurs formats. Les valeurs manquantes sont écrites sous forme de cellules vides.
+
+## Téléchargements rapides d'un tableau
+
+- Sur une page de jeu de données, utilisez **Download** puis choisissez **CSV file** ou **Excel file**. L'export correspond au tableau de l'onglet affiché, avec les filtres Countries et Years appliqués.
+- Sur **All datasets**, les boutons **CSV** et **Excel** exportent le tableau actuellement sélectionné dans la liste, également filtré.
+
+| Format | Nom du fichier | Contenu |
+| --- | --- | --- |
+| CSV | le nom du tableau et la date, par exemple `Coverage_-_National_2026-01-31.csv` | Un tableau, une ligne d'en-tête, une ligne par pays, année et zone |
+| Excel | `pooled_rmncah_2026-01-31.xlsx` | Une feuille portant le nom du tableau |
+
+## Extraire une partie
+
+Utilisez **Extract a piece** lorsque vous avez besoin de plusieurs tableaux, ou d'une partie seulement. Les puces en haut choisissent **Datasets**, **Countries** et **Years** ; ne rien choisir revient à tout choisir. Sous **Columns**, gardez **All columns** ou choisissez les colonnes pour chaque jeu de données : les colonnes de pays, d'année et de zone sont toujours conservées. **Preview** montre jusqu'à six lignes par jeu de données.
+
+La carte **Get the piece** compte les jeux de données, pays, années et lignes, puis propose trois formats :
+
+| Format | Résultat |
+| --- | --- |
+| CSV | Un CSV pour un jeu de données, ou un `.zip` avec un CSV par jeu de données pour plusieurs |
+| Excel | Un classeur avec une feuille par jeu de données |
+| Pooled file | Un `.rds` plus léger que vous pouvez rouvrir dans Pooled |
+
+Les fichiers portent le domaine et la date, par exemple `pooled_rmncah_2026-01-31_piece.zip` ou `_piece.xlsx`. Les noms de feuilles sont limités à 31 caractères et les caractères interdits dans les noms de feuilles Excel sont remplacés par des espaces. Les feuilles Excel ont une ligne d'en-tête en gras, une première ligne figée et des largeurs de colonnes automatiques. **Explore this piece** ouvre le résultat dans l'application. **Start again** réinitialise tous les filtres et colonnes.
+
+<Callout type="info">
+Les fichiers Excel et CSV ne contiennent pas le journal de création. Pour conserver la liste des pays, les fichiers écartés et le journal, gardez le `.rds` agrégé issu de **Build pooled file**.
+</Callout>
+
+## Contenu du fichier agrégé
+
+Le `.rds` est une liste R simple, pas un cache de pays. Il contient `domain`, l'heure de création, la version de l'application, un tableau `countries` (pays, ISO3, fichier source, avertissement), un tableau `left_out` des fichiers écartés avec leurs motifs, `datasets` (un tableau par jeu de données) et un `log` horodaté. Les tableaux suivent l'ordre de la liste de l'application : Parameters and score, Indicator coverage, Coverage, Mortality, Service utilization, Data quality, Denominators, Estimates and surveys, Equity, Health systems.
+
+## Étapes suivantes pour l'analyse
+
+- Lisez le fichier CSV ou Excel dans R, Stata, Python ou Excel. `country` et `iso3` identifient le pays, et les colonnes de couverture portent déjà les mêmes noms d'un pays à l'autre.
+- Pour une analyse complète dans R, lisez le fichier agrégé avec `readRDS()` et travaillez sur `pooled$datasets`.
+- Comparez vos résultats aux méthodes du **[cadre analytique](/fr/docs/framework)**, notamment la **[couverture nationale](/fr/docs/framework/5-coverage-estimation)**.
+- En cas de problème propre à un pays, retournez à son cache dans la **[RMNCAH App](/fr/apps/rmncah)**, corrigez-le, sauvegardez-le et recréez le fichier agrégé.
+
+## Utiliser l'assistant de chat DataSuite
+
+L'assistant de chat de DataSuite travaille sur le jeu de données d'un seul pays ouvert dans l'application RMNCAH ou Vaxx ; voir la page **[Assistant IA](/fr/apps/ai-assistant)**. Le fichier agrégé a une structure différente (une liste de tableaux) : demandez à l'assistant de lire le fichier et d'analyser directement `datasets`, puis vérifiez les résultats par rapport aux tableaux que vous avez téléchargés.

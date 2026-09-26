@@ -1,24 +1,43 @@
 export default {
   index: {
-  title: 'Visão geral das aplicações',
-  theme: {
-    layout: 'full',
-    copyPage: false,
-    toc: true
+    title: 'Visão geral das aplicações',
+    theme: {
+      layout: 'full',
+      copyPage: false,
+      toc: true
+    }
+  },
+  'data-extractor': 'CD2030 Data Extractor',
+  rmncah: {
+    title: 'RMNCAH App',
+    theme: {
+      layout: 'full',
+      copyPage: false,
+      toc: true
+    }
+  },
+  vaxx: {
+    title: 'Vaxx App',
+    theme: {
+      layout: 'full',
+      copyPage: false,
+      toc: true
+    }
+  },
+  pooled: {
+    title: 'Pooled App',
+    theme: {
+      layout: 'full',
+      copyPage: false,
+      toc: true
+    }
+  },
+  'ai-assistant': {
+    title: 'Assistente de IA',
+    theme: {
+      layout: 'full',
+      copyPage: false,
+      toc: true
+    }
   }
-},
-"data-extractor": "Extrator de dados CD2030",
-
-"rmncah": {
-  title: "Aplicação RMNCAH",
-  theme: {
-    layout: 'full',
-    copyPage: false,
-    toc: false
-  }
-},
-"vaxx": {
-  title: "Aplicação Vaxx",
-  display: "hidden"
-}
 }

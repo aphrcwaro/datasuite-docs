@@ -1,0 +1,72 @@
+import { Steps, Callout } from 'nextra/components'
+
+# Análise avançada
+
+Três análises vão além dos gráficos de cobertura básicos: **Análise bayesiana**, **Contínuo de cuidados** e **Projeção de PF com FPET**. Assentam nos dados ajustados e nos denominadores que selecionou, pelo que deve concluir primeiro a [Preparação dos dados](/pt/apps/rmncah/data-preparation) e os [Denominadores](/pt/apps/rmncah/denominators). Métodos: [Abordagem de modelação bayesiana](/pt/docs/framework/5.1-bayesian-coverage) e [Cobertura nacional](/pt/docs/framework/5-coverage-estimation).
+
+## Análise bayesiana
+
+**Finalidade.** Combinar dados de inquérito e dados de rotina das unidades de saúde numa única estimativa por ano, com um intervalo de incerteza e uma previsão de curto prazo. Os inquéritos são utilizados ao seu nível notificado, ponderados pela sua incerteza. Os dados de rotina contribuem apenas com a sua tendência de ano para ano e pesam menos quando a pontuação geral de qualidade dos dados é baixa.
+
+**Quando utilizar.** Quando os inquéritos são antigos ou poucos e os dados das unidades de saúde são imperfeitos, e precisa de uma única tendência defensável, por exemplo para um relatório de síntese.
+
+Existem duas entradas no grupo **Análise bayesiana** da barra lateral: **Análise nacional** e **Análise subnacional** (regiões).
+
+<Steps>
+
+### Abra a Análise bayesiana
+
+Escolha Análise nacional ou Análise subnacional.
+
+### Escolha um separador de indicador
+
+**4 Consultas de Pré-natal**, **Pré-natal 1º Trimestre**, **Partos institucionais**, **Sarampo 1** ou **Pentavalente 3**. O modelo está definido para estes cinco indicadores.
+
+### Leia o gráfico
+
+O título é *Estimativas do modelo de cobertura bayesiano* seguido do indicador, e a nota de fonte indica *Fonte: Dados de inquérito e dados de rotina DHIS2*. A linha central é a melhor estimativa; a faixa é o intervalo de incerteza. Utilize **Baixar Gráfico** e **Baixar Dados** na barra de ferramentas.
+
+</Steps>
+
+![Estimativas bayesianas de CPN4 a nível nacional](/images/bayesian-ANC4-national.png)
+
+![Estimativas bayesianas de CPN4 por região](/images/bayesian-ANC4-subnational.png)
+
+**Como interpretar.** Uma faixa estreita significa que os dados concordam; uma faixa larga significa poucos pontos de dados ou dados em conflito. A estimativa segue uma subida em forma de S, típica da cobertura. Não encare o modelo como substituto de bons dados: se a pontuação de qualidade dos dados de rotina for baixa, a estimativa apoia-se mais nos inquéritos.
+
+## Contínuo de cuidados
+
+**Finalidade.** Acompanhar a cobertura ao longo do percurso de cuidados e ver onde as mulheres e as crianças abandonam.
+
+**Onde.** **Análise nacional**, **Contínuo de cuidados** na barra lateral. A página tem dois cartões, ambos intitulados *Cobertura Nacional e Contínuo*, cada um com os separadores **Contínuo materno** e **Contínuo infantil**.
+
+- **Cartão superior, perfil do contínuo.** *Perfil nacional do contínuo de cuidados*: o valor mais recente das unidades de saúde, o valor mais recente do inquérito e, quando aplicável, o valor do WUENIC para cada etapa do percurso selecionado, por exemplo Pré-natal 1º Trimestre, 4 Consultas de Pré-natal, Partos institucionais e PNC nas primeiras 48 horas no contínuo materno, ou Pentavalente 3 e Sarampo 1 no contínuo infantil.
+- **Cartão inferior, mapa de calor do contínuo.** *Mapa de calor do contínuo subnacional*: as mesmas etapas para cada região de Nível Administrativo 1. Leia ao longo de uma linha para ver uma região e ao longo de uma coluna para ver um indicador. As células vermelhas indicam cobertura baixa, as amarelas intermédia e as verdes elevada.
+
+A página pode gerar o relatório de cobertura nacional com **Gerar Relatório**.
+
+![Perfil do contínuo de cuidados](/images/pt-national-coverage-continuum-care-profile.png)
+
+![Mapa de calor do contínuo materno por região](/images/national-admin1-maternal-continuum-heatmap.png)
+
+**Como interpretar.** Uma grande diferença entre o pré-natal no primeiro trimestre e as 4 consultas de pré-natal sugere fraca continuidade dos cuidados. Um pré-natal elevado mas com menos partos institucionais aponta para barreiras aos cuidados no parto. Uma diferença entre Pentavalente 3 e Sarampo 1 sugere abandono após as primeiras vacinas. Uma linha com muitas células vermelhas indica problemas generalizados nessa região; uma coluna com muitas células vermelhas revela um estrangulamento nacional. Valores baixos podem dever-se a problemas de notificação ou de denominador, pelo que deve verificar a qualidade antes de agir.
+
+## Projeção de PF com FPET
+
+**Finalidade.** Mostrar as tendências de planeamento familiar para mulheres atualmente casadas de 15 a 49 anos, a partir da Family Planning Estimation Tool (FPET, Track20).
+
+**Onde.** É o separador **Projeção de PF** em **Cobertura nacional** e em **Cobertura subnacional**.
+
+O título do gráfico é *Planejamento familiar entre mulheres atualmente casadas de 15 a 49 anos*. Representa dois indicadores: **Prevalência de Métodos Modernos (mCPR)** e **Demanda satisfeita com método moderno**. As linhas são estimativas medianas e as faixas sombreadas são intervalos de credibilidade de 95%. Os dados do FPET são dados de referência integrados para o país e não provêm dos dados das suas unidades de saúde.
+
+<Callout type="info">
+O FPET ajusta uma tendência a todos os inquéritos disponíveis, pelo que uma curva suave não significa que exista um inquérito para cada ano.
+</Callout>
+
+![Projeção FPET](/images/pt-national-coverage-fpet.png)
+
+## Armadilhas comuns
+
+- Utilizar estimativas bayesianas sem indicar que são modeladas. Identifique-as como tal nos relatórios.
+- Ler a Projeção de PF como um indicador das unidades de saúde. É um resultado de modelo.
+- Interpretar o mapa de calor do contínuo sem antes verificar a [Qualidade dos dados](/pt/apps/rmncah/data-quality) da região.

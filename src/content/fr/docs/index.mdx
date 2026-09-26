@@ -1,63 +1,113 @@
----
-title: DataSuite documentation
----
+import { HomeCards } from '@/components/HomeCards'
 
-import {HomeCards } from '@/components/HomeCards'
+# Documentation DataSuite
 
-# DataSuite documentation
+Découvrez comment utiliser DataSuite et explorer ses modules.
 
-Learn how to use DataSuite and explore its modules.
-
-## Getting started
+## Prise en main
 
 <HomeCards
   items={[
     {
-      title: 'Download DataSuite',
-      description: 'Download DataSuite for Windows.',
-      href: '/en/downloads',
+      title: 'Télécharger DataSuite',
+      description: 'Téléchargez DataSuite pour Windows.',
+      href: '/fr/downloads',
       icon: 'tools'
     },
     {
-      title: 'Setup',
-      description: 'Install and configure DataSuite on your system.',
-      href: '/en/docs/setup',
+      title: 'Installation',
+      description: 'Installez et configurez DataSuite sur votre système.',
+      href: '/fr/docs/setup',
       icon: 'desktop-download'
     },
     {
-      title: 'Getting started',
-      description: 'Discover the key features of DataSuite with the step-by-step tutorial.',
-      href: '/en/docs/getting-started',
+      title: 'Premiers pas',
+      description: 'Découvrez les fonctionnalités clés de DataSuite avec le tutoriel étape par étape.',
+      href: '/fr/docs/getting-started',
       icon: 'rocket'
     }
   ]}
 />
 
-## Learn about the apps
+## Méthodologie
+
+La méthodologie Countdown, c'est l'analyse elle-même : chaque étape, comment elle se déroule et comment lire les résultats.
+
+<HomeCards
+  items={[
+    {
+      title: 'Méthodologie Countdown',
+      description: 'Le cadre analytique, étape par étape, de la qualité des données à la diffusion.',
+      href: '/fr/docs/framework',
+      icon: 'book'
+    },
+    {
+      title: 'Déroulement',
+      description: 'L\'ordre de l\'analyse, du chargement des données au partage des résultats.',
+      href: '/fr/docs/framework/0-workflow',
+      icon: 'list-ordered'
+    }
+  ]}
+/>
+
+## Référence
+
+Retrouver une information : où se trouve une étape dans les applications, ce que signifie un indicateur.
+
+<HomeCards
+  items={[
+    {
+      title: 'Référence rapide',
+      description: 'Chaque étape de l\'analyse, sa page de méthode et sa place dans les applications.',
+      href: '/fr/docs/reference',
+      icon: 'library'
+    },
+    {
+      title: 'Définitions des indicateurs',
+      description: 'Ce que mesure chaque indicateur et comment il est calculé.',
+      href: '/fr/docs/reference/indicator-definitions',
+      icon: 'symbol-number'
+    }
+  ]}
+/>
+
+## Découvrir les applications
 
 <HomeCards
   items={[
     {
       title: 'Data Extractor',
-      description: 'Extract and prepare DHIS2 data for analysis.',
-      href: '/en/apps/data-extractor',
+      description: 'Extrayez et préparez les données DHIS2 pour l\'analyse.',
+      href: '/fr/apps/data-extractor',
       icon: 'database'
     },
     {
       title: 'Vaxx',
-      description: 'Explore immunization indicators and analysis tools.',
-      href: '/en/apps/vaxx',
+      description: 'Explorez les indicateurs de vaccination et les outils d\'analyse.',
+      href: '/fr/apps/vaxx',
       icon: 'pulse'
     },
     {
       title: 'RMNCAH',
-      description: 'Analyse reproductive, maternal and child health indicators.',
-      href: '/en/apps/rmncah',
+      description: 'Analysez les indicateurs de santé reproductive, maternelle et infantile.',
+      href: '/fr/apps/rmncah',
       icon: 'person'
+    },
+    {
+      title: 'Pooled',
+      description: 'Combinez les jeux de données enregistrés de plusieurs pays et exportez-les.',
+      href: '/fr/apps/pooled',
+      icon: 'layers'
+    },
+    {
+      title: 'Assistant IA',
+      description: 'Ce que fait l\'assistant de DataSuite, et les bonnes pratiques de l\'IA en analyse.',
+      href: '/fr/apps/ai-assistant',
+      icon: 'sparkle'
     }
   ]}
 />
 
-## Privacy
+## Confidentialité
 
-By default, DataSuite auto-updates to new versions, and does not collects usage data and crash report information.
+Par défaut, DataSuite se met à jour automatiquement vers les nouvelles versions et ne collecte ni données d'utilisation ni rapports de plantage.

@@ -1,5 +1,6 @@
 import { DownloadGrid } from '@/components/DownloadGrid'
-import styles from '../en/downloads.module.css'
+import styles from './downloads.module.css'
+import { Callout } from 'nextra/components'
 
 <div className={styles.cdsuiteGrid}>
 
@@ -21,7 +22,7 @@ La suite d'analyse autonome. Gratuite et open source.
         ],
         links: [
           {
-            label: 'Programme d\'installation utilisateur', 
+            label: 'Programme d\'installation utilisateur',
             options: [
               { label: 'x64', href: '/fr/thank-you?dv=win64user' }
             ]
@@ -44,3 +45,25 @@ La suite d'analyse autonome. Gratuite et open source.
   />
 
 </div>
+
+## Options d'installation [#installer-options]
+
+DataSuite propose des installations Windows au niveau **utilisateur** et au niveau **système**, ainsi qu'une option d'installation **portable (.zip)**.
+
+| Type d'installation | Description |
+| --- | --- |
+| Installation utilisateur | **Recommandée pour la plupart des utilisateurs.** S'installe dans votre dossier Local AppData sans nécessiter de privilèges d'administrateur. Permet des mises à jour fluides en arrière-plan. |
+| Installation système | S'installe dans `Program Files` et nécessite des privilèges d'administrateur. Disponible pour tous les utilisateurs du système, mais les mises à jour nécessitent également une élévation de privilèges. Utilisez cette option si vous avez besoin d'un accès multi-utilisateur. |
+| Mode portable | S'installe sous la forme d'un dossier autonome qui peut être déplacé d'un environnement à un autre. Toutes les données de DataSuite restent dans ce dossier. Idéal pour une utilisation portable sur différentes machines. Consultez [Mode portable](/fr/docs/setup/portable) pour les instructions d'installation. |
+
+<Callout type="info">
+
+Le mode portable n'est pris en charge que par l'archive Windows `.zip`, qui ne prend pas en charge les mises à jour automatiques.
+
+</Callout>
+
+## Mise à jour de DataSuite
+
+Lorsqu'une nouvelle version de CD2030 DataSuite est publiée avec de nouvelles fonctionnalités et des correctifs importants, il vous sera proposé d'installer la nouvelle version au lancement de l'application DataSuite.
+
+Vous pouvez également rechercher manuellement des mises à jour en sélectionnant **Aide** > **Rechercher les mises à jour** sous Windows.

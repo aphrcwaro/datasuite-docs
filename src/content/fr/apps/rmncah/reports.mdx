@@ -1,0 +1,136 @@
+import { Steps, Callout } from 'nextra/components'
+
+# Rapports
+
+La page **Rapports** de la section **Résultats** construit des rapports à partir du jeu de données chargé. Il en existe deux types :
+
+| Type | Ce que c'est | Fichiers téléchargeables |
+| --- | --- | --- |
+| Document | Pages de texte, graphiques et tableaux, avec une page de couverture et un sommaire facultatifs | Word (`.docx`) ou PDF |
+| Présentation | Diapositives avec zones de texte, graphiques, tableaux et images | PowerPoint (`.pptx`) ou PDF |
+
+Les graphiques et tableaux sont calculés à partir des données à chaque aperçu ou téléchargement : un rapport reflète donc toujours l'état actuel de votre analyse (années retirées, ajustement, dénominateurs). Chaque rapport créé est enregistré dans le jeu de données et listé sous **Vos rapports**. Pour télécharger des graphiques ou tableaux isolés, des jeux de données ou utiliser l'assistant IA, voir [Exports, rapports et IA](/fr/apps/rmncah/exports-and-ai).
+
+**Les rapports sont enregistrés dans le fichier du jeu de données.** Créer ou modifier un rapport réécrit le jeu de données enregistré (le cache `.rds`), et la liste des rapports l'accompagne. Conservez une copie du jeu de données avant d'expérimenter, et partagez le jeu de données si un collègue doit ouvrir vos rapports.
+
+<Callout type="info">
+Le sous-titre de la page dans l'application indique encore « rapports Word et PDF ». Le code produit aussi des présentations, et la fiche d'une page est une présentation PowerPoint.
+</Callout>
+
+## Rapports standard de RMNCAH App
+
+Un rapport standard est le rapport Countdown d'une section d'analyse, reconstruit sous forme de blocs modifiables. Il s'ouvre comme votre propre copie : modifiez ou supprimez ce que vous voulez. Les blocs de texte formulés en questions (intitulés **Notes** ou **Interprétations**) sont des invites pour l'analyste ; remplacez-les par l'interprétation convenue lors de votre réunion de revue.
+
+| Rapport standard | Type | Contenu | Page avec un bouton **Générer le rapport** |
+| --- | --- | --- | --- |
+| **Qualité des données** | Document | Tableau récapitulatif de la qualité des données, taux de rapportage des districts, cohérence ANC1/Penta1 et Penta1/Penta3, avec des questions sur le score, la complétude et les valeurs extrêmes | Score Global de Qualité des Données |
+| **Ajustement des données** | Document | Contexte, puis nombres déclarés avant et après ajustement pour les naissances vivantes en établissement et Penta1, avec une invite pour décrire l'effet de la dernière année | Changements d'ajustement |
+| **Sélection du dénominateur** | Document | Projections DHIS2 et ONU de la population, des naissances vivantes et des moins de 1 an, puis couverture de Penta3 et des naissances vivantes en établissement selon chaque dénominateur, au niveau national et par région | Sélection du dénominateur |
+| **Couverture nationale** | Document | Couverture de ANC4, ANC au premier trimestre, soins d'accouchement (accouchements et naissances vivantes en établissement), SPN 48 h, faible poids de naissance, Penta3 et rougeole 1 ; continuum de soins maternels et infantiles ; planification familiale (FPET) ; districts atteignant les cibles ; continuum par région | Continuum des soins |
+| **Inégalités nationales** | Document | Pour les naissances vivantes en établissement et Penta3 : couverture par région dans le temps, carte, équité selon la richesse et l'éducation ; puis couverture par district | Évaluation de l'équité |
+| **Mortalité** | Document | Tendances de la mortalité maternelle (iMMR), des mortinaissances (iSBR) et néonatale en établissement, mortinaissances par décès maternel, complétude de la déclaration des décès | Complétude des données de mortalité |
+| **Services de santé curatifs** | Document | Tableau de qualité des données d'utilisation des services, graphiques et cartes ambulatoires et d'hospitalisation, indice préventif vs curatif | Indice préventif SMI vs Indice curatif |
+| **Performance du système de santé** | Document | Tableau des intrants du système de santé et graphiques par région (établissements, hôpitaux, personnel de santé, lits), résultats des services selon les intrants | Performance des SSP |
+| **Part public/privé** | Document | Propriété des établissements et part privée des services, au niveau national et par zone rurale/urbaine | Part publique/privée |
+| **Recueil de synthèse** | Document, format recueil (35 x 56 cm) | Les six domaines d'analyse (qualité des données et dénominateurs, couverture et cibles, équité et géographie, mortalité, services curatifs, système de santé) avec questions d'interprétation et une couverture pour l'équipe du pays | Page Rapports uniquement |
+| **Fiche d'une page par région** | Présentation, une diapositive 16:9 | Une région : Penta3, naissances vivantes en établissement et ANC4 comparés aux autres régions et dans le temps, tableau du score de qualité des données et tableau de couverture par district | Page Rapports uniquement |
+
+Deux de ces rapports sont les plus demandés par les parties prenantes. Le **recueil de synthèse** est l'analyse complète dans un seul document pour la réunion de revue. La **fiche d'une page** donne à chaque région son propre profil statistique.
+
+## Ouvrir la page Rapports
+
+<Steps>
+
+### Terminez les prérequis
+
+La page Rapports reste verrouillée tant que vous n'avez pas chargé un jeu de données et exécuté **Ajustement des données** (voir [Préparation des données](/fr/apps/rmncah/data-preparation)). Choisissez d'abord les dénominateurs dans [Dénominateurs](/fr/apps/rmncah/denominators) : la plupart des graphiques les utilisent.
+
+### Ouvrez-la
+
+Cliquez sur **Rapports** sous **Résultats**, ou sur **Rapports** dans l'en-tête. Un bouton **Générer le rapport** dans l'en-tête d'une page ouvre aussi la page et démarre le rapport standard correspondant.
+
+</Steps>
+
+## Générer un rapport standard
+
+<Steps>
+
+### Choisissez un rapport
+
+Sous **Rapports standard** (documents) ou **Présentations standard**, cliquez sur une carte. Chaque carte indique le nombre de graphiques et de tableaux. Vous pouvez aussi partir de **Nouveau document** ou **Nouvelle présentation** (**Page vierge**).
+
+### Nommez-le et choisissez sa langue
+
+Une boîte de dialogue demande le nom du rapport (par exemple le type de rapport et le pays), la **Langue du rapport** (anglais, français ou portugais) et se valide avec **Créer le rapport**. La langue du rapport est indépendante de celle de l'application : le texte standard est rédigé dans cette langue, et les graphiques, tableaux et dates y sont toujours dessinés. Vous pourrez la changer plus tard sous l'onglet **Mise en page** ; les graphiques et tableaux sont redessinés, mais le texte que vous avez écrit n'est pas traduit.
+
+### Attendez les graphiques
+
+L'éditeur s'ouvre aussitôt. Chaque graphique affiche **Calcul à partir des données…** puis apparaît un par un. Un graphique qui ne peut pas être tracé affiche **Impossible à tracer avec ces données** avec la raison.
+
+### Définissez la région, si le rapport en a une
+
+Pour la fiche d'une page (et tout graphique dessiné pour une région), choisissez la région dans l'onglet **Mise en page**, groupe **Rapport**, champ **Région de ce rapport**. La première région par ordre alphabétique est choisie par défaut. Laissez le champ vide pour un rapport national. Pour produire une fiche par région, dupliquez le rapport depuis la liste et changez la région.
+
+### Modifiez, puis vérifiez
+
+Remplacez les invites, supprimez ce dont vous n'avez pas besoin, puis ouvrez l'affichage **Page** pour voir les pages finales (voir plus bas).
+
+### Téléchargez
+
+Choisissez **Télécharger**, sélectionnez le format et attendez la barre de progression (**Calcul des graphiques**, puis **Écriture du fichier Word**, **Impression du PDF** ou **Écriture du fichier PowerPoint**). Le fichier se télécharge automatiquement ; **Télécharger à nouveau** est proposé sinon.
+
+</Steps>
+
+## L'éditeur de document
+
+- **Panneau des blocs** (à gauche). L'onglet **Blocs** liste tous les types de graphiques et tableaux par domaine d'analyse, avec une zone de recherche (**Rechercher graphiques, tableaux, texte**) ; **Texte et mise en page** contient **Titre**, **Sous-titre**, **Paragraphe**, **Encadré de notes** et **Saut de page**. Glissez un bloc sur une page, ou appuyez sur **+** pour l'ajouter après le bloc sélectionné. L'onglet **Plan** liste la structure du rapport. Un groupe **Personnalisés** est annoncé pour les graphiques créés pour votre jeu de données ; il est vide pour l'instant.
+- **Réglages des graphiques et tableaux.** Sélectionnez un bloc pour choisir ce qu'il affiche : **Indicateur**, **Niveau** (National, Région ou District), une variante comme Maternel ou Infantile, **Année**, **Région**, **Largeur** (**Pleine largeur**, **Moitié** ou **Tiers**), un titre et **Afficher la légende et la source**. **Personnaliser ce graphique** modifie texte, polices et couleurs pour ce graphique dans ce rapport uniquement. Les graphiques personnalisés dans l'application avec **Appliquer à : Rapport** gardent ce style.
+- **Ordre et suppression.** Faites glisser un bloc par sa poignée, ou utilisez **Monter**, **Descendre**, **Dupliquer** et **Supprimer**. **Annuler** et **Rétablir** (Ctrl+Z, Ctrl+Y) couvrent les modifications. Les changements s'enregistrent automatiquement (**Enregistré dans le jeu de données**).
+- **Texte.** Tapez directement. Entrée commence un paragraphe, Maj+Entrée une nouvelle ligne. Insérez des **Champs** comme `{country}`, `{region}`, `{first_year}`, `{latest_year}`, `{chart_indicator}` ou des valeurs de couverture comme `{penta3_latest}` ; ils sont remplis à partir des données et suivent la langue du rapport.
+- **Conception.** L'onglet **Conception** regroupe les thèmes (**Countdown**, **Ministère de la Santé**, **Épuré**, **Formel**), les couleurs, les polices, la **Page de couverture** (titre, sous-titre, logos, drapeau du pays, éditeurs, date, référence) et le **Sommaire**. **Mise en page** règle le format de page (A4, Letter, recueil, affiche), l'orientation, les marges, les numéros de page, l'en-tête et le pied de page. **Rechercher des thèmes…** crée un thème à partir d'un fichier PowerPoint ou Word (`.potx`, `.pptx`, `.dotx`, `.docx`) ; les téléchargements sont alors écrits à partir de ce fichier.
+- **Affichages.** **Modification**, **Mode lecture**, **Page** (les pages finales exactes), **Concentration** et zoom.
+- **Les présentations** utilisent un éditeur de diapositives avec dispositions, trieuse de diapositives, notes du présentateur et zones de texte ; les graphiques et tableaux s'y placent de la même façon.
+
+## Formats et téléchargements
+
+| Format | Produit par | Remarques |
+| --- | --- | --- |
+| Word `.docx` | L'application | Modifiable. Sous Windows avec Word installé, Word remplit aussi le sommaire et incorpore les polices |
+| PDF d'un document | Créé à partir du fichier Word par Microsoft Word ou LibreOffice : les pages sont identiques à Word | Sans l'un ni l'autre, Chrome, Edge ou Chromium l'imprime : proche du fichier Word, mais les pages peuvent différer |
+| PowerPoint `.pptx` | L'application | Textes, graphiques et tableaux restent modifiables dans PowerPoint |
+| PDF d'une présentation | PowerPoint ou LibreOffice | Impossible sans l'un des deux |
+
+Le fichier porte le nom du pays, du rapport et la date, par exemple `Kenya_Recueil_de_synthese_2026-09-26.docx`, et est enregistré là où votre navigateur ou DataSuite enregistre les téléchargements. Un document ne peut pas être exporté en PowerPoint, ni une présentation en Word.
+
+## Prérequis qui modifient le contenu
+
+- **Les années retirées et l'ajustement** déterminent les chiffres de tous les graphiques de couverture, d'ajustement et de mortalité.
+- **Les dénominateurs** choisis dans Sélection du dénominateur sont utilisés par les graphiques de couverture. Sans eux, le graphique de tendance de la couverture par dénominateur affiche en anglais « Choose the denominators first ».
+- **Les enquêtes.** Les graphiques d'équité et les comparaisons établissements-enquêtes nécessitent les fichiers d'enquête chargés.
+- **Données de référence du pays.** Le graphique FPET nécessite des estimations de planification familiale pour le pays.
+
+## Dépannage
+
+| Symptôme | Cause probable et solution |
+| --- | --- |
+| **Impossible à tracer avec ces données** dans un bloc | Le jeu de données n'a pas les données. Lisez la raison indiquée, chargez le fichier manquant ou supprimez le bloc. Le même texte apparaît dans le fichier exporté |
+| « Choose a region » (en anglais) | Un graphique régional n'a pas de région : définissez **Région de ce rapport** |
+| « No district coverage for ... in ... » (en anglais) | Choisissez une année et une région qui ont des données |
+| Les pages finales ou le PDF échouent, ou signalent l'absence de convertisseur | Installez Microsoft Word ou LibreOffice sur l'ordinateur qui exécute l'application. Le téléchargement Word fonctionne toujours |
+| Le PDF d'une présentation échoue | Nécessite PowerPoint ou LibreOffice. Téléchargez plutôt PowerPoint |
+| Génération lente | Le premier tracé d'un long rapport, comme le recueil de synthèse, calcule tous les graphiques. Attendez la barre de progression ; les modifications suivantes ne redessinent que ce qui a changé |
+
+Les raisons détaillées données après **Impossible à tracer avec ces données** viennent du code et sont en anglais.
+
+## Conseils pour les parties prenantes
+
+1. Fixez la qualité des données, l'ajustement et les dénominateurs avant de générer la synthèse, et indiquez-les dans un bloc de texte sur la première page.
+2. Répondez à chaque invite d'interprétation ou supprimez-la. Laisser les invites est la raison la plus fréquente d'un recueil qui paraît inachevé.
+3. Renseignez la couverture : titre, éditeurs, date et logos des partenaires.
+4. Produisez le rapport dans la langue du public, et utilisez l'affichage **Page** avant d'envoyer un PDF.
+5. Dupliquez la fiche d'une page pour chaque région et partagez les fichiers PowerPoint avec les équipes régionales.
+6. Reliez les constats aux actions : voir [Diffusion, décisions et action](/fr/docs/framework/12-dissemination).
+
+## Ce que cette page ne couvre pas
+
+Les notes de page ajoutées avec le bouton **Notes** ne font pas partie du générateur de rapports d'après le code source. Le groupe de graphiques **Personnalisés** est un espace réservé. L'emplacement où DataSuite enregistre les fichiers téléchargés dépend de votre navigateur ou de vos paramètres, que le code du rapport ne contrôle pas.

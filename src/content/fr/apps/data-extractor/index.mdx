@@ -1,49 +1,53 @@
-import { Callout } from 'nextra/components'
-import { withGitHubAlert } from 'nextra/components'
-import { HomeCards } from '@/components/HomeCards'
-import { Steps } from 'nextra/components'
+import { Callout, Steps } from 'nextra/components'
 
-## CD2030 DHIS2 Data Extractor
+# CD2030 DHIS2 Data Extractor
 
-The **CD2030 DHIS2 Data Extractor** helps teams connect to DHIS2, prepare metadata, map indicators, and download routine data in a way that is more stable and easier to reproduce than manual extraction.
+Le **CD2030 DHIS2 Data Extractor** aide les équipes à se connecter à DHIS2, à préparer les métadonnées, à mapper les indicateurs et à télécharger les données de routine de manière plus stable et plus facilement reproductible qu'avec une extraction manuelle.
 
-It is designed to support large, multi-period downloads while reducing server strain, avoiding unnecessary repeat requests, and preserving progress through local caching.
+Il est conçu pour prendre en charge des téléchargements volumineux portant sur plusieurs périodes, tout en réduisant la charge sur le serveur, en évitant les requêtes répétées inutiles et en conservant la progression grâce à la mise en cache locale.
 
 <Callout type="info">
-   **Access disclaimer:** The CD2030 DHIS2 Data Extractor does not allow unauthorized access to DHIS2 data.
+
+**Avis d'accès :** le CD2030 DHIS2 Data Extractor ne permet pas d'accéder sans autorisation aux données de DHIS2.
+
 </Callout>
 
-## What the extractor does
+## Ce que fait l'extracteur
 
-The extractor supports a practical end-to-end workflow:
+L'extracteur prend en charge un flux de travail complet et pratique :
 
-```mermaid
-flowchart LR
-  A[Sign in to DHIS2] --> B[Sync, Read and cache metadata]
-  B --> C[Map source metadata to indicator]
-  C --> D[Download routine data]
-  D --> E[Save the mapping for export/reuse]
+<Mermaid
+  chart={`
+flowchart TD
+  A["1. Se connecter à DHIS2"]
+  B["2. Synchroniser, lire et mettre en cache les métadonnées"]
+  C["3. Mapper les métadonnées sources vers les indicateurs"]
+  D["4. Télécharger les données de routine"]
+  E["5. Enregistrer le mappage pour l'exporter ou le réutiliser"]
+  A --> B --> C --> D --> E
+`}
+/>
 
+Ce processus aide les analystes à disposer d'un point de départ plus propre et plus reproductible pour les analyses en aval dans DataSuite.
 
-  classDef step fill:#e6f7ff,stroke:#1e7ec8,stroke-width:2px;
-  class A,B,C,D,E,F step;
-```
-
-This process helps analysts produce a cleaner and more reproducible starting point for downstream analysis in DataSuite.
-
-## Quick start steps
+## Étapes de démarrage rapide
 
 <Steps>
-### [Login to DHIS2](/fr//apps/data-extractor/dhis2-login)
-Connect to the correct DHIS2 instance using your server URL and valid account credentials.
 
-### [Cache metadata](/fr/apps/data-extractor/dhis2-login#read-and-cache-metadata)
-Temporarily cache(store)  metadata locally for fast access and efficient downloading
+### [Se connecter à DHIS2](/fr/apps/data-extractor/dhis2-login)
 
-### [Choose a mapping mode](/fr/apps/data-extractor/mapping#map-metadata)
-Use Countdown mapping for the harmonized MNCH template or Custom mapping for other programs.
+Connectez-vous à la bonne instance DHIS2 à l'aide de l'URL de votre serveur et d'identifiants de compte valides.
 
-### [Download data](/fr/apps/data-extractor/data-download)
-Run extraction with smaller requests and reuse cached metadata to minimize repeat downloads.
+### [Mettre les métadonnées en cache](/fr/apps/data-extractor/dhis2-login#read-and-cache-metadata)
+
+Mettez temporairement en cache (stockez) les métadonnées localement pour y accéder rapidement et télécharger efficacement.
+
+### [Choisir un mode de mappage](/fr/apps/data-extractor/mapping#map-metadata)
+
+Utilisez le mappage **Countdown** pour le modèle MNCH harmonisé ou le mappage **Custom** pour les autres programmes.
+
+### [Télécharger les données](/fr/apps/data-extractor/data-download)
+
+Lancez l'extraction avec des requêtes plus petites et réutilisez les métadonnées mises en cache pour limiter les téléchargements répétés.
+
 </Steps>
-

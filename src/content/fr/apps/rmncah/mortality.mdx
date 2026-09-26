@@ -1,0 +1,74 @@
+import { Steps, Callout } from 'nextra/components'
+
+# Mortalité
+
+Le groupe **Mortalité** examine les décès enregistrés dans les établissements de santé : mortalité maternelle institutionnelle, mortinaissances et décès néonatals avant la sortie. Il comprend trois pages : **Mortalité institutionnelle**, **Cartographie de la mortalité** et **Complétude des données de mortalité**. La méthode, les définitions et les formules figurent dans [Mortalité](/fr/docs/framework/9-mortality).
+
+<Callout type="warning">
+Les chiffres de mortalité utilisent les nombres de décès notifiés sans l'ajustement pour le taux de notification et les valeurs aberrantes appliqué aux autres indicateurs, car les décès sont peu nombreux et fluctuent. Ils dépendent toutefois du dénominateur que vous avez sélectionné (naissances vivantes ou naissances). Si une valeur ressemble à une erreur de saisie, vérifiez-la dans la [Détection des valeurs aberrantes](/fr/apps/rmncah/data-quality) et traitez-la selon les indications de la méthodologie.
+</Callout>
+
+## Mortalité institutionnelle
+
+**Objectif.** Montrer le niveau et la tendance de la mortalité institutionnelle et vérifier si elle est plausible.
+
+**Quand l'utiliser.** D'abord pour voir les taux ; utilisez ensuite la seconde carte pour tester la qualité des données.
+
+<Steps>
+
+### Ouvrez la Mortalité institutionnelle
+
+Elle se trouve sous **Mortalité** dans le groupe **Analyse**.
+
+### Lisez la première carte, Mortalité institutionnelle
+
+Onglets : **Mortalité maternelle** (pour 100 000 naissances vivantes en établissement), **Taux de mortinatalité** et **Décès néonatals**. Les points sont les régions et la ligne est le pays, par année.
+
+### Lisez la seconde carte, DQA de la mortalité institutionnelle
+
+Onglets : **Mortinaissances fraîches** (mortinaissances fraîches en pourcentage de toutes les mortinaissances), **Ratio mortinatalité / décès maternels** (mortinaissances par décès maternel) et **Décès néonatals / maternels** (décès néonatals institutionnels par décès maternel). Chaque graphique montre la **Médiane** et une **Plage attendue**, et une note sous le graphique donne la plage : 30 à 55 pour les mortinaissances fraîches, 6 à 15 pour les mortinaissances par décès maternel et 5 à 10 pour les décès néonatals par décès maternel.
+
+</Steps>
+
+![Mortalité maternelle institutionnelle par région et par année](/images/fr-mortality-institutional-mortality.png)
+
+![Mortinaissances fraîches en pourcentage du total des mortinaissances](/images/fr-mortality-institutional-freshsbr.png)
+
+**Comment interpréter.**
+
+- Un ratio de mortalité maternelle très faible avec un faible ratio mortinaissances / décès maternels peut indiquer une sous-notification des décès, et non de bons soins.
+- Une part de mortinaissances fraîches très éloignée de sa plage suggère que les mortinaissances fraîches et macérées sont mal classées.
+- Les décès néonatals correspondent ici aux décès de nouveau-nés vivants avant la sortie de l'établissement ; ils sous-estiment donc la mortalité néonatale communautaire.
+- Les régions qui sortent de la plage chaque année sont prioritaires pour une revue des données.
+
+## Cartographie de la mortalité
+
+**Objectif.** Cartographier la mortalité institutionnelle entre les régions.
+
+**Filtres.** **Sélectionner les années** (une ou plusieurs) et **Palette** (Verts, Bleus, Rouges ou Violets ; Rouges par défaut).
+
+Onglets : **Mortalité maternelle** et **Taux de mortinatalité**. Chaque carte montre les valeurs par région pour les années sélectionnées, ce qui rend visibles les regroupements géographiques.
+
+![Mortalité maternelle institutionnelle par région](/images/fr-mortality-institutional-mmr-byregion.png)
+
+**Piège.** Des valeurs élevées sur une carte ne signifient pas toujours une mortalité élevée. Les régions comptant peu de naissances peuvent varier fortement, et les régions qui notifient bien peuvent sembler pires que celles qui sous-notifient.
+
+## Complétude des données de mortalité
+
+**Objectif.** Estimer dans quelle mesure les établissements notifient les décès, en comparant le taux institutionnel notifié à un taux attendu construit à partir des estimations de l'ONU.
+
+**Quand l'utiliser.** Après les graphiques de DQA, pour juger si la mortalité notifiée est exploitable.
+
+Onglets : **MMR institutionnel** et **SBR institutionnel**. La complétude est le taux institutionnel notifié divisé par le taux institutionnel attendu, tracé pour plusieurs hypothèses sur l'écart entre mortalité communautaire et mortalité institutionnelle, et pour la borne inférieure, la médiane et la borne supérieure de l'estimation de l'ONU. Utilisez **Générer le rapport** pour ouvrir le rapport sur la mortalité.
+
+Si des données externes vous indiquent quelle hypothèse correspond à votre pays, restreignez la plage en conséquence. Par exemple, lorsque la mortalité maternelle communautaire est estimée à 1,5 à 2 fois la mortalité en établissement, la plage plausible de complétude est plus étroite.
+
+![Complétude de la notification des décès maternels en établissement](/images/fr-mortality-completeness.png)
+
+La complétude repose sur les estimations de mortalité de l'ONU. Utilisez les données intégrées du pays, ou téléversez les vôtres à l'étape Téléverser les données de [Démarrage](/fr/apps/rmncah/getting-started).
+
+## Pièges courants
+
+- Traiter la mortalité institutionnelle comme la mortalité de la population. Les établissements ne captent qu'une partie des décès.
+- Comparer des régions dont les parts de naissances en établissement sont très différentes.
+- Ignorer la complétude. Une faible complétude signifie que le taux notifié est une borne inférieure.

@@ -1,41 +1,99 @@
-import { Steps } from 'nextra/components'
-import { Callout } from 'nextra/components'
-import { Bleed } from 'nextra/components'
+---
+topics: [workflow]
+ai:
+  status: draft
+  summary: >-
+    The order of analysis in the RMNCAH App, step by step, with the app pages for each step and the guide that
+    describes them. Each step title links to its methodology chapter.
+  steps:
+    - "Loading data: Load Data (#loading-data)"
+    - "Data quality assessment: the Data quality pages (#data-quality-assessment)"
+    - "Data adjustment: Remove Years, Data Adjustment, Data Adjustment Changes; this step unlocks all the analysis pages (#data-adjustment)"
+    - "Denominator selection: Denominator Assessment and Denominator Selection (#denominator-selection)"
+    - "Coverage estimation: National Coverage, Coverage Target, Continuum of Care, Bayesian Analysis (#coverage-estimation)"
+    - "Equity analysis: National Inequality and Equity Assessment (#equity-analysis)"
+    - "Sub-national analysis: Sub-National Coverage, Sub-National Inequality, Coverage Target (#sub-national-analysis)"
+    - "Mortality analysis: the Mortality pages (#mortality-analysis)"
+    - "Service utilization: the Service Utilization pages (#service-utilization)"
+    - "Health system performance: the Health System Performance pages (#health-system-performance)"
+    - "Dissemination, decisions and action: Reports and the download buttons on every chart and table (#dissemination-decisions-and-action)"
+    - "Leveraging AI: the DataSuite chat assistant works on the same saved dataset (#leveraging-ai-for-analysis-and-interpretation)"
+  rules:
+    - "The method for each step is in its framework chapter, starting with the workflow (/en/docs/framework/0-workflow/)"
+---
 
-Analysis in the RMNCAH App follows a logical flow with the following steps:
+import { Steps } from 'nextra/components'
+
+# Analysis steps
+
+Analysis in the RMNCAH App follows a logical flow with the following steps. Each step names the guide that describes the pages involved; the step title links to the methodology chapter.
 
 <Steps>
-## [Loading data](/docs/framework/1-analysis-setup)
+
+### [Loading data](/en/docs/framework/1-analysis-setup)
+
+In the app: **Load Data**. See [Getting started](/en/apps/rmncah/getting-started).
+
 ![Loading routine data](/images/rmncah-loading-data.jpg)
 
-## [Data Quality Assessment](/docs/framework/2-data-quality-assessment)
-![DQA](/images/dqa-overall-score.png)
+### [Data quality assessment](/en/docs/framework/2-data-quality-assessment)
 
-## [Denominator Selection](/docs/framework/4-denominator-selection)
-![Denominator](/images/denominator-best-selection.png)
+In the app: **Data quality** pages. See [Data quality](/en/apps/rmncah/data-quality).
 
-## [Coverage Estimation](/docs/framework/5-coverage-estimation)
-![Coverage](/images/coverage-national.png)
+![Data quality assessment overall score](/images/dqa-overall-score.png)
 
-## [Equity Analysis](/docs/framework/6-equity-analysis)
-![Equity](/images/equity-area.png)
+### [Data adjustment](/en/docs/framework/3-data-adjustment)
 
-## [Sub-national Analysis](/docs/framework/7-subnational-analysis)
-  ![Sub-national](/images/subnational-coverage-targets.png)
+In the app: **Remove Years**, **Data Adjustment** and **Data Adjustment Changes**. See [Data preparation](/en/apps/rmncah/data-preparation). This step unlocks all the analysis pages.
 
-## [Mortality Analysis](/docs/framework/9-mortality)
-   ![Mortality](/images/mortality-completeness.png)
+### [Denominator selection](/en/docs/framework/4-denominator-selection)
 
-## [Service Utilization](/docs/framework/10-service-utilisation)
-     ![Service utlization](/images/service-utilization-dqa.png)
+In the app: **Denominator Assessment** and **Denominator Selection**. See [Denominators](/en/apps/rmncah/denominators).
 
-## [Health System Performance](/docs/framework/11-health-system-performance)
-    ![Helath systems](/images/health-system.png)
+![Best denominator selection](/images/denominator-best-selection.png)
 
-## [Dissemination, Decisions & Action](/docs/framework/12-dissemination)
+### [Coverage estimation](/en/docs/framework/5-coverage-estimation)
 
+In the app: **National Coverage**, **Coverage Target**, **Continuum of Care** and **Bayesian Analysis**. See [Coverage, equity and targets](/en/apps/rmncah/coverage-equity-targets) and [Advanced analysis](/en/apps/rmncah/advanced-analysis).
 
-## [Leveraging AI for Analysis and Interpretation](/docs/framework/13-ai-leverage)
+![National coverage estimates](/images/coverage-national.png)
 
-        
+### [Equity analysis](/en/docs/framework/6-equity-analysis)
+
+In the app: **National Inequality** and **Equity Assessment**. See [Coverage, equity and targets](/en/apps/rmncah/coverage-equity-targets).
+
+![Equity analysis by area of residence](/images/equity-area.png)
+
+### [Sub-national analysis](/en/docs/framework/7-subnational-analysis)
+
+In the app: **Sub-National Coverage**, **Sub-National Inequality** and **Coverage Target**. See [Sub-national analysis](/en/apps/rmncah/subnational).
+
+![Sub-national coverage against targets](/images/subnational-coverage-targets.png)
+
+### [Mortality analysis](/en/docs/framework/9-mortality)
+
+In the app: **Mortality** pages. See [Mortality](/en/apps/rmncah/mortality).
+
+![Mortality data completeness](/images/mortality-completeness.png)
+
+### [Service utilization](/en/docs/framework/10-service-utilisation)
+
+In the app: **Service Utilization** pages. See [Service utilization and health system](/en/apps/rmncah/service-utilization-health-system).
+
+![Service utilization data quality assessment](/images/service-utilization-dqa.png)
+
+### [Health system performance](/en/docs/framework/11-health-system-performance)
+
+In the app: **Health System Performance** pages. See [Service utilization and health system](/en/apps/rmncah/service-utilization-health-system).
+
+![Health system performance](/images/health-system.png)
+
+### [Dissemination, decisions, and action](/en/docs/framework/12-dissemination)
+
+In the app: **Reports** (see [Reports](/en/apps/rmncah/reports)) and the download buttons on every chart and table (see [Exports, reports and AI](/en/apps/rmncah/exports-and-ai)).
+
+### [Leveraging AI for analysis and interpretation](/en/apps/ai-assistant)
+
+In the app: the DataSuite chat assistant works on the same saved dataset. See [Exports, reports and AI](/en/apps/rmncah/exports-and-ai).
+
 </Steps>

@@ -1,0 +1,91 @@
+---
+topics: [subnational-coverage, inequality, coverage-targets]
+reportKinds: [region_coverage, district_table, inequality, map, threshold, natcov_continuum_region]
+cacheMembers: [calculate_coverage, get_filtered_coverage, calculate_inequality, get_filtered_inequality, inequality_admin1, inequality_district, get_filtered_threshold, get_high_performers, get_mapping_data, get_filtered_mapping_data, admin1_estimates, check_inequality_params]
+appPages: [subnational_coverage, subnational_inequality, subnational_target]
+ai:
+  status: draft
+  summary: >-
+    Three Sub-National Analysis pages: Sub-National Coverage, Sub-National Inequality and Coverage Target. They use
+    the same adjusted data and denominators as the national pages. Expect more noise at district level than at region
+    level.
+  rules:
+    - "Targets are the same as nationally: ANC4 at least 70%, institutional live births and vaccines at least 80%, dropout below 10% (#coverage-target)"
+    - "Check the region's Reporting Rate before drawing conclusions (#read-the-chart)"
+    - "Do not read a single district year in isolation; if a region looks impossible (above 100%), test another denominator before flagging it (#common-pitfalls)"
+    - "Rank areas on level, change over time, reporting completeness and denominator quality, not the latest year only (#common-pitfalls)"
+    - "The method is in Subnational analysis (/en/docs/framework/7-subnational-analysis/)"
+  interpretation:
+    - "Sub-National Coverage: DHIS2 and survey lines for the chosen area; compare with the national line; a survey point far from DHIS2 in one region often signals a denominator or reporting problem there (#read-the-chart)"
+    - "Sub-National Inequality: dots are sub-national units, the line is national or regional coverage; a spread that narrows means inequality is falling; the methodology summarises it with MADM (#sub-national-inequality)"
+    - "Coverage Target: percentage of districts in a region meeting the target; the goal is that all districts meet it (#coverage-target)"
+---
+
+import { Steps, Callout } from 'nextra/components'
+
+# Sub-national analysis
+
+National averages hide the regions and districts that are being left behind. The **Sub-National Analysis** group has three pages: **Sub-National Coverage**, **Sub-National Inequality** and **Coverage Target**. They use the same adjusted data and the same denominators as the national pages (see [Denominators](/en/apps/rmncah/denominators)). The method is described in [Subnational analysis](/en/docs/framework/7-subnational-analysis).
+
+<Callout type="info">
+Expect more noise at district level than at region level. Small numbers, patient movement between districts and reporting gaps all produce implausibly high or low values.
+</Callout>
+
+## Sub-National Coverage
+
+**Purpose.** Compare DHIS2 and survey coverage estimates for each region or district.
+
+**When to use it.** After National Coverage, to find the areas behind the national figure.
+
+<Steps>
+
+### Open Sub-National Coverage
+
+It is in the **Sub-National Analysis** group.
+
+### Set the geography
+
+Choose the **Admin Level**. With **Admin 1** a region selector appears, and with **Admin 2** a district selector, so that you can focus on one area.
+
+### Pick an indicator tab
+
+**ANC 4 Visits**, **Institutional Live Births**, **Low Birth Weight**, **Pentavalent 3**, **Measles 1**, **FP Projection** or **Custom** for any other indicator.
+
+### Read the chart
+
+The title names the area, for example the coverage estimates of the selected region. Lines show the DHIS2 estimate and the survey estimate, and the caption names the denominator used. **Download Plot** and **Download Data** are in the toolbar.
+
+</Steps>
+
+![Sub-national coverage](/images/Subnational_coverage.png)
+
+**How to interpret.** Compare the region with the national line. A survey point far from the DHIS2 line in one region often signals a denominator or reporting problem there. Check the [Reporting Rate](/en/apps/rmncah/data-quality) of the region before drawing conclusions.
+
+## Sub-National Inequality
+
+**Purpose.** Show how far each region (or each district inside a region) is from the national or regional figure, year by year.
+
+**Filters.** **Admin Level** and, at Admin 1, a region selector to zoom in on one region.
+
+Tabs are **ANC 4 Visits**, **Institutional Live Births**, **Low Birth Weight**, **Pentavalent 3**, **Measles 1** and **Custom**. Each dot is a sub-national unit (**Coverage at subnational unit**) and the line is the national or, when a region is chosen, the regional coverage. A spread that narrows over the years means inequality is falling. The methodology summarises this spread with the median absolute deviation from the median (MADM).
+
+![Sub-national inequality](/images/subnational-coverage-inequality.png)
+
+## Coverage Target
+
+**Purpose.** Show the percentage of districts in a region that meet a coverage target, by year.
+
+**Filter.** A region selector. The level is fixed to districts.
+
+Tabs are **ANC 4 Visits**, **Institutional Live Births** and **Vaccine**. The targets are the same as on the national page: at least 70% for ANC4, at least 80% for institutional live births and vaccines, and dropout below 10%. A table under the chart lists the districts that reach the target for the indicator chosen in its *This table only* control.
+
+The goal is that all districts meet the target, so a higher percentage means less inequality.
+
+![Sub-national coverage against targets](/images/subnational-coverage-targets.png)
+
+## Common pitfalls
+
+- Reading a single district year in isolation. Look at the trend and the neighbouring years.
+- Comparing regions that have very different populations without checking numerators.
+- Forgetting that the denominator selected for the whole country also drives regional results. If one region looks impossible (above 100%), test another denominator before flagging the region.
+- Ranking areas on the latest year only. Combine level, change over time, reporting completeness and denominator quality, as the [methodology](/en/docs/framework/5-coverage-estimation) suggests.

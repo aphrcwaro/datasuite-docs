@@ -10,7 +10,7 @@ export default {
   },
   docs: {
     type: 'page',
-    title: 'Documentation',
+    title: 'Documentação',
     theme: {
       copyPage: false,
       toc: false
@@ -18,7 +18,7 @@ export default {
   },
   apps: {
     type: 'page',
-    title: 'Datasuite Apps',
+    title: 'Aplicações DataSuite',
     theme: {
       copyPage: false,
       toc: false
@@ -26,7 +26,7 @@ export default {
   },
   troubleshooting: {
     type: 'page',
-    title: 'FAQs',
+    title: 'FAQ',
     theme: {
       copyPage: false,
       toc: true,
@@ -35,7 +35,7 @@ export default {
   },
   resources: {
     type: 'page',
-    title: 'Resources',
+    title: 'Recursos',
     theme: {
       copyPage: false,
       toc: false
@@ -48,7 +48,8 @@ export default {
       layout: 'full',
       copyPage: false,
       toc: false
-    }
+    },
+    title: 'Transferências'
   },
   'thank-you': {
     type: 'page',
@@ -56,6 +57,7 @@ export default {
     theme: {
       copyPage: false,
       toc: false
-    }
+    },
+    title: 'Obrigado'
   }
 }

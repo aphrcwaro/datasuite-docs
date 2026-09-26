@@ -18,7 +18,7 @@ export default {
   },
   apps: {
     type: 'page',
-    title: 'Applications Datasuite',
+    title: 'Applications DataSuite',
     theme: {
       copyPage: false,
       toc: false
@@ -43,21 +43,21 @@ export default {
   },
   downloads: {
     type: 'page',
-    title: 'Téléchargements',
     display: 'hidden',
     theme: {
       layout: 'full',
       copyPage: false,
       toc: false
-    }
+    },
+    title: 'Téléchargements'
   },
   'thank-you': {
     type: 'page',
-    title: 'Merci',
     display: 'hidden',
     theme: {
       copyPage: false,
       toc: false
-    }
+    },
+    title: 'Merci'
   }
 }

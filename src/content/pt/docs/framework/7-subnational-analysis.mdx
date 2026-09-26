@@ -1,126 +1,120 @@
 import { Steps } from 'nextra/components'
-import { Callout } from 'nextra/components'
-import { Bleed } from 'nextra/components'
 
-## Cobertura Infranacional
+# Análise subnacional
 
-A análise infranacional revela a distribuição geográfica do acesso aos serviços de saúde — crucial para identificar distritos com baixo desempenho que puxam para baixo as médias nacionais e para direcionar os recursos para onde são mais necessários. Este módulo estima a cobertura a nível regional (Admin1) e distrital (Admin2) utilizando o mesmo denominador e metodologia de ajuste que a análise nacional, e depois visualiza como a cobertura varia na geografia. É de esperar uma maior volatilidade a nível distrital devido a populações pequenas, padrões de referência e escolhas de localização de unidades de saúde (hospitais em cidades servem áreas rurais circundantes), mas este ruído contém informações acionáveis sobre onde os sistemas de saúde falham.
+## Cobertura subnacional
 
-O Data Suite gera "resumos de uma página" (one-pagers) a nível distrital — resumos visuais que combinam linhas de tendência baseadas nas unidades de saúde (2020–2024) com instantâneos (snapshots) de inquéritos recentes, gráficos de barras de comparação que mostram o desempenho de cada distrito em relação aos seus pares, e índices de cobertura compostos que fazem a média de sete indicadores de saúde materno-infantil. Estes resumos de uma página comunicam a realidade da cobertura aos decisores em formatos acessíveis e localmente contextualizados, tornando impossível ignorar as desigualdades geográficas e facilitando a alocação baseada em evidências de investimentos para o fortalecimento do sistema de saúde.
+A análise subnacional revela a distribuição geográfica do acesso aos serviços de saúde — crucial para identificar distritos com baixo desempenho que puxam para baixo as médias nacionais e para direcionar os recursos para onde são mais necessários. Este módulo estima a cobertura a nível regional (Admin1) e distrital (Admin2) utilizando o mesmo denominador e metodologia de ajuste que a análise nacional, e depois visualiza como a cobertura varia ao longo do território. É de esperar uma maior volatilidade a nível distrital devido a populações pequenas, padrões de referência e escolhas de localização de unidades de saúde (hospitais em cidades servem áreas rurais circundantes), mas este ruído contém informação passível de ação sobre onde os sistemas de saúde falham.
 
----
+O DataSuite gera "resumos de uma página" (one-pagers) a nível distrital — resumos visuais que combinam linhas de tendência baseadas nas unidades de saúde (2020–2024) com instantâneos (snapshots) de inquéritos recentes, gráficos de barras de comparação que mostram o desempenho de cada distrito em relação aos seus pares, e índices de cobertura compostos que fazem a média de sete indicadores de saúde materno-infantil. Estes resumos de uma página comunicam a realidade da cobertura aos decisores em formatos acessíveis e localmente contextualizados, tornando impossível ignorar as desigualdades geográficas e facilitando a afetação de investimentos baseada em evidências para o reforço do sistema de saúde.
 
-## Cobertura Infranacional na abordagem analítica CD2030
+## Cobertura subnacional na abordagem analítica CD2030
 
-### Fundamentação e Abordagem
+### Fundamentação e abordagem
+
 **Base científica para a análise:**
 
-A análise infranacional da cobertura de intervenções de saúde é essencial para o avanço da cobertura universal de saúde (CUS / UHC), que visa garantir o acesso equitativo a serviços de saúde de qualidade para todas as populações. As médias nacionais mascaram frequentemente disparidades críticas que existem entre regiões, distritos ou subgrupos populacionais.
+A análise subnacional da cobertura de intervenções de saúde é essencial para o avanço da cobertura universal de saúde (CUS / UHC), que visa garantir o acesso equitativo a serviços de saúde de qualidade para todas as populações. As médias nacionais mascaram frequentemente disparidades críticas que existem entre regiões, distritos ou subgrupos populacionais.
 
-A monitorização de dados infranationais ajuda a identificar áreas geográficas onde a cobertura é baixa, sinalizando potenciais desigualdades no acesso aos serviços de saúde e impulsionando intervenções direcionadas. Isto é particularmente importante para chamar a atenção para as populações que são deixadas para trás e garantir que os recursos são direcionados para onde são mais necessários.
+A monitorização de dados subnacionais ajuda a identificar áreas geográficas onde a cobertura é baixa, sinalizando potenciais desigualdades no acesso aos serviços de saúde e impulsionando intervenções direcionadas. Isto é particularmente importante para chamar a atenção para as populações que são deixadas para trás e garantir que os recursos são direcionados para onde são mais necessários.
 
 **Descrição dos passos analíticos:**
 
 O foco aqui é avaliar as estimativas de cobertura (por exemplo, CPN4, partos institucionais, Penta3) aos níveis Admin1 e Admin2, utilizando o denominador com melhor desempenho para os cálculos de cobertura, conforme decidido a partir da análise na secção 2 sobre denominadores.
 
-Haverá mais “ruído” nos dados infranationais, com taxas de cobertura improváveis, demasiado altas ou baixas, em comparação com as análises nacionais, e ainda mais nas análises distritais do que nas análises regionais (Admin1). Isto deve-se ao facto de as análises distritais serem afetadas por pequenos números (mais flutuações que podem ser aleatórias ou devidas a problemas de qualidade dos dados) e pelos padrões de utilização dos serviços de saúde por mulheres e crianças. Por exemplo, um distrito municipal pode ter mais partos do que um distrito rural adjacente devido à localização dos hospitais no distrito municipal.
+Haverá mais "ruído" nos dados subnacionais, com taxas de cobertura improváveis, demasiado altas ou baixas, em comparação com as análises nacionais, e ainda mais nas análises distritais do que nas análises regionais (Admin1). Isto deve-se ao facto de as análises distritais serem afetadas por pequenos números (mais flutuações que podem ser aleatórias ou devidas a problemas de qualidade dos dados) e pelos padrões de utilização dos serviços de saúde por mulheres e crianças. Por exemplo, um distrito municipal pode ter mais partos do que um distrito rural adjacente devido à localização dos hospitais no distrito municipal.
 
 <Steps>
 
-### [Implementação](/docs/methods/#implementation-subnational)
+### Implementação
 
-Navegue para o separador **Subnational Analysis** (Análise Infranacional) -> **Subnational Coverage** (Cobertura Infranacional) e selecione o nível administrativo de interesse (Região (Nível Admin1) ou Distrito). Em seguida, selecione o indicador de interesse entre os principais indicadores (CPN4, Partos institucionais, Baixo Peso ao Nascer, Penta 1 e Sarampo 1). Também pode utilizar o separador **Custom Check** (Verificação Personalizada) para selecionar qualquer outro indicador de interesse.
+Aceda ao separador **Análise subnacional** -> **Cobertura subnacional** e selecione o nível administrativo de interesse (Região (Nível Admin1) ou Distrito). Em seguida, selecione o indicador de interesse entre os principais indicadores (CPN4, Partos institucionais, Baixo peso à nascença, Penta 1 e Sarampo 1). Também pode utilizar o separador **Verificação Personalizada** para selecionar qualquer outro indicador de interesse.
 
-    - *[insert subnational trends Output]*
+![Separador de cobertura subnacional com as estimativas de cobertura de nados-vivos em unidades de saúde ao longo do tempo](/images/pt-subnational-coverage.png)
 
----
+### Resumos estatísticos subnacionais (one-pager)
 
-### [Resumos Estatísticos Infranationais (One-Pager)](/docs/methods/#sub-national-statistical-summaries)
-
-O objetivo é produzir um resumo de uma página (one-pager) para cada unidade Admin1 (geralmente região, província ou condado) que contenha a informação regional, bem como um resumo dos distritos dentro da região. Referimo-nos a isto como o resumo estatístico infranacional regional.
+O objetivo é produzir um resumo de uma página (one-pager) para cada unidade Admin1 (geralmente região, província ou condado) que contenha a informação regional, bem como um resumo dos distritos dentro da região. Referimo-nos a isto como o resumo estatístico subnacional regional.
 
 Os seguintes componentes estão incluídos:
-* **Resumo da informação demográfica chave para a região e para os distritos:** Uma tabela com o número esperado de nascimentos em 2024 de acordo com as projeções do DHIS2 e de acordo com os denominadores preferenciais derivados dos dados das unidades de saúde (com base na CPN1 para nados-vivos e na penta1 para indicadores de imunização).
-* **Gráficos de linhas com a tendência na cobertura de partos institucionais e vacinação penta3:** Estes incluem as melhores estimativas para 2020–2024 baseadas nos dados das unidades de saúde, bem como as estimativas dos inquéritos mais recentes (de 2015) para os mesmos indicadores (com intervalos de confiança, se possível).
-* **Gráficos de barras que comparam a situação de cobertura de 2024 na região com todas as outras regiões:** Isto coloca a região no terço inferior, médio ou superior das regiões em termos de cobertura. Isto é feito tanto para partos institucionais como para a vacinação penta3.
-* **Tabela que resume a cobertura de partos institucionais e vacinação penta3 em 2024 por distrito:** Um desdobramento (breakdown) localizado do desempenho em toda a área infranacional.
+
+- **Resumo da informação demográfica chave para a região e para os distritos:** Uma tabela com o número esperado de nascimentos em 2024 de acordo com as projeções do DHIS2 e de acordo com os denominadores preferenciais derivados dos dados das unidades de saúde (com base na CPN1 para nados-vivos e na penta1 para indicadores de imunização).
+- **Gráficos de linhas com a tendência na cobertura de partos institucionais e vacinação penta3:** Estes incluem as melhores estimativas para 2020–2024 baseadas nos dados das unidades de saúde, bem como as estimativas dos inquéritos mais recentes (de 2015) para os mesmos indicadores (com intervalos de confiança, se possível).
+- **Gráficos de barras que comparam a situação de cobertura de 2024 na região com todas as outras regiões:** Isto coloca a região no terço inferior, médio ou superior das regiões em termos de cobertura. Isto é feito tanto para partos institucionais como para a vacinação penta3.
+- **Tabela que resume a cobertura de partos institucionais e vacinação penta3 em 2024 por distrito:** Uma decomposição (breakdown) localizada do desempenho em toda a área subnacional.
 
 Outros indicadores podem ser utilizados conforme priorizados pelo país (por exemplo, CPN4, sarampo1).
 
-Layout do modelo de resumo estatístico infranacional regional (one-pager)
+Layout do modelo de resumo estatístico subnacional regional (one-pager):
 
-    - *[insert fig Alaotra magoro Output]*
+![Modelo do resumo estatístico subnacional regional (one-pager)](/images/admin-1.png)
 
-Resumir a situação de cobertura de acordo com as estatísticas das unidades de saúde para 2024 pode ser feito para o nível regional e mostrado num mapa. Um índice de cobertura composto é calculado como uma média em sete indicadores de saúde materno-infantil: CPN4, cobertura de nados-vivos institucionais, SBA (assistência qualificada ao parto), TPI2, cuidados pós-natais, 3ª dose da vacina pentavalente e cobertura da vacinação de sarampo 1. É atribuído peso igual a todos os indicadores.
+Resumir a situação de cobertura de acordo com as estatísticas das unidades de saúde para 2024 pode ser feito para o nível regional e mostrado num mapa. Um índice de cobertura composto é calculado como uma média em sete indicadores de saúde materno-infantil: CPN4, cobertura de nados-vivos institucionais, SBA (assistência qualificada ao parto), TPI2, cuidados pós-natais, 3ª dose da vacina pentavalente e cobertura da vacinação contra o sarampo (sarampo 1). É atribuído peso igual a todos os indicadores.
 
 </Steps>
-
----
 
 ## Desigualdade
 
 ## Desigualdade na abordagem analítica CD2030
 
-### Fundamentação e Abordagem
+### Fundamentação e abordagem
+
 **Base científica para a análise:**
 
-Reduzir a desigualdade geográfica é essencial para sistemas de saúde equitativos e para alcançar os ODS. As desigualdades infranationais revelam inconsistências na prestação de serviços e destacam barreiras sistémicas ao acesso aos cuidados de saúde. Acompanhar os indicadores de desigualdade ajuda a avaliar se os sistemas de saúde estão a tornar-se mais equitativos e se as intervenções direcionadas estão a funcionar.
+Reduzir a desigualdade geográfica é essencial para sistemas de saúde equitativos e para alcançar os ODS. As desigualdades subnacionais revelam inconsistências na prestação de serviços e destacam barreiras sistémicas ao acesso aos cuidados de saúde. Acompanhar os indicadores de desigualdade ajuda a avaliar se os sistemas de saúde estão a tornar-se mais equitativos e se as intervenções direcionadas estão a funcionar.
 
 **Descrição dos passos analíticos:**
 
-Aqui calculamos o Desvio Absoluto da Mediana (MADM) para quantificar a dispersão na cobertura entre os distritos dentro de um nível Admin1, em comparação com a cobertura nessa unidade infranacional Admin1 específica.
+Aqui calculamos o Desvio Absoluto da Mediana (MADM) para quantificar a dispersão na cobertura entre os distritos dentro de um nível Admin1, em comparação com a cobertura nessa unidade subnacional Admin1 específica.
 
-As principais medidas estatísticas para as desigualdades infranationais são:
-* **MADM (Desvio Absoluto da Mediana):** Esta medida dá uma indicação de se o país tem sido bem-sucedido na redução das desigualdades entre unidades infranationais.
-* **Percentagem de unidades infranationais com cobertura acima de uma meta ou limiar específico:** Este indicador fornece informações sobre até que ponto um país tem sido bem-sucedido em alcançar a cobertura universal a nível infranacional.
+As principais medidas estatísticas para as desigualdades subnacionais são:
 
-**Resumo do Desempenho Distrital e Regional:**
+- **MADM (Desvio Absoluto da Mediana):** Esta medida dá uma indicação de se o país tem sido bem-sucedido na redução das desigualdades entre unidades subnacionais.
+- **Percentagem de unidades subnacionais com cobertura acima de uma meta ou limiar específico:** Este indicador fornece informações sobre até que ponto um país tem sido bem-sucedido em alcançar a cobertura universal a nível subnacional.
+
+**Resumo do desempenho distrital e regional:**
 
 O progresso em direção a metas internacionais e nacionais pode ser medido calculando a percentagem de regiões e distritos que alcançaram essas metas. O objetivo é que todas as regiões e distritos tenham atingido a meta. Percentagens mais elevadas significam menos desigualdade.
 
 <Steps>
 
-### [Implementação](/docs/methods/#implementation-inequality)
+### Implementação
 
-Navegue para o separador **Subnational Analysis** (Análise Infranacional) => **Subnational Inequality** (Desigualdade Infranacional) e inspecione os resultados plotados a nível regional e distrital por ano, com o desvio absoluto da mediana (MADM), como a medida de resumo para avaliar se as desigualdades foram reduzidas.
+Aceda ao separador **Análise subnacional** -> **Desigualdade subnacional** e inspecione os resultados representados graficamente a nível regional e distrital por ano, com o desvio absoluto da mediana (MADM), como a medida de resumo para avaliar se as desigualdades foram reduzidas.
 
-    - *[insert subnational chart Output]*
+![Separador de desigualdade subnacional com o MADM por ano para nados-vivos em unidades de saúde](/images/pt-subnational-coverage-inequality.png)
 
 </Steps>
 
----
+## Metas de cobertura global
 
-## Metas de Cobertura Global
+## Metas de cobertura global na abordagem analítica CD2030
 
-## Metas de Cobertura Global na abordagem analítica CD2030
+### Fundamentação e abordagem
 
-### Fundamentação e Abordagem
 **Base científica para a análise:**
 
-Reduzir a desigualdade geográfica é essencial para sistemas de saúde equitativos e para alcançar os ODS. As desigualdades infranationais revelam inconsistências na prestação de serviços e destacam barreiras sistémicas ao acesso aos cuidados de saúde. Acompanhar os indicadores de desigualdade ajuda a avaliar se os sistemas de saúde estão a tornar-se mais equitativos e se as intervenções direcionadas estão a funcionar.
+Reduzir a desigualdade geográfica é essencial para sistemas de saúde equitativos e para alcançar os ODS. As desigualdades subnacionais revelam inconsistências na prestação de serviços e destacam barreiras sistémicas ao acesso aos cuidados de saúde. Acompanhar os indicadores de desigualdade ajuda a avaliar se os sistemas de saúde estão a tornar-se mais equitativos e se as intervenções direcionadas estão a funcionar.
 
 **Descrição dos passos analíticos:**
 
-Aqui calculamos o Desvio Absoluto da Mediana (MADM) para quantificar a dispersão na cobertura entre os distritos dentro de um nível Admin1, em comparação com a cobertura nessa unidade infranacional Admin1 específica.
+Aqui calculamos o Desvio Absoluto da Mediana (MADM) para quantificar a dispersão na cobertura entre os distritos dentro de um nível Admin1, em comparação com a cobertura nessa unidade subnacional Admin1 específica.
 
-As principais medidas estatísticas para as desigualdades infranationais são:
-* **MADM (Desvio Absoluto da Mediana):** Esta medida dá uma indicação de se o país tem sido bem-sucedido na redução das desigualdades entre unidades infranationais.
-* **Percentagem de unidades infranationais com cobertura acima de uma meta ou limiar específico:** Este indicador fornece informações sobre até que ponto um país tem sido bem-sucedido em alcançar a cobertura universal a nível infranacional.
+As principais medidas estatísticas para as desigualdades subnacionais são:
 
-**Resumo do Desempenho Distrital e Regional:**
+- **MADM (Desvio Absoluto da Mediana):** Esta medida dá uma indicação de se o país tem sido bem-sucedido na redução das desigualdades entre unidades subnacionais.
+- **Percentagem de unidades subnacionais com cobertura acima de uma meta ou limiar específico:** Este indicador fornece informações sobre até que ponto um país tem sido bem-sucedido em alcançar a cobertura universal a nível subnacional.
+
+**Resumo do desempenho distrital e regional:**
 
 O progresso em direção a metas internacionais e nacionais pode ser medido calculando a percentagem de regiões e distritos que alcançaram essas metas. O objetivo é que todas as regiões e distritos tenham atingido a meta. Percentagens mais elevadas significam menos desigualdade.
 
 <Steps>
 
-### [Implementação](/docs/methods/#implementation-global-targets)
+### Implementação
 
-Navegue para o separador **Subnational Analysis** (Análise Infranacional) => **Subnational Inequality** (Desigualdade Infranacional) e inspecione os resultados plotados a nível regional e distrital por ano, com o desvio absoluto da mediana (MADM), como a medida de resumo para avaliar se as desigualdades foram reduzidas.
+Aceda ao separador **Análise subnacional** -> **Desigualdade subnacional** e inspecione os resultados representados graficamente a nível regional e distrital por ano, com o desvio absoluto da mediana (MADM), como a medida de resumo para avaliar se as desigualdades foram reduzidas.
 
-![Módulo de Desigualdade Infranacional mostrando o desempenho face às metas de cobertura global](/images/subnational-coverage-targets.png)
-
-    - *[insert coverage inequality for ANC4 Output]*
+![Separador de meta de cobertura com a percentagem de unidades subnacionais que atingem a meta para vacinas](/images/pt-subnational-coverage-targets.png)
 
 </Steps>
-
----

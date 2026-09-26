@@ -1,0 +1,94 @@
+import { Steps, Callout } from 'nextra/components'
+
+# Qualidade dos dados
+
+A secção **Qualidade dos dados** responde a uma pergunta antes de se calcular qualquer cobertura: os dados das unidades de saúde são fiáveis? Contém cinco páginas. Leia-as por esta ordem e depois avance para a [Preparação dos dados](/pt/apps/rmncah/data-preparation). O método está explicado em [Avaliação da qualidade dos dados](/pt/docs/framework/2-data-quality-assessment).
+
+## Como utilizar as páginas
+
+<Steps>
+
+### Abra a página a partir de Qualidade dos dados na barra lateral
+
+O carregamento de dados tem de estar concluído primeiro. Estas páginas não exigem o Ajuste de dados.
+
+### Defina os filtros
+
+A maioria das páginas tem uma etiqueta **Indicador**, uma etiqueta **Nível Administrativo** (**Nível Administrativo 1** ou **Nível Administrativo 2**) e, quando o Nível Administrativo 1 está selecionado, uma etiqueta de região com **Selecionar Todos** para se concentrar numa região.
+
+### Leia o gráfico e depois a tabela que se encontra por baixo
+
+Os gráficos mostram o padrão. As tabelas listam os distritos e os meses que lhe estão na origem. Utilize a barra de ferramentas de um cartão para **Baixar Gráfico** (PNG) e **Baixar Dados** (Excel), e o seletor de ano *Apenas esta tabela* nas tabelas.
+
+</Steps>
+
+## Taxa de notificação
+
+Mostra o grau de completude da notificação das unidades de saúde, por serviço, ano e área.
+
+- **Filtros:** **Indicador** (CPN, Parto institucional, Vacinação, OPD), **Limite de Desempenho** (predefinição 90%; escolhas rápidas 70, 80, 90, 95) e **Nível Administrativo**.
+- **Taxa de Notificação Subnacional:** os separadores **Mapa de Calor** e **Gráfico de Barras** mostram a taxa de notificação do serviço selecionado por ano e por área.
+- **Taxa Nacional de Notificação** (ou **Taxa de Notificação dos Distritos em** uma região): a percentagem de distritos cuja taxa de notificação está abaixo do limite, com um painel por serviço.
+- **Unidades Subnacionais com Baixa Notificação:** os distritos ou regiões abaixo do limite no ano selecionado.
+
+<Callout type="info">
+O Limite de Desempenho que definir aqui fica guardado no conjunto de dados e é reutilizado pela Pontuação Geral da Qualidade dos Dados e pelos Indicadores de DQA dos serviços.
+</Callout>
+
+![Mapa de calor da taxa de notificação subnacional](/images/pt-dqa-reporting-rate.png)
+
+## Detecção de valores discrepantes
+
+Identifica valores mensais extremos. Um valor é um valor discrepante extremo quando se afasta mais de 5 vezes o desvio absoluto mediano (MAD) da mediana mensal desse ano.
+
+- **Filtros:** **Indicador** e **Nível Administrativo**.
+- **Indicadores com valores discrepantes:** os separadores **Mapa de Calor**, **Gráfico de barras do indicador** e **Gráfico de barras por região** mostram a percentagem de valores mensais que não são discrepantes.
+- **Unidades subnacionais com valores discrepantes extremos:** todos os distritos e meses assinalados, com o valor, a mediana e o MAD.
+- **Tendências Subnacionais:** escolha uma região e leia a linha mês a mês face à mediana e aos limites de valores discrepantes (mais ou menos 5 MAD).
+
+Espera-se que pelo menos 99% dos valores mensais e 90% dos distritos estejam isentos de valores discrepantes extremos. Um pico súbito pode ser uma campanha e não um erro. Verifique a tendência antes de decidir.
+
+![Mapa de calor da detecção de valores discrepantes](/images/pt-dqa-outlier-detection.png)
+
+## Dados Ausentes
+
+Mostra que indicadores e áreas têm notificações em falta.
+
+- **Filtros:** **Indicador** (com **Selecionar Todos**) e **Nível Administrativo**.
+- **Indicadores com Dados Faltantes:** os separadores **Mapa de Calor** (percentagem de notificações em falta por ano e área), **Indicadores Completos** (percentagem de distritos com dados completos) e **Indicadores Faltantes por Região** (tendência da completude).
+- **Unidades Subnacionais com Dados Faltantes:** os distritos com lacunas para o indicador e o ano selecionados.
+
+![Mapa de calor dos dados ausentes](/images/pt-dqa-missingness.png)
+
+## Consistência interna
+
+Verifica se os indicadores relacionados evoluem em conjunto. São apresentados dois cartões.
+
+- **Gráficos de razões:** as razões anuais CPN1 / Penta1 e Penta1 / Penta3 face à razão esperada. As razões esperadas resultam dos valores de cobertura do inquérito introduzidos em Taxas nacionais, pelo que valores de inquérito errados distorcem esta verificação.
+- **Verificações de Consistência:** os separadores **CPN1 e Penta1**, **Penta1 e Penta3** e **Verificação Personalizada** (escolha um **Eixo X** e um **Eixo Y**). Cada ponto é um distrito, apresentado com um **Ajuste linear** e uma **Diagonal**. Os pontos afastados da diagonal merecem atenção.
+
+Um distrito é considerado consistente quando a sua razão anual se situa entre 1 e 1,5.
+
+![Gráficos de razões](/images/pt-dqa-internal-consistency.png)
+
+![Verificações de consistência entre CPN1 e Penta1](/images/pt-dqa-conistency-checks.png)
+
+## Pontuação Geral da Qualidade dos Dados
+
+Uma tabela por ano, com um filtro de região para ver uma única área de Nível Administrativo 1.
+
+| Bloco | Linhas |
+| --- | --- |
+| 1. Completude | % de relatórios mensais esperados das unidades de saúde (nacional); % de distritos iguais ou acima do limite; % de distritos sem valores em falta nos 4 formulários |
+| 2. Valores discrepantes extremos | % de valores mensais que não são valores discrepantes extremos; % de distritos sem valores discrepantes extremos |
+| 3. Consistência | Razões CPN1 / Penta1 e Penta1 / Penta3; % de distritos dentro do intervalo esperado |
+
+A última linha é a **Pontuação anual da qualidade dos dados**, a média das linhas nacional e distrital de completude (1a, 1b), das duas linhas de valores discrepantes (2a, 2b) e das duas linhas distritais de consistência (3c, 3d). Utilize **Baixar Gráfico** e **Baixar Dados**. **Gerar Relatório** abre o relatório de qualidade dos dados.
+
+![Pontuação geral da qualidade dos dados](/images/pt-dqa-overall-score.png)
+
+## Armadilhas comuns
+
+- Uma pontuação baixa é um motivo para investigar, nem sempre para descartar um ano. Compare com os acontecimentos locais antes de utilizar [Remover anos](/pt/apps/rmncah/data-preparation).
+- A taxa de notificação mede se os relatórios chegaram, não se os números estão certos. Utilize em conjunto a Detecção de valores discrepantes e a Consistência interna.
+- Os resultados distritais são mais ruidosos do que os regionais porque assentam em números mais pequenos.

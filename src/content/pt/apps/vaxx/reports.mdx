@@ -1,0 +1,132 @@
+import { Steps, Callout } from 'nextra/components'
+
+# Relatórios
+
+A página **Relatórios**, na secção **Resultados**, constrói relatórios a partir do conjunto de dados carregado. Existem dois tipos:
+
+| Tipo | O que é | Ficheiros que pode transferir |
+| --- | --- | --- |
+| Documento | Páginas de texto, gráficos e tabelas, com capa e índice opcionais | Word (`.docx`) ou PDF |
+| Apresentação | Diapositivos com caixas de texto, gráficos, tabelas e imagens | PowerPoint (`.pptx`) ou PDF |
+
+Os gráficos e as tabelas são desenhados a partir dos dados sempre que pré-visualiza ou transfere, pelo que um relatório reflete sempre o estado atual da sua análise (anos removidos, ajuste, denominador). Cada relatório que cria fica guardado no conjunto de dados e listado em **Os seus relatórios**. Para transferir gráficos e tabelas individuais, conjuntos de dados ou usar o assistente de IA, ver [Exportações, relatórios e IA](/pt/apps/vaxx/exports-and-ai).
+
+**Os relatórios ficam guardados no ficheiro do conjunto de dados.** Criar ou editar um relatório reescreve o conjunto de dados guardado (a cache `.rds`), e a lista de relatórios segue com ele. Guarde uma cópia do conjunto de dados antes de experimentar e partilhe o conjunto de dados se quiser que um colega abra os seus relatórios.
+
+<Callout type="info">
+O subtítulo da página na aplicação ainda diz «relatórios Word e PDF». O código também produz apresentações, e a ficha de uma página é uma apresentação PowerPoint.
+</Callout>
+
+## Relatórios padrão da Vaxx App
+
+Um relatório padrão é o relatório Countdown de uma secção de análise, reconstruído em blocos editáveis. Abre como uma cópia sua: altere ou elimine o que quiser. Os blocos de texto redigidos como perguntas (com o título **Notas** ou **Interpretações**) são sugestões para o analista; substitua-os pela interpretação acordada na reunião de revisão.
+
+| Relatório padrão | Tipo | Conteúdo | Página com um botão **Gerar Relatório** |
+| --- | --- | --- | --- |
+| **Qualidade dos dados** | Documento | Tabela resumo da qualidade dos dados, taxas de reporte dos distritos, consistência de ANC1/Penta1, Penta1/Penta3 e OPV1/OPV3, com perguntas sobre a pontuação, a completude e os valores extremos | Pontuação Geral da Qualidade dos Dados |
+| **Ajuste dos dados** | Documento | Contexto, depois doses de BCG e de Penta1 reportadas antes e depois do ajuste de completude e de outliers, com uma sugestão para descrever o efeito no último ano | Alterações no ajuste de dados |
+| **Seleção do denominador** | Documento | Projeções DHIS2 e da ONU da população, dos nascimentos vivos e dos menores de 1 ano, depois cobertura de Penta3 e de sarampo 1 com cada denominador, a nível nacional e por região | Seleção do denominador |
+| **Desigualdade nacional** | Documento | Para Penta3 e sarampo 1: cobertura por região ao longo do tempo, mapa, equidade por riqueza e educação; depois cobertura por distrito | Avaliação de equidade |
+| **Caderno de síntese** | Documento, formato caderno (35 x 56 cm) | Qualidade dos dados (numeradores e denominadores), cobertura nacional de ANC1, parto institucional, Penta3 e sarampo 1, distritos que atingem as metas de vacina e abandono, equidade e desigualdade geográfica, com perguntas de interpretação e uma capa para a equipa do país | Apenas a página Relatórios |
+| **Ficha de uma página por região** | Apresentação, um diapositivo 16:9 | Uma região: Penta3 e nascimentos vivos em unidades de saúde comparados com as outras regiões e ao longo do tempo, tabela da pontuação de qualidade dos dados, e população e cobertura por distrito (ANC1, nascimentos institucionais, Penta1, Penta3, MCV1, MCV3) com os totais da região | Apenas a página Relatórios |
+
+A Vaxx App não tem relatórios padrão de mortalidade, utilização dos serviços, sistema de saúde ou setor privado, nem de cobertura nacional isolada: esses pertencem à [RMNCAH App](/pt/apps/rmncah/reports). A cobertura nacional está incluída no caderno de síntese, e pode construir um relatório de cobertura a partir de blocos (ver abaixo).
+
+O **caderno de síntese** é a análise completa num só documento para a reunião de revisão. A **ficha de uma página** dá a cada região o seu próprio perfil estatístico.
+
+## Abrir a página Relatórios
+
+<Steps>
+
+### Conclua os pré-requisitos
+
+A página Relatórios fica bloqueada até carregar um conjunto de dados e executar **Ajuste dos dados** (ver [Preparação dos dados](/pt/apps/vaxx/data-preparation)). Escolha primeiro o denominador em [Denominadores](/pt/apps/vaxx/denominators): os gráficos de cobertura utilizam-no.
+
+### Abra-a
+
+Clique em **Relatórios** em **Resultados**, ou em **Relatórios** no cabeçalho. Um botão **Gerar Relatório** no cabeçalho de uma página também abre a página e inicia o relatório padrão correspondente.
+
+</Steps>
+
+## Gerar um relatório padrão
+
+<Steps>
+
+### Escolha um relatório
+
+Em **Relatórios padrão** (documentos) ou **Apresentações padrão**, clique num cartão. Cada cartão mostra quantos gráficos e tabelas contém. Pode também começar por **Novo documento** ou **Nova apresentação** (**Começar em branco**).
+
+### Dê-lhe um nome e escolha o idioma
+
+Uma janela pede o nome do relatório, o **Idioma do relatório** (inglês, francês ou português) e confirma-se com **Criar relatório**. O idioma do relatório é independente do idioma da aplicação: o texto padrão é escrito nesse idioma, e os gráficos, as tabelas e as datas são sempre desenhados nele. Pode alterá-lo mais tarde no separador **Layout**; os gráficos e as tabelas são redesenhados, mas o texto que escreveu não é traduzido.
+
+### Aguarde os gráficos
+
+O editor abre de imediato. Cada gráfico mostra **A desenhar a partir dos dados…** e aparece um a um. Um gráfico que não pode ser desenhado mostra **Não foi possível desenhar com estes dados** com o motivo.
+
+### Defina a região, se o relatório tiver uma
+
+Para a ficha de uma página (e qualquer gráfico desenhado para uma região), escolha a região no separador **Layout**, grupo **Relatório**, campo **Região deste relatório**. A primeira região por ordem alfabética vem escolhida. Deixe-o vazio para um relatório nacional. Para produzir uma ficha para cada região, duplique o relatório a partir da lista e altere a região.
+
+### Edite e depois verifique
+
+Substitua as sugestões, elimine o que não precisa e abra a vista **Esquema de impressão** para ver as páginas finais (ver abaixo).
+
+### Transfira
+
+Escolha **Descarregar**, selecione o formato e aguarde a barra de progresso (**A desenhar os gráficos**, depois **A escrever o ficheiro Word**, **A imprimir o PDF** ou **A escrever o ficheiro PowerPoint**). O ficheiro é transferido automaticamente; **Descarregar novamente** é oferecido se isso não acontecer.
+
+</Steps>
+
+## O editor de documentos
+
+- **Painel de blocos** (à esquerda). O separador **Blocos** lista todos os tipos de gráficos e tabelas que existem para os indicadores da Vaxx, por área de análise (qualidade dos dados, ajuste, denominadores, nacional, subnacional, perfil de uma região), com uma caixa de pesquisa (**Pesquisar gráficos, tabelas, texto**). Por exemplo **Tendência de cobertura: DHIS2 e inquérito**, **Distritos que atingem a meta**, **Mapa de cobertura**, **Equidade (inquéritos)** e **Indicadores de cobertura por ano (DHIS2)**, que tem uma variante de dose zero e abandono para os conjuntos de dados Vaxx. **Texto e disposição** contém **Título**, **Subtítulo**, **Parágrafo**, **Caixa de notas** e **Quebra de página**. Arraste um bloco para uma página, ou prima **+** para o adicionar depois do bloco selecionado. O separador **Estrutura** lista a estrutura do relatório.
+- **Definições de gráficos e tabelas.** Selecione um bloco para escolher o que mostra: **Indicador**, **Nível** (Nacional, Região ou Distrito), uma variante, **Ano**, **Região**, **Largura** (**Largura total**, **Metade** ou **Terço**), um título e **Mostrar legenda e fonte**. **Personalizar este gráfico** altera texto, tipos de letra e cores deste gráfico apenas neste relatório. Os gráficos personalizados na aplicação com **Aplicar a: Relatório** mantêm esse estilo.
+- **Ordem e remoção.** Arraste um bloco pela sua pega, ou use **Mover para cima**, **Mover para baixo**, **Duplicar** e **Eliminar**. **Desfazer** e **Refazer** (Ctrl+Z, Ctrl+Y) cobrem as edições. As alterações guardam-se automaticamente (**Guardado nos dados**).
+- **Texto.** Escreva diretamente. Enter inicia um parágrafo, Shift+Enter uma nova linha. Insira **Campos** como `{country}`, `{region}`, `{first_year}`, `{latest_year}`, `{chart_indicator}` ou valores de cobertura como `{penta3_latest}`; são preenchidos a partir dos dados e seguem o idioma do relatório.
+- **Design.** O separador **Design** reúne os temas (**Countdown**, **Ministério da Saúde**, **Simples**, **Formal**), as cores, os tipos de letra, a **Capa** (título, subtítulo, logótipos, bandeira do país, editores, data, referência) e o **Índice**. **Layout** define o tamanho da página (A4, Letter, caderno, cartaz), a orientação, as margens, os números de página, o cabeçalho e o rodapé. **Procurar Temas…** cria um tema a partir de um ficheiro PowerPoint ou Word (`.potx`, `.pptx`, `.dotx`, `.docx`); as transferências passam então a ser escritas a partir desse ficheiro.
+- **Vistas.** **Edição**, **Modo de leitura**, **Esquema de impressão** (as páginas finais exatas), **Foco** e zoom.
+- **As apresentações** usam um editor de diapositivos com esquemas, organização de diapositivos, notas do orador e caixas de texto; os gráficos e as tabelas colocam-se nos diapositivos da mesma forma.
+
+## Formatos e transferências
+
+| Formato | Produzido por | Notas |
+| --- | --- | --- |
+| Word `.docx` | A aplicação | Editável. No Windows com o Word instalado, o Word preenche também o índice e incorpora os tipos de letra |
+| PDF de um documento | Criado a partir do ficheiro Word pelo Microsoft Word ou pelo LibreOffice, pelo que as páginas coincidem com o Word | Sem nenhum dos dois, o Chrome, o Edge ou o Chromium imprime-o: próximo do ficheiro Word, mas as páginas podem diferir |
+| PowerPoint `.pptx` | A aplicação | Textos, gráficos e tabelas continuam editáveis no PowerPoint |
+| PDF de uma apresentação | PowerPoint ou LibreOffice | Impossível sem um dos dois |
+
+O ficheiro tem o nome do país, do relatório e a data, e é guardado onde o seu navegador ou o DataSuite guarda as transferências. Um documento não pode ser exportado como PowerPoint, nem uma apresentação como Word.
+
+## Pré-requisitos que alteram o conteúdo
+
+- **Os anos removidos e o ajuste** determinam os números de todos os gráficos de cobertura e de ajuste.
+- **O denominador** escolhido em Seleção do denominador é usado pelos gráficos de cobertura. Sem ele, o gráfico de tendência da cobertura por denominador mostra, em inglês, «Choose the denominators first».
+- **Os inquéritos.** Os gráficos de equidade e as comparações unidades de saúde versus inquéritos precisam dos ficheiros de inquérito carregados no assistente.
+
+## Resolução de problemas
+
+| Sintoma | Causa provável e solução |
+| --- | --- |
+| **Não foi possível desenhar com estes dados** num bloco | O conjunto de dados não tem os dados. Leia o motivo indicado, carregue o ficheiro em falta ou elimine o bloco. O mesmo texto aparece no ficheiro exportado |
+| «Choose a region» (em inglês) | Um gráfico regional não tem região: defina **Região deste relatório** |
+| «No district coverage for ... in ...» (em inglês) | Escolha um ano e uma região que tenham dados |
+| As páginas finais ou o PDF falham, ou indicam falta de conversor | Instale o Microsoft Word ou o LibreOffice no computador que corre a aplicação. A transferência em Word continua a funcionar |
+| O PDF de uma apresentação falha | Precisa do PowerPoint ou do LibreOffice. Transfira antes o PowerPoint |
+| Geração lenta | O primeiro desenho de um relatório longo, como o caderno de síntese, calcula todos os gráficos. Aguarde a barra de progresso; as edições seguintes só redesenham o que mudou |
+
+Os motivos detalhados indicados a seguir a **Não foi possível desenhar com estes dados** vêm do código e estão em inglês.
+
+## Sugestões para as partes interessadas
+
+1. Fixe a qualidade dos dados, o ajuste e o denominador antes de gerar a síntese, e indique-os num bloco de texto na primeira página.
+2. Responda a cada sugestão de interpretação ou elimine-a. Deixar as sugestões é a razão mais comum de um caderno parecer inacabado.
+3. Preencha a capa: título, editores, data e logótipos dos parceiros.
+4. Produza o relatório no idioma do público e use a vista **Esquema de impressão** antes de enviar um PDF.
+5. Duplique a ficha de uma página para cada região e partilhe os ficheiros PowerPoint com as equipas regionais ou os gestores da imunização.
+6. Ligue as conclusões às ações: ver [Disseminação, decisões e ação](/pt/docs/framework/12-dissemination).
+
+## O que esta página não cobre
+
+As notas de página adicionadas com o botão **Notas** não fazem parte do construtor de relatórios, tanto quanto o código mostra. O local onde o DataSuite guarda os ficheiros transferidos depende do seu navegador ou das suas definições, que o código do relatório não controla.

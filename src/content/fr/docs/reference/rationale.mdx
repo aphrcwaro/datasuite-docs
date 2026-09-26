@@ -1,0 +1,411 @@
+import { Callout } from 'nextra/components'
+
+# Méthodes
+
+Cette page présente la justification scientifique des analyses Countdown, avec des détails complémentaires. La méthode elle-même -- comment chaque étape se déroule et comment lire les résultats -- est la [méthodologie Countdown](/fr/docs/framework) ; lorsque cette page et une page de la méthodologie diffèrent, c'est la page de la méthodologie qui s'applique.
+
+## Approche analytique Countdown [#countdown-approach]
+
+## Évaluation de la qualité des données [#data-quality-assessment]
+
+### Exhaustivité des rapports [#reporting-completeness]
+
+**Base scientifique :**
+
+- Une déclaration incomplète entraîne une sous-estimation systématique de la couverture réelle. Supposer que les établissements qui n'ont pas déclaré n'ont fourni aucun service est statistiquement peu plausible ; ils n'ont simplement pas transmis leurs données.
+- Les facteurs d'ajustement tiennent compte de cet écart en s'appuyant sur une hypothèse défendable : les établissements qui ne déclarent pas fonctionnent à une capacité inférieure (généralement 25 % du volume des établissements déclarants).
+
+L'exhaustivité des rapports peut affecter l'analyse, en particulier lorsqu'elle est faible ou varie d'une année à l'autre.
+Les valeurs aberrantes extrêmes, comme un zéro supplémentaire saisi par erreur dans un nombre, peuvent avoir un impact important, surtout sur les chiffres infranationaux.
+À l'issue des évaluations, plusieurs étapes sont nécessaires pour obtenir un jeu de données propre en vue de l'analyse. Cela implique d'ajuster les données pour tenir compte de la déclaration incomplète et de corriger les valeurs aberrantes extrêmes.
+
+Si nous ne tenons pas compte de l'exhaustivité des rapports, cela revient à supposer que tous les établissements qui ne déclarent pas n'ont fourni aucun service, ce qui n'est probablement pas le cas.
+Les ajustements dépendent de la quantité de services (par ex., soins de grossesse, vaccinations) fournis par les établissements qui n'ont pas déclaré par rapport à ceux qui ont déclaré.
+Le facteur d'ajustement $k$, défini comme _le ratio entre le volume de services fournis par les établissements non déclarants et le volume de services fournis par les établissements déclarants_, est utilisé pour ajuster les chiffres déclarés en fonction de la déclaration incomplète.
+
+Pour tenir compte de la déclaration incomplète, le nombre d'événements déclarés peut être ajusté à l'aide de l'exhaustivité et du ratio de déclaration des établissements, selon la formule suivante :
+
+$$
+N_{\text{adjusted}} = N_{\text{reported}} + N_{\text{reported}} \times \left(\frac{1}{c} - 1\right) \times k
+$$
+
+Où :
+
+- $N_{\text{adjusted}}$ : nombre total d'événements ajusté pour tenir compte de la déclaration incomplète
+- $N_{\text{reported}}$ : nombre d'événements déclarés
+- $c$ : exhaustivité des rapports (par ex., proportion d'établissements ayant déclaré)
+- $k$ : facteur d'ajustement tenant compte du volume de services plus faible dans les établissements non déclarants
+
+<Callout type="info">
+
+**Hypothèse par défaut**
+
+Interprétation :
+
+- Par défaut, nous utilisons $k=0.25$, ce qui signifie que les établissements non déclarants ont fourni des services, mais seulement à un volume équivalent à un quart de celui des établissements de santé déclarants.
+- L'ajustement suppose que les établissements non déclarants fournissent tout de même des services, mais à un volume inférieur à celui des établissements déclarants. Le facteur $k$ contrôle l'ampleur de cet ajustement.
+- Le facteur $k$ peut différer selon les services. Par exemple, si la déclaration des établissements privés est médiocre alors qu'ils font partie du système national et réalisent un nombre considérable d'accouchements, $k$ peut être supérieur à 0,25, voire atteindre 1,0.
+- Si le taux de déclaration des établissements est inférieur à 75 %, il devient plus difficile d'imputer les données des districts. Par conséquent, aucun ajustement n'est effectué lorsque la déclaration est inférieure à 75 %. Dans ce cas, toute analyse supplémentaire visant à déterminer la couverture à partir des données des établissements n'est pas considérée comme suffisamment fiable.
+
+</Callout>
+
+Les valeurs de $k$ suivantes sont utilisées, en fonction de la déclaration retenue, pour ajuster les chiffres déclarés en fonction de la déclaration incomplète :
+
+- `k = 0` : aucun service dans les établissements non déclarants (valeur de k par défaut)
+- `k = 0.25` : quelques services, mais bien inférieurs à ceux des établissements déclarants
+- `k = 0.50` : la moitié du rythme des établissements déclarants
+- `k = 0.75` : presque autant que les établissements déclarants
+- `k = 1.0` : même rythme de services que les établissements déclarants
+
+#### Résumé des actions d'ajustement
+
+| Problème | Action | Ajustement |
+| --- | --- | --- |
+| Faibles taux de déclaration : identification des faibles taux qui ont été ajustés | Si inférieur à 75 % (par défaut), les données ont été imputées | La valeur mensuelle médiane du district pour l'année a été imputée pour le mois présentant une faible déclaration |
+| Déclaration incomplète par les districts, variable dans le temps, affectant l'évaluation des tendances | Si les taux de déclaration étaient ≥ 75 % et ≤ 100 % (par défaut), une hypothèse a été formulée sur le volume de services fournis par les établissements non déclarants | Le facteur d'ajustement $k$ a été utilisé pour ajuster la déclaration incomplète ; la valeur par défaut de $k$ est 0,25 (à remplacer si une valeur différente a été utilisée ; préciser si elle a été utilisée pour tous les formulaires de déclaration ou si des facteurs $k$ différents ont été utilisés selon les formulaires) |
+| Les valeurs aberrantes extrêmes peuvent fortement affecter l'évaluation des tendances de couverture | Si une valeur mensuelle était supérieure ou inférieure à 5 fois l'écart absolu médian (MAD) par rapport à la valeur médiane mensuelle du district, un ajustement a été effectué | Les valeurs aberrantes mensuelles extrêmes sont corrigées et remplacées par la valeur médiane du district pour la même année |
+| Valeurs manquantes | En cas de valeur manquante, les données ont été imputées | La valeur mensuelle médiane du district pour l'année a été imputée pour le mois présentant une valeur manquante |
+
+### Détection des valeurs aberrantes [#outlier-detection]
+
+Une valeur aberrante extrême est définie comme une valeur mensuelle qui correspond à 5 fois l'écart absolu médian (MAD) par rapport à la valeur médiane mensuelle d'une année donnée.
+
+### Cohérence interne [#internal-consistency]
+
+- La cohérence interne évalue le degré d'alignement des indicateurs liés au sein du jeu de données, sur la base des relations épidémiologiques et de prestation de services attendues.
+- Dans le cadre analytique CD2030, cette étape complète les autres mesures de DQA en évaluant si les indicateurs qui sont biologiquement ou programmatiquement liés suivent des schémas plausibles.
+- Contrairement aux vérifications d'indicateurs isolés, la cohérence interne se concentre sur les **relations entre les indicateurs**, afin de garantir que les valeurs déclarées reflètent des parcours de prestation de services réalistes tout au long du continuum de soins.
+
+<details>
+<summary>Principales relations entre indicateurs évaluées pour la cohérence interne</summary>
+
+1. **CPN1 par rapport à Penta1**
+
+   Ces indicateurs devraient suivre un schéma cohérent, car ils représentent tous deux des points d'entrée dans les services de santé de la mère et de l'enfant. Après ajustement pour les pertes attendues (par ex., mortinaissances, décès néonatals), le ratio doit se situer dans une plage plausible.
+
+   La relation entre la **CPN1** (première visite de soins prénatals) et le **Penta1** (première dose du vaccin pentavalent) reflète la continuité entre les services de santé de la mère et de l'enfant.
+
+   Le ratio attendu est dérivé d'hypothèses biologiques et démographiques, notamment :
+
+   - Perte de grossesse (~3 %)
+   - Mortinaissances (~2 %)
+   - Grossesses gémellaires (~1,5 %)
+   - Mortalité néonatale (~3 %)
+
+   Ces facteurs donnent un ratio attendu de référence de :
+
+   $$
+   Expected\ Ratio = 1.07
+   $$
+
+   Celui-ci est ensuite ajusté à l'aide de la couverture issue des enquêtes :
+
+   $$
+   Expected\ Ratio = 1.07 \times \left(\frac{\text{Survey ANC1 Coverage}}{\text{Survey Penta1 Coverage}}\right)
+   $$
+
+   *Seuil :* une plage de tolérance de **±0,05** autour du ratio attendu est considérée comme acceptable.
+
+   *Exemple :* si la couverture de la CPN1 = 90 % et celle du Penta1 = 95 % :
+
+   $$
+   1.07 \times \left(\frac{0.90}{0.95}\right) = 1.01
+   $$
+
+   *Plage acceptable :* **0,96 – 1,06**
+
+2. **Penta1 par rapport à Penta3**
+
+   Ce ratio reflète la **continuité du programme de vaccination** et est principalement déterminé par les taux d'abandon plutôt que par des facteurs biologiques.
+
+   Le ratio attendu est basé sur la couverture issue des enquêtes :
+
+   $$
+   Expected\ Ratio = \frac{\text{Survey Penta1 Coverage}}{\text{Survey Penta3 Coverage}}
+   $$
+
+   *Seuil :* une plage de tolérance de **±0,05** est appliquée.
+
+   *Exemple :* si Penta1 = 95 % et Penta3 = 85 % :
+
+   $$
+   \frac{0.95}{0.85} = 1.12
+   $$
+
+   *Plage acceptable :* **1,07 – 1,17**
+
+3. **Accouchements en établissement par rapport à Penta1**
+
+   Le nombre d'accouchements en établissement devrait globalement correspondre à l'utilisation ultérieure des services de santé de l'enfant, y compris la vaccination.
+
+</details>
+
+#### Interprétation dans le processus de DQA
+
+La cohérence interne doit être interprétée conjointement avec :
+
+- L'exhaustivité des rapports
+- La détection des valeurs aberrantes
+- L'exhaustivité des données
+
+<Callout type="info">
+
+**Point clé**
+
+Un fort alignement entre des indicateurs liés renforce la confiance dans la fiabilité des données. Les écarts importants par rapport aux ratios attendus doivent être examinés dans le contexte local avant d'effectuer des ajustements.
+
+</Callout>
+
+<Callout type="warning">
+
+**Interprétation contextuelle**
+
+Tous les écarts n'indiquent pas une mauvaise qualité des données. Des changements de programme, des campagnes ou des perturbations de services peuvent expliquer les différences observées.
+
+</Callout>
+
+## Analyse de la couverture [#coverage-analysis]
+
+### Justification : base scientifique de l'analyse [#coverage-rationale]
+
+**Base scientifique :**
+
+- La couverture des interventions est un résultat essentiel et direct des systèmes de santé. Le suivi régulier de la couverture aux niveaux national et infranational est devenu le pilier du suivi des progrès des plans nationaux de santé et des initiatives internationales.
+- Les indicateurs de santé de la reproduction, de la mère, du nouveau-né, de l'enfant et de l'adolescent assortis de cibles sont les indicateurs les plus courants des plans nationaux de santé et du suivi mondial.
+- Les données des établissements de santé comme les enquêtes auprès des ménages peuvent fournir des statistiques de couverture, et une approche analytique intégrée est souhaitable.
+
+De nombreux indicateurs de couverture peuvent être estimés à la fois à partir des enquêtes et à partir des données des établissements de santé. Les deux sont des sources d'information essentielles et doivent être considérées conjointement. Les données des établissements peuvent servir à produire des estimations annuelles de la couverture, et les résultats de couverture doivent être comparés et interprétés en regard des résultats des enquêtes récentes.
+
+<details>
+<summary>Principaux indicateurs de couverture (dénominateurs des enquêtes et des données des établissements)</summary>
+
+| Indicateur | Dénominateur des enquêtes | Dénominateur des données des établissements |
+| --- | --- | --- |
+| **Soins prénatals (CPN1, CPN1 au premier trimestre, CPN4)** | Femmes âgées de 15 à 49 ans ayant eu une naissance vivante au cours des 2 dernières années | Nombre total estimé de femmes enceintes dans la population |
+| **Traitement préventif intermittent (TPI2, TPI3)** | Femmes âgées de 15 à 49 ans ayant eu une naissance vivante au cours des 2 dernières années | Nombre total estimé de femmes enceintes dans la population |
+| **Accouchements en établissement et SBA** | Naissances vivantes au cours des 2 dernières années | Naissances vivantes estimées comme dénominateur |
+| **Insuffisance pondérale à la naissance et césarienne** | Effectifs d'insuffisance pondérale à la naissance / de césariennes | Naissances vivantes estimées comme dénominateur |
+| **Soins postnatals dans les 48 heures (CPoN48h)** | Soins postnatals dans les 48 heures | Naissances vivantes estimées comme dénominateur |
+| **BCG, Penta1, Penta3** | Enfants de 12 à 23 mois | Nombre de nourrissons survivants (au-delà de la période néonatale) |
+| **Rougeole 1** | Enfants de 12 à 23 mois | Nombre de nourrissons survivants (au-delà de la période postnéonatale) |
+| **Rougeole 2** | Enfants de 24 à 35 mois | Nombre de nourrissons survivants (au-delà de la période postnéonatale) |
+
+</details>
+
+### Soins prénatals (CPN) [#antenatal-care]
+
+La plupart des pays ont au moins un indicateur de CPN assorti d'une cible dans leur plan national. Les cibles mondiales de couverture ENAP/EPMM pour 2025 sont : à l'échelle mondiale, au moins 90 % des femmes enceintes avec 4 visites de CPN ou plus, et 90 % des pays avec au moins 70 % de couverture.
+
+La CPN1 est souvent considérée comme un indicateur de l'accès de base aux services de santé. Elle est élevée dans la plupart des pays et, dans de nombreux cas, le nombre de visites de CPN1 dans les données de routine des établissements de santé peut fournir un meilleur dénominateur pour les indicateurs de CPN et d'accouchement que les projections de population.
+
+<Callout type="warning">
+
+**Surestimation de la couverture**
+
+Parfois, un indicateur peut atteindre une couverture improbablement élevée au niveau national, disons plus de 125 %. Cela peut s'expliquer par une mauvaise qualité des données du numérateur de l'indicateur de couverture, par un dénominateur erroné, ou par le fait que l'intervention est administrée et enregistrée plus d'une fois pendant la grossesse (par ex., la supplémentation en IFA).
+
+Dans ce cas, le calcul de la couverture n'est pas utile. Il vaut mieux l'exprimer différemment. Par exemple, si la couverture est de 200 %, il est préférable de calculer le nombre moyen de cures de 90 comprimés d'IFA qu'une femme enceinte a reçues (dans ce cas 2,0 par femme enceinte dans la population).
+
+</Callout>
+
+![Estimations de la couverture nationale de 4 visites de CPN à partir des données des établissements et des enquêtes](/images/fr-national-coverage.png)
+
+### Soins d'accouchement [#delivery-care]
+
+Tous les pays ont au moins un indicateur de soins d'accouchement assorti d'une cible dans le plan national. La couverture des naissances (vivantes) en établissement et la SBA sont étroitement liées, car presque tous les accouchements assistés par du personnel qualifié ont lieu dans des établissements de santé. Du point de vue analytique, la couverture des accouchements en établissement est privilégiée car il s'agit d'une mesure plus objective qui évite les problèmes liés aux différentes définitions nationales de ce qui constitue un accouchement assisté par du personnel qualifié.
+
+<Callout type="info">
+
+**Repères pour la césarienne**
+
+La césarienne est une intervention vitale et un indicateur important. Une règle empirique générale avancée par l'Organisation mondiale de la Santé (OMS) est que le besoin d'accouchements par césarienne au niveau de la population se situe entre **10 et 15 %** de tous les accouchements.
+
+- **Moins de 10 % :** indique un besoin non satisfait en matière de soins chirurgicaux d'accouchement.
+- **Plus de 10 à 15 % :** implique une surutilisation probable de la césarienne. Cela peut également impliquer une combinaison de besoins non satisfaits au sein de certains groupes de population (par ex., les femmes les plus pauvres ou rurales) parallèlement à une surutilisation dans d'autres sous-groupes.
+
+</Callout>
+
+![Estimations de la couverture nationale de l'insuffisance pondérale à la naissance, un indicateur de soins d'accouchement](/images/national-analysis-lbw.png)
+
+### Vaccination [#immunization]
+
+Les indicateurs de couverture vaccinale sont inclus dans le plan de suivi du secteur de la santé de presque tous les pays. Une cible générale est d'au moins 90 % de couverture pour les vaccins essentiels administrés pendant l'enfance et l'adolescence.
+
+**Formulation des dénominateurs pour les données des établissements :**
+
+Le nombre de vaccinations administrées aux nourrissons est utilisé comme numérateur. Le dénominateur est le nombre d'enfants éligibles dans la population, approximé comme suit :
+
+$$
+\text{Denominator (BCG, Penta)} = \text{Live Births} - \text{Neonatal Deaths}
+$$
+
+$$
+\text{Measles 1 Denominator} = \text{Live Births} - \text{Neonatal Deaths} - \text{Postneonatal Deaths}
+$$
+
+$$
+\text{Measles 2 Denominator} = \text{Live Births} - \text{Neonatal Deaths} - (2 \times \text{Postneonatal Deaths})
+$$
+
+![Estimations de la couverture nationale de la première dose de rougeole à partir des données des établissements et des enquêtes](/images/national-analysis-measles1.png)
+
+### Planification familiale [#family-planning]
+
+Les estimations de la couverture de la planification familiale proviennent d'une collaboration entre Countdown to 2030 et Track20, à l'aide de l'outil d'estimation de la planification familiale (FPET).
+
+$$
+\text{Demand Satisfied (Coverage)} = \frac{\text{Use of Modern Contraceptives}}{\text{Unmet Need} + \text{Use of Modern Contraceptives}}
+$$
+
+![Projection FPET de la prévalence de la contraception moderne et de la demande satisfaite en planification familiale](/images/fr-national-coverage-fpet.png)
+
+## Analyse de l'équité (equiplots) [#equity-analysis]
+
+### Justification : base scientifique de l'analyse [#equity-rationale]
+
+**Base scientifique :**
+
+- Les moyennes nationales de couverture masquent des disparités critiques qui déterminent si les systèmes de santé ne laissent vraiment personne de côté.
+- Les enquêtes auprès des ménages fournissent des informations essentielles sur les inégalités selon trois grandes dimensions : le milieu de résidence (urbain/rural), la richesse (quintiles des plus riches aux plus pauvres) et l'éducation de la mère.
+- Les equiplots sont utilisés pour évaluer si le pays a progressé dans la réduction de l'écart entre pauvres et riches ou de l'écart d'éducation au fil du temps.
+
+Pour les quintiles de richesse, il est possible d'évaluer quel est le type d'inégalité, car toutes les catégories sont de la même taille. Chaque schéma nécessite une stratégie différente de programmation et de ciblage en matière de santé :
+
+- **Inégalité par le haut (privation de masse) :** si les plus riches sont bien en avance sur tous les autres quintiles de richesse, seuls les riches s'en sortent.
+- **Inégalité linéaire :** si les différences de couverture sont équidistantes, il s'agit d'un schéma linéaire où l'augmentation de la richesse des ménages est linéairement associée à une couverture plus élevée.
+- **Inégalité par le bas (marginalisation) :** si les plus pauvres sont laissés pour compte, cela signifie la marginalisation des plus pauvres.
+
+<Callout type="info">
+
+**Guide d'interprétation**
+
+L'interprétation doit se concentrer sur la question de savoir si les inégalités se sont réduites au fil du temps. Les questions suivantes doivent guider l'interprétation :
+
+1. Quel est le niveau d'inégalité dans le point de données le plus récent ?
+2. Comment les inégalités ont-elles évolué au fil du temps ?
+3. Y a-t-il un schéma d'inégalité qui peut être observé ?
+4. Quelles seront les meilleures approches pour réduire les inégalités ?
+
+</Callout>
+
+![Equiplot de la couverture de Pentavalent 3 selon le niveau d'instruction de la mère](/images/fr-national-coverage-education.png)
+
+![Equiplot de la couverture de Pentavalent 3 selon le quintile de richesse](/images/fr-national-coverage-wealth.png)
+
+![Equiplot de la couverture de Pentavalent 1 selon le milieu de résidence](/images/equity_area.png)
+
+![Equiplot de la couverture de Pentavalent 3 selon le milieu de résidence](/images/fr-national-coverage-equity-area.png)
+
+## Performance des systèmes de santé [#health-systems]
+
+### Justification : base scientifique de l'analyse [#health-systems-rationale]
+
+**Base scientifique :**
+
+- L'évaluation de la charge de morbidité, de la couverture des interventions, de la qualité, de l'équité et des intrants du système de santé doit guider directement l'élaboration des politiques et le ciblage des programmes.
+- Une évaluation complète nécessite une comparaison de référence des intrants du système de santé (tels que le financement, la densité du personnel de santé et la disponibilité des infrastructures) avec les extrants correspondants du système (y compris l'utilisation des services et les taux de couverture) au niveau infranational (niveau Admin1).
+- L'objectif principal reste d'isoler les goulots d'étranglement infranationaux spécifiques où des intrants élevés du système ne parviennent pas à se traduire par les extrants de couverture des services SRMNIA-N attendus, ou inversement, d'identifier les régions très performantes présentant une forte efficacité de prestation de services.
+
+### Intrants des systèmes de santé [#health-inputs]
+
+L'évaluation se concentre sur la qualité des données pour les indicateurs du système de santé aux niveaux national et infranational, en visant l'analyse comparative mondiale et l'audit de plausibilité.
+
+<details>
+<summary>Principaux indicateurs d'intrants du système de santé</summary>
+
+- **Financement de la santé :** fréquemment limité aux allocations budgétaires du gouvernement.
+- **Professionnels de la santé essentiels pour 10 000 habitants :** comprend les médecins, les cliniciens non médecins, les infirmiers et les sages-femmes.
+  - *Seuil historique (OMS 2006) :* référence minimale de 23 pour 10 000.
+  - *Seuil actuel (ère de la CSU) :* au moins 44,5 pour 10 000.
+- **Densité des établissements de santé :**
+
+  $$
+  \text{Health Facility Density} = \left( \frac{\text{Total Number of Health Facilities}}{\text{Total Population}} \right) \times 10,000
+  $$
+
+- **Densité hospitalière :**
+
+  $$
+  \text{Hospital Density} = \left( \frac{\text{Total Number of Hospitals}}{\text{Total Population}} \right) \times 100,000
+  $$
+
+- **Densité de lits d'hospitalisation :**
+
+  $$
+  \text{Inpatient Bed Density} = \left( \frac{\text{Total Inpatient Beds}}{\text{Total Population}} \right) \times 10,000
+  $$
+
+</details>
+
+![Densité infranationale des établissements de santé pour 10 000 habitants par unité Admin1](/images/fr-health-system-subnational.png)
+
+### Extrants des systèmes de santé par intrants [#outputs-by-inputs]
+
+L'analyse explore l'association statistique entre les intrants du système de santé et les indicateurs correspondants d'utilisation des services ou de couverture dans les unités infranationales (niveau Admin1) :
+
+- **Infrastructures d'hospitalisation par rapport aux admissions hospitalières des moins de 5 ans :** nous nous attendons à ce que les régions ayant une densité d'hôpitaux/de lits plus faible présentent des taux d'admission pédiatriques plus faibles. Les valeurs aberrantes peuvent indiquer une sous-déclaration des infrastructures ou un débit clinique élevé.
+- **Densité du personnel de santé par rapport à l'utilisation des consultations externes par les moins de 5 ans :** nous nous attendons à une pente positive sur une droite de régression linéaire. Les valeurs aberrantes peuvent signaler une charge de travail élevée du personnel ou une inflation du numérateur.
+- **Densité du personnel de santé par rapport à la couverture des naissances vivantes en établissement :** évalue si la disponibilité du personnel se traduit directement par la couverture des accouchements en établissement.
+
+{/* TODO-IMAGE: Nuage de points des admissions hospitalières (IPD) des moins de 5 ans en fonction de la densité d'hôpitaux/de lits par unité Admin1, avec droite de régression | suggested: 6-ipd_use.png */}
+
+![Consultations externes des moins de 5 ans selon la densité du personnel de santé au niveau Admin1, avec droite de régression](/images/u5_OPD.png)
+
+![Couverture des accouchements en établissement selon la densité du personnel de santé au niveau Admin1, avec droite de régression](/images/institutional_del.png)
+
+## Mortalité institutionnelle [#institutional-mortality]
+
+### Justification : base scientifique de l'analyse [#mortality-rationale]
+
+**Base scientifique :**
+
+- La mortalité maternelle et périnatale dans les établissements de santé constitue un indicateur essentiel de la qualité des soins (mortalité institutionnelle).
+- Si la couverture des naissances en établissement de santé est élevée (par ex., supérieure à 75 %), les statistiques des établissements deviennent une contribution utile à l'estimation des niveaux de mortalité de la population.
+- Le principal défi des données de mortalité des établissements de santé est la **sous-déclaration des décès**. Les décès maternels ne surviennent pas uniquement lors de l'accouchement, mais aussi pendant la grossesse et en post-partum. La déclaration des décès par mortinaissance exige des registres de maternité bien tenus et des recoupements avec les registres du bloc opératoire.
+
+<details>
+<summary>Définitions de la mortalité institutionnelle et de la mortalité de la population</summary>
+
+| Indicateur | Numérateur | Dénominateur |
+| --- | --- | --- |
+| **Ratio de mortalité maternelle en établissement (iMMR)** | Nombre de décès maternels dans les établissements de santé | $\frac{\text{Naissances vivantes dans les établissements de santé}}{100,000}$ |
+| **Mortalité maternelle dans la population (MMR)** | Nombre de décès maternels dans la population | $\frac{\text{Naissances vivantes dans la population}}{100,000}$ |
+| **Taux de mortinatalité en établissement (iSBR)** | Nombre de mortinaissances dans les établissements de santé | $\frac{\text{Naissances dans les établissements de santé}}{1,000}$ |
+| **Mortalité néonatale (avant la sortie)** | Nombre de décès néonatals avant la sortie | $\frac{\text{Naissances vivantes dans les établissements de santé}}{1,000}$ |
+
+</details>
+
+### Interprétation des données et mesures de qualité [#mortality-interpretation]
+
+Lors de l'interprétation de l'iMMR et de l'iSBR, évaluez les valeurs aberrantes extrêmes élevées (erreurs de saisie des données) et les taux invraisemblablement bas (par ex., iMMR &lt; 25 pour 100 000 ou iSBR &lt; 6 pour 1 000), qui indiquent fortement une sous-déclaration importante plutôt que de meilleurs résultats cliniques.
+
+**Ratio entre mortinaissances et décès maternels :**
+
+Nous nous attendons à ce que la mortalité maternelle et les mortinaissances soient positivement corrélées. Nous nous attendons à ce que le ratio entre mortinaissances et décès maternels se situe entre **5 et 25** pour les pays d'Afrique subsaharienne.
+
+<Callout type="warning">
+
+**Signaux de qualité des données**
+
+- **Ratio &lt; 5 :** la sous-déclaration des mortinaissances est probablement plus importante que la sous-déclaration des décès maternels.
+- **Ratio ≥ 25 :** la sous-déclaration des décès maternels est probablement le principal problème.
+
+</Callout>
+
+![Mortalité maternelle en établissement pour 100 000 naissances vivantes par région et au niveau national](/images/fr-mortality-institutional-mortality.png)
+
+![Mortinaissances en établissement pour 1 000 naissances par région et au niveau national](/images/sbr-rate.png)
+
+![Ratio des mortinaissances par rapport aux décès maternels dans les établissements de santé](/images/sbr-maternal-death-ratio.png)
+
+### Cohérence avec les estimations de la population [#mortality-modeling]
+
+Le MMR de la population ($M_p$), le MMR communautaire ($M_c$) et le MMR en établissement ($M_i$) doivent être mathématiquement cohérents.
+
+$$
+M_p = (M_i \times P_i) + (M_c \times (1 - P_i))
+$$
+
+Où $P_i$ est la proportion de naissances vivantes survenant dans un établissement de santé.
+
+Étant donné une estimation de référence du MMR de la population ($M_p$) et un ratio de variance entre communauté et établissement supposé ($R = \frac{M_c}{M_i}$), le MMR attendu en établissement est calculé comme suit :

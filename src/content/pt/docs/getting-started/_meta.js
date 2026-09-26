@@ -1,4 +1,10 @@
 export default {
-  index: 'DataSuite Tutorial',
-  'user-interface': 'User Interface'
+  index: 'Navegar pela interface do DataSuite',
+  'user-interface': {
+    title: 'Interface do utilizador',
+    display: 'hidden',
+    theme: {
+      layout: 'full'
+    }
+  }
 }

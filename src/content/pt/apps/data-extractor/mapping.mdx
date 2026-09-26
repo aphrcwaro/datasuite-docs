@@ -1,127 +1,161 @@
-import { Callout } from 'nextra/components'
-import { Steps } from 'nextra/components'
+import { Callout, Steps } from 'nextra/components'
 
+# Configuração do mapeamento
 
-## Mapping Configuration
+O mapeamento define **quais os dados a extrair** do DHIS2 e **como são estruturados** para a análise.
+É a etapa central do fluxo de trabalho do Data Extractor: obtém os indicadores de interesse,
+associa-os às fontes de dados correspondentes do DHIS2 e padroniza os resultados para as aplicações do DataSuite e para outras análises.
 
-
-Mapping defines **what data to extract** from DHIS2 and **how it is structured** for analysis.
-It is the core step in the Data Extractor workflow in that it: fetches indicators of interest,
-maps/matches with corresponding DHIS2 data sources and standardizes outputs for Datasuite apps and other analyses.
-
-## DHIS2 Data Mapping Workflow
+## Fluxo de trabalho de mapeamento de dados do DHIS2
 
 <Mermaid
   chart={`
-flowchart LR
-  subgraph "Mapping Workflow"
-    A[Create Mapping]
-    B[Define Metadata]
-    C[Configure Indicators]
-    D[Map Data Sources]
-    E[Save Mapping]
-  end
+flowchart TD
+  A["1. Criar mapeamento"]
+  B["2. Definir metadados"]
+  C["3. Configurar indicadores"]
+  D["4. Mapear fontes de dados"]
+  E["5. Guardar mapeamento"]
+  S[("Dados do DHIS2")]
+  F{"Mapeamento concluído?"}
+  G["Transferir dados"]
 
-  A --> B --> C --> D --> E
+  A --> B --> C --> D
+  D <--> S
+  D --> E --> F
+  F -->|Sim| G
+  F -->|Não| C
 
-  D --> S[(DHIS2 Data)]
-  S --> D
-
-  E --> F{Mapping Complete?}
-  F -->|Yes| G[Download Data]
-  F -->|No| C
-
-  classDef step fill:#e8f1ff,stroke:#2791ff,stroke-width:2px,color:#0d3f7b;
-  classDef decision fill:#fff4e5,stroke:#f59e0b,stroke-width:2px,color:#7a4b00;
-  classDef output fill:#e8f8f0,stroke:#10b981,stroke-width:2px,color:#065f46;
-  classDef data fill:#f3e8ff,stroke:#8b5cf6,stroke-width:2px,color:#4c1d95;
-
-  class A,B,C,D,E step;
+  classDef decision fill:#fff4e5,stroke:#f59e0b,stroke-width:2px;
+  classDef output fill:#e8f8f0,stroke:#009c6f,stroke-width:2px;
+  classDef data fill:#f3e8ff,stroke:#8b5cf6,stroke-width:2px;
   class F decision;
   class G output;
   class S data;
 `}
- />
+/>
 
-## Navigating the CD2030 DHIS2 Data Extractor
-Once successfully logged in, the following views help in navigating the CD2030 DHIS2 Data Extractor
-### 1. Dashboard
-![Mapping Manager](/images/extractor_dashboard.jpg)
+## Navegar pelo CD2030 DHIS2 Data Extractor
 
-### 2. Mappings Manager
-![Mapping Manager](/images/extractor_mapping_manager.jpg)
+Depois de iniciar sessão com sucesso, as vistas seguintes ajudam a navegar pelo CD2030 DHIS2 Data Extractor.
 
-The **Mapping Manager** is the central place to:
-- View all saved mappings
-- Search mappings by name or ID
-- Create a new mapping
+### Painel
 
-### 3. Downloads Manager
+![Painel do Data Extractor](/images/extractor_dashboard.jpg)
 
+### Mappings Manager
 
-### Key Actions
+![Mappings Manager com a lista de mapeamentos guardados](/images/extractor_mapping_manager.jpg)
 
-- **New Mapping** : Start a new configuration
-- **Search bar** : Locate existing mappings
-- **Actions column** : Edit, download clone or delete the selected mapping
+O **Mappings Manager** é o local central para:
 
-## 2. Creating a New Mapping
+- Ver todos os mapeamentos guardados
+- Pesquisar mapeamentos por nome ou ID
+- Criar um novo mapeamento
+
+#### Principais ações
+
+- **New Mapping:** iniciar uma nova configuração
+- **Search bar:** localizar mapeamentos existentes
+- **Actions column:** editar, transferir, clonar ou eliminar o mapeamento selecionado
+
+### Downloads Manager
+
+![Downloads Manager com uma transferência em curso](/images/extractor_downloading.jpg)
+
+O **Downloads Manager** é onde se criam as tarefas de transferência e se acompanha o respetivo progresso (ver [transferência de dados](/pt/apps/data-extractor/data-download)).
+
+## Criar um novo mapeamento
 
 <Steps>
-### Click **New Mapping**
-![New Mapping](/images/extractor_mapping_newmap.jpg)
 
-### Configure the mapping
-Define the mapping name, Description and the mapping mode
-<Callout type="important">
-  **Important:** Use a clear naming convention
-  Example:
-    Mapping name: CAM2026_CountryName
-    Description: MNH Indicators for CAM 2026 Workshop
+### Clicar em **New Mapping**
+
+![Ecrã de novo mapeamento em modo de rascunho](/images/extractor_mapping_newmap.jpg)
+
+### Configurar o mapeamento
+
+Defina o nome do mapeamento, a descrição e o modo de mapeamento.
+
+<Callout type="info">
+
+**Importante:** utilize uma convenção de nomenclatura clara. Por exemplo:
+
+- Nome do mapeamento: `CAM2026_CountryName`
+- Descrição: `MNH Indicators for CAM 2026 Workshop`
+
 </Callout>
 
-<a id="map-metadata"/>
-### Select the Mapping mode
+<a id="map-metadata" />
+### Selecionar o modo de mapeamento
+
+Escolha **Countdown** ou **Custom** no campo **Mapping Mode**. Os dois modos são descritos abaixo.
+
 </Steps>
-Mapping is the stage where DHIS2 source metadata is linked to the structure needed for downstream analysis. 
-The extractor supports two mapping approaches depending on the use case.
-### 1. Countdown option
 
-The **Countdown** option maps indicators and related metadata to the **Countdown harmonized MNCH [data template](/en/resources)**. 
-This is the preferred approach when teams are preparing data for Countdown to 2030 workflows and want a standardized structure that aligns with the embedded resource template used by the application.
+## Modos de mapeamento
 
-This option is useful when:
+O mapeamento é a etapa em que os metadados de origem do DHIS2 são associados à estrutura necessária para a análise posterior.
+O extrator suporta duas abordagens de mapeamento, consoante o caso de utilização.
 
-- the analysis is focused on harmonized MNCH indicators,
-- teams want consistency across countries or time periods,
-- outputs are intended for Countdown-aligned analytical workflows.
+### Opção Countdown
 
-<Callout type="info">
-  **Recommended for standardization:** Use the Countdown option when your goal is to produce data aligned with the harmonized MNCH template embedded in the extractor resources.
-</Callout>
+A opção **Countdown** mapeia os indicadores e os metadados relacionados para o **[modelo de dados](/pt/resources) MNCH harmonizado do Countdown**.
+Esta é a abordagem preferida quando as equipas estão a preparar dados para os fluxos de trabalho do Countdown to 2030 e pretendem uma estrutura padronizada, alinhada com o modelo de recursos incorporado na aplicação.
 
-### 2. Custom option
+Esta opção é útil quando:
 
-The **Custom** option allows users to create mappings for other programs or use cases that do not fit the Countdown harmonized template. This gives teams flexibility to work with country-specific program structures, additional service areas, or bespoke indicator sets.
-
-This option is useful when:
-
-- The program area goes beyond the Countdown MNCH scope,
-- Users need a country-defined mapping structure,
-- The extraction supports another analytical workflow outside the standard [harmonized template](/en/resources).
+- a análise se centra nos indicadores MNCH harmonizados,
+- as equipas pretendem consistência entre países ou períodos,
+- os resultados se destinam a fluxos de trabalho analíticos alinhados com o Countdown.
 
 <Callout type="info">
-  **Flexible mapping:** Choose the Custom option when you need to prepare data for other health programs, local reporting needs, or non-Countdown analytical pipelines.
+
+**Recomendado para a padronização:** utilize a opção Countdown quando o objetivo for produzir dados alinhados com o modelo MNCH harmonizado incorporado nos recursos do extrator.
+
+</Callout>
+
+### Opção Custom
+
+A opção **Custom** permite aos utilizadores criar mapeamentos para outros programas ou casos de utilização que não se enquadram no modelo harmonizado do Countdown. Isto dá às equipas flexibilidade para trabalhar com estruturas de programa específicas de cada país, áreas de serviço adicionais ou conjuntos de indicadores personalizados.
+
+Esta opção é útil quando:
+
+- a área do programa vai além do âmbito MNCH do Countdown,
+- os utilizadores precisam de uma estrutura de mapeamento definida pelo país,
+- a extração apoia outro fluxo de trabalho analítico fora do [modelo harmonizado](/pt/resources) padrão.
+
+<Callout type="info">
+
+**Mapeamento flexível:** escolha a opção Custom quando precisar de preparar dados para outros programas de saúde, necessidades locais de relatórios ou fluxos analíticos que não sejam do Countdown.
+
 </Callout>
 
 <Callout type="info">
-**Mapping Summary**
-There are currently two mapping modes:
-- Countdown: This mode has a predefined list of MNCH indicators and structure as in the [harmonized data template](/en/resources)
-- Custom:  Fully user-defined configuration, where the user can download any data that they have access rights to
-**Warning:** 
-- Changing the mapping mode midway will reset your progress if the mapping is not saved.Always save your mapping before switching Mapping modes
+
+**Resumo do mapeamento**
+
+Existem atualmente dois modos de mapeamento:
+
+- **Countdown:** este modo tem uma lista e uma estrutura predefinidas de indicadores MNCH, como no [modelo de dados harmonizado](/pt/resources).
+- **Custom:** configuração totalmente definida pelo utilizador, em que este pode transferir quaisquer dados a que tenha direitos de acesso.
+
 </Callout>
 
+<Callout type="warning">
 
-### Indicators Configuration
+Alterar o modo de mapeamento a meio do processo repõe o progresso se o mapeamento não tiver sido guardado. Guarde sempre o mapeamento antes de mudar de modo de mapeamento.
+
+</Callout>
+
+## Configuração dos indicadores
+
+O painel **Indicators Configuration** é onde se definem os indicadores de um mapeamento. Cada bloco de indicador tem um **Internal Name** e um **Target Export Code** e está associado aos elementos de dados, indicadores ou conjuntos de dados do DHIS2 que o alimentam (**Source Configuration**). Clique em **Save Mapping** para guardar as alterações.
+
+No modo **Countdown**, os indicadores seguem o modelo MNCH harmonizado e estão assinalados como **COUNTDOWN**. Pesquise e adicione as fontes do DHIS2 de cada indicador.
+
+![Indicators Configuration no modo Countdown](/images/extractor_mapping_indicator_config.jpg)
+
+No modo **Custom**, o utilizador define os próprios indicadores, adiciona as fontes do DHIS2 e escolhe as combinações de opções de categoria (desagregações) a incluir.
+
+![Indicators Configuration no modo Custom com uma fonte de elemento de dados e a respetiva desagregação](/images/extractor-mapping-indicator-config-cutom.jpg)

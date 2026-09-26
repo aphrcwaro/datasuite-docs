@@ -1,0 +1,75 @@
+import { Steps, Callout } from 'nextra/components'
+
+# Dénominateurs
+
+La couverture est un nombre d'enfants vaccinés divisé par une population cible : le choix du dénominateur compte donc autant que la qualité des données. Cette section comporte deux pages sous **Dénominateurs** : **Tendance de la population** (la page Évaluation du dénominateur) et **Sélection du dénominateur**. Toutes deux nécessitent des données ajustées. La méthode figure dans le chapitre **[sélection du dénominateur](/fr/docs/framework/4-denominator-selection)**.
+
+## Quand l'utiliser
+
+Utilisez ces pages après l'ajustement et avant de lire un résultat de couverture. Recommencez si vous modifiez l'ajustement ou les données d'enquête.
+
+## Tendance de la population
+
+Compare les tendances de population selon les sources disponibles.
+
+- Filtre **Sélectionner la meilleure population** : **Naissances vivantes (DHIS2)**, **Total des naissances (DHIS2)**, **Population totale (DHIS2)** ou **Moins de 1 an (DHIS2)**. Il définit la population DHIS2 à partir de laquelle les dénominateurs dérivés sont construits.
+- Carte **Comparaison de la population** avec les onglets **Population**, **Naissances** et **Moins de 1 an**. Chaque graphique trace la projection de l'ONU et la projection DHIS2 par année (en milliers).
+
+Cherchez un écart stable et plausible entre l'ONU et le DHIS2. Une rupture brutale d'une courbe signale en général un changement dans la projection de la population, pas une vraie variation des naissances.
+
+![Tendance de la population](/images/fr-denominator-population-trend.png)
+
+## Sélection du dénominateur
+
+Compare la couverture selon chaque option de dénominateur et enregistre votre choix.
+
+<Steps>
+
+### Lire la comparaison avec l'enquête
+
+La carte **Couverture nationale** comporte les onglets **Naissances vivantes en établissement de santé**, **BCG**, **Pentavalent 3** et **Rougeole 1**. Chaque graphique montre la couverture en établissement issue du DHIS2 selon chaque dénominateur, à côté de la couverture de l'enquête nationale pour l'année d'enquête. Un dénominateur qui donne une couverture proche de l'enquête, sans dépasser 100 %, est un bon candidat.
+
+Si les estimations d'enquête sont absentes, la carte affiche « Aucune couverture à afficher pour l'instant » et un bouton **Aller à Charger les données**. Ajoutez les valeurs d'enquête à l'étape Taux nationaux.
+
+### Vérifier le schéma régional
+
+**Couverture dérivée infranationale** comporte les onglets **Pentavalent 1**, **Pentavalent 3** et **Rougeole 1**. Elle compare les estimations régionales par dénominateur pour l'année d'enquête.
+
+### Vérifier la tendance
+
+**Tendance de la population** (sur cette page, il s'agit de la couverture au fil du temps) comporte les onglets **Pentavalent 1**, **Pentavalent 3** et **Rougeole 1**. Chacun montre la couverture par année selon chaque dénominateur, y compris la population de l'ONU. Utilisez le filtre **Niveau administratif** (National, Niveau administratif 1, Niveau administratif 2) et le sélecteur de région pour examiner une zone.
+
+### Choisir le dénominateur
+
+Réglez le sélecteur **Dénominateur de vaccination**. Les options sont **DHIS2**, **CPN 1**, **Pentavalent 1**, **Penta1-dérivé** et **Croissance de la population ANC 1**. Le choix est enregistré dans le jeu de données et utilisé par toutes les pages de couverture, d'inégalités et de cibles. Vaxx App n'a qu'un dénominateur de vaccination, sans dénominateur maternel distinct.
+
+</Steps>
+
+![Sélection du meilleur dénominateur](/images/fr-denominator-best-selection.png)
+
+![Couverture nationale au fil du temps par dénominateur](/images/fr-denominator-national-coverage-overtime.png)
+
+## Signification de chaque option
+
+| Option | Principe |
+| --- | --- |
+| DHIS2 | La population projetée dans les données DHIS2 (naissances vivantes, total des naissances, population totale ou moins de 1 an, selon le réglage Sélectionner la meilleure population). |
+| CPN 1 | Dénominateur dérivé de l'utilisation des services de CPN-1. |
+| Pentavalent 1 | Dénominateur dérivé de la vaccination Penta-1. |
+| Croissance de la population ANC 1, Penta1-dérivé | La dérivation à partir de CPN-1 ou de Penta-1 avec un ajustement pour la croissance démographique annuelle. |
+
+La projection de l'ONU est aussi tracée sur les graphiques à titre de comparaison, mais elle ne fait pas partie des choix du sélecteur.
+
+Les définitions des populations dérivées et des taux d'enquête figurent dans le **[chapitre du cadre](/fr/docs/framework/4-denominator-selection)**.
+
+## Interprétation et pièges
+
+<Callout type="warning">
+Un dénominateur dérivé de Penta1 fait apparaître par construction une couverture Penta1 proche de 100 %. Jugez-le sur Penta3 et Rougeole 1, et par rapport à l'enquête.
+</Callout>
+
+- Ne choisissez pas l'option qui donne la couverture la plus élevée. Choisissez celle qui concorde le mieux avec l'enquête et reste cohérente dans le temps.
+- Les dénominateurs infranationaux peuvent être moins fiables que les dénominateurs nationaux. Lisez-les avec la qualité des données des districts.
+- Le libellé du dénominateur de vaccination apparaît sous forme de sélecteur sur chaque page d'analyse. Si les résultats semblent étranges, vérifiez-le en premier.
+
+Suite : **[Couverture, équité et cibles](/fr/apps/vaxx/coverage-equity-targets)**.

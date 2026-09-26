@@ -1,35 +1,34 @@
 export default {
-
   index: {
-    title: 'Overview',
+    title: 'Visão geral',
     theme: {
       layout: 'full',
       copyPage: false,
       toc: true
     }
   },
-  "dhis2-login": {
-    title: 'DHIS2 Login',
+  'dhis2-login': {
+    title: 'Início de sessão no DHIS2',
     theme: {
-        layout: 'full',
-        copyPage: false,
-        toc: false
+      layout: 'full',
+      copyPage: false,
+      toc: true
     }
   },
   mapping: {
-    title: 'Mapping Indicators',
+    title: 'Mapeamento de indicadores',
     theme: {
       layout: 'full',
       copyPage: false,
-      toc: false
+      toc: true
     }
   },
-  "data-download": {
-    title: 'Downloading Data',
+  'data-download': {
+    title: 'Transferência de dados',
     theme: {
       layout: 'full',
       copyPage: false,
-      toc: false
+      toc: true
     }
-  },
+  }
 }

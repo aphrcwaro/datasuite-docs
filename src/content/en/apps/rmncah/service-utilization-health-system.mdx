@@ -1,0 +1,106 @@
+---
+topics: [service-utilization, mch-curative-index, health-system-performance, private-sector]
+indicators: [opd_total, opd_under5, ipd_total, ipd_under5]
+reportKinds: [service_utilization, mch_index, su_region, su_dqa, su_map, health_system_table, health_system_region, phc_scatter, hs_comparison, hs_national, private_share, ps_ownership]
+cacheMembers: [service_utilization_national, service_utilization_admin1, compute_service_utilization, filter_service_utilization, generate_admin1_service_utilization, generate_admin1_mch_curative_index, calculate_service_dqa_summary, prepare_mapping_service_utlization, utilization_mapping_years, health_system_metrics_national, health_system_metrics_admin1, health_system_comparison, generate_health_system_table, generate_phc_scatter_data, national_private_share, area_private_share, generate_private_sector_data, check_sector_params]
+appPages: [utilization_dqa, national_utilization, subnational_utilization, mch_curative_index, health_system_national, health_system_subnational, health_system_comparison, private_sector]
+ai:
+  status: draft
+  summary: >-
+    Service Utilization studies outpatient and inpatient care for children; Health System Performance relates
+    services to facilities, beds, workforce and the private sector. Both need Data Adjustment. Check the Service
+    Utilization DQA before reading utilization trends.
+  rules:
+    - "Fewer than one OPD visit per person per year generally indicates poor geographic or financial access (#national-utilization)"
+    - "Benchmarks: facilities 2, beds 25 and workforce 44.5 per 10,000; hospital density has no benchmark (#sub-national-health-system)"
+    - "A benchmark is a reference, not a target for every region; a quadrant position is not cause and effect (#common-pitfalls)"
+    - "Methods are in Service utilization (/en/docs/framework/10-service-utilisation/)"
+    - "Health system methods are in Health system performance (/en/docs/framework/11-health-system-performance/)"
+  interpretation:
+    - "Service Utilization DQA: one Data Quality Metrics table by year for OPD and IPD; poor completeness or missingness means caution (#service-utilization-dqa)"
+    - "National Utilization: tabs OPD Visits, IPD Admissions, Under 5, Case Fatality Rate and Deaths, with OPD and IPD maps (#national-utilization)"
+    - "MCH Preventive vs Curative Index: regions in four quadrants; low preventive and low curative use are the priority (#mch-preventive-vs-curative-index)"
+    - "Sub-National Health System: region bars against the national average, with Meets or Below benchmark (#sub-national-health-system)"
+    - "PHC Performance: inputs against a service index by region, a descriptive comparison, not proof of efficiency (#phc-performance)"
+---
+
+import { Callout } from 'nextra/components'
+
+# Service utilization and health system
+
+Two groups in the **Analysis** section look beyond coverage of RMNCAH interventions. **Service Utilization** studies how much outpatient and inpatient care children receive. **Health System Performance** relates services to the inputs of the health system: facilities, beds, workforce and the private sector. Both need Data Adjustment to have been run. Methods: [Service utilization](/en/docs/framework/10-service-utilisation) and [Health system performance](/en/docs/framework/11-health-system-performance).
+
+## Service Utilization
+
+Suggested order: check the data first, then read national and sub-national use, then the combined index.
+
+### Service Utilization DQA
+
+**Purpose.** Judge whether OPD and IPD data are good enough to interpret.
+
+**Filter.** A region selector (**Select All** for national results).
+
+The page shows one table, *Data Quality Metrics*, by year. Its rows are the percent of expected monthly facility reports, the districts meeting the reporting threshold you set on Reporting Rate, the percent of non-missing OPD and IPD monthly values, the districts with no missing OPD or IPD values, OPD values that are not extreme outliers, districts with no OPD extreme outliers, the ratio of OPD to IPD for children under 5, and the percent of OPD and IPD that concerns children under 5. **Download Plot** and **Download Data** are in the toolbar.
+
+If completeness or missingness is poor, treat utilization trends with caution.
+
+![Service utilization DQA](/images/service-utilization-dqa.png)
+
+### National Utilization
+
+Tabs: **OPD Visits** (visits per person per year, all ages and under 5), **IPD Admissions**, **Under 5** (share of OPD visits and IPD admissions that are children under 5), **Case Fatality Rate** (under 5 and all ages) and **Deaths** (proportion of deaths that are under 5). A second card, with **Select Years** and a **Palette** (default Purples), maps **OPD Map** and **IPD Map** by region.
+
+Fewer than one OPD visit per person per year generally indicates poor geographic or financial access. Case fatality in facilities is a proxy for the quality of clinical care.
+
+![OPD visits](/images/service-utilization-OPDvisits.png)
+
+### Sub-National Utilization
+
+Choose a region (or **Select All**) to see the same tabs for that area, plus a second card, *Sub-National Utilization*, with the tabs **OPD Visits** and **IPD Admissions** showing the distribution across Admin 1 regions: OPD per child under 5 per year and IPD admissions per 100 children under 5.
+
+![Sub-national distribution of OPD](/images/service-utilization-subnational-distribution.png)
+
+### MCH Preventive vs Curative Index
+
+Each dot is an Admin 1 region. The horizontal axis is the **MCH Preventive services index** (antenatal, delivery, postnatal and immunization services per child under 5, weighted by importance) and the vertical axis the **Curative service use index** (OPD visits and IPD admissions per child under 5, with admissions counted ten times a visit). Median lines divide the plot into four quadrants: low or high preventive, and low or high curative. **Generate Report** opens the service utilization report.
+
+Regions with low preventive and low curative use are the priority; high curative use with low preventive use may show that people reach facilities only when ill.
+
+![MCH preventive versus curative index](/images/service-utilization-curative-index.png)
+
+## Health System Performance
+
+### National Health System
+
+A table of health system indicators for the latest year, with the columns **Indicator**, **Value** and **Unit**, in three sections: *Health infrastructure* (facility density per 10,000, share of facilities that are hospitals, hospital density per 100,000, inpatient bed density per 10,000), *Health workforce* (workforce density per 10,000 and the ratio of nurse-midwives per physician) and *Role of private sector* (share of private and of NGO facilities). Download the table or its image from the toolbar.
+
+![National health system](/images/health-system.png)
+
+### Sub-National Health System
+
+Tabs: **Health Facility Density**, **Hospital Density**, **Workforce Density** and **Bed Density**. Bars show each region against the **National average** line. For facilities (2 per 10,000), beds (25 per 10,000) and workforce (44.5 per 10,000) a dashed **Target benchmark** is drawn and bars are coloured **Meets benchmark** or **Below benchmark**. Hospital density has no benchmark.
+
+![Health facility density by region](/images/health-system-facility-density.png)
+
+### PHC Performance
+
+Tabs: **Health Facility Density** and **Workforce Density**. Each scatter plot relates an input to a service index for the Admin 1 regions. Dashed median lines split the chart into quadrants, for example high density with a low service index. Unusual regions are labelled. This is a descriptive comparison, not proof of efficiency.
+
+![Health system by region](/images/health-system-subnational.png)
+
+### Public/Private Share
+
+The top card shows the ownership of health facilities as percentages of **Private**, **NGO** and **Public**. Below it, tabs **National** and **Urban/Rural** show the public and private split nationally and by area of residence.
+
+<Callout type="info">
+The chart title currently reads *Ownership of health facilities, 2024 (DHIS2)*. Check that the year matches your data before quoting it.
+</Callout>
+
+![Public and private share](/images/health-system-private-public-share.png)
+
+## Common pitfalls
+
+- Reading utilization trends without checking Service Utilization DQA first.
+- Comparing health system densities with different denominators or population years.
+- Treating a benchmark as a target for every region. It is a reference, and context matters.
+- Interpreting a quadrant position as cause and effect.

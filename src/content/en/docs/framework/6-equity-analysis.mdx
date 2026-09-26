@@ -1,59 +1,82 @@
-import { Steps } from 'nextra/components'
-import { Callout } from 'nextra/components'
-import { Bleed } from 'nextra/components'
+---
+topics: [equity]
+reportKinds: [equity]
+cacheMembers: [wiq_survey, area_survey, education_survey]
+appPages: [equity_assessment]
+ai:
+  status: draft
+  summary: >-
+    Uses household survey data to assess inequality by area of residence (urban/rural), household wealth quintile
+    and mother's education. Equiplots show each subgroup's coverage over time alongside the national trend, to see
+    whether gaps are narrowing or widening.
+  definitions:
+    - "Top inequality (mass deprivation): the richest are well ahead of all other wealth quintiles (#rationale-and-approach)"
+    - "Linear inequality: equidistant differences; coverage rises linearly with household wealth (#rationale-and-approach)"
+    - "Bottom inequality (marginalization): the poorest are left behind (#rationale-and-approach)"
+  steps:
+    - "In the app: National Analysis, then Equity Assessment (#implementation)"
+  rules:
+    - "Equiplots assess progress since 2010 in reducing the poor-rich gap and the gap between women with no or low education and women with higher education (#rationale-and-approach)"
+    - "The type of inequality can be assessed for wealth quintiles because all quintiles are the same size (#rationale-and-approach)"
+    - "Each inequality pattern requires a different strategy of health programming and targeting (#rationale-and-approach)"
+  interpretation:
+    - "Focus on whether inequalities have reduced over time and how far global coverage targets have been met (#interpretation-of-equiplots)"
+    - "Answer: the level of inequality at the most recent point; how it changed over time; any pattern observed; the best approaches to reduce it (#interpretation-of-equiplots)"
+  notCovered:
+    - "No numeric threshold for what counts as a large gap (#interpretation-of-equiplots)"
+---
 
-## Equity Assessment (Equiplots)
+import { Callout, Steps } from 'nextra/components'
+
+# Equity assessment (equiplots)
 
 National coverage averages mask critical disparities that determine whether health systems are truly leaving no one behind. This module uses household survey data to assess inequalities across three major dimensions: residence (urban/rural), wealth (richest-to-poorest quintiles), and maternal education. By visualizing coverage trajectories separately for each population subgroup alongside the national trend, equiplots reveal whether gaps are narrowing or widening—essential information for targeting health investments equitably.
 
 Three distinct inequality patterns emerge from the data: *top inequality* (only the rich escape), *linear inequality* (wealth-associated gradients), and *bottom inequality* (poorest left behind). Each pattern signals different programming priorities: mass access campaigns, pro-poor targeting, or education initiatives respectively. Tracking these patterns over time reveals whether equity interventions work and whether your health system is progressing toward universal coverage for all population groups, not just national averages.
 
----
+## Equity assessment in CD2030 analytical approach
 
-## Equity Assessment in CD2030 Analytical approach
+### Rationale and approach
 
-### Rationale and Approach
 **Scientific basis for the analysis:**
 
 Household surveys provide critical information on inequalities. Our focus is on three major dimensions of inequality: area of residence, wealth and education.
 
-For area of residence, we focus on urban/rural areas, for wealth, we use household wealth quintiles and for education we focus on education of the mother. Equiplots are used to assess whether the country has made progress since 2010 in reducing the poor rich gap or the gap between women with no education or low education and women with higher education.
+For area of residence, we focus on urban/rural areas, for wealth, we use household wealth quintiles and for education we focus on education of the mother. Equiplots are used to assess whether the country has made progress since 2010 in reducing the poor-rich gap or the gap between women with no education or low education and women with higher education.
 
 For wealth quintiles, it can be assessed what the type of inequality is, as all categories are of the same size. Each pattern requires a different strategy of health programming and targeting:
 
-* **Top inequality (mass deprivation):** If the richest are well ahead of all other wealth quintiles, only the rich escape.
-* **Linear inequality:** If the coverage differences are equidistant, this is a linear pattern where the increasing household wealth is linearly associated with higher coverage.
-* **Bottom inequality (marginalization):** If the poorest are left behind, this means marginalization of the poorest.
-
----
+- **Top inequality (mass deprivation):** If the richest are well ahead of all other wealth quintiles, only the rich escape.
+- **Linear inequality:** If the coverage differences are equidistant, this is a linear pattern where the increasing household wealth is linearly associated with higher coverage.
+- **Bottom inequality (marginalization):** If the poorest are left behind, this means marginalization of the poorest.
 
 <Steps>
 
-### [Interpretation of equiplots](/docs/methods/#interpretation-of-equiplots)
+### [Interpretation of equiplots](/en/docs/reference/rationale/#equity-analysis)
 
-The interpretation should focus on whether inequalities have reduced over time and to what extent global targets for coverage have been met. Consider your audience/s and what key messages and insights you want to get across.
+The interpretation should focus on whether inequalities have reduced over time and to what extent global targets for coverage have been met. Consider your audience(s) and what key messages and insights you want to get across.
 
 <Callout type="info">
+
 The following questions should guide and be answered by the interpretation:
-* What is the level of inequality in the most recent data point?
-* How have inequalities changed over time?
-* Is there any inequality pattern that can be observed?
-* What will be the best approaches to reduce inequalities?
+
+- What is the level of inequality in the most recent data point?
+- How have inequalities changed over time?
+- Is there any inequality pattern that can be observed?
+- What will be the best approaches to reduce inequalities?
+
 </Callout>
 
----
+### Implementation
 
-### [Implementation](/docs/methods/#implementation)
+This will be analyzed within the **National Analysis** -> **Equity Assessment** section in the Shiny app.
 
-This will be analysed within the **National analyses -> Equity Assessment** section in the Shiny App.
+You should see the output below:
 
-You expect to see output as below:
+![Equiplot of Pentavalent 3 coverage by area of residence](/images/national-coverage-equity-area.png)
 
-    ![Equity Area](/images/equity_area.png)
-    ![Equity Wealth Quintile](/images/equity_health.png)
-   ![Equity Education](/images/equity_education.png)
-    
+![Equiplot of Pentavalent 3 coverage by wealth quintile](/images/national-coverage-wealth.png)
+
+![Equiplot of Pentavalent 3 coverage by maternal education](/images/national-coverage-education.png)
 
 </Steps>
-
----

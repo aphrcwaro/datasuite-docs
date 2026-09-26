@@ -1,0 +1,226 @@
+import { Callout } from 'nextra/components'
+
+# Exploiter l'IA pour l'analyse et l'interprétation
+
+L'intelligence artificielle (IA) peut être un outil puissant pour améliorer l'efficacité, la profondeur et l'accessibilité de l'analyse et de l'interprétation des données. Elle peut aider les analystes à explorer rapidement des jeux de données, à repérer des tendances, à résumer des évolutions et à produire des visualisations et des observations initiales. L'IA peut également aider à structurer des explications écrites, à traduire des résultats techniques pour différents publics et à synthétiser des données probantes pertinentes à partir de grands volumes d'informations. Bien utilisée, l'IA permet aux analystes de consacrer moins de temps aux tâches routinières ou chronophages et davantage à la réflexion critique, notamment pour contextualiser les résultats, bâtir une compréhension commune et adapter les messages aux besoins des décideurs.
+
+Toutefois, l'IA doit être utilisée avec discernement, avec un jugement professionnel solide et une responsabilité clairement définie. Elle ne doit pas remplacer le rôle de l'analyste dans l'interprétation des résultats, l'évaluation des limites des données ou la formulation de jugements propres au contexte. Les résultats générés par l'IA peuvent contenir des inexactitudes, négliger des nuances importantes ou refléter des biais présents dans les données sous-jacentes. Par conséquent, ces résultats doivent toujours être examinés, validés et adaptés.
+
+La collaboration entre les producteurs de données, les analystes et les utilisateurs de données pour interpréter les résultats est également essentielle pour bâtir une compréhension commune et une appropriation partagée. Les interprétations, conclusions et recommandations finales doivent toujours s'appuyer sur l'expertise humaine, l'expertise thématique et une bonne compréhension du contexte local. Par conséquent, l'IA doit être considérée comme un outil d'appui qui amplifie et renforce l'analyse et l'interprétation, mais qui ne remplace ni la réflexion critique, ni le jugement, ni la prise de décision partagée.
+
+| **Ce que l'IA peut amplifier** | **Ce que l'IA ne doit pas remplacer** |
+| --- | --- |
+| **_Analyse – Comprendre ce que montrent les données_** | |
+| **Affiner la définition du problème ou de la question** auxquels l'analyse doit répondre | **Formuler le problème ou la question** auxquels l'analyse doit répondre |
+| **Faire ressortir les problèmes de qualité des données** (par exemple, données incomplètes, incohérences, valeurs aberrantes, etc.) | **Évaluer la qualité des données et leur adéquation à l'usage prévu**, y compris la fiabilité, la comparabilité et les limites |
+| **Détection plus rapide et plus poussée des tendances** ; mise en relation de signaux provenant de différentes sources | Décider **quelles tendances rechercher** dans les données et pourquoi |
+| **Comparaisons structurées** dans le temps, entre zones géographiques, entre sous-groupes, etc. | Déterminer **quelles comparaisons sont valides et pertinentes** |
+| Production de **synthèses visuelles claires** | **Choisir les visualisations appropriées** et définir ce qui doit être montré et comparé |
+| **_Interprétation – Comprendre ce que signifient les données_** | |
+| **Proposer des explications possibles** et des hypothèses pour les tendances observées, tester des hypothèses de travail | Mobiliser le contexte, **les connaissances et l'expérience collectives** pour identifier les explications probables ; déterminer si les relations sont causales et exploitables |
+| Présenter des ensembles d'options et de scénarios à prioriser | **Peser les options**, fixer les priorités ; **assumer les décisions** et justifier les choix |
+| **Faire émerger des contre-arguments** et vérifier les biais | **Intégrer les points de vue des parties prenantes**, tenir compte des rapports de pouvoir |
+| **Affiner les messages clés** et adapter la langue, le ton et les formats à différents publics | **Juger quels messages sont les plus appropriés** et utiles pour chaque public, **garantir l'exactitude** |
+
+## Rédiger des prompts efficaces pour l'IA
+
+### Ce qui fait un prompt efficace
+
+- **Précisez l'objectif** – par exemple, identifier des tendances, mettre en évidence des anomalies, interpréter des tendances.
+- **Définissez le public** – par exemple, analyse approfondie pour analystes ou synthèse pour décideurs politiques.
+- **Précisez la géographie, la période et le périmètre** – par exemple, pays, niveau administratif, indicateurs, période.
+- **Fournissez des orientations d'interprétation** – par exemple, mettre en évidence les écarts de genre et d'équité, suggérer des explications possibles.
+- **Précisez le format de sortie** – par exemple, une présentation, un court récit, un tableau comparatif.
+- **Fixez des garde-fous** – par exemple, s'en tenir aux données présentées ; signaler les incertitudes ou les problèmes de qualité des données ; éviter toute spéculation qui dépasse les données probantes ; noter les hypothèses et les inférences.
+
+<Callout type="info">
+
+**Exemple de prompt efficace :**
+
+_En vous appuyant uniquement sur les données fournies, résumez les principales tendances, identifiez les tendances et les valeurs aberrantes au niveau national, et mettez en évidence les différences de genre et d'équité. Distinguez clairement ce que montrent les données (analyse) de ce qu'elles peuvent signifier (interprétation). Identifiez explicitement les limites des données, les hypothèses et les sources d'incertitude._
+
+</Callout>
+
+## Prompts d'IA et analyse de genre
+
+### Utiliser des prompts d'IA pour appuyer l'analyse et l'interprétation de genre
+
+Vous trouverez ci-dessous un exemple de prompt que vous pouvez adapter et coller dans DataSuite Assistant afin de générer une première analyse et interprétation de genre. Veuillez y intégrer les données de votre pays.
+
+Les résultats de l'IA sont conçus uniquement comme un point de départ. Ils mettent en évidence les principales hypothèses et suggèrent des questions de réflexion que votre équipe peut utiliser pour orienter ses discussions. Tous les résultats de l'IA doivent être soigneusement examinés et affinés en fonction des connaissances, de l'expertise et du contexte national de votre équipe, en se concentrant sur les résultats les plus pertinents pour le public visé.
+
+Ces prompts peuvent servir à produire des constats pour votre rapport analytique CAM ou à rédiger un court résumé pour le chartbook.
+
+N'hésitez pas à contacter Lior Idit Miller (lmiller9@worldbank.org) et/ou Elizabeth Hazel (ehazel1@jhu.edu) pour toute question ou demande d'appui lors du CAM ou après. Plus de détails sont disponibles sur le [site web du projet MAGE](https://mageproject.org/).
+
+### Prompt pour les équipes analytiques nationales
+
+En vous appuyant uniquement sur les données ci-dessous, produisez une interprétation de la santé maternelle dans ce pays selon une perspective de genre. L'IA doit fournir une interprétation initiale qui nécessite un examen, une validation et un affinement par l'équipe nationale.
+
+L'interprétation doit être brève et concise. Pour chaque section, l'IA doit signaler les hypothèses et poser des questions de réflexion que les équipes devront examiner à la lumière de leur connaissance du contexte.
+
+**Données du pays :**
+
+- **Nom du pays :** [Ajoutez le nom du pays ici]
+- **Demande de planification familiale satisfaite par des méthodes contraceptives modernes :** [Ajoutez les données du pays ici]
+- **Besoins non satisfaits en matière de planification familiale :** [Ajoutez les données du pays ici]
+- **Couverture de 4 visites CPN ou plus :** [Ajoutez les données du pays ici]
+- **Couverture de la CPN au premier trimestre :** [Ajoutez les données du pays ici]
+- **Couverture des accouchements en établissement :** [Ajoutez les données du pays ici]
+- **Couverture des soins postnatals :** [Ajoutez les données du pays ici]
+- **Taux de césarienne :** [Ajoutez les données du pays ici]
+- **Écart urbain/rural pour les accouchements en établissement (points de pourcentage) :** [Ajoutez les données du pays ici]
+- **Écart selon l'éducation de la mère pour les accouchements en établissement (points de pourcentage) :** [Ajoutez les données du pays ici]
+
+**Format de sortie :**
+
+Créez un titre en gras pour cette section intitulé « Projet d'interprétation pour examen par l'équipe nationale ». Incluez ce texte d'introduction : L'accès aux services essentiels de santé maternelle reflète des inégalités de genre plus larges qui influencent l'autonomie des femmes en matière de santé reproductive et leur capacité à demander des soins.
+
+Organisez les résultats par sous-titre : Planification familiale ; Soins prénatals ; Accouchement et soins postnatals ; Équité. Ensuite, pour chaque sous-titre, incluez « Interprétation », « Hypothèses à valider par l'équipe » et « Questions de réflexion ». Les questions de réflexion doivent se limiter aux hypothèses mentionnées et ne pas dépasser 3.
+
+**Générer des options de messages politiques :**
+
+Sur la base des données fournies, générez 4 à 5 messages politiques illustratifs sous forme de puces que les équipes nationales peuvent utiliser comme points de départ pour la discussion. Ces messages doivent être :
+
+- Directement liés à des données précises fournies
+- Pertinents pour les politiques et potentiellement réalisables
+- Formulés selon une perspective de genre et d'équité
+- Concis (1 à 2 phrases chacun)
+
+Chaque puce doit identifier le constat fondé sur les données et son implication en matière de genre et d'équité. Présentez-les comme des suggestions plutôt que comme des recommandations.
+
+Incluez ce texte de conclusion : Ces exemples sont donnés à titre illustratif et visent à susciter la discussion. Les équipes nationales doivent en valider l'exactitude et la pertinence par rapport aux priorités politiques actuelles, adapter le langage au contexte local, ou élaborer d'autres messages reflétant mieux leurs objectifs stratégiques. Les équipes peuvent sélectionner, combiner, réviser ou remplacer entièrement ces options.
+
+## Exemple de résultat d'IA à partir des données du CAM 2025 du Malawi
+
+<Callout type="warning">
+
+À titre illustratif uniquement.
+
+</Callout>
+
+### Projet d'interprétation pour examen par l'équipe nationale
+
+L'accès aux services essentiels de santé maternelle reflète des inégalités de genre plus larges qui influencent l'autonomie des femmes en matière de santé reproductive et leur capacité à demander des soins.
+
+#### Planification familiale
+
+**Interprétation :** Le Malawi affiche des performances relativement solides en matière d'utilisation de la contraception moderne (80,6 % de la demande satisfaite), ce qui suggère des progrès dans l'accès des femmes à la maîtrise de la fécondité. Cependant, les besoins non satisfaits, qui restent de 20 %, indiquent qu'une femme sur cinq souhaitant retarder ou éviter une grossesse ne peut pas le faire. Cet écart peut refléter des obstacles liés au genre, notamment un pouvoir de décision limité, l'opposition du partenaire ou un accès restreint pour certains groupes tels que les adolescentes et les femmes non mariées.
+
+**Hypothèses à valider par l'équipe :**
+
+- Le chiffre des besoins non satisfaits couvre de manière égale les femmes de tous les groupes d'âge et de tous les statuts matrimoniaux
+- Les taux élevés de satisfaction en matière de contraception reflètent un véritable choix plutôt que des limites dans l'offre de méthodes
+- Le consentement du partenaire ou du conjoint n'est pas un obstacle important à l'accès à la contraception
+
+**Questions de réflexion :**
+
+1. Les 20 % de besoins non satisfaits se concentrent-ils sur des populations spécifiques (adolescentes, femmes rurales, femmes non mariées) qui se heurtent à des obstacles d'accès supplémentaires liés au genre ?
+2. Dans quelle mesure l'implication du partenaire masculin, qu'elle soit favorable ou restrictive, influence-t-elle l'utilisation de la contraception au Malawi ?
+3. Les services de planification familiale actuels sont-ils conçus pour répondre aux besoins des femmes disposant d'une autonomie limitée dans la prise de décision au sein du ménage ?
+
+#### Soins prénatals
+
+**Interprétation :** L'écart important entre la couverture de la CPN au premier trimestre (27,6 %) et celle des 4 visites CPN ou plus (62,4 %) suggère que les femmes entrent tardivement dans les soins pendant leur grossesse. Cette tendance peut refléter des contraintes liées au genre, notamment le contrôle limité des femmes sur les ressources du ménage pour le transport, le manque de temps dû aux responsabilités domestiques ou les normes culturelles concernant l'annonce d'une grossesse. Le début tardif de la CPN s'explique aussi par les options limitées de diagnostic de la grossesse, tant au niveau individuel qu'au niveau du système de santé. Le début tardif de la CPN réduit les possibilités de détection précoce des risques et de préparation à l'accouchement.
+
+**Hypothèses à valider par l'équipe :**
+
+- Le début tardif de la CPN est principalement dû à des obstacles du côté de la demande plutôt qu'à la disponibilité de l'offre
+- Les femmes ont la capacité de demander des soins de manière autonome une fois la grossesse confirmée
+- Le chiffre des 4 visites CPN ou plus reflète la qualité du calendrier de contacts recommandé
+
+**Questions de réflexion :**
+
+1. Quels obstacles spécifiques au genre (dépendance financière, contraintes de temps, besoin d'autorisation) retardent la première visite de CPN des femmes au Malawi ?
+2. Existe-t-il des pratiques culturelles de dissimulation de la grossesse qui affectent de manière disproportionnée le recours précoce des femmes aux soins ?
+3. Comment les responsabilités domestiques et de soins des femmes influencent-elles leur capacité à se rendre à plusieurs visites de CPN ?
+
+#### Accouchement et soins postnatals
+
+**Interprétation :** Le taux élevé d'accouchements en établissement au Malawi (95,2 %) représente une réussite importante pour garantir aux femmes l'accès à une assistance qualifiée à l'accouchement. Le taux de césarienne de 9,6 % se situe légèrement en dessous des fourchettes recommandées par l'OMS (10-15 %), ce qui suggère un accès assez adéquat aux soins obstétricaux d'urgence sans surmédicalisation. La forte couverture des soins postnatals (84,1 %) indique un maintien du lien avec le système de santé après l'accouchement. Ces chiffres suggèrent que les investissements dans le système de santé ont permis de lever avec succès les principaux obstacles d'accès aux soins en établissement.
+
+**Hypothèses à valider par l'équipe :**
+
+- Les taux élevés d'accouchements en établissement reflètent un véritable accès et une véritable qualité plutôt que des politiques coercitives
+- Le taux de césarienne est réparti équitablement entre les groupes de richesse et les zones géographiques
+- Les soins postnatals comprennent un contenu significatif répondant aux besoins de santé de la mère et du nouveau-né
+
+**Questions de réflexion :**
+
+1. Le taux élevé d'accouchements en établissement masque-t-il des variations dans la qualité ou dans les pratiques de soins maternels respectueux ?
+2. La césarienne est-elle accessible de manière équitable aux femmes des zones rurales confrontées à des urgences obstétricales ?
+3. Les CPoN répondent-elles de manière adéquate aux besoins de santé des femmes elles-mêmes, ou sont-elles principalement centrées sur les soins au nouveau-né ?
+
+#### Équité
+
+**Interprétation :** L'écart urbain/rural de 25 points de pourcentage pour les accouchements en établissement révèle une inégalité géographique importante, reflétant probablement les désavantages cumulés des femmes rurales : distance jusqu'aux établissements, coûts de transport et infrastructures limitées. L'écart de 15 points de pourcentage lié à l'éducation montre comment le niveau d'instruction des femmes, lui-même façonné par les normes de genre, influence les résultats de santé maternelle. Les femmes moins instruites peuvent se heurter à des obstacles plus importants, notamment une faible littératie en santé, une autonomie réduite et des contraintes économiques qui s'ajoutent aux inégalités fondées sur le genre.
+
+**Hypothèses à valider par l'équipe :**
+
+- L'écart urbain/rural reflète principalement des facteurs liés à l'offre (disponibilité des établissements) plutôt que des préférences du côté de la demande
+- Le niveau d'instruction sert d'indicateur indirect de l'autonomisation des femmes et de leur capacité de décision
+- Ces écarts sont restés stables et ne sont pas déjà pris en compte par des interventions récentes
+
+**Questions de réflexion :**
+
+1. Pour les femmes rurales qui accouchent en dehors des établissements, quels sont les principaux obstacles liés au genre : distance, coût, autorisation ou préférence pour les soins traditionnels ?
+2. Comment un faible niveau d'instruction se combine-t-il à d'autres dimensions de marginalisation (pauvreté, âge, parité) pour aggraver les obstacles rencontrés par certains groupes de femmes ?
+3. Les programmes existants sont-ils spécifiquement conçus pour atteindre les femmes confrontées à de multiples désavantages qui se recoupent ?
+
+#### Options de messages politiques suggérées
+
+Sur la base des données fournies, les messages politiques illustratifs suivants sont proposés comme points de départ pour la discussion des équipes nationales :
+
+- **Combler l'écart des besoins non satisfaits :** Alors que 20 % des femmes ne peuvent pas accéder à la planification familiale souhaitée malgré une demande satisfaite à 80,6 %, des interventions ciblées répondant aux obstacles liés au genre, notamment l'implication des partenaires et des services adaptés aux adolescents, pourraient accélérer les progrès vers une pleine autonomie reproductive.
+- **La CPN précoce, une priorité d'équité de genre :** L'écart de 35 points de pourcentage entre la CPN au premier trimestre (27,6 %) et la couverture des 4 visites CPN ou plus (62,4 %) suggère que les femmes rencontrent des obstacles en début de grossesse ; agir sur la dépendance financière des femmes et leur manque de temps pourrait améliorer le début précoce des soins.
+- **Consolider les acquis en matière d'accouchement tout en abordant la qualité :** Le taux d'accouchements en établissement de 95,2 % au Malawi témoigne d'un accès solide ; la prochaine étape consiste à garantir des soins respectueux, centrés sur la femme, qui préservent la dignité et l'autonomie pendant l'accouchement.
+- **L'impératif de l'accès des femmes rurales :** L'écart urbain/rural de 25 points de pourcentage pour les accouchements indique que les femmes rurales font face à des obstacles géographiques et de genre cumulés ; des stratégies communautaires et des solutions de transport pourraient répondre à ces désavantages qui se recoupent.
+- **Des approches sensibles à l'éducation :** L'écart de 15 points de pourcentage lié à l'éducation pour les accouchements en établissement suggère que les femmes moins instruites ont besoin d'actions de sensibilisation adaptées, tenant compte de la faible littératie en santé et des contraintes possibles sur la prise de décision autonome.
+
+Ces exemples sont donnés à titre illustratif et visent à susciter la discussion. Les équipes nationales doivent en valider l'exactitude et la pertinence par rapport aux priorités politiques actuelles, adapter le langage au contexte local, ou élaborer d'autres messages reflétant mieux leurs objectifs stratégiques. Les équipes peuvent sélectionner, combiner, réviser ou remplacer entièrement ces options.
+
+## L'assistant IA dans DataSuite [#ai-assistant-in-datasuite]
+
+L'assistant de chat de DataSuite travaille aux côtés des applications RMNCAH, Vaxx et Pooled. Il suit les principes
+ci-dessus : il appuie votre analyse, et votre équipe reste responsable de l'interprétation.
+
+### Ce qu'il sait [#what-it-knows]
+
+- **Où vous êtes.** Il sait sur quelle page de l'application vous vous trouvez, quels graphiques et onglets sont à
+  l'écran et quels filtres vous avez définis ; vous pouvez donc demander « que montre ce graphique ? » ou « sur quelle
+  page suis-je ? ».
+- **Votre jeu de données.** Il répond à partir des résultats enregistrés dans votre jeu de données -- les mêmes
+  chiffres que ceux de l'application -- et non à partir de ses propres estimations. Il peut aussi examiner d'autres
+  niveaux, par exemple quels districts expliquent l'évolution d'un indicateur national.
+- **Cette méthodologie.** Il explique les résultats à l'aide de la méthodologie Countdown présentée sur ce site. Lorsque
+  la méthodologie ne couvre pas une question, il le dit au lieu de combler le vide.
+
+### Ce qu'il vous indique [#what-it-tells-you]
+
+Chaque réponse qui s'appuie sur la méthodologie ou sur vos données se termine par ses **sources** : les sections de la
+documentation utilisées, sous forme de liens, et les données employées -- un graphique à l'écran ou un résultat
+enregistré dans votre jeu de données. Lorsqu'il calcule quelque chose que l'application n'affiche pas, il le précise.
+
+### Ce qu'il peut faire [#what-it-can-do]
+
+- Expliquer un graphique ou une page, et ce que signifient les résultats.
+- Décomposer une évolution par région ou par district.
+- Élaborer un rapport : l'un des rapports standard, ou un rapport personnalisé que vous modifiez ensuite dans la page
+  Rapports.
+- Créer un graphique personnalisé, enregistré avec votre jeu de données et redessiné lorsque les données changent,
+  comme les graphiques de l'application.
+- Ouvrir un autre jeu de données dans son propre onglet, afin que chaque jeu de données garde son propre contexte de
+  conversation.
+
+### Ce qu'il ne fera pas [#what-it-will-not-do]
+
+- **Modifier votre jeu de données**, sauf pour enregistrer un rapport ou un graphique que vous avez demandé.
+- **Changer ce qu'affiche l'application** (aller à une autre page, définir des filtres), sauf si votre paramètre le
+  permet. Le paramètre *AI App Control* propose trois choix : demander à chaque fois (par défaut), autoriser, ou
+  désactivé.
+
+### Où se trouvent ses fichiers [#where-its-files-are]
+
+L'assistant conserve ses fichiers d'analyse à côté de votre jeu de données, dans le dossier `ai` du dossier
+`<nom>.shiny-workspace` du jeu de données : le code qu'il a exécuté, les transcriptions des conversations et les
+décisions qu'il a consignées. Ils restent avec les données qu'ils concernent.

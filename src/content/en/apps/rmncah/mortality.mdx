@@ -1,0 +1,98 @@
+---
+topics: [mortality]
+indicators: [maternal_deaths, stillbirth_f, stillbirth_m, total_stillbirth, neonatal_deaths, instlivebirths]
+reportKinds: [mortality_trend, mortality_region, mortality_plausibility, mortality_ratio, mort_nn_trend]
+cacheMembers: [mortality_summary, mortality_ratios, filter_mortality_summary, un_mortality_estimates, mortality_mapping_years, check_mortality_params]
+appPages: [mortality_institutional, mortality_mapping, mortality_completeness]
+ai:
+  status: draft
+  summary: >-
+    The Mortality pages look at deaths recorded in health facilities: institutional maternal mortality, stillbirths
+    and neonatal deaths before discharge. Institutional Mortality shows rates and plausibility checks, Mortality
+    Mapping maps them, Mortality Completeness estimates how completely deaths are reported. Mortality uses reported
+    deaths without the reporting-rate and outlier adjustment applied to other indicators, but still depends on the
+    selected denominator.
+  rules:
+    - "Expected ranges on the DQA card: fresh stillbirths 30 to 55% of stillbirths; 6 to 15 stillbirths per maternal death; 5 to 10 neonatal deaths per maternal death (#read-the-second-card-institutional-mortality-dqa)"
+    - "Completeness = reported institutional rate / expected institutional rate, under several community-to-facility assumptions and the UN lower bound, median and upper bound (#mortality-completeness)"
+    - "Institutional mortality is not population mortality; a low completeness makes the reported rate a lower bound (#common-pitfalls)"
+    - "The method, definitions and formulas are in Mortality (/en/docs/framework/9-mortality/)"
+  interpretation:
+    - "A very low maternal mortality ratio with a low stillbirth-to-maternal-death ratio can point to under-reporting; fresh-stillbirth shares far outside the range suggest misclassification (#read-the-second-card-institutional-mortality-dqa)"
+    - "High values on the map are not always high mortality: small regions swing widely, and good reporters can look worse (#mortality-mapping)"
+---
+
+import { Steps, Callout } from 'nextra/components'
+
+# Mortality
+
+The **Mortality** group looks at deaths recorded in health facilities: institutional maternal mortality, stillbirths and neonatal deaths before discharge. It has three pages: **Institutional Mortality**, **Mortality Mapping** and **Mortality Completeness**. The method, definitions and formulas are in [Mortality](/en/docs/framework/9-mortality).
+
+<Callout type="warning">
+Mortality figures use the reported numbers of deaths without the reporting-rate and outlier adjustment applied to other indicators, because deaths are few and fluctuate. They still depend on the denominator you selected (live births or births). If a value looks like a data entry error, check it in [Outlier Detection](/en/apps/rmncah/data-quality) and treat it with the methodology's guidance.
+</Callout>
+
+## Institutional Mortality
+
+**Purpose.** Show the level and trend of institutional mortality and check whether it is plausible.
+
+**When to use it.** First, to see the rates; then use the second card to test data quality.
+
+<Steps>
+
+### Open Institutional Mortality
+
+It is under **Mortality** in the **Analysis** group.
+
+### Read the first card, Institutional Mortality
+
+Tabs: **Maternal Mortality** (per 100,000 live births in facilities), **Still Birth Rate** and **Neonatal Deaths**. Dots are regions and the line is the country, by year.
+
+### Read the second card, Institutional Mortality DQA
+
+Tabs: **Fresh Stillbirths** (fresh stillbirths as a percentage of all stillbirths), **SBR to Maternal Death Ratio** (stillbirths per maternal death) and **Neonatal / Maternal Deaths** (institutional neonatal deaths per maternal death). Each chart shows the **Median** and an **Expected range**, and a note under the chart gives the range: 30 to 55 for fresh stillbirths, 6 to 15 for stillbirths per maternal death and 5 to 10 for neonatal deaths per maternal death.
+
+</Steps>
+
+![Institutional maternal mortality by region and year](/images/mortality-institutional-mortality.png)
+
+![Fresh stillbirths as a percentage of total stillbirths](/images/mortality-institutional-freshsbr.png)
+
+**How to interpret.**
+
+- A very low maternal mortality ratio with a low stillbirth-to-maternal-death ratio can point to under-reporting of deaths, not to good care.
+- A share of fresh stillbirths far outside its range suggests that fresh and macerated stillbirths are misclassified.
+- Neonatal deaths here are deaths of live-born babies before discharge, so they understate community neonatal mortality.
+- Regions that sit outside the range in every year are the priority for data review.
+
+## Mortality Mapping
+
+**Purpose.** Map institutional mortality across regions.
+
+**Filters.** **Select Years** (one or several) and **Palette** (Greens, Blues, Reds or Purples; the default is Reds).
+
+Tabs: **Maternal Mortality** and **Still Birth Rate**. Each map shows the values by region for the selected years, which makes geographic clusters visible.
+
+![Institutional maternal mortality by region](/images/mortality-institutional-mmr-byregion.png)
+
+**Pitfall.** High values on a map are not always high mortality. Regions with few births can swing widely, and regions that report well can look worse than regions that under-report.
+
+## Mortality Completeness
+
+**Purpose.** Estimate how completely facilities report deaths, by comparing the reported institutional rate with an expected rate built from UN estimates.
+
+**When to use it.** After the DQA charts, to judge whether reported mortality can be used at all.
+
+Tabs: **Institutional MMR** and **Institutional SBR**. Completeness is the reported institutional rate divided by the expected institutional rate, drawn for several assumptions about how much higher community mortality is than institutional mortality and for the lower bound, median and upper bound of the UN estimate. Use **Generate Report** to open the mortality report.
+
+If external evidence tells you which assumption fits your country, narrow the range accordingly. For example, when community maternal mortality is believed to be 1.5 to 2 times facility mortality, the plausible completeness range is narrower.
+
+![Completeness of facility maternal death reporting](/images/mortality-completeness.png)
+
+Completeness relies on the UN mortality estimates. Use the built-in country data, or upload your own in the Upload Data step of [Getting started](/en/apps/rmncah/getting-started).
+
+## Common pitfalls
+
+- Treating institutional mortality as population mortality. Facilities capture only part of deaths.
+- Comparing regions with very different shares of institutional births.
+- Ignoring completeness. A low completeness means the reported rate is a lower bound.

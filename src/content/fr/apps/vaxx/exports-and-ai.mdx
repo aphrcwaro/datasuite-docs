@@ -1,0 +1,62 @@
+import { Steps } from 'nextra/components'
+
+# Exports, rapports et IA
+
+Cette page couvre ce que vous pouvez extraire de Vaxx App (images, tableaux, jeux de données et rapports) et la façon dont l'assistant de chat de DataSuite peut travailler sur les mêmes données. La planification de la diffusion est abordée dans le **[chapitre sur la diffusion](/fr/docs/framework/12-dissemination)**.
+
+## Graphiques et tableaux
+
+Chaque graphique a une barre d'outils dans l'en-tête de sa carte :
+
+| Outil | Rôle |
+| --- | --- |
+| Demander à l'IA | Emplacement d'une future fonction (« bientôt disponible »). |
+| Options d'affichage | Pour ce graphique uniquement : orientation (Auto ou Inverser les axes), taille du texte, position de la légende (Droite, Bas, Masquée). |
+| Modifier les libellés | Modifiez le titre, le sous-titre, la note, les titres des axes et de la légende de ce graphique. Un champ vide conserve le texte d'origine. S'applique au graphique et à son image téléchargée. Le texte modifié n'est pas traduit. |
+| Options de style | Polices, couleurs, angles, légende, axes, grille et fond de ce graphique. Enregistré avec le jeu de données. |
+| Télécharger le graphique | Enregistre le graphique en image PNG. |
+| Télécharger les données | Enregistre les données du graphique dans un fichier Excel. |
+| Agrandir le graphique | Agrandit le graphique. |
+
+Les tableaux ont un bouton **Télécharger les données** (Excel). Les tableaux dotés d'un sélecteur d'année ou d'indicateur ne filtrent que ce tableau, comme l'indique la mention « Ce tableau uniquement ». La carte du Score Global de Qualité des Données a un bouton pour le graphique et un pour les données.
+
+Les téléchargements suivent ce que vous voyez : indicateur, niveau administratif, région et dénominateur courants. Le nom du fichier contient l'indicateur et le dénominateur, par exemple `penta3_...`.
+
+## Jeux de données
+
+| Téléchargement | Où | Fichier |
+| --- | --- | --- |
+| Télécharger le jeu de données principal | Charger les données, étape Téléverser les données | `master_dataset.dta`, les données fusionnées telles que chargées |
+| Télécharger l'ensemble de données ajusté | Ajustement des données, après **Ajuster les données** | `master_adj_dataset.dta`, les données ajustées |
+
+L'assistant enregistre aussi toute l'analyse sous `nom_vaccine.rds` (voir **[Prise en main](/fr/apps/vaxx/getting-started)**). Ce fichier est le cache utilisé par les outils d'IA ci-dessous et par **[Pooled App](/fr/apps/pooled)**.
+
+## Rapports
+
+La page **Rapports** de la section **Résultats** construit des documents (Word ou PDF) et des présentations (PowerPoint ou PDF) à partir du jeu de données chargé, en partant des rapports standard de cette application ou d'une page vierge. Elle nécessite des données ajustées. Les graphiques et tableaux sont redessinés à partir des données à chaque fois, et chaque rapport est enregistré dans le jeu de données. Le guide complet, avec chaque rapport standard, l'éditeur, les formats d'export et le dépannage, se trouve sur la page [Rapports](/fr/apps/vaxx/reports).
+
+## L'assistant de chat DataSuite
+
+L'assistant de chat de DataSuite travaille sur le même jeu de données enregistré que l'application, sait sur quelle page vous êtes et répond à partir de vos données et de la méthodologie Countdown, en citant ses sources. Ce qu'il peut faire ou non, et les bonnes pratiques, sont présentés sur la page **[Assistant IA](/fr/apps/ai-assistant)**.
+
+<Steps>
+
+### Enregistrer votre travail
+
+Terminez l'assistant pour que le jeu de données soit enregistré comme cache `.rds`, et ajustez les données.
+
+### Poser une question
+
+Par exemple : « Quels districts ont un abandon Penta1 à Penta3 supérieur à 10 % pour la dernière année ? » ou « Explique pourquoi la couverture Rougeole 1 de l'enquête et celle du DHIS2 diffèrent. »
+
+### Vérifier la réponse
+
+L'agent termine sa réponse par ses sources. Comparez ses chiffres aux graphiques de l'application avant de les citer, et consultez le **[chapitre sur l'IA](/fr/apps/ai-assistant)** pour de bonnes requêtes.
+
+</Steps>
+
+## Limites
+
+- La référence des données liste les 18 pages d'analyse de Vaxx (téléversement, qualité des données, préparation, dénominateurs, couverture, inégalités, équité et cibles). Elle ne décrit pas les pages Introduction et Rapports.
+- Les boutons Demander à l'IA des barres d'outils des graphiques ne sont pas encore actifs. Utilisez l'assistant de chat.
+- Les résultats de l'IA doivent être vérifiés par un analyste. Voir **[Exploiter l'IA pour l'analyse et l'interprétation](/fr/apps/ai-assistant)**.

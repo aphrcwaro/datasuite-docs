@@ -1,0 +1,62 @@
+import { Steps, Callout } from 'nextra/components'
+
+# Análise subnacional
+
+A secção **Análise subnacional** repete a análise nacional para as regiões (nível administrativo 1) e os distritos (nível administrativo 2). Tem três páginas: **Cobertura subnacional**, **Desigualdade subnacional** e **Meta de cobertura**. As médias nacionais escondem muitas vezes regiões e distritos fracos, e é aqui que a ação dos programas costuma ser dirigida. Métodos: **[análise subnacional](/pt/docs/framework/7-subnational-analysis)**.
+
+Estas páginas exigem dados ajustados e usam o denominador de vacinação escolhido em **[Denominadores](/pt/apps/vaxx/denominators)**. Os seus separadores de indicadores e o separador Verificação Personalizada funcionam como descrito em **[Cobertura, equidade e metas](/pt/apps/vaxx/coverage-equity-targets)**.
+
+## Cobertura subnacional
+
+Compara as estimativas DHIS2 e de inquérito da cobertura em cada região.
+
+<Steps>
+
+### Definir a geografia
+
+Use **Nível Administrativo** (nível 1 ou 2) e o seletor de região. Escolha o nível 1 sem região para ver as regiões, ou escolha uma região para ver os seus distritos. No nível 2, o seletor também pode escolher um distrito.
+
+### Escolher um indicador
+
+Escolha um separador ou **Verificação Personalizada** para qualquer indicador da Vaxx, incluindo evasão, dose zero e subvacinados.
+
+### Ler o gráfico
+
+O gráfico intitula-se "Estimativas de cobertura para ..." para a área selecionada e mostra a estimativa DHIS2, com as estimativas WUENIC e de inquérito quando existem para essa geografia. A nota indica o denominador.
+
+</Steps>
+
+![Cobertura subnacional](/images/pt-subnational-coverage-targets.png)
+
+As estimativas de inquérito e da WUENIC só aparecem quando existem para a geografia selecionada, pelo que alguns gráficos mostram apenas o DHIS2.
+
+## Desigualdade subnacional
+
+Mostra como a cobertura difere entre as unidades dentro de uma mesma geografia.
+
+- Filtros: **Nível Administrativo** e região. Cada gráfico traça a cobertura de cada unidade subnacional por ano (legenda "Cobertura na unidade subnacional") face à cobertura da região selecionada ou do país (legenda "Cobertura nacional", ou o nome da região seguido de "Cobertura").
+- O subtítulo indica que unidades são apresentadas: "Unidade subnacional: nível admin 1", "nível distrital" ou o nome da região.
+- Os separadores e o separador Verificação Personalizada funcionam como na página nacional.
+
+Use-a para encontrar distritos muito abaixo da sua região e ver se a diferença diminui ao longo do tempo. Um distrito sempre baixo não é o mesmo que um distrito baixo apenas num ano mau: o segundo caso pode ser um problema de dados.
+
+## Meta de cobertura
+
+A parte dos distritos de uma região que cumprem as metas mundiais.
+
+1. Escolha a **região** (esta página não tem filtro de nível administrativo: a unidade é sempre o distrito).
+2. Leia os dois separadores. **Vacina** abrange BCG, Pentavalente 3 e Sarampo 1 (cobertura de pelo menos 80% a nível distrital). **Evasão** abrange Penta 1 para Penta 3 e Penta 3 para Sarampo 1 (evasão inferior a 10%).
+3. O título do gráfico, "Percentagem de distritos em (nome da região) que atingem a meta ...", indica o limite usado. As barras são percentagens por ano e por indicador.
+4. A tabela lista os distritos que cumprem a meta para o indicador e o ano que selecionar. Transfira-a em Excel com o botão de transferência da tabela.
+
+## Interpretação e armadilhas
+
+<Callout type="warning">
+Os denominadores distritais são os menos fiáveis. Um distrito com cobertura acima de 100%, ou que oscila de um ano para o outro, tem mais probabilidade de ter um problema de população ou de notificação do que uma alteração real. Confirme em **[Qualidade dos dados](/pt/apps/vaxx/data-quality)**.
+</Callout>
+
+- Os distritos pequenos dão percentagens instáveis. Leia vários anos, não apenas um.
+- Não compare diretamente gráficos do nível 1 e do nível 2: as unidades diferem em tamanho e fiabilidade.
+- Alterar o nível administrativo repõe a seleção de região.
+
+Seguinte: **[Exportações, relatórios e IA](/pt/apps/vaxx/exports-and-ai)**.

@@ -1,0 +1,77 @@
+import { Steps, Callout } from 'nextra/components'
+
+# Préparation des données
+
+La préparation des données transforme les chiffres notifiés en un jeu de données prêt pour l'analyse. Elle comprend trois pages dans la section **Qualité des données** : **Supprimer les années**, **Ajustement des données** et **Changements d'ajustement**. L'exécution de l'ajustement déverrouille les pages Dénominateurs et Analyse. La méthode, les formules et les règles de gestion figurent dans [Ajustement des données](/fr/docs/framework/3-data-adjustment).
+
+## Supprimer les années
+
+**Objectif.** Écarter les années dont les données ne sont pas fiables, par exemple une année avec presque aucune notification ou une défaillance généralisée du système.
+
+**Quand l'utiliser.** Lorsque les pages de [qualité des données](/fr/apps/rmncah/data-quality) montrent une année manifestement erratique et que vous avez une raison concrète de le croire. Sans raison, conservez l'année.
+
+<Steps>
+
+### Ouvrez Supprimer les années
+
+La page se trouve sous **Qualité des données** dans la barre latérale.
+
+### Sélectionner les années à supprimer
+
+Les pastilles listent les années présentes dans les données. Sélectionnez-en une ou plusieurs.
+
+### Appuyez sur Confirmer la suppression
+
+Le message passe de *Aucune année n'a encore été supprimée* à *Les données des années suivantes ont été supprimées*, suivi des années. Pour rétablir une année, désélectionnez-la et confirmez de nouveau.
+
+</Steps>
+
+![Supprimer les années](/images/fr-dqa-remove-year.png)
+
+## Ajustement des données
+
+**Objectif.** Corriger la notification incomplète et les valeurs aberrantes extrêmes. Les valeurs manquantes et aberrantes sont remplacées par la médiane du district pour la même année. Les effectifs notifiés sont ensuite majorés à l'aide d'un facteur K, qui représente le volume de services dans les établissements qui ne notifient pas par rapport à ceux qui notifient.
+
+<Steps>
+
+### Choisissez les facteurs K
+
+La carte **Facteurs K (Facteurs d'ajustement)** comporte quatre sélecteurs : **Facteur K CPN**, **Facteur K accouchement**, **Facteur K vaccins** et **Facteur K consultations externes**. Chacun propose 0, 0,25, 0,5, 0,75 et 1. La valeur 0 suppose que les établissements qui ne notifient pas n'ont fourni aucun service, 0,25 suppose le quart du volume des établissements qui notifient, et 1 le même volume. Augmentez un facteur lorsque des établissements qui notifient mal, par exemple privés, assurent une grande part de ce service.
+
+### Appuyez sur Ajuster les données
+
+Le message passe de *Jeu de données non ajusté* à *Ajustement en cours ...* puis *Données ajustées*. Faites-le même si vous laissez tous les facteurs à 0, car c'est ce qui déverrouille les pages d'analyse.
+
+### Téléchargez le résultat si nécessaire
+
+**Télécharger l'ensemble de données ajusté** enregistre le jeu de données principal ajusté au format `.dta`.
+
+</Steps>
+
+<Callout type="warning">
+Modifier les facteurs K ou les années supprimées annule le jeu de données ajusté. Appuyez de nouveau sur **Ajuster les données**, faute de quoi les pages d'analyse ne refléteront pas votre modification. Si l'ajustement échoue, le message indique la raison.
+</Callout>
+
+Selon la méthodologie, aucun ajustement n'est appliqué aux districts dont le taux de notification est inférieur à 75 %, car l'imputation y est peu fiable. La méthodologie signale ces années comme peu fiables pour les calculs de couverture.
+
+![Sélection du facteur K](/images/fr-adjustment-kfactor.png)
+
+## Changements d'ajustement
+
+**Objectif.** Voir ce que l'ajustement a fait à chaque indicateur.
+
+**Comment le lire.** La carte **Visualiser les effets des changements** comporte un onglet par indicateur : accouchements en établissement, naissances vivantes en établissement, Pentavalent 1, CPN 1 et consultations externes des moins de 5 ans, plus un onglet **Personnalisé** pour tout autre indicateur. Chaque graphique compare le nombre d'événements *avant* et *après* ajustement pour la complétude et les valeurs aberrantes, par année. Utilisez **Télécharger le graphique** et **Télécharger les données** dans la barre d'outils. **Générer le rapport** ouvre le rapport d'ajustement.
+
+![Avant et après l'ajustement](/images/fr-adjustment-before-after.png)
+
+## Comment interpréter les résultats
+
+- Un faible écart entre les courbes signifie que la notification était déjà presque complète.
+- Un écart important pour une année indique une année de faible notification. Indiquez le facteur K utilisé et la variation en pourcentage qu'il a produite, comme le recommande la méthodologie.
+- L'effet est le plus marqué pour les services dont les taux de notification sont les plus faibles. Comparez avec la page [Taux de notification](/fr/apps/rmncah/data-quality).
+
+## Pièges courants
+
+- Supprimer une année que vous devriez conserver raccourcit silencieusement toutes les tendances ultérieures.
+- Utiliser un facteur K élevé pour masquer une mauvaise notification cache le problème au lieu de le corriger. Documentez votre choix.
+- Les indicateurs de mortalité ne sont pas ajustés pour la notification ni pour les valeurs aberrantes, car les décès sont peu nombreux et volatils (voir [Mortalité](/fr/apps/rmncah/mortality)).

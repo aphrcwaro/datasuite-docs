@@ -1,5 +1,8 @@
 export default {
-  "doc-divider": { "type": "separator", "title": "DOCUMENTATION" },
+  'get-started-divider': {
+    type: 'separator',
+    title: 'GET STARTED'
+  },
   index: {
     title: 'Overview',
     theme: {
@@ -7,22 +10,20 @@ export default {
     }
   },
   setup: {
-    title: "Installing Datasuite",
-     theme: {
+    title: 'Installing DataSuite',
+    theme: {
       layout: 'full'
     }
   },
-  "getting-started":"Getting Started",
- 
-  framework: "Analytical Framework",
-
-  methods: {
-    title: "Methods",
-    display: "hidden"
+  'getting-started': 'Getting Started',
+  'methodology-divider': {
+    type: 'separator',
+    title: 'METHODOLOGY'
   },
-  
-  supporting: {
-    title: "Supporting Resources",
-    display: "hidden"
-  }
+  framework: 'Countdown Methodology',
+  'reference-divider': {
+    type: 'separator',
+    title: 'REFERENCE'
+  },
+  reference: 'Reference'
 }

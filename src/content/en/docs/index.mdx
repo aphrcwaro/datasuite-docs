@@ -1,14 +1,10 @@
----
-title: DataSuite documentation
----
-
-import {HomeCards } from '@/components/HomeCards'
+import { HomeCards } from '@/components/HomeCards'
 
 # DataSuite documentation
 
 Learn how to use DataSuite and explore its modules.
 
-## Getting started
+## Get started
 
 <HomeCards
   items={[
@@ -33,6 +29,54 @@ Learn how to use DataSuite and explore its modules.
   ]}
 />
 
+## Methodology
+
+The Countdown methodology is the analysis itself: each step, how it is done and how to read the results.
+
+<HomeCards
+  items={[
+    {
+      title: 'Countdown methodology',
+      description: 'The analytical framework, step by step, from data quality to dissemination.',
+      href: '/en/docs/framework',
+      icon: 'book'
+    },
+    {
+      title: 'Workflow',
+      description: 'The order of the analysis, from loading data to sharing results.',
+      href: '/en/docs/framework/0-workflow',
+      icon: 'list-ordered'
+    }
+  ]}
+/>
+
+## Reference
+
+Look things up: where a step is in the apps, what an indicator or a term means.
+
+<HomeCards
+  items={[
+    {
+      title: 'Quick reference',
+      description: 'Each analysis step, its method page and where it is in the apps.',
+      href: '/en/docs/reference',
+      icon: 'library'
+    },
+    {
+      title: 'Indicator definitions',
+      description: 'What each indicator measures and how it is calculated.',
+      href: '/en/docs/reference/indicator-definitions',
+      icon: 'symbol-number'
+    },
+    {
+      title: 'Glossary',
+      description: 'The terms the methodology uses, each linked to where it is defined.',
+      href: '/en/docs/reference/glossary',
+      icon: 'symbol-key'
+    }
+  ]}
+/>
+
 ## Learn about the apps
 
 <HomeCards
@@ -51,13 +95,25 @@ Learn how to use DataSuite and explore its modules.
     },
     {
       title: 'RMNCAH',
-      description: 'Analyse reproductive, maternal and child health indicators.',
+      description: 'Analyze reproductive, maternal and child health indicators.',
       href: '/en/apps/rmncah',
       icon: 'person'
+    },
+    {
+      title: 'Pooled',
+      description: 'Combine several countries\' saved datasets and export them.',
+      href: '/en/apps/pooled',
+      icon: 'layers'
+    },
+    {
+      title: 'AI assistant',
+      description: 'What the DataSuite assistant does, and good practice for AI in analysis.',
+      href: '/en/apps/ai-assistant',
+      icon: 'sparkle'
     }
   ]}
 />
 
 ## Privacy
 
-By default, DataSuite auto-updates to new versions, and does not collects usage data and crash report information.
+By default, DataSuite auto-updates to new versions, and does not collect usage data or crash report information.

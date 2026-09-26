@@ -1,0 +1,43 @@
+import { Callout } from 'nextra/components'
+
+# Préparer les caches
+
+Pooled lit les **caches** que les applications par pays sauvegardent. Un cache est un fichier `.rds` qui contient le jeu de données d'un pays ainsi que tout ce qui a été calculé dessus : données ajustées, couverture, résultats de qualité des données et choix faits lors de l'analyse. La qualité des résultats agrégés dépend de caches bien préparés ; quelques minutes de préparation valent la peine.
+
+## Produire un cache
+
+1. Ouvrez la **[RMNCAH App](/fr/apps/rmncah)** (ou la **[Vaxx App](/fr/apps/vaxx)**) et importez les données du pays. Elles proviennent généralement du **[Data Extractor](/fr/apps/data-extractor)**.
+2. Déroulez l'analyse : contrôles de qualité des données, préparation et ajustement des données, sélection des dénominateurs. Voir le **[cadre analytique](/fr/docs/framework/0-workflow)**.
+3. L'application sauvegarde le cache sous forme de fichier `.rds`. Lorsque les données ont été importées depuis un fichier Excel ou Stata, le cache est écrit à côté du fichier source, avec le même nom et l'extension `.rds`. Si ce fichier `.rds` existe déjà, il est rechargé au lieu d'en créer un nouveau.
+
+Répétez l'opération pour chaque pays, avec la même application et le même domaine.
+
+<Callout type="important">
+Terminez les étapes d'ajustement et de sélection des dénominateurs avant d'agréger. Un cache non ajusté se charge quand même, mais Pooled avertit que ses tableaux utilisent des données non ajustées, et sa couverture ne sera pas comparable à celle des pays ajustés.
+</Callout>
+
+## Ce qui rend un cache chargeable
+
+Pour chaque fichier, Pooled l'ouvre comme un cache Countdown du domaine choisi, puis vérifie que :
+
+- Le fichier est lisible par R. Un fichier endommagé, ou enregistré par une version plus récente de R, est signalé comme illisible.
+- Le cache contient un nom de **pays**. Un fichier sans pays ou sans données ajustées est signalé comme « Not a Countdown dataset ».
+- Au moins un tableau peut être construit. Si des tableaux standard ne peuvent pas l'être, un avertissement les énumère.
+
+Le pays et son code ISO3 proviennent du contenu du cache, pas du nom du fichier.
+
+## Nommage et dossiers
+
+- Seuls les fichiers se terminant par `.rds` (majuscules ou minuscules) sont utilisés. Les autres fichiers sont listés comme ignorés.
+- Placez tous les pays à agréger dans un même dossier. Sélectionner un dossier ajoute chaque fichier `.rds` qu'il contient.
+- Gardez un nom clair, de préférence avec la date à la fin, par exemple `Kenya_master_adj_dataset_20250918.rds`. Pooled lit la dernière suite de huit chiffres du nom comme date du fichier (année, mois, jour). À défaut, la date de modification du fichier est utilisée.
+- Gardez **un seul fichier par pays**. Si deux fichiers sélectionnés concernent le même pays (identifié par le code ISO3), Pooled conserve le plus récent et écarte l'autre, avec un motif dans le journal.
+- Retirez du dossier les anciennes versions et les fichiers `.rds` sans rapport, ou décochez-les à l'étape 1.
+
+## Notes de compatibilité
+
+- Tous les caches doivent pouvoir être chargés par la version de `cd2030.core` installée avec DataSuite (le paquet Pooled exige la version 1.1.0 ou ultérieure). Les caches portent une version interne des données ; si un ancien fichier ne se charge pas, ouvrez-le et sauvegardez-le à nouveau dans l'application du pays.
+- Les pays peuvent avoir des tableaux différents. Les tableaux de qualité des données ou d'enquête, par exemple, peuvent n'exister que pour certains pays. Pooled note ce qui manque à chaque fichier et le signale à l'étape de vérification au lieu d'échouer.
+- Si les colonnes d'un tableau diffèrent de type d'un pays à l'autre, elles sont combinées sous forme de texte et une note est écrite dans le journal du fichier.
+
+Suite : **[Utiliser l'application](/fr/apps/pooled/using-the-app)**.

@@ -1,94 +1,74 @@
- Page under development...
+# FAQ
 
-## Frequently Asked Questions (FAQs)
+Cette page est en cours de développement. Les questions fréquemment posées sur DataSuite sont regroupées par thème ci-dessous.
 
+## Téléchargement et installation [#faqs-download-install]
 
+**Q. Quelle est la configuration requise pour DataSuite ?**
 
----
+- Consultez la liste de la [configuration requise](/fr/docs/setup/requirements).
 
-<details>
-  <summary><b>Downloading and installation</b></summary>
+**Q. Comment savoir quelle version de DataSuite j'utilise ?**
 
-  <br/>
+- Dans la barre de menus, cliquez sur **Aide** et sélectionnez **À propos**.
 
-  **Q. What are the system requirements for DataSuite?**  
-  - Check out the list of [System Requirements](/docs/supporting/requirements).
+![Boîte de dialogue À propos de DataSuite affichant le numéro de version](/images/datasuite_version_check.jpg)
 
-  **Q. How do I know which version of `CD2030 Datasuite` I'm running?**  
-  - On the Menu bar, right-click **Help** and select **About**.  
-  ![Version check](/images/datasuite_version_check.jpg)
+**Q. Comment rechercher manuellement les mises à jour de DataSuite ?**
 
-  **Q. How do I manually check for CD2030 Datasuite version updates?**  
-  - On the Menu bar, right-click **Help** and select **Check for Updates**.  
-  ![Update check](/images/datasuite_update_check.jpg)
+- Dans la barre de menus, cliquez sur **Aide** et sélectionnez **Rechercher les mises à jour**.
 
-  **Q. How can I do a 'clean' uninstall of DataSuite?**  
-  - If you want to remove all user data after [uninstalling](/en/docs/setup/uninstall) DataSuite, you can delete the user data folders `DataSuite` and `.datasuite`.  
-  - This returns you to the state before you installed DataSuite. This approach can also be used to reset all settings if you don't want to uninstall DataSuite.  
-  - The folder locations vary depending on your platform:
+![Menu Aide avec l'option Rechercher les mises à jour en surbrillance](/images/datasuite_update_check.jpg)
 
-  **Windows** - Delete `%APPDATA%\DataSuite` and `%USERPROFILE%\.datasuite`.
+**Q. Comment effectuer une désinstallation « complète » de DataSuite ?**
 
-</details>
+- Si vous souhaitez supprimer toutes les données utilisateur après avoir [désinstallé](/fr/docs/setup/uninstall) DataSuite, vous pouvez supprimer les dossiers de données utilisateur `DataSuite` et `.datasuite`.
+- Cela vous ramène à l'état antérieur à l'installation de DataSuite. Cette approche peut également servir à réinitialiser tous les paramètres si vous ne souhaitez pas désinstaller DataSuite.
+- L'emplacement des dossiers varie selon votre plateforme :
+  - **Windows** : supprimez `%APPDATA%\DataSuite` et `%USERPROFILE%\.datasuite`.
 
----
+## DHIS2 Data Extractor
 
-<details>
-  <summary><b>DHIS2 Data Extractor</b></summary>
+**Q. Échec de la connexion**
 
-  <br/>
+- Vérifiez l'URL DHIS2.
+- Vérifiez vos identifiants.
 
-  **Q. Login fails**  
-  - Verify DHIS2 URL  
-  - Check credentials  
+**Q. Erreurs d'exportation**
 
-  **Q. Export errors**  
-  - Check file permissions  
-  - Review mapping config  
+- Vérifiez les autorisations d'accès aux fichiers.
+- Examinez la configuration du mappage.
 
-</details>
+## Configuration de l'analyse
 
----
+**Q. Chargement des données : fichier Excel ou RDS ?**
 
-<details>
-  <summary><b>Analysis set up</b></summary>
+- Premier chargement.
+- Chargements suivants.
 
-  <br/>
+**Q. Je ne trouve pas le fichier de cache généré**
 
-  **Q. Loading Data: Excel OR RDS file?**  
-  - First time loading  
-  - Subsequent loading  
+- Assurez-vous d'avoir [correctement configuré votre dossier de travail](/fr/docs/framework/1-analysis-setup#working-folder). Recherchez ensuite un fichier dont le nom respecte le format `Countryname_yyyymmddhhms.rds`. Exemple : `Somalia_202605241128.rds`.
 
-  **Q. I cannot locate the generated cache file**  
-  - Ensure that you have [properly set up your working folder](/docs/framework/1-analysis-setup/#working-folder). Then look for a file that has a name in the format `Countryname_yyyymmddhhms.rds`. Example: `Somalia_202605241128.rds`.
+**Q. Où puis-je obtenir les paramètres de couverture nationaux/infranationaux ?**
 
-  **Q. Where do I get the national/subnational coverage parameters**  
-  - TBC  
+- À confirmer.
 
-  **Q. Where are the other datasets being used in the coverage analysis?**  
-  - TBC  
+**Q. Où se trouvent les autres jeux de données utilisés dans l'analyse de la couverture ?**
 
-  **Q. Export errors**  
-  - Check file permissions  
-  - Review mapping config  
+- À confirmer.
 
-  **Q. No outputs are generated after uploading data.**  
-  - Data adjusted?  
-  - All analyis parameters well set up?  
+**Q. Aucun résultat n'est généré après le téléchargement des données**
 
-</details>
+- Les données ont-elles été ajustées ?
+- Tous les paramètres d'analyse sont-ils correctement configurés ?
 
----
+## Génération de rapports
 
-<details>
-  <summary><b>Report generation</b></summary>
+**Q. Quels sont les types de rapports attendus ?**
 
-  <br/>
+- Rapports de synthèse, fiches récapitulatives d'une page, rapports infranationaux.
 
-  **Q. What are the expected report types?**  
-  - Synthesis reports, one pagers, subnational reports  
+**Q. Dans quelles sections puis-je télécharger les rapports ?**
 
-  **Q. In which sections can I download the reports**  
-  - Download sections  
-
-</details>
+- Sections de téléchargement.

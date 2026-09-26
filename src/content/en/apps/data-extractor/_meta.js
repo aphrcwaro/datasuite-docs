@@ -1,5 +1,4 @@
 export default {
-
   index: {
     title: 'Overview',
     theme: {
@@ -8,12 +7,12 @@ export default {
       toc: true
     }
   },
-  "dhis2-login": {
+  'dhis2-login': {
     title: 'DHIS2 Login',
     theme: {
-        layout: 'full',
-        copyPage: false,
-        toc: false
+      layout: 'full',
+      copyPage: false,
+      toc: true
     }
   },
   mapping: {
@@ -21,15 +20,15 @@ export default {
     theme: {
       layout: 'full',
       copyPage: false,
-      toc: false
+      toc: true
     }
   },
-  "data-download": {
+  'data-download': {
     title: 'Downloading Data',
     theme: {
       layout: 'full',
       copyPage: false,
-      toc: false
+      toc: true
     }
-  },
+  }
 }

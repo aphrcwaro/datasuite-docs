@@ -1,0 +1,78 @@
+---
+topics: [pooling]
+appPages: [build, explore_open]
+ai:
+  status: draft
+  summary: >-
+    The Pooled App combines the saved datasets (.rds caches) of several countries into one file, then lets you
+    explore, compare and export the pooled tables. It does not replace the country apps, where data is uploaded,
+    checked, adjusted and analysed; it starts from what they saved.
+  rules:
+    - "Use RMNCAH or Vaxx to analyse one country's facility data; use Pooled to put countries side by side or extract tables for several countries (#when-to-use-pooled)"
+    - "All files should be of one domain, RMNCAH or Immunization (VAXX), chosen once before loading; up to 2 GB of selected files at a time (#requirements)"
+    - "Pooled keeps only the analysis tables; the raw facility-by-month data is left out (#requirements)"
+    - "It needs a set of .rds files, one per country, saved by the RMNCAH or Vaxx App (#requirements)"
+  interpretation:
+    - "Build pooled file is a four-step wizard: Choose datasets, Loading files, Review results, File created (#how-the-app-is-organised)"
+    - "Explore pooled data offers pages such as Parameters, Overall score, Indicator coverage, Coverage, Mortality, Service utilization and Compare countries (#how-the-app-is-organised)"
+---
+
+import { Callout } from 'nextra/components'
+
+# Pooled App overview
+
+The Pooled App combines the saved datasets of several countries into one file, then lets you explore, compare and export the pooled tables. It is the DataSuite tool for **regional and multi-country analysis**: instead of opening each country one at a time, you load their saved caches together and work on all of them side by side.
+
+Pooled does not replace the country apps. The **[RMNCAH App](/en/apps/rmncah)** and the **[Vaxx App](/en/apps/vaxx)** are where a country's data is uploaded, checked, adjusted and analysed. Pooled starts from what those apps have already saved.
+
+## When to use Pooled
+
+| You want to... | Use |
+| --- | --- |
+| Check, adjust and analyse one country's facility data | RMNCAH or Vaxx App |
+| Put several countries side by side (coverage, sources, trends) | Pooled App |
+| Get one table containing all countries for a regional report | Pooled App |
+| Extract only some countries, years or columns for another tool | Pooled App |
+
+## Requirements
+
+- A set of `.rds` files, one per country, saved by the RMNCAH or Vaxx App. See **[Preparing caches](/en/apps/pooled/preparing-caches)**.
+- All files should belong to the same **data domain**: RMNCAH or Immunization (VAXX). You choose the domain once, before loading.
+- Enough memory: the app accepts up to 2 GB of selected files at a time, and reads them one after another.
+
+<Callout type="info">
+Pooled keeps only the analysis tables (coverage, data quality, denominators, surveys and so on). The raw facility-by-month data is left out, which keeps the pooled file small.
+</Callout>
+
+## How the app is organised
+
+The sidebar has one section, **Pooling**, with two parts.
+
+**Build pooled file** is a four-step wizard:
+
+1. Choose datasets: the domain, what to include, and the files.
+2. Loading files: each file is read and reported as loaded, loaded with a warning, or failed.
+3. Review results: decide what to do about warnings and failures.
+4. File created: download the pooled `.rds` or go straight to exploring it.
+
+**Explore pooled data** opens a pooled file and offers these pages:
+
+| Page | What it shows |
+| --- | --- |
+| Open a file | Use the file you just built, or upload one made earlier |
+| Parameters | The settings and survey values each country brings |
+| Overall score | The data quality score of each country |
+| Indicator coverage | Coverage by indicator: national, Admin 1, District |
+| Coverage | Coverage with each country's chosen denominators |
+| Mortality | Facility maternal and newborn deaths (RMNCAH domain) |
+| Service utilization | Outpatient and inpatient use, children under 5 (RMNCAH domain) |
+| Compare countries | Continuum of care, source triangulation, level and change, trends |
+| All datasets | Every table in the file, including those without their own page |
+| Extract a piece | Pull chosen datasets, countries, years and columns into a new file |
+
+## Where to go next
+
+- **[Preparing caches](/en/apps/pooled/preparing-caches)**: producing and organising the `.rds` files.
+- **[Using the app](/en/apps/pooled/using-the-app)**: a step-by-step walkthrough, with the meaning of the output and common errors.
+- **[Exporting results](/en/apps/pooled/exporting-results)**: CSV, Excel, zip and pooled files, and using the DataSuite chat assistant.
+- **[CD2030 analytical framework](/en/docs/framework)**: the methodology behind the indicators, denominators and data quality score.

@@ -2,7 +2,6 @@ import { DownloadGrid } from '@/components/DownloadGrid'
 import styles from './downloads.module.css'
 import { Callout } from 'nextra/components'
 
-
 <div className={styles.cdsuiteGrid}>
 
 # Download DataSuite
@@ -23,7 +22,7 @@ The standalone analytics suite. Free and built on open source.
         ],
         links: [
           {
-            label: 'User Installer', 
+            label: 'User Installer',
             options: [
               { label: 'x64', href: '/en/thank-you?dv=win64user' }
             ]
@@ -49,26 +48,22 @@ The standalone analytics suite. Free and built on open source.
 
 ## Installer options [#installer-options]
 
-DataSuite provides both Windows **user** and **system** level setups, as well as **portable (.zip)** installation option.
+DataSuite provides both Windows **user** and **system** level setups, as well as a **portable (.zip)** installation option.
 
-| Setup Type | Description |
-|------------|-------------|
-| User setup | **Recommended for most users.** Installs to your Local AppData folder without requiring administrator privileges. Enables seamless background updates. 
+| Setup type | Description |
+| --- | --- |
+| User setup | **Recommended for most users.** Installs to your Local AppData folder without requiring administrator privileges. Enables seamless background updates. |
 | System setup | Installs to `Program Files` and requires administrator privileges. Available to all system users, but updates also require elevation. Use this if you need multi-user access. |
-| Portable mode| Installs as a standalone folder that can be moved between environments. All DataSuite data stays within the folder. Ideal for portable usage across different machines. See [Portable mode](/en/docs/supporting/portable) for setup instructions. |
+| Portable mode | Installs as a standalone folder that can be moved between environments. All DataSuite data stays within the folder. Ideal for portable usage across different machines. See [Portable mode](/en/docs/setup/portable) for setup instructions. |
 
 <Callout type="info">
-   **Note:** 
-   - Using the `Portable mode` the user cannot save their
+
+Portable mode is only supported on the Windows `.zip` archive, which does not support automatic updates.
+
 </Callout>
 
+## Updating DataSuite
 
+When a new version of CD2030 DataSuite is released with new features and important bug fixes, you will be prompted to install the new release when you launch the DataSuite app.
 
-
-## Updating `CD2030 Datasuite`
-
-When a new version of CD2030 DataSuite is released with new features and important bug fixes you will be prompted to 
-install the new release when you launch the `CD2030 Datasuite` App.
-
-You can also manually check for updates by running **Help** > **Check for Updates** on Windows.
-
+You can also manually check for updates by selecting **Help** > **Check for Updates** on Windows.

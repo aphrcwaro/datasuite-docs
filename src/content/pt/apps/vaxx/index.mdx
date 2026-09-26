@@ -1,1 +1,69 @@
-# Page under development and coming up soon
+import { Callout } from 'nextra/components'
+
+# Visão geral da Vaxx App
+
+A Vaxx App é a aplicação do DataSuite dedicada à **cobertura vacinal e às desigualdades**. Recebe os dados de rotina das unidades de saúde de um país (geralmente exportados com o **[Data Extractor](/pt/apps/data-extractor)**), verifica-os e ajusta-os, escolhe um denominador e estima a cobertura das vacinas de rotina, a evasão, as crianças de dose zero e as crianças subvacinadas. A cobertura pode ser comparada com as estimativas de inquéritos e da WUENIC, acompanhada ao longo do tempo, desagregada por região, distrito, área de residência, educação materna e riqueza, e confrontada com as metas mundiais.
+
+Segue o mesmo **[quadro analítico CD2030](/pt/docs/framework/0-workflow)** da **[RMNCAH App](/pt/apps/rmncah)**, mas centrado na imunização: a lista de indicadores, os dados de inquérito, os fatores de ajuste e as páginas de análise são específicos da vacinação.
+
+## A quem se destina
+
+- Gestores de programas de vacinação e analistas nacionais do PAV que precisam de estimativas de cobertura de rotina verificadas e comparáveis com os inquéritos.
+- Analistas do trabalho Countdown sobre cobertura vacinal e desigualdades, a nível nacional e distrital.
+- Quem precisar de um relatório em Word, PDF ou PowerPoint sobre a qualidade dos dados e a cobertura de um país.
+
+## O que precisa
+
+| Elemento | Detalhes |
+| --- | --- |
+| Dados das unidades de saúde | Um ficheiro por país: `.xls`, `.xlsx`, `.dta` ou `.rds`. Um livro do Excel precisa de uma folha `Admin_data`, uma folha `Population_data`, uma folha `Reporting_completeness` e pelo menos uma folha `Service_data`. Consulte **[Primeiros passos](/pt/apps/vaxx/getting-started)**. |
+| Valores de cobertura do inquérito | A cobertura do inquérito nacional mais recente para CPN1, parto institucional, BCG, Penta1, Penta3, VOP1, VOP3 e Sarampo 1, mais as taxas nacionais usadas nos denominadores. Introduzidos ou pré-preenchidos no assistente de carregamento. |
+| Ficheiros de inquérito (opcional) | Ficheiros `.dta` nacionais, regionais, por área, por educação materna e por quintil de riqueza, necessários para a Avaliação de equidade e para as comparações com o inquérito. |
+| Ficheiro de forma (opcional) | Usado nos mapas. Está incluído um ficheiro de forma padrão do país. |
+| DataSuite | A aplicação corre dentro do DataSuite. Abra-a a partir da página Início. |
+
+## Em que a Vaxx difere da RMNCAH App
+
+| | Vaxx App | RMNCAH App |
+| --- | --- | --- |
+| Foco | Imunização | Saúde reprodutiva, materna, neonatal, infantil e do adolescente |
+| Indicadores | CPN1, partos e nascidos vivos institucionais, BCG, VIP 1-2, Sarampo 1-2, VOP 1-3, Pentavalente 1-3, PCV 1-3, Rotavírus 1-2, mais os indicadores derivados de evasão, dose zero e subvacinação | CPN (incluindo CPN4, TIP, sífilis, ferro e ácido fólico, teste de VIH), parto, cesariana, baixo peso à nascença, cuidados pós-natais, nados-mortos e óbitos, um pequeno conjunto de vacinas, consultas externas e internamentos |
+| Serviços da Taxa de notificação | CPN, Parto institucional, Vacinação | Acrescenta as consultas externas |
+| Verificações de consistência | CPN1 e Penta1, Penta1 e Penta3, VOP1 e VOP3, VIP1 e VIP2, mais um par personalizado | CPN1 e Penta1, Penta1 e Penta3, mais um par personalizado |
+| Fatores de ajuste | Fatores K de CPN, Parto e Vacinas | Acrescenta um fator K de consultas externas |
+| Denominador | Um denominador de vacinação | Um denominador materno e um de vacinação |
+| Metas de cobertura | Vacina (BCG, Penta3, Sarampo 1) e Evasão | CPN4, nascidos vivos institucionais e vacina |
+| Dados de inquérito no assistente | Coberturas vacinais, CPN1 e parto institucional | Acrescenta CPN4, cesariana, baixo peso à nascença e estimativas de mortalidade da ONU |
+| Páginas adicionais | Nenhuma | Análise bayesiana, continuum de cuidados, planeamento familiar, mortalidade, utilização de serviços, índice curativo SMI, desempenho do sistema de saúde, setor privado |
+| Cópia guardada | `nome_vaccine.rds` | Uma cópia guardada para o seu próprio grupo de indicadores |
+
+<Callout type="warning">
+Um conjunto de dados guardado por uma aplicação não pode ser aberto na outra. Abrir um `.rds` da RMNCAH na Vaxx é recusado, com uma mensagem a indicar que o conjunto de dados foi criado para outro grupo de indicadores.
+</Callout>
+
+## Navegar na aplicação
+
+A navegação à esquerda tem cinco secções. As páginas de Denominadores, Análise e Resultados só ficam disponíveis depois de os dados serem ajustados.
+
+| Secção | Páginas | Guia |
+| --- | --- | --- |
+| Início | Introdução, Carregar dados | **[Primeiros passos](/pt/apps/vaxx/getting-started)** |
+| Qualidade dos dados | Taxa de notificação, Detecção de valores discrepantes, Dados Ausentes, Consistência interna, Pontuação Geral da Qualidade dos Dados | **[Qualidade dos dados](/pt/apps/vaxx/data-quality)** |
+| Qualidade dos dados (preparação) | Remover anos, Ajuste de dados, Alterações no ajuste de dados | **[Preparação dos dados](/pt/apps/vaxx/data-preparation)** |
+| Denominadores | Tendência populacional, Seleção do denominador | **[Denominadores](/pt/apps/vaxx/denominators)** |
+| Análise, Nacional | Cobertura nacional, Meta de cobertura, Desigualdade nacional (Dados de rotina, Dados de inquérito) | **[Cobertura, equidade e metas](/pt/apps/vaxx/coverage-equity-targets)** |
+| Análise, Subnacional | Cobertura subnacional, Desigualdade subnacional, Meta de cobertura | **[Análise subnacional](/pt/apps/vaxx/subnational)** |
+| Resultados | Relatórios | **[Relatórios](/pt/apps/vaxx/reports)**, **[Exportações, relatórios e IA](/pt/apps/vaxx/exports-and-ai)** |
+
+Cada página tem um cabeçalho com o título da página e um botão Obter Ajuda que abre o capítulo de ajuda correspondente. As páginas associadas a um relatório padrão mostram também um botão Gerar Relatório. O cabeçalho inclui ainda o seletor de idioma (inglês, francês, português).
+
+## Ordem recomendada
+
+1. Carregue os dados e conclua o assistente.
+2. Reveja as cinco páginas de qualidade dos dados e decida se deve remover anos.
+3. Ajuste os dados. Isto desbloqueia as restantes páginas.
+4. Compare os denominadores e escolha um.
+5. Consulte a cobertura nacional, as desigualdades, a equidade e as metas, e depois as páginas subnacionais.
+6. Crie um relatório (ver [Relatórios](/pt/apps/vaxx/reports)).
+
+Os métodos de cada passo estão descritos nos capítulos do quadro: **[qualidade dos dados](/pt/docs/framework/2-data-quality-assessment)**, **[ajuste](/pt/docs/framework/3-data-adjustment)**, **[denominadores](/pt/docs/framework/4-denominator-selection)**, **[cobertura](/pt/docs/framework/5-coverage-estimation)**, **[equidade](/pt/docs/framework/6-equity-analysis)** e **[análise subnacional](/pt/docs/framework/7-subnational-analysis)**. As definições dos indicadores estão em **[Definições de indicadores](/pt/docs/reference/indicator-definitions)**.

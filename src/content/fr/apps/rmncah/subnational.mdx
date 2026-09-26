@@ -1,0 +1,68 @@
+import { Steps, Callout } from 'nextra/components'
+
+# Analyse infranationale
+
+Les moyennes nationales masquent les régions et les districts laissés de côté. Le groupe **Analyse infranationale** comprend trois pages : **Couverture infranationale**, **Inégalités infranationales** et **Objectif de couverture**. Elles utilisent les mêmes données ajustées et les mêmes dénominateurs que les pages nationales (voir [Dénominateurs](/fr/apps/rmncah/denominators)). La méthode est décrite dans [Analyse infranationale](/fr/docs/framework/7-subnational-analysis).
+
+<Callout type="info">
+Attendez-vous à plus de bruit au niveau des districts qu'au niveau des régions. Les petits effectifs, les déplacements de patients entre districts et les lacunes de notification produisent des valeurs invraisemblablement élevées ou basses.
+</Callout>
+
+## Couverture infranationale
+
+**Objectif.** Comparer les estimations de couverture DHIS2 et d'enquête pour chaque région ou district.
+
+**Quand l'utiliser.** Après la Couverture nationale, pour trouver les zones qui se cachent derrière le chiffre national.
+
+<Steps>
+
+### Ouvrez Couverture infranationale
+
+Elle se trouve dans le groupe **Analyse infranationale**.
+
+### Définissez la géographie
+
+Choisissez le **Niveau administratif**. Avec **Niveau administratif 1**, un sélecteur de région apparaît, et avec **Niveau administratif 2**, un sélecteur de district, afin de cibler une zone.
+
+### Choisissez un onglet d'indicateur
+
+**CPN 4 visites**, **Naissances vivantes en établissement**, **Faible poids à la naissance**, **Pentavalent 3**, **Rougeole 1**, **Projection PF** ou **Personnalisé** pour tout autre indicateur.
+
+### Lisez le graphique
+
+Le titre nomme la zone, par exemple les estimations de couverture de la région sélectionnée. Les courbes montrent l'estimation DHIS2 et l'estimation de l'enquête, et la légende indique le dénominateur utilisé. **Télécharger le graphique** et **Télécharger les données** se trouvent dans la barre d'outils.
+
+</Steps>
+
+![Couverture infranationale](/images/Subnational_coverage.png)
+
+**Comment interpréter.** Comparez la région à la ligne nationale. Un point d'enquête éloigné de la courbe DHIS2 dans une région signale souvent un problème de dénominateur ou de notification dans cette région. Vérifiez le [Taux de notification](/fr/apps/rmncah/data-quality) de la région avant de tirer des conclusions.
+
+## Inégalités infranationales
+
+**Objectif.** Montrer l'écart de chaque région (ou de chaque district d'une région) par rapport au chiffre national ou régional, année par année.
+
+**Filtres.** **Niveau administratif** et, au niveau administratif 1, un sélecteur de région pour cibler une région.
+
+Les onglets sont **CPN 4 visites**, **Naissances vivantes en établissement**, **Faible poids à la naissance**, **Pentavalent 3**, **Rougeole 1** et **Personnalisé**. Chaque point est une unité infranationale (**Couverture au niveau infranational**) et la ligne est la couverture nationale ou, lorsqu'une région est choisie, la couverture régionale. Une dispersion qui se réduit au fil des années signifie que les inégalités diminuent. La méthodologie résume cette dispersion par l'écart absolu médian par rapport à la médiane (MADM).
+
+![Inégalités infranationales](/images/subnational-coverage-inequality.png)
+
+## Objectif de couverture
+
+**Objectif.** Montrer le pourcentage de districts d'une région qui atteignent un objectif de couverture, par année.
+
+**Filtre.** Un sélecteur de région. Le niveau est fixé aux districts.
+
+Les onglets sont **CPN 4 visites**, **Naissances vivantes en établissement** et **Vaccin**. Les objectifs sont les mêmes que sur la page nationale : au moins 70 % pour la CPN4, au moins 80 % pour les naissances vivantes en établissement et les vaccins, et un abandon inférieur à 10 %. Un tableau sous le graphique liste les districts qui atteignent l'objectif pour l'indicateur choisi dans son contrôle *Ce tableau uniquement*.
+
+L'objectif est que tous les districts atteignent la cible ; un pourcentage plus élevé signifie donc moins d'inégalités.
+
+![Couverture infranationale par rapport aux objectifs](/images/fr-subnational-coverage-targets.png)
+
+## Pièges courants
+
+- Lire une année de district isolément. Regardez la tendance et les années voisines.
+- Comparer des régions de populations très différentes sans vérifier les numérateurs.
+- Oublier que le dénominateur sélectionné pour tout le pays détermine aussi les résultats régionaux. Si une région semble impossible (au-dessus de 100 %), testez un autre dénominateur avant de la signaler.
+- Classer les zones sur la seule dernière année. Combinez niveau, évolution dans le temps, complétude de la notification et qualité du dénominateur, comme le suggère la [méthodologie](/fr/docs/framework/5-coverage-estimation).

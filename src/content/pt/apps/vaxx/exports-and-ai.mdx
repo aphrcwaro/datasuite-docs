@@ -1,0 +1,62 @@
+import { Steps } from 'nextra/components'
+
+# Exportações, relatórios e IA
+
+Esta página cobre o que pode retirar da Vaxx App (imagens, tabelas, conjuntos de dados e relatórios) e como o assistente de conversa do DataSuite pode trabalhar sobre os mesmos dados. O planeamento da disseminação é tratado no **[capítulo sobre disseminação](/pt/docs/framework/12-dissemination)**.
+
+## Gráficos e tabelas
+
+Cada gráfico tem uma barra de ferramentas no cabeçalho do seu cartão:
+
+| Ferramenta | O que faz |
+| --- | --- |
+| Perguntar à IA | Espaço reservado para uma funcionalidade futura ("em breve"). |
+| Opções de visualização | Apenas para este gráfico: orientação (Auto ou Trocar eixos), tamanho do texto, posição da legenda (Direita, Em baixo, Oculta). |
+| Editar rótulos | Altere o título, o subtítulo, a nota, os títulos dos eixos e da legenda deste gráfico. Um campo vazio mantém o texto original. Aplica-se ao gráfico e à sua imagem transferida. O texto editado não é traduzido. |
+| Opções de estilo | Fontes, cores, ângulos, legenda, eixos, grelha e fundo deste gráfico. Guardado com o conjunto de dados. |
+| Baixar Gráfico | Guarda o gráfico como imagem PNG. |
+| Baixar Dados | Guarda os dados do gráfico num ficheiro Excel. |
+| Expandir gráfico | Amplia o gráfico. |
+
+As tabelas têm um botão **Baixar Dados** (Excel). As tabelas com um seletor de ano ou de indicador filtram apenas essa tabela, como indica a nota "Somente esta tabela". O cartão da Pontuação Geral da Qualidade dos Dados tem um botão para o gráfico e outro para os dados.
+
+As transferências seguem o que vê: o indicador, o nível administrativo, a região e o denominador atuais. O nome do ficheiro inclui o indicador e o denominador, por exemplo `penta3_...`.
+
+## Conjuntos de dados
+
+| Transferência | Onde | Ficheiro |
+| --- | --- | --- |
+| Baixar Conjunto de Dados Principal | Carregar dados, passo Carregar dados | `master_dataset.dta`, os dados combinados tal como carregados |
+| Baixar Conjunto de Dados Ajustado | Ajuste de dados, depois de **Ajustar Dados** | `master_adj_dataset.dta`, os dados ajustados |
+
+O assistente guarda também toda a análise como `nome_vaccine.rds` (consulte **[Primeiros passos](/pt/apps/vaxx/getting-started)**). Esse ficheiro é a cache usada pelas ferramentas de IA abaixo e pela **[Pooled App](/pt/apps/pooled)**.
+
+## Relatórios
+
+A página **Relatórios**, na secção **Resultados**, constrói documentos (Word ou PDF) e apresentações (PowerPoint ou PDF) a partir do conjunto de dados carregado, começando pelos relatórios padrão desta aplicação ou por uma página em branco. Exige dados ajustados. Os gráficos e as tabelas são redesenhados a partir dos dados de cada vez, e cada relatório fica guardado no conjunto de dados. O guia completo, com cada relatório padrão, o editor, os formatos de exportação e a resolução de problemas, está na página [Relatórios](/pt/apps/vaxx/reports).
+
+## O assistente de conversa do DataSuite
+
+O assistente de conversação do DataSuite trabalha sobre o mesmo conjunto de dados guardado que a aplicação, sabe em que página está e responde a partir dos seus dados e da metodologia Countdown, indicando as fontes. O que pode e não pode fazer, e as boas práticas, estão na página **[Assistente de IA](/pt/apps/ai-assistant)**.
+
+<Steps>
+
+### Guardar o seu trabalho
+
+Conclua o assistente para que o conjunto de dados seja guardado como cache `.rds` e ajuste os dados.
+
+### Fazer uma pergunta
+
+Por exemplo: "Que distritos têm evasão de Penta1 para Penta3 acima de 10% no último ano?" ou "Explica por que razão a cobertura de Sarampo 1 do inquérito e a do DHIS2 diferem."
+
+### Verificar a resposta
+
+O agente termina a resposta com as suas fontes. Compare os números com os gráficos da aplicação antes de os citar e consulte o **[capítulo sobre IA](/pt/apps/ai-assistant)** para boas instruções.
+
+</Steps>
+
+## Limites
+
+- A referência de dados lista as 18 páginas de análise da Vaxx (carregamento, qualidade dos dados, preparação, denominadores, cobertura, desigualdade, equidade e metas). Não descreve as páginas Introdução e Relatórios.
+- Os botões Perguntar à IA das barras de ferramentas dos gráficos ainda não estão ativos. Use o assistente de conversa.
+- Os resultados da IA têm de ser verificados por um analista. Consulte **[Aproveitar a IA para análise e interpretação](/pt/apps/ai-assistant)**.

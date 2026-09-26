@@ -1,0 +1,62 @@
+import { Steps, Callout } from 'nextra/components'
+
+# Analyse infranationale
+
+La section **Analyse infranationale** reprend l'analyse nationale pour les régions (niveau administratif 1) et les districts (niveau administratif 2). Elle comporte trois pages : **Couverture infranationale**, **Inégalités infranationales** et **Objectif de couverture**. Les moyennes nationales masquent souvent des régions et des districts en difficulté : c'est ici que l'action des programmes est généralement ciblée. Méthodes : **[analyse infranationale](/fr/docs/framework/7-subnational-analysis)**.
+
+Ces pages nécessitent des données ajustées et utilisent le dénominateur de vaccination choisi dans **[Dénominateurs](/fr/apps/vaxx/denominators)**. Leurs onglets d'indicateurs et l'onglet Vérification personnalisée fonctionnent comme décrit dans **[Couverture, équité et cibles](/fr/apps/vaxx/coverage-equity-targets)**.
+
+## Couverture infranationale
+
+Compare les estimations DHIS2 et d'enquête de la couverture dans chaque région.
+
+<Steps>
+
+### Définir la zone géographique
+
+Utilisez **Niveau administratif** (niveau 1 ou 2) et le sélecteur de région. Choisissez le niveau 1 sans région pour voir les régions, ou choisissez une région pour voir ses districts. Au niveau 2, le sélecteur peut aussi désigner un district.
+
+### Choisir un indicateur
+
+Choisissez un onglet, ou **Vérification personnalisée** pour tout indicateur de Vaxx, y compris l'abandon, zéro dose et sous-vaccinés.
+
+### Lire le graphique
+
+Le graphique s'intitule « Estimations de la couverture pour ... » pour la zone sélectionnée et montre l'estimation DHIS2, avec les estimations WUENIC et d'enquête lorsqu'elles existent pour cette zone. La note indique le dénominateur.
+
+</Steps>
+
+![Couverture infranationale](/images/fr-subnational-coverage-targets.png)
+
+Les estimations d'enquête et de WUENIC n'apparaissent que lorsqu'elles existent pour la zone sélectionnée : certains graphiques n'affichent donc que le DHIS2.
+
+## Inégalités infranationales
+
+Montre comment la couverture diffère entre les unités d'une même zone.
+
+- Filtres : **Niveau administratif** et région. Chaque graphique trace la couverture de chaque unité infranationale par année (légende « Couverture à l'unité infranationale ») par rapport à la couverture de la région sélectionnée ou du pays (légende « Couverture nationale », ou le nom de la région suivi de « Couverture »).
+- Le sous-titre indique quelles unités sont affichées : « Unité infranationale : niveau admin 1 », « niveau du district » ou le nom de la région.
+- Les onglets et l'onglet Vérification personnalisée fonctionnent comme sur la page nationale.
+
+Utilisez-la pour repérer les districts très en dessous de leur région et voir si l'écart se réduit avec le temps. Un district toujours bas n'est pas comparable à un district bas seulement une mauvaise année : ce second cas peut être un problème de données.
+
+## Objectif de couverture
+
+La part des districts d'une région qui atteignent les cibles mondiales.
+
+1. Choisissez la **région** (cette page n'a pas de filtre de niveau administratif : l'unité est toujours le district).
+2. Lisez les deux onglets. **Vaccin** couvre BCG, Pentavalent 3 et Rougeole 1 (couverture d'au moins 80 % au niveau du district). **Abandon** couvre Penta 1 à Penta 3 et Penta 3 à Rougeole 1 (abandon inférieur à 10 %).
+3. Le titre du graphique, « Pourcentage de districts dans (nom de la région) atteignant la cible ... », indique le seuil utilisé. Les barres sont des pourcentages par année et par indicateur.
+4. Le tableau liste les districts qui atteignent la cible pour l'indicateur et l'année que vous sélectionnez. Téléchargez-le au format Excel avec le bouton de téléchargement du tableau.
+
+## Interprétation et pièges
+
+<Callout type="warning">
+Les dénominateurs des districts sont les moins fiables. Un district dont la couverture dépasse 100 %, ou qui oscille d'une année à l'autre, a plus de chances de présenter un problème de population ou de notification qu'un vrai changement. Recoupez avec la **[Qualité des données](/fr/apps/vaxx/data-quality)**.
+</Callout>
+
+- Les petits districts donnent des pourcentages bruités. Lisez plusieurs années, pas une seule.
+- Ne comparez pas directement les graphiques des niveaux 1 et 2 : les unités diffèrent par la taille et la fiabilité.
+- Changer le niveau administratif réinitialise la sélection de région.
+
+Suite : **[Exports, rapports et IA](/fr/apps/vaxx/exports-and-ai)**.

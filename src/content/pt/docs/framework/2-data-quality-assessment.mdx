@@ -1,89 +1,102 @@
-import { Steps } from 'nextra/components'
-import { Callout } from 'nextra/components'
-import { Bleed } from 'nextra/components'
+import { Callout, Steps } from 'nextra/components'
 
-## Visão Geral
+# Avaliação da qualidade dos dados
 
-Dados de unidades de saúde de alta qualidade formam a base de estimativas de cobertura confiáveis. 
-Este módulo avalia sistematicamente os dados das unidades de saúde considerando as métricas padrão de qualidade de dados que incluem: 
-- Completude dos relatórios  
-- Detecção de valores atípicos (outliers)  
-- Consistência interna  
-- Dados ausentes  
-- Cálculos de razões  
-- Pontuação geral de qualidade  
+## Visão geral
 
-## Métricas de DQA (Avaliação da Qualidade dos Dados) na abordagem analítica CD2030
+Dados de unidades de saúde de alta qualidade constituem a base de estimativas de cobertura fiáveis.
+Este módulo avalia sistematicamente os dados das unidades de saúde considerando as métricas padrão de qualidade de dados, que incluem:
+
+- Completude dos relatórios
+- Deteção de valores atípicos
+- Consistência interna
+- Dados ausentes
+- Cálculo de rácios
+- Pontuação geral de qualidade
+
+## Métricas de DQA na abordagem analítica do CD2030
+
 <Steps>
 
-###  [Completude dos relatórios](/docs/methods/#reporting-completeness)
-Para leitura adicional sobre a base científica e os métodos usados para avaliar a completude dos relatórios, acesse **[Completude dos relatórios: fundamentação](/docs/methods/#reporting-completeness)**
+### [Completude dos relatórios](/pt/docs/reference/rationale#reporting-completeness)
+
+Para mais informação sobre a base científica e os métodos usados para avaliar a completude dos relatórios, aceda a **[Completude dos relatórios: fundamentação](/pt/docs/reference/rationale#reporting-completeness)**.
+
 | Métrica | Numerador | Denominador | Interpretação |
-|----------|----------|-------------|---------------|
-| **1a** | Número de relatórios mensais de unidades recebidos | Total de relatórios esperados *(12 × número de unidades)* | ≥90% é bom; afeta a interpretação de tendências |
+| --- | --- | --- | --- |
+| **1a** | Número de relatórios mensais das unidades recebidos | Total de relatórios esperados *(12 × número de unidades)* | ≥90% é bom; afeta a interpretação de tendências |
 | **1b** | Distritos com completude de relatórios ≥90% | Total de distritos | Identifica distritos com baixo desempenho |
-| **1c** | Distritos sem valores ausentes em todos os formulários | Total de distritos | Identifica a distribuição de  |
+| **1c** | Distritos sem valores ausentes em todos os formulários | Total de distritos | Identifica a distribuição de valores ausentes entre os distritos |
 
 <Callout type="info">
-As estatísticas para **1a** e **1b** baseiam-se na média de quatro formulários de relatório (CPN, parto, vacinação, consultas externas/OPD).
+
+As estatísticas para **1a** e **1b** baseiam-se na média de quatro formulários de notificação (CPN, parto, vacinação, consultas externas/OPD).
+
 </Callout>
 
-    - *insert output screenshot Output*
- ---
+![Mapa de calor da taxa de notificação subnacional](/images/pt-dqa-reporting-rate.png)
 
-### [Detecção de valores atípicos](/docs/methods/#outlier-detection)
+![Taxa de notificação nacional e unidades subnacionais com baixa notificação](/images/pt-dqa-national-repoting.png)
+
+### [Deteção de valores atípicos](/pt/docs/reference/rationale#outlier-detection)
+
 Um valor atípico extremo é definido como um **valor mensal que é 5 vezes o desvio absoluto da mediana (MAD) em relação ao valor mediano mensal de um determinado ano**.
-Para leitura adicional sobre a base científica e os métodos usados para avaliar e ajustar os valores atípicos extremos, acesse **[Valores atípicos extremos: fundamentação](/docs/methods/#outlier-detection)**
+Para mais informação sobre a base científica e os métodos usados para avaliar e ajustar os valores atípicos extremos, aceda a **[Valores atípicos extremos: fundamentação](/pt/docs/reference/rationale#outlier-detection)**.
 
 | Métrica | Numerador | Denominador | Interpretação |
-|----------|----------|-------------|---------------|
+| --- | --- | --- | --- |
 | **2a** | Valores mensais não classificados como atípicos | Total de valores mensais | ≥99% esperado |
 | **2b** | Distritos sem valores atípicos | Total de distritos | ≥90% esperado |
 
-<Callout type="warning" >
-Os valores atípicos são identificados estatisticamente. Avalie sempre se os desvios refletem eventos do mundo real (por exemplo, campanhas) ou erros de dados.
+<Callout type="warning">
+
+Os valores atípicos são identificados estatisticamente. Avalie sempre se os desvios refletem acontecimentos do mundo real (por exemplo, campanhas) ou erros de dados.
+
 </Callout>
 
-    - *insert output screenshot Output*
- ---
-### [Consistência interna](/docs/methods/#internal-consistency)
-- A consistência interna avalia o grau de alinhamento dos indicadores relacionados no conjunto de dados, com base nas relações esperadas de epidemiologia e de prestação de serviços. 
-- Dentro da estrutura analítica CD2030, esta etapa complementa outras métricas de DQA avaliando se os indicadores que estão biológica ou programaticamente interligados seguem padrões plausíveis.
-- Ao contrário das verificações de indicadores isolados, a consistência interna centra-se nas **relações entre indicadores**, garantindo que os valores relatados refletem percursos realistas de prestação de serviços ao longo do continuum de cuidados.
+![Mapa de calor da deteção de valores atípicos por região e ano](/images/pt-dqa-outlier-detection.png)
 
-As seguintes métricas são consideradas ao avaliar a consistência interna:
+### [Consistência interna](/pt/docs/reference/rationale#internal-consistency)
+
+- A consistência interna avalia o grau de alinhamento dos indicadores relacionados no conjunto de dados, com base nas relações epidemiológicas e de prestação de serviços esperadas.
+- Na estrutura analítica do CD2030, este passo complementa as outras métricas de DQA, avaliando se os indicadores que estão biológica ou programaticamente interligados seguem padrões plausíveis.
+- Ao contrário das verificações de indicadores isolados, a consistência interna concentra-se nas **relações entre indicadores**, garantindo que os valores notificados refletem percursos realistas de prestação de serviços ao longo do contínuo de cuidados.
+
+São consideradas as seguintes métricas na avaliação da consistência interna:
 
 | Métrica | Numerador | Denominador | Interpretação |
-|----------|----------|-------------|---------------|
-| **3a** | CPN1 relatado | Penta1 relatado | Intervalo de proporção esperado |
-| **3b** | Penta1 relatado | Penta3 relatado | Com base nos dados do inquérito |
-| **3c** | Distritos dentro da proporção esperada | Total de distritos | Intervalo aceitável mais amplo |
+| --- | --- | --- | --- |
+| **3a** | CPN1 notificado | Penta1 notificado | Intervalo de rácio esperado |
+| **3b** | Penta1 notificado | Penta3 notificado | Com base nos dados do inquérito |
+| **3c** | Distritos dentro do rácio esperado | Total de distritos | Intervalo aceitável mais amplo |
 | **3d** | Distritos dentro do intervalo esperado | Total de distritos | O mesmo que acima |
 
-    - *insert output screenshot Output*
- ---
+![Verificações de consistência entre CPN1 e Penta1 por ano](/images/pt-dqa-conistency-checks.png)
 
 ### Dados ausentes
+
 - A confirmar (TBC)
-    - *insert output screenshot Output*
- ---
-### Cálculos de razões
+
+![Mapa de calor de dados ausentes por indicador e região](/images/pt-dqa-missingness.png)
+
+### Cálculo de rácios
+
 - A confirmar (TBC)
-    - *insert output screenshot Output*
- ---
+
+![Gráficos dos rácios CPN1/Penta1 e Penta1/Penta3 por ano](/images/pt-dqa-internal-consistency.png)
+
 ### Pontuação geral de qualidade
 
 | Métrica | Numerador | Denominador | Interpretação |
-|----------|----------|-------------|---------------|
-| **Pontuação Geral** | Calculado automaticamente | Calculado automaticamente | Média dos indicadores **1a, 1b, 2a, 2b, 3c, 3d** |
+| --- | --- | --- | --- |
+| **Pontuação geral** | Calculado automaticamente | Calculado automaticamente | Média dos indicadores **1a, 1b, 2a, 2b, 3c, 3d** |
 
- *insert output screenshot Output*
-<Callout type="success">
-O Datasuite calcula automaticamente a pontuação geral de qualidade dos dados.
+![Tabela da pontuação geral de qualidade dos dados por ano](/images/pt-dqa-overall-score.png)
+
+<Callout type="info">
+
+O DataSuite calcula automaticamente a pontuação geral de qualidade dos dados.
+
 </Callout>
 
-
- ---
 </Steps>
-
----

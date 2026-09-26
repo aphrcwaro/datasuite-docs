@@ -1,0 +1,96 @@
+import { Steps, Callout } from 'nextra/components'
+
+# Cobertura, equidade e metas
+
+A secção **Análise nacional** tem quatro páginas: **Cobertura nacional**, **Meta de cobertura** e, em **Desigualdade nacional**, as páginas **Dados de rotina** (desigualdade entre regiões) e **Dados de inquérito** (a Avaliação de equidade). Todas usam o denominador de vacinação escolhido em **[Denominadores](/pt/apps/vaxx/denominators)** e exigem dados ajustados. As versões subnacionais estão em **[Análise subnacional](/pt/apps/vaxx/subnational)**. Métodos: **[cobertura](/pt/docs/framework/5-coverage-estimation)** e **[equidade](/pt/docs/framework/6-equity-analysis)**.
+
+## Indicadores disponíveis
+
+Cada página mostra uma faixa de separadores, um indicador por separador. A maioria das faixas termina com um separador **Verificação Personalizada** que abre um seletor **Indicador** com todos os indicadores de análise da Vaxx:
+
+- CPN 1, Partos institucionais e Nascidos vivos em estabelecimento de saúde.
+- BCG, VIP 1 e 2, Sarampo 1 e 2, VOP 1 a 3, Pentavalente 1 a 3, PCV 1 a 3, Rotavírus 1 e 2.
+- Evasão: de Penta 1 para Penta 3, de Penta 1 para Sarampo 1, de Penta 3 para Sarampo 1, de Sarampo 1 para Sarampo 2. A evasão é o número de crianças que receberam a primeira dose menos as que receberam a segunda, dividido pelo primeiro, em percentagem.
+- **Dose zero** e **Subvacinados**, derivados de Penta1 e Penta3.
+
+## Cobertura nacional
+
+Compara as estimativas DHIS2 e de inquérito da cobertura nacional para cada indicador.
+
+<Steps>
+
+### Escolher um separador de indicador
+
+Escolha um indicador principal ou **Verificação Personalizada** para qualquer outro.
+
+### Ler o gráfico
+
+O gráfico intitula-se "Estimativas de cobertura nacional para ..." e traça por ano a **Estimativa DHIS2**, a **Estimativa WUENIC** e a **Estimativa de inquérito** com o seu **IC de 95%**. A nota indica o denominador usado nos valores DHIS2.
+
+### Usar as ferramentas do gráfico
+
+Cada gráfico tem uma barra de ferramentas para editar rótulos, alterar a visualização ou o estilo, transferir a imagem e transferir os dados. Consulte **[Exportações, relatórios e IA](/pt/apps/vaxx/exports-and-ai)**.
+
+</Steps>
+
+![Cobertura nacional](/images/pt-national-coverage.png)
+
+Interpretação: linhas DHIS2 que acompanham os pontos do inquérito e da WUENIC apoiam o denominador escolhido. Uma diferença persistente, ou um DHIS2 acima de 100%, aponta para um problema de denominador ou de numerador. Volte à **[qualidade dos dados](/pt/apps/vaxx/data-quality)** e aos **[denominadores](/pt/apps/vaxx/denominators)**.
+
+## Desigualdade nacional: Dados de rotina
+
+Mostra como a cobertura nacional difere entre regiões, com base nos dados das unidades de saúde.
+
+- Separadores e separador Verificação Personalizada como acima. Cada gráfico mostra a cobertura de cada região (nível administrativo 1) por ano (subtítulo "Unidade subnacional: nível admin 1") face à linha nacional.
+- Os filtros **Selecionar Anos** e **Paleta** (Verdes, Azuis, Vermelhos, Roxos) comandam o cartão **Mapeamento subnacional**, onde cada separador desenha um mapa intitulado "Distribuição de ... por Regiões" a partir dos dados DHIS2. O mapa acompanha o separador selecionado no cartão de desigualdade.
+
+Uma grande dispersão entre regiões significa que a média nacional esconde áreas fracas. Analise-as em **[Análise subnacional](/pt/apps/vaxx/subnational)**.
+
+![Desigualdade nacional](/images/pt-national-coverage-inequality.png)
+
+## Desigualdade nacional: Dados de inquérito (Avaliação de equidade)
+
+Compara a cobertura entre grupos de agregados familiares a partir dos ficheiros de inquérito carregados no assistente.
+
+<Steps>
+
+### Escolher o Tipo de Equidade
+
+**Área de Residência** (Rural, Urbano), **Educação Materna** (Sem educação, Primária, Secundária ou superior) ou **Quintil de Riqueza**.
+
+### Escolher o indicador
+
+Os separadores são **Pentavalente 3**, **Sarampo 1** e as evasões de Penta 1 para Penta 3 e de Penta 3 para Sarampo 1, mais **Verificação Personalizada**.
+
+### Ler o equiplot
+
+O gráfico intitula-se "Desigualdades na cobertura de ... por ..." e mostra a cobertura de cada grupo. A distância entre os pontos é a desigualdade.
+
+</Steps>
+
+Se um ficheiro de inquérito não tiver sido carregado, são usados os dados de referência incorporados. Carregue os ficheiros do país no assistente **[Carregar dados](/pt/apps/vaxx/getting-started)** para uma avaliação real.
+
+## Meta de cobertura
+
+Acompanha a parte das unidades subnacionais que cumprem as metas mundiais. Nesta página, use **Nível Administrativo** (nível 1 ou 2). Dois separadores:
+
+| Separador | Indicadores | Uma unidade cumpre a meta quando |
+| --- | --- | --- |
+| **Vacina** | BCG, Pentavalente 3, Sarampo 1 | A cobertura é de pelo menos 80% na região ou no distrito |
+| **Evasão** | Penta 1 para Penta 3, Penta 3 para Sarampo 1 | A evasão é inferior a 10% |
+
+O título do gráfico indica o limite aplicado, e as barras mostram a percentagem de unidades que o cumprem por ano e por indicador. A tabela abaixo do gráfico (**Taxa alvo por região** no nível 1, **Cobertura Subnacional** no nível 2) lista as unidades que atingem o limite vacinal para o indicador e o ano escolhidos nos seus próprios seletores. Pode ser transferida em Excel.
+
+<Callout type="warning">
+Uma percentagem crescente de unidades a cumprir a meta só é boa notícia se a cobertura não exceder níveis plausíveis. Verifique as unidades muito acima de 100%: o denominador é suspeito. Na evasão, lembre-se de que menos é melhor e leia o título do gráfico para ver o sentido.
+</Callout>
+
+![Cobertura face às metas](/images/pt-national-coverage-targets.png)
+
+## Armadilhas
+
+- As páginas de cobertura e de metas mudam quando muda o denominador. Registe o denominador usado num resultado (a nota do gráfico indica-o).
+- Os gráficos de equidade vêm de ficheiros de inquérito e podem ter vários anos. Compare-os com as tendências de rotina, não com um único ano de dados DHIS2.
+- Dose zero e Subvacinados dependem do denominador ainda mais do que a cobertura por dose.
+
+Seguinte: **[Análise subnacional](/pt/apps/vaxx/subnational)**.

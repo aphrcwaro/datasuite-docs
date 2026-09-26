@@ -1,0 +1,67 @@
+---
+topics: [pooling, ai-analysis]
+appPages: [explore_extract, explore_all]
+ai:
+  status: draft
+  summary: >-
+    Exporting from Pooled: one table as CSV or Excel, or a selected piece of the pooled file as CSV, Excel or a
+    smaller pooled file. Missing values are written as empty cells.
+  options:
+    - "Quick downloads: CSV or Excel of the table in view, with the Countries and Years filters applied (#quick-downloads-of-one-table)"
+    - "Extract a piece: CSV (one file, or a .zip of one per dataset), Excel (one sheet per dataset), or Pooled file (.rds) (#extract-a-piece)"
+  rules:
+    - "In Extract a piece, choosing nothing means all; country, year and area columns are always kept (#extract-a-piece)"
+    - "The pooled .rds is a plain R list, not a country cache: domain, creation time, app version, countries, left_out files with reasons, datasets and a log (#what-is-inside-the-pooled-file)"
+    - "For issues with one country, fix its cache in the country app, save, and rebuild the pooled file (#next-steps-for-analysis)"
+    - "Compare results with the methods of the framework, including National coverage (/en/docs/framework/5-coverage-estimation/)"
+    - "The chat assistant works on one country's dataset open in RMNCAH or Vaxx; for the pooled file, ask it to read the file and analyse its datasets directly, and check against downloaded tables (#using-the-datasuite-chat-assistant)"
+---
+
+import { Callout } from 'nextra/components'
+
+# Exporting results
+
+Pooled can export a single table as CSV or Excel, or a selected piece of the pooled file in several formats. Values that are missing are written as empty cells.
+
+## Quick downloads of one table
+
+- On a dataset page, use **Download** and choose **CSV file** or **Excel file**. The export is the table for the tab you are viewing, with the Countries and Years filters applied.
+- On **All datasets**, the **CSV** and **Excel** buttons export the table currently selected in the list, also filtered.
+
+| Format | File name | Contents |
+| --- | --- | --- |
+| CSV | the table name and date, for example `Coverage_-_National_2026-01-31.csv` | One table, header row, one row per country, year and area |
+| Excel | `pooled_rmncah_2026-01-31.xlsx` | One sheet named after the table |
+
+## Extract a piece
+
+Use **Extract a piece** when you need several tables, or only part of them. The chips at the top choose **Datasets**, **Countries** and **Years**; choosing nothing means all. Under **Columns**, keep **All columns** or choose the columns per dataset: country, year and area columns are always kept. The **Preview** shows up to six rows per dataset.
+
+The **Get the piece** card counts datasets, countries, years and rows, then offers three formats:
+
+| Format | Result |
+| --- | --- |
+| CSV | One CSV for one dataset, or a `.zip` with one CSV per dataset for several |
+| Excel | One workbook with one sheet per dataset |
+| Pooled file | A smaller `.rds` you can reopen in Pooled |
+
+Files are named with the domain and date, for example `pooled_rmncah_2026-01-31_piece.zip` or `_piece.xlsx`. Sheet names are limited to 31 characters and the characters not allowed in Excel sheet names are replaced by spaces. Excel sheets have a bold header row, a frozen first row and automatic column widths. **Explore this piece** opens the result in the app. **Start again** resets all filters and columns.
+
+<Callout type="info">
+Excel and CSV files do not contain the build log. To keep the list of countries, the files that were left out and the log, keep the pooled `.rds` from **Build pooled file**.
+</Callout>
+
+## What is inside the pooled file
+
+The `.rds` is a plain R list, not a country cache. It holds `domain`, the creation time, the app version, a table of `countries` (country, ISO3, source file, warning), a table of `left_out` files with reasons, `datasets` (one table per dataset) and a time-stamped `log`. Tables are ordered as in the app's dataset list: Parameters and score, Indicator coverage, Coverage, Mortality, Service utilization, Data quality, Denominators, Estimates and surveys, Equity, Health systems.
+
+## Next steps for analysis
+
+- Read the CSV or Excel file in R, Stata, Python or Excel. `country` and `iso3` identify the country, and coverage columns already share names across countries.
+- For a full analysis in R, read the pooled file with `readRDS()` and work on `pooled$datasets`.
+- Compare your results with the methods in the **[analytical framework](/en/docs/framework)**, including **[national coverage](/en/docs/framework/5-coverage-estimation)**.
+- For issues with a single country, return to its cache in the **[RMNCAH App](/en/apps/rmncah)**, fix it, save, and rebuild the pooled file.
+
+## Using the DataSuite chat assistant
+
+The DataSuite chat assistant works on a single country's dataset open in the RMNCAH or Vaxx app; see the **[AI assistant](/en/apps/ai-assistant)** page. The pooled file has a different structure (a list of tables): ask the assistant to read the file and analyse its `datasets` directly, and check the results against the tables you downloaded.

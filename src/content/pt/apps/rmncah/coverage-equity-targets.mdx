@@ -1,0 +1,96 @@
+import { Steps } from 'nextra/components'
+
+# Cobertura, equidade e metas
+
+Estas quatro páginas encontram-se no grupo **Análise nacional** da barra lateral: **Cobertura nacional**, **Meta de cobertura**, **Desigualdade nacional** (dados de rotina) e **Avaliação de equidade** (dados de inquérito). Todas exigem que o Ajuste de dados tenha sido executado e utilizam os denominadores escolhidos na [Seleção do denominador](/pt/apps/rmncah/denominators). Os métodos estão em [Cobertura nacional](/pt/docs/framework/5-coverage-estimation) e [Avaliação de equidade](/pt/docs/framework/6-equity-analysis).
+
+## Cobertura nacional
+
+**Finalidade.** Comparar a cobertura baseada nas unidades de saúde com as estimativas do inquérito e do WUENIC para cada indicador.
+
+**Quando utilizar.** Depois de escolhidos os denominadores, para avaliar se as tendências das unidades de saúde são credíveis.
+
+<Steps>
+
+### Abra a Cobertura nacional
+
+Não há filtros. A página utiliza o nível nacional e os denominadores que selecionou.
+
+### Escolha um separador de indicador
+
+Separadores: **4 Consultas de Pré-natal**, **Nascidos vivos em estabelecimento de saúde**, **Baixo peso ao nascer**, **Pentavalente 3**, **Sarampo 1**, **Projeção de PF** (ver [Análise avançada](/pt/apps/rmncah/advanced-analysis)) e **Personalizado** para qualquer outro indicador.
+
+### Leia o gráfico
+
+As linhas são a **Estimativa DHIS2**, a **Estimativa WUENIC** e a **Estimativa de inquérito** com o respetivo **IC de 95%**, a partir de 2010. A legenda indica o denominador utilizado. Utilize **Baixar Gráfico** ou **Baixar Dados** na barra de ferramentas.
+
+</Steps>
+
+![Cobertura nacional](/images/pt-national-coverage.png)
+
+**Como interpretar.** Se os valores das unidades de saúde e do inquérito estiverem próximos, a confiança na tendência é maior. Valores das unidades de saúde muito acima do inquérito sugerem um problema de denominador ou notificação excessiva. Valores muito abaixo sugerem notificação incompleta, dados do setor privado em falta ou atividades de proximidade não registadas. Uma cobertura acima de 100% é um sinal de problema de qualidade dos dados, não de bom desempenho.
+
+## Meta de cobertura
+
+**Finalidade.** Mostrar a percentagem de regiões ou distritos que atingem uma meta de cobertura, por ano.
+
+**Filtro.** **Nível Administrativo** (Nível Administrativo 1 ou Nível Administrativo 2).
+
+Os separadores são **4 Consultas de Pré-natal**, **Nascidos vivos em estabelecimento de saúde** e **Vacina** (BCG, Pentavalente 3, Sarampo 1 e as taxas de abandono). O título do gráfico indica a regra, por exemplo a percentagem de unidades que atingem a meta. Os limites aplicados a regiões e distritos são:
+
+| Indicador | Regra |
+| --- | --- |
+| CPN4 | Cobertura de pelo menos 70% |
+| Nascidos vivos em estabelecimento de saúde | Cobertura de pelo menos 80% |
+| Vacinas | Cobertura de pelo menos 80% |
+| Abandono vacinal | Abandono inferior a 10% |
+
+Por baixo do gráfico, uma tabela, **Taxa alvo por região** (Nível Administrativo 1) ou **Cobertura Subnacional >90%** (Nível Administrativo 2), lista as unidades que atingem a meta para o indicador escolhido no controlo *Apenas esta tabela*. O seu título menciona 90%, mas o cálculo aplica os limites acima. Percentagens mais elevadas significam menor desigualdade geográfica. A mesma página para regiões e distritos está descrita em [Análise subnacional](/pt/apps/rmncah/subnational).
+
+![Cobertura face às metas](/images/pt-national-coverage-targets.png)
+
+## Desigualdade nacional (dados de rotina)
+
+**Finalidade.** Ver quanto as regiões diferem do valor nacional, com base nos dados das unidades de saúde.
+
+O cartão **Desigualdade nacional** tem um separador por indicador predefinido (4 Consultas de Pré-natal, Nascidos vivos em estabelecimento de saúde, Baixo peso ao nascer, Pentavalente 3, Sarampo 1) mais **Personalizado**. Cada ponto é uma região de Nível Administrativo 1; a linha é a **Cobertura nacional**. Uma grande dispersão dos pontos significa elevada desigualdade.
+
+Por baixo, escolha **Selecionar Anos** e uma **Paleta** (Verdes, Azuis, Vermelhos ou Roxos) para o cartão **Mapeamento subnacional**, que mapeia a cobertura de cada região nos anos selecionados.
+
+![Desigualdade nacional](/images/pt-national-coverage-inequality.png)
+
+## Avaliação de equidade (dados de inquérito)
+
+**Finalidade.** Mostrar a desigualdade entre grupos da população, com base em dados de inquéritos aos agregados familiares.
+
+**Quando utilizar.** Quando foram carregados ficheiros de inquérito (ou os integrados cobrem o seu país) e pretende saber quem está a ser deixado para trás.
+
+<Steps>
+
+### Escolha o Tipo de Equidade
+
+**Área de Residência** (Rural, Urbano), **Educação Materna** (Sem educação, Primária, Secundária ou superior) ou **Quintil de Riqueza**.
+
+### Escolha um separador de indicador
+
+4 Consultas de Pré-natal, Nascidos vivos em estabelecimento de saúde, Baixo peso ao nascer, Pentavalente 3, Sarampo 1 ou **Personalizado**.
+
+### Leia o equiplot
+
+Cada grupo tem a sua própria linha ao longo do tempo, com a tendência nacional para comparação. **Gerar Relatório** abre o relatório de desigualdade nacional.
+
+</Steps>
+
+Para a riqueza, leia o padrão: só os mais ricos à frente significa desigualdade de topo, grupos igualmente espaçados significam desigualdade linear e os mais pobres muito atrás significam desigualdade de base (marginalização). Cada uma exige uma resposta programática diferente. Concentre-se no ponto de dados mais recente, na variação desde 2010 e em saber se a diferença está a diminuir.
+
+![Equidade por área de residência](/images/pt-national-coverage-equity-area.png)
+
+![Equidade por quintil de riqueza](/images/pt-national-coverage-wealth.png)
+
+![Equidade por educação materna](/images/pt-national-coverage-education.png)
+
+## Armadilhas comuns
+
+- Os pontos do inquérito são poucos e têm intervalos de confiança. Não interprete em excesso pequenas diferenças.
+- A desigualdade entre regiões nos dados das unidades de saúde pode resultar de diferenças de denominador ou de notificação, e não de diferenças reais no acesso.
+- As páginas de equidade dependem dos ficheiros de inquérito e do ano do inquérito indicados em Carregar dados.

@@ -1,41 +1,75 @@
 import { Steps } from 'nextra/components'
-import { Callout } from 'nextra/components'
-import { Bleed } from 'nextra/components'
 
-Analysis in the RMNCAH App follows a logical flow with the following steps:
+# Étapes de l'analyse
+
+L'analyse dans RMNCAH App suit un flux logique comprenant les étapes suivantes. Chaque étape indique le guide qui décrit les pages concernées ; le titre de l'étape renvoie au chapitre méthodologique.
 
 <Steps>
-## [Loading data](/docs/framework/1-analysis-setup)
-        *insert image*
 
-## [Data Quality Assessment](/docs/framework/2-data-quality-assessment)
-         *insert image*
+### [Chargement des données](/fr/docs/framework/1-analysis-setup)
 
-## [Denominator Selection](/docs/framework/4-denominator-selection)
-         *insert image*
+Dans l'application : **Charger les données**. Voir [Démarrage](/fr/apps/rmncah/getting-started).
 
-## [Coverage Estimation](/docs/framework/5-coverage-estimation)
-         *insert image*
+![Chargement des données de routine](/images/rmncah-loading-data.jpg)
 
-## [Equity Analysis](/docs/framework/6-equity-analysis)
-         *insert image*
+### [Évaluation de la qualité des données](/fr/docs/framework/2-data-quality-assessment)
 
-## [Sub-national Analysis](/docs/framework/7-subnational-analysis)
-         *insert image*
+Dans l'application : pages **Qualité des données**. Voir [Qualité des données](/fr/apps/rmncah/data-quality).
 
-## [Mortality Analysis](/docs/framework/9-mortality)
-         *insert image*
+![Score global de l'évaluation de la qualité des données](/images/fr-dqa-overall-score.png)
 
-## [Service Utilization](/docs/framework/10-service-utilisation)
-         *insert image*
+### [Ajustement des données](/fr/docs/framework/3-data-adjustment)
 
-## [Health System Performance](/docs/framework/11-health-system-performance)
-         *insert image*
+Dans l'application : **Supprimer les années**, **Ajustement des données** et **Changements d'ajustement**. Voir [Préparation des données](/fr/apps/rmncah/data-preparation). Cette étape déverrouille toutes les pages d'analyse.
 
-## [Dissemination, Decisions & Action](/docs/framework/12-dissemination)
-        *insert image*
+### [Sélection du dénominateur](/fr/docs/framework/4-denominator-selection)
 
-## [Leveraging AI for Analysis and Interpretation](/docs/framework/13-ai-leverage)
-        *insert image*
-        
+Dans l'application : **Évaluation du dénominateur** et **Sélection du dénominateur**. Voir [Dénominateurs](/fr/apps/rmncah/denominators).
+
+![Meilleure sélection du dénominateur](/images/fr-denominator-best-selection.png)
+
+### [Estimation de la couverture](/fr/docs/framework/5-coverage-estimation)
+
+Dans l'application : **Couverture nationale**, **Objectif de couverture**, **Continuum des soins** et **Analyse bayésienne**. Voir [Couverture, équité et objectifs](/fr/apps/rmncah/coverage-equity-targets) et [Analyses avancées](/fr/apps/rmncah/advanced-analysis).
+
+![Estimations de la couverture nationale](/images/fr-national-coverage.png)
+
+### [Analyse de l'équité](/fr/docs/framework/6-equity-analysis)
+
+Dans l'application : **Inégalités nationales** et **Évaluation de l'équité**. Voir [Couverture, équité et objectifs](/fr/apps/rmncah/coverage-equity-targets).
+
+![Analyse de l'équité selon le milieu de résidence](/images/fr-national-coverage-equity-area.png)
+
+### [Analyse infranationale](/fr/docs/framework/7-subnational-analysis)
+
+Dans l'application : **Couverture infranationale**, **Inégalités infranationales** et **Objectif de couverture**. Voir [Analyse infranationale](/fr/apps/rmncah/subnational).
+
+![Couverture infranationale par rapport aux objectifs](/images/fr-subnational-coverage-targets.png)
+
+### [Analyse de la mortalité](/fr/docs/framework/9-mortality)
+
+Dans l'application : pages **Mortalité**. Voir [Mortalité](/fr/apps/rmncah/mortality).
+
+![Exhaustivité des données de mortalité](/images/fr-mortality-completeness.png)
+
+### [Utilisation des services](/fr/docs/framework/10-service-utilisation)
+
+Dans l'application : pages **Utilisation des services**. Voir [Utilisation des services et système de santé](/fr/apps/rmncah/service-utilization-health-system).
+
+![Évaluation de la qualité des données d'utilisation des services](/images/fr-service-utilization-dqa.png)
+
+### [Performance du système de santé](/fr/docs/framework/11-health-system-performance)
+
+Dans l'application : pages **Performance du système de santé**. Voir [Utilisation des services et système de santé](/fr/apps/rmncah/service-utilization-health-system).
+
+![Performance du système de santé](/images/fr-health-system.png)
+
+### [Diffusion, décisions et action](/fr/docs/framework/12-dissemination)
+
+Dans l'application : **Rapports** (voir [Rapports](/fr/apps/rmncah/reports)) et les boutons de téléchargement de chaque graphique et tableau (voir [Exports, rapports et IA](/fr/apps/rmncah/exports-and-ai)).
+
+### [Exploiter l'IA pour l'analyse et l'interprétation](/fr/apps/ai-assistant)
+
+Dans l'application : l'assistant de chat de DataSuite travaille sur le même jeu de données enregistré. Voir [Exports, rapports et IA](/fr/apps/rmncah/exports-and-ai).
+
 </Steps>

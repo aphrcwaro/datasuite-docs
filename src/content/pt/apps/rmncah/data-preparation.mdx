@@ -1,0 +1,77 @@
+import { Steps, Callout } from 'nextra/components'
+
+# Preparação dos dados
+
+A preparação dos dados transforma os números notificados num conjunto de dados pronto para análise. Tem três páginas na secção **Qualidade dos dados**: **Remover anos**, **Ajuste de dados** e **Alterações no ajuste de dados**. Executar o ajuste é o que desbloqueia as páginas de Denominadores e de Análise. O método, as fórmulas e as regras de negócio encontram-se em [Ajuste de dados](/pt/docs/framework/3-data-adjustment).
+
+## Remover anos
+
+**Finalidade.** Deixar de fora os anos cujos dados não são fiáveis, por exemplo um ano com quase nenhuma notificação ou uma falha generalizada do sistema.
+
+**Quando utilizar.** Depois de as páginas de [qualidade dos dados](/pt/apps/rmncah/data-quality) mostrarem um ano claramente errático e de existir um motivo real para o acreditar. Se não tiver motivo, mantenha o ano.
+
+<Steps>
+
+### Abra Remover anos
+
+Encontra-se em **Qualidade dos dados** na barra lateral.
+
+### Selecionar anos para remover
+
+As etiquetas listam os anos presentes nos dados. Selecione um ou mais.
+
+### Prima Confirmar Remoção
+
+A mensagem passa de *Nenhum ano foi removido ainda* para *Dados para os seguintes anos foram removidos*, seguida dos anos. Para repor um ano, desmarque-o e confirme novamente.
+
+</Steps>
+
+![Remover anos](/images/pt-dqa-remove-year.png)
+
+## Ajuste de dados
+
+**Finalidade.** Corrigir a notificação incompleta e os valores discrepantes extremos. Os valores em falta e discrepantes são substituídos pela mediana do distrito para o mesmo ano. Os valores notificados são depois aumentados com um fator K, que representa o volume de serviços nas unidades que não notificam em relação às que notificam.
+
+<Steps>
+
+### Escolha os Fatores K
+
+O cartão **Fatores K (Fatores de Ajuste)** tem quatro seletores: **Fator K ANC**, **Fator K Parto**, **Fator K Vacinas** e **Fator K OPD**. Cada um oferece 0, 0,25, 0,5, 0,75 e 1. O valor 0 pressupõe que as unidades que não notificam não prestaram serviços, 0,25 pressupõe um quarto do volume das unidades que notificam e 1 o mesmo volume. Aumente um fator quando as unidades que notificam mal, como as privadas, prestam uma grande parte desse serviço.
+
+### Prima Ajustar Dados
+
+A mensagem passa de *Conjunto de dados não ajustado* para *Ajustando...* e depois *Dados Ajustados*. Faça-o mesmo que mantenha todos os fatores em 0, porque é isso que desbloqueia as páginas de análise.
+
+### Transfira o resultado, se precisar
+
+**Baixar Conjunto de Dados Ajustado** guarda o conjunto de dados principal ajustado como ficheiro `.dta`.
+
+</Steps>
+
+<Callout type="warning">
+Alterar os fatores K ou os anos removidos descarta o conjunto de dados ajustado. Prima novamente **Ajustar Dados**, caso contrário as páginas de análise não refletirão a alteração. Se o ajuste falhar, a mensagem indica o motivo.
+</Callout>
+
+Segundo a metodologia, não é aplicado nenhum ajuste aos distritos cuja taxa de notificação seja inferior a 75%, porque a imputação não é fiável nesses casos. A metodologia assinala esses anos como pouco fiáveis para os cálculos de cobertura.
+
+![Seleção do fator K](/images/pt-adjustment-kfactor.png)
+
+## Alterações no ajuste de dados
+
+**Finalidade.** Ver o que o ajuste fez a cada indicador.
+
+**Como ler.** O cartão **Visualizar efeitos das mudanças** tem um separador por indicador: Partos institucionais, Nascidos vivos em estabelecimento de saúde, Pentavalente 1, CPN 1 e OPD Menores de 5 anos, mais um separador **Personalizado** para qualquer outro indicador. Cada gráfico compara o número de eventos *antes* e *depois* do ajuste para completude e valores discrepantes, por ano. Utilize **Baixar Gráfico** e **Baixar Dados** na barra de ferramentas. **Gerar Relatório** abre o relatório de ajuste.
+
+![Antes e depois do ajuste](/images/pt-adjustment-before-after.png)
+
+## Como interpretar os resultados
+
+- Uma pequena diferença entre as linhas significa que a notificação já era quase completa.
+- Uma grande diferença num ano indica um ano com baixa notificação. Indique o fator K utilizado e a variação percentual que produziu, como recomenda a metodologia.
+- O efeito é maior nos serviços com as taxas de notificação mais baixas. Compare com a página [Taxa de notificação](/pt/apps/rmncah/data-quality).
+
+## Armadilhas comuns
+
+- Remover um ano que devia manter encurta silenciosamente todas as tendências posteriores.
+- Utilizar um fator K elevado para ocultar uma notificação deficiente esconde o problema em vez de o resolver. Documente a sua escolha.
+- Os indicadores de mortalidade não são ajustados quanto à notificação nem aos valores discrepantes, porque os óbitos são poucos e voláteis (ver [Mortalidade](/pt/apps/rmncah/mortality)).

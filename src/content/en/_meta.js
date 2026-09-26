@@ -18,7 +18,7 @@ export default {
   },
   apps: {
     type: 'page',
-    title: 'Datasuite Apps',
+    title: 'DataSuite Apps',
     theme: {
       copyPage: false,
       toc: false
@@ -48,7 +48,8 @@ export default {
       layout: 'full',
       copyPage: false,
       toc: false
-    }
+    },
+    title: 'Downloads'
   },
   'thank-you': {
     type: 'page',
@@ -56,6 +57,7 @@ export default {
     theme: {
       copyPage: false,
       toc: false
-    }
+    },
+    title: 'Thank You'
   }
 }

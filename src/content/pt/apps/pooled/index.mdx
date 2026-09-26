@@ -1,0 +1,61 @@
+import { Callout } from 'nextra/components'
+
+# Visão geral da Pooled App
+
+A Pooled App reúne os conjuntos de dados guardados de vários países num único ficheiro e permite explorar, comparar e exportar as tabelas agregadas. É a ferramenta do DataSuite para a **análise regional e multinacional**: em vez de abrir cada país um a um, carrega as respetivas caches guardadas em conjunto e trabalha com todas lado a lado.
+
+A Pooled não substitui as aplicações por país. A **[RMNCAH App](/pt/apps/rmncah)** e a **[Vaxx App](/pt/apps/vaxx)** são onde os dados de um país são carregados, verificados, ajustados e analisados. A Pooled parte do que essas aplicações já guardaram.
+
+## Quando utilizar a Pooled
+
+| Pretende... | Utilize |
+| --- | --- |
+| Verificar, ajustar e analisar os dados das unidades de saúde de um país | RMNCAH ou Vaxx App |
+| Comparar vários países lado a lado (cobertura, fontes, tendências) | Pooled App |
+| Obter uma única tabela com todos os países para um relatório regional | Pooled App |
+| Extrair apenas alguns países, anos ou colunas para outra ferramenta | Pooled App |
+
+## Requisitos
+
+- Um conjunto de ficheiros `.rds`, um por país, guardados pela RMNCAH ou pela Vaxx App. Consulte **[Preparar as caches](/pt/apps/pooled/preparing-caches)**.
+- Todos os ficheiros devem pertencer ao mesmo **domínio de dados**: RMNCAH ou Imunização (VAXX). Escolhe o domínio uma só vez, antes de carregar.
+- Memória suficiente: a aplicação aceita até 2 GB de ficheiros selecionados de cada vez e lê-os um após o outro.
+
+<Callout type="info">
+A Pooled mantém apenas as tabelas de análise (cobertura, qualidade dos dados, denominadores, inquéritos, etc.). Os dados brutos por unidade de saúde e por mês ficam de fora, o que mantém o ficheiro agregado pequeno.
+</Callout>
+
+## Como a aplicação está organizada
+
+A barra lateral tem uma única secção, **Pooling**, com duas partes.
+
+**Build pooled file** é um assistente de quatro passos:
+
+1. Escolher os conjuntos de dados: o domínio, o conteúdo e os ficheiros.
+2. Carregar os ficheiros: cada ficheiro é lido e indicado como carregado, carregado com aviso ou falhado.
+3. Rever os resultados: decidir o que fazer com os avisos e as falhas.
+4. Ficheiro criado: transferir o `.rds` agregado ou passar diretamente à sua exploração.
+
+**Explore pooled data** abre um ficheiro agregado e oferece estas páginas:
+
+| Página | O que mostra |
+| --- | --- |
+| Open a file | Utilizar o ficheiro acabado de criar ou carregar um criado anteriormente |
+| Parameters | Os parâmetros e valores de inquérito de cada país |
+| Overall score | A pontuação de qualidade dos dados de cada país |
+| Indicator coverage | Cobertura por indicador: nacional, Admin 1, Distrito |
+| Coverage | Cobertura com os denominadores escolhidos por cada país |
+| Mortality | Mortes maternas e neonatais nas unidades de saúde (domínio RMNCAH) |
+| Service utilization | Utilização de consulta externa e internamento, crianças com menos de 5 anos (domínio RMNCAH) |
+| Compare countries | Continuum de cuidados, triangulação de fontes, nível e variação, tendências |
+| All datasets | Todas as tabelas do ficheiro, incluindo as que não têm página própria |
+| Extract a piece | Extrair conjuntos de dados, países, anos e colunas escolhidos para um novo ficheiro |
+
+Os nomes das páginas e dos botões são indicados tal como aparecem na aplicação.
+
+## Seguir em frente
+
+- **[Preparar as caches](/pt/apps/pooled/preparing-caches)**: produzir e organizar os ficheiros `.rds`.
+- **[Utilizar a aplicação](/pt/apps/pooled/using-the-app)**: um guia passo a passo, com o significado dos resultados e os erros mais comuns.
+- **[Exportar resultados](/pt/apps/pooled/exporting-results)**: ficheiros CSV, Excel, zip e agregados, e utilização do assistente de conversação do DataSuite.
+- **[Quadro analítico CD2030](/pt/docs/framework)**: a metodologia por trás dos indicadores, denominadores e pontuação de qualidade dos dados.

@@ -1,10 +1,13 @@
 import { Callout } from 'nextra/components'
-import { AutoDownload } from '@/components/AutoDownload' 
-import {HomeCards } from '@/components/HomeCards'
+import { AutoDownload } from '@/components/AutoDownload'
+import { HomeCards } from '@/components/HomeCards'
 
-<AutoDownload />
+# Thank you for downloading DataSuite
 
-
+<AutoDownload
+  messageText="Your download of DataSuite should start shortly."
+  linkText="Direct download link."
+/>
 
 ## Get started
 
@@ -19,18 +22,20 @@ import {HomeCards } from '@/components/HomeCards'
     {
       title: 'Setup',
       description: 'Install and configure DataSuite on your system.',
-      href: '/en/docs/setup/index',
+      href: '/en/docs/setup',
       icon: 'desktop-download'
     },
     {
       title: 'Getting started',
       description: 'Discover the key features of DataSuite with the step-by-step tutorial.',
-      href: '/en/docs/getting-started/index',
+      href: '/en/docs/getting-started',
       icon: 'rocket'
     }
   ]}
 />
 
 <Callout type="info">
-  **Installation blocked?** If the system installer is blocked by your IT administrator, you may need to cancel it and download the **User Setup** version instead. Check out our [Troubleshooting](/troubleshooting) page for details.
+
+**Installation blocked?** If the system installer is blocked by your IT administrator, you may need to cancel it and download the **User Installer** version instead. Check out our [Troubleshooting](/en/troubleshooting) page for details.
+
 </Callout>

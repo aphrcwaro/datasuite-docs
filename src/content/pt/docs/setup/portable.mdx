@@ -1,0 +1,63 @@
+import { Callout } from 'nextra/components'
+
+# Modo portátil
+
+O DataSuite suporta o [modo portátil](https://en.wikipedia.org/wiki/Portable_application). Este modo permite que todos os dados criados e mantidos pelo DataSuite fiquem armazenados junto da própria aplicação, podendo assim ser movidos entre diferentes ambientes.
+
+O modo portátil é suportado na transferência ZIP para Windows. Consulte a [página de transferências](/pt/downloads) para encontrar o ficheiro `.zip` correto para a sua plataforma.
+
+<Callout type="warning">
+
+Não tente configurar o modo portátil numa instalação proveniente dos **instaladores Windows User ou System**. O modo portátil só é suportado no ficheiro ZIP (`.zip`) do Windows. Note também que o ficheiro ZIP do Windows não suporta atualização automática.
+
+</Callout>
+
+## Ativar o modo portátil
+
+### Windows
+
+Depois de descompactar a transferência do DataSuite, crie uma pasta `data` dentro da pasta do DataSuite:
+
+```
+|- DataSuite-win32-x64-1.0.0
+|   |- Suite.exe (or code executable)
+|   |- data
+|   |- bin
+|   |  |- code
+|   |  |- ...
+|   |- ...
+```
+
+A partir desse momento, a pasta `data` será usada para armazenar todos os dados do DataSuite, incluindo o estado da sessão, as preferências, etc.
+
+A pasta `data` pode ser movida para outras instalações do DataSuite. Isto é útil ao atualizar a versão portátil do DataSuite, caso em que pode mover a pasta `data` para uma versão mais recente já extraída do DataSuite.
+
+## Atualizar o DataSuite portátil
+
+No **Windows**, pode atualizar o DataSuite copiando a pasta `data` para uma versão mais recente do DataSuite.
+
+## Migrar para o modo portátil
+
+Também pode migrar uma instalação existente para o modo portátil.
+
+### Windows
+
+1. Transfira a distribuição ZIP do [DataSuite](/pt/downloads) para a sua plataforma.
+2. Crie a pasta `data` conforme descrito acima.
+3. Copie a pasta de dados do utilizador `DataSuite` para `data` e mude-lhe o nome para `user-data`:
+   - **Windows**: `%APPDATA%\DataSuite`
+
+Como exemplo, este é o resultado pretendido no **Windows**:
+
+```
+|- DataSuite-win32-x64-1.84.2
+|   |- DataSuite.exe (or suite executable)
+|   |- data
+|   |   |- user-data
+|   |   |   |- ...
+|   |- ...
+```
+
+## Pasta TMP
+
+Por predefinição, a pasta `TMP` continua a ser a do sistema, mesmo no modo portátil, uma vez que nenhum estado é mantido nela. Se pretender que a pasta TMP também fique dentro da pasta portátil, pode criar uma pasta `tmp` vazia dentro da pasta `data`. Enquanto existir uma pasta `tmp`, será usada para armazenar dados TMP.

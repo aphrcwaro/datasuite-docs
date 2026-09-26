@@ -1,0 +1,96 @@
+import { Steps, Callout } from 'nextra/components'
+
+# Utilizar a aplicação
+
+Esta página explica como criar um ficheiro agregado e explorá-lo. Certifique-se primeiro de que as caches estão prontas: **[Preparar as caches](/pt/apps/pooled/preparing-caches)**. Os rótulos da interface são indicados tal como aparecem na aplicação.
+
+## Criar um ficheiro agregado
+
+<Steps>
+
+### Iniciar a Pooled
+
+Inicie a **Pooled** a partir das aplicações do DataSuite. Quando o DataSuite a inicia com uma pasta selecionada, todos os ficheiros `.rds` dessa pasta já estão adicionados à lista e uma faixa indica quantos ficheiros foram pré-carregados. A aplicação abre em **Build pooled file**. A maioria das páginas e botões da Pooled é atualmente apresentada em inglês, independentemente do idioma selecionado.
+
+### Escolher os conjuntos de dados (passo 1 de 4)
+
+![Escolher os conjuntos de dados guardados dos países](/images/pooled-build-select.png)
+
+- **Data domain**: RMNCAH ou Immunization (VAXX). Esta escolha determina as tabelas do ficheiro agregado. Com Imunização, as tabelas exclusivas do domínio RMNCAH (mortalidade e utilização de serviços) não são construídas.
+- **What to include**: **Everything in each dataset** acrescenta WUENIC, inquéritos, denominadores, qualidade dos dados, etc. **Standard tables only** mantém apenas as tabelas para as quais o Explore tem páginas.
+- **Select files** para escolher vários ficheiros `.rds` de uma só vez, ou **Select a folder** para adicionar todos os ficheiros `.rds` da pasta. Um ficheiro com o mesmo nome substitui o anterior na lista.
+
+Cada ficheiro listado tem uma caixa para o incluir e um botão para o remover. O contador mostra o tamanho total face ao limite de 2 GB. **Clear all** esvazia a lista. Clique em **Load N files**.
+
+### Carregar os ficheiros (passo 2 de 4)
+
+![A carregar os ficheiros selecionados](/images/pooled-load-progress.png)
+
+Os ficheiros são lidos um a um e cada um mostra o resultado assim que termina, com uma barra de progresso global e quatro contadores: Loaded, Loaded with a warning, Failed, Still to load. Pode deixar a página aberta enquanto decorre. **Cancel loading** volta ao passo 1; um ficheiro falhado pode ser tentado de novo. Depois clique em **Review results**.
+
+### Rever e confirmar (passo 3 de 4)
+
+![Rever os resultados antes de combinar](/images/pooled-review-results.png)
+
+A lista **Needs your attention** explica cada aviso e cada falha. Mensagens típicas:
+
+| Mensagem | Significado e solução |
+| --- | --- |
+| Not adjusted yet, so its tables use unadjusted data | Conclua o ajuste na aplicação do país, guarde e volte a carregar |
+| N of M standard tables could not be built | A cache não tem algumas análises; abra-a na aplicação do país |
+| Has N of the M tables the loaded files have | Outros países têm tabelas adicionais que este não tem; normalmente sem gravidade |
+| Another file for the country is newer | País duplicado; é utilizado o ficheiro mais recente |
+| Not a Countdown dataset | O ficheiro não tem país nem dados ajustados; não é uma cache de país |
+| Could not read the file | Danificado ou guardado por uma versão mais recente do R; guarde-o de novo |
+
+Pode deixar um ficheiro de fora. Clique em **Combine N files**. Se houver ficheiros deixados de fora, uma caixa de diálogo pede confirmação e indica que ficam registados, com o motivo, no registo do ficheiro.
+
+### Ficheiro criado (passo 4 de 4)
+
+![Ficheiro criado, pronto a explorar ou transferir](/images/pooled-file-created.png)
+
+A aplicação indica o número de países e de conjuntos de dados e lista cada tabela com o respetivo número de linhas. O ficheiro chama-se `pooled_rmncah_` (ou `pooled_vaccine_`) seguido da data e termina em `.rds`. Utilize **Download .rds** para o guardar, ou **Explore this file**. **Build another file** recomeça.
+
+</Steps>
+
+<Callout type="warning">
+O ficheiro agregado é criado em armazenamento temporário da sessão. Transfira o `.rds` se o quiser voltar a abrir mais tarde.
+</Callout>
+
+## Explorar os dados agregados
+
+Abra um ficheiro em **Open a file**: utilize o que acabou de criar ou carregue um `.rds` agregado criado anteriormente. Só são aceites ficheiros criados por **Build pooled file**; qualquer outro `.rds` é recusado com a mensagem "This is not a pooled file". Depois de aberto, a aplicação salta para a primeira página que tenha dados.
+
+Todas as páginas de conjuntos de dados têm a mesma estrutura: uma barra de ficheiro (nome, países, conjuntos de dados, **Change file**, **Download**), filtros Countries e Years, separadores National, Admin 1 e District quando a tabela os tem, uma faixa de resumo (Rows, Countries, Years, Columns), gráficos e uma tabela **Data** com pesquisa. Os filtros Countries e Years são partilhados por todas as páginas; não escolher nada equivale a escolher tudo.
+
+As páginas com valores numéricos têm também um filtro **Measure**. Os gráficos usam uma linha ou barra por país, com uma cor fixa por país. Nas tabelas Admin 1 e District, mostram a mediana das áreas.
+
+- **Parameters**: parâmetros e valores de inquérito por país, com a cobertura dos inquéritos, a mortalidade neonatal e o ano do inquérito.
+
+![Página Parameters](/images/pooled-parameters.png)
+- **Overall score**: classificação e mapa de calor das componentes da pontuação.
+
+![Página Overall score](/images/pooled-overall-score.png)
+- **Indicator coverage** e **Coverage**: tendência ao longo do tempo, classificação do último ano e, ou a dispersão entre distritos, ou uma tabela da variação desde o primeiro ano.
+
+![Página Coverage](/images/pooled-coverage.png)
+- **Mortality** e **Service utilization**: tendência, classificação e variação.
+- **Compare countries**: quatro separadores. *Continuum of care* é um mapa de calor da cobertura mais recente nas unidades de saúde, da primeira consulta pré-natal às vacinas. *Source triangulation* mostra os valores da unidade de saúde, do inquérito e do WUENIC para DTP3 e MCV1, com a linha da meta de 90%. *Level and change* compara a cobertura atual com a variação no período. *Trends over time* mostra a mediana e a metade central dos países. Requer a tabela `Coverage - National`.
+
+![Página Compare countries](/images/pooled-compare-countries.png)
+- **All datasets**: escolha qualquer tabela na lista agrupada e veja os respetivos dados.
+
+## Ler os resultados
+
+Principais colunas:
+
+| Coluna | Significado |
+| --- | --- |
+| `country`, `iso3` | Nome do país e código ISO3, sempre em primeiro lugar |
+| `adminlevel_1`, `district` | Área, quando a tabela é subnacional |
+| `year` | Ano de notificação |
+| `cov_penta3`, `cov_measles1`, ... | Cobertura das unidades de saúde; o mesmo nome em todos os países, qualquer que seja o denominador escolhido pelo país |
+
+Os indicadores de cobertura são: CPN no 1.º trimestre, CPN4+, parto institucional, cesariana, teste de VIH, nados-vivos institucionais, PNC nas primeiras 48 h, Penta1, Penta3, Sarampo 1 e 2, BCG, OPV1-3, teste de sífilis e TPI2-3 (Admin 1 exclui a OPV). A tabela `Parameters` contém o limiar de desempenho de cada país, os fatores k, as estimativas nacionais como `nmr` e `sbr`, as estimativas de inquérito, `survey_year` e os denominadores escolhidos. Para o significado das pontuações, ajustes e denominadores, consulte o **[quadro analítico](/pt/docs/framework)**.
+
+Continue com **[Exportar resultados](/pt/apps/pooled/exporting-results)**.

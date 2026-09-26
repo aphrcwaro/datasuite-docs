@@ -1,6 +1,6 @@
 export default {
   index: {
-    title: 'FAQS',
+    title: 'FAQ',
     theme: {
       layout: 'full'
     }

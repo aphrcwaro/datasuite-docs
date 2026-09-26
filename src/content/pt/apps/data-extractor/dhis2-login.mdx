@@ -1,44 +1,57 @@
-import { Steps } from 'nextra/components'
-import { Callout } from 'nextra/components'
-import { Bleed } from 'nextra/components'
+import { Callout, Steps } from 'nextra/components'
 
-### Logging in to DHIS2
+# Início de sessão no DHIS2
+
+## Iniciar sessão no DHIS2
+
 <Steps>
-#### Open the CD2030 DHIS2 Data Extractor.
-The first step is to connect the application to the relevant DHIS2 server. Users provide the **DHIS2 instance URL** together with their **username** and **password**. 
-Once authenticated, the extractor can read only the metadata and data that the logged-in user is already authorized to access in that DHIS2 environment.
 
-![DHIS2 login screen](/images/extractor_login.jpg)
+### Abrir o CD2030 DHIS2 Data Extractor
+
+O primeiro passo é ligar a aplicação ao servidor DHIS2 pretendido. Os utilizadores introduzem o **URL da instância DHIS2**, juntamente com o **nome de utilizador** e a **palavra-passe**.
+Depois de autenticado, o extrator só consegue ler os metadados e os dados a que o utilizador com sessão iniciada já tem autorização de acesso nesse ambiente DHIS2.
+
+![Ecrã de início de sessão do DHIS2 no Data Extractor](/images/extractor_login.jpg)
 
 <Callout type="info">
-  **Important:** Access rights are controlled by DHIS2, not by the extractor. If a user cannot see a dataset, organisation unit, or indicator in DHIS2, the extractor will not bypass those permissions.
+
+**Importante:** os direitos de acesso são controlados pelo DHIS2, e não pelo extrator. Se um utilizador não consegue ver um conjunto de dados, uma unidade organizacional ou um indicador no DHIS2, o extrator não contornará essas permissões.
+
 </Callout>
 
-#### Enter valid login credentials.
-- Start by typing the first three letters of your country. If the url is indexed, it will pop up and you can select it. If your country's DHIS2 instance URL is not shown, type it in full.
+### Introduzir credenciais de início de sessão válidas
 
-![DHIS2 server URL login screen](/images/extractor_login_url.jpg)
+- Comece por escrever as três primeiras letras do nome do país. Se o URL estiver indexado, será apresentado e poderá selecioná-lo. Se o URL da instância DHIS2 do país não aparecer, escreva-o por completo.
+- Em seguida, introduza o **DHIS2 Username** e a palavra-passe e clique em **Login**.
+
+![Sugestões de URL do servidor no ecrã de início de sessão](/images/extractor_login_url.jpg)
+
 <Callout type="info">
-  **Tip:** Start by confirming the DHIS2 base URL before entering credentials. A correct URL prevents login failures caused by pointing to the wrong server environment.
+
+**Sugestão:** comece por confirmar o URL base do DHIS2 antes de introduzir as credenciais. Um URL correto evita falhas no início de sessão causadas por apontar para o ambiente de servidor errado.
+
 </Callout>
 
 <a id="read-and-cache-metadata" />
-#### Cache metadata
-![DHIS2 login dashboard](/images/extractor_dashboard.jpg)
-Done automatically following a successful login, this loads and locally caches the metadata needed for mapping and extraction.
-After login, the extractor retrieves the metadata needed to understand the structure of the DHIS2 instance. 
-This can include items such as organisation units, data elements, indicators, category option combinations, datasets, and other configuration objects required for mapping and extraction.
+### Guardar os metadados em cache
+
+Executado automaticamente após um início de sessão bem-sucedido, este passo carrega e guarda localmente em cache os metadados necessários para o mapeamento e a extração.
+Após o início de sessão, o extrator obtém os metadados necessários para compreender a estrutura da instância DHIS2.
+Isto pode incluir itens como unidades organizacionais, elementos de dados, indicadores, combinações de opções de categoria, conjuntos de dados e outros objetos de configuração necessários para o mapeamento e a extração.
+
+![Painel do Data Extractor após o início de sessão](/images/extractor_dashboard.jpg)
 
 <Callout type="info">
-    -  If you think the DHIS2 data might have changed since the last session, **Sync** to ensure the metadata is updated.
-    
-    **Why caching helps:** 
-  - Metadata caching reduces repeated calls to DHIS2, speeds up setup for later runs, and creates a smaller download footprint because the extractor only needs to refresh what is necessary.
-  - Rather than downloading the same metadata repeatedly for every step, the extractor caches it locally for reuse during the session and in later work where appropriate.
-</Callout>
- 
- #### [Mapping indicators](/en/apps/data-extractor/mapping)
 
+Se considerar que os dados do DHIS2 podem ter mudado desde a última sessão, clique em **Sync Meta** para garantir que os metadados estão atualizados.
+
+**Porque é que a cache ajuda:**
+
+- A cache de metadados reduz as chamadas repetidas ao DHIS2, acelera a configuração nas execuções seguintes e diminui o volume transferido, uma vez que o extrator só precisa de atualizar o que for necessário.
+- Em vez de transferir os mesmos metadados repetidamente em cada etapa, o extrator guarda-os em cache localmente para os reutilizar durante a sessão e, quando apropriado, em trabalhos posteriores.
+
+</Callout>
+
+### [Mapear indicadores](/pt/apps/data-extractor/mapping)
 
 </Steps>
-

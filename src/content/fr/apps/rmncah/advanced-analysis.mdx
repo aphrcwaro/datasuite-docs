@@ -1,0 +1,72 @@
+import { Steps, Callout } from 'nextra/components'
+
+# Analyses avancées
+
+Trois analyses vont au-delà des graphiques de couverture de base : l'**Analyse bayésienne**, le **Continuum des soins** et la **Projection PF FPET**. Elles s'appuient sur les données ajustées et les dénominateurs que vous avez sélectionnés ; terminez donc d'abord la [Préparation des données](/fr/apps/rmncah/data-preparation) et les [Dénominateurs](/fr/apps/rmncah/denominators). Méthodes : [Approche de modélisation bayésienne](/fr/docs/framework/5.1-bayesian-coverage) et [Couverture nationale](/fr/docs/framework/5-coverage-estimation).
+
+## Analyse bayésienne
+
+**Objectif.** Combiner les données d'enquête et les données de routine des établissements en une estimation par année, avec une plage d'incertitude et une prévision à court terme. Les enquêtes sont utilisées à leur niveau notifié, pondérées selon leur incertitude. Les données de routine n'apportent que leur tendance d'une année à l'autre, et pèsent moins lorsque le score global de qualité des données est faible.
+
+**Quand l'utiliser.** Lorsque les enquêtes sont anciennes ou peu nombreuses et que les données des établissements sont imparfaites, et que vous avez besoin d'une tendance unique et défendable, par exemple pour un rapport de synthèse.
+
+Le groupe **Analyse bayésienne** de la barre latérale comporte deux entrées : **Analyse nationale** et **Analyse infranationale** (régions).
+
+<Steps>
+
+### Ouvrez l'Analyse bayésienne
+
+Choisissez Analyse nationale ou Analyse infranationale.
+
+### Choisissez un onglet d'indicateur
+
+**CPN 4 visites**, **CPN 1er trimestre**, **Accouchements en établissement**, **Rougeole 1** ou **Pentavalent 3**. Le modèle est défini pour ces cinq indicateurs.
+
+### Lisez le graphique
+
+Le titre est *Estimations du modèle de couverture bayésien* suivi de l'indicateur, et la note de source indique *Source : données d'enquête et données de routine DHIS2*. La courbe centrale est la meilleure estimation ; la bande représente la plage d'incertitude. Utilisez **Télécharger le graphique** et **Télécharger les données** dans la barre d'outils.
+
+</Steps>
+
+![Estimations bayésiennes de la CPN4 au niveau national](/images/bayesian-ANC4-national.png)
+
+![Estimations bayésiennes de la CPN4 par région](/images/bayesian-ANC4-subnational.png)
+
+**Comment interpréter.** Une bande étroite signifie que les données concordent ; une bande large signifie peu de points de données ou des points contradictoires. L'estimation suit la hausse en forme de S typique de la couverture. Ne considérez pas le modèle comme un substitut à de bonnes données : si le score de qualité des données de routine est faible, l'estimation s'appuie davantage sur les enquêtes.
+
+## Continuum des soins
+
+**Objectif.** Suivre la couverture le long du parcours de soins et voir où les femmes et les enfants sont perdus de vue.
+
+**Où.** **Analyse nationale**, **Continuum des soins** dans la barre latérale. La page comporte deux cartes, toutes deux intitulées *Couverture nationale et continuum*, chacune avec les onglets **Continuum maternel** et **Continuum de l'enfant**.
+
+- **Carte du haut, profil du continuum.** *Profil national du continuum des soins* : la dernière valeur des établissements, la dernière valeur de l'enquête et, le cas échéant, la valeur WUENIC pour chaque étape du parcours sélectionné, par exemple CPN 1er trimestre, CPN 4 visites, accouchements en établissement et soins postnatals dans les 48 heures pour le continuum maternel, ou Pentavalent 3 et Rougeole 1 pour le continuum de l'enfant.
+- **Carte du bas, carte thermique du continuum.** *Carte thermique infranationale du continuum* : les mêmes étapes pour chaque région de niveau administratif 1. Lisez une ligne pour voir une région, une colonne pour voir un indicateur. Les cellules rouges indiquent une faible couverture, jaunes une couverture intermédiaire et vertes une couverture élevée.
+
+La page peut générer le rapport de couverture nationale avec **Générer le rapport**.
+
+![Profil du continuum des soins](/images/fr-national-coverage-continuum-care-profile.png)
+
+![Carte thermique du continuum maternel par région](/images/national-admin1-maternal-continuum-heatmap.png)
+
+**Comment interpréter.** Un écart important entre la CPN du premier trimestre et la CPN 4 suggère une continuité des soins insuffisante. Une CPN élevée mais des accouchements en établissement plus faibles pointent des obstacles aux soins à l'accouchement. Un écart entre Pentavalent 3 et Rougeole 1 suggère des abandons après les premiers vaccins. Une ligne comportant beaucoup de cellules rouges signifie des problèmes étendus dans cette région ; une colonne comportant beaucoup de cellules rouges révèle un goulot d'étranglement national. Les valeurs faibles peuvent provenir de problèmes de notification ou de dénominateur ; vérifiez donc la qualité avant d'agir.
+
+## Projection PF FPET
+
+**Objectif.** Montrer les tendances de la planification familiale chez les femmes actuellement en union âgées de 15 à 49 ans, à partir du Family Planning Estimation Tool (FPET, Track20).
+
+**Où.** C'est l'onglet **Projection PF** de **Couverture nationale** et de **Couverture infranationale**.
+
+Le titre du graphique est *Planification familiale chez les femmes actuellement en union de 15 à 49 ans*. Il trace deux indicateurs : la **Prévalence des méthodes modernes (mCPR)** et la **Demande satisfaite par une méthode moderne**. Les courbes sont les estimations médianes et les bandes ombrées les intervalles de crédibilité à 95 %. Les données FPET sont des données de référence intégrées pour le pays et ne proviennent pas des données de vos établissements.
+
+<Callout type="info">
+FPET ajuste une tendance à travers toutes les enquêtes disponibles ; une courbe régulière ne signifie donc pas qu'il existe une enquête pour chaque année.
+</Callout>
+
+![Projection FPET](/images/fr-national-coverage-fpet.png)
+
+## Pièges courants
+
+- Utiliser les estimations bayésiennes sans indiquer qu'elles sont modélisées. Signalez-le dans les rapports.
+- Lire la Projection PF comme un indicateur des établissements. Il s'agit d'une sortie de modèle.
+- Interpréter la carte thermique du continuum sans avoir d'abord vérifié la [Qualité des données](/fr/apps/rmncah/data-quality) de la région.

@@ -1,0 +1,122 @@
+---
+topics: [denominators]
+indicators: [anc1, penta1, instlivebirths]
+reportKinds: [derived_coverage, denominator_trend, derived_coverage_trend]
+cacheMembers: [denominator, derivation_population, denominator_metrics, maternal_denominator, get_denominator, calculate_derived_coverage, calculate_indicator_coverage, indicator_coverage_national, indicator_coverage_admin1, indicator_coverage_district, national_estimates, un_estimates]
+appPages: [denominator_assessment, denominator_selection]
+ai:
+  status: draft
+  summary: >-
+    Coverage divides a facility numerator by an estimated denominator. Denominator Assessment picks the DHIS2
+    population series most consistent with the UN projection; Denominator Selection chooses the maternal and the
+    vaccination denominator the whole analysis uses.
+  options:
+    - "UN (UN projection of live births; shown in the comparison charts only, not selectable) (#denominator-options)"
+    - "DHIS2; ANC 1; Pentavalent 1; ANC 1 Population Growth; Penta 1 population Growth (the five options in the Maternal and Vaccination denominator selectors) (#denominator-options)"
+    - "Select Best Population: Live births, Total births, Total population or Under 1 year (DHIS2) (#select-best-population)"
+  steps:
+    - "Denominator Assessment first: compare UN and DHIS2 on the Population, Births and Under 1 tabs and choose the series that is close to the UN and follows the same direction (#select-best-population)"
+    - "Denominator Selection: read Survey comparison (National Coverage), Subnational Derived Coverage and Population Trend (#denominator-selection)"
+    - "Combine the three views, pick one denominator per indicator type and record why (#population-trend)"
+  rules:
+    - "The best denominator is not the one giving the highest coverage, but the one closest to the survey and stable over time (#how-to-interpret-the-results)"
+    - "Look for the option that agrees best with the survey across regions and for implausible values such as coverage far above 100% (#subnational-derived-coverage)"
+    - "ANC 1 and Penta 1 derived denominators assume most of the population attends the service and facilities report completely; they are weakest where reporting is poor (#how-to-interpret-the-results)"
+    - "The selected denominator changes every coverage, inequality, target, mortality and health system chart; choose once for the whole analysis, not per chart (#common-pitfalls)"
+    - "The method is in Denominator assessment and selection (/en/docs/framework/4-denominator-selection/)"
+  notCovered:
+    - "Weighing a survey year far from the analysis years is left to the analyst's judgement (#common-pitfalls)"
+---
+
+import { Steps, Callout } from 'nextra/components'
+
+# Denominators
+
+Coverage is the number of people who received a service divided by the number who needed it. The numerator comes from facility data; the denominator has to be estimated. The **Denominators** section has two pages, **Denominator Assessment** and **Denominator Selection**. Both unlock after [Data preparation](/en/apps/rmncah/data-preparation). The method is described in [Denominator assessment and selection](/en/docs/framework/4-denominator-selection).
+
+## Denominator options
+
+The UN projection is shown in the comparison charts only. The **Maternal denominator** and **Vaccination denominator** selectors offer the other five options.
+
+| Option in the app | Meaning |
+| --- | --- |
+| UN | UN projection of live births |
+| DHIS2 | DHIS2 projection of live births |
+| ANC 1 | Derived from women attending a first antenatal visit |
+| Pentavalent 1 | Derived from children receiving the first pentavalent dose |
+| ANC 1 Population Growth | ANC 1 derived, adjusted for annual population growth |
+| Penta 1 population Growth | Penta 1 derived, adjusted for annual population growth |
+
+## Denominator Assessment
+
+**Purpose.** Decide which population indicator is consistent between the UN and DHIS2 projections. That choice drives the two population-growth options.
+
+**When to use it.** First, before Denominator Selection.
+
+<Steps>
+
+### Open Denominator Assessment
+
+It is the first page of the **Denominators** section.
+
+### Compare the three tabs
+
+The card **Population Comparison** has the tabs **Population**, **Births** and **Under 1**. Each plots the UN projection against the DHIS2 projection in thousands, by year. The Births tab shows DHIS2 live births and DHIS2 total births.
+
+### Select Best Population
+
+In the filter bar choose the population source that is most consistent with the UN: **Live births (DHIS2)**, **Total births (DHIS2)**, **Total population (DHIS2)** or **Under 1 year (DHIS2)**.
+
+</Steps>
+
+Choose a series where the two sources are close and follow the same direction. Large gaps between UN and DHIS2 suggest an outdated census base or a wrong population entry in the workbook.
+
+![Population comparison between UN and DHIS2](/images/denominator-population-trend.png)
+
+## Denominator Selection
+
+**Purpose.** Choose the best denominator for vaccination indicators and for maternal indicators.
+
+**Filters.** **Maternal denominator**, **Vaccination denominator** and **Admin Level** (National, Admin 1 or Admin 2, with a region chip). The two denominator choices are what the rest of the analysis uses. They appear afterwards in the Denominator row of every analysis page.
+
+Three cards support the decision:
+
+<Steps>
+
+### Survey comparison (National Coverage)
+
+For each indicator tab (Institutional Live Births and Pentavalent 3) the bars show facility-based coverage in the survey year under each denominator, compared with the national survey coverage. If survey estimates are missing the card shows *No coverage to show yet* and a **Go to Load Data** button.
+
+### Subnational Derived Coverage
+
+Compares coverage by region and denominator in the survey year. Look for the option that agrees best with the survey across regions and for implausible values, such as coverage far above 100%.
+
+### Population Trend
+
+Shows national coverage over time (or for the selected region) for each denominator. Look for plausible, smooth trends.
+
+</Steps>
+
+Combine the three views, pick one denominator per indicator type and record why in your notes.
+
+![Best denominator selection](/images/denominator-best-selection.png)
+
+![National coverage over time by denominator](/images/denominator-national-coverage-overtime.png)
+
+## How to interpret the results
+
+- The best denominator is not the one that gives the highest coverage, but the one closest to the survey and stable over time.
+- Denominators derived from ANC 1 or Penta 1 assume that most of the population attends the service and that facilities report completely. They are weakest where reporting is poor. Return to [Data quality](/en/apps/rmncah/data-quality) if results look odd.
+- DHIS2 projections often drift when they are based on an old census.
+
+<Callout type="warning">
+The denominator you select changes every coverage, inequality, target, mortality and health system chart. If you change it later, review the pages that depend on it and regenerate any exported figures.
+</Callout>
+
+## Common pitfalls
+
+- Comparing against the survey when the survey year is far from the analysis years. Weigh that in your judgement.
+- Missing survey coverage values in Load Data, which leaves the survey comparison empty.
+- Choosing a denominator per chart instead of once for the whole analysis.
+
+Continue with [Coverage, equity and targets](/en/apps/rmncah/coverage-equity-targets).

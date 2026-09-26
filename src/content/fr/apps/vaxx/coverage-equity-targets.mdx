@@ -1,0 +1,96 @@
+import { Steps, Callout } from 'nextra/components'
+
+# Couverture, équité et cibles
+
+La section **Analyse nationale** comporte quatre pages : **Couverture nationale**, **Objectif de couverture**, et sous **Inégalités nationales** les pages **Données de routine** (inégalités entre régions) et **Données d'enquête** (l'Évaluation de l'équité). Toutes utilisent le dénominateur de vaccination choisi dans **[Dénominateurs](/fr/apps/vaxx/denominators)** et nécessitent des données ajustées. Les versions infranationales sont dans **[Analyse infranationale](/fr/apps/vaxx/subnational)**. Méthodes : **[couverture](/fr/docs/framework/5-coverage-estimation)** et **[équité](/fr/docs/framework/6-equity-analysis)**.
+
+## Indicateurs disponibles
+
+Chaque page affiche une série d'onglets, un indicateur par onglet. La plupart des séries se terminent par un onglet **Vérification personnalisée** qui ouvre un sélecteur **Indicateur** listant tous les indicateurs d'analyse de Vaxx :
+
+- CPN 1, Accouchements en établissement de santé et Naissances vivantes en établissement de santé.
+- BCG, VPI 1 et 2, Rougeole 1 et 2, VPO 1 à 3, Pentavalent 1 à 3, PCV 1 à 3, Rotavirus 1 et 2.
+- Abandon : entre Penta 1 et Penta 3, entre Penta 1 et Rougeole 1, entre Penta 3 et Rougeole 1, entre Rougeole 1 et Rougeole 2. L'abandon est le nombre d'enfants ayant reçu la première dose moins ceux ayant reçu la seconde, divisé par le premier, en pourcentage.
+- **Zéro dose** et **Sous-vaccinés**, dérivés de Penta1 et de Penta3.
+
+## Couverture nationale
+
+Compare les estimations DHIS2 et d'enquête de la couverture nationale pour chaque indicateur.
+
+<Steps>
+
+### Choisir un onglet d'indicateur
+
+Choisissez un indicateur principal, ou **Vérification personnalisée** pour tout autre.
+
+### Lire le graphique
+
+Le graphique s'intitule « Estimations de la couverture nationale pour ... » et trace par année l'**Estimation DHIS2**, l'**Estimation WUENIC** et l'**Estimation d'enquête** avec son **IC à 95 %**. La note précise le dénominateur utilisé pour les valeurs DHIS2.
+
+### Utiliser les outils du graphique
+
+Chaque graphique dispose d'une barre d'outils pour modifier les libellés, changer l'affichage ou le style, télécharger l'image et télécharger les données. Voir **[Exports, rapports et IA](/fr/apps/vaxx/exports-and-ai)**.
+
+</Steps>
+
+![Couverture nationale](/images/fr-national-coverage.png)
+
+Interprétation : des courbes DHIS2 qui suivent les points de l'enquête et de WUENIC confortent le dénominateur choisi. Un écart persistant, ou un DHIS2 au-dessus de 100 %, signale un problème de dénominateur ou de numérateur. Revenez à la **[qualité des données](/fr/apps/vaxx/data-quality)** et aux **[dénominateurs](/fr/apps/vaxx/denominators)**.
+
+## Inégalités nationales : Données de routine
+
+Montre comment la couverture nationale diffère entre les régions, à partir des données des établissements.
+
+- Onglets et onglet Vérification personnalisée comme ci-dessus. Chaque graphique montre la couverture de chaque région (niveau administratif 1) par année (sous-titre « Unité infranationale : niveau admin 1 ») par rapport à la courbe nationale.
+- Les filtres **Sélectionner les années** et **Palette** (Verts, Bleus, Rouges, Violets) pilotent la carte **Cartographie infranationale**, où chaque onglet dessine une carte intitulée « Répartition de ... par Régions » à partir des données DHIS2. La carte suit l'onglet sélectionné dans la carte des inégalités.
+
+Un large écart entre régions signifie que la moyenne nationale masque des zones faibles. Examinez-les dans **[Analyse infranationale](/fr/apps/vaxx/subnational)**.
+
+![Inégalités nationales](/images/fr-national-coverage-inequality.png)
+
+## Inégalités nationales : Données d'enquête (Évaluation de l'équité)
+
+Compare la couverture entre groupes de ménages à partir des fichiers d'enquête chargés dans l'assistant.
+
+<Steps>
+
+### Choisir le Type d'équité
+
+**Milieu de résidence** (Rural, Urbain), **Éducation maternelle** (Aucune éducation, Primaire, Secondaire ou plus) ou **Quintile de richesse**.
+
+### Choisir l'indicateur
+
+Les onglets sont **Pentavalent 3**, **Rougeole 1**, et les abandons entre Penta 1 et Penta 3 et entre Penta 3 et Rougeole 1, plus **Vérification personnalisée**.
+
+### Lire l'equiplot
+
+Le graphique s'intitule « Inégalités de couverture de ... selon ... » et montre la couverture de chaque groupe. La distance entre les points mesure l'inégalité.
+
+</Steps>
+
+Si un fichier d'enquête n'a pas été téléversé, les données de référence intégrées sont utilisées. Téléversez les fichiers du pays dans l'assistant **[Charger les données](/fr/apps/vaxx/getting-started)** pour une véritable évaluation.
+
+## Objectif de couverture
+
+Suit la part des unités infranationales qui atteignent les cibles mondiales. Sur cette page, utilisez **Niveau administratif** (niveau 1 ou 2). Deux onglets :
+
+| Onglet | Indicateurs | Une unité atteint la cible lorsque |
+| --- | --- | --- |
+| **Vaccin** | BCG, Pentavalent 3, Rougeole 1 | La couverture est d'au moins 80 % dans la région ou le district |
+| **Abandon** | Penta 1 à Penta 3, Penta 3 à Rougeole 1 | L'abandon est inférieur à 10 % |
+
+Le titre du graphique indique le seuil appliqué, et les barres montrent le pourcentage d'unités qui l'atteignent par année et par indicateur. Le tableau sous le graphique (**Taux cible par région** au niveau 1, **Zones infranationales avec une couverture** au niveau 2) liste les unités qui atteignent le seuil vaccinal pour l'indicateur et l'année choisis dans ses propres sélecteurs. Il peut être téléchargé au format Excel.
+
+<Callout type="warning">
+Un pourcentage croissant d'unités atteignant la cible n'est une bonne nouvelle que si la couverture ne dépasse pas des niveaux plausibles. Vérifiez les unités très supérieures à 100 % : le dénominateur est en cause. Pour l'abandon, rappelez-vous que plus bas est mieux, et lisez le titre du graphique pour le sens.
+</Callout>
+
+![Couverture par rapport aux cibles](/images/fr-national-coverage-targets.png)
+
+## Pièges
+
+- Les pages de couverture et de cibles changent quand vous changez de dénominateur. Notez le dénominateur utilisé pour un résultat (la note du graphique l'indique).
+- Les graphiques d'équité proviennent des fichiers d'enquête et peuvent avoir plusieurs années. Comparez-les aux tendances de routine, pas à une seule année de données DHIS2.
+- Zéro dose et Sous-vaccinés dépendent du dénominateur encore plus que la couverture par dose.
+
+Suite : **[Analyse infranationale](/fr/apps/vaxx/subnational)**.

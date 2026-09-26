@@ -1,36 +1,41 @@
 import { Callout } from 'nextra/components'
-import { AutoDownload } from '@/components/AutoDownload' 
-import {HomeCards } from '@/components/HomeCards'
+import { AutoDownload } from '@/components/AutoDownload'
+import { HomeCards } from '@/components/HomeCards'
 
-<AutoDownload />
+# Obrigado por transferir o DataSuite
 
+<AutoDownload
+  messageText="A transferência do DataSuite deverá começar dentro de instantes."
+  linkText="Ligação de transferência direta."
+/>
 
-
-## Get started
+## Começar
 
 <HomeCards
   items={[
     {
-      title: 'Download DataSuite',
-      description: 'Download DataSuite for Windows.',
-      href: '/en/downloads',
+      title: 'Transferir o DataSuite',
+      description: 'Transfira o DataSuite para Windows.',
+      href: '/pt/downloads',
       icon: 'tools'
     },
     {
-      title: 'Setup',
-      description: 'Install and configure DataSuite on your system.',
-      href: '/en/docs/setup/index',
+      title: 'Instalação',
+      description: 'Instale e configure o DataSuite no seu sistema.',
+      href: '/pt/docs/setup',
       icon: 'desktop-download'
     },
     {
-      title: 'Getting started',
-      description: 'Discover the key features of DataSuite with the step-by-step tutorial.',
-      href: '/en/docs/getting-started/index',
+      title: 'Primeiros passos',
+      description: 'Conheça as principais funcionalidades do DataSuite com o tutorial passo a passo.',
+      href: '/pt/docs/getting-started',
       icon: 'rocket'
     }
   ]}
 />
 
 <Callout type="info">
-  **Installation blocked?** If the system installer is blocked by your IT administrator, you may need to cancel it and download the **User Setup** version instead. Check out our [Troubleshooting](/troubleshooting) page for details.
+
+**Instalação bloqueada?** Se o instalador do sistema for bloqueado pelo administrador de TI, poderá ter de o cancelar e transferir antes a versão **Instalador de utilizador**. Consulte a nossa página de [Resolução de problemas](/pt/troubleshooting) para mais detalhes.
+
 </Callout>

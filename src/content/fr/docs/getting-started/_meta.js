@@ -1,7 +1,7 @@
 export default {
-  index: 'Navigating `CD2030 Datasuite',
+  index: "Navigation dans l'interface de DataSuite",
   'user-interface': {
-    title: 'User Interface',
+    title: 'Interface utilisateur',
     display: 'hidden',
     theme: {
       layout: 'full'

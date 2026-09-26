@@ -1,0 +1,411 @@
+import { Callout } from 'nextra/components'
+
+# Métodos
+
+Esta página apresenta a fundamentação científica das análises Countdown, com detalhes adicionais. O método em si -- como cada etapa é feita e como ler os resultados -- é a [metodologia Countdown](/pt/docs/framework); quando esta página e uma página da metodologia diferem, aplica-se a página da metodologia.
+
+## Abordagem analítica Countdown [#countdown-approach]
+
+## Avaliação da qualidade dos dados [#data-quality-assessment]
+
+### Completude da notificação [#reporting-completeness]
+
+**Base científica:**
+
+- A notificação incompleta cria uma subestimação sistemática da cobertura real. Assumir que as unidades que não notificaram não prestaram qualquer serviço é estatisticamente implausível; simplesmente não submeteram dados.
+- Os fatores de ajuste têm em conta esta lacuna com base num pressuposto defensável: as unidades que não notificam funcionam com uma capacidade inferior (tipicamente 25% do volume das unidades que notificam).
+
+A completude da notificação pode afetar a análise, especialmente se for baixa ou variar entre anos.
+Os valores atípicos extremos, como um zero a mais introduzido acidentalmente num número, podem ter um grande impacto, especialmente nos números subnacionais.
+Após as avaliações, são necessários vários passos para obter um conjunto de dados limpo para análise. Isto implica ajustar a notificação incompleta e corrigir os valores atípicos extremos.
+
+Se não se considerar a completude da notificação, isso significa que se assume que todas as unidades que não notificam não prestaram qualquer serviço, o que provavelmente não é verdade.
+Os ajustes dependem da quantidade de serviços (por exemplo, cuidados na gravidez, vacinações) prestados nas unidades que não notificaram em comparação com as que notificaram.
+O fator de ajuste $k$, definido como _o rácio entre o volume de serviços prestados pelas unidades que não notificam e o volume de serviços prestados pelas unidades que notificam_, é utilizado para ajustar os números notificados face à notificação incompleta.
+
+Para ter em conta a notificação incompleta, o número de eventos notificados pode ser ajustado utilizando a completude e o rácio de notificação das unidades, com a seguinte fórmula:
+
+$$
+N_{\text{adjusted}} = N_{\text{reported}} + N_{\text{reported}} \times \left(\frac{1}{c} - 1\right) \times k
+$$
+
+Onde:
+
+- $N_{\text{adjusted}}$: número total de eventos ajustado para a notificação incompleta
+- $N_{\text{reported}}$: número de eventos notificados
+- $c$: completude da notificação (por exemplo, proporção de unidades que notificaram)
+- $k$: fator de ajuste para ter em conta o menor volume de serviços nas unidades que não notificam
+
+<Callout type="info">
+
+**Pressuposto por defeito**
+
+Interpretação:
+
+- Como valor por defeito, utiliza-se $k=0.25$, o que significa que as unidades que não notificam prestaram serviços, mas apenas num volume correspondente a um quarto do volume das unidades de saúde que notificam.
+- O ajuste assume que as unidades que não notificam continuam a prestar serviços, mas com um volume inferior ao das unidades que notificam. O fator $k$ controla a magnitude deste ajuste.
+- O fator $k$ pode ser diferente para diferentes serviços. Por exemplo, se a notificação das unidades privadas for fraca, mas estas estiverem integradas no sistema nacional e realizarem um número considerável de partos, $k$ pode ser superior a 0,25 ou mesmo chegar a 1,0.
+- Se a taxa de notificação das unidades for inferior a 75%, torna-se mais difícil imputar os dados distritais. Por conseguinte, não são feitos ajustes se a notificação for inferior a 75%. Nesse caso, uma análise adicional para determinar a cobertura com os dados das unidades não é considerada suficientemente fiável.
+
+</Callout>
+
+Os seguintes valores de $k$ são utilizados, consoante a notificação, para ajustar os números notificados face à notificação incompleta:
+
+- `k = 0`: nenhum serviço nas unidades que não notificam (valor de k por defeito)
+- `k = 0.25`: alguns serviços, mas muito inferiores aos das unidades que notificam
+- `k = 0.50`: metade da taxa das unidades que notificam
+- `k = 0.75`: quase tantos como as unidades que notificam
+- `k = 1.0`: mesma taxa de serviços que as unidades que notificam
+
+#### Resumo das ações de ajuste
+
+| Problema | Ação | Ajuste |
+| --- | --- | --- |
+| Baixas taxas de notificação: identificação das taxas baixas que foram ajustadas | Se inferior a 75% (por defeito), os dados foram imputados | O valor mensal mediano do distrito para o ano foi imputado para o mês com baixa notificação |
+| Notificação incompleta pelos distritos, variável ao longo do tempo, o que afeta a avaliação das tendências | Se as taxas de notificação eram ≥ 75% e ≤ 100% (por defeito), foi feito um pressuposto sobre o volume de serviços prestados pelas unidades que não notificam | O fator de ajuste $k$ foi utilizado para ajustar a notificação incompleta; o valor por defeito de $k$ é 0,25 (substituir se tiver sido utilizado um valor diferente; indicar se foi utilizado para todos os formulários de notificação ou se foram utilizados fatores $k$ diferentes entre formulários) |
+| Os valores atípicos extremos podem afetar fortemente a avaliação das tendências de cobertura | Se um valor mensal fosse superior ou inferior a 5 vezes o desvio absoluto mediano (MAD) em relação ao valor mediano mensal do distrito, foi feito um ajuste | Os valores atípicos mensais extremos são corrigidos e recebem o valor mediano do distrito para o mesmo ano |
+| Valores em falta | Se existir um valor em falta, os dados foram imputados | O valor mensal mediano do distrito para o ano foi imputado para o mês com valor em falta |
+
+### Deteção de valores atípicos [#outlier-detection]
+
+Um valor atípico extremo é definido como um valor mensal que corresponde a 5 vezes o desvio absoluto mediano (MAD) em relação ao valor mediano mensal de um determinado ano.
+
+### Consistência interna [#internal-consistency]
+
+- A consistência interna avalia o grau de alinhamento entre indicadores relacionados dentro do conjunto de dados, com base nas relações epidemiológicas e de prestação de serviços esperadas.
+- No âmbito do quadro analítico CD2030, esta etapa complementa outras métricas de DQA, avaliando se os indicadores que estão ligados biológica ou programaticamente seguem padrões plausíveis.
+- Ao contrário das verificações de indicadores isolados, a consistência interna centra-se nas **relações entre indicadores**, garantindo que os valores notificados refletem percursos realistas de prestação de serviços ao longo do contínuo de cuidados.
+
+<details>
+<summary>Principais relações entre indicadores avaliadas para a consistência interna</summary>
+
+1. **CPN1 vs Penta1**
+
+   Espera-se que estes indicadores sigam um padrão consistente, uma vez que ambos representam pontos de entrada nos serviços de saúde materna e infantil. Após o ajuste para as perdas esperadas (por exemplo, natimortos, óbitos neonatais), o rácio deve situar-se dentro de um intervalo plausível.
+
+   A relação entre a **CPN1** (primeira consulta de cuidados pré-natais) e a **Penta1** (primeira dose da vacina pentavalente) reflete a continuidade entre os serviços de saúde materna e infantil.
+
+   O rácio esperado deriva de pressupostos biológicos e demográficos, incluindo:
+
+   - Perda de gravidez (~3%)
+   - Natimortos (~2%)
+   - Gravidez gemelar (~1,5%)
+   - Mortalidade neonatal (~3%)
+
+   Estes fatores dão origem a um rácio esperado de base de:
+
+   $$
+   Expected\ Ratio = 1.07
+   $$
+
+   Este é depois ajustado com base na cobertura dos inquéritos:
+
+   $$
+   Expected\ Ratio = 1.07 \times \left(\frac{\text{Survey ANC1 Coverage}}{\text{Survey Penta1 Coverage}}\right)
+   $$
+
+   *Limiar:* um intervalo de tolerância de **±0,05** em torno do rácio esperado é considerado aceitável.
+
+   *Exemplo:* se a cobertura da CPN1 = 90% e a da Penta1 = 95%:
+
+   $$
+   1.07 \times \left(\frac{0.90}{0.95}\right) = 1.01
+   $$
+
+   *Intervalo aceitável:* **0,96 – 1,06**
+
+2. **Penta1 vs Penta3**
+
+   Este rácio reflete a **continuidade do programa de imunização** e é sobretudo determinado pelas taxas de abandono e não por fatores biológicos.
+
+   O rácio esperado baseia-se na cobertura dos inquéritos:
+
+   $$
+   Expected\ Ratio = \frac{\text{Survey Penta1 Coverage}}{\text{Survey Penta3 Coverage}}
+   $$
+
+   *Limiar:* aplica-se um intervalo de tolerância de **±0,05**.
+
+   *Exemplo:* se a Penta1 = 95% e a Penta3 = 85%:
+
+   $$
+   \frac{0.95}{0.85} = 1.12
+   $$
+
+   *Intervalo aceitável:* **1,07 – 1,17**
+
+3. **Partos institucionais vs Penta1**
+
+   O número de partos em unidades de saúde deve, em termos gerais, estar alinhado com a adesão subsequente aos serviços de saúde infantil, incluindo a imunização.
+
+</details>
+
+#### Interpretação no processo de DQA
+
+A consistência interna deve ser interpretada em conjunto com:
+
+- A completude dos relatórios
+- A deteção de valores atípicos
+- A completude dos dados
+
+<Callout type="info">
+
+**Ideia-chave**
+
+Um forte alinhamento entre indicadores relacionados aumenta a confiança na fiabilidade dos dados. Os desvios significativos em relação aos rácios esperados devem ser investigados no contexto local antes de se efetuarem ajustes.
+
+</Callout>
+
+<Callout type="warning">
+
+**Interpretação contextual**
+
+Nem todos os desvios indicam fraca qualidade dos dados. Alterações de programas, campanhas ou perturbações nos serviços podem explicar as diferenças observadas.
+
+</Callout>
+
+## Análise da cobertura [#coverage-analysis]
+
+### Fundamentação: base científica para a análise [#coverage-rationale]
+
+**Base científica:**
+
+- A cobertura das intervenções é um resultado crítico e direto dos sistemas de saúde. O acompanhamento regular da cobertura aos níveis nacional e subnacional tornou-se o pilar da monitorização dos progressos nos planos nacionais de saúde e nas iniciativas internacionais.
+- Os indicadores de saúde reprodutiva, materna, neonatal, infantil e do adolescente com metas são os indicadores mais comuns dos planos nacionais de saúde e da monitorização global.
+- Tanto os dados das unidades de saúde como os inquéritos aos agregados familiares podem fornecer estatísticas de cobertura, sendo desejável uma abordagem analítica integrada.
+
+Muitos indicadores de cobertura podem ser estimados tanto a partir dos inquéritos como dos dados das unidades de saúde. Ambos são elementos de informação críticos e devem ser considerados em conjunto. Os dados das unidades podem ser utilizados para gerar estimativas anuais de cobertura, e os resultados de cobertura devem ser comparados e interpretados em conjunto com os resultados de inquéritos recentes.
+
+<details>
+<summary>Principais indicadores de cobertura (denominadores dos inquéritos vs. dos dados das unidades)</summary>
+
+| Indicador | Denominador dos inquéritos | Denominador dos dados das unidades |
+| --- | --- | --- |
+| **Cuidados pré-natais (CPN1, CPN1 no primeiro trimestre, CPN4)** | Mulheres com 15-49 anos com um nado-vivo nos últimos 2 anos | Total estimado de mulheres grávidas na população |
+| **Terapêutica preventiva intermitente (TPI2, TPI3)** | Mulheres com 15-49 anos com um nado-vivo nos últimos 2 anos | Total estimado de mulheres grávidas na população |
+| **Partos institucionais e SBA** | Nados-vivos nos últimos 2 anos | Nados-vivos estimados como denominador |
+| **Baixo peso à nascença e cesariana** | Contagens de baixo peso à nascença / cesariana | Nados-vivos estimados como denominador |
+| **Cuidados pós-natais nas primeiras 48 horas (CPoN48h)** | Cuidados pós-natais nas primeiras 48 horas | Nados-vivos estimados como denominador |
+| **BCG, Penta1, Penta3** | Crianças com 12-23 meses | Número de lactentes sobreviventes (para além do período neonatal) |
+| **Sarampo 1** | Crianças com 12-23 meses | Número de lactentes sobreviventes (para além do período pós-neonatal) |
+| **Sarampo 2** | Crianças com 24-35 meses | Número de lactentes sobreviventes (para além do período pós-neonatal) |
+
+</details>
+
+### Cuidados pré-natais (CPN) [#antenatal-care]
+
+A maioria dos países tem pelo menos um indicador de CPN com uma meta no plano nacional. As metas globais de cobertura ENAP/EPMM para 2025 são: a nível global, pelo menos 90% das mulheres grávidas com 4 ou mais consultas de CPN, e 90% dos países com pelo menos 70% de cobertura.
+
+A CPN1 é frequentemente considerada um indicador de acesso básico aos serviços de saúde. É elevada na maioria dos países e, em muitos casos, o número de consultas de CPN1 nos dados de rotina das unidades de saúde pode fornecer um melhor denominador para os indicadores de CPN e de parto do que as projeções populacionais.
+
+<Callout type="warning">
+
+**Sobrestimação da cobertura**
+
+Por vezes, um indicador pode atingir uma cobertura improvavelmente elevada a nível nacional, por exemplo, acima de 125%. Isto pode dever-se ao facto de a qualidade dos dados do numerador do indicador de cobertura ser fraca, de o denominador estar errado, ou de a intervenção ser administrada e registada mais do que uma vez durante a gravidez (por exemplo, a suplementação com IFA).
+
+Nesse caso, o cálculo da cobertura não é útil. É preferível expressá-la de forma diferente. Por exemplo, se a cobertura for de 200%, é preferível calcular o número médio de ciclos de 90 comprimidos de IFA que uma mulher grávida recebeu (neste caso, 2,0 por mulher grávida na população).
+
+</Callout>
+
+![Estimativas da cobertura nacional de 4 consultas de CPN a partir dos dados das unidades e dos inquéritos](/images/pt-national-coverage.png)
+
+### Cuidados de parto [#delivery-care]
+
+Todos os países têm pelo menos um indicador de cuidados de parto com uma meta no plano nacional. A cobertura dos nados-vivos institucionais e a SBA estão estreitamente relacionadas, uma vez que quase todos os partos com um profissional qualificado ocorrem em unidades de saúde. Do ponto de vista analítico, é preferível a cobertura dos partos institucionais por ser uma medida mais objetiva e por evitar problemas com as diferentes definições nacionais do que constitui um parto assistido por profissional qualificado.
+
+<Callout type="info">
+
+**Valores de referência para a cesariana**
+
+A cesariana é uma intervenção que salva vidas e um indicador importante. Uma regra geral apresentada pela Organização Mundial da Saúde (OMS) é que a necessidade de cesariana ao nível da população se situa entre **10 e 15%** de todos os partos.
+
+- **Abaixo de 10%:** indica uma necessidade não satisfeita de cuidados cirúrgicos de parto.
+- **Acima de 10-15%:** implica uma provável utilização excessiva de cesarianas. Pode também implicar uma combinação de necessidades não satisfeitas em determinados grupos populacionais (por exemplo, as mulheres mais pobres ou rurais) a par da utilização excessiva noutros subgrupos.
+
+</Callout>
+
+![Estimativas da cobertura nacional de baixo peso à nascença, um indicador de cuidados de parto](/images/national-analysis-lbw.png)
+
+### Imunização [#immunization]
+
+Os indicadores de cobertura de imunização estão incluídos no plano de monitorização do setor da saúde de praticamente todos os países. Uma meta geral é uma cobertura de, pelo menos, 90% para as vacinas essenciais administradas na infância e na adolescência.
+
+**Formulação dos denominadores para os dados das unidades:**
+
+O número de vacinações administradas a lactentes é utilizado como numerador. O denominador é o número de crianças elegíveis na população, aproximado da seguinte forma:
+
+$$
+\text{Denominator (BCG, Penta)} = \text{Live Births} - \text{Neonatal Deaths}
+$$
+
+$$
+\text{Measles 1 Denominator} = \text{Live Births} - \text{Neonatal Deaths} - \text{Postneonatal Deaths}
+$$
+
+$$
+\text{Measles 2 Denominator} = \text{Live Births} - \text{Neonatal Deaths} - (2 \times \text{Postneonatal Deaths})
+$$
+
+![Estimativas da cobertura nacional da primeira dose de sarampo a partir dos dados das unidades e dos inquéritos](/images/national-analysis-measles1.png)
+
+### Planeamento familiar [#family-planning]
+
+As estimativas de cobertura do planeamento familiar resultam de uma colaboração entre a Countdown to 2030 e a Track20, utilizando a Ferramenta de Estimação do Planeamento Familiar (FPET).
+
+$$
+\text{Demand Satisfied (Coverage)} = \frac{\text{Use of Modern Contraceptives}}{\text{Unmet Need} + \text{Use of Modern Contraceptives}}
+$$
+
+![Projeção FPET da prevalência de contraceção moderna e da procura satisfeita em planeamento familiar](/images/pt-national-coverage-fpet.png)
+
+## Análise da equidade (equiplots) [#equity-analysis]
+
+### Fundamentação: base científica para a análise [#equity-rationale]
+
+**Base científica:**
+
+- As médias nacionais de cobertura mascaram disparidades críticas que determinam se os sistemas de saúde estão realmente a não deixar ninguém para trás.
+- Os inquéritos aos agregados familiares fornecem informações críticas sobre as desigualdades em três grandes dimensões: área de residência (urbana/rural), riqueza (quintis dos mais ricos aos mais pobres) e escolaridade da mãe.
+- Os equiplots são utilizados para avaliar se o país registou progressos na redução do fosso entre pobres e ricos ou do fosso de escolaridade ao longo do tempo.
+
+Para os quintis de riqueza, é possível avaliar qual é o tipo de desigualdade, uma vez que todas as categorias têm a mesma dimensão. Cada padrão requer uma estratégia diferente de programação e focalização em saúde:
+
+- **Desigualdade de topo (privação em massa):** se os mais ricos estiverem muito à frente de todos os outros quintis de riqueza, apenas os ricos escapam.
+- **Desigualdade linear:** se as diferenças de cobertura forem equidistantes, trata-se de um padrão linear em que o aumento da riqueza do agregado familiar está linearmente associado a uma maior cobertura.
+- **Desigualdade de base (marginalização):** se os mais pobres forem deixados para trás, isto significa a marginalização dos mais pobres.
+
+<Callout type="info">
+
+**Guia de interpretação**
+
+A interpretação deve centrar-se em saber se as desigualdades se reduziram ao longo do tempo. As seguintes questões devem orientar a interpretação:
+
+1. Qual é o nível de desigualdade no ponto de dados mais recente?
+2. Como é que as desigualdades se alteraram ao longo do tempo?
+3. Existe algum padrão de desigualdade que possa ser observado?
+4. Quais serão as melhores abordagens para reduzir as desigualdades?
+
+</Callout>
+
+![Equiplot da cobertura de Pentavalente 1 por escolaridade materna](/images/equity_education.png)
+
+![Equiplot da cobertura de Pentavalente 1 por quintil de riqueza](/images/equity_health.png)
+
+![Equiplot da cobertura de Pentavalente 1 por área de residência](/images/equity_area.png)
+
+![Equiplot da cobertura de Pentavalente 3 por área de residência](/images/pt-national-coverage-equity-area.png)
+
+## Desempenho dos sistemas de saúde [#health-systems]
+
+### Fundamentação: base científica para a análise [#health-systems-rationale]
+
+**Base científica:**
+
+- A avaliação da carga de doença, da cobertura das intervenções, da qualidade, da equidade e dos recursos do sistema de saúde deve orientar diretamente a formulação de políticas e a focalização dos programas.
+- Uma avaliação abrangente requer uma comparação de base entre os recursos do sistema de saúde (como o financiamento, a densidade da força de trabalho em saúde e a disponibilidade de infraestruturas) e os resultados correspondentes do sistema (incluindo a utilização dos serviços e as taxas de cobertura) ao nível subnacional (nível Admin1).
+- O objetivo central continua a ser isolar estrangulamentos subnacionais específicos onde elevados recursos do sistema não se traduzem nos resultados esperados de cobertura de serviços de SRMNIA-N, ou, inversamente, identificar regiões de elevado desempenho que apresentem uma forte eficiência na prestação de serviços.
+
+### Recursos dos sistemas de saúde [#health-inputs]
+
+A avaliação centra-se na qualidade dos dados dos indicadores do sistema de saúde aos níveis nacional e subnacional, com vista à comparação de referência global (benchmarking) e à auditoria de plausibilidade.
+
+<details>
+<summary>Principais indicadores de recursos do sistema de saúde</summary>
+
+- **Financiamento da saúde:** frequentemente limitado às dotações orçamentadas do governo.
+- **Profissionais de saúde essenciais por 10 000 habitantes:** inclui médicos, clínicos não médicos, enfermeiros e parteiras.
+  - *Limiar histórico (OMS 2006):* referência mínima de 23 por 10 000.
+  - *Limiar atual (era da CUS):* pelo menos 44,5 por 10 000.
+- **Densidade de unidades de saúde:**
+
+  $$
+  \text{Health Facility Density} = \left( \frac{\text{Total Number of Health Facilities}}{\text{Total Population}} \right) \times 10\,000
+  $$
+
+- **Densidade hospitalar:**
+
+  $$
+  \text{Hospital Density} = \left( \frac{\text{Total Number of Hospitals}}{\text{Total Population}} \right) \times 100\,000
+  $$
+
+- **Densidade de camas de internamento:**
+
+  $$
+  \text{Inpatient Bed Density} = \left( \frac{\text{Total Inpatient Beds}}{\text{Total Population}} \right) \times 10\,000
+  $$
+
+</details>
+
+![Densidade subnacional de unidades de saúde por 10 000 habitantes por unidade Admin1](/images/pt-health-system-subnational.png)
+
+### Resultados dos sistemas de saúde em função dos recursos [#outputs-by-inputs]
+
+A análise explora a associação estatística entre os recursos do sistema de saúde e os indicadores correspondentes de utilização dos serviços ou de cobertura nas unidades subnacionais (nível Admin1):
+
+- **Infraestrutura de internamento vs. internamentos hospitalares de menores de 5 anos:** espera-se que as regiões com menor densidade de hospitais/camas apresentem taxas de internamento pediátrico mais baixas. Os valores atípicos podem indicar subnotificação de infraestruturas ou um elevado volume de atividade clínica.
+- **Densidade da força de trabalho em saúde vs. utilização de consultas externas por menores de 5 anos:** espera-se uma inclinação positiva numa reta de regressão linear. Os valores atípicos podem sinalizar sobrecarga de trabalho dos profissionais ou inflação do numerador.
+- **Densidade da força de trabalho em saúde vs. cobertura de nados-vivos institucionais:** avalia se a disponibilidade de profissionais se traduz diretamente em cobertura de partos institucionais.
+
+{/* TODO-IMAGE: Gráfico de dispersão dos internamentos hospitalares (IPD) de menores de 5 anos em função da densidade de hospitais/camas por unidade Admin1, com reta de regressão | suggested: 6-ipd_use.png */}
+
+![Consultas externas de menores de 5 anos por densidade da força de trabalho em saúde ao nível Admin1, com reta de regressão](/images/u5_OPD.png)
+
+![Cobertura de partos institucionais por densidade da força de trabalho em saúde ao nível Admin1, com reta de regressão](/images/institutional_del.png)
+
+## Mortalidade institucional [#institutional-mortality]
+
+### Fundamentação: base científica para a análise [#mortality-rationale]
+
+**Base científica:**
+
+- A mortalidade materna e perinatal nas unidades de saúde constitui um indicador crítico da qualidade dos cuidados (mortalidade institucional).
+- Se a cobertura dos partos em unidades de saúde for elevada (por exemplo, superior a 75%), as estatísticas das unidades tornam-se um contributo útil para a estimação dos níveis de mortalidade da população.
+- O principal desafio dos dados de mortalidade das unidades de saúde é a **subnotificação de óbitos**. Os óbitos maternos não ocorrem apenas durante o parto, mas também na gravidez e no pós-parto. A notificação dos natimortos exige registos de maternidade bem mantidos e verificações cruzadas com os registos do bloco operatório.
+
+<details>
+<summary>Definições de mortalidade institucional vs. mortalidade da população</summary>
+
+| Indicador | Numerador | Denominador |
+| --- | --- | --- |
+| **Rácio de mortalidade materna institucional (iMMR)** | Número de óbitos maternos nas unidades de saúde | $\frac{\text{Nados-vivos nas unidades de saúde}}{100\,000}$ |
+| **Mortalidade materna na população (MMR)** | Número de óbitos maternos na população | $\frac{\text{Nados-vivos na população}}{100\,000}$ |
+| **Taxa de natimortalidade institucional (iSBR)** | Número de natimortos nas unidades de saúde | $\frac{\text{Nascimentos nas unidades de saúde}}{1\,000}$ |
+| **Mortalidade neonatal (antes da alta)** | Número de óbitos neonatais antes da alta | $\frac{\text{Nados-vivos nas unidades de saúde}}{1\,000}$ |
+
+</details>
+
+### Interpretação dos dados e métricas de qualidade [#mortality-interpretation]
+
+Ao interpretar o iMMR e o iSBR, avalie os valores atípicos extremos elevados (erros de introdução de dados) e as taxas implausivelmente baixas (por exemplo, iMMR &lt; 25 por 100 000 ou iSBR &lt; 6 por 1 000), que indicam fortemente uma grande subnotificação e não resultados clínicos superiores.
+
+**Rácio entre natimortos e óbitos maternos:**
+
+Espera-se que a mortalidade materna e os natimortos estejam positivamente correlacionados. Espera-se que o rácio entre natimortos e óbitos maternos se situe entre **5 e 25** nos países da África Subsariana.
+
+<Callout type="warning">
+
+**Alertas de qualidade dos dados**
+
+- **Rácio &lt; 5:** é provável que a subnotificação de natimortos seja superior à subnotificação de óbitos maternos.
+- **Rácio ≥ 25:** é provável que a subnotificação de óbitos maternos seja o principal problema.
+
+</Callout>
+
+![Mortalidade materna institucional por 100 000 nados-vivos por região e a nível nacional](/images/pt-mortality-institutional-mortality.png)
+
+![Natimortos institucionais por 1 000 nascimentos por região e a nível nacional](/images/sbr-rate.png)
+
+![Rácio entre natimortos e óbitos maternos nas unidades de saúde](/images/sbr-maternal-death-ratio.png)
+
+### Consistência com as estimativas da população [#mortality-modeling]
+
+O MMR da população ($M_p$), o MMR comunitário ($M_c$) e o MMR institucional ($M_i$) têm de ser matematicamente consistentes.
+
+$$
+M_p = (M_i \times P_i) + (M_c \times (1 - P_i))
+$$
+
+Onde $P_i$ é a proporção de nados-vivos que ocorrem numa instituição de saúde.
+
+Dada uma estimativa de base para o MMR da população ($M_p$) e um rácio de variância entre comunidade e instituição assumido ($R = \frac{M_c}{M_i}$), o MMR institucional esperado é calculado da seguinte forma:

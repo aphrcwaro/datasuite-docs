@@ -1,0 +1,63 @@
+import { Callout } from 'nextra/components'
+
+# Mode portable
+
+DataSuite prend en charge le [mode portable](https://en.wikipedia.org/wiki/Portable_application). Ce mode permet à toutes les données créées et gérées par DataSuite de rester à proximité de l'application elle-même, afin de pouvoir être déplacées d'un environnement à un autre.
+
+Le mode portable est pris en charge par le téléchargement ZIP pour Windows. Consultez la [page de téléchargement](/fr/downloads) pour trouver le fichier `.zip` adapté à votre plateforme.
+
+<Callout type="warning">
+
+N'essayez pas de configurer le mode portable sur une installation réalisée à partir des **programmes d'installation Windows User ou System**. Le mode portable n'est pris en charge que par l'archive ZIP (`.zip`) de Windows. Notez également que l'archive ZIP de Windows ne prend pas en charge la mise à jour automatique.
+
+</Callout>
+
+## Activer le mode portable
+
+### Windows
+
+Après avoir décompressé le téléchargement de DataSuite, créez un dossier `data` dans le dossier de DataSuite :
+
+```
+|- DataSuite-win32-x64-1.0.0
+|   |- Suite.exe (or code executable)
+|   |- data
+|   |- bin
+|   |  |- code
+|   |  |- ...
+|   |- ...
+```
+
+À partir de ce moment, le dossier `data` sera utilisé pour contenir toutes les données de DataSuite, y compris l'état de la session, les préférences, etc.
+
+Le dossier `data` peut être déplacé vers d'autres installations de DataSuite. C'est utile pour mettre à jour votre version portable de DataSuite : vous pouvez alors déplacer le dossier `data` vers une version plus récente de DataSuite, préalablement extraite.
+
+## Mettre à jour DataSuite portable
+
+Sous **Windows**, vous pouvez mettre à jour DataSuite en copiant le dossier `data` vers une version plus récente de DataSuite.
+
+## Migrer vers le mode portable
+
+Vous pouvez également migrer une installation existante vers le mode portable.
+
+### Windows
+
+1. Téléchargez la distribution ZIP de [DataSuite](/fr/downloads) pour votre plateforme.
+2. Créez le dossier `data` comme indiqué ci-dessus.
+3. Copiez le répertoire de données utilisateur `DataSuite` dans `data` et renommez-le en `user-data` :
+   - **Windows** : `%APPDATA%\DataSuite`
+
+À titre d'exemple, voici le résultat attendu sous **Windows** :
+
+```
+|- DataSuite-win32-x64-1.84.2
+|   |- DataSuite.exe (or suite executable)
+|   |- data
+|   |   |- user-data
+|   |   |   |- ...
+|   |- ...
+```
+
+## Répertoire TMP
+
+Par défaut, le répertoire `TMP` reste celui du système, même en mode portable, car aucun état n'y est conservé. Si vous souhaitez que votre répertoire TMP se trouve également dans votre répertoire portable, vous pouvez créer un répertoire `tmp` vide dans le dossier `data`. Tant qu'un répertoire `tmp` existe, il sera utilisé pour les données TMP.

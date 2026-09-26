@@ -1,0 +1,113 @@
+---
+topics: [data-quality, reporting-completeness, outliers, internal-consistency, data-missingness, dq-ratios, dq-score]
+reportKinds: [reporting_rate, overall_score, consistency, dq_ratios, dq_reporting_units, dq_completeness_units, dq_completeness_districts, dq_outliers_units, dq_outlier_trend]
+cacheMembers: [reporting_rate_national, reporting_rate_admin1, reporting_rate_district, district_reporting_rate, calculate_reporting_rate, calculate_district_reporting_rate, completeness_national, completeness_admin1, completeness_district, district_completeness, calculate_completeness_summary, list_missing_units, outliers_national, outliers_admin1, outliers_district, district_outliers_summary, list_outlier_units, calculate_outliers_summary, ratios_summary, adequacy_ratios, calculate_ratios_and_adequacy, overall_score, calculate_overall_score, performance_threshold]
+appPages: [reporting_rate, data_completeness, outlier_detection, internal_consistency, overall_score]
+ai:
+  status: draft
+  summary: >-
+    Five Data Quality Assessment pages show how complete, plausible and consistent the routine data are; their
+    results decide whether to remove years and how to adjust. Review them after loading, in order: Reporting Rate,
+    Outlier Detection, Data Missingness, Internal Consistency, Overall Data Quality Score.
+  definitions:
+    - "Outlier: a value more than 5 median absolute deviations (MAD) from the median (Hampel method) (#outlier-detection)"
+  rules:
+    - "Performance Threshold is 90 by default (quick picks 70, 80, 90, 95), saved in the dataset and reused by the Overall Data Quality Score (#common-filters)"
+    - "A high national reporting rate can hide many low-reporting districts; check the district view and the score by region (#interpretation-and-pitfalls)"
+    - "Consistency plots show plausibility, not truth; changing the threshold changes the score (#interpretation-and-pitfalls)"
+    - "The method is in Data quality assessment (/en/docs/framework/2-data-quality-assessment/)"
+  interpretation:
+    - "Reporting Rate: Heat Map and Bar Graph tabs; National Reporting Rate shows the percent of districts below the threshold; a table lists units with low reporting (#read-the-national-reporting-rate-card-and-the-table)"
+    - "Internal Consistency: ratios ANC1/Penta1, Penta1/Penta3 and OPV1/OPV3 against expected ratios; points far from the diagonal indicate inconsistent reporting (#internal-consistency)"
+    - "Overall Data Quality Score: completeness, extreme outliers and consistency blocks; the last row is the Annual data quality score (#overall-data-quality-score)"
+---
+
+import { Steps, Callout } from 'nextra/components'
+
+# Data quality
+
+Data quality is the first analysis stage. Five pages under **Data Quality Assessment** show how complete, plausible and consistent the routine data are. Their results decide whether you remove years and how you adjust the data. Methods are described in the **[data quality assessment](/en/docs/framework/2-data-quality-assessment)** chapter.
+
+## When to use it
+
+Use these pages right after loading the data, and again whenever you upload a corrected file. Review them in this order: Reporting Rate, Outlier Detection, Data Missingness, Internal Consistency, Overall Data Quality Score.
+
+## Common filters
+
+- **Indicator**: pick what to assess. Outlier, missingness and consistency pages list all Vaxx indicators (ANC1, Institutional Deliveries, Institutional Live Births, BCG, IPV 1-2, Measles 1-2, OPV 1-3, Pentavalent 1-3, PCV 1-3, Rotavirus 1-2). Reporting Rate uses three service groups: ANC, Institutional Delivery and Vaccination.
+- **Admin Level**: Admin 1 (regions) or Admin 2 (districts). A region selector lets you focus on the districts of one region.
+- **Performance Threshold** (Reporting Rate only): a percentage, 90 by default with quick picks of 70, 80, 90 and 95. It is saved in the dataset and reused by the Overall Data Quality Score.
+
+## Reporting Rate
+
+How completely facilities reported, by year and area.
+
+<Steps>
+
+### Choose the service, threshold and admin level
+
+Select ANC, Institutional Delivery or Vaccination, set the threshold, then the admin level.
+
+### Read Sub-National Reporting Rate
+
+The **Heat Map** tab shows the reporting rate for each area and year. The **Bar Graph** tab shows the rate by year.
+
+### Read the National Reporting Rate card and the table
+
+The National Reporting Rate card shows the percentage of districts with low reporting (below the threshold) by service and year. **Sub-National Units with Low Reporting** lists the areas below the threshold for the selected year and service.
+
+</Steps>
+
+![Reporting rate by year](/images/dqa-reporting-rate.png)
+
+## Outlier Detection
+
+Finds extreme monthly values that may be data entry errors. A value is an outlier when it lies more than 5 median absolute deviations (MAD) from the median (Hampel method).
+
+- **Indicators with Outliers** card: tabs **Heat Map** (percent of non-outlier values by area and year), **Indicator Bar Graph** (by year and indicator) and **Region Bar Graph** (by year and region).
+- **Sub-National Units with Extreme Outliers**: table of year, month, area, reported value, median and MAD. Pick the year with the "This table only" control.
+- **Sub-National Trends**: monthly plot for one region and the selected year, showing the reported value, the median, the outlier bounds (plus and minus 5 MAD) and the outliers.
+
+![Outlier detection](/images/dqa-outlier-detection.png)
+
+## Data Missingness
+
+Shows which indicators and areas have missing data.
+
+- Tabs **Heat Map** (missingness percentage by area and year), **Complete Indicators** (percent of districts with complete data for the indicator) and **Missing Indicators by Region** (trend in completeness by region).
+- **Sub-National Units with Missing Data**: table of areas with incomplete data for the selected indicator and year. The indicator selector has a Select All option.
+
+![Data missingness](/images/dqa-missingness.png)
+
+## Internal Consistency
+
+Checks that related indicators agree over time.
+
+- **Ratio Plots**: ratios ANC1 / Penta1, Penta1 / Penta3 and OPV1 / OPV3 by year, compared with the expected ratios.
+- **Consistency Checks**: tabs **ANC1 and Penta1**, **Penta1 and Penta3**, **OPV1 and OPV3**, **IPV1 and IPV2**, and **Custom Check** where you choose the X and Y indicators. Each plot draws one point per district and year, with a linear fit and a diagonal. Points far from the diagonal indicate inconsistent reporting.
+
+![Consistency checks](/images/dqa-conistency-checks.png)
+
+## Overall Data Quality Score
+
+One annual score across all checks. Filter by region or use the national level. The table has three blocks:
+
+1. **Completeness of monthly facility reporting** (mean of ANC, delivery, immunization): percent of expected monthly reports nationally, and percent of districts with completeness at or above the threshold, and percent of districts with no missing values (mean for common vaccines).
+2. **Extreme outliers**: percent of monthly values that are not extreme outliers, and percent of districts with no extreme outliers in the year.
+3. **Consistency of annual reporting**: the three ratios and the percent of districts with ANC1/Penta1, Penta1/Penta3 and OPV1/OPV3 in the expected range.
+
+The last row is the **Annual data quality score**. Use the two download buttons on the card to save the plot and the data.
+
+![Overall data quality score](/images/dqa-overall-score.png)
+
+## Interpretation and pitfalls
+
+<Callout type="warning">
+A high national reporting rate can hide many low-reporting districts. Always check the district view and the score by region.
+</Callout>
+
+- A year with many outliers or low completeness is a candidate for **[Remove Years](/en/apps/vaxx/data-preparation)** or careful adjustment.
+- Consistency plots show plausibility, not truth: an unusual Penta1/Penta3 ratio can be a real dropout problem or a data problem.
+- Changing the threshold changes the score, so agree it with your team before comparing years or countries.
+
+Next: **[Data preparation](/en/apps/vaxx/data-preparation)**.

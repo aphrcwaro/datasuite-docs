@@ -1,22 +1,48 @@
+---
+topics: [workflow]
+ai:
+  status: draft
+  summary: >-
+    Overview of the CD2030 DataSuite analytical framework: it takes country teams from raw facility and survey
+    data to defensible national and sub-national coverage findings, meant to inform country review processes,
+    planning discussions and technical working groups rather than stand alone as a report.
+  options:
+    - "Data quality assessment: reporting completeness, outliers, missingness, internal consistency, annual quality scores (#framework-modules)"
+    - "Data adjustment: remove unreliable periods, apply adjustment factors, compare values before and after cleaning (#framework-modules)"
+    - "Denominator selection: compare DHIS2, UN, ANC1-derived and Penta1-derived denominator options (#framework-modules)"
+    - "Coverage estimation: levels and trends, comparison with survey benchmarks, progress toward targets (#framework-modules)"
+    - "Equity analysis: inequality by residence, wealth and maternal education from surveys (#framework-modules)"
+    - "Sub-national analysis: regional and district variation, target attainment, geographic inequality (#framework-modules)"
+  steps:
+    - "Load and configure facility and survey data (/en/docs/framework/1-analysis-setup) (#end-to-end-workflow)"
+    - "Calibrate the national benchmark rates (/en/docs/framework/1-analysis-setup#survey-params) (#end-to-end-workflow)"
+    - "Assess data quality before estimating coverage (/en/docs/framework/2-data-quality-assessment) (#end-to-end-workflow)"
+    - "Adjust incomplete, unstable or unreliable data (/en/docs/framework/3-data-adjustment) (#end-to-end-workflow)"
+    - "Select the best-performing denominator (/en/docs/framework/4-denominator-selection) (#end-to-end-workflow)"
+    - "Generate and interpret coverage, equity, sub-national, mortality, service utilization and health system performance results (#end-to-end-workflow)"
+  notCovered:
+    - "How each step is carried out: see the module pages linked from the workflow (#end-to-end-workflow)"
+---
+
 import { HomeCards } from '@/components/HomeCards'
 
-# Framework Overview
-![Countdown Analysis workflow](/images/methods_cd_approach.png)
+# Framework overview
 
 This page summarizes the CD2030 DataSuite analytical framework.
 It is intended to help teams move from raw facility and survey data to defensible national and sub-national coverage findings.
+
+![Countdown analysis workflow](/images/methods_cd_approach.png)
 
 ## End-to-end workflow
 
 The framework follows a practical sequence:
 
-1. [Load and configure](/docs/framework/1-analysis-setup) facility and survey data.
-2. [Calibrate key national benchmark rates](/docs/framework/1-analysis-setup/#survey-params).
-3. [Assess data quality](/docs/framework/2-data-quality-assessment) before estimating coverage.
-4. [Adjust](/docs/framework/3-data-adjustment) incomplete, unstable, or unreliable data.
-5. [Select the best-performing denominator](/docs/framework/4-denominator-selection).
-6. Generate and interprete **[coverage](/docs/framework/5-coverage-estimation)** , **[equity](/docs/framework/6-equity-analysis)**, **[sub-national](/docs/framework/7-subnational-analysis)**, **[mortality](/docs/framework/9-mortality)**, **[Service utilisation](/docs/framework/10-service-utilisation)** and **[Health system performance](/docs/framework/11-health-system-performance)** results.
-
+1. [Load and configure](/en/docs/framework/1-analysis-setup) facility and survey data.
+2. [Calibrate key national benchmark rates](/en/docs/framework/1-analysis-setup#survey-params).
+3. [Assess data quality](/en/docs/framework/2-data-quality-assessment) before estimating coverage.
+4. [Adjust](/en/docs/framework/3-data-adjustment) incomplete, unstable, or unreliable data.
+5. [Select the best-performing denominator](/en/docs/framework/4-denominator-selection).
+6. Generate and interpret **[coverage](/en/docs/framework/5-coverage-estimation)**, **[equity](/en/docs/framework/6-equity-analysis)**, **[sub-national](/en/docs/framework/7-subnational-analysis)**, **[mortality](/en/docs/framework/9-mortality)**, **[service utilization](/en/docs/framework/10-service-utilisation)** and **[health system performance](/en/docs/framework/11-health-system-performance)** results.
 
 ## Framework modules
 
@@ -62,7 +88,3 @@ The framework follows a practical sequence:
 />
 
 The final purpose of the framework is practical use. Findings should inform country review processes, planning discussions, and technical working groups so that the analysis leads to concrete RMNCAH action rather than standing alone as a report.
-
----
-
-

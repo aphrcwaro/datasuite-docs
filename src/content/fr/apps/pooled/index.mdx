@@ -1,0 +1,61 @@
+import { Callout } from 'nextra/components'
+
+# Aperçu de Pooled App
+
+Pooled App regroupe les jeux de données sauvegardés de plusieurs pays dans un seul fichier, puis vous permet d'explorer, de comparer et d'exporter les tableaux agrégés. C'est l'outil DataSuite pour l'**analyse régionale et multi-pays** : au lieu d'ouvrir chaque pays un par un, vous chargez leurs caches sauvegardés ensemble et travaillez sur tous côte à côte.
+
+Pooled ne remplace pas les applications par pays. La **[RMNCAH App](/fr/apps/rmncah)** et la **[Vaxx App](/fr/apps/vaxx)** sont les outils où les données d'un pays sont importées, vérifiées, ajustées et analysées. Pooled part de ce que ces applications ont déjà sauvegardé.
+
+## Quand utiliser Pooled
+
+| Vous voulez... | Utilisez |
+| --- | --- |
+| Vérifier, ajuster et analyser les données des établissements d'un pays | RMNCAH ou Vaxx App |
+| Comparer plusieurs pays côte à côte (couverture, sources, tendances) | Pooled App |
+| Obtenir un tableau unique regroupant tous les pays pour un rapport régional | Pooled App |
+| Extraire seulement certains pays, années ou colonnes pour un autre outil | Pooled App |
+
+## Prérequis
+
+- Un ensemble de fichiers `.rds`, un par pays, sauvegardés par la RMNCAH ou la Vaxx App. Voir **[Préparer les caches](/fr/apps/pooled/preparing-caches)**.
+- Tous les fichiers doivent appartenir au même **domaine de données** : RMNCAH ou Immunisation (VAXX). Vous choisissez le domaine une seule fois, avant le chargement.
+- Assez de mémoire : l'application accepte jusqu'à 2 Go de fichiers sélectionnés à la fois et les lit l'un après l'autre.
+
+<Callout type="info">
+Pooled ne conserve que les tableaux d'analyse (couverture, qualité des données, dénominateurs, enquêtes, etc.). Les données brutes par établissement et par mois sont exclues, ce qui garde le fichier agrégé léger.
+</Callout>
+
+## Organisation de l'application
+
+La barre latérale comporte une seule section, **Pooling**, avec deux parties.
+
+**Build pooled file** est un assistant en quatre étapes :
+
+1. Choisir les jeux de données : le domaine, le contenu et les fichiers.
+2. Chargement des fichiers : chaque fichier est lu et signalé comme chargé, chargé avec un avertissement ou en échec.
+3. Vérifier les résultats : décider quoi faire des avertissements et des échecs.
+4. Fichier créé : télécharger le fichier `.rds` agrégé ou passer directement à son exploration.
+
+**Explore pooled data** ouvre un fichier agrégé et propose ces pages :
+
+| Page | Contenu |
+| --- | --- |
+| Open a file | Utiliser le fichier qui vient d'être créé, ou en téléverser un créé auparavant |
+| Parameters | Les paramètres et valeurs d'enquête de chaque pays |
+| Overall score | Le score de qualité des données de chaque pays |
+| Indicator coverage | Couverture par indicateur : national, Admin 1, District |
+| Coverage | Couverture avec les dénominateurs choisis par chaque pays |
+| Mortality | Décès maternels et néonatals en établissement (domaine RMNCAH) |
+| Service utilization | Recours aux soins ambulatoires et hospitaliers, enfants de moins de 5 ans (domaine RMNCAH) |
+| Compare countries | Continuum de soins, triangulation des sources, niveau et évolution, tendances |
+| All datasets | Tous les tableaux du fichier, y compris ceux sans page propre |
+| Extract a piece | Extraire des jeux de données, pays, années et colonnes choisis dans un nouveau fichier |
+
+Les noms des pages et des boutons sont indiqués tels qu'ils apparaissent dans l'application.
+
+## Pour aller plus loin
+
+- **[Préparer les caches](/fr/apps/pooled/preparing-caches)** : produire et organiser les fichiers `.rds`.
+- **[Utiliser l'application](/fr/apps/pooled/using-the-app)** : un guide pas à pas, avec la signification des résultats et les erreurs courantes.
+- **[Exporter les résultats](/fr/apps/pooled/exporting-results)** : fichiers CSV, Excel, zip et agrégés, et utilisation de l'assistant de chat DataSuite.
+- **[Cadre analytique CD2030](/fr/docs/framework)** : la méthodologie derrière les indicateurs, les dénominateurs et le score de qualité des données.

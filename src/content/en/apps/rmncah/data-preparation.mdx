@@ -1,0 +1,106 @@
+---
+topics: [data-adjustment]
+reportKinds: [adj_comparison]
+cacheMembers: [k_factors, adjusted_data, adjusted_flag, excluded_years, data_with_excluded_years, adjust_data]
+appPages: [remove_years, data_adjustment, data_adjustment_changes]
+ai:
+  status: draft
+  summary: >-
+    Data preparation turns the reported numbers into an analysis-ready dataset with three pages: Remove Years, Data
+    Adjustment and Data Adjustment Changes. Running the adjustment unlocks the Denominators and Analysis pages.
+  definitions:
+    - "K-factor: the volume of services in non-reporting facilities relative to reporting ones; 0 assumes they delivered no services, 1 the same volume (#choose-the-k-factors)"
+  options:
+    - "ANC, Delivery, Vaccines and OPD K-Factors, each 0, 0.25, 0.5, 0.75 or 1 (#choose-the-k-factors)"
+  steps:
+    - "Remove Years: select years and press Confirm Removal; deselect and confirm again to bring one back (#press-confirm-removal)"
+    - "Data Adjustment: choose the K-Factors and press Adjust Data until it says Data Adjusted (#press-adjust-data)"
+    - "Data Adjustment Changes: compare numbers before and after adjustment for each indicator (#data-adjustment-changes)"
+  rules:
+    - "Remove a year only when the data quality pages show it is erratic and there is a real-world reason; otherwise keep it (#remove-years)"
+    - "Missing and outlier values are replaced using the district median for the same year, then counts are scaled with the K-factor (#data-adjustment)"
+    - "Press Adjust Data even with every factor at 0; it unlocks the analysis pages. Changing K-factors or removed years discards the adjustment until Adjust Data is pressed again (#download-the-result-if-you-need-it)"
+    - "No adjustment is applied for districts whose reporting rate is below 75% (#download-the-result-if-you-need-it)"
+    - "Mortality indicators are not adjusted for reporting or outliers (#common-pitfalls)"
+    - "The method, formulas and business rules are in Data adjustment (/en/docs/framework/3-data-adjustment/)"
+  interpretation:
+    - "A small gap between before and after means reporting was nearly complete; a wide gap in one year points to low reporting that year; report the K-factor and the percentage change it produced (#how-to-interpret-the-results)"
+---
+
+import { Steps, Callout } from 'nextra/components'
+
+# Data preparation
+
+Data preparation turns the reported numbers into an analysis-ready dataset. It has three pages in the **Data quality** section: **Remove Years**, **Data Adjustment** and **Data Adjustment Changes**. Running the adjustment is what unlocks the Denominators and Analysis pages. The method, formulas and business rules are in [Data adjustment](/en/docs/framework/3-data-adjustment).
+
+## Remove Years
+
+**Purpose.** Leave out years whose data cannot be relied on, for example a year with almost no reporting or a system-wide failure.
+
+**When to use it.** After the [data quality](/en/apps/rmncah/data-quality) pages show a year that is clearly erratic and you have a real-world reason to believe it. If you have no reason, keep the year.
+
+<Steps>
+
+### Open Remove Years
+
+It is under **Data quality** in the sidebar.
+
+### Select Years to Remove
+
+The chips list the years present in the data. Select one or more.
+
+### Press Confirm Removal
+
+The message changes from *No years have been removed yet* to *Data for the following years has been removed*, followed by the years. To bring a year back, deselect it and confirm again.
+
+</Steps>
+
+![Remove years](/images/dqa-remove-year.png)
+
+## Data Adjustment
+
+**Purpose.** Correct for incomplete reporting and extreme outliers. Missing and outlier values are replaced using the district median for the same year. Reported counts are then scaled up with a K-factor, which represents the volume of services in non-reporting facilities relative to reporting ones.
+
+<Steps>
+
+### Choose the K-Factors
+
+The card **K-Factors (Adjustment Factors)** has four selectors: **ANC K-Factor**, **Delivery K-Factor**, **Vaccines K-Factor** and **OPD K-Factor**. Each offers 0, 0.25, 0.5, 0.75 and 1. A value of 0 assumes that non-reporting facilities delivered no services, 0.25 assumes a quarter of the volume of reporting facilities, and 1 the same volume. Raise a factor when facilities that report poorly, such as private ones, provide a large share of that service.
+
+### Press Adjust Data
+
+The message goes from *Dataset not adjusted* to *Adjusting ...* and then *Data Adjusted*. Do this even if you keep every factor at 0, because it is what unlocks the analysis pages.
+
+### Download the result if you need it
+
+**Download Adjusted Dataset** saves the adjusted master dataset as a `.dta` file.
+
+</Steps>
+
+<Callout type="warning">
+Changing the K-factors or the removed years discards the adjusted dataset. Press **Adjust Data** again, otherwise the analysis pages will not reflect your change. If the adjustment fails, the message shows the reason.
+</Callout>
+
+According to the methodology, no adjustment is applied for districts whose reporting rate is below 75%, because imputation is unreliable there. The methodology flags such years as unreliable for coverage calculations.
+
+![K-factor selection](/images/adjustment-kfactor.png)
+
+## Data Adjustment Changes
+
+**Purpose.** See what the adjustment did to each indicator.
+
+**How to read it.** The card **Visualize effects of changes** has one tab per indicator: Institutional Deliveries, Institutional Live Births, Pentavalent 1, ANC 1 and OPD Under 5 Years, plus a **Custom** tab for any other indicator. Each chart compares the number of events *before* and *after* adjustment for completeness and outliers, by year. Use **Download Plot** and **Download Data** on the toolbar. **Generate Report** opens the adjustment report.
+
+![Before and after adjustment](/images/adjustment-before-after.png)
+
+## How to interpret the results
+
+- A small gap between the lines means reporting was already nearly complete.
+- A wide gap in one year points to a year with low reporting. Report the K-factor used and the percentage change it produced, as the methodology recommends.
+- The effect is largest for services with the lowest reporting rates. Compare with the [Reporting Rate](/en/apps/rmncah/data-quality) page.
+
+## Common pitfalls
+
+- Removing a year you should keep silently shortens every later trend.
+- Using a high K-factor to hide poor reporting hides the problem instead of fixing it. Document your choice.
+- Mortality indicators are not adjusted for reporting or outliers, because deaths are few and volatile (see [Mortality](/en/apps/rmncah/mortality)).

@@ -1,0 +1,95 @@
+---
+topics: [bayesian-coverage, continuum-of-care, fpet]
+reportKinds: [bayes_coverage, continuum, continuum_gap, natcov_fpet]
+cacheMembers: [get_bayes_model, fpet_data]
+appPages: [bayesian_national, bayesian_subnational, continuum_care]
+ai:
+  status: draft
+  summary: >-
+    Bayesian Analysis, Continuum of Care and FPET FP Projection go beyond the basic coverage charts. They build on
+    the adjusted data and the selected denominators, so Data preparation and Denominators come first.
+  rules:
+    - "Surveys are used at their reported level weighted by uncertainty; routine data contribute only their year-to-year trend (#bayesian-analysis)"
+    - "Label Bayesian estimates as modelled in reports; read the FP Projection as model output; check Data quality for a region before interpreting the heatmap (#common-pitfalls)"
+    - "Methods are in Bayesian coverage (/en/docs/framework/5.1-bayesian-coverage/)"
+    - "Coverage methods are in National coverage (/en/docs/framework/5-coverage-estimation/)"
+  interpretation:
+    - "Bayesian Analysis combines survey and routine data into one estimate per year with an uncertainty band and a short forecast; available for ANC 4 Visits, ANC 1st Trimester, Institutional Deliveries, Measles 1 and Pentavalent 3 (#pick-an-indicator-tab)"
+    - "A narrow band means the data agree; a wide band means few or conflicting data points; with a low data quality score the estimate leans on surveys (#read-the-chart)"
+    - "Continuum of Care: a national profile (facility, survey and WUENIC values per step) and a heatmap by Admin 1 region, for the Maternal and Child continuum (#continuum-of-care)"
+    - "Continuum gaps: first-trimester ANC to ANC 4 suggests weak continuity; high ANC with lower institutional deliveries points to barriers to delivery care; Penta 3 to Measles 1 suggests dropout (#continuum-of-care)"
+    - "FP Projection: mCPR and Demand Satisfied with a Modern Method from FPET, built-in reference data, not facility data (#fpet-fp-projection)"
+---
+
+import { Steps, Callout } from 'nextra/components'
+
+# Advanced analysis
+
+Three analyses go beyond the basic coverage charts: **Bayesian Analysis**, **Continuum of Care** and **FPET FP Projection**. They build on the adjusted data and the denominators you selected, so finish [Data preparation](/en/apps/rmncah/data-preparation) and [Denominators](/en/apps/rmncah/denominators) first. Methods: [Bayesian modeling approach](/en/docs/framework/5.1-bayesian-coverage) and [National coverage](/en/docs/framework/5-coverage-estimation).
+
+## Bayesian Analysis
+
+**Purpose.** Combine survey data and routine facility data into one estimate per year, with a range of uncertainty and a short-term forecast. Surveys are used at their reported level, weighted by how uncertain they are. Routine data contribute only their year-to-year trend, and count for less when the overall data quality score is low.
+
+**When to use it.** When surveys are old or few and facility data are imperfect, and you need a single defensible trend, for example for a synthesis report.
+
+There are two entries in the **Bayesian Analysis** group of the sidebar: **National Analysis** and **Sub-National Analysis** (regions).
+
+<Steps>
+
+### Open Bayesian Analysis
+
+Choose National Analysis or Sub-National Analysis.
+
+### Pick an indicator tab
+
+**ANC 4 Visits**, **ANC 1st Trimester**, **Institutional Deliveries**, **Measles 1** or **Pentavalent 3**. The model is defined for these five indicators.
+
+### Read the chart
+
+The title is *Bayesian Coverage Model Estimates* followed by the indicator, and the source note reads *Survey Data & DHIS2 Routine Data*. The central line is the best estimate; the band is the uncertainty range. Use **Download Plot** and **Download Data** in the toolbar.
+
+</Steps>
+
+![Bayesian ANC4 estimates at national level](/images/bayesian-ANC4-national.png)
+
+![Bayesian ANC4 estimates by region](/images/bayesian-ANC4-subnational.png)
+
+**How to interpret.** A narrow band means the data agree; a wide band means few or conflicting data points. The estimate follows an S-shaped rise typical of coverage. Do not read the model as a replacement for good data: if the routine data quality score is low, the estimate leans on surveys.
+
+## Continuum of Care
+
+**Purpose.** Follow coverage along the care pathway and see where women and children drop out.
+
+**Where.** **National Analysis**, **Continuum of Care** in the sidebar. The page has two cards, both titled *National Coverage & Continuum*, each with the tabs **Maternal Continuum** and **Child Continuum**.
+
+- **Top card, continuum profile.** *National continuum-of-care profile*: the latest facility value, the latest survey value and, where relevant, the WUENIC value for each step of the selected pathway, for example ANC 1st Trimester, ANC 4 Visits, Institutional Deliveries and PNC within 48 hours for the maternal continuum, or Pentavalent 3 and Measles 1 for the child continuum.
+- **Bottom card, continuum heatmap.** *Subnational continuum heatmap*: the same steps for each Admin 1 region. Read across a row to see one region, down a column to see one indicator. Red cells are low coverage, yellow intermediate and green high.
+
+The page can generate the national coverage report with **Generate Report**.
+
+![Continuum of care profile](/images/national-coverage-continuum-care-profile.png)
+
+![Maternal continuum heatmap by region](/images/national-admin1-maternal-continuum-heatmap.png)
+
+**How to interpret.** A large gap between first-trimester ANC and ANC 4 suggests weak continuity of care. High ANC but lower institutional deliveries points to barriers to delivery care. A gap between Pentavalent 3 and Measles 1 suggests dropout after the early vaccines. A row with many red cells means broad problems in that region; a column with many red cells shows a national bottleneck. Low values can come from reporting or denominator problems, so check quality before acting.
+
+## FPET FP Projection
+
+**Purpose.** Show family planning trends for currently married women aged 15 to 49, from the Family Planning Estimation Tool (FPET, Track20).
+
+**Where.** It is the **FP Projection** tab on **National Coverage** and on **Sub-National Coverage**.
+
+The chart title is *Family planning among currently married women 15-49 years*. It draws two indicators: **Prevalence of Modern Methods (mCPR)** and **Demand Satisfied with a Modern Method**. Lines are median estimates and shaded bands are 95% credible intervals. FPET data are built-in reference data for the country and do not come from your facility data.
+
+<Callout type="info">
+FPET fits a trend through all available surveys, so a smooth curve does not mean a survey exists for each year.
+</Callout>
+
+![FPET projection](/images/national-coverage-fpet.png)
+
+## Common pitfalls
+
+- Using Bayesian estimates without stating that they are modelled. Label them as such in reports.
+- Reading the FP Projection as a facility indicator. It is model output.
+- Interpreting the continuum heatmap without first checking [Data quality](/en/apps/rmncah/data-quality) for the region.

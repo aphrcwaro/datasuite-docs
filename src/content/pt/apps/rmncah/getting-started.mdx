@@ -1,0 +1,97 @@
+import { Steps, Callout } from 'nextra/components'
+
+# Primeiros passos
+
+Este guia leva-o desde a abertura do RMNCAH App no DataSuite até um conjunto de dados pronto para análise. A metodologia por detrás destas etapas está descrita em [Configuração da análise](/pt/docs/framework/1-analysis-setup).
+
+## Abrir a aplicação
+
+<Steps>
+
+### Iniciar a aplicação a partir do DataSuite
+
+Na página de boas-vindas do DataSuite escolha **Abrir no RMNCAH** (ver [Navegar pela interface do DataSuite](/pt/docs/getting-started)). A aplicação precisa de um ficheiro para trabalhar, pelo que o DataSuite pede-lhe que escolha um. Os tipos aceites são `.xls`, `.xlsx`, `.dta` e `.rds`.
+
+Utilize o livro Excel do [Data Extractor](/pt/apps/data-extractor) na primeira vez e o `.rds` guardado nas vezes seguintes.
+
+### Verificar se o ficheiro foi lido
+
+Abra **Carregar dados** na barra lateral. Quando o DataSuite entrega o ficheiro à aplicação, este é lido automaticamente e uma faixa verde **Carregamento concluído** indica o nome do ficheiro. Se a página mostrar, em vez disso, uma caixa **Carregar dados HFD**, escolha o ficheiro aí.
+
+</Steps>
+
+![Carregamento de dados de rotina](/images/rmncah-loading-data.jpg)
+
+## Dois percursos em Carregar dados
+
+- **Um ficheiro `.rds` retomado** já foi validado. O assistente é substituído por uma página **Pronto para análise** com uma linha por etapa (por exemplo *15 de 15 campos definidos*, *A utilizar o ficheiro de forma integrado*) e uma ligação **Editar** que reabre qualquer etapa. **Continuar para a análise** leva-o à Taxa de notificação.
+- **Um ficheiro Excel ou Stata novo** passa pelo percurso guiado abaixo. Uma etapa só abre depois de premir **Continuar** (ou **Saltar para**) na anterior. As etapas marcadas como *opcional* podem ser saltadas.
+
+## As etapas do assistente
+
+<Steps>
+
+### Carregar dados
+
+O cartão **Conjunto de dados** mostra o ficheiro carregado. **Baixar Conjunto de Dados Principal** guarda o conjunto de dados combinado como ficheiro `.dta`.
+
+O cartão **Dados de referência adicionais (opcional)** permite substituir os conjuntos de referência integrados do país pelos seus próprios ficheiros `.dta`: **Carregar dados das estimativas da ONU**, **Carregar estimativas WUENIC** e **Carregar estimativas de mortalidade da ONU**. **Restaurar padrão** volta aos dados integrados.
+
+### Qualidade dos dados
+
+As verificações são executadas automaticamente. Uma faixa indica *Todas as verificações foram aprovadas — nenhum problema bloqueante encontrado* ou *Algumas verificações encontraram problemas a corrigir antes de poder continuar*.
+
+- **Verificações bloqueantes:** folhas Admin, Population e Service encontradas; colunas de país, admin-1 e distrito presentes; exatamente um país, reconhecido pelo nome; distritos coincidentes entre a folha Admin e todas as outras folhas; nomes de distritos consistentes ao longo dos anos; sem meses em falta (cada distrito-ano tem os 12 meses); todos os nomes de meses reconhecidos (inglês ou francês).
+- **Verificações informativas:** nascimentos vivos estimados não inferiores aos nascimentos vivos nas unidades de saúde (margem de 10%), dados de população não colados nos dados de serviços, todos os indicadores com alguns dados, nomes de meses etiquetados de forma consistente entre folhas.
+- **Verificações de mapeamento:** os nomes das regiões do inquérito e do ficheiro de forma coincidem com o seu conjunto de dados. As diferenças corrigem-se nas etapas de mapeamento.
+
+Corrija os problemas bloqueantes no livro Excel e carregue-o novamente.
+
+### Ficheiros de inquérito (opcional)
+
+Carregue até cinco ficheiros `.dta` no cartão **Pasta de dados da pesquisa**: **Dados nacionais**, **Dados regionais**, **Dados por área**, **Dados de educação materna** e **Dados por quintil do índice de riqueza**. Alimentam a análise de equidade, as linhas de comparação com o inquérito e as comparações subnacionais. Um ficheiro que não possa ser lido mostra *Falha no carregamento* com o motivo.
+
+### Taxas nacionais
+
+Introduza os valores do inquérito utilizados para obter os denominadores. Todos os campos são obrigatórios e **Continuar** permanece desativado enquanto for apresentado *Campos obrigatórios restantes*.
+
+- **Referência do inquérito:** **Ano recente da pesquisa** (2015 a 2030) e **Ano de Início dos Dados da Pesquisa**. Utilize os dois inquéritos mais recentes, por exemplo 2018 quando existem inquéritos de 2008, 2013, 2018 e 2023.
+- **Materno e neonatal:** cobertura de CPN1, CPN4, parto institucional, cesariana e baixo peso ao nascer em percentagem (0 a 100), e perda de gravidez, nascimentos gemelares, natimortalidade, mortalidade neonatal e mortalidade pós-neonatal como proporções (0 a 0,05; por exemplo, 0,03 significa 3%).
+- **Imunização:** cobertura de BCG, Penta1, Penta3 e Sarampo 1 em percentagem.
+
+Se carregou um ficheiro de inquérito nacional, os valores ficam pré-preenchidos e uma faixa indica-o. Verifique-os. As definições encontram-se na [metodologia](/pt/docs/framework/1-analysis-setup#survey-params).
+
+![Taxas nacionais para o cálculo do denominador](/images/pt-national-surveys.png)
+
+### Ficheiro de forma (opcional)
+
+A aplicação utiliza um ficheiro de forma integrado para o país. Para utilizar o seu, carregue os ficheiros `.shp`, `.dbf`, `.shx` e `.prj`, escolha a coluna que contém os nomes das regiões (admin-1) e prima **Usar este ficheiro de forma**.
+
+### Mapear inquérito e Mapear ficheiro de forma
+
+Quando os nomes das regiões do inquérito ou do ficheiro de forma diferem dos do seu conjunto de dados, prima **Associar nomes de região**, corrija as correspondências e guarde. Guarde pelo menos uma vez, mesmo que nada precise de ser alterado. **Limpar mapeamento** recomeça.
+
+### Concluir
+
+Na última etapa prima **Concluir o carregamento dos dados**. A aplicação combina as folhas, guarda na mesma pasta uma cópia com o nome do seu ficheiro acrescido de `_rmncah.rds` e mostra **Pronto para análise**.
+
+</Steps>
+
+<Callout type="info">
+Quando volta a abrir o mesmo ficheiro Excel ou Stata, é utilizada a cópia `_rmncah.rds` guardada junto a ele. Elimine essa cópia se alterou o livro Excel e pretende carregá-lo de novo.
+</Callout>
+
+## Resolução de problemas
+
+| Mensagem | Causa e solução |
+| --- | --- |
+| Upload failed: Unsupported file format. (Falha no carregamento: formato de ficheiro não suportado.) | O ficheiro não é `.xls`, `.xlsx`, `.dta` nem `.rds`. Converta-o ou exporte-o novamente. |
+| Upload failed: The file provided does not exist (Falha no carregamento: o ficheiro indicado não existe) | O caminho selecionado não existe ou o ficheiro foi movido. Selecione o ficheiro novamente. |
+| Falha no carregamento seguida de um detalhe | Não foi possível ler o livro Excel, por exemplo porque falta uma folha ou coluna obrigatória. Compare-o com a lista de folhas em Qualidade dos dados. |
+| This dataset was built for the 'vaccine' indicator group, but this app is for 'rmncah'. (Este conjunto de dados foi criado para o grupo de indicadores 'vaccine', mas esta aplicação é para 'rmncah'.) | Foi aberto um conjunto de dados guardado de outra aplicação Countdown. Utilize a aplicação correspondente ou carregue o livro Excel. |
+| Algumas verificações encontraram problemas a corrigir | Falhou uma verificação bloqueante de Qualidade dos dados. Leia a linha a vermelho, corrija o livro Excel e carregue-o novamente. |
+| Conclua primeiro as etapas anteriores | Tentou avançar. Conclua ou salte a etapa atual. |
+| Alguns nomes de região do inquérito não coincidem com o seu conjunto de dados | Utilize **Associar nomes de região** na etapa de mapeamento. |
+| Carregue e conclua um conjunto de dados para desbloquear esta página | As páginas de análise permanecem bloqueadas até o carregamento estar concluído. |
+
+Depois de carregar, continue com [Qualidade dos dados](/pt/apps/rmncah/data-quality).

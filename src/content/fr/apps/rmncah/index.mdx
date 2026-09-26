@@ -1,31 +1,70 @@
-import { Steps } from 'nextra/components'
-import { Callout } from 'nextra/components'
-import { Bleed } from 'nextra/components'
+# Présentation de RMNCAH App
 
+RMNCAH App, au sein du CD2030 DataSuite, est conçue pour soutenir l'analyse des données de routine des établissements de santé pour les principaux indicateurs RMNCAH.
+Elle fournit un cadre standardisé pour transformer les données brutes de DHIS2 en informations utiles sur la couverture des services, la qualité des données et l'équité.
 
-## `RMNCAH App` Overview
+S'appuyant sur les résultats du **[Data Extractor](/fr/apps/data-extractor)**, RMNCAH App guide les utilisateurs à travers un **[flux de travail analytique structuré](/fr/docs/framework)** comprenant la validation des données, leur ajustement et le calcul des indicateurs.
+Cela garantit des analyses cohérentes, reproductibles et alignées sur l'**[approche méthodologique du CD2030](/fr/docs/framework/0-workflow)**.
 
-The `RMNCAH App` within the CD2030 Datasuite is designed to support the analysis of routine health facility data for key RMNCAH indicators. 
-It provides a standardized framework for transforming raw DHIS2 data into meaningful insights on service coverage, data quality, and equity.
+L'application permet aux utilisateurs de :
 
-Building on the outputs from the **[Data Extractor](/apps/data-extractor)**, the RMNCAH App guides users through a **[structured analytical workflow](/docs/framework)** that includes data validation, adjustment, and indicator computation. 
-This ensures that analyses are consistent, reproducible, and aligned with the **[CD2030 methodological approach](/docs/framework/0-workflow)**.
+- Évaluer la qualité des données à l'aide de métriques DQA standardisées
+- Appliquer des ajustements du numérateur et du dénominateur
+- Générer des estimations de couverture nationales et infranationales
+- Explorer les inégalités et les tendances dans le temps et dans l'espace
+- Produire des résultats pour les rapports, notamment des rapports de synthèse et des visualisations
 
+En alliant rigueur méthodologique et interface conviviale, RMNCAH App facilite la prise de décision fondée sur des données probantes et aide les pays à suivre les progrès sur l'ensemble des priorités RMNCAH.
 
-The app enables users to:
-- Assess data quality through standardized DQA metrics  
-- Apply numerator and denominator adjustments  
-- Generate national and subnational coverage estimates  
-- Explore inequalities and trends across time and geography  
-- Produce outputs for reporting, including synthesis reports and visualizations  
+## Qui l'utilise
 
-By integrating methodological rigor with a user-friendly interface, the RMNCAH App facilitates evidence-based decision-making and supports countries in monitoring progress across RMNCAH priorities.
+L'application est conçue pour l'équipe analytique nationale d'une revue CD2030 : responsables du suivi et de l'évaluation, gestionnaires de données du SIGS et de DHIS2, responsables de programmes de santé maternelle, néonatale, infantile et des adolescents, et analystes qui préparent les revues annuelles du secteur de la santé. Aucune programmation n'est nécessaire. Tout se fait à l'aide de pages, de filtres, de graphiques et de tableaux. Les analystes qui préfèrent les scripts peuvent travailler sur le même jeu de données enregistré via l'assistant de chat de DataSuite (voir [Exports, rapports et IA](/fr/apps/rmncah/exports-and-ai)).
 
+## Ce que vous pouvez charger
 
-## Navigating the `RMNCAH App`
-The RMNCAH App has the following panes:
+L'application ouvre un seul jeu de données à la fois. Elle accepte quatre types de fichiers :
 
-![RMNCAH Tabs](/images/rmncah_ui.jpg)
+| Type de fichier | Description | Usage typique |
+| --- | --- | --- |
+| `.xlsx`, `.xls` | Classeur Excel contenant les feuilles Admin_data, Population_data, Reporting_completeness et au moins une feuille Service_data, tel que produit par le [Data Extractor](/fr/apps/data-extractor) | Premier chargement d'un jeu de données national |
+| `.dta` | Fichier Stata | Premier chargement, ou jeu de données principal téléchargé précédemment |
+| `.rds` | Le jeu de données enregistré que l'application crée lorsque vous terminez le chargement | Reprise du travail : toutes les étapes de chargement sont déjà faites |
 
-## Step by step analytical flow
-![Countdown Analysis workflow](/images/methods_cd_approach.png)
+Pendant l'assistant de chargement, vous pouvez aussi ajouter des fichiers d'enquête facultatifs (`.dta`), un fichier de forme personnalisé et des fichiers de référence propres au pays pour les estimations de l'ONU, de WUENIC et de mortalité de l'ONU (`.dta`). Les données de référence intégrées pour le pays sont utilisées si vous n'ajoutez rien. Voir [Démarrage](/fr/apps/rmncah/getting-started).
+
+## Lien avec le Data Extractor et la méthodologie
+
+- Le **[Data Extractor](/fr/apps/data-extractor)** produit le fichier de données de routine. RMNCAH App commence là où l'extracteur s'arrête.
+- Les **[chapitres méthodologiques](/fr/docs/framework)** expliquent pourquoi chaque analyse est réalisée et comment l'interpréter. Chaque guide de page de cette section se termine par un lien vers le chapitre correspondant, et le bouton **Obtenir de l'aide** de l'application ouvre les mêmes chapitres.
+
+## Disposition et navigation
+
+![Volets de navigation de RMNCAH App](/images/rmncah_ui.jpg)
+
+- **Barre latérale.** Les pages sont regroupées en cinq sections : **Démarrer**, **Qualité des données**, **Dénominateurs**, **Analyse** et **Résultats**. **Changer de langue**, en haut, bascule l'application entre l'anglais, le français et le portugais.
+- **Pages verrouillées.** Les pages sont grisées tant qu'elles ne peuvent pas être utilisées. Charger les données est toujours ouvert. Les groupes Dénominateurs et Analyse ainsi que Rapports ne se déverrouillent qu'après avoir terminé le chargement d'un jeu de données et exécuté l'**Ajustement des données**.
+- **En-tête de page.** Chaque page affiche son titre et un sous-titre d'une ligne. **Obtenir de l'aide** ouvre le chapitre méthodologique correspondant. Les pages qui alimentent un rapport standard affichent aussi **Générer le rapport**. Les pages d'analyse affichent une ligne *Dénominateur* qui indique par quels dénominateurs les chiffres ont été divisés ; elle se définit dans la page Sélection du dénominateur.
+- **Barre de filtres.** Les filtres apparaissent sous forme de pastilles en haut de la page, par exemple **Indicateur**, **Niveau administratif**, **Seuil de performance** ou **Sélectionner les années**.
+- **Cartes de graphiques.** Une carte comporte généralement un onglet par indicateur, plus un onglet **Personnalisé** où vous choisissez tout autre indicateur d'analyse. La barre d'outils de la carte permet de télécharger le graphique (**Télécharger le graphique**, PNG) ou ses chiffres (**Télécharger les données**, Excel), et offre des outils pour modifier les libellés, changer l'affichage ou le style, et agrandir le graphique.
+- **Tableaux.** Un contrôle marqué *Ce tableau uniquement* (année ou indicateur) ne modifie que ce tableau. Chaque tableau a son propre bouton **Télécharger les données**.
+
+## Groupes de pages
+
+| Groupe | Pages | Objectif | Guide |
+| --- | --- | --- | --- |
+| Démarrer | Introduction, Charger les données | Ouvrir le jeu de données et confirmer les taux nationaux et les correspondances | [Démarrage](/fr/apps/rmncah/getting-started) |
+| Qualité des données | Taux de notification, Détection des valeurs aberrantes, Données manquantes, Cohérence interne, Score global de qualité des données | Juger si les données des établissements sont fiables | [Qualité des données](/fr/apps/rmncah/data-quality) |
+| Préparation des données | Supprimer les années, Ajustement des données, Changements d'ajustement | Exclure les années peu fiables et corriger la notification incomplète | [Préparation des données](/fr/apps/rmncah/data-preparation) |
+| Dénominateurs | Évaluation du dénominateur, Sélection du dénominateur | Comparer les sources de population et choisir les dénominateurs | [Dénominateurs](/fr/apps/rmncah/denominators) |
+| Analyse nationale | Couverture nationale, Objectif de couverture, Inégalités nationales, Évaluation de l'équité | Couverture nationale, objectifs et équité | [Couverture, équité et objectifs](/fr/apps/rmncah/coverage-equity-targets) |
+| Analyse infranationale | Couverture infranationale, Inégalités infranationales, Objectif de couverture | Couverture régionale et par district, dispersion et objectifs | [Analyse infranationale](/fr/apps/rmncah/subnational) |
+| Analyses avancées | Analyse bayésienne, Continuum des soins, Projection PF FPET | Estimations modélisées, parcours de soins, planification familiale | [Analyses avancées](/fr/apps/rmncah/advanced-analysis) |
+| Mortalité | Mortalité institutionnelle, Cartographie de la mortalité, Complétude des données de mortalité | Mortalité maternelle, mortinatalité et mortalité néonatale institutionnelles, et exhaustivité de la notification des décès | [Mortalité](/fr/apps/rmncah/mortality) |
+| Utilisation des services et système de santé | Utilisation des services, Indice préventif SMI vs Indice curatif, Performance du système de santé, Part publique/privée | Utilisation ambulatoire et hospitalière, intrants du système de santé et secteur privé | [Utilisation des services et système de santé](/fr/apps/rmncah/service-utilization-health-system) |
+| Résultats | Rapports | Rapports Word, PDF et PowerPoint (rapports standard, recueil de synthèse, fiche d'une page), téléchargements et analyse assistée par IA | [Rapports](/fr/apps/rmncah/reports), [Exports, rapports et IA](/fr/apps/rmncah/exports-and-ai) |
+
+## Flux analytique étape par étape
+
+![Flux de travail de l'analyse Countdown](/images/methods_cd_approach.png)
+
+La page [Étapes de l'analyse](/fr/apps/rmncah/analysis-steps) parcourt la même séquence et relie chaque étape à son chapitre méthodologique.

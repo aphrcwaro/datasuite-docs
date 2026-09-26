@@ -7,18 +7,37 @@ export default {
       toc: true
     }
   },
-  "data-extractor": "Extracteur de données CD2030",
-
-  "rmncah": {
-  title: "Application RMNCAH",
-  theme: {
-  layout: 'full',
-  copyPage: false,
-  toc: false
+  'data-extractor': 'CD2030 Data Extractor',
+  rmncah: {
+    title: 'RMNCAH App',
+    theme: {
+      layout: 'full',
+      copyPage: false,
+      toc: true
+    }
   },
-  }
-  ,"vaxx": {
-    title: "Application Vaxx",
-    display: "hidden"
+  vaxx: {
+    title: 'Vaxx App',
+    theme: {
+      layout: 'full',
+      copyPage: false,
+      toc: true
+    }
+  },
+  pooled: {
+    title: 'Pooled App',
+    theme: {
+      layout: 'full',
+      copyPage: false,
+      toc: true
+    }
+  },
+  'ai-assistant': {
+    title: 'Assistant IA',
+    theme: {
+      layout: 'full',
+      copyPage: false,
+      toc: true
+    }
   }
 }

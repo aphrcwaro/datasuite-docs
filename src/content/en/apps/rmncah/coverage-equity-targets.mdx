@@ -1,0 +1,121 @@
+---
+topics: [coverage, coverage-targets, inequality, equity]
+indicators: [anc1, anc4, ideliv, instlivebirths, sba, penta1, penta3, measles1, bcg, low_bweight, csection]
+reportKinds: [coverage, coverage_table, threshold, inequality, equity]
+cacheMembers: [calculate_coverage, get_filtered_coverage, generate_coverage_data, survey_estimates, national_survey, regional_survey, wuenic_estimates, check_coverage_params, calculate_inequality, get_filtered_inequality, get_filtered_threshold, wiq_survey]
+appPages: [national_coverage, national_target, national_inequality, equity_assessment]
+ai:
+  status: draft
+  summary: >-
+    Four National Analysis pages: National Coverage, Coverage Target, National Inequality (routine data) and Equity
+    Assessment (survey data). All need Data Adjustment and use the denominators chosen on Denominator Selection.
+  rules:
+    - "Target rules: ANC4 at least 70%; institutional live births at least 80%; vaccines at least 80%; vaccine dropout below 10% (#coverage-target)"
+    - "The Coverage Target table title mentions 90%, but the calculation applies the thresholds above (#coverage-target)"
+    - "Survey points are few and have confidence intervals: do not over-read small differences; facility inequality can come from denominator or reporting differences (#common-pitfalls)"
+    - "Methods are in National coverage (/en/docs/framework/5-coverage-estimation/)"
+    - "Equity methods are in Equity analysis (/en/docs/framework/6-equity-analysis/)"
+  interpretation:
+    - "National Coverage: DHIS2, WUENIC and Survey (95% CI) lines per indicator tab; the caption names the denominator (#read-the-chart)"
+    - "Facility close to survey: more confidence; far above: denominator problem or over-reporting; far below: incomplete reporting, missing private sector or outreach; above 100% is a data quality signal (#read-the-chart)"
+    - "National Inequality: each dot is an Admin 1 region, the line is national coverage; a wide spread means high inequality (#national-inequality-routine-data)"
+    - "Equity Assessment: an equiplot per Equity Type (Area, Maternal Education, Wealth Quintile); for wealth, top, linear or bottom inequality each calls for a different response (#read-the-equiplot)"
+    - "Coverage Target: percentage of units meeting the target; higher means less geographic inequality (#coverage-target)"
+---
+
+import { Steps } from 'nextra/components'
+
+# Coverage, equity and targets
+
+These four pages sit in the **National Analysis** group of the sidebar: **National Coverage**, **Coverage Target**, **National Inequality** (routine data) and **Equity Assessment** (survey data). All of them need Data Adjustment to have been run and use the denominators chosen on [Denominator Selection](/en/apps/rmncah/denominators). Methods are in [National coverage](/en/docs/framework/5-coverage-estimation) and [Equity assessment](/en/docs/framework/6-equity-analysis).
+
+## National Coverage
+
+**Purpose.** Compare facility-based coverage with survey and WUENIC estimates for each indicator.
+
+**When to use it.** After denominators are chosen, to judge whether facility trends are believable.
+
+<Steps>
+
+### Open National Coverage
+
+There are no filters. The page uses the national level and the denominators you selected.
+
+### Pick an indicator tab
+
+Tabs: **ANC 4 Visits**, **Institutional Live Births**, **Low Birth Weight**, **Pentavalent 3**, **Measles 1**, **FP Projection** (see [Advanced analysis](/en/apps/rmncah/advanced-analysis)) and **Custom** for any other indicator.
+
+### Read the chart
+
+The lines are the **DHIS2 estimate**, the **WUENIC estimate** and the **Survey estimate** with its **95% CI**, from 2010. The caption names the denominator that was used. Use **Download Plot** or **Download Data** in the toolbar.
+
+</Steps>
+
+![National coverage](/images/national-coverage.png)
+
+**How to interpret.** If facility and survey values are close, confidence in the trend is higher. Facility values far above the survey suggest a denominator problem or over-reporting. Values far below suggest incomplete reporting, missing private-sector data or missing outreach. Coverage above 100% is a data quality signal, not good performance.
+
+## Coverage Target
+
+**Purpose.** Show the percentage of regions or districts that reach a coverage target, by year.
+
+**Filter.** **Admin Level** (Admin 1 or Admin 2).
+
+Tabs are **ANC 4 Visits**, **Institutional Live Births** and **Vaccine** (BCG, Pentavalent 3, Measles 1 and the dropout rates). The chart title states the rule, for example the percentage of units meeting the target. The thresholds applied to regions and districts are:
+
+| Indicator | Rule |
+| --- | --- |
+| ANC4 | Coverage of at least 70% |
+| Institutional live births | Coverage of at least 80% |
+| Vaccines | Coverage of at least 80% |
+| Vaccine dropout | Dropout below 10% |
+
+Below the chart a table, **Target Rate by Region** (Admin 1) or **Sub-National with coverage >90%** (Admin 2), lists the units that reach the target for the indicator you choose in the *This table only* control. Its title mentions 90%, but the calculation applies the thresholds above. Higher percentages mean less geographic inequality. The same page for regions and districts is described under [Sub-national analysis](/en/apps/rmncah/subnational).
+
+![Coverage against targets](/images/national-coverage-targets.png)
+
+## National Inequality (routine data)
+
+**Purpose.** See how much regions differ from the national figure, using facility data.
+
+The card **National Inequality** has one tab per default indicator (ANC 4 Visits, Institutional Live Births, Low Birth Weight, Pentavalent 3, Measles 1) plus **Custom**. Each dot is an Admin 1 region; the line is **National Coverage**. A wide spread of dots means high inequality.
+
+Under it, choose **Select Years** and a **Palette** (Greens, Blues, Reds or Purples) for the **Sub-National Mapping** card, which maps the coverage of each region for the selected years.
+
+![National inequality](/images/national-coverage-inequality.png)
+
+## Equity Assessment (survey data)
+
+**Purpose.** Show inequality between population groups, using household survey data.
+
+**When to use it.** When survey files were loaded (or the built-in ones cover your country) and you want to know who is being left behind.
+
+<Steps>
+
+### Choose the Equity Type
+
+**Area** (Rural, Urban), **Maternal Education** (No education, Primary, Secondary or higher) or **Wealth Quintile**.
+
+### Pick an indicator tab
+
+ANC 4 Visits, Institutional Live Births, Low Birth Weight, Pentavalent 3, Measles 1 or **Custom**.
+
+### Read the equiplot
+
+Each group has its own line over time, with the national trend for comparison. **Generate Report** opens the national inequality report.
+
+</Steps>
+
+For wealth, read the pattern: only the richest ahead means top inequality, evenly spaced groups mean linear inequality, and the poorest far behind means bottom inequality (marginalisation). Each calls for a different programme response. Focus on the latest data point, the change since 2010 and whether the gap is closing.
+
+![Equity by area of residence](/images/national-coverage-equity-area.png)
+
+![Equity by wealth quintile](/images/national-coverage-wealth.png)
+
+![Equity by maternal education](/images/national-coverage-education.png)
+
+## Common pitfalls
+
+- Survey points are few and have confidence intervals. Do not over-read small differences.
+- Facility inequality between regions can come from denominator or reporting differences, not real differences in access.
+- The equity pages rely on the survey files and the survey year from Load Data.

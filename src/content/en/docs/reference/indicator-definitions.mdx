@@ -1,0 +1,193 @@
+---
+topics: [indicator-definitions]
+indicators: [anc1, anc4, anc_1trimester, bcg, csection, hiv_test, ideliv, ifa90, instlivebirths, ipd_total, ipd_under5, ipt2, ipt3, low_bweight, maternal_deaths, measles1, measles2, neonatal_deaths, opd_total, opd_under5, penta1, penta3, pnc48h, sba, stillbirth_f, stillbirth_m, syphilis_test, total_stillbirth]
+cacheMembers: [countdown_data]
+ai:
+  status: draft
+  summary: >-
+    The standardized HMIS variables the DataSuite needs, so facility data feed the correct numerators and
+    denominators. Data are grouped as admin, population, reporting completeness, service data 1-3 and data checks.
+  definitions:
+    - "Admin data: district, region, country; hospitals, health centres, all facilities, private for-profit and non-profit facilities; physicians, nurses/midwives, clinical officers, non-clinician physicians; hospital beds (#admin-data)"
+    - "Population data: by district and year: growth rate, total population, under-5, under-1, projected live births and total births (census-based), women 15-49 (#population-data)"
+    - "Reporting completeness: monthly expected, received and rate for ANC, institutional delivery, vaccinations, OPD and IPD (#reporting-completeness)"
+    - "Service data 1: BCG, Penta1, Penta3, Measles1, Measles2; OPD total and under-5 (new and re-visits); IPD total and under-5; under-5 and all-age facility deaths (#service-data-1)"
+    - "Service data 2: ANC1, first-trimester ANC, ANC4, IPT2, IPT3, IFA90, syphilis and HIV tests, SBA, institutional deliveries and live births, C-sections, low birth weight (<2500 g), PNC within 48 hours, stillbirths (total, fresh, macerated), maternal and neonatal deaths (#service-data-2)"
+    - "Service data 3: OPV1-3, Penta2, PCV1-3, rotavirus 1-2, IPV1-2, HPV1-2, measles cases (#service-data-3)"
+    - "Data checks: per district, whether it is missing from, and how often it occurs in, each sheet (#data-checks)"
+  rules:
+    - "Service and reporting data are reported by district, year and month (#service-data-1)"
+  notCovered:
+    - "How each variable is used in a coverage numerator or denominator is described in the module pages, not here (#data-categories)"
+---
+
+# Indicator definitions
+
+DataSuite standardizes indicator definitions across health management information systems (HMIS) to enable consistent, cross-country analysis. This section specifies exactly which HMIS variables map to reproductive, maternal, newborn, child, and adolescent health (RMNCAH) indicators—preventing misinterpretation and ensuring your facility data feed the correct numerators and denominators. Standardized definitions also enable comparison across countries and over time, making global progress toward universal health coverage measurable.
+
+Three data categories organize the requirements: administrative data (facility inventory, workforce), population data (demographic estimates, survival rates), and service data (events reported by facilities, stratified by indicator and administrative level). Because country HMIS structures vary widely, this reference enables you to systematically extract or map your data to the standardized variable names DataSuite expects. Precise adherence to these definitions is foundational to reliable analysis.
+
+## Data categories
+
+For cross-country standardization of the analysis, this section describes the indicators/variables extracted from the countries' HMIS, that are required for the DataSuite analysis.
+
+The data is grouped into the following main categories:
+
+- **Admin Data**
+- **Population Data**
+- **Reporting Completeness**
+- **Service Data (1, 2, and 3)**
+- **Data Checks**
+
+### Admin data
+
+The following variables describe health system infrastructure and workforce.
+
+| Variable Name | Description |
+| --- | --- |
+| `Num_order` | Nº |
+| `District_name` | District |
+| `First_admin_level` | Region |
+| `Country` | Your country name |
+| `Number_hospitals` | Total number of hospitals (based on country definition) |
+| `Number_hcenters` | Total number of health centers (non-hospitals; based on country definition) |
+| `Total_number_health_facilities` | Total number of health facilities (all types/categories) |
+| `Number_pfacilities_profit` | Total number of health facilities that are private-for-profit |
+| `Number_pfacilities_nonprofit` | Total number of health facilities that are private-non-profit |
+| `Total_physicians` | Total number of physicians / Medical officers |
+| `Total_nurses_midwives` | Total number of nurses / midwives |
+| `Total_clinical_officers` | Total number of clinical officers / Assistant medical officers |
+| `Total_nonclinique_physicians` | Total number of non-clinician physicians |
+| `Number_hospital_beds` | Number of hospital beds |
+
+### Population data
+
+The following variables describe demographic and population estimates.
+
+| Variable Name | Description |
+| --- | --- |
+| `District_name` | District name |
+| `Year` | Year |
+| `Pop_growth_rate` | Annual Population growth rate |
+| `Total_Population` | Total Population |
+| `Population_ under_5years` | Population under 5 years |
+| `Population_under_1year` | Population under 1 year |
+| `Live_births` | Projected total Live births (Estimated live births from census) |
+| `Total_births` | Projected total births (Estimated births from census) |
+| `Women_15_49_years` | Total women 15-49 years |
+
+### Reporting completeness
+
+The following variables track facility reporting rates and expected submissions for various health service categories.
+
+| Variable Name | Description |
+| --- | --- |
+| `District` | District name |
+| `Year` | Year |
+| `Month` | Month |
+| `ANC_reporting_expected` | ANC reporting: Expected number (#) |
+| `ANC_reporting_received` | ANC reporting: Received number (#) |
+| `ANC_reporting_rate` | ANC reporting: Reporting completeness rate (%) |
+| `Instdelivey_reporting_expected` | Institutional delivery reporting: Expected number (#) |
+| `Instdelivey_reporting_received` | Institutional delivery reporting: Received number (#) |
+| `Instdelivey_reporting_rate` | Institutional delivery reporting: Reporting completeness rate (%) |
+| `Vacc_reporting_expected` | Vaccinations reporting: Expected number (#) |
+| `Vacc_reporting_received` | Vaccinations reporting: Received number (#) |
+| `Vacc_reporting_rate` | Vaccinations reporting: Reporting completeness rate (%) |
+| `OPD_reporting_expected` | OPD visits reporting: Expected number (#) |
+| `OPD_reporting_received` | OPD visits reporting: Received number (#) |
+| `OPD_reporting_rate` | OPD visits reporting: Reporting completeness rate (%) |
+| `IPD_reporting_expected` | IPD admissions reporting: Expected number (#) |
+| `IPD_reporting_received` | IPD admissions reporting: Received number (#) |
+| `IPD_reporting_rate` | IPD admissions reporting: Reporting completeness rate (%) |
+
+### Service data 1
+
+General admissions, deaths, and initial child vaccinations.
+
+| Variable Name | Description |
+| --- | --- |
+| `District` | District name |
+| `Year` | Year |
+| `Month` | Month |
+| `BCG` | Total number of BCG doses administered &lt;1 year |
+| `Penta1` | Total number of Pentavalent vaccination 1st dose (infants) |
+| `Penta3` | Total number of Pentavalent vaccination 3rd dose (infants) |
+| `Measles1` | Total number of Measles vaccination 1st dose (infants) |
+| `Measles2` | Total number of Measles vaccination 2nd dose |
+| `OPD_total` | Total number of OPD visits all ages (new and re-visit) |
+| `OPD_under5` | Number of OPD visits for children under-5 years |
+| `IPD_total` | Total number of IPD admissions, all ages |
+| `IPD_under5` | Number of IPD admissions of children under-5 years |
+| `under5_deaths` | Total number of under-5 deaths in health facilities |
+| `total_deaths` | Total number of all age deaths in health facilities |
+
+### Service data 2
+
+Maternal, newborn, and reproductive health indicators.
+
+| Variable Name | Description |
+| --- | --- |
+| `District` | District name |
+| `Year` | Year |
+| `Month` | Month |
+| `ANC1` | Total number of ANC 1st visit |
+| `ANC_1trimester` | Total number of ANC during the 1st trimester of pregnancy |
+| `ANC4` | Total number of Pregnant women completing 4 ANC visits |
+| `IPT2` | Total number of pregnant women receiving IPT 2nd dose |
+| `IPT3` | Total number of pregnant women receiving IPT 3rd dose |
+| `IFA90` | Total number of pregnant women who received iron folic acid (IFA) supplementation for 90 or more days during the pregnancy |
+| `Syphilis_test` | Total number of pregnant women tested for syphilis during pregnancy |
+| `HIV_test` | Total number of pregnant women tested for HIV during pregnancy |
+| `SBA` | Total number of skilled birth attendance in health facilities |
+| `Instdelivery` | Total number of deliveries in health facilities |
+| `Instlivebirths` | Total number of live births in health facilities |
+| `Csection` | Total number of Cesarean sections |
+| `Low_BWeight` | Total number of newborns with low birth weight (&lt;2500g) |
+| `PNC_48h` | Total number of mothers attending PNC visit within 48 hours after delivery |
+| `Stillbirth_total` | Total number of stillbirths in health facilities (all) |
+| `Stillbirth_fresh` | Total number of fresh stillbirths in health facilities |
+| `Stillbirth_macerated` | Total number of macerated stillbirths in health facilities |
+| `maternal_deaths` | Total number of maternal deaths reported |
+| `neonatal_deaths` | Total number of neonatal deaths reported |
+
+### Service data 3
+
+Additional immunizations and disease cases.
+
+| Variable Name | Description |
+| --- | --- |
+| `District` | District name |
+| `Year` | Year |
+| `Month` | Month |
+| `opv1` | Total number of &lt;1 year who received Polio 1 vaccine |
+| `opv2` | Total number of &lt;1 year who received Polio 2 vaccine |
+| `opv3` | Total number of &lt;1 year who received Polio 3 vaccine |
+| `penta2` | Total number of Pentavalent vaccination 2nd dose (infants) |
+| `pcv1` | Total number &lt;1 year who received Pneumococcal Conjugate 1 vaccine |
+| `pcv2` | Total number of &lt;1 year who received Pneumococcal Conjugate 2 vaccine |
+| `pcv3` | Total number of &lt;1 year who received Pneumococcal Conjugate 3 vaccine |
+| `rota1` | Total number of &lt;1 year who received Rotavirus 1 vaccine |
+| `rota2` | Total number of &lt;1 year who received Rotavirus 2 vaccine |
+| `ipv1` | Total number of children who received inactivated poliovirus 1 vaccine |
+| `ipv2` | Total number of children who received inactivated poliovirus 2 vaccine |
+| `hpv1` | Total number of children who received human papillomavirus vaccine 1 |
+| `hpv2` | Total number of children who received human papillomavirus vaccine 2 |
+| `measles_cases` | Total number of Measles cases reported |
+
+### Data checks
+
+Automated diagnostic variables used for validation of completeness and consistency across sheets.
+
+| Variable Name | Description |
+| --- | --- |
+| `District` | District Name |
+| `# of occurrences in 'Admin data'` | Verification count of district presence in the Admin Data sheet |
+| `Is the district missing in 'Population_data'?` | Status flag checking if the district is missing in Population Data |
+| `# of occurrences in 'Population_data'?` | Verification count of district presence in Population Data |
+| `Is the district missing in 'Reporting_completeness'?` | Status flag checking if the district is missing in Reporting Completeness |
+| `# of occurrences in 'Reporting completeness'` | Verification count of district presence in Reporting Completeness |
+| `Is the district missing in 'Service_data_1'?` | Status flag checking if the district is missing in Service Data 1 |
+| `# of occurrences in 'Service_data_1'` | Verification count of district presence in Service Data 1 |
+| `Is the district missing in 'Service_data_2'?` | Status flag checking if the district is missing in Service Data 2 |
+| `# of occurrences in 'Service_data_2'` | Verification count of district presence in Service Data 2 |

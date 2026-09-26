@@ -1,22 +1,102 @@
-# 6 Ajustes de Numerador
+# Ajuste de dados
 
-Relatórios em falta e erros de dados distorcem a análise de cobertura, especialmente quando as taxas de notificação são baixas ou esporádicas. Este módulo aplica correções baseadas em evidências para transformar os números brutos notificados em estimativas defensáveis, contabilizando as unidades de saúde que não enviaram notificações e removendo valores atípicos extremos. Utilizando um fator de ajuste com base científica — fundamentado em pressupostos sobre os volumes relativos de serviços nas unidades notificadoras em comparação com as não notificadoras — o Data Suite aumenta os números proporcionalmente para refletir a verdadeira cobertura ao nível da população.
+## Introdução
 
-A estratégia de ajuste é pragmática: se assumirmos que todas as unidades não notificadoras forneceram zero serviços, subestimaremos drasticamente a cobertura real. Em vez disso, o módulo estima qual a proporção de serviços que provavelmente ocorreu nas unidades silenciosas (tipicamente 25% do volume das unidades notificadoras, por padrão) e ajusta em conformidade. Para períodos de dados com notificação criticamente baixa (abaixo de 75%), não é aplicado qualquer ajuste e esses anos são sinalizados como não confiáveis — protegendo a sua análise contra estimativas impossíveis baseadas em dados insuficientes.
+Relatórios em falta e erros de dados distorcem a análise de cobertura, especialmente quando as taxas de notificação são baixas ou esporádicas. Este módulo aplica correções baseadas em evidências para transformar os números brutos notificados em estimativas defensáveis, tendo em conta as unidades de saúde que não enviaram notificações e removendo valores atípicos extremos.
+Utilizando um fator de ajuste cientificamente fundamentado — baseado em pressupostos sobre os volumes relativos de serviços nas unidades notificadoras em comparação com as não notificadoras — o DataSuite aumenta os números proporcionalmente para refletir a cobertura real ao nível da população.
 
----
+A estratégia de ajuste é pragmática: se assumirmos que todas as unidades não notificadoras prestaram zero serviços, subestimaremos drasticamente a cobertura real. Em vez disso, o módulo estima a proporção de serviços que provavelmente ocorreu nas unidades silenciosas (tipicamente 25% do volume das unidades notificadoras, por predefinição) e ajusta em conformidade. Para períodos de dados com notificação criticamente baixa (abaixo de 75%), nenhum ajuste é aplicado e esses anos são sinalizados como pouco fiáveis — protegendo a análise contra estimativas impossíveis baseadas em dados insuficientes.
 
-## 6.1 Fundamentação, Abordagem e Implementação
+### Fundamentação: base científica da análise
 
+A completude da notificação institucional pode distorcer fortemente a análise de cobertura, particularmente se os níveis de notificação forem baixos ou oscilarem significativamente de um ano para outro.
 
-### Fundamentação: Base científica para a análise
-A completude da notificação institucional pode distorcer fortemente a análise de cobertura, particularmente se os níveis de notificação forem baixos ou flutuarem significativamente de um ano para o outro. 
+Da mesma forma, valores atípicos extremos — como um zero a mais introduzido acidentalmente durante a introdução de dados — podem exercer um impacto desproporcional, especialmente nas métricas subnacionais. Após as nossas avaliações da qualidade dos dados de base, são necessárias medidas corretivas para gerar um conjunto de dados limpo e padronizado para a análise final. Isto exige um ajuste matemático para a notificação incompleta e a resolução dos valores atípicos extremos.
 
-Da mesma forma, valores atípicos (outliers) extremos — como um zero extra inserido acidentalmente durante a digitação dos dados — podem exercer um impacto desproporcional, especialmente nas métricas infranacionais. Após as nossas avaliações da qualidade dos dados de base, são necessárias medidas corretivas para gerar um conjunto de dados limpo e padronizado para a análise final. Isto exige um ajuste matemático para notificações incompletas e a resolução de valores atípicos extremos.
+### Abordagem: descrição das etapas analíticas
 
-### Abordagem: Descrição dos passos analíticos
-Se não ajustarmos a completude da notificação, assumimos implicitamente que todas as unidades não notificadoras prestaram zero serviços de saúde durante os seus períodos de silêncio, o que é estatisticamente improvável. 
+Se não ajustarmos a completude da notificação, assumimos implicitamente que todas as unidades não notificadoras prestaram zero serviços de saúde durante os seus períodos de silêncio, o que é estatisticamente improvável.
 
-Os ajustes dependem de estimar o verdadeiro volume de serviços *(por exemplo, cuidados pré-natais, vacinações)* prestados em unidades não notificadoras em relação àquelas que submeteram dados. Para isso, estabelecemos um fator de ajuste, denotado como $k$. 
+Os ajustes dependem da estimativa do volume real de serviços *(por exemplo, cuidados pré-natais, vacinações)* prestados nas unidades não notificadoras em relação àquelas que enviaram dados. Para isso, estabelecemos um fator de ajuste, denotado como $k$.
 
-O fator de ajuste $k$ é definido como o rácio (ou proporção) entre o volume de serviços prestados por unidades não notificadoras e o volume de serviços prestados por unidades notificadoras. Este fator é usado diretamente para aumentar os números not
+O fator de ajuste $k$ é definido como o rácio entre o volume de serviços prestados por unidades não notificadoras e o volume de serviços prestados por unidades notificadoras. Este fator é utilizado diretamente para aumentar os números notificados, a fim de compensar as lacunas de notificação incompleta.
+
+## Fórmulas e parâmetros de ajuste do numerador
+
+Para ter em conta com precisão a notificação incompleta, o número bruto de eventos notificados é ajustado utilizando tanto a proporção de completude da notificação como o rácio do volume de serviços das unidades, através da seguinte equação:
+
+$$N_{\text{adj}} = N_{\text{rep}} \times \left[ 1 + \left( (1 - C) \times k \right) \right]$$
+
+Em que:
+
+- **$N_{\text{adj}}$**: número total estimado de eventos de saúde ajustado para a notificação incompleta.
+- $N_{\text{rep}}$: número bruto de eventos notificados no sistema.
+- $C$: completude da notificação *(expressa como a proporção de relatórios esperados das unidades efetivamente recebidos)*.
+- $k$: o fator de ajuste que tem em conta os menores volumes relativos de serviços nas unidades não notificadoras.
+
+### Configuração do fator $k$
+
+Por predefinição, a plataforma define um valor de base de **`k = 0.25`**. Isto pressupõe que as unidades não notificadoras estão ativas, mas operam com menor capacidade, prestando um volume de serviços equivalente a exatamente **um quarto (25%)** de uma unidade notificadora média.
+
+No entanto, o fator $k$ pode ser ajustado manualmente para diferentes serviços com base no contexto do sistema. Por exemplo, se as unidades de saúde privadas têm baixa conformidade na notificação, mas asseguram uma grande parte dos partos a nível nacional, $k$ pode ser elevado acima de 0,25, ou definido até 1,0.
+
+Dependendo da infraestrutura local, pode escolher entre os seguintes níveis de valor de k:
+
+- **`k = 0.00`** – Nenhum serviço prestado nas unidades não notificadoras.
+- **`k = 0.25`** – Alguns serviços prestados, mas em um volume muito inferior ao das unidades notificadoras *(predefinição)*.
+- **`k = 0.50`** – Serviços prestados a metade da taxa das unidades notificadoras.
+- **`k = 0.75`** – Serviços prestados a uma taxa quase igual à das unidades notificadoras.
+- **`k = 1.00`** – Serviços prestados exatamente à mesma taxa das unidades notificadoras.
+
+### Regras de limiar de dados críticos
+
+- **A regra de completude de 75%:** se a taxa de notificação das unidades de um distrito cair abaixo de **75%**, torna-se matematicamente pouco fiável imputar os dados ausentes. Portanto, **nenhum ajuste é aplicado se a notificação for inferior a 75%**. Nestes cenários, os cálculos de cobertura subsequentes que utilizam os dados das unidades são sinalizados como insuficientemente fiáveis para a avaliação final.
+- **Correção de valores atípicos:** os valores atípicos extremos são corrigidos removendo o valor errado e imputando o valor mensal mediano calculado para essa unidade/distrito específico dentro do mesmo ano civil.
+
+### Resumo das regras de negócio do ajuste de dados
+
+| Problema observado | Critérios de identificação e de limiar | Ação corretiva imputada |
+| --- | --- | --- |
+| **Taxas de notificação criticamente baixas** | Qualquer taxa de notificação de distrito **abaixo de 75%** (limiar predefinido). | Os dados são imputados usando o **valor mensal mediano** daquele distrito-ano para o mês silencioso específico. |
+| **Lacunas de notificação incompleta** | As taxas de notificação situam-se **entre $\ge$ 75% e $\le$ 100%**. | O **fator de ajuste $k$** (predefinição `0.25`) é aplicado para aumentar os números brutos e compensar as unidades não notificadoras. |
+| **Valores atípicos extremos** | Um valor mensal é maior ou menor que **5 vezes o desvio absoluto da mediana ($MAD$)** em relação à mediana mensal do distrito. | O valor extremo é descartado e substituído pelo **valor mediano do distrito** para o mesmo ano civil. |
+| **Valores ausentes** | Campos de dados nulos ou vazios encontrados dentro de um período de notificação ativo. | O campo ausente é imputado com o **valor mensal mediano do distrito** para aquele ano específico. |
+
+## Implementação: realização da análise no DataSuite
+
+Os resultados e as definições desta fase são geridos diretamente através da secção **Ajuste de dados** do DataSuite.
+
+Na interface do utilizador deste módulo, selecione o valor específico do **fator $k$** considerado adequado ao contexto do seu país e ao ecossistema das suas unidades, a fim de executar o processo de limpeza dos dados.
+
+![Alterações no ajuste de dados comparando valores antes e depois do ajuste](/images/pt-adjustment-before-after.png)
+
+### Remover anos
+
+O painel de configuração **Remover anos** permite excluir completamente anos civis específicos do processamento ativo. Esta ferramenta foi concebida para descartar anos que não contêm dados de notificação, ou cujos dados foram explicitamente sinalizados como inadequados para a análise pela equipa técnica nacional devido a problemas de qualidade graves e sistémicos.
+
+Recomenda-se vivamente a utilização desta funcionalidade quando:
+
+- A linha de base quantitativa da qualidade dos dados está bem abaixo dos limiares aceitáveis.
+- A equipa do país dispõe de informação contextual suficiente e verificada *(por exemplo, grandes falhas de implementação em todo o sistema, cortes de rede prolongados ou eventos de corrupção da base de dados)* que tornam os dados desse ano específico completamente pouco fiáveis ou imprecisos.
+
+A remoção estratégica desses blocos históricos corrompidos garante que as linhas cronológicas de cobertura e as avaliações de tendências subsequentes sejam construídas exclusivamente sobre uma base de dados sólida e fiável.
+
+![Ecrã Remover anos para excluir anos pouco fiáveis](/images/pt-dqa-remove-year.png)
+
+### Resultados do ajuste
+
+Esta secção produz um conjunto de dados mestre ajustado (`.dta`) pronto para a análise, juntamente com gráficos para diferentes indicadores que mostram o efeito dos ajustes de dados. A imagem abaixo mostra o resultado do ajuste sem que tenha sido feito qualquer ajuste aos dados.
+
+![Ecrã de ajuste de dados com seleção do fator k](/images/pt-adjustment-kfactor.png)
+
+### Relatório
+
+A interpretação deve incluir o fator de ajuste selecionado (fator k) que foi utilizado para ajustar a notificação incompleta (se necessário, por serviço). Se for utilizado o fator predefinido, refira-o e explique o que isso significa para o leitor.
+
+Indique a variação percentual que o ajuste produziu nos números notificados de partos institucionais e de penta1 ao longo do período de seis anos.
+
+Pode pretender:
+
+- Destacar o ano com o maior impacto do ajuste, se houver.
+- Interpretar se o impacto do ajuste nas taxas de cobertura é grande ou pequeno.
+- Fazer a mesma descrição e as mesmas interpretações para as vacinações de penta1.

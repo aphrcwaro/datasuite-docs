@@ -1,0 +1,159 @@
+---
+topics: [reports]
+cacheMembers: [report_projects, report_assets, report_themes]
+appPages: [reports]
+ai:
+  status: draft
+  summary: >-
+    The Reports page builds documents (Word or PDF) and slide decks (PowerPoint or PDF) from the loaded dataset, from
+    the app's standard reports or a blank page. Charts and tables are redrawn from the data each time, and every
+    report is saved in the dataset: creating or editing a report rewrites the saved .rds, so keep a copy before
+    experimenting.
+  steps:
+    - "Finish the prerequisites: load a dataset, run Data Adjustment and choose denominators (#finish-the-prerequisites)"
+    - "Choose a standard report or a blank document or deck, name it and pick the Report language (#name-it-and-choose-its-language)"
+    - "Set the region on the Layout tab if the report has one (#set-the-region-if-the-report-has-one)"
+    - "Replace the prompts, check Print layout, then Download (#edit-then-check)"
+  rules:
+    - "Text blocks written as questions (Notes or Interpretations) are prompts for the analyst to replace with the agreed interpretation (#standard-reports-in-the-rmncah-app)"
+    - "PDF of a document needs Word or LibreOffice (else a browser prints it); PDF of a deck needs PowerPoint or LibreOffice; a document cannot be exported as PowerPoint, nor a deck as Word (#formats-and-downloads)"
+    - "Removed years, adjustment, denominators and survey files change report content (#prerequisites-that-change-report-content)"
+    - "Dissemination is covered in Dissemination (/en/docs/framework/12-dissemination/)"
+  notCovered:
+    - "Page notes from the Notes button; the Custom chart group is a placeholder; where downloads are saved (#what-this-page-does-not-cover)"
+---
+
+import { Steps, Callout } from 'nextra/components'
+
+# Reports
+
+The **Reports** page in the **Output** section builds reports from the loaded dataset. There are two kinds:
+
+| Kind | What it is | Files you can download |
+| --- | --- | --- |
+| Document | Pages of text, charts and tables, with an optional cover page and contents | Word (`.docx`) or PDF |
+| Slide deck | Slides with text boxes, charts, tables and pictures | PowerPoint (`.pptx`) or PDF |
+
+Charts and tables are drawn from the data every time you preview or download, so a report always reflects the current state of your analysis (years removed, adjustment, denominators). Every report you create is saved in the dataset and listed under **Your reports**. For downloading single charts and tables, datasets and the AI assistant, see [Exports, reports and AI](/en/apps/rmncah/exports-and-ai).
+
+**Reports are stored inside the dataset file.** Creating or editing a report rewrites the saved dataset (the `.rds` cache), and the report list travels with it. Keep a copy of the dataset before you experiment, and share the dataset if you want a colleague to open your reports.
+
+<Callout type="info">
+The page subtitle in the app still says "Word and PDF reports". The code also builds slide decks, and the one-pager is a PowerPoint deck.
+</Callout>
+
+## Standard reports in the RMNCAH App
+
+A standard report is the Countdown report of one analysis section, rebuilt as editable blocks. It opens as your own copy: change or delete anything. Text blocks written as questions (headed **Notes** or **Interpretations**) are prompts for the analyst; replace them with the interpretation agreed at your review meeting.
+
+| Standard report | Kind | What it contains | Page with a **Generate Report** button |
+| --- | --- | --- | --- |
+| **Data quality** | Document | Data quality summary table, district reporting rates, ANC1/Penta1 and Penta1/Penta3 consistency, with questions on score, completeness and outliers | Overall Data Quality Score |
+| **Data adjustment** | Document | Background, then reported numbers before and after adjustment for institutional live births and Penta1, with a prompt to describe the effect in the latest year | Data Adjustment Changes |
+| **Denominator selection** | Document | DHIS2 and UN projections of population, live births and under 1, then coverage of Penta3 and institutional live births under each denominator, national and by region | Denominator Selection |
+| **National coverage** | Document | Coverage of ANC4, ANC in the first trimester, delivery care (institutional deliveries and institutional live births), PNC 48h, low birth weight, Penta3 and Measles 1; maternal and child continuum of care; family planning (FPET); districts reaching targets; continuum by region | Continuum of Care |
+| **National inequality** | Document | For institutional live births and Penta3: coverage by region over time, map, equity by wealth and education; then coverage by district | Equity Assessment |
+| **Mortality** | Document | Institutional maternal (iMMR), stillbirth (iSBR) and neonatal mortality trends, stillbirths per maternal death, completeness of death reporting | Mortality Completeness |
+| **Curative health services** | Document | Service utilization data quality table, outpatient and inpatient charts and maps, preventive vs curative index | MCH Preventive vs Curative Index |
+| **Health system performance** | Document | Health system inputs table and by-region charts (facilities, hospitals, health workers, beds), service outputs by inputs | PHC Performance |
+| **Public/private share** | Document | Ownership of facilities and the private share of services, nationally and by rural/urban area | Public/Private Share |
+| **Synthesis chartbook** | Document, chartbook page (13.9 x 22 in) | All six analysis areas (data quality and denominators, coverage and targets, equity and geography, mortality, curative services, health system) with interpretation questions and a cover for the country team | Reports page only |
+| **Sub-national one-pager** | Slide deck, one 16:9 slide | One region: Penta3, institutional live births and ANC4 against other regions and over time, the data quality score table and a coverage table by district | Reports page only |
+
+Two of these are the ones most stakeholders ask for. The **synthesis chartbook** is the complete analysis in one document for the review meeting. The **one-pager** gives each region its own statistical profile.
+
+## Open the Reports page
+
+<Steps>
+
+### Finish the prerequisites
+
+Reports stays locked until you have loaded a dataset and run **Data Adjustment** (see [Data preparation](/en/apps/rmncah/data-preparation)). Choose denominators on [Denominator Selection](/en/apps/rmncah/denominators) first: most charts use them.
+
+### Open it
+
+Click **Reports** under **Output**, or click **Reports** in the top header. A **Generate Report** button in a page header also opens the page and starts the matching standard report.
+
+</Steps>
+
+## Generate a standard report
+
+<Steps>
+
+### Choose a report
+
+Under **Standard reports** (documents) or **Standard slide decks**, click a card. Each card shows how many charts and tables it holds. You can also start from **New document** or **New slide deck** (**Start blank**).
+
+### Name it and choose its language
+
+A dialog asks for the report name (for example, the report and country), the **Report language** (English, French or Portuguese) and confirms with **Create report**. The report language is independent of the app language: the standard text is written in it, and the charts, tables and dates are always drawn in it. You can change it later on the **Layout** tab; charts and tables are redrawn, but text you wrote yourself is not translated.
+
+### Wait for the charts
+
+The editor opens at once. Each chart shows **Drawing from the dataset** and appears one by one. A chart that cannot be drawn shows **Could not be drawn with this dataset** with the reason.
+
+### Set the region, if the report has one
+
+For the one-pager (and any chart drawn for one region), pick the region on the **Layout** tab, under **Report**, in **Region of this report**. The first region in alphabetical order is chosen for you. Leave it empty for a national report. To produce a one-pager per region, duplicate the report from the list and change the region.
+
+### Edit, then check
+
+Replace the prompts, delete what you do not need, then open **Print layout** to see the final pages (see below).
+
+### Download
+
+Choose **Download**, pick the format and wait for the progress bar (**Drawing charts from the dataset**, then **Writing the Word file**, **Printing the PDF** or **Writing the PowerPoint file**). The file downloads by itself; **Download again** is offered if it does not.
+
+</Steps>
+
+## The document editor
+
+- **Blocks panel** (left). The **Blocks** tab lists every chart and table kind grouped by analysis area, with a search box (**Search charts, tables, text**); **Text and layout** holds **Heading**, **Sub-heading**, **Paragraph**, **Notes box** and **Page break**. Drag a block onto a page, or press **+** to add it after the selected block. The **Outline** tab lists the report's structure. A **Custom** group is announced for charts made for your dataset; it is empty for now.
+- **Chart and table settings.** Select a block to set what it shows: **Indicator**, **Level** (National, Region or District), a variant such as Maternal or Child, **Year**, **Region**, **Width** (**Full width**, **Half** or **Third**), a title and **Show caption and source**. **Customize this chart** changes text, fonts and colours for this chart in this report only. Charts you customised in the app with **Apply to: Report** keep that styling.
+- **Order and removal.** Drag a block by its handle, or use **Move up**, **Move down**, **Duplicate** and **Delete**. **Undo** and **Redo** (Ctrl+Z, Ctrl+Y) cover edits. Changes save automatically (**Saved in the dataset**).
+- **Text.** Type directly. Enter starts a paragraph, Shift+Enter a new line. Insert **Fields** such as `{country}`, `{region}`, `{first_year}`, `{latest_year}`, `{chart_indicator}` or coverage values like `{penta3_latest}`; they are filled in from the data and follow the report language.
+- **Design.** The **Design** tab holds themes (**Countdown**, **Ministry of Health**, **Minimal**, **Formal**), colours, fonts, the **Cover page** (title, subtitle, logos, country flag, editors, date, reference) and **Contents**. **Layout** sets page size (A4, Letter, chartbook, poster), orientation, margins, page numbers, header and footer. **Browse for Themes** builds a theme from a PowerPoint or Word file (`.potx`, `.pptx`, `.dotx`, `.docx`); downloads are then written from that file.
+- **Views.** **Edit**, **Read mode**, **Print layout** (the exact final pages), **Focus** and zoom.
+- **Slide decks** use a slide editor with layouts, a slide sorter, speaker notes and text boxes; charts and tables are placed on slides in the same way.
+
+## Formats and downloads
+
+| Format | Made by | Notes |
+| --- | --- | --- |
+| Word `.docx` | The app | Editable. On Windows with Word installed, Word also fills in the contents page and embeds fonts |
+| PDF of a document | Made from the Word file by Microsoft Word or LibreOffice, so pages match Word exactly | If neither is installed, Chrome, Edge or Chromium prints it: close to the Word file, but pages can differ |
+| PowerPoint `.pptx` | The app | Text, charts and tables stay editable in PowerPoint |
+| PDF of a slide deck | PowerPoint or LibreOffice | Not possible without one of them |
+
+The file is named after the country, the report name and the date, for example `Kenya_Synthesis_chartbook_2026-09-26.docx`, and is saved wherever your browser or DataSuite saves downloads. A document cannot be exported as PowerPoint, nor a deck as Word.
+
+## Prerequisites that change report content
+
+- **Removed years and adjustment** decide the numbers in every coverage, adjustment and mortality chart.
+- **Denominators** chosen on Denominator Selection are used by the coverage charts. Without them, the coverage-by-denominator trend chart says **Choose the denominators first**.
+- **Surveys.** Equity charts and facility-versus-survey comparisons need the survey files you loaded.
+- **Country reference data.** The FPET chart needs family planning estimates for the country.
+
+## Troubleshooting
+
+| Symptom | Likely cause and fix |
+| --- | --- |
+| **Could not be drawn with this dataset** in a block | The dataset lacks the data. Read the reason after it, load the missing file or delete the block. The same text appears in the exported file |
+| **Choose a region** | A regional chart has no region: set **Region of this report** |
+| **No district coverage for ... in ...** | Pick a year and region that have data |
+| Final pages or PDF fail, or say a converter is missing | Install Microsoft Word or LibreOffice on the computer running the app. Word download still works |
+| Slide deck PDF fails | Needs PowerPoint or LibreOffice. Download PowerPoint instead |
+| Slow generation | The first draw of a long report, such as the synthesis chartbook, computes every chart. Wait for the progress bar; later edits redraw only what changed |
+
+## Tips for stakeholders
+
+1. Settle data quality, adjustment and denominators before you generate the synthesis, and state them in a text block on the first page.
+2. Answer every interpretation prompt or delete it. Leaving prompts in is the most common reason a chartbook looks unfinished.
+3. Fill in the cover: title, editors, date and logos of the partners.
+4. Produce the report in the language of the audience, and use **Print layout** before you send a PDF.
+5. Duplicate the one-pager for each region and share the PowerPoint files with the regional teams.
+6. Link findings to actions: see [Dissemination, decisions and action](/en/docs/framework/12-dissemination).
+
+## What this page does not cover
+
+Page notes added with the **Notes** button are not part of the report builder as far as the source shows. The **Custom** chart group is a placeholder. Where DataSuite saves downloaded files depends on your browser or desktop settings, which the report code does not control.

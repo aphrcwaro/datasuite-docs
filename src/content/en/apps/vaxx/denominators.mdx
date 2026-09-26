@@ -1,0 +1,103 @@
+---
+topics: [denominators]
+indicators: [anc1, penta1, instlivebirths]
+reportKinds: [derived_coverage, denominator_trend, derived_coverage_trend]
+cacheMembers: [denominator, derivation_population, denominator_metrics, maternal_denominator, get_denominator, calculate_derived_coverage, calculate_indicator_coverage, indicator_coverage_national, indicator_coverage_admin1, indicator_coverage_district, national_estimates, un_estimates]
+appPages: [denominator_assessment, denominator_selection]
+ai:
+  status: draft
+  summary: >-
+    Coverage divides vaccinated children by a target population, so the denominator matters as much as data quality.
+    Population Trend (Denominator Assessment) sets the DHIS2 population; Denominator Selection compares coverage
+    under each option and records one vaccination denominator.
+  options:
+    - "Vaccination denominator: DHIS2, ANC 1, Pentavalent 1, Penta1-derived, ANC 1 Population Growth (#choose-the-denominator)"
+    - "Select Best Population: Live births, Total births, Total population or Under 1 year (DHIS2) (#population-trend)"
+    - "The UN projection is plotted for comparison but is not a choice (#what-each-option-means)"
+  steps:
+    - "Population Trend: compare UN and DHIS2; look for a stable, plausible gap (#population-trend)"
+    - "Survey comparison, regional pattern, then trend over time (#read-the-survey-comparison)"
+    - "Set the Vaccination denominator chip; it is saved and used by every coverage, inequality and target page (#choose-the-denominator)"
+  rules:
+    - "A denominator giving coverage close to the survey, without exceeding 100 percent, is a good candidate (#read-the-survey-comparison)"
+    - "Do not pick the option with the highest coverage; pick the one that best agrees with the survey and stays consistent over time (#interpretation-and-pitfalls)"
+    - "A Penta1-derived denominator makes Penta1 coverage near 100 percent by construction; judge it on Penta3 and Measles 1 and against the survey (#interpretation-and-pitfalls)"
+    - "The Vaxx App has one vaccination denominator, no separate maternal one (#choose-the-denominator)"
+    - "The method is in Denominator assessment and selection (/en/docs/framework/4-denominator-selection/)"
+---
+
+import { Steps, Callout } from 'nextra/components'
+
+# Denominators
+
+Coverage is a number of vaccinated children divided by a target population, so the choice of denominator matters as much as the data quality. This section has two pages under **Denominators**: **Population Trend** (the Denominator Assessment page) and **Denominator Selection**. Both need adjusted data. The method is in the **[denominator selection](/en/docs/framework/4-denominator-selection)** chapter.
+
+## When to use it
+
+Use these pages after adjustment and before reading any coverage result. Repeat them if you change the adjustment or the survey inputs.
+
+## Population Trend
+
+Compares population trends across the available sources.
+
+- Filter **Select Best Population**: **Live births (DHIS2)**, **Total births (DHIS2)**, **Total population (DHIS2)** or **Under 1 year (DHIS2)**. It sets the DHIS2 population the derived denominators are built from.
+- Card **Population Comparison** with tabs **Population**, **Births** and **Under 1**. Each chart plots the UN projection against the DHIS2 projection by year (in thousands).
+
+Look for a stable, plausible gap between UN and DHIS2. A sudden break in one line usually means a change in how the population was projected, not a real change in births.
+
+![Population trend](/images/denominator-population-trend.png)
+
+## Denominator Selection
+
+Compares coverage under each denominator option and records your choice.
+
+<Steps>
+
+### Read the survey comparison
+
+The **National Coverage** card has tabs **Institutional Live Births**, **BCG**, **Pentavalent 3** and **Measles 1**. Each chart shows the facility-based coverage from DHIS2 under each denominator, next to the national survey coverage for the survey year. A denominator that gives coverage close to the survey, without exceeding 100 percent, is a good candidate.
+
+If survey estimates are missing, the card shows "No coverage to show yet" and a **Go to Load Data** button. Add the survey values in the National Rates step.
+
+### Check the regional pattern
+
+**Subnational Derived Coverage** has tabs **Pentavalent 1**, **Pentavalent 3** and **Measles 1**. It compares regional estimates by denominator for the survey year.
+
+### Check the trend
+
+**Population Trend** (on this page it means coverage over time) has tabs **Pentavalent 1**, **Pentavalent 3** and **Measles 1**. Each shows coverage by year under every denominator, including the UN population. Use the **Admin Level** filter (National, Admin 1, Admin 2) and the region selector to look at one area.
+
+### Choose the denominator
+
+Set the **Vaccination denominator** chip. Options are **DHIS2**, **ANC 1**, **Pentavalent 1**, **Penta1-derived** and **ANC 1 Population Growth**. The choice is saved in the dataset and used by every coverage, inequality and target page. The Vaxx App has one vaccination denominator, with no separate maternal one.
+
+</Steps>
+
+![Best denominator selection](/images/denominator-best-selection.png)
+
+![National coverage over time by denominator](/images/denominator-national-coverage-overtime.png)
+
+## What each option means
+
+| Option | Idea |
+| --- | --- |
+| DHIS2 | The population projected in the DHIS2 data (live births, total births, total population or under 1, per the Select Best Population setting). |
+| ANC 1 | Denominator derived from ANC-1 service utilization. |
+| Pentavalent 1 | Denominator derived from Penta-1 immunization. |
+| ANC 1 Population Growth, Penta1-derived | The ANC-1 or Penta-1 derivation with an adjustment for annual population growth. |
+
+The UN projection is also plotted on the charts for comparison, but it is not one of the choices in the chip.
+
+Definitions of derived populations and survey rates are in the **[framework chapter](/en/docs/framework/4-denominator-selection)**.
+
+## Interpretation and pitfalls
+
+<Callout type="warning">
+A denominator derived from Penta1 makes Penta1 coverage look near 100 percent by construction. Judge it on Penta3 and Measles 1, and against the survey.
+</Callout>
+
+- Do not pick the option that gives the highest coverage. Pick the one that best agrees with the survey and stays consistent over time.
+- Sub-national denominators can be less reliable than national ones. Read them together with district data quality.
+- The vaccination denominator label appears as a chip on every analysis page. If results look odd, check it first.
+
+Next: **[Coverage, equity and targets](/en/apps/vaxx/coverage-equity-targets)**.

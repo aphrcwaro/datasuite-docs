@@ -1,44 +1,57 @@
-import { Steps } from 'nextra/components'
-import { Callout } from 'nextra/components'
-import { Bleed } from 'nextra/components'
+import { Callout, Steps } from 'nextra/components'
 
+# Transferência de dados
 
-Once login, metadata retrieval, and mapping are complete, the extractor can begin data download. 
-Instead of relying on a single large DHIS2 request, the extractor is designed to handle extraction in smaller and more manageable batches.
-![DHIS2 login dashboard](/images/extractor_dashboard.jpg)
-This approach lowers the risk of timeouts for large download requests, thus reducing the chances of incomplete downloads.
+Depois de concluídos o início de sessão, a obtenção dos metadados e o mapeamento, o extrator pode iniciar a transferência dos dados.
+Em vez de depender de um único pedido grande ao DHIS2, o extrator foi concebido para realizar a extração em lotes mais pequenos e mais fáceis de gerir.
+Esta abordagem reduz o risco de tempo limite excedido em transferências grandes e, com isso, diminui a probabilidade de transferências incompletas.
 
 <Callout type="warning">
-  **Large extractions still need planning:** 
-  - Even with caching and chunked processing, very large downloads may take time depending on server performance, user permissions, internet stability, and the size of the requested organisation unit and period ranges.
+
+**As extrações grandes continuam a exigir planeamento:**
+
+- Mesmo com a cache e o processamento em partes, as transferências muito grandes podem demorar, consoante o desempenho do servidor, as permissões do utilizador, a estabilidade da internet e o tamanho das unidades organizacionais e dos períodos pedidos.
+
 </Callout>
 
-## Download Steps
+## Etapas da transferência
+
 <Steps>
-### [Complete and save your mapping](/apps/data-extractor/mapping)
----
-### Go to the Download Manager and click **+ New Download Task**
-![download_configuration](/images/extractor_download_config.jpg)
----
-### Configure the download parameters: name of the mapping(in case you have multiple mappings), period(Start &End) and the Admin level.
-<Callout type="important">
-  **Countdown download configuration** 
-  - Date Range -> To be the last five years (e.g. January 1st 2020 to December 31st 2025).
-  - Admin Level -> To be Level 3
+
+### [Concluir e guardar o mapeamento](/pt/apps/data-extractor/mapping)
+
+### Aceder ao Downloads Manager e clicar em **+ New Download Task**
+
+![Downloads Manager com o botão New Download Task](/images/extractor_downloading.jpg)
+
+### Configurar os parâmetros da transferência
+
+Selecione o nome do mapeamento (caso existam vários mapeamentos), o período (datas de início e de fim) e o nível administrativo e, em seguida, clique em **Start Download**.
+
+![Caixa de diálogo Configure Download Task](/images/extractor_download_config.jpg)
+
+<Callout type="info">
+
+**Configuração da transferência do Countdown:**
+
+- **Date Range:** utilize os últimos cinco anos (por exemplo, de 1 de janeiro de 2020 a 31 de dezembro de 2025).
+- **Admin Level:** utilize o nível 3.
+
 </Callout>
 
 </Steps>
 
-Caching is not only useful for metadata. It also helps the extractor preserve progress and reduce unnecessary repeated work where extraction tasks are interrupted or revisited.
+A cache não é útil apenas para os metadados. Ajuda também o extrator a preservar o progresso e a evitar trabalho repetido desnecessário quando as tarefas de extração são interrompidas ou retomadas.
 
-This improves reliability in practical field conditions, especially when:
+Isto melhora a fiabilidade em condições reais de terreno, especialmente quando:
 
-- internet connectivity is unstable,
-- DHIS2 response times vary,
-- analysts need to rerun the same extract after refining mappings,
-- teams want a reproducible process with less manual repetition.
+- a ligação à internet é instável,
+- os tempos de resposta do DHIS2 variam,
+- os analistas precisam de executar novamente a mesma extração depois de refinar os mapeamentos,
+- as equipas querem um processo reproduzível, com menos repetição manual.
 
 <Callout type="info">
-  **Tip:** If you are testing mappings, validate the metadata and structure first using a smaller extraction range before launching a full national, multi-year download.
-</Callout>
 
+**Sugestão:** se estiver a testar mapeamentos, valide primeiro os metadados e a estrutura com um período de extração mais pequeno antes de iniciar uma transferência nacional completa, com vários anos.
+
+</Callout>

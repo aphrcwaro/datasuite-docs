@@ -1,19 +1,29 @@
 export default {
-  "doc-divider": { "type": "separator", "title": "DOCUMENTATION" },
-
+  'get-started-divider': {
+    type: 'separator',
+    title: 'PRIMEIROS PASSOS'
+  },
   index: {
     title: 'Visão geral',
     theme: {
       layout: 'full'
     }
   },
-
-  "getting-started": "Introdução",
-
-  framework: "Estrutura analítica",
-
-  methods: {
-    title: "Métodos",
-    display: "hidden"
-  }
+  setup: {
+    title: 'Instalar o DataSuite',
+    theme: {
+      layout: 'full'
+    }
+  },
+  'getting-started': 'Primeiros passos',
+  'methodology-divider': {
+    type: 'separator',
+    title: 'METODOLOGIA'
+  },
+  framework: 'Metodologia Countdown',
+  'reference-divider': {
+    type: 'separator',
+    title: 'REFERÊNCIA'
+  },
+  reference: 'Referência'
 }

@@ -1,0 +1,63 @@
+---
+topics: [pooling, analysis-setup]
+cacheMembers: [cache_path, countdown_data]
+ai:
+  status: draft
+  summary: >-
+    Pooled reads the .rds caches the country apps save: a country's dataset with everything computed on it. Good
+    pooled results depend on well-prepared caches.
+  steps:
+    - "Open the RMNCAH or Vaxx App, upload the country's data and work through data quality, adjustment and denominator selection (#producing-a-cache)"
+    - "Repeat for each country, with the same app and domain (#producing-a-cache)"
+    - "Put all countries in one folder, one file per country, with a clear name ending in the date (#naming-and-folders)"
+  rules:
+    - "Complete adjustment and denominators before pooling; an unadjusted cache loads with a warning and is not comparable with adjusted countries (#producing-a-cache)"
+    - "A loadable cache is readable by R, contains a country name and adjusted data, and yields at least one table (#what-makes-a-cache-loadable)"
+    - "Only .rds files are used; two files for the same country (by ISO3): the newer date is kept; the date is the last run of eight digits in the name, else the modified time (#naming-and-folders)"
+    - "Caches must load with the installed cd2030.core (1.1.0 or later); re-save an old file in the country app if it fails (#compatibility-notes)"
+    - "The workflow is in the framework (/en/docs/framework/0-workflow/)"
+---
+
+import { Callout } from 'nextra/components'
+
+# Preparing caches
+
+Pooled reads the **caches** that the country apps save. A cache is an `.rds` file that holds a country's dataset together with everything computed on it: adjusted data, coverage, data quality results and the choices made in the analysis. Good pooled results depend on well-prepared caches, so it is worth a few minutes to get them right.
+
+## Producing a cache
+
+1. Open the **[RMNCAH App](/en/apps/rmncah)** (or the **[Vaxx App](/en/apps/vaxx)**) and upload the country's data. The data usually comes from the **[Data Extractor](/en/apps/data-extractor)**.
+2. Work through the analysis: data quality checks, data preparation and adjustment, and denominator selection. See the **[analytical framework](/en/docs/framework/0-workflow)**.
+3. The app saves the cache as an `.rds` file. When the country's data was uploaded from a spreadsheet or Stata file, the cache is written next to the source file with the same name and an `.rds` extension. If that `.rds` already exists, it is loaded again instead of a new one being created.
+
+Repeat for each country, using the same app and the same domain for all of them.
+
+<Callout type="important">
+Complete the adjustment and denominator steps before pooling. A cache that is not adjusted still loads, but Pooled warns that its tables use unadjusted data, and coverage will not be comparable with countries that were adjusted.
+</Callout>
+
+## What makes a cache loadable
+
+For each file, Pooled opens it as a Countdown cache for the domain you chose and then checks:
+
+- The file can be read by R. A damaged file, or one saved by a newer version of R, is reported as unreadable.
+- The cache contains a **country** name. Files without a country or without adjusted data are reported as "Not a Countdown dataset".
+- At least one table can be built. Standard tables that cannot be built produce a warning that lists them.
+
+The country and its ISO3 code come from inside the cache, not from the file name.
+
+## Naming and folders
+
+- Only files ending in `.rds` (any letter case) are used. Other files are listed as skipped.
+- Put all the countries you want to pool in one folder. Selecting a folder adds every `.rds` file inside it.
+- Keep a clear name, ideally with the date at the end, for example `Kenya_master_adj_dataset_20250918.rds`. Pooled reads the last run of eight digits in the name as the file date (year, month, day). If there is none, the file's modified time is used.
+- Keep **one file per country**. If two selected files are for the same country (matched by ISO3 code), Pooled keeps the one with the newer date and leaves the other out, with a reason in the log.
+- Remove old versions and unrelated `.rds` files from the folder, or untick them in step 1.
+
+## Compatibility notes
+
+- All caches must be loadable by the version of `cd2030.core` installed with DataSuite (the Pooled package requires version 1.1.0 or later). Caches carry an internal data version, so if an old file fails to load, open and re-save it in the country app first.
+- Countries can have different tables. Data quality or survey tables, for example, may exist for some countries only. Pooled records what each file lacks and flags it in the review step rather than failing.
+- If the columns of one table differ between countries in type, they are combined as text and a note is written to the file log.
+
+Next: **[Using the app](/en/apps/pooled/using-the-app)**.

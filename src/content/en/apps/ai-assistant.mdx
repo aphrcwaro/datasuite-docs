@@ -1,0 +1,242 @@
+---
+topics: [ai-analysis]
+ai:
+  status: draft
+  summary: >-
+    AI can support analysis and interpretation but must not replace the analyst's judgement: outputs must be
+    reviewed, validated and adapted, and final interpretations, conclusions and recommendations stay grounded in
+    human and subject-matter expertise and local context.
+  rules:
+    - "AI can amplify: sharpening the question, surfacing data quality issues, pattern detection, structured comparisons, visual summaries, possible explanations, options and scenarios, counterarguments, refining messages (#)"
+    - "AI must not replace: framing the question, judging data quality and fitness for use, deciding which patterns and comparisons are valid, choosing visualizations, judging explanations and causality, weighing options and owning decisions, stakeholder perspectives, ensuring messages are accurate and appropriate (#)"
+    - "An effective prompt states its purpose, audience, geography, time and scope, interpretation guidance, output format and guardrails (#what-makes-an-effective-prompt)"
+    - "Guardrails: stick to the data shown, flag uncertainty and data quality issues, avoid speculation beyond the evidence, note assumptions and inferences (#what-makes-an-effective-prompt)"
+    - "Distinguish what the data shows (analysis) from what it may mean (interpretation), and state limitations, assumptions and uncertainty (#what-makes-an-effective-prompt)"
+    - "The gender prompt uses only the data points supplied, and its output is a starting point with assumptions and reflective questions for country team review (#using-ai-prompts-to-support-gender-analysis-and-interpretation)"
+    - "The DataSuite assistant answers from the dataset's saved results and this methodology, ends answers with its sources, and says when the methodology does not cover a question (#what-it-knows)"
+    - "It changes what the app shows only as the AI App Control setting allows (ask, allow, off), and changes the dataset only to save a report or chart the user asked for (#what-it-will-not-do)"
+  interpretation:
+    - "The Malawi output and its policy messages are illustrative only, not findings or method (#example-of-an-ai-output-using-malawi-2025-cam-data)"
+---
+
+import { Callout } from 'nextra/components'
+
+# Leveraging AI for Analysis and Interpretation
+
+Artificial intelligence (AI) can be a powerful tool to enhance the efficiency, depth, and accessibility of data analysis and interpretation. It can support analysts in rapidly exploring datasets, identifying patterns, summarizing trends, and generating initial visualizations and insights. AI can also help structure written explanations, translate technical findings for different audiences, and synthesize relevant evidence from large volumes of information. When used well, AI can enable analysts to spend less time on routine or time-intensive tasks and more time on critical thinking, such as contextualizing findings, building shared understanding, and tailoring messages to decision-makers' needs.
+
+However, AI must be used thoughtfully, with sound professional judgment and clear accountability. It should not replace the analyst's role in interpreting results, assessing data limitations, or making context-specific judgments. AI-generated outputs may contain inaccuracies, overlook important nuances, or reflect biases in the underlying data. Therefore, outputs must always be reviewed, validated, and adapted.
+
+Collaboration between data producers, analysts, and data users to interpret findings is also essential to build shared understanding and ownership. Final interpretations, conclusions, and recommendations should always remain grounded in human expertise, subject-matter expertise, and an understanding of the local context. Therefore, AI should be considered a support tool that amplifies and strengthens analysis and interpretation, but is not a substitute for critical thinking, judgment, and shared decision-making.
+
+| **AI can amplify** | **AI must not replace** |
+| --- | --- |
+| **_Analysis – Understanding what the data shows_** | |
+| **Sharpening the definition of the problem or question** that the analysis should respond to | **Framing the problem or question** that the analysis should respond to |
+| **Surfacing data quality issues** (e.g., incompleteness, inconsistencies, outliers, etc.) | **Assessing data quality and fitness for use**, including reliability, comparability, limitations |
+| **Faster, deeper pattern detection;** connecting signals from across sources | Deciding **what patterns to look for** in the data and why |
+| **Structured comparisons** across time, geographies, subgroups, etc. | Determining **which comparisons are valid and relevant** |
+| Generating **clear visual summaries** | **Selecting appropriate visualizations** and defining what should be shown and compared |
+| **_Interpretation – Understanding what the data means_** | |
+| **Generating possible explanations** and hypotheses for trends and patterns, testing assumptions | Using context, **collective knowledge and experience** to identify likely explanations; whether relationships are causal and actionable |
+| Presenting sets of options and scenarios for prioritization | **Weighing up options**, deciding priorities; **owning decisions** and justifying choices |
+| **Surfacing counterarguments** and bias checks | **Integrating stakeholder perspectives**, navigating power dynamics |
+| **Refining key messages** and adapting language, tone, and formats for different audiences | **Judging what messages are most appropriate** and useful for each audience, **ensuring accuracy** |
+
+## Effective AI prompts
+
+### What makes an effective prompt
+
+- **Be clear on the purpose** – e.g., identify trends, show anomalies, interpret trends.
+- **Define the audience** – e.g., analyst deep dive versus policymaker summary.
+- **Specify geography, time, and scope** – e.g., country, administrative level, indicators, time period.
+- **Provide interpretation guidance** – e.g., highlight gender and equity gaps, suggest possible explanations.
+- **Specify the output format** – e.g., a slide deck, short narrative, comparison table.
+- **Set guardrails** – e.g., stick to the data shown; flag uncertainty or data quality issues; avoid speculation beyond evidence; note assumptions and inferences.
+
+<Callout type="info">
+
+**Example of an effective prompt:**
+
+_Using only the data provided, summarize key trends, identify patterns and outliers at national level, and highlight gender and equity differences. Clearly distinguish between what the data shows (analysis) and what it may mean (interpretation). Explicitly identify data limitations, assumptions, and sources of uncertainty._
+
+</Callout>
+
+## AI prompts and gender analysis
+
+### Using AI prompts to support gender analysis and interpretation
+
+Below is an example of a prompt that you can adapt and paste into the DataSuite Assistant to generate an initial gender analysis and interpretation. Please incorporate your country's data into the prompt.
+
+The AI output is designed to provide a starting point only. It will highlight key assumptions and suggest reflection questions that your team can use to guide your discussions. All AI outputs should be carefully reviewed and refined based on your team's knowledge, expertise, and country context, focusing on the findings that are most relevant for your intended audience.
+
+These prompts can be used to generate findings for your CAM analytical report or used to create a short summary for the chartbook.
+
+Please reach out to Lior Idit Miller (lmiller9@worldbank.org) and/or Elizabeth Hazel (ehazel1@jhu.edu) for questions or support at the CAM or afterwards. More details are available on the [MAGE project website](https://mageproject.org/).
+
+### Prompt for country analytical teams
+
+Using only the data points below, generate a gender-lens interpretation of maternal health in this country. The AI should provide an initial interpretation that requires country team review, validation, and refinement.
+
+The interpretation should be brief and concise. For each section, the AI should flag assumptions and pose reflective questions for teams to consider based on their contextual knowledge.
+
+**Country data:**
+
+- **Country name:** [Add country name here]
+- **Demand for family planning satisfied by modern contraceptives:** [Add country data here]
+- **Unmet need for family planning:** [Add country data here]
+- **ANC 4+ visits coverage:** [Add country data here]
+- **ANC first trimester coverage:** [Add country data here]
+- **Institutional delivery coverage:** [Add country data here]
+- **Postnatal care coverage:** [Add country data here]
+- **C-section rate:** [Add country data here]
+- **Urban/rural institutional delivery gap (percentage points):** [Add country data here]
+- **Maternal education institutional delivery gap (percentage points):** [Add country data here]
+
+**Output format:**
+
+Create a bold heading for this section called "Draft interpretation for country team review". Include this opening text: Access to essential maternal health services reflects broader gender inequities that shape women's autonomy over their reproductive health and their ability to seek care.
+
+Organize the findings by subheading: Family planning; Antenatal care; Delivery and postnatal care; Equity. Then for each subheading include "Interpretation", "Assumptions for team validation", and "Reflection questions". Reflection questions should be limited to the specific assumptions mentioned and no more than 3.
+
+**Generate policy message options:**
+
+Based on the data provided, generate 4-5 bullet point illustrative policy messages that country teams can use as starting points for discussion. These should be:
+
+- Directly linked to specific data points provided
+- Policy-relevant and potentially actionable
+- Framed through a gender and equity lens
+- Concise (1-2 sentences each)
+
+Each bullet should identify the data-driven finding and its gender/equity implication. Present these as suggestions rather than recommendations.
+
+Include this closing text: These are illustrative examples intended to spark discussion. Country teams should validate for accuracy and relevance to current policy priorities, adapt language to local context, or develop alternative messages that better reflect their strategic objectives. Teams may select, combine, revise, or replace these options entirely.
+
+## Example of an AI output using Malawi 2025 CAM data
+
+<Callout type="warning">
+
+For illustrative purposes only.
+
+</Callout>
+
+### Draft interpretation for country team review
+
+Access to essential maternal health services reflects broader gender inequities that shape women's autonomy over their reproductive health and their ability to seek care.
+
+#### Family planning
+
+**Interpretation:** Malawi demonstrates relatively strong performance in modern contraceptive uptake (80.6% demand satisfied), suggesting progress in women's access to fertility control. However, the persistent 20% unmet need indicates that one in five women who wish to delay or prevent pregnancy cannot do so. This gap may reflect gendered barriers including limited decision-making power, partner opposition, or restricted access for certain groups such as adolescents and unmarried women.
+
+**Assumptions for team validation:**
+
+- The unmet need figure captures women across all age groups and marital statuses equally
+- High contraceptive satisfaction rates reflect genuine choice rather than method limitations
+- Partner/spousal consent is not a significant barrier to contraceptive access
+
+**Reflection questions:**
+
+1. Does the 20% unmet need concentrate among specific populations (adolescents, rural women, unmarried women) who face additional gender-related access barriers?
+2. To what extent does male partner involvement—either supportive or restrictive—influence contraceptive uptake in Malawi?
+3. Are current family planning services designed to accommodate women with limited autonomy in household decision-making?
+
+#### Antenatal care
+
+**Interpretation:** The significant gap between first trimester ANC coverage (27.6%) and ANC 4+ visits (62.4%) suggests women are entering care late in pregnancy. This pattern may reflect gendered constraints including women's limited control over household resources for transport, time poverty due to domestic responsibilities, or cultural norms around pregnancy disclosure. Late ANC initiation also occurs due to limited pregnancy diagnosis options at both individual and health system level. Late ANC initiation reduces opportunities for early risk detection and birth preparedness.
+
+**Assumptions for team validation:**
+
+- Late ANC initiation is primarily driven by demand-side barriers rather than supply-side availability
+- Women have agency to seek care independently once pregnancy is confirmed
+- The ANC 4+ figure reflects the recommended contact schedule quality
+
+**Reflection questions:**
+
+1. What gender-specific barriers (financial dependence, time constraints, need for permission) delay women's first ANC visit in Malawi?
+2. Are there cultural practices around pregnancy concealment that disproportionately affect women's early care-seeking?
+3. How do women's domestic and caregiving responsibilities influence their ability to attend multiple ANC visits?
+
+#### Delivery and postnatal care
+
+**Interpretation:** Malawi's high institutional delivery rate (95.2%) represents a significant achievement in ensuring women access skilled birth attendance. The C-section rate of 9.6% falls slightly below the WHO-recommended ranges (10-15%), suggesting somewhat appropriate access to emergency obstetric care without over-medicalization. Strong postnatal care coverage (84.1%) indicates continued engagement with the health system post-delivery. These figures suggest health system investments have successfully addressed major access barriers for facility-based care.
+
+**Assumptions for team validation:**
+
+- High institutional delivery rates reflect genuine access and quality rather than coercive policies
+- The C-section rate is equitably distributed across wealth and geographic groups
+- Postnatal care includes meaningful content addressing maternal and newborn health needs
+
+**Reflection questions:**
+
+1. Does the high institutional delivery rate mask variations in quality or respectful maternity care practices?
+2. Is the C-section rate equitably available to women in rural areas facing obstetric emergencies?
+3. Does PNC adequately address women's own health needs, or does it focus predominantly on newborn care?
+
+#### Equity
+
+**Interpretation:** The 25 percentage-point urban/rural gap in institutional delivery reveals significant geographic inequity, likely reflecting rural women's compounded disadvantages including distance to facilities, transport costs, and limited infrastructure. The 15 percentage-point education gap demonstrates how women's educational attainment—itself shaped by gender norms—influences maternal health outcomes. Less-educated women may face greater barriers including limited health literacy, reduced autonomy, and economic constraints that intersect with gender-based inequities.
+
+**Assumptions for team validation:**
+
+- The urban/rural gap primarily reflects supply-side factors (facility availability) rather than demand-side preferences
+- Educational attainment serves as a proxy for women's empowerment and decision-making capacity
+- These gaps have remained stable and are not already being addressed by recent interventions
+
+**Reflection questions:**
+
+1. For rural women who deliver outside institutions, what are the primary gendered barriers—distance, cost, permission, or preference for traditional care?
+2. How does low educational attainment intersect with other dimensions of marginalization (poverty, age, parity) to compound barriers for specific groups of women?
+3. Are existing programs specifically designed to reach women facing multiple intersecting disadvantages?
+
+#### Suggested policy message options
+
+Based on the data provided, the following illustrative policy messages are offered as starting points for country team discussion:
+
+- **Closing the unmet need gap:** With 20% of women unable to access desired family planning despite 80.6% demand satisfaction, targeted interventions addressing gendered barriers—including partner engagement and adolescent-friendly services—could accelerate progress toward full reproductive autonomy.
+- **Early ANC as a gender equity priority:** The 35 percentage-point gap between first trimester ANC (27.6%) and ANC 4+ coverage (62.4%) suggests women face early pregnancy barriers; addressing women's financial dependence and time poverty could improve early care initiation.
+- **Sustaining delivery gains while addressing quality:** Malawi's 95.2% institutional delivery rate demonstrates strong access; the next frontier involves ensuring respectful, woman-centered care that upholds dignity and autonomy during childbirth.
+- **Rural women's access imperative:** The 25 percentage-point urban/rural delivery gap indicates rural women face compounded geographic and gender barriers; community-based strategies and transport solutions could address these intersecting disadvantages.
+- **Education-sensitive approaches:** The 15 percentage-point education gap in institutional delivery suggests less-educated women require tailored outreach that accounts for limited health literacy and potential constraints on autonomous decision-making.
+
+These are illustrative examples intended to spark discussion. Country teams should validate for accuracy and relevance to current policy priorities, adapt language to local context, or develop alternative messages that better reflect their strategic objectives. Teams may select, combine, revise, or replace these options entirely.
+
+## The AI assistant in DataSuite [#ai-assistant-in-datasuite]
+
+DataSuite's chat assistant works alongside the RMNCAH, Vaxx and Pooled apps. It is built to follow the guidance above:
+it supports your analysis, and your team stays responsible for the interpretation.
+
+### What it knows [#what-it-knows]
+
+- **Where you are.** It knows which app page you are on, which charts and tabs are on screen, and the filters you have
+  set, so you can ask "what does this chart show?" or "which page am I on?".
+- **Your dataset.** It answers from the results your dataset has saved -- the same numbers the app shows -- not from
+  estimates of its own. It can look at other levels too, for example which districts drive a change in a national
+  indicator.
+- **This methodology.** It explains results with the Countdown methodology on this site. When the methodology does not
+  cover a question, it says so rather than filling the gap.
+
+### What it tells you [#what-it-tells-you]
+
+Every answer that uses the methodology or your data ends with its **sources**: the documentation sections it relied on,
+as links, and the data it used -- a chart on screen, or a result saved in your dataset. When it calculates something
+the app does not show, it says so.
+
+### What it can do [#what-it-can-do]
+
+- Explain a chart or a page, and what the results mean.
+- Break a change down by region or district.
+- Build a report: one of the standard reports, or a custom one you then edit in the Reports page.
+- Make a custom chart that is saved with your dataset and redraws when the data changes, like the app's own charts.
+- Open another dataset in its own tab, so each dataset keeps its own conversation context.
+
+### What it will not do [#what-it-will-not-do]
+
+- **Change your dataset**, except to save a report or a chart you asked for.
+- **Change what the app shows** (go to another page, set filters) unless your setting allows it. The setting
+  *AI App Control* has three choices: ask each time (the default), allow, or off.
+
+### Where its files are [#where-its-files-are]
+
+The assistant keeps its files for an analysis next to your dataset, in the `ai` folder of the dataset's
+`<name>.shiny-workspace` folder: the code it ran, conversation transcripts and the decisions it recorded. They stay
+with the data they are about.

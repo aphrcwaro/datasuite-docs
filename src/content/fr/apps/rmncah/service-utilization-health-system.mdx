@@ -1,0 +1,80 @@
+import { Callout } from 'nextra/components'
+
+# Utilisation des services et système de santé
+
+Deux groupes de la section **Analyse** vont au-delà de la couverture des interventions RMNCAH. **Utilisation des services** étudie l'ampleur des soins ambulatoires et hospitaliers reçus par les enfants. **Performance du système de santé** met en relation les services et les intrants du système de santé : établissements, lits, personnel et secteur privé. Les deux exigent que l'Ajustement des données ait été exécuté. Méthodes : [Utilisation des services](/fr/docs/framework/10-service-utilisation) et [Performance du système de santé](/fr/docs/framework/11-health-system-performance).
+
+## Utilisation des services
+
+Ordre suggéré : vérifiez d'abord les données, puis lisez l'utilisation nationale et infranationale, puis l'indice combiné.
+
+### Indicateurs de DQA des services
+
+**Objectif.** Juger si les données de consultations externes (OPD) et d'hospitalisation (IPD) sont suffisamment bonnes pour être interprétées.
+
+**Filtre.** Un sélecteur de région (**Tout sélectionner** pour les résultats nationaux).
+
+La page affiche un tableau, *Métriques de qualité des données*, par année. Ses lignes sont le pourcentage de rapports mensuels attendus des établissements, les districts atteignant le seuil de notification défini dans Taux de notification, le pourcentage de valeurs mensuelles OPD et IPD non manquantes, les districts sans valeur OPD ou IPD manquante, les valeurs OPD qui ne sont pas des valeurs aberrantes extrêmes, les districts sans valeur aberrante extrême pour l'OPD, le ratio OPD/IPD chez les moins de 5 ans, et le pourcentage d'OPD et d'IPD concernant les enfants de moins de 5 ans. **Télécharger le graphique** et **Télécharger les données** se trouvent dans la barre d'outils.
+
+Si la complétude ou les données manquantes sont mauvaises, traitez les tendances d'utilisation avec prudence.
+
+![DQA de l'utilisation des services](/images/fr-service-utilization-dqa.png)
+
+### Utilisation des services nationale
+
+Onglets : **Consultations externes** (visites par personne et par an, tous âges et moins de 5 ans), **Admissions en hospitalisation**, **Moins de 5 ans** (part des consultations externes et des admissions en hospitalisation concernant les enfants de moins de 5 ans), **Taux de létalité** (moins de 5 ans et tous âges) et **Décès** (proportion des décès concernant les moins de 5 ans). Une seconde carte, avec **Sélectionner les années** et une **Palette** (Violets par défaut), cartographie **Carte OPD** et **Carte IPD** par région.
+
+Moins d'une consultation externe par personne et par an indique généralement un accès géographique ou financier insuffisant. La létalité en établissement est un indicateur indirect de la qualité des soins cliniques.
+
+![Consultations externes](/images/fr-service-utilization-opdvisits.png)
+
+### Utilisation des services infranationale
+
+Choisissez une région (ou **Tout sélectionner**) pour voir les mêmes onglets pour cette zone, ainsi qu'une seconde carte, *Utilisation des services infranationale*, avec les onglets **Consultations externes** et **Admissions en hospitalisation** montrant la répartition entre les régions de niveau administratif 1 : consultations externes par enfant de moins de 5 ans et par an, et admissions en hospitalisation pour 100 enfants de moins de 5 ans.
+
+![Répartition infranationale des consultations externes](/images/fr-service-utilization-subnational-distribution.png)
+
+### Indice préventif SMI vs Indice curatif
+
+Chaque point est une région de niveau administratif 1. L'axe horizontal est l'**Indice des services préventifs SMI** (services prénatals, d'accouchement, postnatals et de vaccination par enfant de moins de 5 ans, pondérés selon leur importance) et l'axe vertical l'**Indice d'utilisation des services curatifs** (consultations externes et admissions en hospitalisation par enfant de moins de 5 ans, une admission comptant dix fois une consultation). Des lignes médianes divisent le graphique en quatre quadrants : préventif faible ou élevé, curatif faible ou élevé. **Générer le rapport** ouvre le rapport sur l'utilisation des services.
+
+Les régions à faible utilisation préventive et curative sont prioritaires ; une forte utilisation curative avec une faible utilisation préventive peut indiquer que les gens ne se rendent dans les établissements que lorsqu'ils sont malades.
+
+![Indice préventif SMI par rapport à l'indice curatif](/images/fr-service-utilization-curative-index.png)
+
+## Performance du système de santé
+
+### Système de santé national
+
+Un tableau des indicateurs du système de santé pour la dernière année, avec les colonnes **Indicateur**, **Valeur** et **Unité**, en trois sections : *Infrastructures de santé* (densité d'établissements pour 10 000, part des établissements qui sont des hôpitaux, densité hospitalière pour 100 000, densité de lits d'hospitalisation pour 10 000), *Personnel de santé* (densité du personnel pour 10 000 et ratio infirmiers-sages-femmes par médecin) et *Rôle du secteur privé* (part des établissements privés et des établissements d'ONG). Téléchargez le tableau ou son image depuis la barre d'outils.
+
+![Système de santé national](/images/fr-health-system.png)
+
+### Système de santé infranational
+
+Onglets : **Densité des établissements de santé**, **Densité hospitalière**, **Densité du personnel** et **Densité de lits**. Les barres montrent chaque région par rapport à la ligne **Moyenne nationale**. Pour les établissements (2 pour 10 000), les lits (25 pour 10 000) et le personnel (44,5 pour 10 000), une **Valeur de référence cible** en pointillés est tracée et les barres sont colorées **Atteint la référence** ou **Sous la référence**. La densité hospitalière n'a pas de valeur de référence.
+
+![Densité des établissements de santé par région](/images/fr-health-system-facility-density.png)
+
+### Performance des SSP
+
+Onglets : **Densité des établissements de santé** et **Densité du personnel**. Chaque nuage de points relie un intrant à un indice de service pour les régions de niveau administratif 1. Des lignes médianes en pointillés divisent le graphique en quadrants, par exemple forte densité avec un faible indice de service. Les régions atypiques sont étiquetées. Il s'agit d'une comparaison descriptive, non d'une preuve d'efficience.
+
+![Système de santé par région](/images/fr-health-system-subnational.png)
+
+### Part publique/privée
+
+La carte du haut montre la propriété des établissements de santé en pourcentages de **Privé**, **ONG** et **Public**. En dessous, les onglets **National** et **Urbain/Rural** montrent la répartition public/privé au niveau national et selon le milieu de résidence.
+
+<Callout type="info">
+Le titre du graphique indique actuellement *Propriété des établissements de santé, 2024 (DHIS2)*. Vérifiez que l'année correspond à vos données avant de la citer.
+</Callout>
+
+![Part publique et privée](/images/fr-health-system-private-public-share.png)
+
+## Pièges courants
+
+- Lire les tendances d'utilisation sans avoir d'abord consulté les indicateurs de DQA des services.
+- Comparer des densités du système de santé avec des dénominateurs ou des années de population différents.
+- Traiter une valeur de référence comme un objectif pour chaque région. C'est un repère, et le contexte compte.
+- Interpréter la position dans un quadrant comme une relation de cause à effet.
