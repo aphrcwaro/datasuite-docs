@@ -16,7 +16,7 @@ Use estas páginas logo após carregar os dados e sempre que carregar um ficheir
 <Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
 <Tabs.Tab>
 
-A maioria das páginas tem uma etiqueta **Indicador**, uma etiqueta **Nível Administrativo** (**Nível Administrativo 1** ou **Nível Administrativo 2**) e, quando o Nível Administrativo 1 está selecionado, uma etiqueta de região com **Selecionar Todos** para se concentrar numa região. A página Taxa de notificação acrescenta um **Limite de Desempenho** (ver [Taxa de notificação](#taxa-de-notificação)).
+A maioria das páginas tem uma etiqueta **Indicador**, uma etiqueta **Nível Administrativo** (**Nível Administrativo 1** ou **Nível Administrativo 2**) e, quando o Nível Administrativo 1 está selecionado, uma etiqueta de região com **Selecionar Todos** para se concentrar numa região. A página Taxa de notificação acrescenta um **Limite de Desempenho** (ver [Taxa de notificação](#reporting-rate)).
 
 </Tabs.Tab>
 <Tabs.Tab>
@@ -46,7 +46,7 @@ Os gráficos mostram o padrão. As tabelas listam os distritos e os meses que lh
 
 </Steps>
 
-## Taxa de notificação
+## Taxa de notificação[#reporting-rate]
 
 Mostra o grau de completude da notificação das unidades de saúde, por serviço, ano e área.
 
@@ -87,7 +87,7 @@ O Limite de Desempenho que definir aqui fica guardado no conjunto de dados e é 
 
 ![Mapa de calor da taxa de notificação subnacional](/images/pt-dqa-reporting-rate.png)
 
-## Detecção de valores discrepantes
+## Detecção de valores discrepantes[#outlier-detection]
 
 Identifica valores mensais extremos que podem ser erros de introdução. O que é um valor discrepante extremo: [Qualidade dos dados > Deteção de valores atípicos](/pt/docs/methodology/data-quality#deteção-de-valores-atípicos).
 
@@ -100,7 +100,7 @@ Como ler (a parte esperada de valores sem valores discrepantes, campanhas): [Qua
 
 ![Mapa de calor da detecção de valores discrepantes](/images/pt-dqa-outlier-detection.png)
 
-## Dados Ausentes
+## Dados Ausentes[#data-missingness]
 
 Mostra que indicadores e áreas têm notificações em falta.
 
@@ -112,7 +112,7 @@ Como os valores em falta são medidos e tratados: [Qualidade dos dados > Dados a
 
 ![Mapa de calor dos dados ausentes](/images/pt-dqa-missingness.png)
 
-## Consistência interna
+## Consistência interna[#internal-consistency]
 
 Verifica se os indicadores relacionados evoluem em conjunto e concordam entre si ao longo do tempo. São apresentados dois cartões: **Gráficos de razões** e **Verificações de Consistência**. As razões esperadas e o intervalo em que um distrito deve ficar: [Qualidade dos dados > Consistência interna](/pt/docs/methodology/data-quality#consistência-interna). Como ler os gráficos: [Qualidade dos dados > Consistência e rácios](/pt/docs/methodology/data-quality#consistência-e-rácios).
 
@@ -135,7 +135,7 @@ Verifica se os indicadores relacionados evoluem em conjunto e concordam entre si
 
 ![Verificações de consistência entre CPN1 e Penta1](/images/pt-dqa-conistency-checks.png)
 
-## Pontuação Geral da Qualidade dos Dados
+## Pontuação Geral da Qualidade dos Dados[#overall-data-quality-score]
 
 Uma pontuação anual que resume todas as verificações: uma tabela por ano, com um filtro de região para ver uma única área de Nível Administrativo 1, ou o nível nacional. Como a pontuação é calculada: [Qualidade dos dados > Pontuação geral de qualidade](/pt/docs/methodology/data-quality#pontuação-geral-de-qualidade).
 

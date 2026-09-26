@@ -85,6 +85,9 @@ Interpretation, a methodology page may end with `### Common pitfalls`.
 - **Anchors are stable.** The outline's `##` headings use their natural anchors. Content headings keep the anchor they
   had: when one is renamed or moved, keep the old id with Nextra's suffix, `### New heading[#old-id]` (no space before the bracket). Links from other
   pages, the AI briefs' `(#anchor)` items and `src/components/MethodDefaults.jsx` rely on them.
+- **Get help targets.** Each app page's Get help button opens a heading of the app guide (the `help` entries in
+  cd2030.rmncah and cd2030.vaxx `R/pages.R`). Those headings carry the English id in every language (fr/pt use
+  `[#english-id]`), so one id works for all three; don't rename or remove them without updating `pages.R`.
 - **Restructure, don't rewrite.** Moving text into the outline must not drop or change a fact, number, rule, table,
   formula, figure or link. Methodology changes are made separately and recorded in REORGANISATION.md.
 - **fr and pt mirror en**: same outline, same order, their own heading text (anchors follow their text).

@@ -16,7 +16,7 @@ Utilisez ces pages juste après le chargement des données, puis chaque fois que
 <Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
 <Tabs.Tab>
 
-La plupart des pages ont une pastille **Indicateur**, une pastille **Niveau administratif** (**Niveau administratif 1** ou **Niveau administratif 2**) et, lorsque le niveau administratif 1 est sélectionné, une pastille de région avec **Tout sélectionner** pour cibler une seule région. La page Taux de notification ajoute un **Seuil de performance** (voir [Taux de notification](#taux-de-notification)).
+La plupart des pages ont une pastille **Indicateur**, une pastille **Niveau administratif** (**Niveau administratif 1** ou **Niveau administratif 2**) et, lorsque le niveau administratif 1 est sélectionné, une pastille de région avec **Tout sélectionner** pour cibler une seule région. La page Taux de notification ajoute un **Seuil de performance** (voir [Taux de notification](#reporting-rate)).
 
 </Tabs.Tab>
 <Tabs.Tab>
@@ -46,7 +46,7 @@ Les graphiques montrent la tendance. Les tableaux listent les districts et les m
 
 </Steps>
 
-## Taux de notification
+## Taux de notification[#reporting-rate]
 
 Montre à quel point les établissements ont notifié de façon complète, par service, année et zone.
 
@@ -87,7 +87,7 @@ Le seuil de performance défini ici est conservé dans le jeu de données et ré
 
 ![Carte thermique du taux de notification infranational](/images/fr-dqa-reporting-rate.png)
 
-## Détection des valeurs aberrantes
+## Détection des valeurs aberrantes[#outlier-detection]
 
 Repère les valeurs mensuelles extrêmes qui peuvent être des erreurs de saisie. Ce qui constitue une valeur aberrante extrême : [Qualité des données > Détection des valeurs aberrantes](/fr/docs/methodology/data-quality#détection-des-valeurs-aberrantes).
 
@@ -100,7 +100,7 @@ Comment le lire (part attendue de valeurs sans valeur aberrante, campagnes) : [Q
 
 ![Carte thermique de détection des valeurs aberrantes](/images/fr-dqa-outlier-detection.png)
 
-## Données manquantes
+## Données manquantes[#data-missingness]
 
 Montre quels indicateurs et quelles zones ont des rapports manquants.
 
@@ -112,7 +112,7 @@ Comment les valeurs manquantes sont mesurées et traitées : [Qualité des donn�
 
 ![Carte thermique des données manquantes](/images/fr-dqa-missingness.png)
 
-## Cohérence interne
+## Cohérence interne[#internal-consistency]
 
 Vérifie que les indicateurs apparentés évoluent ensemble et concordent au fil du temps. Deux cartes sont affichées : **Graphiques des ratios** et **Vérifications de cohérence**. Les ratios attendus et la plage dans laquelle un district doit se situer : [Qualité des données > Cohérence interne](/fr/docs/methodology/data-quality#cohérence-interne). Comment lire les graphiques : [Qualité des données > Cohérence et ratios](/fr/docs/methodology/data-quality#cohérence-et-ratios).
 
@@ -135,7 +135,7 @@ Vérifie que les indicateurs apparentés évoluent ensemble et concordent au fil
 
 ![Vérifications de cohérence entre CPN1 et Penta1](/images/fr-dqa-conistency-checks.png)
 
-## Score global de qualité des données
+## Score global de qualité des données[#overall-data-quality-score]
 
 Un score annuel qui résume tous les contrôles : un tableau par année, avec un filtre de région pour voir une seule zone de niveau administratif 1, ou le niveau national. Comment le score est calculé : [Qualité des données > Score de qualité global](/fr/docs/methodology/data-quality#score-de-qualité-global).
 

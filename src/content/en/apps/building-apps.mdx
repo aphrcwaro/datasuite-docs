@@ -195,9 +195,67 @@ version breaking your app -- and apps outside CRAN get no warning when a CRAN pa
   conventions on this page now means nothing changes for your app when they arrive.
 </Callout>
 
+## Python apps
+
+DataSuite also runs apps written with [Shiny for Python](https://shiny.posit.co/py/), in the same tabs and with the
+same restart, crash recovery and environment variables as R apps. Users need **Python 3.10 or newer** from
+[python.org](https://www.python.org/downloads/) (DataSuite finds it through the `py` launcher, the `PATH` or the
+usual install folders, or the `datasuite.pythonPath` setting); DataSuite installs everything else.
+
+The app's folder holds an `app.py` whose Shiny app object is named `app`:
+
+```python
+from shiny import App, ui, render
+
+app_ui = ui.page_fluid(ui.output_text("hello"))
+
+def server(input, output, session):
+    @render.text
+    def hello():
+        return "Hello"
+
+app = App(app_ui, server)
+```
+
+and the extension marks it with `"runtime": "python"`:
+
+```json
+"shinyApps": [{
+  "id": "myapp", "name": "My App", "location": "apps/myapp", "runtime": "python",
+  "accepts": ["csv"],
+  "package": { "name": "mypkg", "version": "1.2.0" }
+}]
+```
+
+**Dependencies** go in a `requirements.txt` next to `app.py`, each with a minimum version, for the same reasons as
+above:
+
+```
+pandas>=2.1
+plotly>=5.18
+```
+
+A `pyproject.toml` with a `[project] dependencies` list works too (when both exist, `requirements.txt` is used; reading
+`pyproject.toml` needs Python 3.11 or newer). Shiny for Python itself is always installed. `package` is optional: a
+pip package the app comes from, with `version` its oldest supported version and `index` an extra package index to
+look in besides PyPI; `app.py` then only imports the app, e.g. `from mypkg.app import app`.
+
+DataSuite installs all of this into its own virtual environment, one per Python version
+(`<user data>/python/venv/<version>`), never into the user's Python, with the same rules as R: when the extension is
+installed or updated (the package is brought up to its newest version), a quick check before every launch that
+downloads nothing when every requirement is met, and working offline once set up. If a running app imports a module
+that isn't installed, DataSuite offers to install the pip package of the same name -- if the name differs (e.g.
+`sklearn` is `scikit-learn`), list it in `requirements.txt`.
+
+<Callout type="warning">
+  On Windows, keep paths short: the Python kernel can't open files whose full path is longer than 260 characters, so
+  a deeply nested app folder or package can fail to import.
+</Callout>
+
 ## What DataSuite gives a running app
 
-DataSuite starts the app in a fresh R session with these environment variables:
+DataSuite starts the app in a fresh R (or Python) session with these environment variables (`Sys.getenv()` in R,
+`os.environ` in Python):
 
 | Variable | Value |
 | --- | --- |
