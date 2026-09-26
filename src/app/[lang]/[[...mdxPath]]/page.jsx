@@ -1,7 +1,7 @@
 import { generateStaticParamsFor, importPage } from 'nextra/pages'
 import { notFound } from 'next/navigation'
 import { useMDXComponents as getMDXComponents } from '@/mdx-components'
-import { locales } from '@/proxy'
+import { locales } from '@/locales'
 export const generateStaticParams = generateStaticParamsFor('mdxPath', 'lang')
 
 export async function generateMetadata(props) {

@@ -1,0 +1,259 @@
+{
+  "description": "Page ids the apps' sidebars send (input$tabs), the `appPages` front matter vocabulary. From cd2030.core and the app packages' nav trees.",
+  "pages": [
+    {
+      "id": "upload_data",
+      "apps": [
+        "rmncah",
+        "vaxx"
+      ]
+    },
+    {
+      "id": "introduction",
+      "apps": [
+        "rmncah",
+        "vaxx"
+      ]
+    },
+    {
+      "id": "reporting_rate",
+      "apps": [
+        "rmncah",
+        "vaxx"
+      ]
+    },
+    {
+      "id": "data_completeness",
+      "apps": [
+        "rmncah",
+        "vaxx"
+      ]
+    },
+    {
+      "id": "outlier_detection",
+      "apps": [
+        "rmncah",
+        "vaxx"
+      ]
+    },
+    {
+      "id": "internal_consistency",
+      "apps": [
+        "rmncah",
+        "vaxx"
+      ]
+    },
+    {
+      "id": "overall_score",
+      "apps": [
+        "rmncah",
+        "vaxx"
+      ]
+    },
+    {
+      "id": "remove_years",
+      "apps": [
+        "rmncah",
+        "vaxx"
+      ]
+    },
+    {
+      "id": "data_adjustment",
+      "apps": [
+        "rmncah",
+        "vaxx"
+      ]
+    },
+    {
+      "id": "data_adjustment_changes",
+      "apps": [
+        "rmncah",
+        "vaxx"
+      ]
+    },
+    {
+      "id": "denominator_assessment",
+      "apps": [
+        "rmncah",
+        "vaxx"
+      ]
+    },
+    {
+      "id": "denominator_selection",
+      "apps": [
+        "rmncah",
+        "vaxx"
+      ]
+    },
+    {
+      "id": "national_coverage",
+      "apps": [
+        "rmncah",
+        "vaxx"
+      ]
+    },
+    {
+      "id": "national_inequality",
+      "apps": [
+        "rmncah",
+        "vaxx"
+      ]
+    },
+    {
+      "id": "national_target",
+      "apps": [
+        "rmncah",
+        "vaxx"
+      ]
+    },
+    {
+      "id": "equity_assessment",
+      "apps": [
+        "rmncah",
+        "vaxx"
+      ]
+    },
+    {
+      "id": "subnational_coverage",
+      "apps": [
+        "rmncah",
+        "vaxx"
+      ]
+    },
+    {
+      "id": "subnational_inequality",
+      "apps": [
+        "rmncah",
+        "vaxx"
+      ]
+    },
+    {
+      "id": "subnational_target",
+      "apps": [
+        "rmncah",
+        "vaxx"
+      ]
+    },
+    {
+      "id": "reports",
+      "apps": [
+        "rmncah",
+        "vaxx"
+      ]
+    },
+    {
+      "id": "bayesian_national",
+      "apps": [
+        "rmncah"
+      ]
+    },
+    {
+      "id": "bayesian_subnational",
+      "apps": [
+        "rmncah"
+      ]
+    },
+    {
+      "id": "continuum_care",
+      "apps": [
+        "rmncah"
+      ]
+    },
+    {
+      "id": "health_system_comparison",
+      "apps": [
+        "rmncah"
+      ]
+    },
+    {
+      "id": "health_system_national",
+      "apps": [
+        "rmncah"
+      ]
+    },
+    {
+      "id": "health_system_subnational",
+      "apps": [
+        "rmncah"
+      ]
+    },
+    {
+      "id": "mch_curative_index",
+      "apps": [
+        "rmncah"
+      ]
+    },
+    {
+      "id": "mortality_completeness",
+      "apps": [
+        "rmncah"
+      ]
+    },
+    {
+      "id": "mortality_institutional",
+      "apps": [
+        "rmncah"
+      ]
+    },
+    {
+      "id": "mortality_mapping",
+      "apps": [
+        "rmncah"
+      ]
+    },
+    {
+      "id": "national_utilization",
+      "apps": [
+        "rmncah"
+      ]
+    },
+    {
+      "id": "private_sector",
+      "apps": [
+        "rmncah"
+      ]
+    },
+    {
+      "id": "subnational_utilization",
+      "apps": [
+        "rmncah"
+      ]
+    },
+    {
+      "id": "utilization_dqa",
+      "apps": [
+        "rmncah"
+      ]
+    },
+    {
+      "id": "build",
+      "apps": [
+        "pooled"
+      ]
+    },
+    {
+      "id": "explore_all",
+      "apps": [
+        "pooled"
+      ]
+    },
+    {
+      "id": "explore_compare",
+      "apps": [
+        "pooled"
+      ]
+    },
+    {
+      "id": "explore_extract",
+      "apps": [
+        "pooled"
+      ]
+    },
+    {
+      "id": "explore_open",
+      "apps": [
+        "pooled"
+      ]
+    }
+  ]
+}

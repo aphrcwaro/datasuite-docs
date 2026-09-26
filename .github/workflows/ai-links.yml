@@ -1,0 +1,38 @@
+name: AI links
+
+# The English pages' front matter links the methodology to the apps and cd2030.core (topics, indicators, reportKinds,
+# cacheMembers, appPages); the DataSuite chat relies on them through the AI corpus (/ai/corpus.json). This checks
+# every link against its vocabulary (src/ai). cd2030.core's release workflow can run it against its own manifest with
+# `node scripts/check-ai-links.mjs --manifest <file>`.
+
+on:
+  push:
+    branches: [main]
+    paths: ['src/content/**', 'src/ai/**', 'scripts/check-ai-links.mjs', 'scripts/build-ai-corpus.mjs', '.github/workflows/ai-links.yml']
+  pull_request:
+    paths: ['src/content/**', 'src/ai/**', 'scripts/check-ai-links.mjs', 'scripts/build-ai-corpus.mjs', '.github/workflows/ai-links.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        env:
+          PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: '1'
+        run: npm ci --include=dev
+
+      - name: Check the front matter links
+        run: npm run ai-links
+
+      - name: Build the AI corpus from the content
+        run: node scripts/build-ai-corpus.mjs src/content corpus-check

@@ -1,0 +1,155 @@
+{
+  "description": "Controlled vocabulary for the `topics` front matter key. Add a topic here before using it in a page.",
+  "topics": [
+    {
+      "id": "workflow",
+      "title": "The CD2030 analysis workflow",
+      "description": "The end-to-end sequence: setup, data quality, adjustment, denominators, coverage, equity, sub-national, mortality, services, health system, dissemination."
+    },
+    {
+      "id": "analysis-setup",
+      "title": "Analysis setup and loading data",
+      "description": "Working folder, uploading HMIS data, the saved dataset (.rds), embedded datasets, national parameters for denominators."
+    },
+    {
+      "id": "app-navigation",
+      "title": "Using the apps",
+      "description": "Opening an app, the Load Data wizard, layout and navigation."
+    },
+    {
+      "id": "data-quality",
+      "title": "Data quality assessment",
+      "description": "Whether facility data can be trusted: completeness, outliers, consistency, missingness, ratios, overall score."
+    },
+    {
+      "id": "reporting-completeness",
+      "title": "Reporting completeness",
+      "description": "Reporting rates of facilities and districts, and the threshold used."
+    },
+    {
+      "id": "outliers",
+      "title": "Outlier detection",
+      "description": "Extreme monthly values flagged by the outlier rules."
+    },
+    {
+      "id": "internal-consistency",
+      "title": "Internal consistency",
+      "description": "Whether related indicators (e.g. ANC1 and Penta1) agree."
+    },
+    {
+      "id": "data-missingness",
+      "title": "Data missingness",
+      "description": "Missing monthly values by indicator and unit."
+    },
+    {
+      "id": "dq-ratios",
+      "title": "Ratio calculations",
+      "description": "Expected ratios between indicators and their adequacy."
+    },
+    {
+      "id": "dq-score",
+      "title": "Overall data quality score",
+      "description": "The combined data quality score by year and admin level."
+    },
+    {
+      "id": "data-adjustment",
+      "title": "Data adjustment",
+      "description": "Removing years and adjusting numerators for incomplete reporting with k-factors."
+    },
+    {
+      "id": "denominators",
+      "title": "Denominator assessment and selection",
+      "description": "Denominator options (DHIS2, UN, derived from ANC1/Penta1) and choosing the best one."
+    },
+    {
+      "id": "coverage",
+      "title": "Coverage estimation",
+      "description": "National coverage from routine data compared with surveys and WUENIC."
+    },
+    {
+      "id": "continuum-of-care",
+      "title": "Continuum of care",
+      "description": "Coverage along the maternal, newborn and child continuum, and its gaps."
+    },
+    {
+      "id": "bayesian-coverage",
+      "title": "Bayesian coverage estimates",
+      "description": "Model-based estimates and short-term forecasts combining survey and routine data."
+    },
+    {
+      "id": "fpet",
+      "title": "Family planning (FPET)",
+      "description": "Family planning projections from FPET."
+    },
+    {
+      "id": "equity",
+      "title": "Equity assessment",
+      "description": "Equiplots of coverage by wealth, education and area from surveys."
+    },
+    {
+      "id": "subnational-coverage",
+      "title": "Sub-national coverage",
+      "description": "Coverage by region and district, heatmaps and one-pagers."
+    },
+    {
+      "id": "inequality",
+      "title": "Inequality between areas",
+      "description": "Inequality in coverage between regions or districts from routine data."
+    },
+    {
+      "id": "coverage-targets",
+      "title": "Global coverage targets",
+      "description": "Share of areas reaching the global coverage targets."
+    },
+    {
+      "id": "indicator-definitions",
+      "title": "Indicator definitions",
+      "description": "The data categories and indicator definitions used by the apps."
+    },
+    {
+      "id": "mortality",
+      "title": "Institutional mortality",
+      "description": "Institutional maternal mortality and stillbirth ratios, their data quality and interpretation."
+    },
+    {
+      "id": "service-utilization",
+      "title": "Service utilization",
+      "description": "Outpatient and inpatient service use, especially for children under 5."
+    },
+    {
+      "id": "mch-curative-index",
+      "title": "MCH preventive vs curative index",
+      "description": "The balance between preventive and curative child services."
+    },
+    {
+      "id": "health-system-performance",
+      "title": "Health system performance",
+      "description": "Health system inputs (workforce, facilities, beds) and outputs by input."
+    },
+    {
+      "id": "private-sector",
+      "title": "Public and private share",
+      "description": "Share of services by the public and private sectors."
+    },
+    {
+      "id": "reports",
+      "title": "Reports",
+      "description": "Standard and custom reports, the report editor, formats and downloads."
+    },
+    {
+      "id": "dissemination",
+      "title": "Dissemination and action",
+      "description": "Planning to use the results for decisions and action."
+    },
+    {
+      "id": "ai-analysis",
+      "title": "AI-assisted analysis",
+      "description": "Using the DataSuite chat and AI prompts for analysis and interpretation."
+    },
+    {
+      "id": "pooling",
+      "title": "Pooling datasets",
+      "description": "Combining saved datasets across countries or years in the Pooled app."
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+# Static files only. The public entry point (TLS, path routing to the other services) is the main Caddy.
+:80 {
+	root * /srv
+	encode zstd gzip
+	file_server
+
+	handle_errors {
+		@notfound expression {err.status_code} == 404
+		handle @notfound {
+			rewrite * /404.html
+			file_server
+		}
+	}
+}

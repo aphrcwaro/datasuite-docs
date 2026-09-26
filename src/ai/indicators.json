@@ -1,0 +1,247 @@
+{
+  "description": "Indicator codes (cd2030.core indicator groups rmncah and vaccine), the `indicators` front matter vocabulary.",
+  "indicators": [
+    {
+      "id": "anc1",
+      "groups": [
+        "rmncah",
+        "vaccine"
+      ]
+    },
+    {
+      "id": "anc4",
+      "groups": [
+        "rmncah"
+      ]
+    },
+    {
+      "id": "anc_1trimester",
+      "groups": [
+        "rmncah"
+      ]
+    },
+    {
+      "id": "bcg",
+      "groups": [
+        "rmncah",
+        "vaccine"
+      ]
+    },
+    {
+      "id": "csection",
+      "groups": [
+        "rmncah"
+      ]
+    },
+    {
+      "id": "hiv_test",
+      "groups": [
+        "rmncah"
+      ]
+    },
+    {
+      "id": "ideliv",
+      "groups": [
+        "rmncah",
+        "vaccine"
+      ]
+    },
+    {
+      "id": "ifa90",
+      "groups": [
+        "rmncah"
+      ]
+    },
+    {
+      "id": "instlivebirths",
+      "groups": [
+        "rmncah",
+        "vaccine"
+      ]
+    },
+    {
+      "id": "ipd_total",
+      "groups": [
+        "rmncah"
+      ]
+    },
+    {
+      "id": "ipd_under5",
+      "groups": [
+        "rmncah"
+      ]
+    },
+    {
+      "id": "ipt2",
+      "groups": [
+        "rmncah"
+      ]
+    },
+    {
+      "id": "ipt3",
+      "groups": [
+        "rmncah"
+      ]
+    },
+    {
+      "id": "ipv1",
+      "groups": [
+        "vaccine"
+      ]
+    },
+    {
+      "id": "ipv2",
+      "groups": [
+        "vaccine"
+      ]
+    },
+    {
+      "id": "low_bweight",
+      "groups": [
+        "rmncah"
+      ]
+    },
+    {
+      "id": "maternal_deaths",
+      "groups": [
+        "rmncah"
+      ]
+    },
+    {
+      "id": "measles1",
+      "groups": [
+        "rmncah",
+        "vaccine"
+      ]
+    },
+    {
+      "id": "measles2",
+      "groups": [
+        "rmncah",
+        "vaccine"
+      ]
+    },
+    {
+      "id": "neonatal_deaths",
+      "groups": [
+        "rmncah"
+      ]
+    },
+    {
+      "id": "opd_total",
+      "groups": [
+        "rmncah"
+      ]
+    },
+    {
+      "id": "opd_under5",
+      "groups": [
+        "rmncah"
+      ]
+    },
+    {
+      "id": "opv1",
+      "groups": [
+        "vaccine"
+      ]
+    },
+    {
+      "id": "opv2",
+      "groups": [
+        "vaccine"
+      ]
+    },
+    {
+      "id": "opv3",
+      "groups": [
+        "vaccine"
+      ]
+    },
+    {
+      "id": "pcv1",
+      "groups": [
+        "vaccine"
+      ]
+    },
+    {
+      "id": "pcv2",
+      "groups": [
+        "vaccine"
+      ]
+    },
+    {
+      "id": "pcv3",
+      "groups": [
+        "vaccine"
+      ]
+    },
+    {
+      "id": "penta1",
+      "groups": [
+        "rmncah",
+        "vaccine"
+      ]
+    },
+    {
+      "id": "penta2",
+      "groups": [
+        "vaccine"
+      ]
+    },
+    {
+      "id": "penta3",
+      "groups": [
+        "rmncah",
+        "vaccine"
+      ]
+    },
+    {
+      "id": "pnc48h",
+      "groups": [
+        "rmncah"
+      ]
+    },
+    {
+      "id": "rota1",
+      "groups": [
+        "vaccine"
+      ]
+    },
+    {
+      "id": "rota2",
+      "groups": [
+        "vaccine"
+      ]
+    },
+    {
+      "id": "sba",
+      "groups": [
+        "rmncah"
+      ]
+    },
+    {
+      "id": "stillbirth_f",
+      "groups": [
+        "rmncah"
+      ]
+    },
+    {
+      "id": "stillbirth_m",
+      "groups": [
+        "rmncah"
+      ]
+    },
+    {
+      "id": "syphilis_test",
+      "groups": [
+        "rmncah"
+      ]
+    },
+    {
+      "id": "total_stillbirth",
+      "groups": [
+        "rmncah"
+      ]
+    }
+  ]
+}

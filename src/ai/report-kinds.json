@@ -1,0 +1,282 @@
+{
+  "source": "cd2030.core report_block_kinds() (groups rmncah, vaccine); to be replaced by cache_manifest()",
+  "version": "1.1.1",
+  "kinds": [
+    {
+      "id": "reporting_rate",
+      "label": "Reporting rate by district",
+      "type": "chart",
+      "groups": ["rmncah", "vaccine"]
+    },
+    {
+      "id": "overall_score",
+      "label": "Data quality score table",
+      "type": "table",
+      "groups": ["rmncah", "vaccine"]
+    },
+    {
+      "id": "consistency",
+      "label": "Consistency between two indicators, by district",
+      "type": "chart",
+      "groups": ["rmncah", "vaccine"]
+    },
+    {
+      "id": "dq_ratios",
+      "label": "Consistency ratios compared with expected ratios",
+      "type": "chart",
+      "groups": ["rmncah", "vaccine"]
+    },
+    {
+      "id": "dq_reporting_units",
+      "label": "Reporting rate by region or district",
+      "type": "chart",
+      "groups": ["rmncah", "vaccine"]
+    },
+    {
+      "id": "dq_completeness_units",
+      "label": "Completeness of reporting by region or district",
+      "type": "chart",
+      "groups": ["rmncah", "vaccine"]
+    },
+    {
+      "id": "dq_completeness_districts",
+      "label": "Districts with complete data",
+      "type": "chart",
+      "groups": ["rmncah", "vaccine"]
+    },
+    {
+      "id": "dq_outliers_units",
+      "label": "Values that are not extreme outliers",
+      "type": "chart",
+      "groups": ["rmncah", "vaccine"]
+    },
+    {
+      "id": "dq_outlier_trend",
+      "label": "Monthly values and outliers in a district",
+      "type": "chart",
+      "groups": ["rmncah", "vaccine"]
+    },
+    {
+      "id": "adj_comparison",
+      "label": "Numbers before and after adjustment",
+      "type": "chart",
+      "groups": ["rmncah", "vaccine"]
+    },
+    {
+      "id": "derived_coverage",
+      "label": "Coverage by denominator",
+      "type": "chart",
+      "groups": ["rmncah", "vaccine"]
+    },
+    {
+      "id": "denominator_trend",
+      "label": "Population projections: DHIS2 and UN",
+      "type": "chart",
+      "groups": ["rmncah", "vaccine"]
+    },
+    {
+      "id": "derived_coverage_trend",
+      "label": "Coverage over time by denominator",
+      "type": "chart",
+      "groups": ["rmncah", "vaccine"]
+    },
+    {
+      "id": "coverage",
+      "label": "Coverage trend: DHIS2 and survey",
+      "type": "chart",
+      "groups": ["rmncah", "vaccine"]
+    },
+    {
+      "id": "continuum",
+      "label": "Continuum of care",
+      "type": "chart",
+      "groups": "rmncah"
+    },
+    {
+      "id": "threshold",
+      "label": "Districts reaching the target",
+      "type": "chart",
+      "groups": ["rmncah", "vaccine"]
+    },
+    {
+      "id": "coverage_table",
+      "label": "Coverage table (DHIS2)",
+      "type": "table",
+      "groups": ["rmncah", "vaccine"]
+    },
+    {
+      "id": "indicator_coverage",
+      "label": "Coverage indicators by year (DHIS2)",
+      "type": "chart",
+      "groups": ["rmncah", "vaccine"]
+    },
+    {
+      "id": "continuum_gap",
+      "label": "Continuum of care: facility and survey compared",
+      "type": "chart",
+      "groups": "rmncah"
+    },
+    {
+      "id": "bayes_coverage",
+      "label": "Bayesian coverage model estimates",
+      "type": "chart",
+      "groups": "rmncah"
+    },
+    {
+      "id": "natcov_fpet",
+      "label": "Family planning: mCPR and demand satisfied (FPET)",
+      "type": "chart",
+      "groups": "rmncah"
+    },
+    {
+      "id": "natcov_continuum_region",
+      "label": "Continuum of care by region",
+      "type": "chart",
+      "groups": "rmncah"
+    },
+    {
+      "id": "inequality",
+      "label": "Coverage by region over time",
+      "type": "chart",
+      "groups": ["rmncah", "vaccine"]
+    },
+    {
+      "id": "map",
+      "label": "Coverage map",
+      "type": "chart",
+      "groups": ["rmncah", "vaccine"]
+    },
+    {
+      "id": "equity",
+      "label": "Equity (from surveys)",
+      "type": "chart",
+      "groups": ["rmncah", "vaccine"]
+    },
+    {
+      "id": "continuum_units",
+      "label": "Continuum of care: latest coverage by region",
+      "type": "chart",
+      "groups": "rmncah"
+    },
+    {
+      "id": "region_coverage",
+      "label": "Coverage in a region, by denominator",
+      "type": "chart",
+      "groups": ["rmncah", "vaccine"]
+    },
+    {
+      "id": "district_table",
+      "label": "Coverage by district in a region",
+      "type": "table",
+      "groups": ["rmncah", "vaccine"]
+    },
+    {
+      "id": "op_district_population",
+      "label": "Population and coverage by district in a region",
+      "type": "table",
+      "groups": ["rmncah", "vaccine"]
+    },
+    {
+      "id": "mortality_trend",
+      "label": "Institutional mortality trend",
+      "type": "chart",
+      "groups": "rmncah"
+    },
+    {
+      "id": "mortality_region",
+      "label": "Institutional mortality by region",
+      "type": "chart",
+      "groups": "rmncah"
+    },
+    {
+      "id": "mortality_plausibility",
+      "label": "Stillbirths per maternal death",
+      "type": "chart",
+      "groups": "rmncah"
+    },
+    {
+      "id": "mortality_ratio",
+      "label": "Completeness of death reporting",
+      "type": "chart",
+      "groups": "rmncah"
+    },
+    {
+      "id": "mort_nn_trend",
+      "label": "Institutional neonatal mortality trend",
+      "type": "chart",
+      "groups": "rmncah"
+    },
+    {
+      "id": "service_utilization",
+      "label": "Service utilization",
+      "type": "chart",
+      "groups": "rmncah"
+    },
+    {
+      "id": "mch_index",
+      "label": "Preventive and curative care index",
+      "type": "chart",
+      "groups": "rmncah"
+    },
+    {
+      "id": "su_region",
+      "label": "Service use by region",
+      "type": "chart",
+      "groups": "rmncah"
+    },
+    {
+      "id": "su_dqa",
+      "label": "Service utilization data quality",
+      "type": "table",
+      "groups": "rmncah"
+    },
+    {
+      "id": "su_map",
+      "label": "Service utilization map by region",
+      "type": "chart",
+      "groups": "rmncah"
+    },
+    {
+      "id": "health_system_table",
+      "label": "Health system inputs table",
+      "type": "table",
+      "groups": "rmncah"
+    },
+    {
+      "id": "health_system_region",
+      "label": "Health system inputs by region",
+      "type": "chart",
+      "groups": "rmncah"
+    },
+    {
+      "id": "phc_scatter",
+      "label": "Service outputs by inputs",
+      "type": "chart",
+      "groups": "rmncah"
+    },
+    {
+      "id": "hs_comparison",
+      "label": "Service use by health system inputs, by region",
+      "type": "chart",
+      "groups": "rmncah"
+    },
+    {
+      "id": "hs_national",
+      "label": "Health system scores and densities (national)",
+      "type": "chart",
+      "groups": "rmncah"
+    },
+    {
+      "id": "private_share",
+      "label": "Private sector share",
+      "type": "chart",
+      "groups": "rmncah"
+    },
+    {
+      "id": "ps_ownership",
+      "label": "Ownership of health facilities by region",
+      "type": "chart",
+      "groups": "rmncah"
+    }
+  ]
+}

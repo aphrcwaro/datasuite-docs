@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>DataSuite</title>
+  <!-- The site lives under /en, /fr and /pt. This root page sends visitors to their language: the one they picked
+       before (NEXT_LOCALE cookie), else their browser's, else English. Plain HTML so it works on any static host. -->
+  <meta http-equiv="refresh" content="0; url=/en/" />
+  <script>
+    (function () {
+      var supported = ['en', 'fr', 'pt'];
+      var cookie = document.cookie.match(/(?:^|; )NEXT_LOCALE=(\w+)/);
+      var chosen = cookie && supported.indexOf(cookie[1]) >= 0 ? cookie[1] : null;
+      if (!chosen) {
+        var languages = navigator.languages || [navigator.language || 'en'];
+        for (var i = 0; i < languages.length && !chosen; i++) {
+          var code = String(languages[i]).slice(0, 2).toLowerCase();
+          if (supported.indexOf(code) >= 0) chosen = code;
+        }
+      }
+      location.replace('/' + (chosen || 'en') + '/' + location.search + location.hash);
+    })();
+  </script>
+</head>
+<body>
+  <p><a href="/en/">English</a> &middot; <a href="/fr/">Fran&ccedil;ais</a> &middot; <a href="/pt/">Portugu&ecirc;s</a></p>
+</body>
+</html>

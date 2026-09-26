@@ -6,14 +6,18 @@
   "scripts": {
     "build": "next build --webpack",
     "dev": "next dev --webpack",
-    "index": "npx pagefind --site .next/server/app --output-path public/_pagefind",
-    "start": "next start"
+    "index": "npx pagefind --site out --output-path out/_pagefind",
+    "postbuild": "npm run index && npm run ai-corpus",
+    "ai-corpus": "node scripts/build-ai-corpus.mjs src/content out",
+    "ai-links": "node scripts/check-ai-links.mjs --snapshot",
+    "start": "npx --yes serve out"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
     "@vscode/codicons": "^0.0.44",
     "glob": "^13.0.6",
     "gray-matter": "^4.0.3",
+    "katex": "^0.16.33",
     "mermaid": "^11.13.0",
     "negotiator": "^1.0.0",
     "next": "^16.0.7",

@@ -5,8 +5,9 @@ import { getPageMap } from 'nextra/page-map'
 import { notFound } from 'next/navigation'
 import { Analytics } from "@vercel/analytics/next"
 import Image from 'next/image'
-import { locales } from '@/proxy'
+import { locales } from '@/locales'
 import 'nextra-theme-docs/style.css'
+import 'katex/dist/katex.min.css'
 import '../../../public/css/custom.css'
 
 export default async function RootLayout({ children, params }) {
@@ -36,9 +37,9 @@ export default async function RootLayout({ children, params }) {
     pt: {
       themeSwitch: { dark: 'Escuro', light: 'Claro', system: 'Sistema' },
       toc: { title: 'Nesta página', backToTop: 'Voltar ao topo' },
-      feedback: { content: 'Tem alguma pergunta? Envie-nos seu feedback' },
+      feedback: { content: 'Tem alguma questão? Envie-nos o seu feedback' },
       searchPlaceholder: 'Pesquisar...',
-      download: 'Baixar'
+      download: 'Transferir'
     }
   }
 

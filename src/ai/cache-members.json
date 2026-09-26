@@ -1,0 +1,770 @@
+{
+  "source": "cd2030.core CacheConnection public methods and active bindings; to be replaced by cache_manifest()",
+  "version": "1.1.1",
+  "members": [
+    {
+      "name": "adjust_data",
+      "kind": "method"
+    },
+    {
+      "name": "calculate_completeness_summary",
+      "kind": "method"
+    },
+    {
+      "name": "calculate_coverage",
+      "kind": "method"
+    },
+    {
+      "name": "calculate_derived_coverage",
+      "kind": "method"
+    },
+    {
+      "name": "calculate_district_completeness_summary",
+      "kind": "method"
+    },
+    {
+      "name": "calculate_district_outlier_summary",
+      "kind": "method"
+    },
+    {
+      "name": "calculate_district_reporting_rate",
+      "kind": "method"
+    },
+    {
+      "name": "calculate_indicator_coverage",
+      "kind": "method"
+    },
+    {
+      "name": "calculate_inequality",
+      "kind": "method"
+    },
+    {
+      "name": "calculate_outliers_summary",
+      "kind": "method"
+    },
+    {
+      "name": "calculate_overall_score",
+      "kind": "method"
+    },
+    {
+      "name": "calculate_ratios_and_adequacy",
+      "kind": "method"
+    },
+    {
+      "name": "calculate_reporting_rate",
+      "kind": "method"
+    },
+    {
+      "name": "calculate_service_dqa_summary",
+      "kind": "method"
+    },
+    {
+      "name": "check_indicator_emptiness",
+      "kind": "method"
+    },
+    {
+      "name": "check_population_service_collision",
+      "kind": "method"
+    },
+    {
+      "name": "check_shapefile_admin_names",
+      "kind": "method"
+    },
+    {
+      "name": "check_survey_admin_names",
+      "kind": "method"
+    },
+    {
+      "name": "clear_area_survey",
+      "kind": "method"
+    },
+    {
+      "name": "clear_education_survey",
+      "kind": "method"
+    },
+    {
+      "name": "clear_map_mapping",
+      "kind": "method"
+    },
+    {
+      "name": "clear_national_survey",
+      "kind": "method"
+    },
+    {
+      "name": "clear_regional_survey",
+      "kind": "method"
+    },
+    {
+      "name": "clear_shapefile",
+      "kind": "method"
+    },
+    {
+      "name": "clear_survey_mapping",
+      "kind": "method"
+    },
+    {
+      "name": "clear_survey_year",
+      "kind": "method"
+    },
+    {
+      "name": "clear_un_estimates",
+      "kind": "method"
+    },
+    {
+      "name": "clear_un_mortality_estimates",
+      "kind": "method"
+    },
+    {
+      "name": "clear_wiq_survey",
+      "kind": "method"
+    },
+    {
+      "name": "clear_wizard_parts",
+      "kind": "method"
+    },
+    {
+      "name": "clear_wuenic_estimates",
+      "kind": "method"
+    },
+    {
+      "name": "compute_service_utilization",
+      "kind": "method"
+    },
+    {
+      "name": "filter_mortality_summary",
+      "kind": "method"
+    },
+    {
+      "name": "filter_service_utilization",
+      "kind": "method"
+    },
+    {
+      "name": "generate_admin1_mch_curative_index",
+      "kind": "method"
+    },
+    {
+      "name": "generate_admin1_service_utilization",
+      "kind": "method"
+    },
+    {
+      "name": "generate_coverage_data",
+      "kind": "method"
+    },
+    {
+      "name": "generate_health_system_table",
+      "kind": "method"
+    },
+    {
+      "name": "generate_phc_scatter_data",
+      "kind": "method"
+    },
+    {
+      "name": "generate_private_sector_data",
+      "kind": "method"
+    },
+    {
+      "name": "get_base_indicator_coverage",
+      "kind": "method"
+    },
+    {
+      "name": "get_bayes_model",
+      "kind": "method"
+    },
+    {
+      "name": "get_chart_options",
+      "kind": "method"
+    },
+    {
+      "name": "get_denominator",
+      "kind": "method"
+    },
+    {
+      "name": "get_filtered_coverage",
+      "kind": "method"
+    },
+    {
+      "name": "get_filtered_inequality",
+      "kind": "method"
+    },
+    {
+      "name": "get_filtered_mapping_data",
+      "kind": "method"
+    },
+    {
+      "name": "get_filtered_threshold",
+      "kind": "method"
+    },
+    {
+      "name": "get_high_performers",
+      "kind": "method"
+    },
+    {
+      "name": "get_mapping_data",
+      "kind": "method"
+    },
+    {
+      "name": "get_regional_estimates",
+      "kind": "method"
+    },
+    {
+      "name": "is_default",
+      "kind": "method"
+    },
+    {
+      "name": "lbr_mean",
+      "kind": "method"
+    },
+    {
+      "name": "list_missing_units",
+      "kind": "method"
+    },
+    {
+      "name": "load_from_disk",
+      "kind": "method"
+    },
+    {
+      "name": "prepare_mapping_service_utlization",
+      "kind": "method"
+    },
+    {
+      "name": "reactive",
+      "kind": "method"
+    },
+    {
+      "name": "reset_chart_options",
+      "kind": "method"
+    },
+    {
+      "name": "save_to_disk",
+      "kind": "method"
+    },
+    {
+      "name": "set_adjusted_data",
+      "kind": "method"
+    },
+    {
+      "name": "set_adjusted_flag",
+      "kind": "method"
+    },
+    {
+      "name": "set_area_survey",
+      "kind": "method"
+    },
+    {
+      "name": "set_cache_path",
+      "kind": "method"
+    },
+    {
+      "name": "set_chart_options",
+      "kind": "method"
+    },
+    {
+      "name": "set_countdown_data",
+      "kind": "method"
+    },
+    {
+      "name": "set_csection_area_estimates",
+      "kind": "method"
+    },
+    {
+      "name": "set_csection_national_estimates",
+      "kind": "method"
+    },
+    {
+      "name": "set_denominator",
+      "kind": "method"
+    },
+    {
+      "name": "set_derivation_population",
+      "kind": "method"
+    },
+    {
+      "name": "set_education_survey",
+      "kind": "method"
+    },
+    {
+      "name": "set_excluded_years",
+      "kind": "method"
+    },
+    {
+      "name": "set_fpet_data",
+      "kind": "method"
+    },
+    {
+      "name": "set_k_factors",
+      "kind": "method"
+    },
+    {
+      "name": "set_language",
+      "kind": "method"
+    },
+    {
+      "name": "set_map_mapping",
+      "kind": "method"
+    },
+    {
+      "name": "set_mapping_years",
+      "kind": "method"
+    },
+    {
+      "name": "set_maternal_denominator",
+      "kind": "method"
+    },
+    {
+      "name": "set_mortality_mapping_years",
+      "kind": "method"
+    },
+    {
+      "name": "set_national_estimates",
+      "kind": "method"
+    },
+    {
+      "name": "set_national_survey",
+      "kind": "method"
+    },
+    {
+      "name": "set_performance_threshold",
+      "kind": "method"
+    },
+    {
+      "name": "set_quality_confirmed",
+      "kind": "method"
+    },
+    {
+      "name": "set_regional_survey",
+      "kind": "method"
+    },
+    {
+      "name": "set_report_asset",
+      "kind": "method"
+    },
+    {
+      "name": "set_report_project",
+      "kind": "method"
+    },
+    {
+      "name": "set_report_theme",
+      "kind": "method"
+    },
+    {
+      "name": "set_sector_area_estimates",
+      "kind": "method"
+    },
+    {
+      "name": "set_sector_national_estimates",
+      "kind": "method"
+    },
+    {
+      "name": "set_selected_admin_level_1",
+      "kind": "method"
+    },
+    {
+      "name": "set_selected_district",
+      "kind": "method"
+    },
+    {
+      "name": "set_shapefile",
+      "kind": "method"
+    },
+    {
+      "name": "set_shapefile_name_field",
+      "kind": "method"
+    },
+    {
+      "name": "set_start_survey_year",
+      "kind": "method"
+    },
+    {
+      "name": "set_survey_estimates",
+      "kind": "method"
+    },
+    {
+      "name": "set_survey_mapping",
+      "kind": "method"
+    },
+    {
+      "name": "set_survey_year",
+      "kind": "method"
+    },
+    {
+      "name": "set_un_estimates",
+      "kind": "method"
+    },
+    {
+      "name": "set_un_mortality_estimates",
+      "kind": "method"
+    },
+    {
+      "name": "set_utilization_mapping_years",
+      "kind": "method"
+    },
+    {
+      "name": "set_wiq_survey",
+      "kind": "method"
+    },
+    {
+      "name": "set_wizard_country",
+      "kind": "method"
+    },
+    {
+      "name": "set_wizard_parts",
+      "kind": "method"
+    },
+    {
+      "name": "set_wizard_quality_results",
+      "kind": "method"
+    },
+    {
+      "name": "set_wuenic_estimates",
+      "kind": "method"
+    },
+    {
+      "name": "summarise_completeness_ratio",
+      "kind": "method"
+    },
+    {
+      "name": "adequacy_ratios",
+      "kind": "binding"
+    },
+    {
+      "name": "adjusted_data",
+      "kind": "binding"
+    },
+    {
+      "name": "adjusted_flag",
+      "kind": "binding"
+    },
+    {
+      "name": "admin1_estimates",
+      "kind": "binding"
+    },
+    {
+      "name": "area_private_share",
+      "kind": "binding"
+    },
+    {
+      "name": "area_survey",
+      "kind": "binding"
+    },
+    {
+      "name": "cache_path",
+      "kind": "binding"
+    },
+    {
+      "name": "chart_options",
+      "kind": "binding"
+    },
+    {
+      "name": "check_coverage_params",
+      "kind": "binding"
+    },
+    {
+      "name": "check_inequality_params",
+      "kind": "binding"
+    },
+    {
+      "name": "check_mortality_params",
+      "kind": "binding"
+    },
+    {
+      "name": "check_sector_params",
+      "kind": "binding"
+    },
+    {
+      "name": "completeness_admin1",
+      "kind": "binding"
+    },
+    {
+      "name": "completeness_district",
+      "kind": "binding"
+    },
+    {
+      "name": "completeness_national",
+      "kind": "binding"
+    },
+    {
+      "name": "countdown_data",
+      "kind": "binding"
+    },
+    {
+      "name": "country",
+      "kind": "binding"
+    },
+    {
+      "name": "country_iso",
+      "kind": "binding"
+    },
+    {
+      "name": "csection_area_estimates",
+      "kind": "binding"
+    },
+    {
+      "name": "csection_national_estimates",
+      "kind": "binding"
+    },
+    {
+      "name": "data_with_excluded_years",
+      "kind": "binding"
+    },
+    {
+      "name": "data_years",
+      "kind": "binding"
+    },
+    {
+      "name": "denominator",
+      "kind": "binding"
+    },
+    {
+      "name": "denominator_metrics",
+      "kind": "binding"
+    },
+    {
+      "name": "derivation_population",
+      "kind": "binding"
+    },
+    {
+      "name": "district_completeness",
+      "kind": "binding"
+    },
+    {
+      "name": "district_outliers_summary",
+      "kind": "binding"
+    },
+    {
+      "name": "district_reporting_rate",
+      "kind": "binding"
+    },
+    {
+      "name": "education_survey",
+      "kind": "binding"
+    },
+    {
+      "name": "excluded_years",
+      "kind": "binding"
+    },
+    {
+      "name": "fpet_data",
+      "kind": "binding"
+    },
+    {
+      "name": "health_system_comparison",
+      "kind": "binding"
+    },
+    {
+      "name": "health_system_metrics_admin1",
+      "kind": "binding"
+    },
+    {
+      "name": "health_system_metrics_national",
+      "kind": "binding"
+    },
+    {
+      "name": "indicator_coverage_admin1",
+      "kind": "binding"
+    },
+    {
+      "name": "indicator_coverage_district",
+      "kind": "binding"
+    },
+    {
+      "name": "indicator_coverage_national",
+      "kind": "binding"
+    },
+    {
+      "name": "inequality_admin1",
+      "kind": "binding"
+    },
+    {
+      "name": "inequality_district",
+      "kind": "binding"
+    },
+    {
+      "name": "k_factors",
+      "kind": "binding"
+    },
+    {
+      "name": "language",
+      "kind": "binding"
+    },
+    {
+      "name": "list_outlier_units",
+      "kind": "binding"
+    },
+    {
+      "name": "map_mapping",
+      "kind": "binding"
+    },
+    {
+      "name": "mapping_years",
+      "kind": "binding"
+    },
+    {
+      "name": "maternal_denominator",
+      "kind": "binding"
+    },
+    {
+      "name": "mortality_mapping_years",
+      "kind": "binding"
+    },
+    {
+      "name": "mortality_ratios",
+      "kind": "binding"
+    },
+    {
+      "name": "mortality_summary",
+      "kind": "binding"
+    },
+    {
+      "name": "national_estimates",
+      "kind": "binding"
+    },
+    {
+      "name": "national_private_share",
+      "kind": "binding"
+    },
+    {
+      "name": "national_survey",
+      "kind": "binding"
+    },
+    {
+      "name": "outliers_admin1",
+      "kind": "binding"
+    },
+    {
+      "name": "outliers_district",
+      "kind": "binding"
+    },
+    {
+      "name": "outliers_national",
+      "kind": "binding"
+    },
+    {
+      "name": "overall_score",
+      "kind": "binding"
+    },
+    {
+      "name": "performance_threshold",
+      "kind": "binding"
+    },
+    {
+      "name": "quality_confirmed",
+      "kind": "binding"
+    },
+    {
+      "name": "ratios_summary",
+      "kind": "binding"
+    },
+    {
+      "name": "regional_survey",
+      "kind": "binding"
+    },
+    {
+      "name": "report_assets",
+      "kind": "binding"
+    },
+    {
+      "name": "report_projects",
+      "kind": "binding"
+    },
+    {
+      "name": "report_themes",
+      "kind": "binding"
+    },
+    {
+      "name": "reporting_rate_admin1",
+      "kind": "binding"
+    },
+    {
+      "name": "reporting_rate_district",
+      "kind": "binding"
+    },
+    {
+      "name": "reporting_rate_national",
+      "kind": "binding"
+    },
+    {
+      "name": "sector_area_estimates",
+      "kind": "binding"
+    },
+    {
+      "name": "sector_national_estimates",
+      "kind": "binding"
+    },
+    {
+      "name": "selected_admin_level_1",
+      "kind": "binding"
+    },
+    {
+      "name": "selected_district",
+      "kind": "binding"
+    },
+    {
+      "name": "service_utilization_admin1",
+      "kind": "binding"
+    },
+    {
+      "name": "service_utilization_national",
+      "kind": "binding"
+    },
+    {
+      "name": "shapefile",
+      "kind": "binding"
+    },
+    {
+      "name": "shapefile_name_field",
+      "kind": "binding"
+    },
+    {
+      "name": "start_survey_year",
+      "kind": "binding"
+    },
+    {
+      "name": "subnational_regions",
+      "kind": "binding"
+    },
+    {
+      "name": "survey_estimates",
+      "kind": "binding"
+    },
+    {
+      "name": "survey_mapping",
+      "kind": "binding"
+    },
+    {
+      "name": "survey_year",
+      "kind": "binding"
+    },
+    {
+      "name": "survey_years",
+      "kind": "binding"
+    },
+    {
+      "name": "un_estimates",
+      "kind": "binding"
+    },
+    {
+      "name": "un_mortality_estimates",
+      "kind": "binding"
+    },
+    {
+      "name": "utilization_mapping_years",
+      "kind": "binding"
+    },
+    {
+      "name": "wiq_survey",
+      "kind": "binding"
+    },
+    {
+      "name": "wizard_parts",
+      "kind": "binding"
+    },
+    {
+      "name": "wizard_quality_results",
+      "kind": "binding"
+    },
+    {
+      "name": "wuenic_estimates",
+      "kind": "binding"
+    }
+  ]
+}
