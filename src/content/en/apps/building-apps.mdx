@@ -1,0 +1,228 @@
+---
+description: How to build a Shiny app that DataSuite installs, updates and runs -- how to package it, declare its dependencies, version it and release it.
+---
+
+import { Callout } from 'nextra/components'
+
+# Building apps for DataSuite
+
+DataSuite runs R Shiny apps in its own tabs. An app comes to DataSuite inside an extension: the extension's
+`package.json` describes the app, and DataSuite installs the app's R code, keeps it up to date and starts it when the
+user opens a file.
+
+This page is for people who write those apps. It covers what DataSuite expects so that an app installs cleanly on a
+user's computer and keeps working as R packages change.
+
+<Callout type="info">
+  Users install nothing by hand: DataSuite needs R 4.1 or newer on the computer, and installs everything else the app
+  declares into its own R library. Whatever an app does not declare, DataSuite cannot install.
+</Callout>
+
+## The short version
+
+1. **Make the app an R package** that exports `run_app()`. A plain app folder works too, but a package is easier to
+   install, test and version.
+2. **Declare every dependency in DESCRIPTION, each with a minimum version**: `dplyr (>= 1.1.4)`, never a bare `dplyr`.
+3. **Never install packages while the app runs**: no `install.packages()`, `pak` or `remotes` in the app's code.
+4. **Version with semantic versioning**, and write every change in NEWS.md.
+5. **Release through the extension**: a new extension version is what makes DataSuite update users' R packages.
+
+The rest of this page explains each rule.
+
+## 1. Package the app
+
+### As an R package (recommended)
+
+The package exports a `run_app()` function that returns a Shiny app object:
+
+```r
+#' @export
+run_app <- function(...) {
+  shiny::shinyApp(ui = app_ui, server = app_server, ...)
+}
+```
+
+The extension ships a folder with a one-line `app.R`:
+
+```r
+mypkg::run_app()
+```
+
+and names the package in its `package.json`:
+
+```json
+"contributes": {
+  "shinyApps": [{
+    "id": "myapp",
+    "name": "My App",
+    "location": "apps/myapp",
+    "accepts": ["xlsx", "rds"],
+    "capabilities": { "requiresFile": true },
+    "package": {
+      "name": "mypkg",
+      "version": "1.2.0",
+      "repos": ["https://<owner>.r-universe.dev"]
+    }
+  }]
+}
+```
+
+- `package.version` is the **oldest** version of the package this release of the extension works with.
+- `package.repos` are looked in before CRAN. [r-universe](https://r-universe.dev) is the easiest place to publish: it
+  builds Windows, macOS and Linux binaries from your GitHub repository.
+
+### As a plain app folder
+
+An `app.R` (or `ui.R` and `server.R`) in the folder named by `location`, with no `package`. DataSuite runs it with
+`shiny::runApp()`.
+
+Put a DESCRIPTION file next to `app.R` that lists what the app uses, with minimum versions, in the same format a
+package uses:
+
+```
+Depends: R (>= 4.1.0)
+Imports:
+    dplyr (>= 1.1.4),
+    ggplot2 (>= 3.5.0),
+    shiny (>= 1.8.0)
+```
+
+<Callout type="warning">
+  DataSuite does not read an app folder's DESCRIPTION yet: today a plain app gets its packages only when it fails
+  with "there is no package called ...", when DataSuite offers to install the missing package. Write the DESCRIPTION
+  now anyway -- it documents the app's needs, renv and rsconnect (Posit Connect) already read it, and DataSuite
+  will install from it.
+</Callout>
+
+## 2. Declare dependencies
+
+In DESCRIPTION:
+
+| Field | What goes there |
+| --- | --- |
+| `Depends` | `R (>= 4.1.0)` -- the oldest R the app works with (DataSuite needs 4.1 or newer). |
+| `Imports` | Every package the code needs, **each with a minimum version**. |
+| `Suggests` | Optional features the code checks for with `requireNamespace()` (e.g. PDF export), also with minimum versions. DataSuite installs these for the app's own packages when it can, but never fails because one is missing. |
+| `Remotes` | Packages that are not on CRAN, e.g. `owner/otherpkg`, so installs from GitHub work too. |
+
+### Why every dependency needs a minimum version
+
+DataSuite updates a CRAN package on a user's computer **only when a DESCRIPTION asks for a newer version than the user
+has**. It never updates CRAN packages just because a newer one exists -- that would change packages under apps that
+were never tested with them.
+
+So with a bare `dplyr`, a user who has an old dplyr keeps it, and the first time the app calls a function newer than
+their copy, it stops with "could not find function" or "unused argument". `R CMD check` does not catch this: it runs
+against your own, newer library.
+
+How to choose the minimum:
+
+- The version that introduced the newest function or argument your code uses from that package (see the package's
+  NEWS).
+- When unsure, the version you develop and test with (`packageVersion("dplyr")`).
+- Not a CRAN version released in the last day or two: Windows gets CRAN's prebuilt binaries, which can lag a release.
+- Packages that come with R (base, stats, utils, graphics, grDevices, tools, methods) need no minimum: they come with
+  R, so `Depends: R (>= ...)` covers them.
+
+When you start using something newer from a package, raise its minimum **in the same change**.
+
+### Call functions explicitly
+
+Use `pkg::fun()` or `@importFrom pkg fun` in package code, never `library()` or `require()`. That way `R CMD check`
+tells you when something is used but not declared.
+
+## 3. Don't install at run time
+
+Don't call `install.packages()`, `pak::pkg_install()`, `remotes::install_*()` or `devtools::*` from the app. DataSuite
+installs what the app declares -- into its own library, in a separate R process, and only when no app tab has the
+packages loaded (Windows can't replace a loaded package). An app that installs packages itself can break other apps
+and fail on computers without the right permissions.
+
+## 4. Version numbers
+
+Use [semantic versioning](https://semver.org) for the package:
+
+| Change | Bump | Example |
+| --- | --- | --- |
+| Breaks code or data that uses it: a renamed or removed function, changed arguments, a saved-file format that older versions can't read | major | 1.4.2 → 2.0.0 |
+| Adds something without breaking anything | minor | 1.4.2 → 1.5.0 |
+| Fixes only | patch | 1.4.2 → 1.4.3 |
+
+Write every release in NEWS.md; for a major version, say what users or other packages must change.
+
+The extension has its own version (in its `package.json`), bumped on the same rules for its own changes. An extension
+release that only raises `package.version` is a patch.
+
+## 5. Release
+
+1. Update your development library to current CRAN (`update.packages()`), so you test what a new user would get.
+2. Run `devtools::check()`: 0 errors, 0 warnings, 0 notes.
+3. Bump `Version:`, write NEWS.md, commit, tag `vX.Y.Z` and push. Wait for your repository (e.g. r-universe) to build
+   it.
+4. If you publish several packages that depend on each other, release them in dependency order and wait for each
+   build before releasing the next -- a package published before the version it requires fails to install.
+5. In the extension, raise `package.version` if users must have the new version, bump the extension's version and
+   publish it.
+
+### How updates reach users
+
+| When | What DataSuite does |
+| --- | --- |
+| The extension is installed | Installs the app's package and everything it declares. |
+| **The extension is updated** (any new version) | Updates the app's package and every dependency from its own repositories to the newest version; installs or updates any CRAN package that is missing or older than a DESCRIPTION requires. |
+| Before every launch | Checks the package is installed at `package.version` or newer; installs only if it isn't. Works offline once set up. |
+| An app tab is open | Waits: updates run once the app's tabs are closed. |
+| Offline | Keeps what is installed if it is new enough, and tries again later. |
+
+So publishing a new package version alone reaches **new** installs only (they get the newest); existing users get it
+with the next extension release. That is deliberate: users only ever run combinations you released together.
+
+## Keeping an app working over time
+
+Minimum versions protect against packages that are **too old**. They don't protect against a package's **new**
+version breaking your app -- and apps outside CRAN get no warning when a CRAN package they use changes.
+
+- Run `R CMD check` on a schedule against current CRAN, e.g. a weekly GitHub Actions workflow
+  ([r-lib/actions](https://github.com/r-lib/actions) has ready-made ones). A breaking release then shows up as a
+  failed run, usually before your users meet it.
+- Don't pin exact versions or add upper limits (`dplyr (< 1.2)`): DataSuite only understands minimums, and upper limits
+  conflict with other packages that need newer versions.
+
+<Callout type="info">
+  Planned in DataSuite: installing CRAN packages as of a date the app declares (a dated CRAN snapshot), so every user
+  gets exactly the versions the author tested with; a separate R library per extension, so one app's updates can't
+  change another's packages; and installing a plain app folder's dependencies from its DESCRIPTION. Following the
+  conventions on this page now means nothing changes for your app when they arrive.
+</Callout>
+
+## What DataSuite gives a running app
+
+DataSuite starts the app in a fresh R session with these environment variables:
+
+| Variable | Value |
+| --- | --- |
+| `CDSUITE_SHINY_ID` | The app's `id`. |
+| `CDSUITE_SHINY_NAME` | The app's `name`. |
+| `CDSUITE_SHINY_SELECTED_FILE` | The file the user opened, if any. |
+| `CDSUITE_SHINY_WORKSPACE_DIR` | A folder for the app's work on that file, `<file name>.shiny-workspace` next to it. |
+| `CDSUITE_SHINY_LOCALE` | The display language, e.g. `en`, `fr`, `pt`. |
+
+Other `shinyApps` fields:
+
+| Field | Purpose |
+| --- | --- |
+| `description`, `icon` | Shown in menus, tooltips and the Start page (`icon` is a codicon id). |
+| `showOnStartPage` | Also list the app on the Start page. |
+| `capabilities` | `requiresFile`, `canSelectFiles`, `canSelectFolders`, `canSelectMany`: what the file picker allows. |
+| `cache` | `{ "file": "<stem>.rds" }`: the file the app saves its work to next to the data file. Opening the data file again opens the saved file. |
+| `aiModelRole` | `fast`, `balanced` or `reasoning`: the least capable AI model the app's analysis can use. While the app's tab is active, the chat's Auto model choice uses at least this. |
+
+## Checklist before publishing
+
+- [ ] The app runs from `run_app()` (package) or `app.R` (folder), with nothing sourced from outside it.
+- [ ] Every package the code uses is in DESCRIPTION, with a minimum version.
+- [ ] `devtools::check()` is clean, against an up-to-date library.
+- [ ] No `install.packages()` or similar anywhere in the app.
+- [ ] Version bumped and NEWS.md written.
+- [ ] The package is built in its repository before the extension is published.
+- [ ] The extension's `package.version` is raised if users need this version.

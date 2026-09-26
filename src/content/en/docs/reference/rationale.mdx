@@ -1,8 +1,12 @@
+---
+description: The scientific rationale behind the Countdown analyses, covering data quality, coverage, equity, health systems performance and institutional mortality.
+---
+
 import { Callout } from 'nextra/components'
 
-# Methods
+# Scientific rationale
 
-This page gives the scientific rationale behind the Countdown analyses, with supporting detail. The method itself -- how each step is done and how to read the results -- is the [Countdown methodology](/en/docs/framework); where this page and a methodology page differ, the methodology page applies.
+This page gives the scientific rationale behind the Countdown analyses, with supporting detail. The method itself -- how each step is done and how to read the results -- is the [Countdown methodology](/en/docs/methodology); where this page and a methodology page differ, the methodology page applies.
 
 ## Countdown analytical approach [#countdown-approach]
 
@@ -33,7 +37,7 @@ Where:
 
 - $N_{\text{adjusted}}$: total number of events adjusted for incomplete reporting
 - $N_{\text{reported}}$: number of events reported
-- $c$: reporting completeness (e.g., proportion of facilities that reported)
+- $c$: reporting completeness (the proportion of expected facility reports actually received)
 - $k$: adjustment factor to account for lower service volume in non-reporting facilities
 
 <Callout type="info">
@@ -45,14 +49,14 @@ Interpretation:
 - As a default value, we use $k=0.25$, which means the non-reporting facilities provided services but only at a volume which was a quarter of the reporting health facilities.
 - The adjustment assumes that non-reporting facilities still provide services, but at a lower volume compared to reporting facilities. The factor $k$ controls the magnitude of this adjustment.
 - The factor $k$ can be different for different services. For instance, if private facility reporting is poor but they are in the national system and they provide a considerable number of deliveries, $k$ may be greater than 0.25 or even as high as 1.0.
-- If the facility reporting rate is below 75%, it becomes more difficult to impute district data. Therefore, no adjustments are made if reporting is lower than 75%. In that case, further analysis to determine coverage with the facility data is not considered sufficiently reliable.
+- If a district's reporting rate for a service is below 75% in a month (or missing), that rate is replaced by the median of the district's reporting rates between 75% and 100% for that service, and the month's reported count is then adjusted with $k$ as usual. (The 2024 guidebook words this both as "no adjustment below 75%" and as "median value imputed"; the rule above is the one the apps apply.)
 
 </Callout>
 
 The following $k$ values are used depending on the reporting used to adjust the reported numbers for incomplete reporting:
 
-- `k = 0`: no services in non-reporting facilities (default k-value)
-- `k = 0.25`: some services, but much lower than reporting facilities
+- `k = 0`: no services in non-reporting facilities
+- `k = 0.25`: some services, but much lower than reporting facilities (default k-value)
 - `k = 0.50`: half the rate compared to reporting facilities
 - `k = 0.75`: nearly as much as reporting facilities
 - `k = 1.0`: same rate of services as reporting facilities
@@ -61,14 +65,14 @@ The following $k$ values are used depending on the reporting used to adjust the 
 
 | Problem | Action | Adjustment |
 | --- | --- | --- |
-| Low reporting rates: identifying low rates that were adjusted | If below 75% (default), data were imputed | Median monthly value for the district year was imputed for the month with low reporting |
+| Low reporting rates: identifying low rates that were adjusted | If below 75% (default), or missing, the reporting rate was replaced | The median of the district's reporting rates between 75% and 100% was used as the month's reporting rate, and the count adjusted with $k$ |
 | Incomplete reporting by districts, variable over time, affecting trend assessment | If reporting rates were ≥ 75% and ≤ 100% (default), an assumption was made about the volume of services provided by the non-reporting facilities | Adjustment factor $k$ was used to adjust for incomplete reporting; the default value of $k$ is 0.25 (replace if a different value was used; state whether it was used for all reporting forms or whether different $k$ factors were used between forms) |
-| Extreme outliers can greatly affect coverage trend assessments | If a monthly value was greater or smaller than 5 times the median absolute deviation (MAD) from the district monthly median value, an adjustment was made | Extreme monthly outliers are corrected and given the district median value for the same year |
+| Extreme outliers can greatly affect coverage trend assessments | If a monthly value was more than 5 times the median absolute deviation (MAD) from the district's median monthly value (computed from all years except the most recent one), an adjustment was made | Extreme monthly outliers are replaced by the median of the district's other (non-outlier) months in the same year |
 | Missing values | If there is a missing value, data were imputed | District median monthly value for the year was imputed for the month with missing value |
 
 ### Outlier detection [#outlier-detection]
 
-An extreme outlier is defined as a monthly value that is 5 times the median absolute deviation (MAD) from the monthly median value for a particular year.
+An extreme outlier is defined as a monthly value more than 5 times the median absolute deviation (MAD) from the median monthly value of the same series (the district, or the national or admin-1 series being assessed), the median and MAD being computed from all years except the most recent one.
 
 ### Internal consistency [#internal-consistency]
 

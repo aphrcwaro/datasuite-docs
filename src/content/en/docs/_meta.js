@@ -1,8 +1,4 @@
 export default {
-  'get-started-divider': {
-    type: 'separator',
-    title: 'GET STARTED'
-  },
   index: {
     title: 'Overview',
     theme: {
@@ -16,14 +12,12 @@ export default {
     }
   },
   'getting-started': 'Getting Started',
-  'methodology-divider': {
-    type: 'separator',
-    title: 'METHODOLOGY'
+  methodology: {
+    title: 'Methodology',
+    theme: { collapsed: false }
   },
-  framework: 'Countdown Methodology',
-  'reference-divider': {
-    type: 'separator',
-    title: 'REFERENCE'
-  },
-  reference: 'Reference'
+  reference: {
+    title: 'Reference',
+    theme: { collapsed: false }
+  }
 }

@@ -1,0 +1,265 @@
+---
+description: Comment la couverture nationale annuelle est estimée à partir des numérateurs ajustés et des dénominateurs retenus, puis comparée aux enquêtes et à WUENIC.
+---
+
+import { Callout, Steps } from 'nextra/components'
+
+# Couverture nationale
+
+Une fois la qualité des données assurée, les dénominateurs sélectionnés et les numérateurs ajustés, DataSuite synthétise le tout en estimations de couverture — la mesure principale qui répond à la question : *Quelle proportion de la population ayant besoin d'un service de santé l'a réellement reçu ?* Ce module génère des estimations annuelles de la couverture pour les indicateurs de santé de la reproduction, de la mère, du nouveau-né, de l'enfant et de l'adolescent en divisant les numérateurs ajustés des rapports d'établissements par les dénominateurs de population les plus performants. Les estimations de couverture sont ensuite comparées aux résultats des enquêtes récentes auprès des ménages pour valider les conclusions et identifier les zones de biais systématique.
+
+<Callout type="info">
+**En bref**
+- **Répond à :** Quelle proportion de la population ayant besoin d'un service de santé l'a réellement reçu, année par année au niveau national, et les enquêtes (et WUENIC pour la vaccination) confirment-elles les estimations fondées sur les établissements ?
+- **Utilise :** les numérateurs ajustés issus de l'[Ajustement des données](/fr/docs/methodology/data-adjustment) et les dénominateurs choisis lors de l'[Évaluation et sélection du dénominateur](/fr/docs/methodology/denominators) ; les estimations des enquêtes auprès des ménages, WUENIC pour la vaccination et le FPET pour la planification familiale.
+- **Produit :** des estimations et tendances annuelles de la couverture nationale pour chaque indicateur, comparées aux enquêtes et aux cibles ; les profils du continuum de soins mère-nouveau-né et de l'enfant ; des cartes thermiques infranationales et les meilleures et moins bonnes performances. Étape suivante : [Approche de modélisation bayésienne](/fr/docs/methodology/bayesian-coverage) et [Analyse infranationale](/fr/docs/methodology/subnational).
+- **Dans les applications :** [Couverture nationale](/fr/apps/countdown/coverage-equity-targets#couverture-nationale) ; [Continuum des soins](/fr/apps/countdown/advanced-analysis#continuum-des-soins) et [Projection PF](/fr/apps/countdown/advanced-analysis#projection-pf-fpet) (application RMNCAH).
+- **Valeurs par défaut :** [Valeurs par défaut et seuils : Couverture](/fr/docs/reference/defaults#couverture)
+</Callout>
+
+## Pourquoi c'est important
+
+Les fondements scientifiques et programmatiques de la mesure de la couverture des soins prénatals, des soins d'accouchement, de la vaccination et de la planification familiale sont présentés dans la [justification](/fr/docs/reference/rationale#coverage-analysis) ; chaque groupe d'indicateurs de la section Méthode renvoie à sa propre section.
+
+## Méthode
+
+L'estimation de la couverture doit tenir compte des réalités opérationnelles : certains indicateurs (accouchements en établissement, vaccinations) atteignent des niveaux improbablement élevés (> 100 %) en raison de problèmes de qualité des données ou d'enregistrements en double, ce qui nécessite de les recadrer en tant que moyenne de services par habitant plutôt qu'en pourcentages. La couverture de la planification familiale est gérée par une modélisation démographique spécialisée (FPET) qui intègre de multiples sources de données d'enquête et peut intégrer les données des établissements si la qualité le permet. Le module produit des courbes de tendance, des comparaisons avec les cibles mondiales (par exemple, 90 % d'accouchements en établissement d'ici 2025) et des visualisations côte à côte des données des établissements par rapport aux enquêtes pour évaluer la crédibilité.
+
+<Callout type="info">
+
+**Les analyses RMNCAH et de vaccination diffèrent ici :** les analyses RMNCAH estiment la couverture de la CPN, de l'accouchement (y compris la césarienne et le faible poids de naissance), des soins postnatals, d'un petit ensemble de vaccins et de la planification familiale (projection FPET), et y ajoutent le continuum de soins de la mère et de l'enfant ; les analyses de vaccination estiment la couverture de la CPN1, des accouchements et naissances vivantes en établissement et des vaccins de routine (BCG, VPI, rougeole, VPO, Penta, PCV, rotavirus), avec l'abandon, les enfants zéro dose et les sous-vaccinés. Voir [Analyses RMNCAH et vaccination](/fr/docs/reference/rmncah-vs-vaccine).
+
+</Callout>
+
+### Soins prénatals (CPN)
+
+Voir la justification : [Soins prénatals (CPN)](/fr/docs/reference/rationale/#antenatal-care).
+
+La plupart des pays ont au moins un indicateur de CPN (soins prénatals) avec une cible dans leur plan national. Les cibles mondiales de couverture ENAP/EPMM pour 2025 sont : à l'échelle mondiale, au moins 90 % des femmes enceintes avec 4 visites de soins prénatals ou plus, et 90 % des pays avec au moins 70 % de couverture. Il existe plusieurs indicateurs de CPN qui capturent :
+
+- **Le contact avec les services de santé pendant la grossesse** (1re visite CPN, 4 visites CPN ou plus, 1re visite CPN au premier trimestre). La CPN1 est souvent considérée comme un indicateur de l'accès de base aux services de santé. Elle est élevée dans la plupart des pays, et dans de nombreux cas, le nombre de visites CPN1 dans les données de routine des établissements de santé peut fournir un meilleur dénominateur pour les indicateurs de CPN et d'accouchement que les projections de population (voir la section 2 sur les dénominateurs).
+- **Le contenu des services fournis** (traitement préventif intermittent (TPI2 ou TPI3) contre le paludisme, dépistage du VIH, dépistage de la syphilis et supplémentation en fer-acide folique (IFA) (au moins 90 comprimés administrés à la femme enceinte)). Certains pays n'auront pas de politiques pour toutes ces interventions diagnostiques ou thérapeutiques pendant la grossesse (par exemple, pas de TPI s'il n'y a pas de risque de paludisme).
+
+Pour la plupart des indicateurs, les enquêtes fournissent également des estimations de couverture au niveau national, avec des intervalles de confiance à 95 %. Pour la plupart des indicateurs de couverture, les données se réfèrent à une période précédant l'enquête : par ex., la couverture des accouchements en établissement pour les naissances vivantes au cours des deux années précédant l'enquête. Cela signifie que le point médian de l'estimation de la couverture se situe un an avant l'enquête.
+
+<Callout type="warning">
+
+Parfois, un indicateur peut atteindre une couverture improbablement élevée au niveau national, disons plus de 125 %. Cela peut s'expliquer par le fait que la qualité des données du numérateur de l'indicateur de couverture est mauvaise, que le dénominateur est erroné, ou que l'intervention est administrée et enregistrée plus d'une fois pendant la grossesse. La supplémentation en IFA en est un exemple. Dans ce cas, le calcul de la couverture n'est pas utile. Il vaut mieux l'exprimer différemment. Par exemple, si la couverture est de 200 %, il est préférable de calculer le nombre moyen de cures de 90 comprimés d'IFA qu'une femme enceinte a reçues (dans ce cas 2,0 par femme enceinte dans la population).
+
+</Callout>
+
+![Couverture nationale de la CPN4, estimations des établissements et des enquêtes](/images/fr-national-coverage.png)
+
+### Soins d'accouchement
+
+Voir la justification : [Soins d'accouchement](/fr/docs/reference/rationale/#delivery-care).
+
+Tous les pays ont au moins un indicateur de soins d'accouchement avec une cible dans le plan national. La cible mondiale de couverture du Plan d'action Chaque nouveau-né (ENAP) et de l'initiative Mettre fin à la mortalité maternelle évitable (EPMM) pour 2025 est d'au moins 90 % de couverture moyenne mondiale, et 90 % des pays avec au moins 80 % de couverture d'assistance par du personnel qualifié à la naissance (SBA). Pour les soins postnatals (CPoN) dans les 2 jours, la cible mondiale de couverture est de 80 %, et 90 % des pays avec au moins 60 % de couverture.
+
+La couverture des naissances (vivantes) en établissement et la SBA sont étroitement liées, car presque tous les accouchements assistés par du personnel qualifié ont lieu dans des établissements de santé. Du point de vue analytique, la couverture des accouchements en établissement est privilégiée car il s'agit d'une mesure plus objective qui évite les problèmes liés aux différentes définitions nationales de ce qui constitue une naissance assistée par du personnel qualifié. La SBA est souvent privilégiée du point de vue des soins de santé car elle inclut un élément de qualité ; évidemment, un accouchement en établissement sans assistance qualifiée n'est pas souhaitable, et dans certains pays, la SBA à domicile peut faire partie de la stratégie de prestation des soins de santé. L'un ou l'autre indicateur fonctionne bien pour capturer les soins d'accouchement.
+
+<Callout type="info">
+
+La césarienne est une intervention vitale et un indicateur important. Une règle empirique générale mise en avant par l'Organisation mondiale de la Santé (OMS) est que le besoin d'accouchements par césarienne au niveau de la population se situe entre 10 et 15 % de tous les accouchements.
+
+- **Moins de 10 % :** indique un besoin non satisfait en matière de soins chirurgicaux d'accouchement.
+- **Plus de 10 à 15 % :** implique une surutilisation probable de la césarienne. Cela peut également impliquer une combinaison de besoins non satisfaits au sein de certains groupes de population (par exemple, les femmes les plus pauvres ou rurales) parallèlement à une surutilisation dans d'autres sous-groupes (comme les femmes urbaines et plus aisées).
+
+</Callout>
+
+Les soins postnatals (CPoN) dans les 48 heures sont fournis à la mère et au nouveau-né. Les systèmes nationaux varient dans la façon dont ils enregistrent le type de CPoN, et les enquêtes auprès des ménages sont connues pour avoir des problèmes de qualité des données concernant les CPoN pour la mère ou le bébé. Certains pays utilisent de multiples définitions pour le moment de la visite CPoN (par exemple, au cours de la première semaine).
+
+L'insuffisance pondérale à la naissance est un indicateur critique de la santé néonatale. Il est plus significatif si la distinction entre la prématurité et le retard de croissance intra-utérin (petit pour l'âge gestationnel) est faite, mais la plupart des systèmes de déclaration des établissements et des enquêtes manquent de données aussi granulaires. Tous les bébés sont censés être pesés immédiatement après la naissance, et le pourcentage de nouveau-nés pesant moins de 2 500 grammes est généralement déclaré dans le système DHIS2. À titre indicatif pour l'interprétation des données, la prévalence de l'insuffisance pondérale à la naissance en Afrique subsaharienne a été estimée à 13,9 % (intervalle de crédibilité à 95 % : 12,4–15,7 %) pour 2020.
+
+![Couverture nationale de l'insuffisance pondérale à la naissance](/images/national-analysis-lbw.png)
+
+### Vaccination
+
+Voir la justification : [Vaccination](/fr/docs/reference/rationale/#immunization).
+
+Les indicateurs de couverture vaccinale sont inclus dans le plan de suivi du secteur de la santé de presque tous les pays. Une cible générale est d'au moins 90 % de couverture pour les vaccins essentiels administrés pendant l'enfance et l'adolescence.
+
+Pour les analyses de couverture nationale, l'accent est mis sur le BCG, les première et troisième doses du vaccin pentavalent/DTC (penta1/DTC1 et penta3/DTC3), et les première et deuxième doses du vaccin contre la rougeole (souvent co-administré sous forme de rougeole-rubéole). Les vaccinations par le BCG et le penta/DTC sont recommandées à la naissance (BCG), à 6 semaines (penta1) et à 14 semaines (penta3).
+
+- **Données des établissements :** le nombre de vaccinations administrées aux nourrissons est utilisé comme numérateur. Le dénominateur est le nombre d'enfants éligibles dans la population, approximé comme suit :
+  $$\text{Dénominateur} = \text{Naissances Vivantes} - \text{Décès Néonatals}$$
+- **Données d'enquête :** fournissent généralement la couverture vaccinale chez les enfants âgés de 12 à 23 mois (et peuvent inclure l'âge auquel le vaccin a été administré, généralement avant le premier anniversaire).
+
+La première dose du vaccin contre la rougeole est généralement recommandée à l'âge de 9 mois. Pour les données des établissements, l'enregistrement et la notification séparent généralement les doses de rougeole administrées aux enfants de moins d'un an de celles administrées aux enfants d'un an et plus, bien que la qualité de l'enregistrement par groupe d'âge varie (il y a souvent une tendance à enregistrer les vaccinations contre la rougeole administrées après 12 mois comme étant administrées à des nourrissons). Ici, le dénominateur utilisé pour mesurer la couverture représente les enfants qui ont survécu à la première année de vie :
+$$\text{Dénominateur Rougeole 1} = \text{Naissances Vivantes} - \text{Décès Néonatals} - \text{Décès Postnéonatals}$$
+
+La deuxième dose de rougeole utilise les enfants âgés de 24 à 35 mois comme dénominateur, estimé comme suit :
+$$\text{Dénominateur Rougeole 2} = \text{Naissances Vivantes} - \text{Décès Néonatals} - (2 \times \text{Décès Postnéonatals})$$
+
+Les analyses de vaccination calculent aussi l'abandon (entre Penta 1 et Penta 3, entre Penta 1 et Rougeole 1, entre Penta 3 et Rougeole 1, entre Rougeole 1 et Rougeole 2) ainsi que les enfants zéro dose et sous-vaccinés. L'**abandon** est le nombre d'enfants ayant reçu la première dose moins ceux ayant reçu la seconde, divisé par le premier, en pourcentage. Les **zéro dose** et les **sous-vaccinés** sont dérivés de Penta1 et de Penta3.
+
+L'OMS et l'UNICEF collaborent avec les pays pour produire des estimations annuelles de la couverture vaccinale en utilisant toutes les sources de données. Ces estimations nationales, appelées WUENIC, sont publiées et disponibles pour la période 2020-2024. Ces tendances temporelles sont incluses dans les résultats de l'analyse pour comparer les estimations annuelles des données d'établissements de 2019-2024 produites lors de l'atelier avec les résultats de l'enquête.
+
+![Couverture nationale de la première dose du vaccin contre la rougeole](/images/national-analysis-measles1.png)
+
+### Planification familiale
+
+Voir la justification : [Planification familiale](/fr/docs/reference/rationale/#family-planning).
+
+Les estimations de la couverture de la planification familiale sont issues d'une collaboration entre Countdown to 2030 et Track20. Track20 a développé l'outil d'estimation de la planification familiale (FPET), un modèle avancé axé sur trois indicateurs : l'utilisation de contraceptifs modernes, les besoins non satisfaits en contraceptifs modernes et la demande satisfaite par des méthodes modernes. Ces trois indicateurs sont étroitement liés car :
+
+$$\text{Demande satisfaite (Couverture)} = \frac{\text{Utilisation de contraceptifs modernes}}{\text{Besoins non satisfaits} + \text{Utilisation de contraceptifs modernes}}$$
+
+Le FPET utilise une modélisation statistique qui intègre toutes les données d'enquête disponibles et peut intégrer les données des établissements si la qualité est suffisante. Le FPET permet de combiner divers types de données d'enquête, en ajustant une courbe de tendance qui tire sa force de multiples points de données et minimise les risques associés à la comparaison directe de différentes enquêtes.
+
+Dans les applications, les données FPET sont des données de référence intégrées pour le pays et ne proviennent pas des données de vos établissements.
+
+![Projections du FPET](/images/fr-national-coverage-fpet.png)
+
+## Interprétation
+
+### Tendances de la couverture nationale
+
+- Le graphique de tendance nationale présente la couverture annuelle basée sur les établissements, généralement de 2020 à 2025 ou pour la dernière période disponible.
+- Les estimations d'enquête sont superposées en utilisant au moins les deux dernières enquêtes auprès des ménages, avec les intervalles de confiance lorsqu'ils sont disponibles.
+- Pour les indicateurs de vaccination, les estimations WUENIC peuvent également être affichées comme référence externe.
+- La couverture basée sur les établissements augmente-t-elle, diminue-t-elle ou stagne-t-elle ?
+  - Les deux dernières estimations d'enquête sont-elles cohérentes avec la tendance des établissements ?
+  - Pour la vaccination, les données des établissements, les données d'enquête et les estimations WUENIC racontent-elles une histoire similaire ?
+  - Le pays progresse-t-il vers la cible nationale ou mondiale pertinente ?
+
+![Couverture nationale du Penta3](/images/national-coverage-penta3.png)
+
+![Couverture nationale de la rougeole 1](/images/national-coverage-measles1.png)
+
+![Couverture nationale de la CPN4](/images/national-coverage-anc4.png)
+
+#### Interpréter la tendance nationale
+
+- Si les estimations des établissements et des enquêtes sont proches, la confiance dans la tendance est plus forte : des courbes DHIS2 qui suivent les points de l'enquête et de WUENIC confortent le dénominateur choisi.
+- Si les estimations des établissements sont beaucoup plus élevées que celles des enquêtes, vérifiez s'il existe des problèmes de dénominateur, une sur-déclaration ou un ajustement incomplet pour le secteur privé.
+- Si les estimations des établissements sont beaucoup plus basses que celles des enquêtes, vérifiez s'il existe une déclaration incomplète des établissements, des services de sensibilisation (outreach) manquants, des données du secteur privé manquantes ou des problèmes d'extraction.
+- Un écart persistant signale un problème de dénominateur ou de numérateur ; revenez à la [qualité des données](/fr/docs/methodology/data-quality) et aux [dénominateurs](/fr/docs/methodology/denominators).
+- Des intervalles de confiance larges pour les enquêtes signifient que le point d'enquête doit être interprété avec prudence. Les points d'enquête sont peu nombreux et assortis d'intervalles de confiance : ne surinterprétez pas les petites différences.
+- Une couverture supérieure à 100 % doit être traitée comme un signal de qualité des données, et non comme une preuve de bonne performance du programme.
+
+### Continuum de soins mère-nouveau-né
+
+- Le graphique du continuum mère-nouveau-né suit le parcours de la grossesse à l'accouchement et à la période postnatale immédiate.
+- Les indicateurs typiques comprennent :
+  - La CPN au premier trimestre
+  - La CPN4+
+  - Les naissances vivantes en établissement
+  - Les soins postnatals dans les 48 heures
+
+![Continuum de soins mère-nouveau-né](/images/national-maternal-continuum.png)
+
+#### Interpréter le continuum mère-nouveau-né[#interprétation-1]
+
+- Le graphique aide à identifier où les femmes et les nouveau-nés sont perdus le long du parcours de soins.
+- Une faible CPN au premier trimestre suggère une entrée tardive dans les soins de grossesse.
+- Un écart entre la CPN au premier trimestre et la CPN4+ suggère une faible continuité des soins prénatals.
+- Une CPN élevée mais des naissances vivantes en établissement plus faibles peuvent indiquer des obstacles aux soins d'accouchement, tels que la distance, le transport, le coût, les lacunes de référence ou la qualité perçue des soins.
+- Des naissances vivantes en établissement élevées mais de faibles soins postnatals suggèrent des occasions manquées avant la sortie ou un faible suivi après la naissance.
+- Si les estimations des établissements et des enquêtes sont cohérentes, l'interprétation est plus solide.
+- Si les estimations des établissements et des enquêtes diffèrent, vérifiez les définitions des indicateurs, l'exhaustivité des rapports, la qualité des dénominateurs, la déclaration du secteur privé et le calendrier des enquêtes.
+
+### Continuum de soins de l'enfant
+
+- Le graphique du continuum de l'enfant se concentre sur les contacts de santé de l'enfant après la naissance, en particulier la vaccination et les services pour les maladies de l'enfant.
+- Les indicateurs prioritaires actuels peuvent inclure :
+  - DTC3/Penta3
+  - MCV1/Rougeole 1
+  - BCG, DTC1, MCV2, PCV3, rotavirus, vaccination complète, enfants zéro dose, SRO et recours aux soins pour pneumonie, lorsque disponibles.
+- Le graphique aide à évaluer si les enfants restent en contact avec les services après la naissance et l'accès aux services de vaccination essentiels.
+
+![Continuum de soins de l'enfant](/images/national-child-continuum.png)
+
+#### Interpréter le continuum de l'enfant[#interprétation-2]
+
+- Un écart entre le DTC3/Penta3 et le MCV1 peut suggérer des abandons après la série de vaccins de la petite enfance.
+- Un MCV1 faible par rapport au DTC3 peut indiquer un suivi insuffisant, des occasions manquées, la mobilité des personnes qui s'occupent de l'enfant ou des lacunes de déclaration.
+- Pour les indicateurs de vaccination, comparez les données des établissements, les estimations d'enquête et les estimations WUENIC.
+- Si les trois sources concordent, la confiance dans le profil de couverture vaccinale est plus forte.
+- Si les données des établissements sont supérieures à la fois à l'enquête et au WUENIC, vérifiez les dénominateurs, les doses déclarées et une éventuelle sur-déclaration.
+- Si les données des établissements sont inférieures à l'enquête ou au WUENIC, vérifiez l'exhaustivité de la déclaration, la saisie des données de sensibilisation (outreach), la déclaration du secteur privé et les problèmes d'extraction.
+
+### Cartes thermiques infranationales
+
+- Les cartes thermiques montrent la variation entre les unités infranationales.
+- L'échelle de couleurs doit se lire comme suit :
+  - **Rouge** = couverture plus faible / performance plus faible.
+  - **Jaune/orange** = couverture intermédiaire.
+  - **Vert** = couverture plus élevée / performance plus forte.
+- Lisez la carte thermique en parcourant les lignes pour comprendre comment une zone infranationale se comporte sur plusieurs indicateurs.
+- Lisez la carte thermique en parcourant les colonnes pour comprendre comment un indicateur varie d'une zone infranationale à l'autre.
+
+![Carte thermique du continuum maternel par zone de niveau administratif 1](/images/national-admin1-maternal-continuum-heatmap.png)
+
+![Carte thermique du continuum de l'enfant par zone de niveau administratif 1](/images/national-admin1-child-continuum-heatmap.png)
+
+### Continuum de soins au niveau infranational
+
+- Une ligne comportant de nombreuses cellules rouges suggère des difficultés généralisées de prestation de services, d'accès ou de déclaration dans cette zone.
+- Une colonne comportant de nombreuses cellules rouges suggère que l'indicateur constitue un goulot d'étranglement national.
+- Une ligne mixte suggère que la zone obtient de bons résultats pour certains services, mais de mauvais résultats pour d'autres.
+- Les zones vertes peuvent fournir des enseignements utiles, mais leur qualité des données doit tout de même être vérifiée.
+- Les zones rouges devraient déclencher un examen plus approfondi, mais de faibles valeurs peuvent refléter des problèmes de déclaration ou de dénominateur plutôt qu'une véritable faible couverture ; vérifiez donc la qualité avant d'agir.
+
+### Meilleures et moins bonnes performances infranationales
+
+- Les meilleures et les moins bonnes zones ne doivent pas être classées uniquement sur la base de la dernière couverture.
+- L'interprétation doit tenir compte de :
+  - Le niveau de couverture le plus récent.
+  - L'évolution dans le temps.
+  - L'exhaustivité des rapports.
+  - La qualité des dénominateurs.
+  - Les valeurs implausibles supérieures à 100 %.
+- Une classification utile est la suivante :
+  - **Élevée et en amélioration** – performance solide ; zone d'apprentissage potentielle.
+  - **Élevée mais en baisse** – zone d'alerte précoce.
+  - **Faible mais en amélioration** – zone de progrès nécessitant un soutien continu.
+  - **Faible et en baisse** – zone prioritaire pour un examen et des mesures correctives.
+- Les zones dont la couverture dépasse 100 % doivent être signalées et exclues des classements de meilleure performance, sauf si les données sont examinées.
+- Les pays devraient examiner si la faible performance est concentrée dans quelques zones ou répandue dans de nombreuses zones.
+
+![Meilleures et moins bonnes zones de niveau administratif 1 par indicateur](/images/national-admin1-best-worst-indicator.png)
+
+### Projections de la planification familiale
+
+- Les courbes sont les estimations médianes et les bandes ombrées les intervalles de crédibilité à 95 %.
+
+<Callout type="info">
+FPET ajuste une tendance à travers toutes les enquêtes disponibles ; une courbe régulière ne signifie donc pas qu'il existe une enquête pour chaque année.
+</Callout>
+
+### Pièges courants
+
+- Les enfants zéro dose et sous-vaccinés (analyses de vaccination) dépendent du dénominateur encore plus que la couverture par dose.
+- Lire la Projection PF comme un indicateur des établissements. Il s'agit d'une sortie de modèle.
+- Interpréter la carte thermique du continuum sans avoir d'abord vérifié la [Qualité des données](/fr/apps/countdown/data-quality) de la région.
+
+## Dans les applications
+
+<Steps>
+
+### Ouvrez Couverture nationale
+
+Dans le groupe **Analyse nationale**, ouvrez **Couverture nationale**. La page exige des données ajustées et utilise les dénominateurs choisis dans Sélection du dénominateur (dans l'application Vaxx, le dénominateur de vaccination choisi dans Dénominateurs).
+
+### Choisissez un onglet d'indicateur
+
+Un indicateur par onglet ; **Personnalisé** (**Vérification personnalisée** dans l'application Vaxx) couvre tout autre indicateur. Dans l'application RMNCAH, l'onglet **Projection PF** présente les estimations du FPET ([Projection PF FPET](/fr/apps/countdown/advanced-analysis#projection-pf-fpet)).
+
+### Lisez le graphique
+
+Le graphique trace par année l'estimation DHIS2, l'estimation WUENIC et l'estimation de l'enquête avec son IC à 95 % ; la légende indique le dénominateur utilisé pour les valeurs DHIS2. Écran par écran : [Couverture nationale](/fr/apps/countdown/coverage-equity-targets#couverture-nationale).
+
+### Suivez le continuum de soins
+
+Dans l'application RMNCAH, **Analyse nationale**, **Continuum des soins** présente les profils du continuum maternel et de l'enfant et la carte thermique par région de niveau administratif 1 : [Continuum des soins](/fr/apps/countdown/advanced-analysis#continuum-des-soins).
+
+</Steps>
+
+## Voir aussi
+
+- [Justification : analyse de la couverture](/fr/docs/reference/rationale#coverage-analysis)
+- [Formules](/fr/docs/reference/formulas) (Couverture : dénominateurs de la vaccination, demande satisfaite en planification familiale)
+- [Valeurs par défaut et seuils : Couverture](/fr/docs/reference/defaults#couverture)
+- Étape précédente : [Évaluation et sélection du dénominateur](/fr/docs/methodology/denominators)
+- Étape suivante : [Approche de modélisation bayésienne](/fr/docs/methodology/bayesian-coverage)

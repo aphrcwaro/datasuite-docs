@@ -1,0 +1,178 @@
+---
+description: Comparer les options de dénominateur dans Évaluation du dénominateur et en choisir une dans Sélection du dénominateur, car il détermine chaque couverture.
+---
+import { Tabs, Steps, Callout } from 'nextra/components'
+
+# Dénominateurs
+
+La couverture est le nombre de personnes qui ont reçu un service divisé par le nombre de celles qui en avaient besoin ; le dénominateur doit être estimé (voir [Dénominateurs > Couverture des services](/fr/docs/methodology/denominators#objectif)). La section **Dénominateurs** comprend deux pages, **Évaluation du dénominateur** et **Sélection du dénominateur**. La méthode est décrite dans [Évaluation et sélection du dénominateur](/fr/docs/methodology/denominators).
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+Toutes deux se déverrouillent après la [Préparation des données](/fr/apps/countdown/data-preparation).
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+La page Évaluation du dénominateur s'appelle **Tendance de la population** dans le menu. Toutes deux nécessitent des données ajustées.
+
+</Tabs.Tab>
+</Tabs>
+
+## Quand l'utiliser
+
+Utilisez ces pages après l'ajustement et avant de lire un résultat de couverture. Recommencez si vous modifiez l'ajustement ou les données d'enquête. L'Évaluation du dénominateur vient en premier, avant la Sélection du dénominateur.
+
+## Options de dénominateur
+
+La projection de l'ONU des naissances vivantes n'apparaît que dans les graphiques de comparaison ; elle ne fait pas partie des choix des sélecteurs. Les autres options sont :
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+Les sélecteurs **Dénominateur maternel** et **Dénominateur de vaccination** proposent les cinq autres options.
+
+| Option dans l'application | Signification |
+| --- | --- |
+| ONU | Projection de l'ONU des naissances vivantes |
+| DHIS2 | Projection DHIS2 des naissances vivantes |
+| CPN 1 | Dérivé des femmes ayant effectué une première consultation prénatale |
+| Pentavalent 1 | Dérivé des enfants ayant reçu la première dose de pentavalent |
+| CPN 1 avec croissance démographique | CPN 1 dérivé, ajusté pour la croissance démographique annuelle |
+| Penta 1 avec croissance démographique | Penta 1 dérivé, ajusté pour la croissance démographique annuelle |
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+Le sélecteur **Dénominateur de vaccination** propose ces options.
+
+| Option | Principe |
+| --- | --- |
+| DHIS2 | La population projetée dans les données DHIS2 (naissances vivantes, total des naissances, population totale ou moins de 1 an, selon le réglage Sélectionner la meilleure population). |
+| CPN 1 | Dénominateur dérivé de l'utilisation des services de CPN-1. |
+| Pentavalent 1 | Dénominateur dérivé de la vaccination Penta-1. |
+| Croissance de la population ANC 1, Penta1-dérivé | La dérivation à partir de CPN-1 ou de Penta-1 avec un ajustement pour la croissance démographique annuelle. |
+
+La projection de l'ONU est aussi tracée sur les graphiques à titre de comparaison, mais elle ne fait pas partie des choix du sélecteur.
+
+</Tabs.Tab>
+</Tabs>
+
+Ce qu'est chaque option, et comment les populations dérivées sont calculées à partir des taux d'enquête : **[Dénominateurs > Options de dénominateur](/fr/docs/methodology/denominators#options-de-dénominateur)** et **[Calcul des dénominateurs dérivés](/fr/docs/methodology/denominators#calcul-des-dénominateurs-dérivés)**.
+
+## Évaluation du dénominateur
+
+**Objectif.** Comparer les tendances de population selon les sources disponibles et décider quel indicateur de population est cohérent entre les projections de l'ONU et de DHIS2 (ce que ce choix détermine : [Dénominateurs > Comparaison des tendances de la population](/fr/docs/methodology/denominators#comparaison-des-tendances-de-la-population)).
+
+<Steps>
+
+### Ouvrez l'Évaluation du dénominateur
+
+C'est la première page de la section **Dénominateurs** (**Tendance de la population** dans l'application Vaxx).
+
+### Comparez les trois onglets
+
+La carte **Comparaison de la population** comporte les onglets **Population**, **Naissances** et **Moins de 1 an**. Chacun trace la projection de l'ONU par rapport à la projection DHIS2, en milliers, par année. L'onglet Naissances montre les naissances vivantes DHIS2 et le total des naissances DHIS2.
+
+### Sélectionner la meilleure population
+
+Dans la barre de filtres, choisissez la source de population la plus cohérente avec l'ONU : **Naissances vivantes (DHIS2)**, **Total des naissances (DHIS2)**, **Population totale (DHIS2)** ou **Moins de 1 an (DHIS2)**.
+
+</Steps>
+
+Comment choisir, et ce que signifient les écarts ou les ruptures entre les courbes : [Dénominateurs > Comparaison des tendances de la population](/fr/docs/methodology/denominators#comparaison-des-tendances-de-la-population) et [Lecture des tendances de la population](/fr/docs/methodology/denominators#lecture-des-tendances-de-la-population).
+
+![Comparaison de la population entre l'ONU et DHIS2](/images/fr-denominator-population-trend.png)
+
+## Sélection du dénominateur
+
+**Objectif.** Comparer la couverture selon chaque option de dénominateur et choisir le meilleur dénominateur. Ce choix est celui qu'utilise le reste de l'analyse ; il apparaît ensuite dans la ligne Dénominateur (le sélecteur de dénominateur) de chaque page d'analyse.
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+Choisir le meilleur dénominateur pour les indicateurs de vaccination et pour les indicateurs maternels.
+
+**Filtres.** **Dénominateur maternel**, **Dénominateur de vaccination** et **Niveau administratif** (National, Niveau administratif 1 ou Niveau administratif 2, avec une pastille de région). Les deux choix de dénominateur sont ceux qu'utilise le reste de l'analyse.
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+Choisir un seul dénominateur de vaccination. Le **Niveau administratif** (National, Niveau administratif 1, Niveau administratif 2) et le sélecteur de région servent sur la carte de tendance.
+
+</Tabs.Tab>
+</Tabs>
+
+Trois cartes étayent la décision :
+
+<Steps>
+
+### Lire la comparaison avec l'enquête (Couverture nationale)
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+Pour chaque onglet d'indicateur (**Naissances vivantes en établissement** et **Pentavalent 3**), les barres montrent la couverture fondée sur les données des établissements pour l'année de l'enquête avec chaque dénominateur, comparée à la couverture nationale de l'enquête.
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+La carte **Couverture nationale** comporte les onglets **Naissances vivantes en établissement de santé**, **BCG**, **Pentavalent 3** et **Rougeole 1**. Chaque graphique montre la couverture en établissement issue du DHIS2 selon chaque dénominateur, à côté de la couverture de l'enquête nationale pour l'année d'enquête.
+
+</Tabs.Tab>
+</Tabs>
+
+Comment la lire : [Dénominateurs > Examen de la sélection du dénominateur](/fr/docs/methodology/denominators#examen-de-la-sélection-du-dénominateur) (a).
+
+Si les estimations d'enquête sont absentes, la carte affiche *Aucune couverture à afficher pour le moment* et un bouton **Aller à Charger les données**. Ajoutez les valeurs d'enquête à l'étape Taux nationaux.
+
+### Vérifier le schéma régional (Couverture dérivée infranationale)
+
+**Couverture dérivée infranationale** compare la couverture par région et par dénominateur pour l'année de l'enquête. Comment la lire : [Dénominateurs > Examen de la sélection du dénominateur](/fr/docs/methodology/denominators#examen-de-la-sélection-du-dénominateur) (b).
+
+Dans l'application Vaxx, ses onglets sont **Pentavalent 1**, **Pentavalent 3** et **Rougeole 1**.
+
+### Vérifier la tendance (Tendance de la population)
+
+La carte **Tendance de la population** (sur cette page, il s'agit de la couverture au fil du temps) montre la couverture nationale au fil du temps, ou celle de la zone sélectionnée, pour chaque dénominateur, y compris la population de l'ONU dans l'application Vaxx. Utilisez le filtre **Niveau administratif** (National, Niveau administratif 1, Niveau administratif 2) et le sélecteur de région pour examiner une zone. Comment la lire : [Dénominateurs > Examen de la sélection du dénominateur](/fr/docs/methodology/denominators#examen-de-la-sélection-du-dénominateur) (c).
+
+Dans l'application Vaxx, ses onglets sont **Pentavalent 1**, **Pentavalent 3** et **Rougeole 1**.
+
+### Choisir le dénominateur
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+Réglez le **Dénominateur maternel** et le **Dénominateur de vaccination**, et consignez la raison dans vos notes. Comment combiner les trois vues : [Dénominateurs > Sélection finale et synthèse](/fr/docs/methodology/denominators#sélection-finale-et-synthèse).
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+Réglez le sélecteur **Dénominateur de vaccination**. Les options sont **DHIS2**, **CPN 1**, **Pentavalent 1**, **Penta1-dérivé** et **Croissance de la population ANC 1**. Le choix est enregistré dans le jeu de données et utilisé par toutes les pages de couverture, d'inégalités et de cibles. Vaxx App n'a qu'un dénominateur de vaccination, sans dénominateur maternel distinct. Comment combiner les trois vues : [Dénominateurs > Sélection finale et synthèse](/fr/docs/methodology/denominators#sélection-finale-et-synthèse).
+
+</Tabs.Tab>
+</Tabs>
+
+</Steps>
+
+![Meilleure sélection du dénominateur](/images/fr-denominator-best-selection.png)
+
+![Couverture nationale au fil du temps selon le dénominateur](/images/fr-denominator-national-coverage-overtime.png)
+
+## Comment interpréter les résultats
+
+Ce qui fait le meilleur dénominateur, et ce qu'il faut surveiller : [Dénominateurs > Sélection finale et synthèse](/fr/docs/methodology/denominators#sélection-finale-et-synthèse) et [Pièges courants](/fr/docs/methodology/denominators#pièges-courants).
+
+- Le libellé du dénominateur apparaît sur chaque page d'analyse (dans l'application Vaxx, le sélecteur du dénominateur de vaccination). Si les résultats semblent étranges, vérifiez-le en premier, puis revenez à [Qualité des données](/fr/apps/countdown/data-quality).
+
+<Callout type="warning">
+Le dénominateur sélectionné modifie tous les graphiques de couverture, d'inégalités, d'objectifs, de mortalité et de système de santé. Si vous le modifiez plus tard, revoyez les pages qui en dépendent et régénérez les figures exportées.
+</Callout>
+
+## Pièges courants
+
+- Des valeurs de couverture d'enquête manquantes dans Charger les données, ce qui laisse la comparaison avec l'enquête vide.
+- Régler de nouveau le dénominateur pour chaque graphique : il se règle une seule fois, dans Sélection du dénominateur, pour toute l'analyse. Pour les pièges dans son choix, voir [Dénominateurs > Pièges courants](/fr/docs/methodology/denominators#pièges-courants).
+
+Suite : **[Couverture, équité et objectifs](/fr/apps/countdown/coverage-equity-targets)**.

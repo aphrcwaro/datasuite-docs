@@ -1,0 +1,166 @@
+---
+description: Como corrigir os números notificados para a notificação incompleta, os valores atípicos extremos e os valores em falta, sem subestimar a cobertura.
+---
+
+import { Callout, Steps } from 'nextra/components'
+
+# Ajuste de dados
+
+Relatórios em falta e erros de dados distorcem a análise de cobertura, especialmente quando as taxas de notificação são baixas ou esporádicas. Este módulo aplica correções baseadas em evidências para transformar os números brutos notificados em estimativas defensáveis, tendo em conta as unidades de saúde que não enviaram notificações e removendo valores atípicos extremos.
+Utilizando um fator de ajuste cientificamente fundamentado — baseado em pressupostos sobre os volumes relativos de serviços nas unidades notificadoras em comparação com as não notificadoras — o DataSuite aumenta os números proporcionalmente para refletir a cobertura real ao nível da população.
+
+<Callout type="info">
+**Em resumo**
+- **Responde a:** Como corrigir os números notificados para a notificação incompleta, os valores atípicos extremos e os valores em falta, para que a cobertura não seja subestimada?
+- **Utiliza:** a completude da notificação, os valores atípicos extremos e os valores em falta avaliados na [avaliação da qualidade dos dados](/pt/docs/methodology/data-quality), e o fator de ajuste $k$ definido pelo analista.
+- **Produz:** os números ajustados ($N_{\text{adj}}$), um conjunto de dados mestre ajustado (`.dta`), utilizados como numeradores das estatísticas de cobertura na [avaliação e seleção do denominador](/pt/docs/methodology/denominators) e na [cobertura nacional](/pt/docs/methodology/coverage).
+- **Nas aplicações:** [Preparação dos dados](/pt/apps/countdown/data-preparation) (**Remover anos**, **Ajuste de dados** e **Alterações no ajuste de dados**).
+- **Valores predefinidos:** [Valores predefinidos e limiares: ajuste de dados](/pt/docs/reference/defaults#ajuste-de-dados)
+</Callout>
+
+## Porque é importante
+
+A estratégia de ajuste é pragmática: se assumirmos que todas as unidades não notificadoras prestaram zero serviços, subestimaremos drasticamente a cobertura real. Em vez disso, o módulo estima a proporção de serviços que provavelmente ocorreu nas unidades silenciosas (uma parte k do volume das unidades notificadoras, definida pelo analista; o valor predefinido do guia Countdown é 25%) e ajusta em conformidade. Quando a notificação de um distrito num mês é criticamente baixa (abaixo de 75%) ou está em falta, a sua taxa de notificação é substituída pela mediana das taxas do distrito entre 75% e 100% antes do ajuste, para que alguns meses muito incompletos não produzam estimativas impossíveis (ver [Regras de limiar de dados críticos](#regras-de-limiar-de-dados-críticos)).
+
+### Fundamentação: base científica da análise
+
+A completude da notificação institucional pode distorcer fortemente a análise de cobertura, particularmente se os níveis de notificação forem baixos ou oscilarem significativamente de um ano para outro.
+
+Da mesma forma, valores atípicos extremos — como um zero a mais introduzido acidentalmente durante a introdução de dados — podem exercer um impacto desproporcional, especialmente nas métricas subnacionais. Após as nossas avaliações da qualidade dos dados de base, são necessárias medidas corretivas para gerar um conjunto de dados limpo e padronizado para a análise final. Isto exige um ajuste matemático para a notificação incompleta e a resolução dos valores atípicos extremos.
+
+Para a argumentação completa, aceda a **[Completude da notificação: fundamentação](/pt/docs/reference/rationale#reporting-completeness)** e **[Valores atípicos extremos: fundamentação](/pt/docs/reference/rationale#outlier-detection)**.
+
+## Método
+
+### Abordagem: descrição das etapas analíticas
+
+Se não ajustarmos a completude da notificação, assumimos implicitamente que todas as unidades não notificadoras prestaram zero serviços de saúde durante os seus períodos de silêncio, o que é estatisticamente improvável.
+
+Os ajustes dependem da estimativa do volume real de serviços *(por exemplo, cuidados pré-natais, vacinações)* prestados nas unidades não notificadoras em relação àquelas que enviaram dados. Para isso, estabelecemos um fator de ajuste, denotado como $k$.
+
+O fator de ajuste $k$ é definido como o rácio entre o volume de serviços prestados por unidades não notificadoras e o volume de serviços prestados por unidades notificadoras. Este fator é utilizado diretamente para aumentar os números notificados, a fim de compensar as lacunas de notificação incompleta.
+
+### Fórmulas e parâmetros de ajuste do numerador
+
+Para ter em conta com precisão a notificação incompleta, o número bruto de eventos notificados é ajustado utilizando tanto a proporção de completude da notificação como o rácio do volume de serviços das unidades, através da seguinte equação:
+
+$$N_{\text{adj}} = N_{\text{rep}} + N_{\text{rep}} \times \left( \frac{1}{C} - 1 \right) \times k$$
+
+Em que:
+
+- **$N_{\text{adj}}$**: número total estimado de eventos de saúde ajustado para a notificação incompleta.
+- $N_{\text{rep}}$: número bruto de eventos notificados no sistema.
+- $C$: completude da notificação *(expressa como a proporção de relatórios esperados das unidades efetivamente recebidos)*.
+- $k$: o fator de ajuste que tem em conta os menores volumes relativos de serviços nas unidades não notificadoras.
+
+### Configuração do fator $k$
+
+Um novo conjunto de dados começa com **`k = 0`** (sem ajuste) até o analista definir k para cada serviço na página Ajuste de dados. O valor predefinido do guia Countdown é **`k = 0.25`**, o que pressupõe que as unidades não notificadoras estão ativas, mas operam com menor capacidade, prestando um volume de serviços equivalente a exatamente **um quarto (25%)** de uma unidade notificadora média.
+
+No entanto, o fator $k$ pode ser ajustado manualmente para diferentes serviços com base no contexto do sistema. Por exemplo, se as unidades de saúde privadas têm baixa conformidade na notificação, mas asseguram uma grande parte dos partos a nível nacional, $k$ pode ser elevado acima de 0,25, ou definido até 1,0. De forma mais geral, aumente um fator quando as unidades que notificam mal, como as privadas, prestam uma grande parte desse serviço; mantenha o valor predefinido do guia de 0,25, a menos que tenha indícios de que as unidades que não notificam asseguram outra parte dos serviços.
+
+Dependendo da infraestrutura local, pode escolher entre os seguintes níveis de valor de k:
+
+- **`k = 0.00`** – Nenhum serviço prestado nas unidades não notificadoras.
+- **`k = 0.25`** – Alguns serviços prestados, mas em um volume muito inferior ao das unidades notificadoras *(valor predefinido do guia)*.
+- **`k = 0.50`** – Serviços prestados a metade da taxa das unidades notificadoras.
+- **`k = 0.75`** – Serviços prestados a uma taxa quase igual à das unidades notificadoras.
+- **`k = 1.00`** – Serviços prestados exatamente à mesma taxa das unidades notificadoras.
+
+<Callout type="info">
+
+**As análises RMNCAH e de vacinação diferem aqui:** o k define-se por serviço: quatro fatores k nas análises RMNCAH (**CPN**, **parto**, **vacinas** e **OPD**), três nas análises de vacinação (**CPN**, **parto** e **vacinas**); ver [Escolha os Fatores K](/pt/apps/countdown/data-preparation#escolha-os-fatores-k). Ver [Análises RMNCAH e de vacinação](/pt/docs/reference/rmncah-vs-vaccine).
+
+</Callout>
+
+### Regras de limiar de dados críticos
+
+- **A regra de completude de 75%:** se a taxa de notificação de um distrito para um serviço for inferior a **75%** num mês (ou estiver em falta), essa taxa não é usada tal como está: é substituída pela mediana das taxas de notificação do distrito entre 75% e 100% para esse serviço. O número notificado do mês é depois ajustado com o fator de ajuste $k$ como habitualmente -- nenhum mês fica sem ajuste, e o próprio número notificado é mantido. (O guia de vacinação Countdown de 2024 formula esta regra tanto como "nenhum ajuste abaixo de 75%" como "valor mediano imputado"; a regra acima é a que as aplicações aplicam.)
+- **Correção de valores atípicos:** um valor mensal que se afasta mais de 5 vezes o MAD do valor mediano mensal do distrito (mediana e MAD calculados a partir de todos os anos exceto o mais recente) é um valor atípico extremo; é substituído pela mediana dos outros meses (não atípicos) do distrito no mesmo ano.
+
+### Resumo das regras de negócio do ajuste de dados
+
+| Problema observado | Critérios de identificação e de limiar | Ação corretiva imputada |
+| --- | --- | --- |
+| **Taxas de notificação criticamente baixas** | Uma taxa de notificação mensal de distrito para um serviço **abaixo de 75%** (limiar predefinido), ou em falta. | A taxa é substituída pela **mediana das taxas de notificação do distrito entre 75% e 100%** para esse serviço; o número notificado do mês é depois ajustado com $k$ como abaixo. |
+| **Lacunas de notificação incompleta** | As taxas de notificação situam-se **entre $\ge$ 75% e $\le$ 100%**. | O **fator de ajuste $k$** (definido pelo analista; a aplicação começa em `0`, o guia sugere `0.25`) é aplicado para aumentar os números brutos e compensar as unidades não notificadoras. |
+| **Valores atípicos extremos** | Um valor mensal que se afasta mais de **5 vezes o desvio absoluto da mediana ($MAD$)** do valor mediano mensal do distrito (mediana e $MAD$ calculados a partir de todos os anos exceto o mais recente). | O valor extremo é substituído pela **mediana dos outros meses (não atípicos) do distrito** no mesmo ano. |
+| **Valores ausentes** | Campos de dados nulos ou vazios encontrados dentro de um período de notificação ativo. | O campo ausente é imputado com o **valor mensal mediano do distrito** para aquele ano específico. |
+
+Nas análises RMNCAH, os indicadores de mortalidade não são ajustados quanto à notificação nem aos valores atípicos, porque os óbitos são poucos e voláteis (ver [Mortalidade](/pt/apps/countdown/mortality)).
+
+### Remover anos
+
+O painel de configuração **Remover anos** permite excluir completamente anos civis específicos do processamento ativo. Esta ferramenta foi concebida para descartar anos que não contêm dados de notificação, ou cujos dados foram explicitamente sinalizados como inadequados para a análise pela equipa técnica nacional devido a problemas de qualidade graves e sistémicos.
+
+Remova um ano apenas quando as verificações de [qualidade dos dados](/pt/docs/methodology/data-quality) o mostrarem claramente errático ou inutilizável -- por exemplo um ano com quase nenhuma notificação ou uma falha conhecida ou generalizada do sistema -- e existir um motivo real para o acreditar. Se não tiver motivo, mantenha o ano.
+
+Recomenda-se vivamente a utilização desta funcionalidade quando:
+
+- A linha de base quantitativa da qualidade dos dados está bem abaixo dos limiares aceitáveis.
+- A equipa do país dispõe de informação contextual suficiente e verificada *(por exemplo, grandes falhas de implementação em todo o sistema, cortes de rede prolongados ou eventos de corrupção da base de dados)* que tornam os dados desse ano específico completamente pouco fiáveis ou imprecisos.
+
+A remoção estratégica desses blocos históricos corrompidos garante que as linhas cronológicas de cobertura e as avaliações de tendências subsequentes sejam construídas exclusivamente sobre uma base de dados sólida e fiável.
+
+## Interpretação
+
+### Resultados do ajuste
+
+Esta secção produz um conjunto de dados mestre ajustado (`.dta`) pronto para a análise, juntamente com gráficos para diferentes indicadores que mostram o efeito dos ajustes de dados. A imagem abaixo mostra o resultado do ajuste sem que tenha sido feito qualquer ajuste aos dados.
+
+![Ecrã de ajuste de dados com seleção do fator k](/images/pt-adjustment-kfactor.png)
+
+![Alterações no ajuste de dados comparando valores antes e depois do ajuste](/images/pt-adjustment-before-after.png)
+
+Ler a comparação de antes e depois:
+
+- Uma pequena diferença entre as linhas (pequenas diferenças entre antes e depois) é normal e significa que a notificação já era quase completa.
+- Uma grande diferença ou um grande salto num ano indica um ano com notificação muito baixa, ou um valor atípico a rever na **[Detecção de valores discrepantes](/pt/apps/countdown/data-quality)**. Indique o fator k utilizado e a variação percentual que produziu (ver [Relatório](#relatório)).
+- O efeito é maior nos serviços com as taxas de notificação mais baixas. Compare com a página [Taxa de notificação](/pt/apps/countdown/data-quality).
+
+### Relatório
+
+A interpretação deve incluir o fator de ajuste selecionado (fator k) que foi utilizado para ajustar a notificação incompleta (se necessário, por serviço). Se for utilizado o fator predefinido, refira-o e explique o que isso significa para o leitor.
+
+Indique a variação percentual que o ajuste produziu nos números notificados de partos institucionais e de penta1 ao longo do período de seis anos.
+
+Pode pretender:
+
+- Destacar o ano com o maior impacto do ajuste, se houver.
+- Interpretar se o impacto do ajuste nas taxas de cobertura é grande ou pequeno.
+- Fazer a mesma descrição e as mesmas interpretações para as vacinações de penta1.
+
+### Armadilhas comuns
+
+- Remover um ano que devia manter encurta silenciosamente todas as tendências posteriores.
+- Utilizar um fator k elevado para ocultar uma notificação deficiente esconde o problema em vez de o resolver. Documente a sua escolha.
+- Os meses ou distritos com notificação inferior a 75% não ficam sem ajuste (ver [Regras de limiar de dados críticos](#regras-de-limiar-de-dados-críticos)), mas o ajuste não consegue recuperar o que uma notificação muito incompleta deixou de fora. Pondere remover esses anos.
+
+## Nas aplicações
+
+<Steps>
+
+### Remova os anos pouco fiáveis
+
+Na página **Remover anos**, selecione os anos a excluir e confirme (ver [Remover anos](/pt/apps/countdown/data-preparation#remover-anos)).
+
+![Ecrã Remover anos para excluir anos pouco fiáveis](/images/pt-dqa-remove-year.png)
+
+### Escolha o fator k e ajuste os dados[#implementação-realização-da-análise-no-datasuite]
+
+Os resultados e as definições desta fase são geridos diretamente através da secção **Ajuste de dados** do DataSuite.
+
+Na interface do utilizador deste módulo, selecione o valor específico do **fator $k$** considerado adequado ao contexto do seu país e ao ecossistema das suas unidades, a fim de executar o processo de limpeza dos dados (ver [Ajuste de dados](/pt/apps/countdown/data-preparation#ajuste-de-dados)).
+
+### Reveja as alterações
+
+Compare os valores antes e depois do ajuste na página [Alterações no ajuste de dados](/pt/apps/countdown/data-preparation#alterações-no-ajuste-de-dados).
+
+</Steps>
+
+## Ver também
+
+- Fundamentação: [Completude da notificação](/pt/docs/reference/rationale#reporting-completeness) (com o resumo das ações de ajuste) e [Valores atípicos extremos](/pt/docs/reference/rationale#outlier-detection)
+- [Fórmulas: ajuste de dados](/pt/docs/reference/formulas#ajuste-de-dados)
+- [Valores predefinidos e limiares: ajuste de dados](/pt/docs/reference/defaults#ajuste-de-dados)
+- Etapa anterior: [Avaliação da qualidade dos dados](/pt/docs/methodology/data-quality) · Etapa seguinte: [Avaliação e seleção do denominador](/pt/docs/methodology/denominators)

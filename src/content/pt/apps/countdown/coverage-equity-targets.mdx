@@ -1,0 +1,217 @@
+---
+description: As páginas Cobertura nacional, Meta de cobertura, Desigualdade nacional e Avaliação de equidade, para estimar cobertura, metas e desigualdades.
+---
+import { Tabs, Steps, Callout } from 'nextra/components'
+
+# Cobertura, equidade e metas
+
+Estas quatro páginas encontram-se no grupo **Análise nacional** da barra lateral: **Cobertura nacional**, **Meta de cobertura**, **Desigualdade nacional** (dados de rotina) e **Avaliação de equidade** (dados de inquérito). Todas exigem que o Ajuste de dados tenha sido executado (dados ajustados) e utilizam os denominadores escolhidos na [Seleção do denominador](/pt/apps/countdown/denominators). As versões subnacionais estão em **[Análise subnacional](/pt/apps/countdown/subnational)**. Os métodos estão em [Cobertura nacional](/pt/docs/methodology/coverage) e [Avaliação de equidade](/pt/docs/methodology/equity).
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+As páginas utilizam os denominadores materno e de vacinação escolhidos na Seleção do denominador.
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+Em **Desigualdade nacional**, a aplicação Vaxx tem duas páginas: **Dados de rotina** (desigualdade entre regiões) e **Dados de inquérito** (a Avaliação de equidade). Todas as páginas usam o denominador de vacinação escolhido em **[Denominadores](/pt/apps/countdown/denominators)**.
+
+</Tabs.Tab>
+</Tabs>
+
+## Indicadores disponíveis
+
+Cada página mostra uma faixa de separadores, um indicador por separador, e a maioria das faixas termina com um separador para qualquer outro indicador.
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+Os separadores de indicadores predefinidos são **4 Consultas de Pré-natal**, **Nascidos vivos em estabelecimento de saúde**, **Baixo peso ao nascer**, **Pentavalente 3** e **Sarampo 1** (a Cobertura nacional tem também **Projeção de PF**). O separador **Personalizado** abrange qualquer outro indicador.
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+A maioria das faixas termina com um separador **Verificação Personalizada** que abre um seletor **Indicador** com todos os indicadores de análise da Vaxx:
+
+- CPN 1, Partos institucionais e Nascidos vivos em estabelecimento de saúde.
+- BCG, VIP 1 e 2, Sarampo 1 e 2, VOP 1 a 3, Pentavalente 1 a 3, PCV 1 a 3, Rotavírus 1 e 2.
+- Evasão: de Penta 1 para Penta 3, de Penta 1 para Sarampo 1, de Penta 3 para Sarampo 1, de Sarampo 1 para Sarampo 2.
+- **Dose zero** e **Subvacinados**.
+
+O que medem a evasão, a dose zero e os subvacinados: [Cobertura nacional > Imunização (vacinação)](/pt/docs/methodology/coverage#imunização-vacinação).
+
+</Tabs.Tab>
+</Tabs>
+
+## Cobertura nacional
+
+**Finalidade.** Comparar a cobertura baseada nas unidades de saúde (DHIS2) com as estimativas do inquérito e do WUENIC da cobertura nacional para cada indicador.
+
+**Quando utilizar.** Depois de escolhidos os denominadores, para avaliar se as tendências das unidades de saúde são credíveis.
+
+<Steps>
+
+### Abra a Cobertura nacional
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+Não há filtros. A página utiliza o nível nacional e os denominadores que selecionou.
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+É a primeira página da secção **Análise nacional**.
+
+</Tabs.Tab>
+</Tabs>
+
+### Escolha um separador de indicador
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+Separadores: **4 Consultas de Pré-natal**, **Nascidos vivos em estabelecimento de saúde**, **Baixo peso ao nascer**, **Pentavalente 3**, **Sarampo 1**, **Projeção de PF** (ver [Análise avançada](/pt/apps/countdown/advanced-analysis)) e **Personalizado** para qualquer outro indicador.
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+Escolha um indicador principal ou **Verificação Personalizada** para qualquer outro.
+
+</Tabs.Tab>
+</Tabs>
+
+### Leia o gráfico
+
+O gráfico intitula-se "Estimativas de cobertura nacional para ..." e traça por ano a **Estimativa DHIS2**, a **Estimativa WUENIC** e a **Estimativa de inquérito** com o respetivo **IC de 95%**, a partir de 2010. A legenda indica o denominador utilizado nos valores DHIS2.
+
+### Use as ferramentas do gráfico
+
+Cada gráfico tem uma barra de ferramentas para editar rótulos, alterar a visualização ou o estilo, transferir a imagem (**Baixar Gráfico**) e transferir os dados (**Baixar Dados**). Consulte **[Exportações, relatórios e IA](/pt/apps/countdown/exports-and-ai)**.
+
+</Steps>
+
+![Cobertura nacional](/images/pt-national-coverage.png)
+
+### Como interpretar a Cobertura nacional
+
+O que significa a concordância ou a diferença entre as linhas: [Cobertura nacional > Interpretar a tendência nacional](/pt/docs/methodology/coverage#interpretar-a-tendência-nacional). Para investigar uma diferença, volte à **[qualidade dos dados](/pt/apps/countdown/data-quality)** e aos **[denominadores](/pt/apps/countdown/denominators)**.
+
+## Meta de cobertura
+
+**Finalidade.** Mostrar a percentagem de regiões ou distritos (unidades subnacionais) que atingem uma meta de cobertura mundial, por ano.
+
+**Filtro.** **Nível Administrativo** (Nível Administrativo 1 ou Nível Administrativo 2).
+
+O título do gráfico indica a regra ou o limite aplicado, por exemplo a percentagem de unidades que atingem a meta, e as barras mostram a percentagem de unidades que o cumprem por ano e por indicador. Os limites aplicados a regiões e distritos estão em [Análise subnacional > Valores das metas](/pt/docs/methodology/subnational#valores-das-metas).
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+Os separadores são **4 Consultas de Pré-natal**, **Nascidos vivos em estabelecimento de saúde** e **Vacina** (BCG, Pentavalente 3 e Sarampo 1). As metas de abandono existem apenas na aplicação Vaxx.
+
+Por baixo do gráfico, uma tabela, **Taxa alvo por região** (Nível Administrativo 1) ou **Distritos que atingem a meta de cobertura** (Nível Administrativo 2), lista as unidades que atingem a meta para o indicador escolhido no controlo *Apenas esta tabela*.
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+Dois separadores:
+
+| Separador | Indicadores |
+| --- | --- |
+| **Vacina** | BCG, Pentavalente 3, Sarampo 1 |
+| **Evasão** | Penta 1 para Penta 3, Penta 3 para Sarampo 1 |
+
+A tabela abaixo do gráfico (**Taxa alvo por região** no nível 1, **Distritos que atingem a meta de cobertura** no nível 2) lista as unidades que atingem o limite vacinal para o indicador e o ano escolhidos nos seus próprios seletores. Pode ser transferida em Excel.
+
+</Tabs.Tab>
+</Tabs>
+
+A mesma página para regiões e distritos está descrita em [Análise subnacional](/pt/apps/countdown/subnational). Leia o título do gráfico para ver o sentido da regra (na evasão, menos é melhor). Como ler as percentagens: [Análise subnacional > Metas de cobertura global](/pt/docs/methodology/subnational#leitura-das-metas-de-cobertura).
+
+![Cobertura face às metas](/images/pt-national-coverage-targets.png)
+
+## Desigualdade nacional (dados de rotina)
+
+**Finalidade.** Ver quanto as regiões diferem do valor nacional, com base nos dados das unidades de saúde.
+
+O cartão **Desigualdade nacional** (na aplicação Vaxx, a página **Dados de rotina**) tem um separador por indicador predefinido mais o separador Personalizado (Verificação Personalizada), como acima. Cada gráfico mostra a cobertura de cada região (nível administrativo 1) por ano (subtítulo "Unidade subnacional: nível admin 1"): cada ponto é uma região de Nível Administrativo 1 e a linha é a **Cobertura nacional**. Como ler a dispersão: [Análise subnacional > Desigualdade](/pt/docs/methodology/subnational#leitura-da-desigualdade). Analise as áreas fracas em **[Análise subnacional](/pt/apps/countdown/subnational)**.
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+Separadores: 4 Consultas de Pré-natal, Nascidos vivos em estabelecimento de saúde, Baixo peso ao nascer, Pentavalente 3, Sarampo 1 e **Personalizado**.
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+Separadores e separador Verificação Personalizada como acima.
+
+</Tabs.Tab>
+</Tabs>
+
+Por baixo, escolha **Selecionar Anos** e uma **Paleta** (Verdes, Azuis, Vermelhos ou Roxos) para o cartão **Mapeamento subnacional**, que mapeia a cobertura de cada região nos anos selecionados. Na aplicação Vaxx, cada separador deste cartão desenha um mapa intitulado "Distribuição de ... por Regiões" a partir dos dados DHIS2, e o mapa acompanha o separador selecionado no cartão de desigualdade.
+
+![Desigualdade nacional](/images/pt-national-coverage-inequality.png)
+
+## Avaliação de equidade (dados de inquérito)
+
+**Finalidade.** Mostrar a desigualdade entre grupos da população (grupos de agregados familiares), com base em dados de inquéritos aos agregados familiares carregados no assistente.
+
+**Quando utilizar.** Quando foram carregados ficheiros de inquérito (ou os integrados cobrem o seu país) e pretende saber quem está a ser deixado para trás. Na aplicação Vaxx, é a página **Dados de inquérito** em **Desigualdade nacional**.
+
+<Steps>
+
+### Escolha o Tipo de Equidade
+
+**Área de Residência** (Rural, Urbano), **Educação Materna** (Sem educação, Primária, Secundária ou superior) ou **Quintil de Riqueza**.
+
+### Escolha o indicador
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+4 Consultas de Pré-natal, Nascidos vivos em estabelecimento de saúde, Baixo peso ao nascer, Pentavalente 3, Sarampo 1 ou **Personalizado**.
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+Os separadores são **Pentavalente 3**, **Sarampo 1** e as evasões de Penta 1 para Penta 3 e de Penta 3 para Sarampo 1, mais **Verificação Personalizada**.
+
+</Tabs.Tab>
+</Tabs>
+
+### Leia o equiplot
+
+O gráfico intitula-se "Desigualdades na cobertura de ... por ..." e mostra a cobertura de cada grupo. Como o ler: [Avaliação da equidade > Interpretação dos equiplots](/pt/docs/methodology/equity#interpretação-dos-equiplots).
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+Cada grupo tem a sua própria linha ao longo do tempo, com a tendência nacional para comparação. **Gerar Relatório** abre o relatório de desigualdade nacional.
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+Se um ficheiro de inquérito não tiver sido carregado, são usados os dados de referência incorporados. Carregue os ficheiros do país no assistente **[Carregar dados](/pt/apps/countdown/getting-started)** para uma avaliação real.
+
+</Tabs.Tab>
+</Tabs>
+
+</Steps>
+
+![Equidade por área de residência](/images/pt-national-coverage-equity-area.png)
+
+![Equidade por quintil de riqueza](/images/pt-national-coverage-wealth.png)
+
+![Equidade por educação materna](/images/pt-national-coverage-education.png)
+
+## Armadilhas comuns
+
+- As páginas de equidade dependem dos ficheiros de inquérito e do ano do inquérito indicados em Carregar dados.
+- As páginas de cobertura e de metas mudam quando muda o denominador. Registe o denominador usado num resultado (a nota do gráfico indica-o).
+
+Armadilhas na leitura destes resultados: [Cobertura nacional > Interpretar a tendência nacional](/pt/docs/methodology/coverage#interpretar-a-tendência-nacional) e [Armadilhas comuns](/pt/docs/methodology/coverage#armadilhas-comuns); [Análise subnacional > Desigualdade](/pt/docs/methodology/subnational#leitura-da-desigualdade); [Avaliação da equidade > Armadilhas comuns](/pt/docs/methodology/equity#armadilhas-comuns).
+
+Seguinte: **[Análise subnacional](/pt/apps/countdown/subnational)**.

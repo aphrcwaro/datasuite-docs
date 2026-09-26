@@ -1,0 +1,217 @@
+---
+description: Les pages Couverture nationale, Objectif de couverture, Inégalités nationales et Évaluation de l'équité pour estimer couverture, objectifs et inégalités.
+---
+import { Tabs, Steps, Callout } from 'nextra/components'
+
+# Couverture, équité et objectifs
+
+Ces quatre pages se trouvent dans le groupe **Analyse nationale** de la barre latérale : **Couverture nationale**, **Objectif de couverture**, **Inégalités nationales** (données de routine) et **Évaluation de l'équité** (données d'enquête). Toutes exigent que l'Ajustement des données ait été exécuté (données ajustées) et utilisent les dénominateurs choisis dans [Sélection du dénominateur](/fr/apps/countdown/denominators). Les versions infranationales sont dans **[Analyse infranationale](/fr/apps/countdown/subnational)**. Les méthodes figurent dans [Couverture nationale](/fr/docs/methodology/coverage) et [Évaluation de l'équité](/fr/docs/methodology/equity).
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+Les pages utilisent les dénominateurs maternel et de vaccination choisis dans Sélection du dénominateur.
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+Sous **Inégalités nationales**, l'application Vaxx comporte deux pages : **Données de routine** (inégalités entre régions) et **Données d'enquête** (l'Évaluation de l'équité). Toutes les pages utilisent le dénominateur de vaccination choisi dans **[Dénominateurs](/fr/apps/countdown/denominators)**.
+
+</Tabs.Tab>
+</Tabs>
+
+## Indicateurs disponibles
+
+Chaque page affiche une série d'onglets, un indicateur par onglet, et la plupart des séries se terminent par un onglet pour tout autre indicateur.
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+Les onglets d'indicateurs par défaut sont **CPN 4 visites**, **Naissances vivantes en établissement**, **Faible poids à la naissance**, **Pentavalent 3** et **Rougeole 1** (Couverture nationale comporte aussi **Projection PF**). L'onglet **Personnalisé** couvre tout autre indicateur.
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+La plupart des séries se terminent par un onglet **Vérification personnalisée** qui ouvre un sélecteur **Indicateur** listant tous les indicateurs d'analyse de Vaxx :
+
+- CPN 1, Accouchements en établissement de santé et Naissances vivantes en établissement de santé.
+- BCG, VPI 1 et 2, Rougeole 1 et 2, VPO 1 à 3, Pentavalent 1 à 3, PCV 1 à 3, Rotavirus 1 et 2.
+- Abandon : entre Penta 1 et Penta 3, entre Penta 1 et Rougeole 1, entre Penta 3 et Rougeole 1, entre Rougeole 1 et Rougeole 2.
+- **Zéro dose** et **Sous-vaccinés**.
+
+Ce que mesurent l'abandon, les zéro dose et les sous-vaccinés : [Couverture nationale > Vaccination](/fr/docs/methodology/coverage#vaccination).
+
+</Tabs.Tab>
+</Tabs>
+
+## Couverture nationale
+
+**Objectif.** Comparer la couverture fondée sur les données des établissements (DHIS2) avec les estimations d'enquête et de WUENIC de la couverture nationale pour chaque indicateur.
+
+**Quand l'utiliser.** Une fois les dénominateurs choisis, pour juger si les tendances des établissements sont crédibles.
+
+<Steps>
+
+### Ouvrez Couverture nationale
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+Il n'y a aucun filtre. La page utilise le niveau national et les dénominateurs que vous avez sélectionnés.
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+C'est la première page de la section **Analyse nationale**.
+
+</Tabs.Tab>
+</Tabs>
+
+### Choisissez un onglet d'indicateur
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+Onglets : **CPN 4 visites**, **Naissances vivantes en établissement**, **Faible poids à la naissance**, **Pentavalent 3**, **Rougeole 1**, **Projection PF** (voir [Analyses avancées](/fr/apps/countdown/advanced-analysis)) et **Personnalisé** pour tout autre indicateur.
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+Choisissez un indicateur principal, ou **Vérification personnalisée** pour tout autre.
+
+</Tabs.Tab>
+</Tabs>
+
+### Lisez le graphique
+
+Le graphique s'intitule « Estimations de la couverture nationale pour ... » et trace par année l'**estimation DHIS2**, l'**estimation WUENIC** et l'**estimation de l'enquête** avec son **IC à 95 %**, à partir de 2010. La légende indique le dénominateur utilisé pour les valeurs DHIS2.
+
+### Utilisez les outils du graphique
+
+Chaque graphique dispose d'une barre d'outils pour modifier les libellés, changer l'affichage ou le style, télécharger l'image (**Télécharger le graphique**) et télécharger les données (**Télécharger les données**). Voir **[Exports, rapports et IA](/fr/apps/countdown/exports-and-ai)**.
+
+</Steps>
+
+![Couverture nationale](/images/fr-national-coverage.png)
+
+### Comment interpréter la Couverture nationale
+
+Ce que signifient l'accord ou l'écart entre les courbes : [Couverture nationale > Interpréter la tendance nationale](/fr/docs/methodology/coverage#interpréter-la-tendance-nationale). Pour examiner un écart, revenez à la **[qualité des données](/fr/apps/countdown/data-quality)** et aux **[dénominateurs](/fr/apps/countdown/denominators)**.
+
+## Objectif de couverture
+
+**Objectif.** Montrer le pourcentage de régions ou de districts (unités infranationales) qui atteignent un objectif de couverture mondial, par année.
+
+**Filtre.** **Niveau administratif** (Niveau administratif 1 ou Niveau administratif 2).
+
+Le titre du graphique énonce la règle ou le seuil appliqué, par exemple le pourcentage d'unités atteignant l'objectif, et les barres montrent le pourcentage d'unités qui l'atteignent par année et par indicateur. Les seuils appliqués aux régions et aux districts figurent dans [Analyse infranationale > Valeurs cibles](/fr/docs/methodology/subnational#valeurs-cibles).
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+Les onglets sont **CPN 4 visites**, **Naissances vivantes en établissement** et **Vaccin** (BCG, Pentavalent 3 et Rougeole 1). Les cibles d'abandon ne figurent que dans l'application Vaxx.
+
+Sous le graphique, un tableau, **Taux cible par région** (niveau administratif 1) ou **Districts atteignant l'objectif de couverture** (niveau administratif 2), liste les unités qui atteignent l'objectif pour l'indicateur choisi dans le contrôle *Ce tableau uniquement*.
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+Deux onglets :
+
+| Onglet | Indicateurs |
+| --- | --- |
+| **Vaccin** | BCG, Pentavalent 3, Rougeole 1 |
+| **Abandon** | Penta 1 à Penta 3, Penta 3 à Rougeole 1 |
+
+Le tableau sous le graphique (**Taux cible par région** au niveau 1, **Districts atteignant l'objectif de couverture** au niveau 2) liste les unités qui atteignent le seuil vaccinal pour l'indicateur et l'année choisis dans ses propres sélecteurs. Il peut être téléchargé au format Excel.
+
+</Tabs.Tab>
+</Tabs>
+
+La même page pour les régions et les districts est décrite dans [Analyse infranationale](/fr/apps/countdown/subnational). Lisez le titre du graphique pour le sens de la règle (pour l'abandon, plus bas est mieux). Comment lire les pourcentages : [Analyse infranationale > Cibles mondiales de couverture](/fr/docs/methodology/subnational#lecture-des-cibles-de-couverture).
+
+![Couverture par rapport aux objectifs](/images/fr-national-coverage-targets.png)
+
+## Inégalités nationales (données de routine)
+
+**Objectif.** Voir dans quelle mesure les régions diffèrent du chiffre national, à partir des données des établissements.
+
+La carte **Inégalités nationales** (dans l'application Vaxx, la page **Données de routine**) comporte un onglet par indicateur par défaut plus l'onglet Personnalisé (Vérification personnalisée), comme ci-dessus. Chaque graphique montre la couverture de chaque région (niveau administratif 1) par année (sous-titre « Unité infranationale : niveau admin 1 ») : chaque point est une région de niveau administratif 1 et la ligne est la **Couverture nationale**. Comment lire la dispersion : [Analyse infranationale > Inégalités](/fr/docs/methodology/subnational#lecture-des-inégalités). Examinez les zones faibles dans **[Analyse infranationale](/fr/apps/countdown/subnational)**.
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+Onglets : CPN 4 visites, Naissances vivantes en établissement, Faible poids à la naissance, Pentavalent 3, Rougeole 1 et **Personnalisé**.
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+Onglets et onglet Vérification personnalisée comme ci-dessus.
+
+</Tabs.Tab>
+</Tabs>
+
+En dessous, choisissez **Sélectionner les années** et une **Palette** (Verts, Bleus, Rouges ou Violets) pour la carte **Cartographie infranationale**, qui cartographie la couverture de chaque région pour les années sélectionnées. Dans l'application Vaxx, chaque onglet de cette carte dessine une carte intitulée « Répartition de ... par Régions » à partir des données DHIS2, et la carte suit l'onglet sélectionné dans la carte des inégalités.
+
+![Inégalités nationales](/images/fr-national-coverage-inequality.png)
+
+## Évaluation de l'équité (données d'enquête)
+
+**Objectif.** Montrer les inégalités entre groupes de population (groupes de ménages), à partir des données d'enquêtes auprès des ménages chargées dans l'assistant.
+
+**Quand l'utiliser.** Lorsque des fichiers d'enquête ont été chargés (ou que ceux qui sont intégrés couvrent votre pays) et que vous voulez savoir qui est laissé de côté. Dans l'application Vaxx, c'est la page **Données d'enquête** sous **Inégalités nationales**.
+
+<Steps>
+
+### Choisissez le type d'équité
+
+**Milieu de résidence** (Rural, Urbain), **Éducation maternelle** (Sans instruction, Primaire, Secondaire ou plus) ou **Quintile de richesse**.
+
+### Choisissez l'indicateur
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+CPN 4 visites, Naissances vivantes en établissement, Faible poids à la naissance, Pentavalent 3, Rougeole 1 ou **Personnalisé**.
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+Les onglets sont **Pentavalent 3**, **Rougeole 1**, et les abandons entre Penta 1 et Penta 3 et entre Penta 3 et Rougeole 1, plus **Vérification personnalisée**.
+
+</Tabs.Tab>
+</Tabs>
+
+### Lisez l'equiplot
+
+Le graphique s'intitule « Inégalités de couverture de ... selon ... » et montre la couverture de chaque groupe. Comment le lire : [Évaluation de l'équité > Interprétation des equiplots](/fr/docs/methodology/equity#interprétation-des-equiplots).
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+Chaque groupe a sa propre courbe dans le temps, avec la tendance nationale pour comparaison. **Générer le rapport** ouvre le rapport sur les inégalités nationales.
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+Si un fichier d'enquête n'a pas été téléversé, les données de référence intégrées sont utilisées. Téléversez les fichiers du pays dans l'assistant **[Charger les données](/fr/apps/countdown/getting-started)** pour une véritable évaluation.
+
+</Tabs.Tab>
+</Tabs>
+
+</Steps>
+
+![Équité selon le milieu de résidence](/images/fr-national-coverage-equity-area.png)
+
+![Équité selon le quintile de richesse](/images/fr-national-coverage-wealth.png)
+
+![Équité selon l'éducation maternelle](/images/fr-national-coverage-education.png)
+
+## Pièges courants
+
+- Les pages d'équité s'appuient sur les fichiers d'enquête et l'année d'enquête de Charger les données.
+- Les pages de couverture et de cibles changent quand vous changez de dénominateur. Notez le dénominateur utilisé pour un résultat (la note du graphique l'indique).
+
+Pièges dans la lecture de ces résultats : [Couverture nationale > Interpréter la tendance nationale](/fr/docs/methodology/coverage#interpréter-la-tendance-nationale) et [Pièges courants](/fr/docs/methodology/coverage#pièges-courants) ; [Analyse infranationale > Inégalités](/fr/docs/methodology/subnational#lecture-des-inégalités) ; [Évaluation de l'équité > Pièges courants](/fr/docs/methodology/equity#pièges-courants).
+
+Suite : **[Analyse infranationale](/fr/apps/countdown/subnational)**.

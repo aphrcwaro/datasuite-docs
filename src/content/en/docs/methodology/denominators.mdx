@@ -1,0 +1,224 @@
+---
+description: How to compare the denominator options built from UN and DHIS2 population projections and survey values, and select the one giving the most plausible coverage.
+topics: [denominators]
+indicators: [anc1, penta1, instlivebirths]
+reportKinds: [derived_coverage, denominator_trend, derived_coverage_trend]
+cacheMembers: [denominator, derivation_population, denominator_metrics, maternal_denominator, get_denominator, calculate_derived_coverage, calculate_indicator_coverage, indicator_coverage_national, indicator_coverage_admin1, indicator_coverage_district, national_estimates, un_estimates]
+appPages: [denominator_assessment, denominator_selection]
+ai:
+  status: draft
+  summary: >-
+    Coverage = people who received a service / people who need it. The denominator is estimated with six options,
+    compared mainly against surveys. Vaccine analyses select one denominator for all immunization indicators; RMNCAH
+    analyses select a maternal and an immunization denominator.
+  definitions:
+    - "ANC-1 derived: pregnancies = ANC-1 / survey ANC-1 coverage; deliveries = pregnancies x (1 - pregnancy loss); births = deliveries / (1 - 0.5 x twin rate); live births = births x (1 - stillbirth rate); infants = live births x (1 - NMR); measles 1 target = infants x (1 - PNMR); measles 2 = infants x (1 - 2 x PNMR) (#computing-the-derived-denominators)"
+    - "Penta-1 derived: infants = Penta-1 / survey Penta-1 coverage, then the same chain backward (#computing-the-derived-denominators)"
+    - "Populations used: pregnancies for ANC, deliveries for institutional deliveries, live births for institutional live births and BCG, infants for Penta, measles targets for measles (#computing-the-derived-denominators)"
+  options:
+    - "UN projections (national only), DHIS2 projections, ANC-1 derived, Penta-1 derived, and ANC-1 or Penta-1 derived with population growth (#denominator-options)"
+  steps:
+    - "Population trend: compare UN and DHIS2 total population, live births, under-1; pick one close, same direction, stable gap; it adjusts derived options for growth (#population-trend-comparison)"
+    - "DHIS2 projection checks: growth rate or CBR changing by 2 per 1,000 or more between years; vs UN, population difference above 5%, growth rate above 0.3%, CBR above 5 per 1,000; implied CDR (CBR - growth) negative or below 5 per 1,000 (#population-trend-comparison)"
+    - "Compare with the survey: (a) national, survey year; (b) subnational, survey year, noting coverage above 100%; (c) national trends for plausibility (#denominator-selection-examination)"
+    - "Combine (a), (b), (c), select the denominator(s) and justify each choice in a short paragraph (#final-selection-and-synthesis)"
+  rules:
+    - "Vaccine: one denominator for all immunization indicators. RMNCAH: a maternal (ANC, delivery) and an immunization denominator (#selecting-the-best-denominator-option)"
+    - "UN projections are national only; in the apps UN is shown for comparison, not selectable (#denominator-options)"
+    - "Guidebook: compare institutional live births and Penta-3 coverage with the latest survey (gold standard); smallest absolute difference, national and subnational (#denominator-selection-examination)"
+    - "Guidebook defaults: pregnancy loss 3%, stillbirth 2%, twins 1.5%, NMR 3%, PNMR 2.4% (#computing-the-derived-denominators)"
+    - "Apps: survey values when available (ANC-1, Penta-1 coverage, else 98%, 97%; stillbirth, NMR, PNMR); NMR fallback 2.5%, not 3% (#computing-the-derived-denominators)"
+    - "Best denominator: closest to the survey, not above 100%, stable; not the highest coverage (#final-selection-and-synthesis)"
+    - "Penta1-derived gives Penta1 near 100% by construction: judge on Penta3, Measles 1, survey (#final-selection-and-synthesis)"
+  interpretation:
+    - "Large UN-DHIS2 gaps: outdated census or wrong entry; a sudden break: a projection change (#reading-the-population-trends)"
+    - "Derived options are weakest where reporting is poor; sub-national denominators less reliable (#final-selection-and-synthesis)"
+  notCovered:
+    - "How to weigh (a), (b) and (c) when they point to different options (#final-selection-and-synthesis)"
+    - "Weighing a survey year far from the analysis years, or choosing per chart instead of once (#common-pitfalls)"
+---
+
+import { Callout, Steps } from 'nextra/components'
+
+# Denominator assessment and selection
+
+This section on **denominator selection** helps you select the most appropriate approach for denominator estimation for the computation of the coverage indicators at the national and subnational levels. For more information, please refer to the guidebook on the Countdown DataSuite.
+
+<Callout type="info">
+**At a glance**
+- **Answers:** Which denominator option gives the most plausible coverage, compared with the survey, at national and subnational level?
+- **Uses:** the adjusted numbers from [Data adjustment](/en/docs/methodology/data-adjustment), the UN and DHIS2 population projections, and the survey values (ANC-1 and Penta-1 coverage, stillbirth rate, NMR, PNMR) from [Analysis setup](/en/docs/methodology/analysis-setup#survey-params).
+- **Produces:** the selected denominator(s) (one or two, depending on the analysis: see [Selecting the best denominator option](#selecting-the-best-denominator-option)), used for the coverage indicators in [Coverage](/en/docs/methodology/coverage).
+- **In the apps:** [Denominators](/en/apps/countdown/denominators) (**Denominator Assessment** and **Denominator Selection**).
+- **Defaults:** [Defaults and thresholds: denominators](/en/docs/reference/defaults#denominators)
+</Callout>
+
+## Why it matters
+
+The numerators of coverage statistics (e.g., number of live births in health facilities) are derived from the health facility data and need to be adjusted as shown in the previous section. The denominator of the coverage statistics (e.g., number of live births in the population) needs to be estimated for national and subnational levels (regions/provinces and districts). Because the numerator comes from facility data and the denominator has to be estimated, the choice of denominator matters as much as the data quality.
+
+For the scientific basis of facility-based coverage and its denominators, see **[Coverage analysis: rationale](/en/docs/reference/rationale#coverage-rationale)**.
+
+## Method
+
+### Service coverage[#objective]
+
+**Service coverage** is defined as the population who received the service divided by the population who need the services (also referred to as the target population). In a vaccine analysis, it is the number of vaccinated children divided by a target population.
+
+### Denominator options
+
+There are six denominator options that are analyzed to determine the most accurate baseline:
+
+1. **The UN estimates of live births** (UN projections)
+2. **The DHIS2 projection of live births** (DHIS2 projections)
+3. **Derivation of denominators from ANC-1 services utilization** (ANC-1 derived)
+4. **Derivation of denominators from Penta-1 immunization** (Penta-1 derived)
+5. **Derivation of denominators from ANC-1 services utilization, with adjustment for annual population growth** (ANC-1 population growth)
+6. **Derivation of denominators from Penta-1 immunization, with adjustment for annual population growth** (Penta-1 population growth)
+
+<Callout type="warning">
+
+**UN projections are national only.** The 2024 Countdown vaccination guidebook: "For the subnational level, no UN projections are available." Below national level, compare the DHIS2 projections and the ANC-1 and Penta-1 derived options. In the apps, the UN projections appear in the national comparison; the denominators you can select are DHIS2, ANC-1, Penta-1, ANC-1 population growth and Penta-1 population growth.
+
+</Callout>
+
+### Computing the derived denominators
+
+The ANC-1 derived option starts from the number of women attending a first antenatal visit and works forward through pregnancy to the eligible infants; the Penta-1 derived option starts from the number of infants vaccinated with Penta-1 and works backward.
+
+| Population | From ANC-1 | From Penta-1 |
+| --- | --- | --- |
+| Pregnancies | ANC-1 ÷ survey ANC-1 coverage | deliveries ÷ (1 − pregnancy loss) |
+| Deliveries | pregnancies × (1 − pregnancy loss) | births × (1 − 0.5 × twin rate) |
+| Births | deliveries ÷ (1 − 0.5 × twin rate) | live births ÷ (1 − stillbirth rate) |
+| Live births | births × (1 − stillbirth rate) | infants ÷ (1 − NMR) |
+| Infants eligible for Penta (under 1) | live births × (1 − NMR) | Penta-1 ÷ survey Penta-1 coverage |
+| Measles 1 target | infants × (1 − PNMR) | infants × (1 − PNMR) |
+| Measles 2 target | infants × (1 − 2 × PNMR) | infants × (1 − 2 × PNMR) |
+
+Each coverage indicator uses the population that matches it: pregnancies for ANC, deliveries for institutional deliveries, live births for institutional live births and BCG, infants for Penta, and the measles targets for measles. The DHIS2 and UN projections of live births are converted to the other populations with the same assumptions.
+
+**Default assumptions (guidebook):**
+
+| Assumption | Default |
+| --- | --- |
+| Pregnancy loss | 3% |
+| Stillbirth rate | 2% |
+| Twin rate | 1.5% |
+| Neonatal mortality rate (NMR) | 3% |
+| Post-neonatal mortality rate (PNMR) | 2.4% |
+
+<Callout type="info">
+
+The apps use the country's most recent survey values when they are available: ANC-1 and Penta-1 coverage (otherwise 98% and 97%), and the stillbirth rate, NMR and PNMR. When the survey gives no NMR, the apps use 2.5%, not the guidebook's 3%. Pregnancy loss and the twin rate always use the defaults.
+
+</Callout>
+
+### Selecting the best denominator option
+
+The goal here is to identify the best denominator option for the computation of the coverage indicators. How many denominators you choose depends on the analysis.
+
+<Callout type="info">
+
+**RMNCAH and vaccine analyses differ here:** a vaccine analysis uses one denominator for all the immunization indicators (the Vaxx app's **Vaccination denominator**); an RMNCAH analysis uses two: a **maternal denominator** for the ANC and delivery indicators and an **immunization denominator** for the immunization indicators (the RMNCAH app's **Maternal denominator** and **Vaccination denominator**). See [RMNCAH and vaccine analyses](/en/docs/reference/rmncah-vs-vaccine).
+
+</Callout>
+
+To identify the best option, follow these steps: (1) the [population trend comparison](#population-trend-comparison), below; then, under [Interpretation](#interpretation), (2) the [denominator selection examination](#denominator-selection-examination) and (3) the [final selection and synthesis](#final-selection-and-synthesis).
+
+### Population trend comparison
+
+Under the **"Population Trend"** section, compare the trends in the total population, total live births, and under-1 population between the UN and the DHIS2 projections.
+
+Select the indicator trends (total population, live births, or under-1 population) that are consistent across the two sources, with estimates generally close: the two sources are close and follow the same direction, with a stable, plausible gap between UN and DHIS2.
+
+- **Example:** You may select the under-1 population if the UN estimates and the DHIS2 projections for that demographic are very close.
+
+![Population comparison between UN and DHIS2 projections](/images/denominator-population-trend.png)
+
+<Callout type="info">
+
+The indicator selected in this step sets the DHIS2 population the derived denominators are built from, and will be used to adjust the ANC-1-derived and Penta-1-derived options with population growth.
+
+</Callout>
+
+**Check the quality of the DHIS2 projections.** The guidebook flags a DHIS2 projection as inconsistent when:
+
+- **Over time:** the population growth rate or the crude birth rate (CBR) changes by 2 per 1,000 or more between years.
+- **Against the UN projections:** the population differs by more than 5% (relative difference), the growth rate by more than 0.3% (absolute difference), or the CBR by more than 5 per 1,000.
+- **Implied crude death rate:** CDR = CBR − growth rate is negative or below 5 per 1,000.
+
+The apps show the trends; these checks are made by the analyst.
+
+## Interpretation
+
+### Reading the population trends
+
+- Large gaps between UN and DHIS2 suggest an outdated census base or a wrong population entry in the workbook.
+- A sudden break in one line usually means a change in how the population was projected, not a real change in births.
+- DHIS2 projections often drift when they are based on an old census.
+
+### Denominator selection examination
+
+Under **"Denominator Selection"**, examine the consistency between the survey estimates and the computed estimate from DHIS2 data using each denominator method. This is done by comparing three sets of graphs at national and subnational levels:
+
+**a. Comparison of national estimates:** First, compare the national estimate of each indicator between the routine data and the survey data by examining the first bar graph for the survey year. The figure shows a horizontal dotted line indicating the survey estimate and a bar corresponding to the routine estimate. A denominator that gives coverage close to the survey, without exceeding 100 percent, is a good candidate. In making this comparison, note down the best denominator options (there may be more than one viable option).
+
+![National coverage by denominator option compared with the survey estimate](/images/denominator-best-selection.png)
+
+**b. Subnational level comparison on the survey year:** In the second set of figures, the horizontal bars represent the coverage estimate from the routine data compared to the "diamond" which represents the survey estimate. A figure is produced for each denominator option. Review each figure and identify the best denominator option based on the closeness of the coverage estimate from the survey to that of the routine data. Look for the option that agrees best with the survey across regions. Similarly, examine estimates that are implausible (e.g., coverage estimates above 100%, or far above it). Note down the best denominator option.
+
+**c. Trends in national estimates:** Examine the trend estimate for each denominator option by looking for consistency and overall plausibility in the historical trends: plausible, smooth trends.
+
+![National coverage over time by denominator option](/images/denominator-national-coverage-overtime.png)
+
+<Callout type="info">
+
+**The survey is the gold standard.** The guidebook compares the coverage of **institutional live births** and **Penta-3** from each option with the most recent survey, and selects the method with the smallest absolute difference between the routine and survey coverage, at national and subnational level.
+
+</Callout>
+
+### Final selection and synthesis
+
+**Combine your notes** from sub-steps (a), (b), and (c) above to select the best-performing denominator (one or two, depending on the analysis: see [Selecting the best denominator option](#selecting-the-best-denominator-option)).
+
+**Summarize your choice** in a short paragraph, documenting the justification for each denominator you selected.
+
+- The best denominator is not the one that gives the highest coverage, but the one that best agrees with (is closest to) the survey and stays stable and consistent over time.
+- Denominators derived from ANC 1 or Penta 1 assume that most of the population attends the service and that facilities report completely. They are weakest where reporting is poor; if results look odd, go back to [Data quality](/en/docs/methodology/data-quality).
+- Sub-national denominators can be less reliable than national ones. Read them together with district data quality.
+
+<Callout type="warning">
+A denominator derived from Penta1 makes Penta1 coverage look near 100 percent by construction. Judge it on Penta3 and Measles 1, and against the survey.
+</Callout>
+
+### Common pitfalls
+
+- Comparing against the survey when the survey year is far from the analysis years. Weigh that in your judgement.
+- Choosing a denominator per chart instead of once for the whole analysis. The denominator you select changes every coverage, inequality, target, mortality and health system result.
+
+## In the apps
+
+<Steps>
+
+### Assess the population trends
+
+On **Denominator Assessment** (**Population Trend** in the Vaxx app), compare the UN and DHIS2 projections and select the best population (see [Denominator Assessment](/en/apps/countdown/denominators#denominator-assessment)).
+
+### Compare the denominator options
+
+On **Denominator Selection**, compare coverage under each option with the survey, nationally, subnationally and over time (see [Denominator Selection](/en/apps/countdown/denominators#denominator-selection)).
+
+### Choose the denominator
+
+Set the denominator(s) the rest of the analysis uses (see [Choose the denominator](/en/apps/countdown/denominators#choose-the-denominator)).
+
+</Steps>
+
+## See also
+
+- [Coverage analysis: rationale](/en/docs/reference/rationale#coverage-rationale)
+- [Formulas: denominators](/en/docs/reference/formulas#denominators)
+- [Defaults and thresholds: denominators](/en/docs/reference/defaults#denominators)
+- Glossary: [Service coverage](/en/docs/reference/glossary#service-coverage), [Immunization denominator (BCG, Penta)](/en/docs/reference/glossary#immunization-denominator-bcg-penta), [Measles denominators](/en/docs/reference/glossary#measles-denominators)
+- Previous step: [Data adjustment](/en/docs/methodology/data-adjustment) · Next step: [Coverage](/en/docs/methodology/coverage)

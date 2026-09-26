@@ -1,0 +1,191 @@
+---
+description: "How to set up the analysis: the HMIS/DHIS2 Excel workbook and the checks it must pass, survey files, reference datasets and national survey parameters the Countdown analysis needs, and how to load them."
+topics: [analysis-setup]
+cacheMembers: [countdown_data, cache_path, country, data_years, national_estimates, survey_estimates, un_estimates, wuenic_estimates, national_survey, survey_year, wizard_quality_results, quality_confirmed]
+appPages: [upload_data, introduction]
+ai:
+  status: draft
+  summary: >-
+    Setting up the analysis: a dedicated working folder, loading HMIS/DHIS2 data (Excel on first load, then the
+    generated .rds), the embedded reference datasets matched to the country, and the national survey parameters
+    used to support denominator selection.
+  definitions:
+    - "Parameters: ANC1 and ANC4 coverage, pregnancy loss, twin births, neonatal and post-neonatal mortality, stillbirth rate, institutional delivery, BCG, Penta1, Penta3 and Measles1 coverage, C-section rate, low birth weight, recent survey year, survey data start year (#survey-params)"
+  steps:
+    - "Create a dedicated working folder and place the raw Excel upload files in it before starting the app (#working-folder)"
+    - "First upload: the Excel workbook generated from HMIS/DHIS2 exports (.xlsx or .xls; a .dta is also accepted); later uploads: the cached .rds file (#uploading-hmis-data)"
+    - "Review the national survey parameters, and update them if more recent, validated values exist (#survey-params)"
+  rules:
+    - "The Excel workbook must contain Admin_data, Population_data, Reporting_completeness and at least one Service_data sheet (#hmis-data)"
+    - "Blocking checks must pass (sheets and key columns found, exactly one recognised country, districts match across sheets and years, no missing months, month names recognised); informational checks (e.g. estimated live births not below facility live births, 10% margin) do not block (#checks-on-the-uploaded-data)"
+    - "Optional survey files (national, regional, area, maternal education, wealth quintile) power equity analysis and survey comparisons; their region names, and a custom shapefile's, must match the dataset's (#survey-files-and-shapefile)"
+    - "On first load the app saves a companion .rds file in the same working folder and uses it to speed up later loads (#rds)"
+    - "Embedded reference datasets (UN estimates, survey data, WUENIC, UN mortality data, FPET) are matched automatically to the uploaded country (#embedded-datasets)"
+    - "Use one working folder per country or DHIS2 export batch, keep the Excel source and the .rds together, and do not rename the .rds manually (#embedded-datasets)"
+    - "The national parameters support denominator selection; they are typically derived from the most recent national survey (e.g. DHS, MICS) and applied uniformly across subnational units (#survey-params)"
+    - "Default parameter values are extracted from the country's survey data (#survey-params)"
+    - "Every parameter is required; coverage values are percentages (0 to 100); loss, twin, stillbirth and mortality rates are proportions (0 to 0.05) (#survey-params)"
+    - "Survey data start year: ideally the two most recent surveys are used (e.g. surveys in 2008, 2013, 2018 and 2023 give a start year of 2018) (#survey-params)"
+  notCovered:
+    - "How each parameter enters the denominator calculations is not described on this page (#survey-params)"
+---
+
+import { Callout, Steps } from 'nextra/components'
+
+# Analysis setup
+
+This page describes the steps required to set up the analysis workbench. It sets out the data and national parameters the analysis needs, and how to load them in the apps.
+
+<Callout type="info">
+**At a glance**
+- **Answers:** What data, reference datasets and national parameters does the analysis need, and how are they loaded?
+- **Uses:** the Excel workbook generated from HMIS/DHIS2 exports (see the [DHIS2 data indicator definitions](/en/docs/reference/indicator-definitions)), the embedded reference datasets and the national survey parameters.
+- **Produces:** a working folder with the companion `.rds` file, the reference datasets matched to the country, and the national parameters used for [denominator selection](/en/docs/methodology/denominators); the next step is [data quality assessment](/en/docs/methodology/data-quality).
+- **In the apps:** [Getting started](/en/apps/countdown/getting-started) (the Load Data wizard).
+</Callout>
+
+## Method
+
+### HMIS data
+
+The app accepts common tabular data formats for the DHIS2 upload:
+
+- Excel workbook: `.xlsx` or `.xls`
+- Stata dataset: `.dta`
+- A dataset already saved by the app: `.rds`
+
+The Excel workbook, in the format produced by the [Data Extractor](/en/apps/data-extractor), must contain an `Admin_data` sheet, a `Population_data` sheet, a `Reporting_completeness` sheet and at least one `Service_data` sheet.
+
+<Callout type="info">
+
+See the [DHIS2 data indicator definitions](/en/docs/reference/indicator-definitions).
+
+</Callout>
+
+### Checks on the uploaded data
+
+When the data is loaded, it is checked before the analysis can go on. There are three kinds of check.
+
+- **Blocking checks** must pass before the analysis can continue:
+  - Admin, Population and Service sheets found;
+  - country, admin-1 and district columns present in the Admin sheet;
+  - exactly one country in the Admin sheet, recognised by name;
+  - districts match between the Admin sheet and every other sheet;
+  - district names consistent across years;
+  - no missing months (every district-year has all 12);
+  - every month name recognised (English or French).
+- **Informational checks** do not block:
+  - estimated live births not lower than facility (reported institutional) live births (10% margin);
+  - population data not pasted into service data;
+  - every indicator has some data;
+  - month names labelled consistently across sheets.
+- **Mapping checks:** two checks report survey or shapefile region names that do not match the dataset. The names are matched to the dataset's own region names before the analysis (see [Survey files and shapefile](#survey-files-and-shapefile)).
+
+### Survey files and shapefile
+
+Survey data files (`.dta`) are optional. There are five: **national**, **regional**, **area**, **maternal education** and **wealth index quintile** data. They power equity analysis (the Equity Assessment), survey comparison lines and sub-national comparisons. Without them the app keeps its built-in reference data.
+
+A shapefile is used for maps. A standard shapefile for the country is built in; a custom one can be used instead.
+
+When survey files or a custom shapefile name their regions differently from the dataset, their region (admin-1) names must be matched to those in the dataset.
+
+### Embedded datasets
+
+In addition to the uploaded DHIS2 dataset, the app includes internal reference datasets that are linked to the country whose data was uploaded.
+
+These embedded datasets are:
+
+- UN estimates
+- Survey data
+- WUENIC estimates
+- UN mortality data
+- Family Planning Estimation Tool (FPET) data
+
+Because these datasets are named according to the country whose DHIS2 data is loaded, the app can automatically match the uploaded file to the correct reference set.
+
+<Callout type="info">
+
+**Best practice**
+
+- Use one working folder per country or DHIS2 export batch.
+- Keep the original Excel source file and the generated `.rds` file together.
+- Do not rename the `.rds` file manually; the app manages that file automatically.
+
+</Callout>
+
+### National parameters for denominator calculation[#survey-params]
+
+- These parameters are used to support **selection of denominators** for service coverage analysis within the RMNCAH analytical framework.
+- They are typically derived from the **most recent national survey** (e.g., DHS, MICS) and are applied uniformly across subnational units.
+
+<Callout type="info">
+
+**Tip**
+
+The default values are extracted from the available country survey data. Users can update these values if they have more recent, validated values.
+
+</Callout>
+
+Every parameter is required. Coverage values are percentages (0 to 100). Pregnancy loss, twin births, stillbirth, neonatal mortality and post-neonatal mortality are proportions (0 to 0.05; for example 0.03 means 3%). The recent survey year lies between 2015 and 2030.
+
+![Analysis parameters](/images/rmncah-analysis-params.jpg)
+
+| Parameter | Definition |
+| --- | --- |
+| **ANC1 Survey (%)** | Percentage of women aged 15–49 with a live birth who received at least one antenatal care (ANC) visit during their last pregnancy. (Example: If 940 out of 1,000 women had at least one ANC visit, the ANC1 coverage is 94%.) |
+| **ANC4** | Percentage of women aged 15–49 with a live birth who received four or more antenatal care visits during their last pregnancy. (Example: If 680 out of 1,000 women had ≥4 ANC visits, ANC4 coverage is 68%.) |
+| **Pregnancy Loss (proportion)** | Proportion of pregnancies that ended in miscarriage, abortion, or stillbirth out of all reported pregnancy outcomes. (Example: If 80 of 1,000 pregnancies ended in loss, the proportion is 0.08) |
+| **Twin Births (proportion)** | Proportion of live births that are twins out of all live births. (Example: If 30 out of 1,500 live births were twins (i.e., 15 twin pairs), the proportion is 0.02) |
+| **Neonatal Mortality (proportion)** | Proportion of live births that die within the first 28 days of life out of all live births. (Example: If 20 out of 1,000 live births died within the first 28 days, the proportion is 0.02) |
+| **Post Neonatal Mortality (proportion)** | Proportion of live births that die between 28 days and 11 months of life out of all live births. (Example: If 15 out of 1,000 live births died between 28 days and 11 months, the proportion is 0.015) |
+| **Stillbirth Rate (proportion)** | Proportion of pregnancies that ended in stillbirth out of all reported pregnancy outcomes. (Example: If 10 out of 1,000 pregnancies ended in stillbirth, the proportion is 0.01) |
+| **Institutional delivery** | Percentage of live births that occurred in a health facility. (Example: If 850 out of 1,000 live births were in a health facility, the institutional delivery coverage is 85%.) |
+| **BCG Coverage (%)** | Percentage of infants aged 12–23 months who received the Bacillus Calmette-Guérin (BCG) vaccine. (Example: If 950 out of 1,000 infants received the BCG vaccine, the BCG coverage is 95%.) |
+| **Penta1 Coverage (%)** | Percentage of infants aged 12–23 months who received the first dose of pentavalent vaccine. (Example: If 920 out of 1,000 infants received the first dose, the Penta 1 coverage is 92%.) |
+| **Penta 3** | Percentage of infants aged 12–23 months who received the third dose of pentavalent vaccine. (Example: If 850 out of 1,000 infants received the third dose, the Penta 3 coverage is 85%.) |
+| **Measles 1 Coverage (%)** | Percentage of infants aged 12–23 months who received the first dose of measles vaccine. (Example: If 900 out of 1,000 infants received the first dose, the Measles1 coverage is 90%.) |
+| **C-Section Rate (%)** | Percentage of live births that were delivered by cesarean section. (Example: If 150 out of 1,000 live births were by C-section, the C-section coverage is 15%.) |
+| **Low birth weight** | Percentage of live births that were low birth weight (less than 2,500 grams). (Example: If 100 out of 1,000 live births were low birth weight, the low birth weight coverage is 10%.) |
+| **Recent survey Year** | The calendar year in which the survey was conducted and from which vaccine coverage estimates (e.g., BCG, Penta1/3, Measles1) are drawn. (Example: If the survey was conducted in 2022, that is the vaccine survey year). |
+| **Survey Data Start Year** | The calendar year from which the survey data starts. This is used to determine the time period for which the survey data is relevant. Ideally, it is recommended to use the two most recent surveys for this analysis. (Example: If a country has survey data for 2008, 2013, 2018 and 2023; the Survey data start should be 2018 (two most recent)). |
+
+<Callout type="info">
+
+**RMNCAH and vaccine analyses differ here:** ANC4, C-section rate and low birth weight are asked for in RMNCAH analyses only; vaccine analyses ask instead for the OPV1 and OPV3 survey coverage. See [RMNCAH and vaccine analyses](/en/docs/reference/rmncah-vs-vaccine).
+
+</Callout>
+
+## In the apps
+
+Setup is done in the app's Load Data wizard; [Getting started](/en/apps/countdown/getting-started) describes it screen by screen, including the national parameter fields.
+
+<Steps>
+
+### Create a working folder[#working-folder]
+
+The first step in the analysis workflow is to prepare a dedicated working folder. This folder is where you keep the input files for the app, and where the system creates the derived data file used for faster future loads.
+
+- Choose a clear directory name that you can easily remember and reference, preferably in your local environment.
+- Place the raw upload (Excel) files in that folder before starting the app.
+- Keep any related documentation, data or country-specific files together so the working folder is self-contained.
+
+### Uploading HMIS data
+
+For the initial upload, use the Excel workbook generated from HMIS/DHIS2 exports. For subsequent uploads, use the [cached .RDS file](#rds), which is automatically generated and stored in the working folder when the Excel file is uploaded.
+
+### Automatic RDS creation[#rds]
+
+- When you load an Excel file for the first time, the app automatically converts and saves a companion `.rds` file in the same working folder.
+- On subsequent loads, the app checks for the existing `.rds` file and uses it to speed up data reloads.
+
+This means the first load may take slightly longer while the Excel file is read and transformed. After that, the app opens the saved `.rds` file much faster.
+
+</Steps>
+
+## See also
+
+- [Getting started](/en/apps/countdown/getting-started): the Load Data wizard in the app
+- [DHIS2 data indicator definitions](/en/docs/reference/indicator-definitions)
+- [Formulas: denominators](/en/docs/reference/formulas#denominators), where the national parameters are used
+- [Glossary](/en/docs/reference/glossary)
+- Previous: [Framework overview: end-to-end workflow](/en/docs/methodology#end-to-end-workflow) · Next: [Data quality assessment](/en/docs/methodology/data-quality)

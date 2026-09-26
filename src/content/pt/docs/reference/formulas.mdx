@@ -1,0 +1,302 @@
+---
+description: Todas as fórmulas da metodologia Countdown, pela ordem da análise, com o significado de cada símbolo e uma ligação para a secção que a explica.
+title: Fórmulas
+---
+
+# Fórmulas
+
+Todas as fórmulas que a [metodologia Countdown](/pt/docs/methodology) enuncia, reunidas num só lugar, pela ordem da análise. Cada uma indica o significado dos seus símbolos e remete para a secção que a explica; se a formulação diferir, prevalece essa secção. Para os próprios valores predefinidos e limiares, consulte [Valores predefinidos e limiares](/pt/docs/reference/defaults).
+
+## Qualidade dos dados
+
+### Completude dos relatórios (1a, 1b, 1c)
+
+$$\text{1a} = \frac{\text{relatórios mensais das unidades recebidos}}{12 \times \text{número de unidades}}$$
+
+$$\text{1b} = \frac{\text{distritos com completude dos relatórios} \ge 90\%}{\text{total de distritos}} \qquad \text{1c} = \frac{\text{distritos sem valores em falta em nenhum formulário}}{\text{total de distritos}}$$
+
+- 1a e 1b são a média sobre os formulários de relatório da análise: CPN, parto, imunização e consultas externas (OPD) nas análises RMNCAH; CPN, parto e imunização nas análises de vacinação.
+- 1c conta um distrito sem nenhum valor mensal em falta no ano, em nenhum formulário.
+
+Explicado em: [Completude dos relatórios](/pt/docs/methodology/data-quality#completude-dos-relatórios).
+
+### Valores atípicos extremos (2a, 2b)
+
+Um valor mensal $x$ é um valor atípico extremo quando se situa fora de
+
+$$\tilde{x} \pm 5 \times MAD$$
+
+$$\text{2a} = \frac{\text{valores mensais não classificados como atípicos}}{\text{total de valores mensais}} \qquad \text{2b} = \frac{\text{distritos sem valores atípicos}}{\text{total de distritos}}$$
+
+- $\tilde{x}$: o valor mensal mediano da mesma série (a do distrito, ou a série nacional ou de nível admin-1 avaliada).
+- $MAD$: o desvio absoluto da mediana dessa série.
+- Referência: $\tilde{x}$ e $MAD$ são calculados a partir de todos os anos exceto o mais recente, pelo que o último ano é avaliado face aos anos anteriores.
+
+Explicado em: [Deteção de valores atípicos](/pt/docs/methodology/data-quality#deteção-de-valores-atípicos).
+
+### Consistência interna: rácios nacionais (3a, 3b, 3c)
+
+$$\text{3a} = \frac{\text{CPN1 notificadas}}{\text{Penta1 notificadas}}, \quad E_{3a} = 1{,}07 \times \frac{\text{CPN1}_{s}}{\text{Penta1}_{s}}$$
+
+$$\text{3b} = \frac{\text{Penta1 notificadas}}{\text{Penta3 notificadas}}, \quad E_{3b} = \frac{\text{Penta1}_{s}}{\text{Penta3}_{s}} \qquad \text{3c} = \frac{\text{VOP1 notificadas}}{\text{VOP3 notificadas}}, \quad E_{3c} = \frac{\text{VOP1}_{s}}{\text{VOP3}_{s}}$$
+
+Um rácio nacional $r$ é aceitável quando
+
+$$\lvert r - E \rvert \le 0{,}05$$
+
+- $E$: o rácio esperado; $\text{CPN1}_{s}$, $\text{Penta1}_{s}$, ...: a cobertura no inquérito mais recente.
+- 1,07: o rácio CPN1 / Penta1 esperado quando a cobertura do inquérito é a mesma para ambos, com 3% de perdas de gravidez, 2% de natimortos, 1,5% de gémeos e 3% de mortalidade neonatal antes da Penta1.
+- 3c (VOP1 / VOP3) aplica-se às análises de vacinação.
+
+Explicado em: [Consistência interna](/pt/docs/methodology/data-quality#consistência-interna) e [Cálculo de rácios](/pt/docs/methodology/data-quality#cálculo-de-rácios).
+
+### Consistência interna: rácios distritais
+
+$$\text{verificação distrital} = \frac{\text{distritos com } 1{,}0 \le r_d \le 1{,}5}{\text{total de distritos}}$$
+
+- $r_d$: o rácio do distrito -- CPN1 / Penta1 (3c nas análises RMNCAH, 3f nas análises de vacinação), Penta1 / Penta3 (3d; 3g), VOP1 / VOP3 (análises de vacinação, 3h).
+
+Explicado em: [Consistência interna](/pt/docs/methodology/data-quality#consistência-interna).
+
+### Pontuação geral de qualidade dos dados
+
+$$\text{Pontuação}_{\text{RMNCAH}} = \text{média}\,(\text{1a}, \text{1b}, \text{1c}, \text{2a}, \text{2b}, \text{3c}, \text{3d})$$
+
+$$\text{Pontuação}_{\text{vacinação}} = \text{média}\,(\text{1a}, \text{1b}, \text{1c}, \text{2a}, \text{2b}, \text{3f}, \text{3g}, \text{3h})$$
+
+- As componentes são as métricas acima; as verificações dos rácios distritais são 3c, 3d (RMNCAH) ou 3f, 3g, 3h (vacinação). O guia de 2024 deixava 1c fora da pontuação; as aplicações incluem-no.
+
+Explicado em: [Pontuação geral de qualidade](/pt/docs/methodology/data-quality#pontuação-geral-de-qualidade).
+
+## Ajuste de dados
+
+### Ajuste para a notificação incompleta
+
+$$N_{\text{adj}} = N_{\text{rep}} + N_{\text{rep}} \times \left( \frac{1}{C} - 1 \right) \times k$$
+
+- $N_{\text{adj}}$: o número de eventos ajustado para a notificação incompleta.
+- $N_{\text{rep}}$: o número bruto de eventos notificados.
+- $C$: a completude da notificação, a proporção de relatórios esperados das unidades efetivamente recebidos.
+- $k$: a razão entre o volume de serviços das unidades não notificadoras e o das unidades notificadoras (definido pelo analista para cada serviço: a aplicação começa em 0; o valor predefinido do guia é 0,25).
+
+Explicado em: [Fórmulas e parâmetros de ajuste do numerador](/pt/docs/methodology/data-adjustment#fórmulas-e-parâmetros-de-ajuste-do-numerador) e [Configuração do fator k](/pt/docs/methodology/data-adjustment#configuração-do-fator-k).
+
+### Taxas de notificação baixas
+
+$$C = \begin{cases} C_{\text{notificada}} & \text{se } 75\% \le C_{\text{notificada}} \le 100\% \\ \text{mediana}\,\{\, C_{\text{distrito}} : 75\% \le C_{\text{distrito}} \le 100\% \,\} & \text{se } C_{\text{notificada}} < 75\% \text{ ou em falta} \end{cases}$$
+
+- $C_{\text{notificada}}$: a taxa de notificação de um distrito para um serviço num mês.
+- $C_{\text{distrito}}$: as taxas de notificação do distrito para esse serviço. O número do mês é depois ajustado com $k$ como habitualmente; o próprio número é mantido.
+
+Explicado em: [Regras de limiar de dados críticos](/pt/docs/methodology/data-adjustment#regras-de-limiar-de-dados-críticos).
+
+### Substituição de valores atípicos e em falta
+
+$$x_{\text{atípico}} \rightarrow \text{mediana}\,(\text{meses não atípicos do distrito no mesmo ano})$$
+
+$$x_{\text{em falta}} \rightarrow \text{mediana}\,(\text{valores mensais do distrito no mesmo ano})$$
+
+- Um valor atípico é um valor mensal fora de $\tilde{x} \pm 5 \times MAD$ da série do distrito (ver [Valores atípicos extremos](#valores-atípicos-extremos-2a-2b)).
+
+Explicado em: [Resumo das regras de negócio do ajuste de dados](/pt/docs/methodology/data-adjustment#resumo-das-regras-de-negócio-do-ajuste-de-dados).
+
+## Denominadores
+
+### Cobertura
+
+$$\text{Cobertura} = \frac{\text{população que recebeu o serviço}}{\text{população que necessita do serviço}}$$
+
+- O numerador é o número ajustado dos dados das unidades de saúde; o denominador é a população-alvo, estimada com a opção de denominador selecionada.
+
+Explicado em: [Avaliação e seleção do denominador](/pt/docs/methodology/denominators#objetivo).
+
+### Denominadores derivados da CPN1
+
+$$
+\begin{aligned}
+\text{gravidezes} &= \frac{\text{CPN1}}{\text{cobertura da CPN1 no inquérito}} \\
+\text{partos} &= \text{gravidezes} \times (1 - \text{perdas de gravidez}) \\
+\text{nascimentos} &= \frac{\text{partos}}{1 - 0{,}5 \times \text{taxa de gemelaridade}} \\
+\text{nados-vivos} &= \text{nascimentos} \times (1 - \text{taxa de natimortalidade}) \\
+\text{crianças} &= \text{nados-vivos} \times (1 - \text{TMN}) \\
+\text{alvo do sarampo 1} &= \text{crianças} \times (1 - \text{TMPN}) \\
+\text{alvo do sarampo 2} &= \text{crianças} \times (1 - 2 \times \text{TMPN})
+\end{aligned}
+$$
+
+- TMN, TMPN: taxas de mortalidade neonatal e pós-neonatal; crianças: as crianças elegíveis para a Penta (menos de 1 ano).
+- Cada indicador usa a população que lhe corresponde: gravidezes para a CPN, partos para os partos institucionais, nados-vivos para os nados-vivos institucionais e a BCG, crianças para a Penta, os alvos do sarampo para o sarampo.
+
+Explicado em: [Cálculo dos denominadores derivados](/pt/docs/methodology/denominators#cálculo-dos-denominadores-derivados).
+
+### Denominadores derivados da Penta1
+
+$$
+\begin{aligned}
+\text{crianças} &= \frac{\text{Penta1}}{\text{cobertura da Penta1 no inquérito}} \\
+\text{nados-vivos} &= \frac{\text{crianças}}{1 - \text{TMN}} \\
+\text{nascimentos} &= \frac{\text{nados-vivos}}{1 - \text{taxa de natimortalidade}} \\
+\text{partos} &= \text{nascimentos} \times (1 - 0{,}5 \times \text{taxa de gemelaridade}) \\
+\text{gravidezes} &= \frac{\text{partos}}{1 - \text{perdas de gravidez}}
+\end{aligned}
+$$
+
+- Os alvos do sarampo são calculados a partir das crianças, como para a CPN1.
+- As versões com crescimento populacional das opções CPN1 e Penta1 ajustam estes valores ao crescimento anual da população, usando o indicador populacional escolhido na [comparação da tendência populacional](/pt/docs/methodology/denominators#comparação-da-tendência-populacional); a página da metodologia não apresenta uma fórmula para esse ajuste.
+
+Explicado em: [Cálculo dos denominadores derivados](/pt/docs/methodology/denominators#cálculo-dos-denominadores-derivados).
+
+### Taxa bruta de mortalidade implícita (verificação das projeções do DHIS2)
+
+$$\text{TBM} = \text{TBN} - \text{taxa de crescimento}$$
+
+- TBM, TBN: taxas brutas de mortalidade e de natalidade (por 1 000). Uma projeção do DHIS2 é assinalada quando a TBM implícita é negativa ou inferior a 5 por 1 000.
+
+Explicado em: [Comparação da tendência populacional](/pt/docs/methodology/denominators#comparação-da-tendência-populacional).
+
+### Comparação com o inquérito
+
+$$\text{melhor opção} = \arg\min_{\text{opção}} \; \lvert \text{cobertura}_{\text{rotina, opção}} - \text{cobertura}_{\text{inquérito}} \rvert$$
+
+- Comparada para os nados-vivos institucionais e a Penta3 com o inquérito mais recente (a referência), a nível nacional e subnacional.
+
+Explicado em: [Exame da seleção do denominador](/pt/docs/methodology/denominators#exame-da-seleção-do-denominador).
+
+## Cobertura
+
+### Denominadores da imunização
+
+$$\text{Denominador} = \text{Nados-vivos} - \text{Óbitos neonatais}$$
+
+$$\text{Denominador sarampo 1} = \text{Nados-vivos} - \text{Óbitos neonatais} - \text{Óbitos pós-neonatais}$$
+
+$$\text{Denominador sarampo 2} = \text{Nados-vivos} - \text{Óbitos neonatais} - (2 \times \text{Óbitos pós-neonatais})$$
+
+- O primeiro é o denominador da BCG e das doses de Penta (crianças elegíveis para vacinação); o sarampo 1 usa as crianças que sobrevivem ao primeiro ano; o sarampo 2 as crianças dos 24 aos 35 meses.
+
+Explicado em: [Imunização (vacinação)](/pt/docs/methodology/coverage#imunização-vacinação).
+
+### Procura satisfeita em planeamento familiar
+
+$$\text{Procura satisfeita} = \frac{\text{Uso de contracetivos modernos}}{\text{Necessidade não satisfeita} + \text{Uso de contracetivos modernos}}$$
+
+Explicado em: [Planeamento familiar](/pt/docs/methodology/coverage#planeamento-familiar).
+
+## Nível subnacional
+
+### Índice de cobertura composto
+
+$$\text{Índice} = \frac{\text{CPN4} + \text{nados-vivos institucionais} + \text{SBA} + \text{TPI2} + \text{cuidados pós-natais} + \text{Penta3} + \text{Sarampo 1}}{7}$$
+
+- A cobertura de cada indicador, com peso igual (SBA: assistência qualificada ao parto).
+
+Explicado em: [Resumos estatísticos subnacionais (one-pager)](/pt/docs/methodology/subnational#resumos-estatísticos-subnacionais-one-pager).
+
+### Unidades que atingem uma meta
+
+$$\text{Unidades que atingem a meta} = \frac{\text{regiões ou distritos que atingem a meta}}{\text{total de regiões ou distritos}} \times 100$$
+
+- Uma meta como "Penta3 de pelo menos 80% em todos os distritos" é atingida quando esta percentagem chega a 100%.
+
+Explicado em: [Valores das metas](/pt/docs/methodology/subnational#valores-das-metas).
+
+### Desigualdade (MADM)
+
+O desvio absoluto em relação à mediana (MADM) da cobertura dos distritos dentro de uma unidade admin-1 mede a dispersão entre distritos; a página da metodologia define-o por palavras e não apresenta uma fórmula.
+
+Explicado em: [Desigualdade](/pt/docs/methodology/subnational#desigualdade).
+
+## Mortalidade
+
+### Taxas de mortalidade institucional
+
+$$\text{iMMR} = \frac{\text{mortes maternas nas unidades de saúde}}{\text{nados-vivos nas unidades de saúde} / 100\,000}$$
+
+$$\text{iSBR} = \frac{\text{natimortos nas unidades de saúde}}{\text{nascimentos nas unidades de saúde} / 1\,000}$$
+
+$$\text{Óbitos neonatais antes da alta} = \frac{\text{óbitos neonatais antes da alta}}{\text{nados-vivos nas unidades de saúde} / 1\,000}$$
+
+- As taxas da população (MMR, SBR) e da comunidade (cMMR, cSBR) são iguais, com os óbitos e os nascimentos da população ou da comunidade. São calculadas a partir de dados não ajustados.
+
+Explicado em: [Mortalidade institucional na abordagem analítica CD2030](/pt/docs/methodology/mortality#mortalidade-institucional-na-abordagem-analítica-cd2030).
+
+### Natimortos em relação a mortes maternas
+
+$$\text{rácio} = \frac{\text{natimortos notificados}}{\text{mortes maternas notificadas}}$$
+
+- Normalmente para um ano; é levantado um alerta de qualidade dos dados quando o rácio está fora do intervalo 5-25.
+
+Explicado em: [Rácio de natimortos para mortes maternas a nível nacional](/pt/docs/methodology/mortality#rácio-de-natimortos-para-mortes-maternas-a-nível-nacional).
+
+### MMR da população, da comunidade e institucional
+
+$$M_p = (M_i \times P_i) + (M_c \times (1 - P_i))$$
+
+$$M_c = \frac{M_p - (M_i \times P_i)}{1 - P_i}$$
+
+- $M_p$: rácio de mortalidade materna na população; $M_i$: rácio de mortalidade materna institucional; $M_c$: rácio de mortalidade materna na comunidade.
+- $P_i$: a proporção de nados-vivos nas unidades de saúde.
+
+Explicado em: [Modelação matemática e formulações](/pt/docs/methodology/mortality#modelação-matemática-e-formulações) e [Cálculo retroativo da mortalidade comunitária](/pt/docs/methodology/mortality#cálculo-retroativo-da-mortalidade-comunitária).
+
+### MMR institucional esperado e completude da notificação
+
+$$M_i \text{ esperado} = \frac{M_p}{P_i + \left( \frac{M_c}{M_i} \times (1 - P_i) \right)}$$
+
+$$\text{Completude da notificação das unidades de saúde} = \frac{M_i \text{ notificado}}{M_i \text{ esperado}}$$
+
+- $\frac{M_c}{M_i}$: o rácio assumido entre a mortalidade materna na comunidade e a institucional.
+- A mesma abordagem aplica-se aos natimortos, com todos os nascimentos em vez dos nados-vivos.
+
+Explicado em: [Cálculo da mortalidade institucional esperada](/pt/docs/methodology/mortality#cálculo-da-mortalidade-institucional-esperada) e [Cálculo da completude da notificação](/pt/docs/methodology/mortality#cálculo-da-completude-da-notificação).
+
+### Óbitos neonatais antes da alta: verificação aproximada da completude
+
+$$\text{mortalidade neonatal institucional (antes da alta)} \ge 0{,}5 \times \text{mortalidade neonatal da população}$$
+
+Explicado em: [Considerações sobre o iSBR](/pt/docs/methodology/mortality#considerações-sobre-o-isbr).
+
+### Valores atípicos nos dados de mortalidade
+
+$$\lvert x_{\text{ano}} - \bar{x} \rvert > 3\sigma \qquad \text{ou} \qquad \lvert x_{\text{mês}} - \tilde{x} \rvert > 5 \times MAD$$
+
+- $\bar{x}$, $\sigma$: a média anual de longo prazo e o desvio-padrão; $\tilde{x}$, $MAD$: a mediana de referência e o desvio absoluto da mediana dos valores mensais.
+
+Explicado em: [Limiares de deteção de valores atípicos](/pt/docs/methodology/mortality#limiares-de-deteção-de-valores-atípicos).
+
+## Utilização de serviços e sistema de saúde
+
+### Utilização de consultas externas e de internamento
+
+$$\text{Visitas OPD por criança por ano} = \frac{\text{visitas OPD ajustadas de menores de 5 anos no ano}}{\text{população de menores de 5 anos (projeção do DHIS2)}}$$
+
+$$\text{Admissões por 100 crianças menores de 5 anos} = \frac{\text{admissões de menores de 5 anos no ano}}{\text{população de menores de 5 anos}} \times 100$$
+
+$$\text{Altas} = \text{Admissões} - \text{Óbitos}$$
+
+- As percentagens de visitas OPD e de admissões atribuídas a crianças menores de cinco anos são as visitas (admissões) de menores de 5 anos divididas pelo total de visitas (admissões).
+
+Explicado em: [Utilização de serviços de consultas externas](/pt/docs/methodology/service-utilisation#utilização-de-serviços-de-consultas-externas) e [Utilização de serviços de internamento](/pt/docs/methodology/service-utilisation#utilização-de-serviços-de-internamento).
+
+### Taxa de letalidade
+
+$$\text{Taxa de letalidade pediátrica} = \frac{\text{Número de crianças que morrem no hospital}}{\text{Número total de admissões (Altas + Óbitos)}}$$
+
+- Calculada apenas a partir de dados não ajustados.
+
+Explicado em: [Taxa de letalidade](/pt/docs/methodology/service-utilisation#taxa-de-letalidade).
+
+### Densidades do sistema de saúde
+
+$$\text{Densidade de unidades de saúde} = \left( \frac{\text{Número total de unidades de saúde}}{\text{População total}} \right) \times 10\,000$$
+
+$$\text{Densidade hospitalar} = \left( \frac{\text{Número total de hospitais}}{\text{População total}} \right) \times 100\,000$$
+
+$$\text{Densidade de camas de internamento} = \left( \frac{\text{Número total de camas de internamento}}{\text{População total}} \right) \times 10\,000$$
+
+Explicado em: [Número de unidades de saúde por 10 000 habitantes](/pt/docs/methodology/health-system#número-de-unidades-de-saúde-por-10-000-habitantes), [Número de hospitais por 100 000 habitantes](/pt/docs/methodology/health-system#número-de-hospitais-por-100-000-habitantes) e [Densidade de camas de internamento por 10 000 habitantes](/pt/docs/methodology/health-system#densidade-de-camas-de-internamento-por-10-000-habitantes).
+
+## Ver também
+
+- [Valores predefinidos e limiares](/pt/docs/reference/defaults): os valores que as fórmulas utilizam
+- [Definições de indicadores](/pt/docs/reference/indicator-definitions): os elementos de dados por detrás de cada indicador

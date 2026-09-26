@@ -1,3 +1,6 @@
+---
+description: Como exportar da Pooled App uma única tabela em CSV ou Excel, ou uma parte escolhida do ficheiro agregado com os conjuntos de dados, países e anos pretendidos.
+---
 import { Callout } from 'nextra/components'
 
 # Exportar resultados
@@ -40,8 +43,8 @@ O `.rds` é uma lista R simples, não uma cache de país. Contém `domain`, a ho
 
 - Leia o ficheiro CSV ou Excel em R, Stata, Python ou Excel. `country` e `iso3` identificam o país, e as colunas de cobertura já têm os mesmos nomes em todos os países.
 - Para uma análise completa em R, leia o ficheiro agregado com `readRDS()` e trabalhe sobre `pooled$datasets`.
-- Compare os seus resultados com os métodos do **[quadro analítico](/pt/docs/framework)**, incluindo a **[cobertura nacional](/pt/docs/framework/5-coverage-estimation)**.
-- Para problemas de um só país, volte à sua cache na **[RMNCAH App](/pt/apps/rmncah)**, corrija-a, guarde-a e recrie o ficheiro agregado.
+- Compare os seus resultados com os métodos do **[quadro analítico](/pt/docs/methodology)**, incluindo a **[cobertura nacional](/pt/docs/methodology/coverage)**.
+- Para problemas de um só país, volte à sua cache na **[RMNCAH App](/pt/apps/countdown)**, corrija-a, guarde-a e recrie o ficheiro agregado.
 
 ## Utilizar o assistente de conversação do DataSuite
 

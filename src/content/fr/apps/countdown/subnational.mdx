@@ -1,0 +1,164 @@
+---
+description: Les pages de l'Analyse infranationale, qui reprennent l'analyse nationale de la couverture, des inégalités et des objectifs pour les régions et les districts.
+---
+import { Tabs, Steps, Callout } from 'nextra/components'
+
+# Analyse infranationale
+
+Le groupe **Analyse infranationale** reprend l'analyse nationale pour les régions (niveau administratif 1) et les districts (niveau administratif 2) (pourquoi : [Analyse infranationale > Couverture infranationale](/fr/docs/methodology/subnational#la-couverture-infranationale-dans-lapproche-analytique-cd2030)). Il comprend trois pages : **Couverture infranationale**, **Inégalités infranationales** et **Objectif de couverture**. La méthode est décrite dans [Analyse infranationale](/fr/docs/methodology/subnational).
+
+Ces pages nécessitent des données ajustées et utilisent les mêmes dénominateurs que les pages nationales (voir [Dénominateurs](/fr/apps/countdown/denominators)) ; dans l'application Vaxx, il s'agit du dénominateur de vaccination qui y est choisi. Dans l'application Vaxx, leurs onglets d'indicateurs et l'onglet Vérification personnalisée fonctionnent comme décrit dans **[Couverture, équité et cibles](/fr/apps/countdown/coverage-equity-targets)**.
+
+<Callout type="info">
+Attendez-vous à plus de bruit au niveau des districts qu'au niveau des régions : voir [Analyse infranationale > Estimations de couverture aux niveaux Admin1 et Admin2](/fr/docs/methodology/subnational#justification-et-approche).
+</Callout>
+
+## Couverture infranationale
+
+**Objectif.** Comparer les estimations de couverture DHIS2 et d'enquête pour chaque région ou district.
+
+**Quand l'utiliser.** Après la Couverture nationale, pour trouver les zones qui se cachent derrière le chiffre national.
+
+<Steps>
+
+### Ouvrez Couverture infranationale
+
+Elle se trouve dans le groupe **Analyse infranationale**.
+
+### Définissez la géographie
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+Choisissez le **Niveau administratif**. Avec **Niveau administratif 1**, un sélecteur de région apparaît, et avec **Niveau administratif 2**, un sélecteur de district, afin de cibler une zone.
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+Utilisez **Niveau administratif** (niveau 1 ou 2) et le sélecteur de région. Choisissez le niveau 1 sans région pour voir les régions, ou choisissez une région pour voir ses districts. Au niveau 2, le sélecteur peut aussi désigner un district.
+
+</Tabs.Tab>
+</Tabs>
+
+### Choisissez un indicateur
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+Choisissez un onglet d'indicateur : **CPN 4 visites**, **Naissances vivantes en établissement**, **Faible poids à la naissance**, **Pentavalent 3**, **Rougeole 1**, **Projection PF** ou **Personnalisé** pour tout autre indicateur.
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+Choisissez un onglet, ou **Vérification personnalisée** pour tout indicateur de Vaxx, y compris l'abandon, zéro dose et sous-vaccinés.
+
+</Tabs.Tab>
+</Tabs>
+
+### Lisez le graphique
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+Le titre nomme la zone, par exemple les estimations de couverture de la région sélectionnée. Les courbes montrent l'estimation DHIS2 et l'estimation de l'enquête, et la légende indique le dénominateur utilisé. **Télécharger le graphique** et **Télécharger les données** se trouvent dans la barre d'outils.
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+Le graphique s'intitule « Estimations de la couverture pour ... » pour la zone sélectionnée et montre l'estimation DHIS2, avec les estimations WUENIC et d'enquête lorsqu'elles existent pour cette zone. La note indique le dénominateur.
+
+</Tabs.Tab>
+</Tabs>
+
+</Steps>
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+![Couverture infranationale](/images/Subnational_coverage.png)
+
+**Comment interpréter.** Voir [Analyse infranationale > Couverture infranationale](/fr/docs/methodology/subnational#lecture-de-la-couverture-infranationale). Le [Taux de notification](/fr/apps/countdown/data-quality) de la région se trouve dans les pages de qualité des données ; vérifiez-le avant de tirer des conclusions.
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+![Couverture infranationale](/images/fr-subnational-coverage-targets.png)
+
+Les estimations d'enquête et de WUENIC n'apparaissent que lorsqu'elles existent pour la zone sélectionnée : certains graphiques n'affichent donc que le DHIS2.
+
+</Tabs.Tab>
+</Tabs>
+
+## Inégalités infranationales
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+**Objectif.** Montrer l'écart de chaque région (ou de chaque district d'une région) par rapport au chiffre national ou régional, année par année.
+
+**Filtres.** **Niveau administratif** et, au niveau administratif 1, un sélecteur de région pour cibler une région.
+
+Les onglets sont **CPN 4 visites**, **Naissances vivantes en établissement**, **Faible poids à la naissance**, **Pentavalent 3**, **Rougeole 1** et **Personnalisé**. Chaque point est une unité infranationale (**Couverture au niveau infranational**) et la ligne est la couverture nationale ou, lorsqu'une région est choisie, la couverture régionale. Comment lire la dispersion, et le MADM qui la résume : [Analyse infranationale > Inégalités](/fr/docs/methodology/subnational#lecture-des-inégalités).
+
+![Inégalités infranationales](/images/subnational-coverage-inequality.png)
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+Montre comment la couverture diffère entre les unités d'une même zone.
+
+- Filtres : **Niveau administratif** et région. Chaque graphique trace la couverture de chaque unité infranationale par année (légende « Couverture à l'unité infranationale ») par rapport à la couverture de la région sélectionnée ou du pays (légende « Couverture nationale », ou le nom de la région suivi de « Couverture »).
+- Le sous-titre indique quelles unités sont affichées : « Unité infranationale : niveau admin 1 », « niveau du district » ou le nom de la région.
+- Les onglets et l'onglet Vérification personnalisée fonctionnent comme sur la page nationale.
+
+Utilisez-la pour repérer les districts très en dessous de leur région et voir si l'écart se réduit avec le temps. Comment la lire : [Analyse infranationale > Inégalités](/fr/docs/methodology/subnational#lecture-des-inégalités).
+
+</Tabs.Tab>
+</Tabs>
+
+## Objectif de couverture
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+**Objectif.** Montrer le pourcentage de districts d'une région qui atteignent un objectif de couverture, par année.
+
+**Filtre.** Un sélecteur de région. Le niveau est fixé aux districts.
+
+Les onglets sont **CPN 4 visites**, **Naissances vivantes en établissement** et **Vaccin**. Les objectifs sont les mêmes que sur la page nationale ([Analyse infranationale > Valeurs cibles](/fr/docs/methodology/subnational#valeurs-cibles)). Un tableau sous le graphique liste les districts qui atteignent l'objectif pour l'indicateur choisi dans son contrôle *Ce tableau uniquement*.
+
+Comment lire les pourcentages : [Analyse infranationale > Progrès vers les cibles](/fr/docs/methodology/subnational#justification-et-approche-2).
+
+![Couverture infranationale par rapport aux objectifs](/images/fr-subnational-coverage-targets.png)
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+La part des districts d'une région qui atteignent les cibles mondiales.
+
+1. Choisissez la **région** (cette page n'a pas de filtre de niveau administratif : l'unité est toujours le district).
+2. Lisez les deux onglets. **Vaccin** couvre BCG, Pentavalent 3 et Rougeole 1. **Abandon** couvre Penta 1 à Penta 3 et Penta 3 à Rougeole 1. Les seuils figurent dans [Analyse infranationale > Valeurs cibles](/fr/docs/methodology/subnational#valeurs-cibles).
+3. Le titre du graphique, « Pourcentage de districts dans (nom de la région) atteignant la cible ... », indique le seuil utilisé. Les barres sont des pourcentages par année et par indicateur.
+4. Le tableau liste les districts qui atteignent la cible pour l'indicateur et l'année que vous sélectionnez. Téléchargez-le au format Excel avec le bouton de téléchargement du tableau.
+
+</Tabs.Tab>
+</Tabs>
+
+## Interprétation et pièges
+
+Comment lire ces résultats et les pièges à éviter : [Analyse infranationale > Interprétation](/fr/docs/methodology/subnational#interprétation) et [Pièges courants](/fr/docs/methodology/subnational#pièges-courants). Pour recouper un district qui semble invraisemblable, utilisez la **[Qualité des données](/fr/apps/countdown/data-quality)** ; pour tester un autre dénominateur, revenez à [Dénominateurs](/fr/apps/countdown/denominators).
+
+- Dans l'application Vaxx, changer le niveau administratif réinitialise la sélection de région.
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+Suite : **[Analyses avancées](/fr/apps/countdown/advanced-analysis)**.
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+Suite : **[Exports, rapports et IA](/fr/apps/countdown/exports-and-ai)**.
+
+</Tabs.Tab>
+</Tabs>

@@ -1,8 +1,12 @@
+---
+description: "La justification scientifique des analyses Countdown : qualité des données, couverture, équité, performance des systèmes de santé et mortalité en établissement."
+---
+
 import { Callout } from 'nextra/components'
 
-# Méthodes
+# Justification scientifique
 
-Cette page présente la justification scientifique des analyses Countdown, avec des détails complémentaires. La méthode elle-même -- comment chaque étape se déroule et comment lire les résultats -- est la [méthodologie Countdown](/fr/docs/framework) ; lorsque cette page et une page de la méthodologie diffèrent, c'est la page de la méthodologie qui s'applique.
+Cette page présente la justification scientifique des analyses Countdown, avec des détails complémentaires. La méthode elle-même -- comment chaque étape se déroule et comment lire les résultats -- est la [méthodologie Countdown](/fr/docs/methodology) ; lorsque cette page et une page de la méthodologie diffèrent, c'est la page de la méthodologie qui s'applique.
 
 ## Approche analytique Countdown [#countdown-approach]
 
@@ -33,7 +37,7 @@ Où :
 
 - $N_{\text{adjusted}}$ : nombre total d'événements ajusté pour tenir compte de la déclaration incomplète
 - $N_{\text{reported}}$ : nombre d'événements déclarés
-- $c$ : exhaustivité des rapports (par ex., proportion d'établissements ayant déclaré)
+- $c$ : exhaustivité des rapports (proportion des rapports attendus des établissements effectivement reçus)
 - $k$ : facteur d'ajustement tenant compte du volume de services plus faible dans les établissements non déclarants
 
 <Callout type="info">
@@ -45,14 +49,14 @@ Interprétation :
 - Par défaut, nous utilisons $k=0.25$, ce qui signifie que les établissements non déclarants ont fourni des services, mais seulement à un volume équivalent à un quart de celui des établissements de santé déclarants.
 - L'ajustement suppose que les établissements non déclarants fournissent tout de même des services, mais à un volume inférieur à celui des établissements déclarants. Le facteur $k$ contrôle l'ampleur de cet ajustement.
 - Le facteur $k$ peut différer selon les services. Par exemple, si la déclaration des établissements privés est médiocre alors qu'ils font partie du système national et réalisent un nombre considérable d'accouchements, $k$ peut être supérieur à 0,25, voire atteindre 1,0.
-- Si le taux de déclaration des établissements est inférieur à 75 %, il devient plus difficile d'imputer les données des districts. Par conséquent, aucun ajustement n'est effectué lorsque la déclaration est inférieure à 75 %. Dans ce cas, toute analyse supplémentaire visant à déterminer la couverture à partir des données des établissements n'est pas considérée comme suffisamment fiable.
+- Si le taux de notification d'un district pour un service est inférieur à 75 % un mois donné (ou manquant), ce taux est remplacé par la médiane des taux de notification du district compris entre 75 % et 100 % pour ce service, et le nombre déclaré du mois est ensuite ajusté avec $k$ comme d'habitude. (Le guide de 2024 formule cette règle à la fois comme « aucun ajustement en dessous de 75 % » et comme « valeur médiane imputée » ; la règle ci-dessus est celle qu'appliquent les applications.)
 
 </Callout>
 
 Les valeurs de $k$ suivantes sont utilisées, en fonction de la déclaration retenue, pour ajuster les chiffres déclarés en fonction de la déclaration incomplète :
 
-- `k = 0` : aucun service dans les établissements non déclarants (valeur de k par défaut)
-- `k = 0.25` : quelques services, mais bien inférieurs à ceux des établissements déclarants
+- `k = 0` : aucun service dans les établissements non déclarants
+- `k = 0.25` : quelques services, mais bien inférieurs à ceux des établissements déclarants (valeur de k par défaut)
 - `k = 0.50` : la moitié du rythme des établissements déclarants
 - `k = 0.75` : presque autant que les établissements déclarants
 - `k = 1.0` : même rythme de services que les établissements déclarants
@@ -61,14 +65,14 @@ Les valeurs de $k$ suivantes sont utilisées, en fonction de la déclaration ret
 
 | Problème | Action | Ajustement |
 | --- | --- | --- |
-| Faibles taux de déclaration : identification des faibles taux qui ont été ajustés | Si inférieur à 75 % (par défaut), les données ont été imputées | La valeur mensuelle médiane du district pour l'année a été imputée pour le mois présentant une faible déclaration |
+| Faibles taux de déclaration : identification des faibles taux qui ont été ajustés | Si inférieur à 75 % (par défaut), ou manquant, le taux de déclaration a été remplacé | La médiane des taux de déclaration du district compris entre 75 % et 100 % a été utilisée comme taux du mois, et le nombre ajusté avec $k$ |
 | Déclaration incomplète par les districts, variable dans le temps, affectant l'évaluation des tendances | Si les taux de déclaration étaient ≥ 75 % et ≤ 100 % (par défaut), une hypothèse a été formulée sur le volume de services fournis par les établissements non déclarants | Le facteur d'ajustement $k$ a été utilisé pour ajuster la déclaration incomplète ; la valeur par défaut de $k$ est 0,25 (à remplacer si une valeur différente a été utilisée ; préciser si elle a été utilisée pour tous les formulaires de déclaration ou si des facteurs $k$ différents ont été utilisés selon les formulaires) |
-| Les valeurs aberrantes extrêmes peuvent fortement affecter l'évaluation des tendances de couverture | Si une valeur mensuelle était supérieure ou inférieure à 5 fois l'écart absolu médian (MAD) par rapport à la valeur médiane mensuelle du district, un ajustement a été effectué | Les valeurs aberrantes mensuelles extrêmes sont corrigées et remplacées par la valeur médiane du district pour la même année |
+| Les valeurs aberrantes extrêmes peuvent fortement affecter l'évaluation des tendances de couverture | Si une valeur mensuelle s'écartait de plus de 5 fois l'écart absolu médian (MAD) de la valeur médiane mensuelle du district (calculée sur toutes les années sauf la plus récente), un ajustement a été effectué | Les valeurs aberrantes mensuelles extrêmes sont remplacées par la médiane des autres mois (non aberrants) du district la même année |
 | Valeurs manquantes | En cas de valeur manquante, les données ont été imputées | La valeur mensuelle médiane du district pour l'année a été imputée pour le mois présentant une valeur manquante |
 
 ### Détection des valeurs aberrantes [#outlier-detection]
 
-Une valeur aberrante extrême est définie comme une valeur mensuelle qui correspond à 5 fois l'écart absolu médian (MAD) par rapport à la valeur médiane mensuelle d'une année donnée.
+Une valeur aberrante extrême est définie comme une valeur mensuelle qui s'écarte de plus de 5 fois l'écart absolu médian (MAD) de la valeur médiane mensuelle de la même série (le district, ou la série nationale ou de niveau admin-1 évaluée), la médiane et le MAD étant calculés sur toutes les années sauf la plus récente.
 
 ### Cohérence interne [#internal-consistency]
 

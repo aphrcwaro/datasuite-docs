@@ -1,0 +1,417 @@
+{
+  "package": "cd2030.core",
+  "version": "1.2.0",
+  "generatedAt": "2026-09-26T14:13:12Z",
+  "entries": [
+    {
+      "id": "dq_reporting_threshold",
+      "step": "data_quality",
+      "group": "both",
+      "value": 90,
+      "unit": "%",
+      "label": "District reporting completeness threshold (1b)",
+      "note": "Score item 1b is the percentage of districts whose facility reporting rate is at least this value; the app starts at 90% and the Reporting Rate page can change it.",
+      "source": "R/1a_checks_reporting_rate.R"
+    },
+    {
+      "id": "dq_reporting_threshold_picks",
+      "step": "data_quality",
+      "group": "both",
+      "value": [70, 80, 90, 95],
+      "unit": "%",
+      "label": "Reporting threshold quick picks",
+      "note": "The values the Reporting Rate page offers as quick picks for the district reporting threshold.",
+      "source": "R/ui-page-1a_checks_reporting_rate.R"
+    },
+    {
+      "id": "dq_outlier_mad_multiplier",
+      "step": "data_quality",
+      "group": "both",
+      "value": 5,
+      "unit": "x MAD",
+      "label": "Extreme outlier bound",
+      "note": "A monthly value is an extreme outlier when it lies more than 5 median absolute deviations from its district's median (Hampel X84).",
+      "source": "R/utils-quality_checks.R"
+    },
+    {
+      "id": "dq_outlier_baseline",
+      "step": "data_quality",
+      "group": "both",
+      "value": "all years except the latest",
+      "unit": "",
+      "label": "Outlier baseline years",
+      "note": "The district median and MAD used for the outlier bounds are computed from all years except the latest, so the latest year cannot hide its own outliers.",
+      "source": "R/utils-quality_checks.R"
+    },
+    {
+      "id": "dq_ratio_adequate_range",
+      "step": "data_quality",
+      "group": "both",
+      "value": [1, 1.5],
+      "unit": "ratio",
+      "label": "Adequate range for consistency ratios",
+      "note": "A district's consistency ratio (the ratio of its annual totals) is adequate when it is between 1 and 1.5 inclusive.",
+      "source": "R/1a_checks_ratios.R"
+    },
+    {
+      "id": "dq_ratio_pairs",
+      "step": "data_quality",
+      "group": "both",
+      "value": ["anc1/penta1", "penta1/penta3"],
+      "unit": "",
+      "label": "Consistency ratios checked",
+      "note": "The internal consistency ratios checked for every indicator group (numerator/denominator).",
+      "source": "R/utils-quality_checks.R"
+    },
+    {
+      "id": "dq_ratio_pairs_vaccine",
+      "step": "data_quality",
+      "group": "vaccine",
+      "value": "opv1/opv3",
+      "unit": "",
+      "label": "Consistency ratios added for immunization",
+      "note": "The consistency ratios added to the common ones when the indicator group is vaccine.",
+      "source": "R/utils-quality_checks.R"
+    },
+    {
+      "id": "dq_ratio_anc1_penta1_mortality",
+      "step": "data_quality",
+      "group": "both",
+      "value": 1.07,
+      "unit": "ratio",
+      "label": "ANC1/Penta1 expected ratio multiplier",
+      "note": "The expected anc1/penta1 ratio is multiplied by this factor to allow for mortality between the first antenatal visit and the first Penta dose.",
+      "source": "R/1a_checks_ratios.R"
+    },
+    {
+      "id": "dq_ratio_expected_coverage_anc1",
+      "step": "data_quality",
+      "group": "both",
+      "value": 0.98,
+      "unit": "proportion",
+      "label": "Assumed anc1 coverage for expected ratios",
+      "note": "When no survey coverage is supplied, calculate_ratios_summary() builds the expected ratios from an assumed anc1 coverage of 98% (the app passes the country's survey estimates instead).",
+      "source": "R/1a_checks_ratios.R"
+    },
+    {
+      "id": "dq_ratio_expected_coverage_penta1",
+      "step": "data_quality",
+      "group": "both",
+      "value": 0.97,
+      "unit": "proportion",
+      "label": "Assumed penta1 coverage for expected ratios",
+      "note": "When no survey coverage is supplied, calculate_ratios_summary() builds the expected ratios from an assumed penta1 coverage of 97% (the app passes the country's survey estimates instead).",
+      "source": "R/1a_checks_ratios.R"
+    },
+    {
+      "id": "dq_ratio_expected_coverage_penta3",
+      "step": "data_quality",
+      "group": "both",
+      "value": 0.89,
+      "unit": "proportion",
+      "label": "Assumed penta3 coverage for expected ratios",
+      "note": "When no survey coverage is supplied, calculate_ratios_summary() builds the expected ratios from an assumed penta3 coverage of 89% (the app passes the country's survey estimates instead).",
+      "source": "R/1a_checks_ratios.R"
+    },
+    {
+      "id": "dq_ratio_expected_coverage_opv1",
+      "step": "data_quality",
+      "group": "vaccine",
+      "value": 0.97,
+      "unit": "proportion",
+      "label": "Assumed opv1 coverage for expected ratios",
+      "note": "When no survey coverage is supplied, calculate_ratios_summary() builds the expected ratios from an assumed opv1 coverage of 97% (the app passes the country's survey estimates instead).",
+      "source": "R/1a_checks_ratios.R"
+    },
+    {
+      "id": "dq_ratio_expected_coverage_opv3",
+      "step": "data_quality",
+      "group": "vaccine",
+      "value": 0.78,
+      "unit": "proportion",
+      "label": "Assumed opv3 coverage for expected ratios",
+      "note": "When no survey coverage is supplied, calculate_ratios_summary() builds the expected ratios from an assumed opv3 coverage of 78% (the app passes the country's survey estimates instead).",
+      "source": "R/1a_checks_ratios.R"
+    },
+    {
+      "id": "dq_ratio_expected_coverage_pcv1",
+      "step": "data_quality",
+      "group": "vaccine",
+      "value": 0.97,
+      "unit": "proportion",
+      "label": "Assumed pcv1 coverage for expected ratios",
+      "note": "When no survey coverage is supplied, calculate_ratios_summary() builds the expected ratios from an assumed pcv1 coverage of 97% (the app passes the country's survey estimates instead).",
+      "source": "R/1a_checks_ratios.R"
+    },
+    {
+      "id": "dq_ratio_expected_coverage_rota1",
+      "step": "data_quality",
+      "group": "vaccine",
+      "value": 0.96,
+      "unit": "proportion",
+      "label": "Assumed rota1 coverage for expected ratios",
+      "note": "When no survey coverage is supplied, calculate_ratios_summary() builds the expected ratios from an assumed rota1 coverage of 96% (the app passes the country's survey estimates instead).",
+      "source": "R/1a_checks_ratios.R"
+    },
+    {
+      "id": "dq_score_components_rmncah",
+      "step": "data_quality",
+      "group": "rmncah",
+      "value": ["1a", "1b", "1c", "2a", "2b", "3c", "3d"],
+      "unit": "",
+      "label": "Overall score components (RMNCAH)",
+      "note": "The annual data quality score is the mean of these rows of the overall score table: reporting, completeness, outliers and the share of districts with adequate ratios.",
+      "source": "R/1a_checks_overall_score.R"
+    },
+    {
+      "id": "dq_score_components_vaccine",
+      "step": "data_quality",
+      "group": "vaccine",
+      "value": ["1a", "1b", "1c", "2a", "2b", "3f", "3g", "3h"],
+      "unit": "",
+      "label": "Overall score components (immunization)",
+      "note": "The annual data quality score is the mean of these rows of the overall score table: reporting, completeness, outliers and the share of districts with adequate ratios.",
+      "source": "R/1a_checks_overall_score.R"
+    },
+    {
+      "id": "adj_k_default",
+      "step": "adjustment",
+      "group": "both",
+      "value": 0.25,
+      "unit": "",
+      "label": "Completeness adjustment factor k (default adjustment)",
+      "note": "adjust_service_data(adjustment = \"default\") uses k = 0.25 for every indicator group (anc, idelv, pnc, vacc, opd, ipd).",
+      "source": "R/1c_adjust_service_data.R"
+    },
+    {
+      "id": "adj_k_start",
+      "step": "adjustment",
+      "group": "both",
+      "value": 0,
+      "unit": "",
+      "label": "Starting k in the app",
+      "note": "A new dataset starts with k = 0 for every indicator group, so the app adjusts nothing until the user picks a k on the Data Adjustment page.",
+      "source": "R/CacheConnection-class.R"
+    },
+    {
+      "id": "adj_k_options",
+      "step": "adjustment",
+      "group": "both",
+      "value": [0, 0.25, 0.5, 0.75, 1],
+      "unit": "",
+      "label": "k values offered",
+      "note": "The k values the Data Adjustment page offers for each indicator group.",
+      "source": "R/ui-page-1c_data_adjustment.R"
+    },
+    {
+      "id": "adj_reporting_rate_cutoff",
+      "step": "adjustment",
+      "group": "both",
+      "value": 75,
+      "unit": "%",
+      "label": "Reporting rate cutoff",
+      "note": "Before adjusting, a reporting rate below 75% (or missing) is replaced by the district's median reporting rate.",
+      "source": "R/1c_adjust_service_data.R"
+    },
+    {
+      "id": "adj_reporting_rate_window",
+      "step": "adjustment",
+      "group": "both",
+      "value": [75, 100],
+      "unit": "%",
+      "label": "Reporting rates used for the replacement median",
+      "note": "The replacement median is taken over the district's reporting rates between 75% and 100% inclusive.",
+      "source": "R/1c_adjust_service_data.R"
+    },
+    {
+      "id": "adj_outlier_mad_multiplier",
+      "step": "adjustment",
+      "group": "both",
+      "value": 5,
+      "unit": "x MAD",
+      "label": "Outliers replaced after adjustment",
+      "note": "After the k adjustment, values more than 5 MAD from the district's median monthly value (baseline: all years except the latest) are replaced by the median of the district's other (non-outlier) months in the same year; missing months get the district's median for that year.",
+      "source": "R/1c_adjust_service_data.R"
+    },
+    {
+      "id": "den_nmr",
+      "step": "denominators",
+      "group": "both",
+      "value": 0.025,
+      "unit": "proportion",
+      "label": "Neonatal mortality rate",
+      "note": "Default neonatal mortality rate (2.5%) of calculate_indicator_coverage() when no rate is supplied; the rate it is given also fills in regions the survey has no value for.",
+      "source": "R/2_denominators_calculate_indicator_coverage.R"
+    },
+    {
+      "id": "den_pnmr",
+      "step": "denominators",
+      "group": "both",
+      "value": 0.024,
+      "unit": "proportion",
+      "label": "Post-neonatal mortality rate",
+      "note": "Default post-neonatal mortality rate (2.4%) of calculate_indicator_coverage() when no rate is supplied; the rate it is given also fills in regions the survey has no value for.",
+      "source": "R/2_denominators_calculate_indicator_coverage.R"
+    },
+    {
+      "id": "den_sbr",
+      "step": "denominators",
+      "group": "both",
+      "value": 0.02,
+      "unit": "proportion",
+      "label": "Stillbirth rate",
+      "note": "Default stillbirth rate (2%) of calculate_indicator_coverage() when no rate is supplied; the rate it is given also fills in regions the survey has no value for.",
+      "source": "R/2_denominators_calculate_indicator_coverage.R"
+    },
+    {
+      "id": "den_twin",
+      "step": "denominators",
+      "group": "both",
+      "value": 0.015,
+      "unit": "proportion",
+      "label": "Twin rate",
+      "note": "Default twin rate (1.5%) of calculate_indicator_coverage() when no rate is supplied; the rate it is given also fills in regions the survey has no value for.",
+      "source": "R/2_denominators_calculate_indicator_coverage.R"
+    },
+    {
+      "id": "den_preg_loss",
+      "step": "denominators",
+      "group": "both",
+      "value": 0.03,
+      "unit": "proportion",
+      "label": "Pregnancy loss rate",
+      "note": "Default pregnancy loss rate (3%) of calculate_indicator_coverage() when no rate is supplied; the rate it is given also fills in regions the survey has no value for.",
+      "source": "R/2_denominators_calculate_indicator_coverage.R"
+    },
+    {
+      "id": "den_anc1survey",
+      "step": "denominators",
+      "group": "both",
+      "value": 0.98,
+      "unit": "proportion",
+      "label": "ANC1 survey coverage",
+      "note": "Default ANC1 survey coverage (98%) of calculate_indicator_coverage() when no rate is supplied; the rate it is given also fills in regions the survey has no value for.",
+      "source": "R/2_denominators_calculate_indicator_coverage.R"
+    },
+    {
+      "id": "den_dpt1survey",
+      "step": "denominators",
+      "group": "both",
+      "value": 0.97,
+      "unit": "proportion",
+      "label": "Penta1 (DTP1) survey coverage",
+      "note": "Default Penta1 (DTP1) survey coverage (97%) of calculate_indicator_coverage() when no rate is supplied; the rate it is given also fills in regions the survey has no value for.",
+      "source": "R/2_denominators_calculate_indicator_coverage.R"
+    },
+    {
+      "id": "den_survey_year",
+      "step": "denominators",
+      "group": "both",
+      "value": 2019,
+      "unit": "year",
+      "label": "Survey year",
+      "note": "Default survey year in calculate_indicator_coverage(); the app uses the year of the country's latest survey.",
+      "source": "R/2_denominators_calculate_indicator_coverage.R"
+    },
+    {
+      "id": "den_app_twin_preg_loss",
+      "step": "denominators",
+      "group": "both",
+      "value": [0.015, 0.03],
+      "unit": "proportion",
+      "label": "Starting twin and pregnancy loss rates in the app",
+      "note": "A new dataset starts with a twin rate of 1.5% and a pregnancy loss rate of 3%; neonatal, post-neonatal and stillbirth rates come from the survey.",
+      "source": "R/CacheConnection-class.R"
+    },
+    {
+      "id": "cov_target_vaccine_national",
+      "step": "coverage",
+      "group": "both",
+      "value": 90,
+      "unit": "%",
+      "label": "Vaccine coverage target (national)",
+      "note": "At national level a vaccine (BCG, Penta3, measles1) reaches the target when its coverage is at least this value.",
+      "source": "R/3_calculate_threshold.R"
+    },
+    {
+      "id": "cov_target_anc4",
+      "step": "coverage",
+      "group": "rmncah",
+      "value": 70,
+      "unit": "%",
+      "label": "ANC4 coverage target",
+      "note": "Units reach the ANC4 target when their coverage is at least this value.",
+      "source": "R/3_calculate_threshold.R"
+    },
+    {
+      "id": "cov_target_instlivebirths",
+      "step": "coverage",
+      "group": "rmncah",
+      "value": 80,
+      "unit": "%",
+      "label": "Institutional live births coverage target",
+      "note": "Units reach the institutional live births target when their coverage is at least this value.",
+      "source": "R/3_calculate_threshold.R"
+    },
+    {
+      "id": "cov_target_dropout",
+      "step": "coverage",
+      "group": "vaccine",
+      "value": 10,
+      "unit": "%",
+      "label": "Dropout rate target",
+      "note": "Units meet the dropout target (Penta1-Penta3, Penta3-measles1) when their dropout rate is below this value.",
+      "source": "R/3_calculate_threshold.R"
+    },
+    {
+      "id": "cov_target_other",
+      "step": "coverage",
+      "group": "both",
+      "value": 80,
+      "unit": "%",
+      "label": "High performer threshold (other indicators)",
+      "note": "CacheConnection$get_high_performers() lists the units at or above this coverage for indicators without a specific target.",
+      "source": "R/CacheConnection-class.R"
+    },
+    {
+      "id": "sub_target_vaccine",
+      "step": "subnational",
+      "group": "both",
+      "value": 80,
+      "unit": "%",
+      "label": "Vaccine coverage target (regions and districts)",
+      "note": "Below national level a vaccine (BCG, Penta3, measles1) reaches the target when its coverage is at least this value.",
+      "source": "R/3_calculate_threshold.R"
+    },
+    {
+      "id": "mort_mmr_low",
+      "step": "mortality",
+      "group": "rmncah",
+      "value": 25,
+      "unit": "per 100,000 live births",
+      "label": "Very low institutional MMR",
+      "note": "A unit whose institutional maternal mortality ratio is below this value is flagged as very low, a sign of under-reported deaths.",
+      "source": "R/5_mortality.R"
+    },
+    {
+      "id": "mort_sbr_low",
+      "step": "mortality",
+      "group": "rmncah",
+      "value": 6,
+      "unit": "per 1,000 births",
+      "label": "Very low institutional stillbirth rate",
+      "note": "A unit whose institutional stillbirth rate is below this value is flagged as very low, a sign of under-reported stillbirths.",
+      "source": "R/5_mortality.R"
+    },
+    {
+      "id": "mort_completeness_ratios",
+      "step": "mortality",
+      "group": "rmncah",
+      "value": [0.5, 1, 1.5, 2],
+      "unit": "ratio",
+      "label": "Completeness ratios compared",
+      "note": "The completeness ratios at which the institutional mortality is compared with the UN estimates.",
+      "source": "R/5_mortality.R"
+    }
+  ]
+}

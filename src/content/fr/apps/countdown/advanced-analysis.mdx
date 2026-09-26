@@ -1,0 +1,76 @@
+---
+description: L'Analyse bayésienne, le Continuum des soins et la Projection PF FPET de l'application RMNCAH, fondés sur les données ajustées et les dénominateurs choisis.
+---
+import { Steps, Callout } from 'nextra/components'
+
+# Analyses avancées
+
+<Callout type="info">
+Cette page concerne uniquement l'**application RMNCAH**.
+</Callout>
+
+Trois analyses vont au-delà des graphiques de couverture de base : l'**Analyse bayésienne**, le **Continuum des soins** et la **Projection PF FPET**. Elles s'appuient sur les données ajustées et les dénominateurs que vous avez sélectionnés ; terminez donc d'abord la [Préparation des données](/fr/apps/countdown/data-preparation) et les [Dénominateurs](/fr/apps/countdown/denominators). Méthodes : [Approche de modélisation bayésienne](/fr/docs/methodology/bayesian-coverage) et [Couverture nationale](/fr/docs/methodology/coverage).
+
+## Analyse bayésienne
+
+**Objectif.** Combiner les données d'enquête et les données de routine des établissements en une estimation par année, avec une plage d'incertitude et une prévision à court terme. Comment le modèle utilise chaque source : [Approche de modélisation bayésienne > Comment les données d'enquête sont-elles utilisées ?](/fr/docs/methodology/bayesian-coverage#comment-les-données-denquête-sont-elles-utilisées-) et [Comment les données de routine sont-elles utilisées ?](/fr/docs/methodology/bayesian-coverage#comment-les-données-de-routine-sont-elles-utilisées-)
+
+**Quand l'utiliser.** Voir [Approche de modélisation bayésienne > Pourquoi c'est important](/fr/docs/methodology/bayesian-coverage#pourquoi-cest-important).
+
+Le groupe **Analyse bayésienne** de la barre latérale comporte deux entrées : **Analyse nationale** et **Analyse infranationale** (régions).
+
+<Steps>
+
+### Ouvrez l'Analyse bayésienne
+
+Choisissez Analyse nationale ou Analyse infranationale.
+
+### Choisissez un onglet d'indicateur
+
+**CPN 4 visites**, **CPN 1er trimestre**, **Accouchements en établissement**, **Rougeole 1** ou **Pentavalent 3**. Le modèle est défini pour ces cinq indicateurs.
+
+### Lisez le graphique
+
+Le titre est *Estimations du modèle de couverture bayésien* suivi de l'indicateur, et la note de source indique *Source : données d'enquête et données de routine DHIS2*. La courbe centrale est la meilleure estimation ; la bande représente la plage d'incertitude. Utilisez **Télécharger le graphique** et **Télécharger les données** dans la barre d'outils.
+
+</Steps>
+
+![Estimations bayésiennes de la CPN4 au niveau national](/images/bayesian-ANC4-national.png)
+
+![Estimations bayésiennes de la CPN4 par région](/images/bayesian-ANC4-subnational.png)
+
+**Comment interpréter.** Voir [Approche de modélisation bayésienne > Lecture des estimations](/fr/docs/methodology/bayesian-coverage#lecture-des-estimations) et les [exemples illustratifs](/fr/docs/methodology/bayesian-coverage#exemples-illustratifs).
+
+## Continuum des soins
+
+**Objectif.** Suivre la couverture le long du parcours de soins et voir où les femmes et les enfants sont perdus de vue.
+
+**Où.** **Analyse nationale**, **Continuum des soins** dans la barre latérale. La page comporte deux cartes, toutes deux intitulées *Couverture nationale et continuum*, chacune avec les onglets **Continuum maternel** et **Continuum de l'enfant**.
+
+- **Carte du haut, profil du continuum.** *Profil national du continuum des soins* : la dernière valeur des établissements, la dernière valeur de l'enquête et, le cas échéant, la valeur WUENIC pour chaque étape du parcours sélectionné, par exemple CPN 1er trimestre, CPN 4 visites, accouchements en établissement et soins postnatals dans les 48 heures pour le continuum maternel, ou Pentavalent 3 et Rougeole 1 pour le continuum de l'enfant.
+- **Carte du bas, carte thermique du continuum.** *Carte thermique infranationale du continuum* : les mêmes étapes pour chaque région de niveau administratif 1. Lisez une ligne pour voir une région, une colonne pour voir un indicateur. Les cellules rouges indiquent une faible couverture, jaunes une couverture intermédiaire et vertes une couverture élevée.
+
+La page peut générer le rapport de couverture nationale avec **Générer le rapport**.
+
+![Profil du continuum des soins](/images/fr-national-coverage-continuum-care-profile.png)
+
+![Carte thermique du continuum maternel par région](/images/national-admin1-maternal-continuum-heatmap.png)
+
+**Comment interpréter.** Voir [Couverture nationale > Interpréter le continuum mère-nouveau-né](/fr/docs/methodology/coverage#interprétation-1), [Interpréter le continuum de l'enfant](/fr/docs/methodology/coverage#interprétation-2) et [Continuum de soins au niveau infranational](/fr/docs/methodology/coverage#continuum-de-soins-au-niveau-infranational).
+
+## Projection PF FPET
+
+**Objectif.** Montrer les tendances de la planification familiale chez les femmes actuellement en union âgées de 15 à 49 ans, à partir du Family Planning Estimation Tool (FPET, Track20).
+
+**Où.** C'est l'onglet **Projection PF** de **Couverture nationale** et de **Couverture infranationale**.
+
+Le titre du graphique est *Planification familiale chez les femmes actuellement en union de 15 à 49 ans*. Il trace deux indicateurs : la **Prévalence des méthodes modernes (mCPR)** et la **Demande satisfaite par une méthode moderne**.
+
+![Projection FPET](/images/fr-national-coverage-fpet.png)
+
+**Comment interpréter.** Voir [Couverture nationale > Projections de la planification familiale](/fr/docs/methodology/coverage#projections-de-la-planification-familiale) ; origine des données : [Planification familiale](/fr/docs/methodology/coverage#planification-familiale).
+
+## Pièges courants
+
+- Pièges dans l'utilisation des estimations bayésiennes : [Approche de modélisation bayésienne > Pièges courants](/fr/docs/methodology/bayesian-coverage#pièges-courants).
+- Pièges dans la lecture de la Projection PF et de la carte thermique du continuum : [Couverture nationale > Pièges courants](/fr/docs/methodology/coverage#pièges-courants).

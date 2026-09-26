@@ -1,3 +1,6 @@
+---
+description: Présentation du CD2030 DHIS2 Data Extractor, qui se connecte à DHIS2, met en cache les métadonnées, mappe les indicateurs et télécharge les données de routine.
+---
 import { Callout, Steps } from 'nextra/components'
 
 # CD2030 DHIS2 Data Extractor
@@ -22,13 +25,15 @@ flowchart TD
   A["1. Se connecter à DHIS2"]
   B["2. Synchroniser, lire et mettre en cache les métadonnées"]
   C["3. Mapper les métadonnées sources vers les indicateurs"]
-  D["4. Télécharger les données de routine"]
-  E["5. Enregistrer le mappage pour l'exporter ou le réutiliser"]
+  D["4. Enregistrer le mappage pour l'exporter ou le réutiliser"]
+  E["5. Télécharger les données de routine"]
   A --> B --> C --> D --> E
 `}
 />
 
 Ce processus aide les analystes à disposer d'un point de départ plus propre et plus reproductible pour les analyses en aval dans DataSuite.
+
+Le classeur Excel qu'il exporte est le fichier de données de routine que chargent les [applications RMNCAH et Vaxx](/fr/apps/countdown) ; pour savoir ce que ces données doivent contenir, voir la [Configuration de l'analyse](/fr/docs/methodology/analysis-setup#données-hmis) dans la méthodologie et les [Définitions des indicateurs](/fr/docs/reference/indicator-definitions).
 
 ## Étapes de démarrage rapide
 
@@ -38,11 +43,11 @@ Ce processus aide les analystes à disposer d'un point de départ plus propre et
 
 Connectez-vous à la bonne instance DHIS2 à l'aide de l'URL de votre serveur et d'identifiants de compte valides.
 
-### [Mettre les métadonnées en cache](/fr/apps/data-extractor/dhis2-login#read-and-cache-metadata)
+### [Mettre les métadonnées en cache](/fr/apps/data-extractor/dhis2-login#mettre-les-métadonnées-en-cache)
 
 Mettez temporairement en cache (stockez) les métadonnées localement pour y accéder rapidement et télécharger efficacement.
 
-### [Choisir un mode de mappage](/fr/apps/data-extractor/mapping#map-metadata)
+### [Choisir un mode de mappage](/fr/apps/data-extractor/mapping#sélectionner-le-mode-de-mappage)
 
 Utilisez le mappage **Countdown** pour le modèle MNCH harmonisé ou le mappage **Custom** pour les autres programmes.
 

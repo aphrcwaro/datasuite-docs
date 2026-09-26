@@ -1,0 +1,157 @@
+---
+description: How to remove unreliable years, run Data Adjustment and review Data Adjustment Changes to turn reported numbers into the dataset used for coverage.
+topics: [data-adjustment]
+reportKinds: [adj_comparison]
+cacheMembers: [k_factors, adjusted_data, adjusted_flag, excluded_years, data_with_excluded_years, adjust_data]
+appPages: [remove_years, data_adjustment, data_adjustment_changes]
+ai:
+  status: draft
+  summary: >-
+    Data preparation turns the reported numbers into an analysis-ready dataset with three pages: Remove Years, Data
+    Adjustment and Data Adjustment Changes. Adjusting is required: running Adjust Data unlocks the later pages
+    (RMNCAH: Denominators and Analysis; Vaxx: denominators, coverage, inequality, targets and Reports).
+  options:
+    - "K-Factors, each 0, 0.25, 0.5, 0.75 or 1: ANC, Delivery, Vaccines and OPD in RMNCAH; ANC, Delivery and Vaccines in Vaxx (#choose-the-k-factors)"
+  steps:
+    - "Remove Years: confirm on the data quality pages that a year is unusable, select it and press Confirm Removal; deselect and confirm again to bring one back (#press-confirm-removal)"
+    - "Data Adjustment: choose the K-Factors and press Adjust Data until it says Data Adjusted (#press-adjust-data)"
+    - "Data Adjustment Changes: compare numbers before and after adjustment for each indicator (#data-adjustment-changes)"
+  rules:
+    - "Removal happens before adjustment; after changing the removed years, press Adjust Data again (#remove-years)"
+    - "The page shows the K-factors stored in the dataset (#choose-the-k-factors)"
+    - "RMNCAH: press Adjust Data even with every factor at 0; it unlocks the analysis pages (#press-adjust-data)"
+    - "Changing K-factors, removed years or the threshold discards the adjustment until Adjust Data is pressed again; then re-check denominators (#common-pitfalls)"
+    - "Reports and pooled caches should be built from adjusted data (#common-pitfalls)"
+    - "The method, formulas and business rules (what each K-factor assumes, when to remove a year, the 75% rule, outliers and missing values) are in Data adjustment (/en/docs/methodology/data-adjustment/)"
+    - "How to read the before-and-after comparison, what to report, and the pitfalls in choosing K and removing years are in Data adjustment > Interpretation (/en/docs/methodology/data-adjustment/#interpretation)"
+  interpretation:
+    - "Data Adjustment Changes: one tab per indicator; each chart compares the number of events before and after adjustment for completeness and outliers, by year; in Vaxx, before any adjustment the chart uses a K-factor of 0 for every service (#data-adjustment-changes)"
+---
+
+import { Tabs, Steps, Callout } from 'nextra/components'
+
+# Data preparation
+
+Data preparation turns the reported numbers into an analysis-ready dataset, the dataset used for coverage. It has three pages: **Remove Years**, **Data Adjustment** and **Data Adjustment Changes** (in the RMNCAH app they are in the **Data quality** section). The method, formulas and business rules are in [Data adjustment](/en/docs/methodology/data-adjustment).
+
+<Callout type="important">
+Adjusting the data is required. Running the adjustment is what unlocks the later pages: in the RMNCAH app the Denominators and Analysis pages; in the Vaxx app denominators, coverage, inequality, targets and Reports stay unavailable until you run **Adjust Data** at least once.
+</Callout>
+
+## Remove Years
+
+**Purpose.** Leave out years whose data cannot be relied on.
+
+**When to use it.** When to remove a year, and when to keep it: [Data adjustment > Remove years](/en/docs/methodology/data-adjustment#remove-years).
+
+<Steps>
+
+### Open Remove Years
+
+In the RMNCAH app it is under **Data quality** in the sidebar. Decide from the [data quality](/en/apps/countdown/data-quality) pages first.
+
+### Select Years to Remove
+
+In **Select Years to Remove**, the chips list the years present in the data. Select one or more.
+
+### Press Confirm Removal
+
+The message changes from *No years have been removed yet* to *Data for the following years has been removed*, followed by the years. To bring a year back (restore years), deselect it or clear the selection and confirm again.
+
+</Steps>
+
+![Remove years](/images/dqa-remove-year.png)
+
+Removal happens before adjustment. If you have already adjusted, run **Adjust Data** again after changing the removed years.
+
+## Data Adjustment
+
+**Purpose.** Correct for incomplete reporting (missing reports) and extreme outliers. How missing values, outliers and the K-factor are handled: [Data adjustment > Method](/en/docs/methodology/data-adjustment#method).
+
+The page has two cards: **K-Factors (Adjustment Factors)** and the adjustment card with **Adjust Data**, which applies the corrections to the current dataset.
+
+<Steps>
+
+### Choose the K-Factors
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+The card **K-Factors (Adjustment Factors)** has four selectors: **ANC K-Factor**, **Delivery K-Factor**, **Vaccines K-Factor** and **OPD K-Factor**. Each offers 0, 0.25, 0.5, 0.75 and 1. What each value assumes and how to choose: [Data adjustment > Configuring the k-factor](/en/docs/methodology/data-adjustment#configuring-the-k-factor).
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+The card **K-Factors (Adjustment Factors)** has an **ANC K-Factor**, a **Delivery K-Factor** and a **Vaccines K-Factor**, each a choice of 0, 0.25, 0.5, 0.75 or 1. The page shows the values stored in the dataset. Pick a value for each of the three factors; the starting value, the guidebook's default and how to choose: [Data adjustment > Configuring the k-factor](/en/docs/methodology/data-adjustment#configuring-the-k-factor).
+
+</Tabs.Tab>
+</Tabs>
+
+### Press Adjust Data
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+The message goes from *Dataset not adjusted* to *Adjusting ...* and then *Data Adjusted*. Do this even if you keep every factor at 0, because it is what unlocks the analysis pages.
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+Choose **Adjust Data** and wait for "Data Adjusted". The status box shows "Not adjusted yet", then "Adjusting ...", then "Data Adjusted".
+
+</Tabs.Tab>
+</Tabs>
+
+### Download the result if you need it
+
+Once adjusted, **Download Adjusted Dataset** saves the adjusted master dataset as a `.dta` file (`master_adj_dataset.dta`).
+
+### Review the changes
+
+Open **Data Adjustment Changes**.
+
+</Steps>
+
+<Callout type="warning">
+Changing the K-factors or the removed years discards the adjusted dataset. Press **Adjust Data** again, otherwise the analysis pages will not reflect your change. If the adjustment fails, the message shows the reason.
+</Callout>
+
+How a district-month with reporting below 75% (or missing) is handled: [Data adjustment > Critical data threshold rules](/en/docs/methodology/data-adjustment/#critical-data-threshold-rules).
+
+![K-factor selection](/images/adjustment-kfactor.png)
+
+## Data Adjustment Changes
+
+**Purpose.** See what the adjustment did to each indicator.
+
+**How to read it.** The card **Visualize effects of changes** has one tab per indicator. Each chart compares the number of events (of the indicator) *before* and *after* adjustment for completeness and outliers, by year.
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+Tabs are Institutional Deliveries, Institutional Live Births, Pentavalent 1, ANC 1 and OPD Under 5 Years, plus a **Custom** tab for any other indicator. Use **Download Plot** and **Download Data** on the toolbar. **Generate Report** opens the adjustment report.
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+Tabs are **Institutional Live Births**, **BCG**, **Pentavalent 1** and **Measles 1**, plus a **Custom Check** tab with an indicator selector.
+
+If the data have not been adjusted, the chart uses a K-factor of 0 for every service, so it shows only what outlier and missing value handling do.
+
+</Tabs.Tab>
+</Tabs>
+
+![Before and after adjustment](/images/adjustment-before-after.png)
+
+## How to interpret the results
+
+How to read the before-and-after charts: [Data adjustment > Adjustment outputs](/en/docs/methodology/data-adjustment#adjustment-outputs). What to report: [Data adjustment > Report](/en/docs/methodology/data-adjustment#report).
+
+## Common pitfalls
+
+- Changing K-factors, removed years or the performance threshold affects every downstream page. Re-run **Adjust Data** and re-check denominators afterwards.
+- Reports and pooled caches should be built from adjusted data. See **[Pooled App](/en/apps/pooled)**.
+
+Pitfalls in choosing the K-factors and removing years, and which indicators are not adjusted: [Data adjustment > Common pitfalls](/en/docs/methodology/data-adjustment#common-pitfalls).
+
+Next: **[Denominators](/en/apps/countdown/denominators)**.

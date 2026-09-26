@@ -61,6 +61,16 @@ function text(node) {
     case 'image': return node.alt ?? ''
     case 'table': return node.children.map(row => row.children.map(cell => text(cell).trim()).join(' | ')).join('\n')
     case 'list': return node.children.map(item => '- ' + text(item).trim().replace(/\n/g, '\n  ')).join('\n')
+    case 'mdxJsxFlowElement':
+      // <Tabs items={['RMNCAH', 'Vaxx']}>: each tab's text is labelled with its item, so the app it applies to survives
+      if (node.name === 'Tabs') {
+        const items = node.attributes?.find(a => a.name === 'items')?.value
+        const labels = [...String(items?.value ?? items ?? '').matchAll(/(['"])(.*?)\1/g)].map(m => m[2])
+        return node.children.filter(c => c.type === 'mdxJsxFlowElement')
+          .map((tab, i) => ({ label: labels[i], body: text({ ...tab, name: 'Tabs.Tab' }).trim() }))
+          .filter(t => t.body).map(t => (t.label ? `[${t.label}] ` : '') + t.body).join('\n\n')
+      }
+      return node.children.map(text).map(t => t.trim()).filter(Boolean).join('\n\n')
     case 'paragraph': case 'emphasis': case 'strong': case 'delete': case 'link': case 'linkReference': case 'mdxJsxTextElement':
       return (node.children ?? []).map(text).join('')
     default:
@@ -127,6 +137,41 @@ for (const lang of LANGS) {
     if (ai) page.ai = ai
     if (lang === 'en') english.set(page.slug, page)
     pages.push(page)
+  }
+}
+
+// The Defaults and thresholds page draws its tables from src/data/methodology-defaults.json (generated from
+// cd2030.core) with a component, so its text holds only headings: fold the values into each step's section, in the
+// page's language, so the AI can quote them.
+const defaultsFile = path.resolve('src/data/methodology-defaults.json')
+if (fs.existsSync(defaultsFile)) {
+  const defaults = JSON.parse(fs.readFileSync(defaultsFile, 'utf8'))
+  const i18nFile = path.resolve('src/data/methodology-defaults.i18n.json')
+  const i18n = fs.existsSync(i18nFile) ? JSON.parse(fs.readFileSync(i18nFile, 'utf8')) : {}
+  const show = v => Array.isArray(v) ? (v.length === 2 && v.every(x => typeof x === 'number') ? `${v[0]}-${v[1]}` : v.join(', ')) : String(v)
+  for (const page of pages) {
+    if (page.slug !== 'docs/reference/defaults') continue
+    // which step each heading's table shows, from the page source (<MethodDefaults ... step="...">)
+    const source = fs.readFileSync(path.join(contentDir, page.lang, 'docs/reference/defaults.mdx'), 'utf8')
+    const stepOf = new Map()
+    let heading = null
+    for (const line of source.split(/\r?\n/)) {
+      const h = line.match(/^#{2,3}\s+(.+?)\s*(?:\[#[^\]]+\])?\s*$/)
+      if (h) heading = h[1].trim()
+      const m = line.match(/<MethodDefaults\b[^>]*\bstep="([a-z_]+)"/)
+      if (m && heading) stepOf.set(heading, m[1])
+    }
+    const tr = i18n[page.lang] ?? {}
+    for (const section of page.sections) {
+      const step = stepOf.get(section.heading)
+      if (!step) continue
+      const rows = defaults.entries.filter(e => e.step === step).map(e => {
+        const t = tr[e.id] ?? {}
+        const unit = e.unit ? ` ${e.unit}` : ''
+        return `${t.label ?? e.label}: ${show(e.value)}${unit} (${e.group}). ${t.note ?? e.note}`
+      })
+      if (rows.length) section.text = `${section.text}\n${rows.join('\n')}`.trim()
+    }
   }
 }
 

@@ -1,4 +1,5 @@
 ---
+description: How to export from the Pooled App, either one table as CSV or Excel, or a selected piece of the pooled file with the datasets, countries and years you choose.
 topics: [pooling, ai-analysis]
 appPages: [explore_extract, explore_all]
 ai:
@@ -13,7 +14,7 @@ ai:
     - "In Extract a piece, choosing nothing means all; country, year and area columns are always kept (#extract-a-piece)"
     - "The pooled .rds is a plain R list, not a country cache: domain, creation time, app version, countries, left_out files with reasons, datasets and a log (#what-is-inside-the-pooled-file)"
     - "For issues with one country, fix its cache in the country app, save, and rebuild the pooled file (#next-steps-for-analysis)"
-    - "Compare results with the methods of the framework, including National coverage (/en/docs/framework/5-coverage-estimation/)"
+    - "Compare results with the methods of the framework, including National coverage (/en/docs/methodology/coverage/)"
     - "The chat assistant works on one country's dataset open in RMNCAH or Vaxx; for the pooled file, ask it to read the file and analyse its datasets directly, and check against downloaded tables (#using-the-datasuite-chat-assistant)"
 ---
 
@@ -59,8 +60,8 @@ The `.rds` is a plain R list, not a country cache. It holds `domain`, the creati
 
 - Read the CSV or Excel file in R, Stata, Python or Excel. `country` and `iso3` identify the country, and coverage columns already share names across countries.
 - For a full analysis in R, read the pooled file with `readRDS()` and work on `pooled$datasets`.
-- Compare your results with the methods in the **[analytical framework](/en/docs/framework)**, including **[national coverage](/en/docs/framework/5-coverage-estimation)**.
-- For issues with a single country, return to its cache in the **[RMNCAH App](/en/apps/rmncah)**, fix it, save, and rebuild the pooled file.
+- Compare your results with the methods in the **[analytical framework](/en/docs/methodology)**, including **[national coverage](/en/docs/methodology/coverage)**.
+- For issues with a single country, return to its cache in the **[RMNCAH App](/en/apps/countdown)**, fix it, save, and rebuild the pooled file.
 
 ## Using the DataSuite chat assistant
 

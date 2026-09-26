@@ -1,0 +1,96 @@
+---
+description: How to use the RMNCAH app's Bayesian Analysis, Continuum of Care and FPET FP Projection pages, which build on adjusted data and the selected denominators.
+topics: [bayesian-coverage, continuum-of-care, fpet]
+reportKinds: [bayes_coverage, continuum, continuum_gap, natcov_fpet]
+cacheMembers: [get_bayes_model, fpet_data]
+appPages: [bayesian_national, bayesian_subnational, continuum_care]
+ai:
+  status: draft
+  summary: >-
+    Bayesian Analysis, Continuum of Care and FPET FP Projection go beyond the basic coverage charts. They build on
+    the adjusted data and the selected denominators, so Data preparation and Denominators come first.
+  rules:
+    - "Reading the FP Projection and the continuum heatmap, and their pitfalls, is in National coverage (/en/docs/methodology/coverage/)"
+    - "How the Bayesian model uses surveys and routine data, and how to read its estimates, is in Bayesian coverage (/en/docs/methodology/bayesian-coverage/)"
+    - "Methods are in Bayesian coverage (/en/docs/methodology/bayesian-coverage/)"
+    - "Coverage methods are in National coverage (/en/docs/methodology/coverage/)"
+  interpretation:
+    - "Bayesian Analysis combines survey and routine data into one estimate per year with an uncertainty band and a short forecast; available for ANC 4 Visits, ANC 1st Trimester, Institutional Deliveries, Measles 1 and Pentavalent 3 (#pick-an-indicator-tab)"
+    - "Bayesian chart: the central line is the best estimate and the band the uncertainty range, with Download Plot and Download Data (#read-the-chart)"
+    - "Continuum of Care: a national profile (facility, survey and WUENIC values per step) and a heatmap by Admin 1 region, for the Maternal and Child continuum (#continuum-of-care)"
+    - "FP Projection: mCPR and Demand Satisfied with a Modern Method from FPET (#fpet-fp-projection)"
+---
+
+import { Steps, Callout } from 'nextra/components'
+
+# Advanced analysis
+
+<Callout type="info">
+This page applies to the **RMNCAH app** only.
+</Callout>
+
+Three analyses go beyond the basic coverage charts: **Bayesian Analysis**, **Continuum of Care** and **FPET FP Projection**. They build on the adjusted data and the denominators you selected, so finish [Data preparation](/en/apps/countdown/data-preparation) and [Denominators](/en/apps/countdown/denominators) first. Methods: [Bayesian modeling approach](/en/docs/methodology/bayesian-coverage) and [National coverage](/en/docs/methodology/coverage).
+
+## Bayesian Analysis
+
+**Purpose.** Combine survey data and routine facility data into one estimate per year, with a range of uncertainty and a short-term forecast. How the model uses each source: [Bayesian modeling approach > How are survey data used?](/en/docs/methodology/bayesian-coverage#how-are-survey-data-used) and [How are routine data used?](/en/docs/methodology/bayesian-coverage#how-are-routine-data-used)
+
+**When to use it.** See [Bayesian modeling approach > Why it matters](/en/docs/methodology/bayesian-coverage#why-it-matters).
+
+There are two entries in the **Bayesian Analysis** group of the sidebar: **National Analysis** and **Sub-National Analysis** (regions).
+
+<Steps>
+
+### Open Bayesian Analysis
+
+Choose National Analysis or Sub-National Analysis.
+
+### Pick an indicator tab
+
+**ANC 4 Visits**, **ANC 1st Trimester**, **Institutional Deliveries**, **Measles 1** or **Pentavalent 3**. The model is defined for these five indicators.
+
+### Read the chart
+
+The title is *Bayesian Coverage Model Estimates* followed by the indicator, and the source note reads *Survey Data & DHIS2 Routine Data*. The central line is the best estimate; the band is the uncertainty range. Use **Download Plot** and **Download Data** in the toolbar.
+
+</Steps>
+
+![Bayesian ANC4 estimates at national level](/images/bayesian-ANC4-national.png)
+
+![Bayesian ANC4 estimates by region](/images/bayesian-ANC4-subnational.png)
+
+**How to interpret.** See [Bayesian modeling approach > Reading the estimates](/en/docs/methodology/bayesian-coverage#reading-the-estimates) and the [illustrative examples](/en/docs/methodology/bayesian-coverage#illustrative-examples).
+
+## Continuum of Care
+
+**Purpose.** Follow coverage along the care pathway and see where women and children drop out.
+
+**Where.** **National Analysis**, **Continuum of Care** in the sidebar. The page has two cards, both titled *National Coverage & Continuum*, each with the tabs **Maternal Continuum** and **Child Continuum**.
+
+- **Top card, continuum profile.** *National continuum-of-care profile*: the latest facility value, the latest survey value and, where relevant, the WUENIC value for each step of the selected pathway, for example ANC 1st Trimester, ANC 4 Visits, Institutional Deliveries and PNC within 48 hours for the maternal continuum, or Pentavalent 3 and Measles 1 for the child continuum.
+- **Bottom card, continuum heatmap.** *Subnational continuum heatmap*: the same steps for each Admin 1 region. Read across a row to see one region, down a column to see one indicator. Red cells are low coverage, yellow intermediate and green high.
+
+The page can generate the national coverage report with **Generate Report**.
+
+![Continuum of care profile](/images/national-coverage-continuum-care-profile.png)
+
+![Maternal continuum heatmap by region](/images/national-admin1-maternal-continuum-heatmap.png)
+
+**How to interpret.** See [National coverage > Interpreting the maternal continuum](/en/docs/methodology/coverage#interpretation-1), [Interpreting the child continuum](/en/docs/methodology/coverage#interpretation-2) and [Continuum of care at subnational level](/en/docs/methodology/coverage#continuum-of-care-at-subnational-level).
+
+## FPET FP Projection
+
+**Purpose.** Show family planning trends for currently married women aged 15 to 49, from the Family Planning Estimation Tool (FPET, Track20).
+
+**Where.** It is the **FP Projection** tab on **National Coverage** and on **Sub-National Coverage**.
+
+The chart title is *Family planning among currently married women 15-49 years*. It draws two indicators: **Prevalence of Modern Methods (mCPR)** and **Demand Satisfied with a Modern Method**.
+
+![FPET projection](/images/national-coverage-fpet.png)
+
+**How to interpret.** See [National coverage > Family planning projections](/en/docs/methodology/coverage#family-planning-projections); where the data come from: [Family planning](/en/docs/methodology/coverage#family-planning).
+
+## Common pitfalls
+
+- Pitfalls in using the Bayesian estimates: [Bayesian modeling approach > Common pitfalls](/en/docs/methodology/bayesian-coverage#common-pitfalls).
+- Pitfalls in reading the FP Projection and the continuum heatmap: [National coverage > Common pitfalls](/en/docs/methodology/coverage#common-pitfalls).

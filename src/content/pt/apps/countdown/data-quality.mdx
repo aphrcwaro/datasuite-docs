@@ -1,0 +1,173 @@
+---
+description: "As cinco páginas de qualidade dos dados (taxa de notificação, valores discrepantes, dados ausentes, consistência interna, pontuação geral): são fiáveis?"
+---
+import { Tabs, Steps, Callout } from 'nextra/components'
+
+# Qualidade dos dados
+
+A qualidade dos dados é a primeira fase da análise. Responde a uma pergunta antes de se calcular qualquer cobertura: os dados das unidades de saúde são fiáveis? Cinco páginas, em **Qualidade dos dados** na aplicação RMNCAH e em **Avaliação da Qualidade dos Dados** na aplicação Vaxx, mostram quão completos, plausíveis e consistentes são os dados de rotina. Os seus resultados determinam se remove anos e como ajusta os dados na [Preparação dos dados](/pt/apps/countdown/data-preparation). O método está explicado em [Avaliação da qualidade dos dados](/pt/docs/methodology/data-quality).
+
+## Quando usar
+
+Use estas páginas logo após carregar os dados e sempre que carregar um ficheiro corrigido. O carregamento de dados tem de estar concluído primeiro; estas páginas não exigem o Ajuste de dados. Reveja-as por esta ordem: Taxa de notificação, Detecção de valores discrepantes, Dados Ausentes, Consistência interna, Pontuação Geral da Qualidade dos Dados. Depois avance para a [Preparação dos dados](/pt/apps/countdown/data-preparation).
+
+## Filtros comuns
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+A maioria das páginas tem uma etiqueta **Indicador**, uma etiqueta **Nível Administrativo** (**Nível Administrativo 1** ou **Nível Administrativo 2**) e, quando o Nível Administrativo 1 está selecionado, uma etiqueta de região com **Selecionar Todos** para se concentrar numa região. A página Taxa de notificação acrescenta um **Limite de Desempenho** (ver [Taxa de notificação](#taxa-de-notificação)).
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+- **Indicador**: escolha o que avaliar. As páginas de valores discrepantes, dados ausentes e consistência listam todos os indicadores da Vaxx (CPN 1, Partos institucionais, Nascidos vivos em estabelecimento de saúde, BCG, VIP 1-2, Sarampo 1-2, VOP 1-3, Pentavalente 1-3, PCV 1-3, Rotavírus 1-2). A Taxa de notificação usa três grupos de serviços: CPN, Parto institucional e Vacinação.
+- **Nível Administrativo**: Nível Administrativo 1 (regiões) ou Nível Administrativo 2 (distritos). Um seletor de região permite concentrar-se nos distritos de uma região.
+- **Limite de Desempenho** (apenas na Taxa de notificação): uma percentagem, 90 por omissão, com escolhas rápidas de 70, 80, 90 e 95. É guardado no conjunto de dados e reutilizado pela Pontuação Geral da Qualidade dos Dados.
+
+</Tabs.Tab>
+</Tabs>
+
+## Como utilizar as páginas
+
+<Steps>
+
+### Abra a página a partir da barra lateral
+
+As páginas estão em **Qualidade dos dados** (RMNCAH) ou em **Avaliação da Qualidade dos Dados** (Vaxx). O carregamento de dados tem de estar concluído primeiro.
+
+### Defina os filtros
+
+Escolha o indicador, o nível administrativo e, se quiser, uma região, como descrito em [Filtros comuns](#filtros-comuns).
+
+### Leia o gráfico e depois a tabela que se encontra por baixo
+
+Os gráficos mostram o padrão. As tabelas listam os distritos e os meses que lhe estão na origem. Utilize a barra de ferramentas de um cartão para **Baixar Gráfico** (PNG) e **Baixar Dados** (Excel), e o seletor de ano *Apenas esta tabela* nas tabelas.
+
+</Steps>
+
+## Taxa de notificação
+
+Mostra o grau de completude da notificação das unidades de saúde, por serviço, ano e área.
+
+<Steps>
+
+### Escolher o serviço, o limite e o nível administrativo
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+- **Indicador:** CPN, Parto institucional, Vacinação, OPD.
+- **Limite de Desempenho:** predefinição 90%; escolhas rápidas 70, 80, 90, 95.
+- **Nível Administrativo.**
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+Selecione CPN, Parto institucional ou Vacinação, defina o limite e depois o nível administrativo.
+
+</Tabs.Tab>
+</Tabs>
+
+### Ler a Taxa de Notificação Subnacional
+
+O separador **Mapa de Calor** mostra a taxa de notificação do serviço selecionado para cada área e ano. O separador **Gráfico de Barras** mostra a taxa por ano.
+
+### Ler o cartão Taxa Nacional de Notificação e a tabela
+
+O cartão **Taxa Nacional de Notificação** (na aplicação RMNCAH, **Taxa de Notificação dos Distritos em** uma região quando se escolhe uma região) mostra a percentagem de distritos cuja taxa de notificação está abaixo do limite (baixa notificação), com um painel por serviço, por ano. **Unidades Subnacionais com Baixa Notificação** lista os distritos ou regiões abaixo do limite para o ano e o serviço escolhidos.
+
+</Steps>
+
+O que a taxa de notificação mede e como a ler: [Qualidade dos dados > Completude dos relatórios](/pt/docs/methodology/data-quality#completude-dos-relatórios) e [Taxas de notificação](/pt/docs/methodology/data-quality#taxas-de-notificação).
+
+<Callout type="info">
+O Limite de Desempenho que definir aqui fica guardado no conjunto de dados e é reutilizado pela Pontuação Geral da Qualidade dos Dados e, na aplicação RMNCAH, pelos Indicadores de DQA dos serviços.
+</Callout>
+
+![Mapa de calor da taxa de notificação subnacional](/images/pt-dqa-reporting-rate.png)
+
+## Detecção de valores discrepantes
+
+Identifica valores mensais extremos que podem ser erros de introdução. O que é um valor discrepante extremo: [Qualidade dos dados > Deteção de valores atípicos](/pt/docs/methodology/data-quality#deteção-de-valores-atípicos).
+
+- **Filtros:** **Indicador** e **Nível Administrativo**.
+- Cartão **Indicadores com valores discrepantes**: separadores **Mapa de Calor** (percentagem de valores mensais não discrepantes por área e ano), **Gráfico de barras do indicador** (por ano e indicador) e **Gráfico de barras por região** (por ano e região).
+- **Unidades subnacionais com valores discrepantes extremos:** todos os distritos e meses assinalados, numa tabela com ano, mês, área, valor reportado, mediana e MAD. Escolha o ano com o controlo "Somente esta tabela".
+- **Tendências Subnacionais:** escolha uma região e leia a linha mês a mês para o ano selecionado: o valor reportado face à mediana, aos limites de valores discrepantes (mais ou menos 5 MAD) e os valores discrepantes.
+
+Como ler (a parte esperada de valores sem valores discrepantes, campanhas): [Qualidade dos dados > Valores atípicos](/pt/docs/methodology/data-quality#valores-atípicos).
+
+![Mapa de calor da detecção de valores discrepantes](/images/pt-dqa-outlier-detection.png)
+
+## Dados Ausentes
+
+Mostra que indicadores e áreas têm notificações em falta.
+
+- **Filtros:** **Indicador** (com **Selecionar Todos**) e **Nível Administrativo**.
+- **Indicadores com Dados Faltantes:** os separadores **Mapa de Calor** (percentagem de notificações em falta por ano e área), **Indicadores Completos** (percentagem de distritos com dados completos para o indicador) e **Indicadores Faltantes por Região** (tendência da completude por região).
+- **Unidades Subnacionais com Dados Faltantes:** uma tabela dos distritos com lacunas (dados incompletos) para o indicador e o ano selecionados.
+
+Como os valores em falta são medidos e tratados: [Qualidade dos dados > Dados ausentes](/pt/docs/methodology/data-quality#dados-ausentes).
+
+![Mapa de calor dos dados ausentes](/images/pt-dqa-missingness.png)
+
+## Consistência interna
+
+Verifica se os indicadores relacionados evoluem em conjunto e concordam entre si ao longo do tempo. São apresentados dois cartões: **Gráficos de razões** e **Verificações de Consistência**. As razões esperadas e o intervalo em que um distrito deve ficar: [Qualidade dos dados > Consistência interna](/pt/docs/methodology/data-quality#consistência-interna). Como ler os gráficos: [Qualidade dos dados > Consistência e rácios](/pt/docs/methodology/data-quality#consistência-e-rácios).
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+- **Gráficos de razões:** as razões anuais CPN1 / Penta1 e Penta1 / Penta3 face à razão esperada. As razões esperadas resultam dos valores de cobertura do inquérito introduzidos em Taxas nacionais.
+- **Verificações de Consistência:** os separadores **CPN1 e Penta1**, **Penta1 e Penta3** e **Verificação Personalizada** (escolha um **Eixo X** e um **Eixo Y**). Cada ponto é um distrito, apresentado com um **Ajuste linear** e uma **Diagonal**.
+
+![Gráficos de razões](/images/pt-dqa-internal-consistency.png)
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+- **Gráficos de razões**: razões CPN1 / Penta1, Penta1 / Penta3 e OPV1 / OPV3 por ano, comparadas com as razões esperadas.
+- **Verificações de Consistência**: separadores **CPN1 e Penta1**, **Penta1 e Penta3**, **OPV1 e OPV3**, **IPV1 e IPV2** e **Verificação Personalizada**, onde escolhe os indicadores dos eixos X e Y. Cada gráfico desenha um ponto por distrito e ano, com um ajuste linear e uma diagonal.
+
+</Tabs.Tab>
+</Tabs>
+
+![Verificações de consistência entre CPN1 e Penta1](/images/pt-dqa-conistency-checks.png)
+
+## Pontuação Geral da Qualidade dos Dados
+
+Uma pontuação anual que resume todas as verificações: uma tabela por ano, com um filtro de região para ver uma única área de Nível Administrativo 1, ou o nível nacional. Como a pontuação é calculada: [Qualidade dos dados > Pontuação geral de qualidade](/pt/docs/methodology/data-quality#pontuação-geral-de-qualidade).
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+| Bloco | Linhas |
+| --- | --- |
+| 1. Completude | % de relatórios mensais esperados das unidades de saúde (nacional); % de distritos iguais ou acima do limite; % de distritos sem valores em falta nos 4 formulários |
+| 2. Valores discrepantes extremos | % de valores mensais que não são valores discrepantes extremos; % de distritos sem valores discrepantes extremos |
+| 3. Consistência | Razões CPN1 / Penta1 e Penta1 / Penta3; % de distritos dentro do intervalo esperado |
+
+A última linha é a **Pontuação anual da qualidade dos dados**. Utilize **Baixar Gráfico** e **Baixar Dados**. **Gerar Relatório** abre o relatório de qualidade dos dados.
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+A tabela tem três blocos:
+
+1. **Completude dos relatórios mensais das unidades de saúde** (média de CPN, parto, vacinação): percentagem de relatórios mensais esperados a nível nacional, percentagem de distritos com completude igual ou superior ao limite e percentagem de distritos sem valores em falta (média para vacinas comuns).
+2. **Valores discrepantes extremos**: percentagem de valores mensais que não são valores discrepantes extremos e percentagem de distritos sem valores discrepantes extremos no ano.
+3. **Consistência dos relatórios anuais**: as três razões e a percentagem de distritos com CPN1/Penta1, Penta1/Penta3 e VOP1/VOP3 no intervalo esperado.
+
+A última linha é a **Pontuação anual da qualidade dos dados**. Use os dois botões de transferência do cartão para guardar o gráfico e os dados.
+
+</Tabs.Tab>
+</Tabs>
+
+![Pontuação geral da qualidade dos dados](/images/pt-dqa-overall-score.png)
+
+## Interpretação e armadilhas
+
+Como ler os resultados, e o que vigiar antes de remover anos ou ajustar: [Qualidade dos dados > Interpretação](/pt/docs/methodology/data-quality#interpretação), incluindo as suas [Armadilhas comuns](/pt/docs/methodology/data-quality#armadilhas-comuns).
+
+Seguinte: **[Preparação dos dados](/pt/apps/countdown/data-preparation)**.

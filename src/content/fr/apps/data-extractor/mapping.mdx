@@ -1,3 +1,6 @@
+---
+description: Créer un mappage dans le Data Extractor pour définir les données DHIS2 à extraire et leur structure, choisir le mode de mappage et configurer les indicateurs.
+---
 import { Callout, Steps } from 'nextra/components'
 
 # Configuration du mappage
@@ -57,7 +60,7 @@ Le **Mappings Manager** est l'endroit central pour :
 
 - **New Mapping :** démarrer une nouvelle configuration
 - **Search bar :** retrouver des mappages existants
-- **Actions column :** modifier, télécharger, cloner ou supprimer le mappage sélectionné
+- **Actions column :** modifier, exporter au format JSON, cloner ou supprimer le mappage sélectionné
 
 ### Downloads Manager
 
@@ -144,7 +147,7 @@ Il existe actuellement deux modes de mappage :
 
 <Callout type="warning">
 
-Changer de mode de mappage en cours de route réinitialisera votre progression si le mappage n'est pas enregistré. Enregistrez toujours votre mappage avant de changer de mode de mappage.
+Changer de mode de mappage efface tous les indicateurs et leur configuration du mappage en cours de modification, qu'il ait été enregistré ou non ; l'application demande d'abord une confirmation (**Yes, Clear Indicators**). Choisissez le mode de mappage avant d'ajouter des indicateurs.
 
 </Callout>
 

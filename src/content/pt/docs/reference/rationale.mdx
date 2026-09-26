@@ -1,8 +1,12 @@
+---
+description: "A fundamentação científica das análises Countdown: qualidade dos dados, cobertura, equidade, desempenho dos sistemas de saúde e mortalidade institucional."
+---
+
 import { Callout } from 'nextra/components'
 
-# Métodos
+# Fundamentação científica
 
-Esta página apresenta a fundamentação científica das análises Countdown, com detalhes adicionais. O método em si -- como cada etapa é feita e como ler os resultados -- é a [metodologia Countdown](/pt/docs/framework); quando esta página e uma página da metodologia diferem, aplica-se a página da metodologia.
+Esta página apresenta a fundamentação científica das análises Countdown, com detalhes adicionais. O método em si -- como cada etapa é feita e como ler os resultados -- é a [metodologia Countdown](/pt/docs/methodology); quando esta página e uma página da metodologia diferem, aplica-se a página da metodologia.
 
 ## Abordagem analítica Countdown [#countdown-approach]
 
@@ -33,7 +37,7 @@ Onde:
 
 - $N_{\text{adjusted}}$: número total de eventos ajustado para a notificação incompleta
 - $N_{\text{reported}}$: número de eventos notificados
-- $c$: completude da notificação (por exemplo, proporção de unidades que notificaram)
+- $c$: completude da notificação (proporção dos relatórios esperados das unidades efetivamente recebidos)
 - $k$: fator de ajuste para ter em conta o menor volume de serviços nas unidades que não notificam
 
 <Callout type="info">
@@ -45,14 +49,14 @@ Interpretação:
 - Como valor por defeito, utiliza-se $k=0.25$, o que significa que as unidades que não notificam prestaram serviços, mas apenas num volume correspondente a um quarto do volume das unidades de saúde que notificam.
 - O ajuste assume que as unidades que não notificam continuam a prestar serviços, mas com um volume inferior ao das unidades que notificam. O fator $k$ controla a magnitude deste ajuste.
 - O fator $k$ pode ser diferente para diferentes serviços. Por exemplo, se a notificação das unidades privadas for fraca, mas estas estiverem integradas no sistema nacional e realizarem um número considerável de partos, $k$ pode ser superior a 0,25 ou mesmo chegar a 1,0.
-- Se a taxa de notificação das unidades for inferior a 75%, torna-se mais difícil imputar os dados distritais. Por conseguinte, não são feitos ajustes se a notificação for inferior a 75%. Nesse caso, uma análise adicional para determinar a cobertura com os dados das unidades não é considerada suficientemente fiável.
+- Se a taxa de notificação de um distrito para um serviço for inferior a 75% num mês (ou estiver em falta), essa taxa é substituída pela mediana das taxas de notificação do distrito entre 75% e 100% para esse serviço, e o número notificado do mês é depois ajustado com $k$ como habitualmente. (O guia de 2024 formula esta regra tanto como "nenhum ajuste abaixo de 75%" como "valor mediano imputado"; a regra acima é a que as aplicações aplicam.)
 
 </Callout>
 
 Os seguintes valores de $k$ são utilizados, consoante a notificação, para ajustar os números notificados face à notificação incompleta:
 
-- `k = 0`: nenhum serviço nas unidades que não notificam (valor de k por defeito)
-- `k = 0.25`: alguns serviços, mas muito inferiores aos das unidades que notificam
+- `k = 0`: nenhum serviço nas unidades que não notificam
+- `k = 0.25`: alguns serviços, mas muito inferiores aos das unidades que notificam (valor de k por defeito)
 - `k = 0.50`: metade da taxa das unidades que notificam
 - `k = 0.75`: quase tantos como as unidades que notificam
 - `k = 1.0`: mesma taxa de serviços que as unidades que notificam
@@ -61,14 +65,14 @@ Os seguintes valores de $k$ são utilizados, consoante a notificação, para aju
 
 | Problema | Ação | Ajuste |
 | --- | --- | --- |
-| Baixas taxas de notificação: identificação das taxas baixas que foram ajustadas | Se inferior a 75% (por defeito), os dados foram imputados | O valor mensal mediano do distrito para o ano foi imputado para o mês com baixa notificação |
+| Baixas taxas de notificação: identificação das taxas baixas que foram ajustadas | Se inferior a 75% (por defeito), ou em falta, a taxa de notificação foi substituída | A mediana das taxas de notificação do distrito entre 75% e 100% foi usada como taxa do mês, e o número ajustado com $k$ |
 | Notificação incompleta pelos distritos, variável ao longo do tempo, o que afeta a avaliação das tendências | Se as taxas de notificação eram ≥ 75% e ≤ 100% (por defeito), foi feito um pressuposto sobre o volume de serviços prestados pelas unidades que não notificam | O fator de ajuste $k$ foi utilizado para ajustar a notificação incompleta; o valor por defeito de $k$ é 0,25 (substituir se tiver sido utilizado um valor diferente; indicar se foi utilizado para todos os formulários de notificação ou se foram utilizados fatores $k$ diferentes entre formulários) |
-| Os valores atípicos extremos podem afetar fortemente a avaliação das tendências de cobertura | Se um valor mensal fosse superior ou inferior a 5 vezes o desvio absoluto mediano (MAD) em relação ao valor mediano mensal do distrito, foi feito um ajuste | Os valores atípicos mensais extremos são corrigidos e recebem o valor mediano do distrito para o mesmo ano |
+| Os valores atípicos extremos podem afetar fortemente a avaliação das tendências de cobertura | Se um valor mensal se afastasse mais de 5 vezes o desvio absoluto mediano (MAD) do valor mediano mensal do distrito (calculado a partir de todos os anos exceto o mais recente), foi feito um ajuste | Os valores atípicos mensais extremos são substituídos pela mediana dos outros meses (não atípicos) do distrito no mesmo ano |
 | Valores em falta | Se existir um valor em falta, os dados foram imputados | O valor mensal mediano do distrito para o ano foi imputado para o mês com valor em falta |
 
 ### Deteção de valores atípicos [#outlier-detection]
 
-Um valor atípico extremo é definido como um valor mensal que corresponde a 5 vezes o desvio absoluto mediano (MAD) em relação ao valor mediano mensal de um determinado ano.
+Um valor atípico extremo é definido como um valor mensal que se afasta mais de 5 vezes o desvio absoluto mediano (MAD) do valor mediano mensal da mesma série (o distrito, ou a série nacional ou de nível admin-1 avaliada), sendo a mediana e o MAD calculados a partir de todos os anos exceto o mais recente.
 
 ### Consistência interna [#internal-consistency]
 

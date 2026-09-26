@@ -1,0 +1,196 @@
+---
+description: "As verificações da qualidade dos dados das unidades de saúde: completude dos relatórios, valores atípicos, consistência interna, dados ausentes e pontuação."
+---
+
+import { Callout, Steps } from 'nextra/components'
+
+# Avaliação da qualidade dos dados
+
+Este módulo avalia sistematicamente os dados das unidades de saúde considerando as métricas padrão de qualidade de dados, que incluem:
+
+- Completude dos relatórios
+- Deteção de valores atípicos
+- Consistência interna
+- Dados ausentes
+- Cálculo de rácios
+- Pontuação geral de qualidade
+
+<Callout type="info">
+**Em resumo**
+- **Responde a:** Quão completos, plausíveis e consistentes são os dados das unidades de saúde, antes de se estimar a cobertura?
+- **Utiliza:** os dados mensais das unidades de saúde (relatórios recebidos e números de serviços) e, para os rácios esperados, as coberturas de CPN1, Penta1 e Penta3 (e VOP1, VOP3) do inquérito mais recente.
+- **Produz:** as métricas 1a-1c, 2a-2b e 3a-3h e a pontuação geral de qualidade; os valores em falta e os valores atípicos extremos são depois corrigidos, e os anos pouco fiáveis podem ser removidos, na etapa de [ajuste dos dados](/pt/docs/methodology/data-adjustment).
+- **Nas aplicações:** [Qualidade dos dados](/pt/apps/countdown/data-quality) (**Qualidade dos dados** na aplicação RMNCAH, **Avaliação da Qualidade dos Dados** na aplicação Vaxx).
+- **Valores predefinidos:** [Valores predefinidos e limiares: qualidade dos dados](/pt/docs/reference/defaults#qualidade-dos-dados)
+</Callout>
+
+## Porque é importante
+
+Dados de unidades de saúde de alta qualidade constituem a base de estimativas de cobertura fiáveis.
+Para a base científica de cada métrica, aceda a **[Avaliação da qualidade dos dados: fundamentação](/pt/docs/reference/rationale#data-quality-assessment)**.
+
+## Método
+
+### [Completude dos relatórios](/pt/docs/reference/rationale#reporting-completeness)
+
+Para mais informação sobre a base científica e os métodos usados para avaliar a completude dos relatórios, aceda a **[Completude dos relatórios: fundamentação](/pt/docs/reference/rationale#reporting-completeness)**.
+
+| Métrica | Numerador | Denominador | Interpretação |
+| --- | --- | --- | --- |
+| **1a** | Número de relatórios mensais das unidades recebidos | Total de relatórios esperados *(12 × número de unidades)* | ≥90% é bom; afeta a interpretação de tendências |
+| **1b** | Distritos com completude de relatórios ≥90% | Total de distritos | Identifica distritos com baixo desempenho |
+| **1c** | Distritos sem valores ausentes em todos os formulários | Total de distritos | Identifica a distribuição de valores ausentes entre os distritos |
+
+<Callout type="info">
+
+**As análises RMNCAH e de vacinação diferem aqui:** as estatísticas para **1a** e **1b** são a média dos formulários de notificação da análise: as análises **RMNCAH** utilizam CPN, parto, vacinação e consultas externas/OPD (internamentos excluídos); as análises de **vacinação** utilizam CPN, parto e vacinação. O guia Countdown 2024 sobre vacinação baseava-as apenas no formulário de vacinação. Ver [Análises RMNCAH e de vacinação](/pt/docs/reference/rmncah-vs-vaccine).
+
+</Callout>
+
+### [Deteção de valores atípicos](/pt/docs/reference/rationale#outlier-detection)
+
+Um valor atípico extremo é definido como um **valor mensal que se afasta mais de 5 vezes o desvio absoluto da mediana (MAD) do valor mediano mensal da mesma série** (método de Hampel) -- a do distrito, ou a série nacional ou de nível admin-1 avaliada. A mediana e o MAD são calculados a partir de todos os anos exceto o mais recente, pelo que o último ano é avaliado face aos anos anteriores.
+Para mais informação sobre a base científica e os métodos usados para avaliar e ajustar os valores atípicos extremos, aceda a **[Valores atípicos extremos: fundamentação](/pt/docs/reference/rationale#outlier-detection)**.
+
+| Métrica | Numerador | Denominador | Interpretação |
+| --- | --- | --- | --- |
+| **2a** | Valores mensais não classificados como atípicos | Total de valores mensais | ≥99% esperado |
+| **2b** | Distritos sem valores atípicos | Total de distritos | ≥90% esperado |
+
+### [Consistência interna](/pt/docs/reference/rationale#internal-consistency)
+
+- A consistência interna avalia o grau de alinhamento dos indicadores relacionados no conjunto de dados, com base nas relações epidemiológicas e de prestação de serviços esperadas.
+- Na estrutura analítica do CD2030, este passo complementa as outras métricas de DQA, avaliando se os indicadores que estão biológica ou programaticamente interligados seguem padrões plausíveis.
+- Ao contrário das verificações de indicadores isolados, a consistência interna concentra-se nas **relações entre indicadores**, garantindo que os valores notificados refletem percursos realistas de prestação de serviços ao longo do contínuo de cuidados.
+
+São consideradas as seguintes métricas na avaliação da consistência interna:
+
+Rácios nacionais:
+
+| Indicador | Numerador | Denominador | Interpretação |
+| --- | --- | --- | --- |
+| **3a** | CPN1 notificado (nacional) | Penta1 notificado | Rácio esperado 1,07 × (cobertura de CPN1 ÷ cobertura de Penta1 no inquérito), ± 0,05 (ver [Cálculo de rácios](#cálculo-de-rácios)) |
+| **3b** | Penta1 notificado (nacional) | Penta3 notificado | Rácio esperado cobertura de Penta1 ÷ cobertura de Penta3 no inquérito, ± 0,05 |
+| **3c** *(análises de vacinação)* | VOP1 notificado (nacional) | VOP3 notificado | Rácio esperado cobertura de VOP1 ÷ cobertura de VOP3 no inquérito, ± 0,05 |
+
+Rácios dos distritos: a proporção de distritos cujo rácio está entre **1,0 e 1,5** (um intervalo mais amplo, porque os rácios dos distritos variam mais):
+
+| Rácio | Análises RMNCAH | Análises de vacinação | Numerador | Denominador |
+| --- | --- | --- | --- | --- |
+| CPN1 / Penta1 | **3c** | **3f** | Distritos com o rácio entre 1,0 e 1,5 | Total de distritos |
+| Penta1 / Penta3 | **3d** | **3g** | Distritos com o rácio entre 1,0 e 1,5 | Total de distritos |
+| VOP1 / VOP3 | – | **3h** | Distritos com o rácio entre 1,0 e 1,5 | Total de distritos |
+
+<Callout type="info">
+
+**As análises RMNCAH e de vacinação diferem aqui:** as análises de vacinação acrescentam o rácio VOP1/VOP3 (**3c** a nível nacional, **3h** para os distritos), pelo que os controlos dos distritos são **3c** e **3d** nas análises RMNCAH e **3f**, **3g** e **3h** nas análises de vacinação. A página Consistência interna da aplicação Vaxx também representa VIP1 face a VIP2, sem pontuação. Ver [Análises RMNCAH e de vacinação](/pt/docs/reference/rmncah-vs-vaccine).
+
+</Callout>
+
+### Dados ausentes
+
+- Os valores mensais em falta são medidos pelo **1c**: a proporção de distritos sem valores mensais em falta no ano, em nenhum formulário de notificação (ver [Completude dos relatórios](#completude-dos-relatórios)).
+- Na etapa de [ajuste dos dados](/pt/docs/methodology/data-adjustment/), um valor mensal em falta é substituído pelo valor mensal mediano do distrito para o ano.
+
+### Cálculo de rácios
+
+- **CPN1 para Penta1 (3a).** Entre a primeira consulta pré-natal (cerca das 20 semanas de gravidez) e a Penta1 (6 a 8 semanas após o nascimento), o método pressupõe uma perda de gravidez de 3%, uma taxa de natimortalidade de 2%, uma taxa gemelar de 1,5% e uma mortalidade neonatal antes da Penta1 de 3%. Com a mesma cobertura de CPN1 e de Penta1 no inquérito, isto dá um rácio CPN1 para Penta1 esperado de **1,07**; em geral, o rácio esperado é 1,07 × (cobertura de CPN1 ÷ cobertura de Penta1), ambas do inquérito mais recente.
+- **Penta1 para Penta3 (3b).** A mortalidade tem um papel reduzido entre as 6 e as 14 semanas de idade, pelo que o rácio esperado depende do abandono entre as doses: cobertura de Penta1 ÷ cobertura de Penta3 no último inquérito (por ex., 0,95 ÷ 0,85 = 1,12). O rácio **VOP1 para VOP3** (3c, análises de vacinação) avalia-se da mesma forma.
+- **Intervalo aceitável.** Um rácio nacional a **± 0,05** do valor esperado é aceitável; fora dele, assinale o rácio e discuta possíveis explicações. Os rácios dos distritos variam mais: um rácio entre **1,0 e 1,5** é considerado dentro do intervalo.
+
+### Pontuação geral de qualidade
+
+| Métrica | Numerador | Denominador | Interpretação |
+| --- | --- | --- | --- |
+| **Pontuação geral** | Calculado automaticamente | Calculado automaticamente | Média de **1a, 1b, 1c, 2a, 2b** e dos controlos de rácios dos distritos (ver abaixo) |
+
+<Callout type="info">
+
+**As análises RMNCAH e de vacinação diferem aqui:** os controlos de rácios dos distritos na pontuação são **3c, 3d** nas análises RMNCAH e **3f, 3g, 3h** nas análises de vacinação. Nas análises de vacinação, o 1c da pontuação é a média sobre as vacinas traçadoras (BCG, Penta1-3, VOP1-3, Sarampo 1) e o 2b a média apenas sobre as vacinas; as análises RMNCAH calculam ambos sobre todos os indicadores. Ver [Análises RMNCAH e de vacinação](/pt/docs/reference/rmncah-vs-vaccine).
+
+</Callout>
+
+O guia Countdown 2024 sobre vacinação excluía o 1c da pontuação; as aplicações incluem-no.
+
+## Interpretação
+
+### Taxas de notificação
+
+<Callout type="warning">
+Uma taxa de notificação nacional elevada pode esconder muitos distritos com baixa notificação. Verifique sempre a vista por distrito e a pontuação por região.
+</Callout>
+
+- A taxa de notificação mede se os relatórios chegaram, não se os números estão certos. Utilize em conjunto a deteção de valores atípicos e a consistência interna.
+
+![Mapa de calor da taxa de notificação subnacional](/images/pt-dqa-reporting-rate.png)
+
+![Taxa de notificação nacional e unidades subnacionais com baixa notificação](/images/pt-dqa-national-repoting.png)
+
+### Valores atípicos
+
+<Callout type="warning">
+
+Os valores atípicos são identificados estatisticamente. Avalie sempre se os desvios refletem acontecimentos do mundo real (por exemplo, campanhas) ou erros de dados.
+
+</Callout>
+
+- Espera-se que pelo menos 99% dos valores mensais (2a) e 90% dos distritos (2b) estejam isentos de valores atípicos extremos.
+- Um pico súbito pode ser uma campanha e não um erro. Verifique a tendência antes de decidir.
+
+![Mapa de calor da deteção de valores atípicos por região e ano](/images/pt-dqa-outlier-detection.png)
+
+### Consistência e rácios
+
+- Reflita sobre grandes diferenças entre anos (por ex., mais de 0,10).
+- Numa verificação de consistência, os pontos afastados da diagonal indicam reporte inconsistente e merecem atenção.
+- Os gráficos de consistência mostram plausibilidade, não a verdade: uma razão Penta1/Penta3 invulgar pode ser um verdadeiro problema de evasão ou um problema de dados.
+- As razões esperadas resultam dos valores de cobertura do inquérito, pelo que valores de inquérito errados distorcem esta verificação.
+
+![Verificações de consistência entre CPN1 e Penta1 por ano](/images/pt-dqa-conistency-checks.png)
+
+![Gráficos dos rácios CPN1/Penta1 e Penta1/Penta3 por ano](/images/pt-dqa-internal-consistency.png)
+
+### Valores em falta
+
+![Mapa de calor de dados ausentes por indicador e região](/images/pt-dqa-missingness.png)
+
+### Pontuação geral
+
+![Tabela da pontuação geral de qualidade dos dados por ano](/images/pt-dqa-overall-score.png)
+
+### Armadilhas comuns
+
+- Uma pontuação baixa é um motivo para investigar, nem sempre para descartar um ano. Compare com os acontecimentos locais antes de utilizar [Remover anos](/pt/apps/countdown/data-preparation). Um ano com muitos valores atípicos ou baixa completude é candidato a **Remover anos** ou a um ajuste cuidadoso (ver [Ajuste de dados](/pt/docs/methodology/data-adjustment#remover-anos)).
+- Os resultados distritais são mais ruidosos do que os regionais porque assentam em números mais pequenos.
+- Alterar o limite de desempenho altera a pontuação, por isso acorde-o com a sua equipa antes de comparar anos ou países.
+
+## Nas aplicações
+
+<Steps>
+
+### Abra as páginas de qualidade dos dados
+
+Estão em **Qualidade dos dados** na aplicação RMNCAH e em **Avaliação da Qualidade dos Dados** na aplicação Vaxx: ver [Qualidade dos dados](/pt/apps/countdown/data-quality) para cada página e os seus filtros.
+
+### Reveja as métricas
+
+Percorra [Taxa de notificação](/pt/apps/countdown/data-quality#taxa-de-notificação), [Deteção de valores atípicos](/pt/apps/countdown/data-quality#detecção-de-valores-discrepantes), [Dados ausentes](/pt/apps/countdown/data-quality#dados-ausentes), [Consistência interna](/pt/apps/countdown/data-quality#consistência-interna) e a [Pontuação geral da qualidade dos dados](/pt/apps/countdown/data-quality#pontuação-geral-da-qualidade-dos-dados).
+
+<Callout type="info">
+
+O DataSuite calcula automaticamente a pontuação geral de qualidade dos dados.
+
+</Callout>
+
+### Avance para a preparação dos dados
+
+Remova os anos pouco fiáveis e ajuste os dados na [Preparação dos dados](/pt/apps/countdown/data-preparation).
+
+</Steps>
+
+## Ver também
+
+- [Avaliação da qualidade dos dados: fundamentação](/pt/docs/reference/rationale#data-quality-assessment)
+- [Fórmulas: qualidade dos dados](/pt/docs/reference/formulas#qualidade-dos-dados)
+- [Valores predefinidos e limiares: qualidade dos dados](/pt/docs/reference/defaults#qualidade-dos-dados)
+- Etapa anterior: [Configuração da análise](/pt/docs/methodology/analysis-setup) · Etapa seguinte: [Ajuste de dados](/pt/docs/methodology/data-adjustment)

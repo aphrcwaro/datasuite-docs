@@ -1,17 +1,18 @@
 ---
+description: Alphabetical glossary of terms as the DataSuite documentation defines them, from adjusted numerator to zero-dose, each linked to the section it comes from.
 title: Glossary
 ---
 
 # Glossary
 
 Terms as the DataSuite documentation defines them, each linked to the section it comes from. Where a page
-and the methodology word a term differently, the methodology page applies.
+and the methodology word a term differently, the methodology page applies. For abbreviations and acronyms, see [Abbreviations](/en/docs/reference/abbreviations).
 
 ## A
 
 ### Adjusted numerator (N_adj)
 
-N_adj = N_rep x [1 + (1 - C) x k], where N_rep is the raw reported number and C the reporting completeness (proportion of expected reports received) ([source](/en/docs/framework/3-data-adjustment#numerator-adjustment-formulas-and-parameters))
+N_adj = N_rep + N_rep x (1/C - 1) x k, where N_rep is the raw reported number and C the reporting completeness (proportion of expected reports received) ([source](/en/docs/methodology/data-adjustment#numerator-adjustment-formulas-and-parameters))
 
 ### Admin data
 
@@ -21,21 +22,21 @@ District, region, country; hospitals, health centres, all facilities, private fo
 
 ### Bottom inequality (marginalization)
 
-The poorest are left behind ([source](/en/docs/framework/6-equity-analysis#rationale-and-approach))
+The poorest are left behind ([source](/en/docs/methodology/equity#rationale-and-approach))
 
 ## C
 
 ### Completeness of facility death reporting
 
-Completeness of facility reporting = reported iMMR / expected iMMR ([source](/en/docs/framework/9-mortality#computing-reporting-completeness))
+Completeness of facility reporting = reported iMMR / expected iMMR ([source](/en/docs/methodology/mortality#computing-reporting-completeness))
 
 ### Consistent district
 
-Its yearly ratio lies between 1 and 1.5 ([source](/en/apps/rmncah/data-quality#internal-consistency))
+Its yearly ratio lies between 1 and 1.5 ([source](/en/apps/countdown/data-quality#internal-consistency))
 
 ### Core health professionals per 10,000 (physicians, non-physician clinicians, nurses, midwives)
 
-Thresholds 23 (2006 WHO) and 44.5 (UHC) ([source](/en/docs/framework/11-health-system-performance#core-health-professionals-per-10000-population))
+Thresholds 23 (2006 WHO) and 44.5 (UHC) ([source](/en/docs/methodology/health-system#core-health-professionals-per-10000-population))
 
 ## D
 
@@ -45,111 +46,107 @@ Per district, whether it is missing from, and how often it occurs in, each sheet
 
 ### Data quality indicators 1a, 1b, 1c
 
-- 1a: monthly facility reports received / total expected reports (12 x number of facilities) ([source](/en/docs/framework/2-data-quality-assessment#reporting-completeness))
-- 1b: districts with at least 90% reporting completeness / total districts ([source](/en/docs/framework/2-data-quality-assessment#reporting-completeness))
-- 1c: districts with no missing values across all forms / total districts ([source](/en/docs/framework/2-data-quality-assessment#reporting-completeness))
+- 1a: monthly facility reports received / total expected reports (12 x number of facilities) ([source](/en/docs/methodology/data-quality#reporting-completeness))
+- 1b: districts with at least 90% reporting completeness / total districts ([source](/en/docs/methodology/data-quality#reporting-completeness))
+- 1c: districts with no missing values across all forms / total districts ([source](/en/docs/methodology/data-quality#reporting-completeness))
 
 ### Data quality indicators 2a, 2b
 
-- 2a: monthly values not classified as outliers / total monthly values; 2b: districts with no outliers / total districts ([source](/en/docs/framework/2-data-quality-assessment#outlier-detection))
+- 2a: monthly values not classified as outliers / total monthly values; 2b: districts with no outliers / total districts ([source](/en/docs/methodology/data-quality#outlier-detection))
 
 ### Data quality indicators 3a-3d
 
-- 3a: ANC1 reported / Penta1 reported (expected ratio range); 3b: Penta1 reported / Penta3 reported (based on survey data); 3c and 3d: districts within the expected ratio or range / total districts ([source](/en/docs/framework/2-data-quality-assessment#internal-consistency))
+- 3a: ANC1 reported / Penta1 reported (expected ratio range); 3b: Penta1 reported / Penta3 reported (based on survey data); 3c and 3d: districts within the expected ratio or range / total districts ([source](/en/docs/methodology/data-quality#internal-consistency))
 
 ### Demand satisfied (family planning)
 
-Family planning demand satisfied = use of modern contraceptives / (unmet need + use of modern contraceptives) ([source](/en/docs/framework/5-coverage-estimation#family-planning))
+Family planning demand satisfied = use of modern contraceptives / (unmet need + use of modern contraceptives) ([source](/en/docs/methodology/coverage#family-planning))
 
 ### Dropout
 
-Children who received the first dose minus those who received the second, divided by the first, as a percentage ([source](/en/apps/vaxx/coverage-equity-targets#indicators-available))
+Children who received the first dose minus those who received the second, divided by the first, as a percentage ([source](/en/apps/countdown/coverage-equity-targets#indicators-available))
 
 ## E
 
 ### Expected institutional maternal mortality ratio (expected iMMR)
 
-Expected iMMR = population MMR / (P_i + (M_c/M_i) x (1 - P_i)), with P_i the share of live births in facilities ([source](/en/docs/framework/9-mortality#calculating-expected-institutional-mortality))
+Expected iMMR = population MMR / (P_i + (M_c/M_i) x (1 - P_i)), with P_i the share of live births in facilities ([source](/en/docs/methodology/mortality#calculating-expected-institutional-mortality))
 
 ### Extreme outlier
 
-A monthly value 5 times the median absolute deviation (MAD) from the monthly median value for that year ([source](/en/docs/framework/2-data-quality-assessment#outlier-detection))
-
-Also defined as: A monthly value more than 5 times the median absolute deviation (MAD) from the monthly median for that year ([source](/en/apps/rmncah/data-quality#outlier-detection))
-
-Also defined as: A value more than 5 median absolute deviations (MAD) from the median (Hampel method) ([source](/en/apps/vaxx/data-quality#outlier-detection))
+A monthly value more than 5 times the median absolute deviation (MAD) from the median monthly value of the same series (district, or the national or admin-1 series being assessed), the median and MAD being computed from all years except the most recent one ([source](/en/docs/methodology/data-quality#outlier-detection)). In data adjustment it is replaced by the median of the district's non-outlier months in the same year ([source](/en/docs/methodology/data-adjustment#critical-data-threshold-rules)).
 
 ## H
 
 ### Health facilities per 10,000 (all tiers, public and private)
 
-Below 2 indicates low infrastructure access ([source](/en/docs/framework/11-health-system-performance#number-of-health-facilities-per-10000-population))
+Below 2 indicates low infrastructure access ([source](/en/docs/methodology/health-system#number-of-health-facilities-per-10000-population))
 
 ### Hospitals per 100,000 population
 
- ([source](/en/docs/framework/11-health-system-performance#number-of-hospitals-per-100000-population))
+ ([source](/en/docs/methodology/health-system#number-of-hospitals-per-100000-population))
 
 ## I
 
 ### Immunization denominator (BCG, Penta)
 
-Live births - neonatal deaths ([source](/en/docs/framework/5-coverage-estimation#immunization))
+Live births - neonatal deaths ([source](/en/docs/methodology/coverage#immunization))
 
 ### Inpatient beds per 10,000 population
 
- ([source](/en/docs/framework/11-health-system-performance#inpatient-bed-density-per-10000-population))
+ ([source](/en/docs/methodology/health-system#inpatient-bed-density-per-10000-population))
 
 ### Institutional mortality (iMMR, iSBR, neonatal deaths before discharge)
 
-IMMR: maternal deaths in facilities per 100,000 facility live births; iSBR: stillbirths per 1,000 facility births; neonatal deaths before discharge per 1,000 facility live births ([source](/en/docs/framework/9-mortality#institutional-mortality-in-the-cd2030-analytical-approach))
+IMMR: maternal deaths in facilities per 100,000 facility live births; iSBR: stillbirths per 1,000 facility births; neonatal deaths before discharge per 1,000 facility live births ([source](/en/docs/methodology/mortality#institutional-mortality-in-the-cd2030-analytical-approach))
 
 ## K
 
 ### k (k-factor)
 
-The ratio of the volume of services provided by non-reporting facilities to that of reporting facilities ([source](/en/docs/framework/3-data-adjustment#approach-description-of-analytical-steps))
+The ratio of the volume of services provided by non-reporting facilities to that of reporting facilities ([source](/en/docs/methodology/data-adjustment#approach-description-of-analytical-steps))
 
-Also defined as: The volume of services in non-reporting facilities relative to reporting ones; 0 assumes they delivered no services, 1 the same volume ([source](/en/apps/rmncah/data-preparation#choose-the-k-factors))
+Also defined as: The volume of services in non-reporting facilities relative to reporting ones; 0 assumes they delivered no services, 1 the same volume ([source](/en/apps/countdown/data-preparation#choose-the-k-factors))
 
-Also defined as: The assumed service volume of non-reporting facilities relative to reporting ones ([source](/en/apps/vaxx/data-preparation#data-adjustment))
+Also defined as: The assumed service volume of non-reporting facilities relative to reporting ones ([source](/en/apps/countdown/data-preparation#data-adjustment))
 
 ## L
 
 ### Linear inequality
 
-Equidistant differences; coverage rises linearly with household wealth ([source](/en/docs/framework/6-equity-analysis#rationale-and-approach))
+Equidistant differences; coverage rises linearly with household wealth ([source](/en/docs/methodology/equity#rationale-and-approach))
 
 ## M
 
 ### MADM
 
-The median absolute deviation from the median of district coverage within an Admin1 unit, compared with that unit's coverage ([source](/en/docs/framework/7-subnational-analysis#rationale-and-approach-1))
+The median absolute deviation from the median of district coverage within an Admin1 unit, compared with that unit's coverage ([source](/en/docs/methodology/subnational#rationale-and-approach-1))
 
 ### Measles denominators
 
-Measles 1 denominator: live births - neonatal deaths - postneonatal deaths; Measles 2: live births - neonatal deaths - 2 x postneonatal deaths ([source](/en/docs/framework/5-coverage-estimation#immunization))
+Measles 1 denominator: live births - neonatal deaths - postneonatal deaths; Measles 2: live births - neonatal deaths - 2 x postneonatal deaths ([source](/en/docs/methodology/coverage#immunization))
 
 ## O
 
 ### OPD visits per child per year
 
-Adjusted under-5 OPD visits (new and re-visits) / DHIS2 projected under-5 population ([source](/en/docs/framework/10-service-utilisation#mean-number-of-opd-visits-per-child-per-year))
+Adjusted under-5 OPD visits (new and re-visits) / DHIS2 projected under-5 population ([source](/en/docs/methodology/service-utilisation#mean-number-of-opd-visits-per-child-per-year))
 
 ### Overall data quality score
 
-The mean of indicators 1a, 1b, 2a, 2b, 3c and 3d, computed automatically ([source](/en/docs/framework/2-data-quality-assessment#overall-quality-score))
+The mean of indicators 1a, 1b, 2a, 2b, 3c and 3d, computed automatically ([source](/en/docs/methodology/data-quality#overall-quality-score))
 
-Also defined as: The mean of rows 1a, 1b, 2a, 2b, 3c and 3d of the score table ([source](/en/apps/rmncah/data-quality#overall-data-quality-score))
+Also defined as: The mean of rows 1a, 1b, 2a, 2b, 3c and 3d of the score table ([source](/en/apps/countdown/data-quality#overall-data-quality-score))
 
 ## P
 
 ### Pediatric case fatality rate
 
-Children who die in hospital / total admissions (discharges + deaths) ([source](/en/docs/framework/10-service-utilisation#case-fatality-rate))
+Children who die in hospital / total admissions (discharges + deaths) ([source](/en/docs/methodology/service-utilisation#case-fatality-rate))
 
 ### Percent of subnational units above a target or threshold
 
-How far universal coverage is reached subnationally; the goal is all units meeting the target, and higher means less inequality ([source](/en/docs/framework/7-subnational-analysis#rationale-and-approach-1))
+How far universal coverage is reached subnationally; the goal is all units meeting the target, and higher means less inequality ([source](/en/docs/methodology/subnational#rationale-and-approach-1))
 
 ### Population data
 
@@ -165,7 +162,7 @@ Monthly expected, received and rate for ANC, institutional delivery, vaccination
 
 ### Service coverage
 
-The population who received the service divided by the population who need it (the target population) ([source](/en/docs/framework/4-denominator-selection#objective))
+The population who received the service divided by the population who need it (the target population) ([source](/en/docs/methodology/denominators#objective))
 
 ### Service data 1
 
@@ -183,14 +180,14 @@ OPV1-3, Penta2, PCV1-3, rotavirus 1-2, IPV1-2, HPV1-2, measles cases ([source](/
 
 ### Top inequality (mass deprivation)
 
-The richest are well ahead of all other wealth quintiles ([source](/en/docs/framework/6-equity-analysis#rationale-and-approach))
+The richest are well ahead of all other wealth quintiles ([source](/en/docs/methodology/equity#rationale-and-approach))
 
 ### Trajectory
 
-One possible path of coverage over time; each year's estimate is the middle value across trajectories, with a range leaving out the most extreme ones ([source](/en/docs/framework/5.1-bayesian-coverage#producing-estimates-and-short-term-forecasts))
+One possible path of coverage over time; each year's estimate is the middle value across trajectories, with a range leaving out the most extreme ones ([source](/en/docs/methodology/bayesian-coverage#producing-estimates-and-short-term-forecasts))
 
 ## Z
 
 ### Zero-dose and under-vaccinated
 
-Zero-dose and Under-vaccinated are derived from Penta1 and Penta3 ([source](/en/apps/vaxx/coverage-equity-targets#indicators-available))
+Zero-dose and Under-vaccinated are derived from Penta1 and Penta3 ([source](/en/apps/countdown/coverage-equity-targets#indicators-available))

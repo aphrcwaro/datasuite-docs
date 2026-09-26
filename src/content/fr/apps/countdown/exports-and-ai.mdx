@@ -1,0 +1,130 @@
+---
+description: Ce que l'on peut exporter des applications RMNCAH et Vaxx (images, tableaux, jeux de données, rapports) et comment l'assistant de DataSuite analyse ces données.
+---
+import { Tabs, Steps, Callout } from 'nextra/components'
+
+# Exports, rapports et IA
+
+Cette page couvre ce que vous pouvez extraire de l'application (images, tableaux, jeux de données et rapports), comment construire un rapport et comment l'assistant de chat de DataSuite peut analyser le même jeu de données enregistré. Pour planifier l'utilisation des résultats, voir [Diffusion, décisions et action](/fr/docs/methodology/dissemination) et [Exploiter l'IA pour l'analyse et l'interprétation](/fr/apps/ai-assistant).
+
+## Graphiques et tableaux
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+| Où | Ce que vous obtenez |
+| --- | --- |
+| Barre d'outils du graphique, **Télécharger le graphique** | Le graphique sous forme d'image PNG |
+| Barre d'outils du graphique, **Télécharger les données** | Les chiffres du graphique dans un fichier Excel `.xlsx`, avec des feuilles titrées |
+| Tableau, **Télécharger les données** | Le tableau au format Excel, pour l'année ou l'indicateur choisi dans *Ce tableau uniquement* |
+| Score global de qualité des données, DQA de l'utilisation des services, Système de santé national | **Télécharger le graphique** (PNG) et **Télécharger les données** (Excel) pour tout le tableau |
+
+Certains graphiques offrent aussi des outils dans la barre d'outils de la carte : modifier les libellés d'un graphique, changer l'orientation, la taille du texte ou la position de la légende, ajuster le style (polices, couleurs, quadrillage) et agrandir le graphique. **Personnaliser ce graphique** permet d'appliquer un réglage à ce graphique, à tous les graphiques de la carte, à tous les graphiques du même type ou à tous les graphiques, et à l'écran, au rapport ou aux deux. Les réglages sont enregistrés avec le jeu de données.
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+Chaque graphique a une barre d'outils dans l'en-tête de sa carte :
+
+| Outil | Rôle |
+| --- | --- |
+| Demander à l'IA | Emplacement d'une future fonction (« bientôt disponible »). |
+| Options d'affichage | Pour ce graphique uniquement : orientation (Auto ou Inverser les axes), taille du texte, position de la légende (Droite, Bas, Masquée). |
+| Modifier les libellés | Modifiez le titre, le sous-titre, la note, les titres des axes et de la légende de ce graphique. Un champ vide conserve le texte d'origine. S'applique au graphique et à son image téléchargée. Le texte modifié n'est pas traduit. |
+| Options de style | Polices, couleurs, angles, légende, axes, grille et fond de ce graphique. Enregistré avec le jeu de données. |
+| Télécharger le graphique | Enregistre le graphique en image PNG. |
+| Télécharger les données | Enregistre les données du graphique dans un fichier Excel. |
+| Agrandir le graphique | Agrandit le graphique. |
+
+Les tableaux ont un bouton **Télécharger les données** (Excel). Les tableaux dotés d'un sélecteur d'année ou d'indicateur ne filtrent que ce tableau, comme l'indique la mention « Ce tableau uniquement ». La carte du Score Global de Qualité des Données a un bouton pour le graphique et un pour les données.
+
+Les téléchargements suivent ce que vous voyez : indicateur, niveau administratif, région et dénominateur courants. Le nom du fichier contient l'indicateur et le dénominateur, par exemple `penta3_...`.
+
+</Tabs.Tab>
+</Tabs>
+
+<Callout type="info">
+Comment partager un graphique pour que les lecteurs puissent le vérifier : [Diffusion > Partager les graphiques et les tableaux](/fr/docs/methodology/dissemination#partager-les-graphiques-et-les-tableaux).
+</Callout>
+
+## Jeux de données
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+| Où | Ce que vous obtenez |
+| --- | --- |
+| Charger les données, **Télécharger le jeu de données principal** | Le jeu de données fusionné sous forme de fichier Stata `.dta` |
+| Ajustement des données, **Télécharger l'ensemble de données ajusté** | Le jeu de données ajusté sous forme de fichier `.dta` |
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+| Téléchargement | Où | Fichier |
+| --- | --- | --- |
+| Télécharger le jeu de données principal | Charger les données, étape Téléverser les données | `master_dataset.dta`, les données fusionnées telles que chargées |
+| Télécharger l'ensemble de données ajusté | Ajustement des données, après **Ajuster les données** | `master_adj_dataset.dta`, les données ajustées |
+
+L'assistant enregistre aussi toute l'analyse sous `nom_vaccine.rds` (voir **[Prise en main](/fr/apps/countdown/getting-started)**). Ce fichier est le cache utilisé par les outils d'IA ci-dessous et par **[Pooled App](/fr/apps/pooled)**.
+
+</Tabs.Tab>
+</Tabs>
+
+## Rapports
+
+La page **Rapports** de la section **Résultats** construit des documents (Word ou PDF) et des présentations (PowerPoint ou PDF) à partir du jeu de données chargé, en partant des rapports standard de cette application ou d'une page vierge. Dans l'application Vaxx, elle nécessite des données ajustées. Les graphiques et tableaux sont redessinés à partir des données à chaque fois, et chaque rapport est enregistré dans le jeu de données. Le guide complet, avec chaque rapport standard, l'éditeur, les formats d'export et le dépannage, se trouve sur la page [Rapports](/fr/apps/countdown/reports).
+
+## L'assistant de chat DataSuite
+
+L'assistant de chat de DataSuite travaille sur le même jeu de données enregistré que l'application, sait sur quelle page vous êtes et répond à partir de vos données et de la méthodologie Countdown, en citant ses sources. Ce qu'il peut faire ou non, et les bonnes pratiques, sont présentés sur la page **[Assistant IA](/fr/apps/ai-assistant)**.
+
+<Steps>
+
+### Enregistrer votre travail
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+Terminez le chargement du jeu de données. L'assistant travaille sur le jeu de données enregistré `_rmncah.rds`, créé lorsque vous terminez l'assistant Charger les données.
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+Terminez l'assistant pour que le jeu de données soit enregistré comme cache `.rds`, et ajustez les données.
+
+</Tabs.Tab>
+</Tabs>
+
+### Poser une question
+
+Ouvrez le chat et posez votre question.
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+Exemples : *Liste les pages de l'application RMNCAH et ce que chacune lit*, *Quelles régions ont une couverture Penta3 inférieure à 80 % lors de la dernière année, avec le dénominateur sélectionné ?*, *Rédige une interprétation du continuum des soins national pour la réunion de revue*.
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+Par exemple : « Quels districts ont un abandon Penta1 à Penta3 supérieur à 10 % pour la dernière année ? » ou « Explique pourquoi la couverture Rougeole 1 de l'enquête et celle du DHIS2 diffèrent. »
+
+</Tabs.Tab>
+</Tabs>
+
+### Vérifier la réponse
+
+L'assistant termine sa réponse par ses sources : les données utilisées et les sections de la méthodologie. Comparez ses chiffres avec la page correspondante et les graphiques de l'application avant de les citer, et consultez le **[chapitre sur l'IA](/fr/apps/ai-assistant)** pour de bonnes requêtes.
+
+</Steps>
+
+## Pièges courants
+
+- Partager des résultats : voir [Diffusion > Pièges courants](/fr/docs/methodology/dissemination#pièges-courants).
+- Interroger l'assistant sur des résultats avant que l'Ajustement des données ait été exécuté et enregistré dans l'application.
+- Accepter une interprétation de l'IA sans vérifier la qualité des données. L'assistant lit les mêmes données ; de mauvaises données donnent donc de mauvaises conclusions. Les résultats de l'IA doivent être vérifiés par un analyste. Voir **[Exploiter l'IA pour l'analyse et l'interprétation](/fr/apps/ai-assistant)**.
+
+## Limites
+
+- Dans l'application Vaxx, la référence des données liste les 18 pages d'analyse de Vaxx (téléversement, qualité des données, préparation, dénominateurs, couverture, inégalités, équité et cibles). Elle ne décrit pas les pages Introduction et Rapports.
+- Dans l'application Vaxx, les boutons Demander à l'IA des barres d'outils des graphiques ne sont pas encore actifs. Utilisez l'assistant de chat.

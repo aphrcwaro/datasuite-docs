@@ -1,4 +1,5 @@
 ---
+description: How to produce the .rds caches that the Pooled App reads from the RMNCAH or Vaxx app, and what makes a cache loadable and comparable across countries.
 topics: [pooling, analysis-setup]
 cacheMembers: [cache_path, countdown_data]
 ai:
@@ -15,7 +16,7 @@ ai:
     - "A loadable cache is readable by R, contains a country name and adjusted data, and yields at least one table (#what-makes-a-cache-loadable)"
     - "Only .rds files are used; two files for the same country (by ISO3): the newer date is kept; the date is the last run of eight digits in the name, else the modified time (#naming-and-folders)"
     - "Caches must load with the installed cd2030.core (1.1.0 or later); re-save an old file in the country app if it fails (#compatibility-notes)"
-    - "The workflow is in the framework (/en/docs/framework/0-workflow/)"
+    - "The workflow is in the framework (/en/docs/methodology/)"
 ---
 
 import { Callout } from 'nextra/components'
@@ -26,8 +27,8 @@ Pooled reads the **caches** that the country apps save. A cache is an `.rds` fil
 
 ## Producing a cache
 
-1. Open the **[RMNCAH App](/en/apps/rmncah)** (or the **[Vaxx App](/en/apps/vaxx)**) and upload the country's data. The data usually comes from the **[Data Extractor](/en/apps/data-extractor)**.
-2. Work through the analysis: data quality checks, data preparation and adjustment, and denominator selection. See the **[analytical framework](/en/docs/framework/0-workflow)**.
+1. Open the **[RMNCAH App](/en/apps/countdown)** (or the **[Vaxx App](/en/apps/countdown)**) and upload the country's data. The data usually comes from the **[Data Extractor](/en/apps/data-extractor)**.
+2. Work through the analysis: data quality checks, data preparation and adjustment, and denominator selection. See the **[analytical framework](/en/docs/methodology)**.
 3. The app saves the cache as an `.rds` file. When the country's data was uploaded from a spreadsheet or Stata file, the cache is written next to the source file with the same name and an `.rds` extension. If that `.rds` already exists, it is loaded again instead of a new one being created.
 
 Repeat for each country, using the same app and the same domain for all of them.

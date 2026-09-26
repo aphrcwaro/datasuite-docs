@@ -10,6 +10,8 @@
     "postbuild": "npm run index && npm run ai-corpus",
     "ai-corpus": "node scripts/build-ai-corpus.mjs src/content out",
     "ai-links": "node scripts/check-ai-links.mjs --snapshot",
+    "links": "node scripts/check-anchors.mjs",
+    "translations": "node scripts/check-translations.mjs",
     "start": "npx --yes serve out"
   },
   "dependencies": {

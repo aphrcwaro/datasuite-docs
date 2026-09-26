@@ -1,0 +1,114 @@
+---
+description: "Visão geral da estrutura analítica do CD2030 DataSuite: qualidade e ajuste dos dados, denominadores, cobertura e desigualdades subnacionais."
+---
+
+import { HomeCards } from '@/components/HomeCards'
+
+# Visão geral da estrutura
+
+Esta página resume a estrutura analítica do CD2030 DataSuite.
+Destina-se a ajudar as equipas a passar dos dados brutos das unidades de saúde e dos inquéritos para resultados defensáveis de cobertura a nível nacional e subnacional.
+
+O CD2030 DataSuite implementa um fluxo de trabalho analítico de ponta a ponta que transforma dados brutos das unidades de saúde em estimativas de cobertura credíveis e acionáveis.
+O fluxo de trabalho segue uma sequência lógica: avaliar a qualidade dos dados, corrigir a incompletude e os erros, selecionar denominadores baseados em evidências, calcular a cobertura e examinar os padrões de desigualdade a nível nacional e geográfico.
+
+![Fluxo de trabalho da análise Countdown](/images/methods_cd_approach.png)
+
+Esta abordagem estruturada responde a um desafio universal na monitorização de SRMNIA (RMNCAH): os dados das unidades de saúde são abundantes, mas muitas vezes pouco fiáveis, enquanto os inquéritos fornecem estimativas de cobertura de referência (padrão de excelência), mas são pouco frequentes e dispendiosos.
+O CD2030 DataSuite colmata esta lacuna ao examinar sistematicamente os dados das unidades de saúde, calibrá-los em relação aos valores de referência dos inquéritos e produzir linhas de tendência contínuas com incerteza quantificada.
+O resultado é a confiança de que os números de cobertura refletem a realidade, e não artefactos dos dados.
+
+## Fluxo de trabalho de ponta a ponta
+
+A estrutura segue uma sequência prática:
+
+1. [Carregar e configurar](/pt/docs/methodology/analysis-setup) os dados das unidades de saúde e dos inquéritos.
+2. [Calibrar as principais taxas de referência nacionais](/pt/docs/methodology/analysis-setup#survey-params).
+3. [Avaliar a qualidade dos dados](/pt/docs/methodology/data-quality) antes de estimar a cobertura.
+4. [Ajustar](/pt/docs/methodology/data-adjustment) os dados incompletos, instáveis ou pouco confiáveis.
+5. [Selecionar o denominador com melhor desempenho](/pt/docs/methodology/denominators).
+6. Gerar e interpretar os resultados de **[cobertura](/pt/docs/methodology/coverage)** (incluindo a **[estimativa bayesiana da cobertura](/pt/docs/methodology/bayesian-coverage)**), **[equidade](/pt/docs/methodology/equity)**, **[subnacionais](/pt/docs/methodology/subnational)**, **[mortalidade](/pt/docs/methodology/mortality)**, **[utilização de serviços](/pt/docs/methodology/service-utilisation)** e **[desempenho do sistema de saúde](/pt/docs/methodology/health-system)**, por esta ordem.
+7. Planear a **[disseminação, as decisões e a ação](/pt/docs/methodology/dissemination)**.
+
+Nas aplicações, a mesma sequência é seguida página a página: ver [Etapas da análise](/pt/apps/countdown/analysis-steps) (RMNCAH App).
+
+## Módulos da estrutura
+
+<HomeCards
+  items={[
+    {
+      title: 'Configuração da Análise',
+      description: 'Configurar a análise: os dados e os parâmetros nacionais de que necessita e a forma de os carregar nas aplicações.',
+      href: '/pt/docs/methodology/analysis-setup',
+      icon: 'tools'
+    },
+    {
+      title: 'Avaliação da Qualidade dos Dados',
+      description: 'Rever a completude da notificação, os valores atípicos, os dados em falta, consistência interna e pontuações anuais de qualidade.',
+      href: '/pt/docs/methodology/data-quality',
+      icon: 'checklist'
+    },
+    {
+      title: 'Ajuste de Dados',
+      description: 'Remover períodos pouco fiáveis, aplicar fatores de ajuste e comparar valores antes e depois da limpeza.',
+      href: '/pt/docs/methodology/data-adjustment',
+      icon: 'settings-gear'
+    },
+    {
+      title: 'Seleção do Denominador',
+      description: 'Comparar as opções de denominador do DHIS2, da ONU, derivadas da CPN1 e derivadas da Penta1.',
+      href: '/pt/docs/methodology/denominators',
+      icon: 'symbol-number'
+    },
+    {
+      title: 'Estimativa de Cobertura',
+      description: 'Estimar níveis e tendências, comparar com as referências dos inquéritos e rever o progresso em direção às metas.',
+      href: '/pt/docs/methodology/coverage',
+      icon: 'graph'
+    },
+    {
+      title: 'Estimativa de Cobertura Bayesiana',
+      description: 'Modelar a cobertura nacional e subnacional até ao ano mais recente com dados, com previsões de curto prazo.',
+      href: '/pt/docs/methodology/bayesian-coverage',
+      icon: 'symbol-operator'
+    },
+    {
+      title: 'Análise de Equidade',
+      description: 'Avaliar a desigualdade por local de residência, riqueza e educação materna, com base em comparações de inquéritos.',
+      href: '/pt/docs/methodology/equity',
+      icon: 'graph-scatter'
+    },
+    {
+      title: 'Análise Subnacional',
+      description: 'Examinar a variação regional e distrital, a consecução de metas e a desigualdade geográfica.',
+      href: '/pt/docs/methodology/subnational',
+      icon: 'globe'
+    },
+    {
+      title: 'Mortalidade',
+      description: 'Verificar se as mortes maternas, os natimortos e as mortes neonatais notificados pelas unidades de saúde são plausíveis e qual a completude da notificação de mortes.',
+      href: '/pt/docs/methodology/mortality',
+      icon: 'pulse'
+    },
+    {
+      title: 'Utilização de Serviços',
+      description: 'Medir em que medida as crianças menores de 5 anos acedem aos serviços curativos, com a letalidade institucional como indicador indireto da qualidade dos cuidados.',
+      href: '/pt/docs/methodology/service-utilisation',
+      icon: 'person'
+    },
+    {
+      title: 'Desempenho do Sistema de Saúde',
+      description: 'Analisar os recursos e resultados do sistema de saúde -- serviços, força de trabalho, financiamento -- e o papel do setor privado nos serviços de SRMNIA-N.',
+      href: '/pt/docs/methodology/health-system',
+      icon: 'layers'
+    },
+    {
+      title: 'Disseminação, Decisões e Ação',
+      description: 'Transformar as conclusões em ações concretas, das reuniões de revisão ao planeamento e às decisões baseadas em dados.',
+      href: '/pt/docs/methodology/dissemination',
+      icon: 'book'
+    }
+  ]}
+/>
+
+O objetivo final da estrutura é a utilização prática. As conclusões devem informar os processos de revisão do país, as discussões de planeamento e os grupos de trabalho técnicos, para que a análise conduza a ações concretas de SRMNIA (RMNCAH) em vez de permanecer apenas como um relatório isolado.

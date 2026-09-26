@@ -1,3 +1,6 @@
+---
+description: Como criar um mapeamento no Data Extractor que define os dados do DHIS2 a extrair e a sua estrutura, escolher o modo de mapeamento e configurar indicadores.
+---
 import { Callout, Steps } from 'nextra/components'
 
 # Configuração do mapeamento
@@ -57,7 +60,7 @@ O **Mappings Manager** é o local central para:
 
 - **New Mapping:** iniciar uma nova configuração
 - **Search bar:** localizar mapeamentos existentes
-- **Actions column:** editar, transferir, clonar ou eliminar o mapeamento selecionado
+- **Actions column:** editar, exportar em JSON, clonar ou eliminar o mapeamento selecionado
 
 ### Downloads Manager
 
@@ -144,7 +147,7 @@ Existem atualmente dois modos de mapeamento:
 
 <Callout type="warning">
 
-Alterar o modo de mapeamento a meio do processo repõe o progresso se o mapeamento não tiver sido guardado. Guarde sempre o mapeamento antes de mudar de modo de mapeamento.
+Alterar o modo de mapeamento apaga todos os indicadores e a respetiva configuração do mapeamento que está a editar, quer tenha sido guardado quer não; a aplicação pede primeiro uma confirmação (**Yes, Clear Indicators**). Escolha o modo de mapeamento antes de adicionar indicadores.
 
 </Callout>
 

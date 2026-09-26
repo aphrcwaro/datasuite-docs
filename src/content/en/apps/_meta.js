@@ -8,16 +8,8 @@ export default {
     }
   },
   'data-extractor': 'CD2030 Data Extractor',
-  rmncah: {
-    title: 'RMNCAH App',
-    theme: {
-      layout: 'full',
-      copyPage: false,
-      toc: true
-    }
-  },
-  vaxx: {
-    title: 'Vaxx App',
+  countdown: {
+    title: 'RMNCAH and Vaxx apps',
     theme: {
       layout: 'full',
       copyPage: false,
@@ -34,6 +26,14 @@ export default {
   },
   'ai-assistant': {
     title: 'AI Assistant',
+    theme: {
+      layout: 'full',
+      copyPage: false,
+      toc: true
+    }
+  },
+  'building-apps': {
+    title: 'Building apps for DataSuite',
     theme: {
       layout: 'full',
       copyPage: false,

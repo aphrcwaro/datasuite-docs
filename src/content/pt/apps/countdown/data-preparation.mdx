@@ -1,0 +1,130 @@
+---
+description: Como remover anos pouco fiáveis, executar o Ajuste de dados e rever as alterações para obter o conjunto de dados pronto para análise usado na cobertura.
+---
+import { Tabs, Steps, Callout } from 'nextra/components'
+
+# Preparação dos dados
+
+A preparação dos dados transforma os números notificados num conjunto de dados pronto para análise, o conjunto de dados usado para a cobertura. Tem três páginas: **Remover anos**, **Ajuste de dados** e **Alterações no ajuste de dados** (na aplicação RMNCAH, encontram-se na secção **Qualidade dos dados**). O método, as fórmulas e as regras de negócio encontram-se em [Ajuste de dados](/pt/docs/methodology/data-adjustment).
+
+<Callout type="important">
+O ajuste é obrigatório. Executar o ajuste é o que desbloqueia as páginas seguintes: na aplicação RMNCAH, as páginas de Denominadores e de Análise; na aplicação Vaxx, os denominadores, a cobertura, as desigualdades, as metas e os Relatórios ficam indisponíveis até executar **Ajustar Dados** pelo menos uma vez.
+</Callout>
+
+## Remover anos
+
+**Finalidade.** Deixar de fora os anos cujos dados não são fiáveis.
+
+**Quando utilizar.** Quando remover um ano, e quando o manter: [Ajuste de dados > Remover anos](/pt/docs/methodology/data-adjustment#remover-anos).
+
+<Steps>
+
+### Abra Remover anos
+
+Na aplicação RMNCAH, encontra-se em **Qualidade dos dados** na barra lateral. Decida primeiro com base nas páginas de [qualidade dos dados](/pt/apps/countdown/data-quality).
+
+### Selecionar anos para remover
+
+Em **Selecionar anos para remover**, as etiquetas listam os anos presentes nos dados. Selecione um ou mais.
+
+### Prima Confirmar Remoção
+
+A mensagem passa de *Nenhum ano foi removido ainda* para *Dados para os seguintes anos foram removidos*, seguida dos anos. Para repor um ano, desmarque-o ou limpe a seleção e confirme novamente.
+
+</Steps>
+
+![Remover anos](/images/pt-dqa-remove-year.png)
+
+A remoção ocorre antes do ajuste. Se já ajustou os dados, execute **Ajustar Dados** de novo depois de alterar os anos removidos.
+
+## Ajuste de dados
+
+**Finalidade.** Corrigir a notificação incompleta (notificações em falta) e os valores discrepantes extremos. Como são tratados os valores em falta, os valores discrepantes e o fator K: [Ajuste de dados > Método](/pt/docs/methodology/data-adjustment#método).
+
+A página tem dois cartões: **Fatores K (Fatores de Ajuste)** e o cartão de ajuste com **Ajustar Dados**, que aplica as correções ao conjunto de dados atual.
+
+<Steps>
+
+### Escolha os Fatores K
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+O cartão **Fatores K (Fatores de Ajuste)** tem quatro seletores: **Fator K ANC**, **Fator K Parto**, **Fator K Vacinas** e **Fator K OPD**. Cada um oferece 0, 0,25, 0,5, 0,75 e 1. O que cada valor pressupõe e como escolher: [Ajuste de dados > Configuração do fator k](/pt/docs/methodology/data-adjustment#configuração-do-fator-k).
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+O cartão **Fatores K (Fatores de Ajuste)** tem um **Fator K ANC**, um **Fator K Parto** e um **Fator K Vacinas**, cada um a escolher entre 0, 0,25, 0,5, 0,75 ou 1. A página mostra os valores guardados no conjunto de dados. Escolha um valor para cada um dos três fatores; o valor inicial, o valor predefinido do guia e como escolher: [Ajuste de dados > Configuração do fator k](/pt/docs/methodology/data-adjustment#configuração-do-fator-k).
+
+</Tabs.Tab>
+</Tabs>
+
+### Prima Ajustar Dados
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+A mensagem passa de *Conjunto de dados não ajustado* para *Ajustando...* e depois *Dados Ajustados*. Faça-o mesmo que mantenha todos os fatores em 0, porque é isso que desbloqueia as páginas de análise.
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+Escolha **Ajustar Dados** e aguarde por "Dados Ajustados". A caixa de estado mostra "Ainda não ajustado", depois "Ajustando...", depois "Dados Ajustados".
+
+</Tabs.Tab>
+</Tabs>
+
+### Transfira o resultado, se precisar
+
+Depois de ajustados os dados, **Baixar Conjunto de Dados Ajustado** guarda o conjunto de dados principal ajustado como ficheiro `.dta` (`master_adj_dataset.dta`).
+
+### Rever as alterações
+
+Abra **Alterações no ajuste de dados**.
+
+</Steps>
+
+<Callout type="warning">
+Alterar os fatores K ou os anos removidos descarta o conjunto de dados ajustado. Prima novamente **Ajustar Dados**, caso contrário as páginas de análise não refletirão a alteração. Se o ajuste falhar, a mensagem indica o motivo.
+</Callout>
+
+Como é tratado um mês de distrito com notificação inferior a 75% (ou em falta): [Ajuste dos dados > Regras de limiar de dados críticos](/pt/docs/methodology/data-adjustment/#regras-de-limiar-de-dados-críticos).
+
+![Seleção do fator K](/images/pt-adjustment-kfactor.png)
+
+## Alterações no ajuste de dados
+
+**Finalidade.** Ver o que o ajuste fez a cada indicador.
+
+**Como ler.** O cartão **Visualizar efeitos das mudanças** tem um separador por indicador. Cada gráfico compara o número de eventos (do indicador) *antes* e *depois* do ajuste para completude e valores discrepantes, por ano.
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+Os separadores são Partos institucionais, Nascidos vivos em estabelecimento de saúde, Pentavalente 1, CPN 1 e OPD Menores de 5 anos, mais um separador **Personalizado** para qualquer outro indicador. Utilize **Baixar Gráfico** e **Baixar Dados** na barra de ferramentas. **Gerar Relatório** abre o relatório de ajuste.
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+Os separadores são **Nascidos vivos em estabelecimento de saúde**, **BCG**, **Pentavalente 1** e **Sarampo 1**, mais um separador **Verificação Personalizada** com um seletor de indicador.
+
+Se os dados não foram ajustados, o gráfico usa um fator K de 0 para todos os serviços, pelo que mostra apenas o efeito do tratamento de valores discrepantes e em falta.
+
+</Tabs.Tab>
+</Tabs>
+
+![Antes e depois do ajuste](/images/pt-adjustment-before-after.png)
+
+## Como interpretar os resultados
+
+Como ler os gráficos de antes e depois: [Ajuste de dados > Resultados do ajuste](/pt/docs/methodology/data-adjustment#resultados-do-ajuste). O que relatar: [Ajuste de dados > Relatório](/pt/docs/methodology/data-adjustment#relatório).
+
+## Armadilhas comuns
+
+- Alterar os fatores K, os anos removidos ou o limite de desempenho afeta todas as páginas seguintes. Execute **Ajustar Dados** de novo e reverifique os denominadores.
+- Os relatórios e as caches agregadas devem ser criados a partir de dados ajustados. Consulte a **[Pooled App](/pt/apps/pooled)**.
+
+As armadilhas na escolha dos fatores K e na remoção de anos, e os indicadores que não são ajustados: [Ajuste de dados > Armadilhas comuns](/pt/docs/methodology/data-adjustment#armadilhas-comuns).
+
+Seguinte: **[Denominadores](/pt/apps/countdown/denominators)**.

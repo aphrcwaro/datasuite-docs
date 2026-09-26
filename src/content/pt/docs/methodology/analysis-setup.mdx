@@ -1,0 +1,162 @@
+---
+description: "Como configurar a análise: o livro do Excel gerado a partir do HMIS/DHIS2 e as verificações que deve passar, os ficheiros de inquérito, os dados de referência e os parâmetros nacionais de inquérito, e como carregá-los."
+---
+
+import { Callout, Steps } from 'nextra/components'
+
+# Configuração da análise
+
+Esta página descreve os passos necessários para configurar o ambiente de análise. Apresenta os dados e os parâmetros nacionais de que a análise necessita e a forma de os carregar nas aplicações.
+
+<Callout type="info">
+**Em resumo**
+- **Responde a:** De que dados, conjuntos de dados de referência e parâmetros nacionais necessita a análise, e como são carregados?
+- **Utiliza:** o livro do Excel gerado a partir das exportações do HMIS/DHIS2 (ver as [definições dos indicadores de dados do DHIS2](/pt/docs/reference/indicator-definitions)), os conjuntos de dados de referência incorporados e os parâmetros nacionais dos inquéritos.
+- **Produz:** uma pasta de trabalho com o ficheiro `.rds` associado, os conjuntos de dados de referência correspondentes ao país e os parâmetros nacionais utilizados na [seleção do denominador](/pt/docs/methodology/denominators); o passo seguinte é a [avaliação da qualidade dos dados](/pt/docs/methodology/data-quality).
+- **Nas aplicações:** [Primeiros passos](/pt/apps/countdown/getting-started) (o assistente Carregar dados).
+</Callout>
+
+## Método
+
+### Dados do HMIS
+
+A aplicação aceita os formatos de dados tabulares mais comuns para o carregamento de dados do DHIS2:
+
+- Livro do Excel: `.xlsx` ou `.xls`
+- Conjunto de dados Stata: `.dta`
+- Conjunto de dados já guardado pela aplicação: `.rds`
+
+O livro do Excel, no formato produzido pelo [Data Extractor](/pt/apps/data-extractor), tem de conter uma folha `Admin_data`, uma folha `Population_data`, uma folha `Reporting_completeness` e pelo menos uma folha `Service_data`.
+
+<Callout type="info">
+
+Consulte as [definições dos indicadores de dados do DHIS2](/pt/docs/reference/indicator-definitions).
+
+</Callout>
+
+### Verificações dos dados carregados
+
+Ao carregar, os dados são verificados antes de a análise poder continuar. Há três tipos de verificação.
+
+- **Verificações bloqueantes** (têm de ser aprovadas para poder continuar):
+  - folhas Admin, Population e Service encontradas;
+  - colunas de país, admin-1 e distrito presentes na folha Admin;
+  - exatamente um país na folha Admin, reconhecido pelo nome;
+  - distritos coincidentes entre a folha Admin e todas as outras folhas;
+  - nomes de distritos consistentes ao longo dos anos;
+  - sem meses em falta (cada distrito-ano tem os 12 meses);
+  - todos os nomes de meses reconhecidos (inglês ou francês).
+- **Verificações informativas** (não bloqueiam):
+  - nascimentos vivos estimados não inferiores aos nascimentos vivos nas unidades de saúde (contagens institucionais reportadas; margem de 10%);
+  - dados de população não colados nos dados de serviços;
+  - todos os indicadores com alguns dados;
+  - nomes de meses etiquetados de forma consistente entre folhas.
+- **Verificações de mapeamento:** duas verificações indicam os nomes das regiões do inquérito ou do ficheiro de forma que não coincidem com o conjunto de dados. Esses nomes são associados aos do conjunto de dados antes da análise (ver [Ficheiros de inquérito e ficheiro de forma](#ficheiros-de-inquérito-e-ficheiro-de-forma)).
+
+### Ficheiros de inquérito e ficheiro de forma
+
+Os ficheiros de dados de inquérito (`.dta`) são opcionais. São cinco: **dados nacionais**, **dados regionais**, **dados por área**, **dados de educação materna** e **dados por quintil do índice de riqueza**. Alimentam a análise de equidade (a Avaliação de equidade), as linhas de comparação com o inquérito e as comparações subnacionais. Sem eles, a aplicação mantém os seus dados de referência incorporados.
+
+O ficheiro de forma é usado nos mapas. Está incluído um ficheiro de forma padrão do país; um ficheiro personalizado pode substituí-lo.
+
+Se os ficheiros de inquérito ou um ficheiro de forma personalizado derem às regiões nomes diferentes dos do conjunto de dados, os seus nomes de regiões (admin-1) têm de ser associados aos do conjunto de dados.
+
+### Conjuntos de dados incorporados
+
+Para além do conjunto de dados do DHIS2 carregado, a aplicação inclui conjuntos de dados de referência internos que estão associados ao país cujos dados foram carregados.
+
+Estes conjuntos de dados incorporados são:
+
+- Estimativas da ONU
+- Dados de inquéritos
+- Estimativas do WUENIC
+- Dados de mortalidade da ONU
+- Dados da Ferramenta de Estimativa do Planeamento Familiar (FPET)
+
+Como estes conjuntos de dados têm o nome do país cujos dados do DHIS2 são carregados, a aplicação consegue associar automaticamente o ficheiro carregado ao conjunto de referência correto.
+
+<Callout type="info">
+
+**Boas práticas**
+
+- Utilize uma pasta de trabalho por país ou por lote de exportação do DHIS2.
+- Mantenha juntos o ficheiro de origem original do Excel e o ficheiro `.rds` gerado.
+- Não mude manualmente o nome do ficheiro `.rds`; a aplicação gere esse ficheiro automaticamente.
+
+</Callout>
+
+### Parâmetros nacionais para o cálculo do denominador[#survey-params]
+
+- Estes parâmetros são utilizados para apoiar a **seleção de denominadores** na análise da cobertura de serviços no âmbito da estrutura analítica SRMNIA (RMNCAH).
+- Derivam tipicamente do **inquérito nacional mais recente** (por exemplo, DHS, MICS) e são aplicados de forma uniforme a todas as unidades subnacionais.
+
+<Callout type="info">
+
+**Dica**
+
+Os valores predefinidos são extraídos dos dados de inquéritos disponíveis para o país. Os utilizadores podem atualizar estes valores se dispuserem de valores validados mais recentes.
+
+</Callout>
+
+Todos os parâmetros são obrigatórios. Os valores de cobertura são percentagens (0 a 100). A perda de gravidez, os nascimentos gemelares, a natimortalidade, a mortalidade neonatal e a mortalidade pós-neonatal são proporções (0 a 0,05; por exemplo, 0,03 significa 3%). O ano recente do inquérito situa-se entre 2015 e 2030.
+
+![Taxas nacionais para o cálculo do denominador](/images/pt-national-survey-parameters.png)
+
+| Parâmetro | Definição |
+| --- | --- |
+| **Cobertura ANC1 (%)** | Percentagem de mulheres com idade entre 15 e 49 anos com um nado-vivo que tiveram pelo menos uma consulta de cuidados pré-natais (CPN) durante a última gravidez. (Exemplo: se 940 em 1 000 mulheres tiveram pelo menos uma consulta de CPN, a cobertura de CPN1 é de 94%.) |
+| **Cobertura ANC4 (%)** | Percentagem de mulheres com idade entre 15 e 49 anos com um nado-vivo que tiveram quatro ou mais consultas de cuidados pré-natais durante a última gravidez. (Exemplo: se 680 em 1 000 mulheres tiveram ≥4 consultas de CPN, a cobertura de CPN4 é de 68%.) |
+| **Perda gestacional (proporção)** | Proporção de gravidezes que terminaram em aborto espontâneo, aborto provocado ou natimorto, em relação a todos os desfechos de gravidez registados. (Exemplo: se 80 em 1 000 gravidezes terminaram em perda, a proporção é 0,08) |
+| **Nascimentos gemelares (proporção)** | Proporção de nados-vivos que são gémeos, em relação a todos os nados-vivos. (Exemplo: se 30 em 1 500 nados-vivos eram gémeos (ou seja, 15 pares de gémeos), a proporção é 0,02) |
+| **Mortalidade neonatal (proporção)** | Proporção de nados-vivos que morrem nos primeiros 28 dias de vida, em relação a todos os nados-vivos. (Exemplo: se 20 em 1 000 nados-vivos morreram nos primeiros 28 dias, a proporção é 0,02) |
+| **Mortalidade pós-neonatal (proporção)** | Proporção de nados-vivos que morrem entre os 28 dias e os 11 meses de vida, em relação a todos os nados-vivos. (Exemplo: se 15 em 1 000 nados-vivos morreram entre os 28 dias e os 11 meses, a proporção é 0,015) |
+| **Taxa de natimortalidade (proporção)** | Proporção de gravidezes que terminaram em natimorto, em relação a todos os desfechos de gravidez registados. (Exemplo: se 10 em 1 000 gravidezes terminaram em natimorto, a proporção é 0,01) |
+| **Cobertura de partos institucionais (%)** | Percentagem de nados-vivos que ocorreram numa unidade de saúde. (Exemplo: se 850 em 1 000 nados-vivos ocorreram numa unidade de saúde, a cobertura de parto institucional é de 85%.) |
+| **Cobertura BCG (%)** | Percentagem de lactentes com 12 a 23 meses que receberam a vacina Bacilo de Calmette-Guérin (BCG). (Exemplo: se 950 em 1 000 lactentes receberam a vacina BCG, a cobertura de BCG é de 95%.) |
+| **Cobertura Penta1 (%)** | Percentagem de lactentes com 12 a 23 meses que receberam a primeira dose da vacina pentavalente. (Exemplo: se 920 em 1 000 lactentes receberam a primeira dose, a cobertura da Penta 1 é de 92%.) |
+| **Cobertura Penta3 (%)** | Percentagem de lactentes com 12 a 23 meses que receberam a terceira dose da vacina pentavalente. (Exemplo: se 850 em 1 000 lactentes receberam a terceira dose, a cobertura da Penta 3 é de 85%.) |
+| **Cobertura Sarampo 1 (%)** | Percentagem de lactentes com 12 a 23 meses que receberam a primeira dose da vacina contra o sarampo. (Exemplo: se 900 em 1 000 lactentes receberam a primeira dose, a cobertura do Sarampo 1 é de 90%.) |
+| **Taxa de cesarianas (%)** | Percentagem de nados-vivos que nasceram por cesariana. (Exemplo: se 150 em 1 000 nados-vivos nasceram por cesariana, a taxa de cesarianas é de 15%.) |
+| **Baixo peso ao nascer (%)** | Percentagem de nados-vivos com baixo peso à nascença (menos de 2 500 gramas). (Exemplo: se 100 em 1 000 nados-vivos tiveram baixo peso à nascença, a proporção de baixo peso à nascença é de 10%.) |
+| **Ano recente da pesquisa** | O ano civil em que o inquérito foi realizado e do qual são extraídas as estimativas de cobertura vacinal (por exemplo, BCG, Penta1/3, Sarampo 1). (Exemplo: se o inquérito foi realizado em 2022, esse é o ano do inquérito de vacinação). |
+| **Ano de Início dos Dados da Pesquisa** | O ano civil a partir do qual os dados do inquérito começam. É utilizado para determinar o período de tempo para o qual os dados do inquérito são relevantes. Idealmente, recomenda-se utilizar os dois inquéritos mais recentes para esta análise. (Exemplo: se um país tem dados de inquéritos de 2008, 2013, 2018 e 2023, o início dos dados do inquérito deve ser 2018 (os dois mais recentes)). |
+
+<Callout type="info">
+
+**As análises RMNCAH e de vacinação diferem aqui:** a CPN4, a taxa de cesarianas e o baixo peso à nascença só são pedidos nas análises RMNCAH; as análises de vacinação pedem, em vez disso, a cobertura de VOP1 e VOP3 do inquérito. Ver [Análises RMNCAH e de vacinação](/pt/docs/reference/rmncah-vs-vaccine).
+
+</Callout>
+
+## Nas aplicações
+
+A configuração é feita no assistente Carregar dados da aplicação; [Primeiros passos](/pt/apps/countdown/getting-started) descreve-o ecrã a ecrã, incluindo os campos dos parâmetros nacionais.
+
+<Steps>
+
+### Criar uma pasta de trabalho[#working-folder]
+
+O primeiro passo no fluxo de trabalho de análise é preparar uma pasta de trabalho dedicada. É nesta pasta que se guardam os ficheiros de entrada da aplicação e onde o sistema cria o ficheiro de dados derivado, utilizado para acelerar os carregamentos futuros.
+
+- Escolha um nome de pasta claro, fácil de memorizar e de referenciar, de preferência no seu ambiente local.
+- Coloque nessa pasta os ficheiros brutos a carregar (Excel) antes de iniciar a aplicação.
+- Mantenha juntos toda a documentação relacionada, os dados e os ficheiros específicos do país, para que a pasta de trabalho seja autónoma.
+
+### Carregamento dos dados do HMIS
+
+Para o carregamento inicial, utilize o livro do Excel gerado a partir das exportações do HMIS/DHIS2. Para os carregamentos seguintes, utilize o [ficheiro .RDS em cache](#rds), que é gerado e guardado automaticamente na pasta de trabalho quando o ficheiro Excel é carregado.
+
+### Criação automática de RDS[#rds]
+
+- Quando carrega um ficheiro Excel pela primeira vez, a aplicação converte-o e guarda automaticamente um ficheiro `.rds` complementar na mesma pasta de trabalho.
+- Nos carregamentos seguintes, a aplicação verifica a existência do ficheiro `.rds` e utiliza-o para acelerar o recarregamento dos dados.
+
+Isto significa que o primeiro carregamento pode demorar um pouco mais enquanto o ficheiro Excel é lido e transformado. Depois disso, a aplicação abre o ficheiro `.rds` guardado muito mais depressa.
+
+</Steps>
+
+## Ver também
+
+- [Primeiros passos](/pt/apps/countdown/getting-started): o assistente Carregar dados na aplicação
+- [Definições dos indicadores](/pt/docs/reference/indicator-definitions)
+- [Fórmulas: denominadores](/pt/docs/reference/formulas#denominadores), onde os parâmetros nacionais são utilizados
+- Anterior: [Visão geral da estrutura: fluxo de trabalho de ponta a ponta](/pt/docs/methodology#fluxo-de-trabalho-de-ponta-a-ponta) · Seguinte: [Avaliação da qualidade dos dados](/pt/docs/methodology/data-quality)

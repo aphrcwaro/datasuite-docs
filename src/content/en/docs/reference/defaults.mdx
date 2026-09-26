@@ -1,0 +1,55 @@
+---
+description: The default values, cut-offs and expected ranges the Countdown method uses, by analysis step, and whether each applies to RMNCAH or vaccine analyses.
+title: Defaults and thresholds
+---
+
+import { MethodDefaults, MethodDefaultsNote } from '@/components/MethodDefaults'
+
+# Defaults and thresholds
+
+The numbers the method uses -- default values, cut-offs and expected ranges -- in one place, grouped by analysis step. Each row says what the number is, whether it applies to RMNCAH analyses, vaccine analyses or both, how the apps use it, and which section of the [Countdown methodology](/en/docs/methodology) explains it.
+
+The values are generated from the apps' code (cd2030.core), so they are what the apps use. Where the 2024 Countdown vaccination guidebook differs, the methodology page says so.
+
+<MethodDefaultsNote lang="en" />
+
+## Data quality
+
+The checks of reporting completeness, outliers and internal consistency, and the overall quality score: [Data quality assessment](/en/docs/methodology/data-quality).
+
+<MethodDefaults lang="en" step="data_quality" />
+
+## Data adjustment
+
+The adjustment for incomplete reporting (the factor $k$), low reporting rates and extreme outliers: [Data adjustment](/en/docs/methodology/data-adjustment).
+
+<MethodDefaults lang="en" step="adjustment" />
+
+## Denominators
+
+The assumptions behind the derived denominators and the checks of the population projections: [Denominator assessment and selection](/en/docs/methodology/denominators).
+
+<MethodDefaults lang="en" step="denominators" />
+
+## Coverage
+
+National coverage and its comparison with surveys and targets: [National coverage](/en/docs/methodology/coverage).
+
+<MethodDefaults lang="en" step="coverage" />
+
+## Subnational
+
+Subnational coverage, inequality and the coverage targets: [Subnational analysis](/en/docs/methodology/subnational).
+
+<MethodDefaults lang="en" step="subnational" />
+
+## Mortality
+
+Institutional mortality, its plausibility checks and the completeness of death reporting: [Mortality](/en/docs/methodology/mortality).
+
+<MethodDefaults lang="en" step="mortality" />
+
+## See also
+
+- [Formulas](/en/docs/reference/formulas): the formulas the method uses, with what each symbol means
+- [Quick reference](/en/docs/reference): each analysis step, its method page and where it is in the apps

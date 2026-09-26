@@ -1,0 +1,106 @@
+---
+description: Como os equiplots de inquéritos aos agregados familiares mostram as diferenças de cobertura por residência, riqueza e escolaridade materna ao longo do tempo.
+---
+
+import { Callout, Steps } from 'nextra/components'
+
+# Avaliação da equidade (equiplots)
+
+As médias nacionais de cobertura mascaram disparidades críticas que determinam se os sistemas de saúde não estão verdadeiramente a deixar ninguém para trás. Este módulo utiliza dados de inquéritos aos agregados familiares para avaliar as desigualdades através de três grandes dimensões: residência (urbana/rural), riqueza (quintis dos mais ricos aos mais pobres) e escolaridade materna. Ao visualizar as trajetórias de cobertura separadamente para cada subgrupo populacional juntamente com a tendência nacional, os equiplots revelam se as lacunas estão a diminuir ou a aumentar — informação essencial para direcionar equitativamente os investimentos em saúde.
+
+<Callout type="info">
+**Em resumo**
+- **Responde a:** As diferenças de cobertura entre subgrupos populacionais (residência urbana/rural, quintil de riqueza do agregado familiar, escolaridade da mãe) estão a diminuir ou a aumentar, e que tipo de desigualdade mostram os quintis de riqueza?
+- **Utiliza:** dados de inquéritos aos agregados familiares sobre a área de residência, os quintis de riqueza do agregado familiar e a escolaridade da mãe, com a tendência da cobertura nacional para comparação ([Cobertura nacional](/pt/docs/methodology/coverage)).
+- **Produz:** equiplots da cobertura de cada subgrupo ao longo do tempo, juntamente com a tendência nacional, e o padrão de desigualdade (de topo, linear ou de base) para a riqueza. Passo seguinte: [Análise subnacional](/pt/docs/methodology/subnational).
+- **Nas aplicações:** [Avaliação de equidade](/pt/apps/countdown/coverage-equity-targets#avaliação-de-equidade-dados-de-inquérito) (na aplicação Vaxx, a página Dados de inquérito em Desigualdade nacional).
+</Callout>
+
+## Porque é importante
+
+Três padrões distintos de desigualdade emergem dos dados: *desigualdade de topo* (apenas os ricos escapam), *desigualdade linear* (gradientes associados à riqueza) e *desigualdade de base* (os mais pobres são deixados para trás). Cada padrão sinaliza diferentes prioridades de programação: campanhas de acesso em massa, direcionamento a favor dos pobres ou iniciativas de educação, respetivamente. O acompanhamento destes padrões ao longo do tempo revela se as intervenções de equidade funcionam e se o seu sistema de saúde está a progredir em direção à cobertura universal para todos os grupos populacionais, e não apenas nas médias nacionais.
+
+A base científica é apresentada na [fundamentação](/pt/docs/reference/rationale#equity-analysis).
+
+## Método
+
+### Fundamentação e abordagem
+
+**Base científica para a análise:**
+
+Os inquéritos aos agregados familiares fornecem informações cruciais sobre as desigualdades. O nosso foco centra-se em três grandes dimensões de desigualdade: área de residência, riqueza e educação.
+
+Para a área de residência, concentramo-nos nas áreas urbanas/rurais; para a riqueza, utilizamos os quintis de riqueza do agregado familiar; e para a educação, focamo-nos na escolaridade da mãe. Os equiplots são utilizados para avaliar se o país registou progressos desde 2010 na redução do fosso entre pobres e ricos, ou o fosso entre mulheres sem escolaridade ou com baixa escolaridade e mulheres com ensino superior.
+
+Para os quintis de riqueza, é possível avaliar qual é o tipo de desigualdade, uma vez que todas as categorias têm a mesma dimensão. Cada padrão requer uma estratégia diferente de programação e direcionamento em saúde:
+
+- **Desigualdade de topo (privação em massa):** Se os mais ricos estiverem muito à frente de todos os outros quintis de riqueza, apenas os ricos escapam.
+- **Desigualdade linear:** Se as diferenças de cobertura forem equidistantes, trata-se de um padrão linear onde o aumento da riqueza do agregado familiar está linearmente associado a uma maior cobertura.
+- **Desigualdade de base (marginalização):** Se os mais pobres forem deixados para trás, isto significa a marginalização dos mais pobres.
+
+## Interpretação
+
+### Interpretação dos equiplots
+
+Ver a fundamentação: [Análise da equidade (equiplots)](/pt/docs/reference/rationale/#equity-analysis).
+
+A interpretação deve focar-se na questão de saber se as desigualdades se reduziram ao longo do tempo e em que medida as metas globais de cobertura foram alcançadas. Tenha em consideração o(s) seu(s) público(s) e quais as principais mensagens e perspetivas que pretende transmitir.
+
+<Callout type="info">
+
+As seguintes questões devem guiar a interpretação e ser respondidas pela mesma:
+
+- Qual é o nível de desigualdade no ponto de dados mais recente?
+- Como é que as desigualdades se alteraram ao longo do tempo?
+- Existe algum padrão de desigualdade que possa ser observado?
+- Quais serão as melhores abordagens para reduzir as desigualdades?
+
+</Callout>
+
+Como ler um equiplot:
+
+- A distância entre os pontos é a desigualdade.
+- Para a riqueza, leia o padrão: só os mais ricos à frente significa desigualdade de topo, grupos igualmente espaçados significam desigualdade linear e os mais pobres muito atrás significam desigualdade de base (marginalização). Cada uma exige uma resposta programática diferente.
+- Concentre-se no ponto de dados mais recente, na variação desde 2010 e em saber se a diferença está a diminuir.
+
+### Armadilhas comuns
+
+- Os gráficos de equidade vêm de ficheiros de inquérito e podem ter vários anos. Compare-os com as tendências de rotina, não com um único ano de dados DHIS2.
+
+## Nas aplicações
+
+<Steps>
+
+### Abra a Avaliação de equidade[#implementação]
+
+Isto será analisado na secção **Análise nacional** -> **Avaliação de equidade** da aplicação Shiny. Na aplicação Vaxx, é a página **Dados de inquérito** em **Desigualdade nacional**.
+
+### Escolha o Tipo de Equidade e o indicador
+
+**Área de Residência**, **Educação Materna** ou **Quintil de Riqueza** e, depois, um separador de indicador (**Personalizado**, ou **Verificação Personalizada** na aplicação Vaxx, para qualquer outro indicador).
+
+<Callout type="info">
+
+**As análises RMNCAH e de vacinação diferem aqui:** os separadores de indicadores são CPN4, nascidos vivos institucionais, baixo peso à nascença, Penta3 e Sarampo 1 nas análises RMNCAH; Penta3, Sarampo 1 e as evasões Penta1 a Penta3 e Penta3 a Sarampo 1 nas análises de vacinação. Ver [Análises RMNCAH e de vacinação](/pt/docs/reference/rmncah-vs-vaccine).
+
+</Callout>
+
+### Leia os equiplots
+
+Ecrã a ecrã: [Avaliação de equidade](/pt/apps/countdown/coverage-equity-targets#avaliação-de-equidade-dados-de-inquérito).
+
+Deverá ver o resultado abaixo:
+
+![Equiplot da cobertura de Pentavalente 3 por área de residência](/images/pt-national-coverage-equity-area.png)
+
+![Equiplot da cobertura de Pentavalente 3 por quintil de riqueza](/images/pt-national-coverage-wealth.png)
+
+![Equiplot da cobertura de Pentavalente 3 por educação materna](/images/pt-national-coverage-education.png)
+
+</Steps>
+
+## Ver também
+
+- [Fundamentação: análise da equidade (equiplots)](/pt/docs/reference/rationale#equity-analysis)
+- Passo anterior: [Abordagem de modelação bayesiana](/pt/docs/methodology/bayesian-coverage)
+- Passo seguinte: [Análise subnacional](/pt/docs/methodology/subnational)

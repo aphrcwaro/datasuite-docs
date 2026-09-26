@@ -1,0 +1,172 @@
+---
+description: "As aplicações RMNCAH e Vaxx: para que serve cada uma, quem as usa, as diferenças, os ficheiros que carregam, os grupos de páginas e a ordem recomendada."
+---
+import { Tabs, Callout } from 'nextra/components'
+
+# Aplicações RMNCAH e Vaxx
+
+O DataSuite tem duas aplicações Countdown para os dados de rotina das unidades de saúde: o **RMNCAH App** e a **Vaxx App**. Ambas recebem os dados de rotina das unidades de saúde de um país (geralmente exportados com o **[Data Extractor](/pt/apps/data-extractor)**), verificam-nos e ajustam-nos, escolhem os denominadores e estimam a cobertura, as desigualdades e as tendências. Seguem o mesmo **[quadro analítico CD2030](/pt/docs/methodology)** e partilham a maior parte das páginas, por isso este guia descreve-as em conjunto. Onde as aplicações diferem, o guia mostra um separador **RMNCAH** e um separador **Vaxx**; o separador escolhido é mantido de página para página.
+
+## Para que serve cada aplicação
+
+### RMNCAH App
+
+O RMNCAH App, no âmbito do CD2030 DataSuite, foi concebido para apoiar a análise de dados de rotina das unidades de saúde para os principais indicadores RMNCAH.
+Oferece uma estrutura padronizada para transformar dados brutos do DHIS2 em informação relevante sobre a cobertura dos serviços, a qualidade dos dados e a equidade.
+
+Com base nos resultados do **[Data Extractor](/pt/apps/data-extractor)**, o RMNCAH App orienta os utilizadores ao longo de um **[fluxo de trabalho analítico estruturado](/pt/docs/methodology)** que inclui a validação, o ajuste de dados e o cálculo de indicadores.
+Isto garante que as análises são consistentes, reproduzíveis e alinhadas com a **[abordagem metodológica do CD2030](/pt/docs/methodology)**.
+
+A aplicação permite aos utilizadores:
+
+- Avaliar a qualidade dos dados através de métricas padronizadas de DQA
+- Aplicar ajustes de numerador e denominador
+- Gerar estimativas de cobertura nacionais e subnacionais
+- Explorar desigualdades e tendências ao longo do tempo e do território
+- Produzir resultados para relatórios, incluindo relatórios de síntese e visualizações
+
+Ao integrar rigor metodológico e uma interface de fácil utilização, o RMNCAH App facilita a tomada de decisões baseada em evidências e apoia os países na monitorização do progresso das prioridades RMNCAH.
+
+### Vaxx App
+
+A Vaxx App é a aplicação do DataSuite dedicada à **cobertura vacinal e às desigualdades**. Recebe os dados de rotina das unidades de saúde de um país (geralmente exportados com o **[Data Extractor](/pt/apps/data-extractor)**), verifica-os e ajusta-os, escolhe um denominador e estima a cobertura das vacinas de rotina, a evasão, as crianças de dose zero e as crianças subvacinadas. A cobertura pode ser comparada com as estimativas de inquéritos e da WUENIC, acompanhada ao longo do tempo, desagregada por região, distrito, área de residência, educação materna e riqueza, e confrontada com as metas mundiais.
+
+Segue o mesmo **[quadro analítico CD2030](/pt/docs/methodology)** do RMNCAH App, mas centrado na imunização: a lista de indicadores, os dados de inquérito, os fatores de ajuste e as páginas de análise são específicos da vacinação.
+
+## Quem utiliza cada aplicação
+
+### Utilizadores do RMNCAH App
+
+O RMNCAH App destina-se à equipa analítica nacional de uma revisão CD2030: responsáveis de monitorização e avaliação, gestores de dados do HMIS e do DHIS2, gestores de programas de saúde materna, neonatal, infantil e do adolescente, e analistas que preparam as revisões anuais do setor da saúde. Não é necessário escrever código. Tudo se faz através de páginas, filtros, gráficos e tabelas. Os analistas que preferem programar podem trabalhar sobre o mesmo conjunto de dados guardado através do assistente de conversação do DataSuite (ver [Exportações, relatórios e IA](/pt/apps/countdown/exports-and-ai)).
+
+### Utilizadores da Vaxx App
+
+- Gestores de programas de vacinação e analistas nacionais do PAV que precisam de estimativas de cobertura de rotina verificadas e comparáveis com os inquéritos.
+- Analistas do trabalho Countdown sobre cobertura vacinal e desigualdades, a nível nacional e distrital.
+- Quem precisar de um relatório em Word, PDF ou PowerPoint sobre a qualidade dos dados e a cobertura de um país.
+
+## Diferenças num relance
+
+| | RMNCAH App | Vaxx App |
+| --- | --- | --- |
+| Foco | Saúde reprodutiva, materna, neonatal, infantil e do adolescente | Imunização |
+| Indicadores | CPN (incluindo CPN4, TIP, sífilis, ferro e ácido fólico, teste de VIH), parto, cesariana, baixo peso à nascença, cuidados pós-natais, nados-mortos e óbitos, um pequeno conjunto de vacinas, consultas externas e internamentos | CPN1, partos e nascidos vivos institucionais, BCG, VIP 1-2, Sarampo 1-2, VOP 1-3, Pentavalente 1-3, PCV 1-3, Rotavírus 1-2, mais os indicadores derivados de evasão, dose zero e subvacinação |
+| Serviços da Taxa de notificação | CPN, Parto institucional e Vacinação, mais as consultas externas | CPN, Parto institucional, Vacinação |
+| Verificações de consistência | CPN1 e Penta1, Penta1 e Penta3, mais um par personalizado | CPN1 e Penta1, Penta1 e Penta3, VOP1 e VOP3, VIP1 e VIP2, mais um par personalizado |
+| Fatores de ajuste | Fatores K de CPN, Parto e Vacinas, mais um fator K de consultas externas | Fatores K de CPN, Parto e Vacinas |
+| Denominador | Um denominador materno e um de vacinação | Um denominador de vacinação |
+| Metas de cobertura | CPN4, nascidos vivos institucionais e vacina | Vacina (BCG, Penta3, Sarampo 1) e Evasão |
+| Dados de inquérito no assistente | Coberturas vacinais, CPN1 e parto institucional, mais CPN4, cesariana, baixo peso à nascença e estimativas de mortalidade da ONU | Coberturas vacinais, CPN1 e parto institucional |
+| Páginas adicionais | Análise bayesiana, continuum de cuidados, planeamento familiar, mortalidade, utilização de serviços, índice curativo SMI, desempenho do sistema de saúde, setor privado | Nenhuma |
+| Cópia guardada | Uma cópia guardada para o seu próprio grupo de indicadores (`_rmncah.rds`) | `nome_vaccine.rds` |
+
+<Callout type="warning">
+Um conjunto de dados guardado por uma aplicação não pode ser aberto na outra. Abrir um `.rds` da RMNCAH na Vaxx é recusado, com uma mensagem a indicar que o conjunto de dados foi criado para outro grupo de indicadores.
+</Callout>
+
+## O que pode carregar
+
+Cada aplicação abre um conjunto de dados de cada vez. Aceita quatro tipos de ficheiro:
+
+| Tipo de ficheiro | O que é | Utilização típica |
+| --- | --- | --- |
+| `.xlsx`, `.xls` | Livro Excel com as folhas obrigatórias ([Configuração da análise > Dados do HMIS](/pt/docs/methodology/analysis-setup#dados-do-hmis)), tal como produzido pelo [Data Extractor](/pt/apps/data-extractor) | Primeiro carregamento de um conjunto de dados de um país |
+| `.dta` | Ficheiro Stata | Primeiro carregamento, ou um conjunto de dados principal transferido anteriormente |
+| `.rds` | O conjunto de dados guardado que a aplicação cria quando conclui o carregamento | Retomar o trabalho: todas as etapas de carregamento já estão concluídas |
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+Durante o assistente de carregamento pode também adicionar ficheiros de inquérito opcionais (`.dta`), um ficheiro de forma personalizado e ficheiros de referência da ONU, do WUENIC e de mortalidade da ONU específicos do país (`.dta`). Quando não adiciona nada, são utilizados os dados de referência integrados para o país. Ver [Primeiros passos](/pt/apps/countdown/getting-started).
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+| Elemento | Detalhes |
+| --- | --- |
+| Dados das unidades de saúde | Um ficheiro por país: `.xls`, `.xlsx`, `.dta` ou `.rds`. As folhas de que um livro do Excel precisa estão em [Configuração da análise > Dados do HMIS](/pt/docs/methodology/analysis-setup#dados-do-hmis). Consulte **[Primeiros passos](/pt/apps/countdown/getting-started)**. |
+| Valores de cobertura do inquérito | A cobertura do inquérito para CPN1, parto institucional, BCG, Penta1, Penta3, VOP1, VOP3 e Sarampo 1, mais as taxas nacionais. Introduzidos ou pré-preenchidos no assistente de carregamento. O que são: [Configuração da análise > Parâmetros nacionais](/pt/docs/methodology/analysis-setup#survey-params). |
+| Ficheiros de inquérito (opcional) | Ficheiros `.dta` nacionais, regionais, por área, por educação materna e por quintil de riqueza. Para que servem: [Configuração da análise > Ficheiros de inquérito e ficheiro de forma](/pt/docs/methodology/analysis-setup#ficheiros-de-inquérito-e-ficheiro-de-forma). |
+| Ficheiro de forma (opcional) | Para os mapas; ver [Configuração da análise > Ficheiros de inquérito e ficheiro de forma](/pt/docs/methodology/analysis-setup#ficheiros-de-inquérito-e-ficheiro-de-forma). |
+| DataSuite | A aplicação corre dentro do DataSuite. Abra-a a partir da página Início. |
+
+</Tabs.Tab>
+</Tabs>
+
+## Relação com o Data Extractor e com a metodologia
+
+- O **[Data Extractor](/pt/apps/data-extractor)** produz o ficheiro de dados de rotina. As aplicações começam onde o extrator termina.
+- Os **[capítulos metodológicos](/pt/docs/methodology)** explicam porque se faz cada análise e como a interpretar. Cada guia de página desta secção termina com uma ligação para o capítulo correspondente, e o botão **Obter Ajuda** da aplicação abre os mesmos capítulos.
+
+## Estrutura e navegação
+
+![Painéis de navegação do RMNCAH App](/images/rmncah_ui.jpg)
+
+- **Barra lateral.** As páginas estão agrupadas em secções (ver [Grupos de páginas](#grupos-de-páginas)). **Mudar idioma** (no topo) alterna a aplicação entre inglês, francês e português.
+- **Páginas bloqueadas.** As páginas ficam a cinzento até poderem ser utilizadas. **Carregar dados** está sempre aberta. Os grupos Denominadores e Análise e os Resultados (Relatórios) só são desbloqueados depois de concluir o carregamento de um conjunto de dados e executar o **Ajuste de dados**.
+- **Cabeçalho da página.** Cada página mostra o seu título e um subtítulo de uma linha. **Obter Ajuda** abre o capítulo metodológico (de ajuda) correspondente. As páginas que alimentam um relatório padrão mostram também **Gerar Relatório**. O cabeçalho inclui ainda o seletor de idioma (inglês, francês, português). As páginas de análise mostram uma linha *Denominador* que indica por que denominadores os números foram divididos; é definida na página Seleção do denominador.
+- **Barra de filtros.** Os filtros aparecem como etiquetas no topo da página, por exemplo **Indicador**, **Nível Administrativo**, **Limite de Desempenho** ou **Selecionar Anos**.
+- **Cartões de gráficos.** Um cartão tem normalmente um separador por indicador, mais um separador **Personalizado** onde escolhe qualquer outro indicador de análise. A barra de ferramentas do cartão transfere o gráfico (**Baixar Gráfico**, PNG) ou os seus números (**Baixar Dados**, Excel) e oferece ferramentas para editar etiquetas, alterar a vista ou o estilo e expandir o gráfico.
+- **Tabelas.** Um controlo marcado *Apenas esta tabela* (ano ou indicador) altera somente essa tabela. Cada tabela tem o seu próprio botão **Baixar Dados**.
+
+## Grupos de páginas
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+A barra lateral agrupa as páginas em cinco secções: **Início**, **Qualidade dos dados**, **Denominadores**, **Análise** e **Resultados**. Dentro delas, as páginas formam estes grupos:
+
+| Grupo | Páginas | Finalidade | Guia |
+| --- | --- | --- | --- |
+| Início | Introdução, Carregar dados | Abrir o conjunto de dados e confirmar as taxas nacionais e os mapeamentos | [Primeiros passos](/pt/apps/countdown/getting-started) |
+| Qualidade dos dados | Taxa de notificação, Detecção de valores discrepantes, Dados Ausentes, Consistência interna, Pontuação Geral da Qualidade dos Dados | Avaliar se os dados das unidades de saúde são fiáveis | [Qualidade dos dados](/pt/apps/countdown/data-quality) |
+| Preparação dos dados | Remover anos, Ajuste de dados, Alterações no ajuste de dados | Excluir anos pouco fiáveis e corrigir a notificação incompleta | [Preparação dos dados](/pt/apps/countdown/data-preparation) |
+| Denominadores | Avaliação do denominador, Seleção do denominador | Comparar as fontes de população e escolher os denominadores | [Denominadores](/pt/apps/countdown/denominators) |
+| Análise nacional | Cobertura nacional, Meta de cobertura, Desigualdade nacional, Avaliação de equidade | Cobertura nacional, metas e equidade | [Cobertura, equidade e metas](/pt/apps/countdown/coverage-equity-targets) |
+| Análise subnacional | Cobertura subnacional, Desigualdade subnacional, Meta de cobertura | Cobertura regional e distrital, dispersão e metas | [Análise subnacional](/pt/apps/countdown/subnational) |
+| Análise avançada | Análise bayesiana, Contínuo de cuidados, Projeção de PF com FPET | Estimativas modeladas, percurso de cuidados, planeamento familiar | [Análise avançada](/pt/apps/countdown/advanced-analysis) |
+| Mortalidade | Mortalidade institucional, Mapeamento da mortalidade, Completude dos dados de mortalidade | Mortalidade materna, natimortalidade e neonatal institucionais e grau de completude do registo de óbitos | [Mortalidade](/pt/apps/countdown/mortality) |
+| Utilização de serviços e sistema de saúde | Utilização dos Serviços, Índice preventivo de SMI vs Índice curativo, Desempenho do Sistema de Saúde, Participação pública/privada | Utilização ambulatorial e de internamento, recursos do sistema de saúde e setor privado | [Utilização de serviços e sistema de saúde](/pt/apps/countdown/service-utilization-health-system) |
+| Resultados | Relatórios | Relatórios Word, PDF e PowerPoint (relatórios padrão, caderno de síntese, ficha de uma página), transferências e análise assistida por IA | [Relatórios](/pt/apps/countdown/reports), [Exportações, relatórios e IA](/pt/apps/countdown/exports-and-ai) |
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+A navegação à esquerda tem cinco secções. As páginas de Denominadores, Análise e Resultados só ficam disponíveis depois de os dados serem ajustados.
+
+| Secção | Páginas | Guia |
+| --- | --- | --- |
+| Início | Introdução, Carregar dados | **[Primeiros passos](/pt/apps/countdown/getting-started)** |
+| Qualidade dos dados | Taxa de notificação, Detecção de valores discrepantes, Dados Ausentes, Consistência interna, Pontuação Geral da Qualidade dos Dados | **[Qualidade dos dados](/pt/apps/countdown/data-quality)** |
+| Qualidade dos dados (preparação) | Remover anos, Ajuste de dados, Alterações no ajuste de dados | **[Preparação dos dados](/pt/apps/countdown/data-preparation)** |
+| Denominadores | Tendência populacional, Seleção do denominador | **[Denominadores](/pt/apps/countdown/denominators)** |
+| Análise, Nacional | Cobertura nacional, Meta de cobertura, Desigualdade nacional (Dados de rotina, Dados de inquérito) | **[Cobertura, equidade e metas](/pt/apps/countdown/coverage-equity-targets)** |
+| Análise, Subnacional | Cobertura subnacional, Desigualdade subnacional, Meta de cobertura | **[Análise subnacional](/pt/apps/countdown/subnational)** |
+| Resultados | Relatórios | **[Relatórios](/pt/apps/countdown/reports)**, **[Exportações, relatórios e IA](/pt/apps/countdown/exports-and-ai)** |
+
+</Tabs.Tab>
+</Tabs>
+
+## Ordem recomendada
+
+![Fluxo de trabalho da análise Countdown](/images/methods_cd_approach.png)
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+A página de [etapas da análise](/pt/apps/countdown/analysis-steps) percorre a mesma sequência e liga cada etapa ao respetivo capítulo metodológico.
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+1. Carregue os dados e conclua o assistente.
+2. Reveja as cinco páginas de qualidade dos dados e decida se deve remover anos.
+3. Ajuste os dados. Isto desbloqueia as restantes páginas.
+4. Compare os denominadores e escolha um.
+5. Consulte a cobertura nacional, as desigualdades, a equidade e as metas, e depois as páginas subnacionais.
+6. Crie um relatório (ver [Relatórios](/pt/apps/countdown/reports)).
+
+</Tabs.Tab>
+</Tabs>
+
+Os métodos de cada passo estão descritos nos capítulos do quadro: **[qualidade dos dados](/pt/docs/methodology/data-quality)**, **[ajuste](/pt/docs/methodology/data-adjustment)**, **[denominadores](/pt/docs/methodology/denominators)**, **[cobertura](/pt/docs/methodology/coverage)**, **[equidade](/pt/docs/methodology/equity)** e **[análise subnacional](/pt/docs/methodology/subnational)**. As definições dos indicadores estão em **[Definições de indicadores](/pt/docs/reference/indicator-definitions)**.

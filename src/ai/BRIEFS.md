@@ -41,7 +41,7 @@ Rules for writing one:
 - **Short.** About 150-400 words in total. A long page gets a brief of its method, not a summary of every paragraph.
 - **App pages** (`apps/<app>/...`) describe the screen: what each page and card shows, how to use it, and which
   framework page holds the method (as a link, e.g. `rules: ["The method is in Denominator assessment and selection
-  (/en/docs/framework/4-denominator-selection/)"]`); they don't restate the method.
+  (/en/docs/methodology/denominators/)"]`); they don't restate the method.
 - **`notCovered`** lists real gaps honestly, so the AI says "the methodology doesn't address this" rather than
   improvising.
 - **`status: draft`** until someone who knows the method has checked it against the page; then `reviewed`.

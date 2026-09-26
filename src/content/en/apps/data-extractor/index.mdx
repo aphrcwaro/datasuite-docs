@@ -1,3 +1,6 @@
+---
+description: Overview of the CD2030 DHIS2 Data Extractor, which connects to DHIS2, caches metadata, maps indicators and downloads routine data in a reproducible way.
+---
 import { Callout, Steps } from 'nextra/components'
 
 # CD2030 DHIS2 Data Extractor
@@ -22,13 +25,15 @@ flowchart TD
   A["1. Sign in to DHIS2"]
   B["2. Sync, read, and cache metadata"]
   C["3. Map source metadata to indicators"]
-  D["4. Download routine data"]
-  E["5. Save the mapping for export or reuse"]
+  D["4. Save the mapping for export or reuse"]
+  E["5. Download routine data"]
   A --> B --> C --> D --> E
 `}
 />
 
 This process helps analysts produce a cleaner and more reproducible starting point for downstream analysis in DataSuite.
+
+The Excel workbook it exports is the routine data file that the [RMNCAH and Vaxx apps](/en/apps/countdown) load; for what that data must contain, see [Analysis setup](/en/docs/methodology/analysis-setup#hmis-data) in the methodology and the [Indicator definitions](/en/docs/reference/indicator-definitions).
 
 ## Quick start steps
 
@@ -38,11 +43,11 @@ This process helps analysts produce a cleaner and more reproducible starting poi
 
 Connect to the correct DHIS2 instance using your server URL and valid account credentials.
 
-### [Cache metadata](/en/apps/data-extractor/dhis2-login#read-and-cache-metadata)
+### [Cache metadata](/en/apps/data-extractor/dhis2-login#cache-metadata)
 
 Temporarily cache (store) metadata locally for fast access and efficient downloading.
 
-### [Choose a mapping mode](/en/apps/data-extractor/mapping#map-metadata)
+### [Choose a mapping mode](/en/apps/data-extractor/mapping#select-the-mapping-mode)
 
 Use **Countdown** mapping for the harmonized MNCH template or **Custom** mapping for other programs.
 

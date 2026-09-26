@@ -1,0 +1,105 @@
+---
+description: The sequence of analysis steps in the RMNCAH app, from loading data to dissemination, each linked to its app guide and to its methodology chapter.
+topics: [workflow]
+ai:
+  status: draft
+  summary: >-
+    The order of analysis in the RMNCAH App, step by step, with the app pages for each step and the guide that
+    describes them. Each step title links to its methodology chapter.
+  steps:
+    - "Loading data: Load Data (#loading-data)"
+    - "Data quality assessment: the Data quality pages (#data-quality-assessment)"
+    - "Data adjustment: Remove Years, Data Adjustment, Data Adjustment Changes; this step unlocks all the analysis pages (#data-adjustment)"
+    - "Denominator selection: Denominator Assessment and Denominator Selection (#denominator-selection)"
+    - "Coverage estimation: National Coverage, Coverage Target, Continuum of Care, Bayesian Analysis (#coverage-estimation)"
+    - "Equity analysis: National Inequality and Equity Assessment (#equity-analysis)"
+    - "Sub-national analysis: Sub-National Coverage, Sub-National Inequality, Coverage Target (#sub-national-analysis)"
+    - "Mortality analysis: the Mortality pages (#mortality-analysis)"
+    - "Service utilization: the Service Utilization pages (#service-utilization)"
+    - "Health system performance: the Health System Performance pages (#health-system-performance)"
+    - "Dissemination, decisions and action: Reports and the download buttons on every chart and table (#dissemination-decisions-and-action)"
+    - "Leveraging AI: the DataSuite chat assistant works on the same saved dataset (#leveraging-ai-for-analysis-and-interpretation)"
+  rules:
+    - "The method for each step is in its framework chapter, starting with the workflow (/en/docs/methodology/)"
+    - "Why the analysis runs in this order is in the framework's end-to-end workflow (/en/docs/methodology#end-to-end-workflow)"
+---
+
+import { Steps, Callout } from 'nextra/components'
+
+# Analysis steps
+
+<Callout type="info">
+This page applies to the **RMNCAH app** only.
+</Callout>
+
+Analysis in the RMNCAH App follows a logical flow with the following steps. Each step names the guide that describes the pages involved; the step title links to the methodology chapter. Why the analysis runs in this order: [Framework overview > End-to-end workflow](/en/docs/methodology#end-to-end-workflow).
+
+<Steps>
+
+### [Loading data](/en/docs/methodology/analysis-setup)
+
+In the app: **Load Data**. See [Getting started](/en/apps/countdown/getting-started).
+
+![Loading routine data](/images/rmncah-loading-data.jpg)
+
+### [Data quality assessment](/en/docs/methodology/data-quality)
+
+In the app: **Data quality** pages. See [Data quality](/en/apps/countdown/data-quality).
+
+![Data quality assessment overall score](/images/dqa-overall-score.png)
+
+### [Data adjustment](/en/docs/methodology/data-adjustment)
+
+In the app: **Remove Years**, **Data Adjustment** and **Data Adjustment Changes**. See [Data preparation](/en/apps/countdown/data-preparation). This step unlocks all the analysis pages.
+
+### [Denominator selection](/en/docs/methodology/denominators)
+
+In the app: **Denominator Assessment** and **Denominator Selection**. See [Denominators](/en/apps/countdown/denominators).
+
+![Best denominator selection](/images/denominator-best-selection.png)
+
+### [Coverage estimation](/en/docs/methodology/coverage)
+
+In the app: **National Coverage**, **Coverage Target**, **Continuum of Care** and **Bayesian Analysis**. See [Coverage, equity and targets](/en/apps/countdown/coverage-equity-targets) and [Advanced analysis](/en/apps/countdown/advanced-analysis).
+
+![National coverage estimates](/images/coverage-national.png)
+
+### [Equity analysis](/en/docs/methodology/equity)
+
+In the app: **National Inequality** and **Equity Assessment**. See [Coverage, equity and targets](/en/apps/countdown/coverage-equity-targets).
+
+![Equity analysis by area of residence](/images/equity-area.png)
+
+### [Sub-national analysis](/en/docs/methodology/subnational)
+
+In the app: **Sub-National Coverage**, **Sub-National Inequality** and **Coverage Target**. See [Sub-national analysis](/en/apps/countdown/subnational).
+
+![Sub-national coverage against targets](/images/subnational-coverage-targets.png)
+
+### [Mortality analysis](/en/docs/methodology/mortality)
+
+In the app: **Mortality** pages. See [Mortality](/en/apps/countdown/mortality).
+
+![Mortality data completeness](/images/mortality-completeness.png)
+
+### [Service utilization](/en/docs/methodology/service-utilisation)
+
+In the app: **Service Utilization** pages. See [Service utilization and health system](/en/apps/countdown/service-utilization-health-system).
+
+![Service utilization data quality assessment](/images/service-utilization-dqa.png)
+
+### [Health system performance](/en/docs/methodology/health-system)
+
+In the app: **Health System Performance** pages. See [Service utilization and health system](/en/apps/countdown/service-utilization-health-system).
+
+![Health system performance](/images/health-system.png)
+
+### [Dissemination, decisions, and action](/en/docs/methodology/dissemination)
+
+In the app: **Reports** (see [Reports](/en/apps/countdown/reports)) and the download buttons on every chart and table (see [Exports, reports and AI](/en/apps/countdown/exports-and-ai)).
+
+### [Leveraging AI for analysis and interpretation](/en/apps/ai-assistant)
+
+In the app: the DataSuite chat assistant works on the same saved dataset. See [Exports, reports and AI](/en/apps/countdown/exports-and-ai).
+
+</Steps>

@@ -1,0 +1,195 @@
+---
+description: Analyse des intrants et des résultats du système de santé (infrastructures, personnel, financement) pour repérer où ils ne se traduisent pas en couverture.
+---
+
+import { Callout, Steps } from 'nextra/components'
+
+# Performance du système de santé
+
+Cette section se concentre sur l'analyse de la performance des systèmes de santé, y compris la disponibilité et la qualité des services de santé, le personnel de santé et le financement de la santé. L'analyse vise à identifier les lacunes et les défis du système de santé qui peuvent affecter la prestation des services de santé de la reproduction, de la mère, du nouveau-né, de l'enfant, de l'adolescent et de la nutrition (SRMNIA-N / RMNCAH-N).
+
+Elle contient les sous-sections suivantes :
+
+- Intrants du système de santé (nationaux et infranationaux)
+- Extrants du système de santé (nationaux et infranationaux)
+- Secteur privé et services SRMNIA-N
+
+<Callout type="info">
+**En bref**
+- **Répond à :** Où des intrants élevés du système de santé ne se traduisent-ils pas par la couverture attendue des services SRMNIA-N, et quelles régions fournissent les services de manière efficace ?
+- **Utilise :** les intrants du système de santé (infrastructures, personnel et, lorsqu'il est disponible, financement) aux niveaux national et Admin1 ; les visites OPD et les admissions hospitalières des moins de 5 ans issues de l'[utilisation des services](/fr/docs/methodology/service-utilisation) ; la couverture des naissances vivantes en établissement, issue d'une enquête récente auprès des ménages ou de l'estimation DHIS2 privilégiée ([couverture nationale](/fr/docs/methodology/coverage)).
+- **Produit :** des indicateurs d'intrants comparés aux références, et des comparaisons descriptives des extrants par intrants entre les unités Admin1, pour la [planification de la diffusion, des décisions et de l'action](/fr/docs/methodology/dissemination).
+- **Dans les applications :** [Utilisation des services et système de santé](/fr/apps/countdown/service-utilization-health-system) (application RMNCAH uniquement).
+</Callout>
+
+## Pourquoi c'est important
+
+La base scientifique de la comparaison des intrants et des extrants du système de santé est présentée dans la justification : [performance des systèmes de santé](/fr/docs/reference/rationale#health-systems).
+
+### Objectif
+
+L'objectif principal reste d'isoler les goulots d'étranglement infranationaux spécifiques où des intrants élevés du système ne parviennent pas à se traduire par les extrants de couverture des services SRMNIA-N attendus, ou inversement, d'identifier les régions très performantes présentant une forte efficacité de prestation de services.
+
+## Méthode
+
+### Portée analytique
+
+La portée analytique se limite à une comparaison descriptive directe des extrants du système de santé (couverture des interventions traceuses) par rapport aux intrants du système (infrastructures, personnel et mesures de financement) au niveau infranational (niveau Admin1). Des méthodologies plus complexes, telles que l'analyse d'enveloppement des données, la modélisation de l'efficacité frontalière ou l'indexation composite contrôlant les facteurs de développement socio-économique multisectoriels, n'entrent pas dans le cadre de cette section opérationnelle.
+
+### Cadre d'évaluation des intrants des systèmes de santé
+
+Dans un premier temps, l'évaluation se concentre sur la qualité des données pour les indicateurs du système de santé aux niveaux national et infranational. Pour les indicateurs sélectionnés, l'évaluation doit cibler :
+
+- **Analyse comparative mondiale (benchmarking) :** Comparaison avec les référentiels de données mondiaux pour les indicateurs sélectionnés *(au niveau national uniquement)*.
+- **Audit de plausibilité :** Évaluer la plausibilité des valeurs des indicateurs à travers les unités infranationales pour identifier les valeurs aberrantes majeures ou les modèles improbables.
+
+De plus, il est très utile d'explorer les corrélations croisées des intrants du système de santé entre eux *(par exemple, la densité du personnel tracée par rapport à la capacité en lits d'hospitalisation)*. Cette cartographie des corrélations est efficace pour détecter les incohérences systémiques des données à travers les unités Admin1 (provinces, régions ou comtés).
+
+Enfin, l'évaluation de l'alignement des mesures de performance du système de santé à travers les différents niveaux administratifs *(par exemple, la comparaison directe des agrégats Admin1 par rapport aux valeurs imbriquées des districts)* aide à isoler les anomalies structurelles, les divergences de déclaration ou les valeurs aberrantes géographiques.
+
+### Indicateurs d'intrants et références analytiques
+
+#### Financement de la santé
+
+Les indicateurs de financement de la santé aux niveaux des districts ou Admin1 sont difficiles à obtenir et se limitent fréquemment aux allocations budgétées plutôt qu'aux dépenses réelles. Ces jeux de données ont également tendance à capturer exclusivement les ressources gouvernementales, omettant l'aide des donateurs externes, l'assurance privée ou les dépenses directes des ménages.
+
+<Callout type="warning">
+
+**Règle du système :** Ces données de suivi financier ne sont pas chargées comme paramètres par défaut ici. Cependant, si des données de dépenses infranationales fiables sont disponibles pour l'équipe de pays, elles doivent être utilisées pour enrichir la base de référence des intrants du système de santé.
+
+</Callout>
+
+#### Professionnels de la santé essentiels pour 10 000 habitants
+
+Les outils de suivi du personnel de santé sont souvent de mauvaise qualité de données et peuvent être opérationnellement difficiles à extraire. L'indicateur principal utilisé par la plateforme est la **densité des professionnels de la santé essentiels pour 10 000 habitants**. Cette cohorte comprend :
+
+- Médecins
+- Cliniciens non médecins *(par exemple, agents cliniques ou agents de santé ayant une formation chirurgicale et des certifications pluriannuelles, mais n'ayant pas de diplôme médical universitaire complet)*
+- Infirmières professionnelles
+- Sages-femmes diplômées
+
+<Callout type="info">
+
+**Références de seuil de densité :**
+
+- **Seuil historique (recommandations de l'OMS de 2006) :** Un seuil de base minimal de **23 professionnels de la santé essentiels pour 10 000 habitants** a été désigné comme le point de bascule critique nécessaire pour atteindre les volumes d'accouchements assistés par du personnel qualifié requis afin de réduire la mortalité maternelle et infantile.
+- **Seuil moderne (ère de la CSU) :** Les cibles mondiales actualisées établissent un seuil de base nettement plus élevé, d'au moins **44,5 professionnels de la santé essentiels pour 10 000 habitants**, afin d'atteindre avec succès les objectifs de la couverture sanitaire universelle (CSU).
+
+</Callout>
+
+![Densité du personnel de santé pour 10 000 habitants par unité Admin1](/images/health_workforce.png)
+
+#### Nombre d'établissements de santé pour 10 000 habitants
+
+Cette mesure sert d'indicateur de base de l'infrastructure sanitaire physique et inclut tous les niveaux de soins : hôpitaux, centres de santé complets et points de soins primaires de niveau inférieur tels que les postes de santé et les dispensaires. Les secteurs privé et public doivent tous deux être pris en compte.
+
+$$\text{Densité des établissements de santé} = \left( \frac{\text{Nombre total d'établissements de santé}}{\text{Population totale}} \right) \times 10\,000$$
+
+Il s'agit d'un indicateur brut, car il accorde le même poids aux petits dispensaires primaires et aux hôpitaux de référence tertiaires.
+
+**Référence indicative :** Une valeur de **2 établissements pour 10 000 habitants** est utilisée comme base de référence indicative. Une unité infranationale située en dessous de 2 est classée comme ayant un faible accès aux infrastructures.
+
+#### Nombre d'hôpitaux pour 100 000 habitants
+
+Pour obtenir des informations spécifiques sur la capacité des infrastructures disponibles pour les services d'hospitalisation aiguë, la plateforme calcule la densité d'hôpitaux rapportée à 100 000 habitants :
+
+$$\text{Densité hospitalière} = \left( \frac{\text{Nombre total d'hôpitaux}}{\text{Population totale}} \right) \times 100\,000$$
+
+#### Densité de lits d'hospitalisation pour 10 000 habitants
+
+Cet indicateur constitue une mesure supplémentaire de la capacité structurelle des soins de santé et se calcule comme le nombre absolu de lits d'hospitalisation officiels dans l'ensemble des établissements de santé en fonctionnement pour 10 000 habitants.
+
+$$\text{Densité des lits d'hospitalisation} = \left( \frac{\text{Nombre total de lits d'hospitalisation}}{\text{Population totale}} \right) \times 10\,000$$
+
+![Onglet Système de santé infranational présentant la densité des établissements pour 10 000 habitants par unité Admin1](/images/fr-health-system-subnational.png)
+
+#### Valeurs de référence tracées dans les applications
+
+Les graphiques **Système de santé infranational** tracent une valeur de référence pour trois indicateurs, et chaque région est colorée **Atteint la référence** ou **Sous la référence** :
+
+| Indicateur | Valeur de référence |
+| --- | --- |
+| Densité des établissements de santé | 2 pour 10 000 |
+| Densité de lits | 25 pour 10 000 |
+| Densité du personnel | 44,5 pour 10 000 |
+| Densité hospitalière | Pas de valeur de référence |
+
+## Interprétation
+
+### Extrants des systèmes de santé par intrants au niveau infranational
+
+La deuxième partie de l'analyse explore l'association statistique entre les intrants du système de santé et les indicateurs correspondants d'utilisation ou de couverture des services à travers les unités infranationales (niveau Admin1). Les associations suivantes sont évaluées :
+
+#### Infrastructures d'hospitalisation et admissions hospitalières des moins de 5 ans
+
+La plateforme évalue l'association entre la densité hospitalière (pour 100 000 habitants) ou la densité de lits d'hospitalisation (pour 10 000 habitants), mise en relation avec les taux annuels d'admission hospitalière des enfants de moins de 5 ans, stratifiés par unité Admin1.
+
+- **Attente théorique :** Nous nous attendons à ce que les régions ayant une plus faible densité d'hôpitaux ou de lits présentent des taux d'admission pédiatrique plus faibles, tandis que les régions ayant une plus grande capacité structurelle affichent des taux d'admission plus élevés. Visuellement, cette tendance devrait se traduire par une pente positive sur une droite de régression linéaire.
+- **Identification et interprétation des valeurs aberrantes :** Lors de l'examen du nuage de points, les équipes doivent rechercher les valeurs aberrantes majeures, telles que les régions présentant une très faible densité d'infrastructures mais des taux d'admission pédiatrique inhabituellement élevés. Les explications opérationnelles possibles sont les suivantes :
+  - **Sous-déclaration des infrastructures :** Les hôpitaux actifs ou les capacités en lits sont sous-déclarés dans le système par ces régions spécifiques.
+  - **Forte activité clinique :** Les hôpitaux existants dans ces régions à faible densité fonctionnent avec des taux de rotation des admissions et d'occupation des lits exceptionnellement élevés.
+  - **Gonflement du numérateur :** Les admissions hospitalières sont surdéclarées ou comptées en double dans ces zones.
+
+Le récit technique doit s'appuyer sur la connaissance contextuelle de la situation réelle dans ces unités infranationales.
+
+#### Densité du personnel de santé et utilisation des consultations externes par les moins de 5 ans
+
+Ce modèle vérifie l'association entre la densité du personnel de santé (professionnels de la santé essentiels pour 10 000 habitants) et le nombre moyen de visites en consultation externe (OPD) chez les enfants de moins de 5 ans, par région.
+
+- **Attente théorique :** Nous nous attendons à ce que les régions ayant une plus faible densité de personnel de santé aient des taux d'utilisation des OPD plus faibles chez les enfants, et que celles ayant une plus forte densité de personnel aient des taux d'utilisation plus élevés. Cette relation se traduit par une pente positive sur une droite de régression linéaire.
+- **Identification et interprétation des valeurs aberrantes :** Si une région affiche une faible densité de personnel de santé associée à des taux d'utilisation des OPD élevés, l'équipe de pays doit évaluer si :
+  - **Sous-déclaration du personnel :** Le nombre de professionnels de la santé essentiels est sous-déclaré par ces régions.
+  - **Charge de travail élevée du personnel :** Les agents de santé de ces zones subissent une charge de travail clinique et un volume de patients exceptionnellement élevés.
+  - **Gonflement du numérateur :** Les visites OPD sont surdéclarées en raison de problèmes de qualité des données ou de documentation.
+
+L'interprétation finale doit réconcilier ces données avec la réalité du terrain dans les régions concernées.
+
+#### Densité du personnel de santé et couverture des naissances vivantes en établissement
+
+Cette composante croise la densité du personnel de santé (professionnels de la santé essentiels pour 10 000 habitants) avec la couverture des naissances vivantes en établissement, par région. Pour les données d'entrée sur la couverture des accouchements, les équipes peuvent utiliser les données d'une enquête récente auprès des ménages ou l'estimation privilégiée dérivée des établissements du DHIS2.
+
+- **Attente théorique :** Nous nous attendons à ce que les régions ayant une plus faible densité de personnel de santé enregistrent des taux plus faibles de couverture des accouchements en établissement, tandis que celles ayant une plus forte concentration de professionnels essentiels affichent une couverture plus élevée. Cela se traduira par une pente positive sur une droite de régression linéaire.
+
+Les considérations structurelles et de qualité des données pour l'interprétation des valeurs aberrantes dans ce modèle correspondent aux étapes analytiques décrites dans les sections ci-dessus.
+
+![Onglet Performance des SSP présentant la densité des établissements par rapport à l'indice des SSP par unité Admin1](/images/fr-health-system-facility-density.png)
+
+### Pièges courants
+
+- Comparer des densités du système de santé avec des dénominateurs ou des années de population différents.
+- Traiter une valeur de référence comme un objectif pour chaque région. C'est un repère, et le contexte compte.
+- Interpréter la position dans un quadrant comme une relation de cause à effet. La comparaison d'un intrant avec un indice de service, comme dans **Performance des SSP**, est descriptive, non une preuve d'efficience.
+
+## Dans les applications
+
+La performance du système de santé est analysée uniquement dans l'application RMNCAH ; [Utilisation des services et système de santé](/fr/apps/countdown/service-utilization-health-system) décrit chaque écran.
+
+<Steps>
+
+### Ouvrir Performance du système de santé[#mise-en-œuvre]
+
+L'analyse de ces sous-modules est entièrement réalisée dans la section **Performance du système de santé** de la DataSuite.
+
+![Onglet Système de santé national présentant les indicateurs du système de santé](/images/fr-health-system.png)
+
+Naviguez vers l'onglet du module principal pour configurer vos paramètres analytiques, sélectionner vos entrées de tableau croisé, et examiner les nuages de points et les matrices de tableau de bord qui en résultent.
+
+### Examiner les intrants
+
+**Système de santé national** présente les indicateurs d'intrants pour la dernière année ; **Système de santé infranational** compare chaque région à la moyenne nationale.
+
+### Mettre en relation les intrants et l'utilisation des services
+
+**Performance des SSP** met en relation un intrant et un indice de services pour les régions Admin 1. Il s'agit d'une comparaison descriptive, et non d'une preuve d'efficacité.
+
+### Examiner la part du secteur privé
+
+**Part publique/privée** présente la propriété des établissements de santé (privé, ONG et public), au niveau national et par milieu de résidence.
+
+</Steps>
+
+## Voir aussi
+
+- [Justification : performance des systèmes de santé](/fr/docs/reference/rationale#health-systems)
+- [Formules : utilisation des services et système de santé](/fr/docs/reference/formulas#utilisation-des-services-et-système-de-santé)
+- Précédent : [Utilisation des services](/fr/docs/methodology/service-utilisation) · Suivant : [Planification de la diffusion, des décisions et de l'action](/fr/docs/methodology/dissemination)

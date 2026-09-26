@@ -1,0 +1,187 @@
+---
+description: Comment comparer les options de dénominateur issues des projections de population et des valeurs d'enquête, et choisir la plus plausible.
+---
+
+import { Callout, Steps } from 'nextra/components'
+
+# Évaluation et sélection du dénominateur
+
+Cette section sur la **sélection du dénominateur** vous aide à choisir l'approche la plus appropriée pour l'estimation du dénominateur lors du calcul des indicateurs de couverture aux niveaux national et infranational. Pour plus d'informations, veuillez consulter le guide de DataSuite de Countdown.
+
+<Callout type="info">
+**En bref**
+- **Répond à :** Quelle option de dénominateur donne la couverture la plus plausible, comparée à l'enquête, aux niveaux national et infranational ?
+- **Utilise :** les nombres ajustés issus de l'[ajustement des données](/fr/docs/methodology/data-adjustment), les projections de population de l'ONU et du DHIS2, et les valeurs de l'enquête (couverture CPN1 et Penta1, taux de mortinatalité, TMN, TMPN) de la [configuration de l'analyse](/fr/docs/methodology/analysis-setup#survey-params).
+- **Produit :** le ou les dénominateurs sélectionnés (un ou deux selon l'analyse : voir [Sélection de la meilleure option de dénominateur](#sélection-de-la-meilleure-option-de-dénominateur)), utilisés pour les indicateurs de couverture dans la [couverture nationale](/fr/docs/methodology/coverage).
+- **Dans les applications :** [Dénominateurs](/fr/apps/countdown/denominators) (**Évaluation du dénominateur** et **Sélection du dénominateur**).
+- **Valeurs par défaut :** [Valeurs par défaut et seuils : dénominateurs](/fr/docs/reference/defaults#dénominateurs)
+</Callout>
+
+## Pourquoi c'est important
+
+Les numérateurs des statistiques de couverture (par exemple, le nombre de naissances vivantes dans les établissements de santé) sont dérivés des données des établissements de santé et doivent être ajustés comme indiqué dans la section précédente. Le dénominateur des statistiques de couverture (par exemple, le nombre de naissances vivantes dans la population) doit être estimé aux niveaux national et infranational (régions/provinces et districts). Le numérateur provient des données des établissements ; le dénominateur doit être estimé : le choix du dénominateur compte donc autant que la qualité des données.
+
+Pour les bases scientifiques de la couverture calculée à partir des données des établissements et de ses dénominateurs, consultez **[Analyse de la couverture : justification](/fr/docs/reference/rationale#coverage-rationale)**.
+
+## Méthode
+
+### Couverture des services[#objectif]
+
+La **couverture des services** est définie comme la population ayant reçu le service divisée par la population ayant besoin de ce service (également appelée population cible). Dans une analyse de vaccination, c'est un nombre d'enfants vaccinés divisé par une population cible.
+
+### Options de dénominateur
+
+Six options de dénominateur sont analysées afin de déterminer la base de référence la plus précise :
+
+1. **Les estimations de l'ONU des naissances vivantes** (projections de l'ONU)
+2. **La projection DHIS2 des naissances vivantes** (projections DHIS2)
+3. **Dérivation des dénominateurs à partir de l'utilisation des services de CPN1** (dérivé de la CPN1)
+4. **Dérivation des dénominateurs à partir de la vaccination Penta1** (dérivé du Penta1)
+5. **Dérivation des dénominateurs à partir de l'utilisation des services de CPN1, avec ajustement pour la croissance démographique annuelle** (CPN1 avec croissance démographique)
+6. **Dérivation des dénominateurs à partir de la vaccination Penta1, avec ajustement pour la croissance démographique annuelle** (Penta1 avec croissance démographique)
+
+<Callout type="warning">
+
+**Les projections de l'ONU sont uniquement nationales.** Le guide de vaccination Countdown de 2024 : « Au niveau infranational, aucune projection de l'ONU n'est disponible. » En dessous du niveau national, comparez les projections du DHIS2 et les options dérivées de la CPN1 et du Penta1. Dans les applications, les projections de l'ONU apparaissent dans la comparaison nationale ; les dénominateurs que vous pouvez sélectionner sont DHIS2, CPN1, Penta1, CPN1 avec croissance démographique et Penta1 avec croissance démographique.
+
+</Callout>
+
+### Calcul des dénominateurs dérivés
+
+L'option dérivée de la CPN1 part du nombre de femmes ayant effectué une première visite prénatale et avance, à travers la grossesse, jusqu'aux nourrissons éligibles ; l'option dérivée du Penta1 part du nombre de nourrissons vaccinés au Penta1 et remonte en arrière.
+
+| Population | À partir de la CPN1 | À partir du Penta1 |
+| --- | --- | --- |
+| Grossesses | CPN1 ÷ couverture CPN1 de l'enquête | accouchements ÷ (1 − pertes de grossesse) |
+| Accouchements | grossesses × (1 − pertes de grossesse) | naissances × (1 − 0,5 × taux de gémellité) |
+| Naissances | accouchements ÷ (1 − 0,5 × taux de gémellité) | naissances vivantes ÷ (1 − taux de mortinatalité) |
+| Naissances vivantes | naissances × (1 − taux de mortinatalité) | nourrissons ÷ (1 − TMN) |
+| Nourrissons éligibles au Penta (moins de 1 an) | naissances vivantes × (1 − TMN) | Penta1 ÷ couverture Penta1 de l'enquête |
+| Cible rougeole 1 | nourrissons × (1 − TMPN) | nourrissons × (1 − TMPN) |
+| Cible rougeole 2 | nourrissons × (1 − 2 × TMPN) | nourrissons × (1 − 2 × TMPN) |
+
+Chaque indicateur de couverture utilise la population qui lui correspond : les grossesses pour la CPN, les accouchements pour les accouchements en établissement, les naissances vivantes pour les naissances vivantes en établissement et le BCG, les nourrissons pour le Penta, et les cibles rougeole pour la rougeole. Les projections des naissances vivantes du DHIS2 et de l'ONU sont converties vers les autres populations avec les mêmes hypothèses.
+
+**Hypothèses par défaut (guide) :**
+
+| Hypothèse | Valeur par défaut |
+| --- | --- |
+| Pertes de grossesse | 3 % |
+| Taux de mortinatalité | 2 % |
+| Taux de gémellité | 1,5 % |
+| Taux de mortalité néonatale (TMN) | 3 % |
+| Taux de mortalité post-néonatale (TMPN) | 2,4 % |
+
+<Callout type="info">
+
+Les applications utilisent les valeurs de l'enquête la plus récente du pays lorsqu'elles sont disponibles : couverture CPN1 et Penta1 (sinon 98 % et 97 %), taux de mortinatalité, TMN et TMPN. Lorsque l'enquête ne donne pas de TMN, les applications utilisent 2,5 %, et non les 3 % du guide. Les pertes de grossesse et le taux de gémellité utilisent toujours les valeurs par défaut.
+
+</Callout>
+
+### Sélection de la meilleure option de dénominateur
+
+L'objectif ici est d'identifier la meilleure option de dénominateur pour le calcul des indicateurs de couverture. Le nombre de dénominateurs à choisir dépend de l'analyse.
+
+<Callout type="info">
+
+**Les analyses RMNCAH et de vaccination diffèrent ici :** une analyse de vaccination utilise un seul dénominateur pour tous les indicateurs de vaccination (le **Dénominateur de vaccination** de l'application Vaxx) ; une analyse RMNCAH en utilise deux : un **dénominateur maternel** pour les indicateurs de CPN et d'accouchement et un **dénominateur de vaccination** pour les indicateurs de vaccination (le **Dénominateur maternel** et le **Dénominateur de vaccination** de l'application RMNCAH). Voir [Analyses RMNCAH et vaccination](/fr/docs/reference/rmncah-vs-vaccine).
+
+</Callout>
+
+Pour identifier la meilleure option, suivez ces étapes : (1) la [comparaison des tendances de la population](#comparaison-des-tendances-de-la-population), ci-dessous ; puis, dans [Interprétation](#interprétation), (2) l'[examen de la sélection du dénominateur](#examen-de-la-sélection-du-dénominateur) et (3) la [sélection finale et synthèse](#sélection-finale-et-synthèse).
+
+### Comparaison des tendances de la population
+
+Dans la section **Tendance de la population**, comparez les tendances de la population totale, du nombre total de naissances vivantes et de la population de moins de 1 an entre les projections de l'ONU et celles du DHIS2.
+
+Sélectionnez les tendances des indicateurs (population totale, naissances vivantes ou population de moins de 1 an) qui sont cohérentes entre les deux sources, avec des estimations généralement proches : les deux sources sont proches et évoluent dans le même sens, avec un écart stable et plausible entre l'ONU et le DHIS2.
+
+- **Exemple :** Vous pouvez sélectionner la population de moins de 1 an si les estimations de l'ONU et les projections du DHIS2 pour cette catégorie sont très proches.
+
+![Comparaison de la population entre les projections de l'ONU et du DHIS2](/images/fr-denominator-population-trend.png)
+
+<Callout type="info">
+
+L'indicateur sélectionné à cette étape définit la population DHIS2 à partir de laquelle les dénominateurs dérivés sont construits, et sera utilisé pour ajuster, en fonction de la croissance démographique, les options dérivées de la CPN1 et du Penta1.
+
+</Callout>
+
+**Vérifiez la qualité des projections du DHIS2.** Le guide considère une projection du DHIS2 comme incohérente lorsque :
+
+- **Dans le temps :** le taux de croissance démographique ou le taux brut de natalité (TBN) varie de 2 pour 1 000 ou plus d'une année à l'autre.
+- **Par rapport aux projections de l'ONU :** la population diffère de plus de 5 % (différence relative), le taux de croissance de plus de 0,3 % (différence absolue), ou le TBN de plus de 5 pour 1 000.
+- **Taux brut de mortalité implicite :** TBM = TBN − taux de croissance est négatif ou inférieur à 5 pour 1 000.
+
+Les applications affichent les tendances ; ces vérifications sont faites par l'analyste.
+
+## Interprétation
+
+### Lecture des tendances de la population
+
+- Des écarts importants entre l'ONU et DHIS2 suggèrent une base de recensement dépassée ou une population erronée dans le classeur.
+- Une rupture brutale d'une courbe signale en général un changement dans la projection de la population, pas une vraie variation des naissances.
+- Les projections DHIS2 dérivent souvent lorsqu'elles reposent sur un ancien recensement.
+
+### Examen de la sélection du dénominateur
+
+Dans la section **Sélection du dénominateur**, examinez la cohérence entre les estimations d'enquête et l'estimation calculée à partir des données du DHIS2 avec chaque méthode de dénominateur. Pour cela, comparez trois séries de graphiques aux niveaux national et infranational :
+
+**a. Comparaison des estimations nationales :** commencez par comparer l'estimation nationale de chaque indicateur entre les données de routine et les données d'enquête en examinant le premier graphique à barres pour l'année de l'enquête. La figure présente une ligne horizontale en pointillé indiquant l'estimation de l'enquête et une barre correspondant à l'estimation de routine. Un dénominateur qui donne une couverture proche de l'enquête, sans dépasser 100 %, est un bon candidat. Lors de cette comparaison, notez les meilleures options de dénominateur (il peut y avoir plus d'une option viable).
+
+![Couverture nationale par option de dénominateur comparée à l'estimation de l'enquête](/images/fr-denominator-best-selection.png)
+
+**b. Comparaison infranationale pour l'année de l'enquête :** dans la deuxième série de figures, les barres horizontales représentent l'estimation de couverture issue des données de routine, comparée au « losange » qui représente l'estimation de l'enquête. Une figure est produite pour chaque option de dénominateur. Examinez chaque figure et identifiez la meilleure option de dénominateur en fonction de la proximité entre l'estimation de couverture de l'enquête et celle des données de routine. Cherchez l'option qui concorde le mieux avec l'enquête dans toutes les régions. De même, examinez les estimations qui ne sont pas plausibles (par exemple, des estimations de couverture supérieures, voire très supérieures, à 100 %). Notez la meilleure option de dénominateur.
+
+**c. Tendances des estimations nationales :** examinez l'estimation de tendance pour chaque option de dénominateur en recherchant la cohérence et la plausibilité globale des tendances historiques : des tendances plausibles et régulières.
+
+![Couverture nationale au fil du temps par option de dénominateur](/images/fr-denominator-national-coverage-overtime.png)
+
+<Callout type="info">
+
+**L'enquête est la référence.** Le guide compare la couverture des **naissances vivantes en établissement** et du **Penta3** obtenue avec chaque option à l'enquête la plus récente, et retient la méthode dont la différence absolue entre la couverture de routine et celle de l'enquête est la plus faible, aux niveaux national et infranational.
+
+</Callout>
+
+### Sélection finale et synthèse
+
+**Combinez vos notes** des sous-étapes (a), (b) et (c) ci-dessus afin de sélectionner le dénominateur le plus performant (un ou deux selon l'analyse : voir [Sélection de la meilleure option de dénominateur](#sélection-de-la-meilleure-option-de-dénominateur)).
+
+**Résumez votre choix** dans un court paragraphe, en documentant la justification de chaque dénominateur sélectionné.
+
+- Le meilleur dénominateur n'est pas celui qui donne la couverture la plus élevée, mais celui qui concorde le mieux avec l'enquête (le plus proche) et reste stable et cohérent dans le temps.
+- Les dénominateurs dérivés de CPN 1 ou de Penta 1 supposent que la plupart de la population fréquente le service et que les établissements notifient de façon complète. Ils sont les plus fragiles là où la notification est faible ; si les résultats semblent étranges, revenez à la [qualité des données](/fr/docs/methodology/data-quality).
+- Les dénominateurs infranationaux peuvent être moins fiables que les dénominateurs nationaux. Lisez-les avec la qualité des données des districts.
+
+<Callout type="warning">
+Un dénominateur dérivé de Penta1 fait apparaître par construction une couverture Penta1 proche de 100 %. Jugez-le sur Penta3 et Rougeole 1, et par rapport à l'enquête.
+</Callout>
+
+### Pièges courants
+
+- Comparer avec l'enquête alors que l'année de l'enquête est éloignée des années d'analyse. Tenez-en compte dans votre jugement.
+- Choisir un dénominateur par graphique au lieu d'un seul pour toute l'analyse. Le dénominateur sélectionné modifie tous les résultats de couverture, d'inégalités, d'objectifs, de mortalité et de système de santé.
+
+## Dans les applications
+
+<Steps>
+
+### Évaluez les tendances de la population
+
+Sur la page **Évaluation du dénominateur** (**Tendance de la population** dans l'application Vaxx), comparez les projections de l'ONU et du DHIS2 et sélectionnez la meilleure population (voir [Évaluation du dénominateur](/fr/apps/countdown/denominators#évaluation-du-dénominateur)).
+
+### Comparez les options de dénominateur
+
+Sur la page **Sélection du dénominateur**, comparez la couverture obtenue avec chaque option à l'enquête, au niveau national, au niveau infranational et dans le temps (voir [Sélection du dénominateur](/fr/apps/countdown/denominators#sélection-du-dénominateur)).
+
+### Choisissez le dénominateur
+
+Réglez le ou les dénominateurs que le reste de l'analyse utilise (voir [Choisir le dénominateur](/fr/apps/countdown/denominators#choisir-le-dénominateur)).
+
+</Steps>
+
+## Voir aussi
+
+- [Analyse de la couverture : justification](/fr/docs/reference/rationale#coverage-rationale)
+- [Formules : dénominateurs](/fr/docs/reference/formulas#dénominateurs)
+- [Valeurs par défaut et seuils : dénominateurs](/fr/docs/reference/defaults#dénominateurs)
+- Étape précédente : [Ajustement des données](/fr/docs/methodology/data-adjustment) · Étape suivante : [Couverture nationale](/fr/docs/methodology/coverage)

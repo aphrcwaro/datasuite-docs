@@ -1,0 +1,55 @@
+---
+description: Les valeurs par défaut, seuils et plages attendues de la méthode Countdown, par étape, et s'ils valent pour les analyses RMNCAH, de vaccination ou les deux.
+title: Valeurs par défaut et seuils
+---
+
+import { MethodDefaults, MethodDefaultsNote } from '@/components/MethodDefaults'
+
+# Valeurs par défaut et seuils
+
+Les nombres qu'utilise la méthode -- valeurs par défaut, seuils et plages attendues -- réunis en un seul endroit, regroupés par étape de l'analyse. Chaque ligne indique ce qu'est la valeur, si elle s'applique aux analyses RMNCAH, aux analyses de vaccination ou aux deux, comment les applications l'utilisent, et quelle section de la [méthodologie Countdown](/fr/docs/methodology) l'explique.
+
+Les valeurs sont générées à partir du code des applications (cd2030.core) : ce sont donc celles qu'utilisent les applications. Lorsque le guide de vaccination Countdown de 2024 diffère, la page de méthodologie le précise.
+
+<MethodDefaultsNote lang="fr" />
+
+## Qualité des données
+
+Les contrôles de l'exhaustivité des rapports, des valeurs aberrantes et de la cohérence interne, et le score de qualité global : [Évaluation de la qualité des données](/fr/docs/methodology/data-quality).
+
+<MethodDefaults lang="fr" step="data_quality" />
+
+## Ajustement des données
+
+L'ajustement pour les rapports incomplets (le facteur $k$), les faibles taux de notification et les valeurs aberrantes extrêmes : [Ajustement des données](/fr/docs/methodology/data-adjustment).
+
+<MethodDefaults lang="fr" step="adjustment" />
+
+## Dénominateurs
+
+Les hypothèses des dénominateurs dérivés et les contrôles des projections de population : [Évaluation et sélection du dénominateur](/fr/docs/methodology/denominators).
+
+<MethodDefaults lang="fr" step="denominators" />
+
+## Couverture
+
+La couverture nationale et sa comparaison avec les enquêtes et les cibles : [Couverture nationale](/fr/docs/methodology/coverage).
+
+<MethodDefaults lang="fr" step="coverage" />
+
+## Niveau infranational
+
+La couverture infranationale, les inégalités et les cibles de couverture : [Analyse infranationale](/fr/docs/methodology/subnational).
+
+<MethodDefaults lang="fr" step="subnational" />
+
+## Mortalité
+
+La mortalité en établissement, ses contrôles de plausibilité et l'exhaustivité de la déclaration des décès : [Mortalité](/fr/docs/methodology/mortality).
+
+<MethodDefaults lang="fr" step="mortality" />
+
+## Voir aussi
+
+- [Formules](/fr/docs/reference/formulas) : les formules qu'utilise la méthode, avec la signification de chaque symbole
+- [Référence rapide](/fr/docs/reference) : chaque étape de l'analyse, sa page de méthode et sa place dans les applications

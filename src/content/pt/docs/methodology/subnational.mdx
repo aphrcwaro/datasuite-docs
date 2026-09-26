@@ -1,0 +1,182 @@
+---
+description: "Como a cobertura varia entre regiões e distritos: estimativas subnacionais, resumo regional, medida de desigualdade MADM e metas atingidas."
+---
+
+import { Callout, Steps } from 'nextra/components'
+
+# Análise subnacional
+
+A análise subnacional examina como a cobertura varia entre regiões (Admin1) e distritos (Admin2), se a desigualdade geográfica está a diminuir e quantas unidades atingem as metas de cobertura. Produz as estimativas de cobertura subnacional, o resumo regional de uma página, a medida de desigualdade MADM e a percentagem de unidades que atingem cada meta.
+
+<Callout type="info">
+**Em resumo**
+- **Responde a:** Como varia a cobertura entre regiões e distritos? As desigualdades entre unidades subnacionais diminuíram? Que percentagem de regiões e distritos atinge cada meta?
+- **Utiliza:** o mesmo ajuste ([Ajuste de dados](/pt/docs/methodology/data-adjustment)) e o denominador com melhor desempenho ([Seleção do denominador](/pt/docs/methodology/denominators)) que a análise nacional ([Cobertura nacional](/pt/docs/methodology/coverage)).
+- **Produz:** a cobertura por região e por distrito, o resumo estatístico subnacional regional (one-pager) com o índice de cobertura composto, o MADM e a percentagem de unidades que atingem cada meta; utilizados nos relatórios ([Relatórios](/pt/apps/countdown/reports)).
+- **Nas aplicações:** [Análise subnacional](/pt/apps/countdown/subnational); desigualdade e metas nacionais em [Cobertura, equidade e metas](/pt/apps/countdown/coverage-equity-targets).
+- **Valores predefinidos:** [Nível subnacional](/pt/docs/reference/defaults#nível-subnacional)
+</Callout>
+
+## Porque é importante
+
+A análise subnacional revela a distribuição geográfica do acesso aos serviços de saúde — crucial para identificar distritos com baixo desempenho que puxam para baixo as médias nacionais e para direcionar os recursos para onde são mais necessários. Este módulo estima a cobertura a nível regional (Admin1) e distrital (Admin2) utilizando o mesmo denominador e metodologia de ajuste que a análise nacional, e depois visualiza como a cobertura varia ao longo do território. É de esperar uma maior volatilidade a nível distrital devido a populações pequenas, padrões de referência e escolhas de localização de unidades de saúde (hospitais em cidades servem áreas rurais circundantes), mas este ruído contém informação passível de ação sobre onde os sistemas de saúde falham.
+
+O DataSuite gera "resumos de uma página" (one-pagers) a nível distrital — resumos visuais que combinam linhas de tendência baseadas nas unidades de saúde (2020–2024) com instantâneos (snapshots) de inquéritos recentes, gráficos de barras de comparação que mostram o desempenho de cada distrito em relação aos seus pares, e índices de cobertura compostos que fazem a média de sete indicadores de saúde materno-infantil. Estes resumos de uma página comunicam a realidade da cobertura aos decisores em formatos acessíveis e localmente contextualizados, tornando impossível ignorar as desigualdades geográficas e facilitando a afetação de investimentos baseada em evidências para o reforço do sistema de saúde.
+
+### Cobertura subnacional[#cobertura-subnacional-na-abordagem-analítica-cd2030]
+
+A análise subnacional da cobertura de intervenções de saúde é essencial para o avanço da cobertura universal de saúde (CUS / UHC), que visa garantir o acesso equitativo a serviços de saúde de qualidade para todas as populações. As médias nacionais mascaram frequentemente disparidades críticas que existem entre regiões, distritos ou subgrupos populacionais.
+
+As médias nacionais escondem as regiões e os distritos que estão a ser deixados para trás, e é nas regiões e nos distritos que a ação dos programas costuma ser dirigida. A monitorização de dados subnacionais ajuda a identificar áreas geográficas onde a cobertura é baixa, sinalizando potenciais desigualdades no acesso aos serviços de saúde e impulsionando intervenções direcionadas. Isto é particularmente importante para chamar a atenção para as populações que são deixadas para trás e garantir que os recursos são direcionados para onde são mais necessários.
+
+### Desigualdade e metas de cobertura global[#desigualdade-na-abordagem-analítica-cd2030]
+
+Reduzir a desigualdade geográfica é essencial para sistemas de saúde equitativos e para alcançar os ODS. As desigualdades subnacionais revelam inconsistências na prestação de serviços e destacam barreiras sistémicas ao acesso aos cuidados de saúde. Acompanhar os indicadores de desigualdade ajuda a avaliar se os sistemas de saúde estão a tornar-se mais equitativos e se as intervenções direcionadas estão a funcionar.
+
+## Método
+
+### Cobertura subnacional[#cobertura-subnacional]
+
+#### Estimativas de cobertura aos níveis Admin1 e Admin2[#fundamentação-e-abordagem]
+
+O foco aqui é avaliar as estimativas de cobertura (por exemplo, CPN4, partos institucionais, Penta3) aos níveis Admin1 e Admin2, utilizando o denominador com melhor desempenho para os cálculos de cobertura, conforme decidido a partir da análise na secção 2 sobre denominadores.
+
+Haverá mais "ruído" nos dados subnacionais, com taxas de cobertura improváveis, demasiado altas ou baixas, em comparação com as análises nacionais, e ainda mais nas análises distritais do que nas análises regionais (Admin1). Isto deve-se ao facto de as análises distritais serem afetadas por pequenos números (mais flutuações que podem ser aleatórias ou devidas a problemas de qualidade dos dados) e pelos padrões de utilização dos serviços de saúde por mulheres e crianças. Por exemplo, um distrito municipal pode ter mais partos do que um distrito rural adjacente devido à localização dos hospitais no distrito municipal. Números pequenos, movimentos de doentes entre distritos e lacunas na notificação produzem valores implausivelmente altos ou baixos.
+
+#### Resumos estatísticos subnacionais (one-pager)
+
+O objetivo é produzir um resumo de uma página (one-pager) para cada unidade Admin1 (geralmente região, província ou condado) que contenha a informação regional, bem como um resumo dos distritos dentro da região. Referimo-nos a isto como o resumo estatístico subnacional regional.
+
+Os seguintes componentes estão incluídos:
+
+- **Resumo da informação demográfica chave para a região e para os distritos:** Uma tabela com o número esperado de nascimentos em 2024 de acordo com as projeções do DHIS2 e de acordo com os denominadores preferenciais derivados dos dados das unidades de saúde (com base na CPN1 para nados-vivos e na penta1 para indicadores de imunização).
+- **Gráficos de linhas com a tendência na cobertura de partos institucionais e vacinação penta3:** Estes incluem as melhores estimativas para 2020–2024 baseadas nos dados das unidades de saúde, bem como as estimativas dos inquéritos mais recentes (de 2015) para os mesmos indicadores (com intervalos de confiança, se possível).
+- **Gráficos de barras que comparam a situação de cobertura de 2024 na região com todas as outras regiões:** Isto coloca a região no terço inferior, médio ou superior das regiões em termos de cobertura. Isto é feito tanto para partos institucionais como para a vacinação penta3.
+- **Tabela que resume a cobertura de partos institucionais e vacinação penta3 em 2024 por distrito:** Uma decomposição (breakdown) localizada do desempenho em toda a área subnacional.
+
+Outros indicadores podem ser utilizados conforme priorizados pelo país (por exemplo, CPN4, sarampo1).
+
+Layout do modelo de resumo estatístico subnacional regional (one-pager):
+
+![Modelo do resumo estatístico subnacional regional (one-pager)](/images/admin-1.png)
+
+Resumir a situação de cobertura de acordo com as estatísticas das unidades de saúde para 2024 pode ser feito para o nível regional e mostrado num mapa. Um índice de cobertura composto é calculado como uma média em sete indicadores de saúde materno-infantil: CPN4, cobertura de nados-vivos institucionais, SBA (assistência qualificada ao parto), TPI2, cuidados pós-natais, 3ª dose da vacina pentavalente e cobertura da vacinação contra o sarampo (sarampo 1). É atribuído peso igual a todos os indicadores.
+
+### Desigualdade[#desigualdade]
+
+#### MADM e unidades acima de uma meta[#fundamentação-e-abordagem-1]
+
+Aqui calculamos o Desvio Absoluto da Mediana (MADM) para quantificar a dispersão na cobertura entre os distritos dentro de um nível Admin1, em comparação com a cobertura nessa unidade subnacional Admin1 específica.
+
+As principais medidas estatísticas para as desigualdades subnacionais são:
+
+- **MADM (Desvio Absoluto da Mediana):** Esta medida dá uma indicação de se o país tem sido bem-sucedido na redução das desigualdades entre unidades subnacionais.
+- **Percentagem de unidades subnacionais com cobertura acima de uma meta ou limiar específico:** Este indicador fornece informações sobre até que ponto um país tem sido bem-sucedido em alcançar a cobertura universal a nível subnacional.
+
+### Metas de cobertura global[#metas-de-cobertura-global]
+
+#### Progresso em direção às metas[#fundamentação-e-abordagem-2]
+
+**Resumo do desempenho distrital e regional:**
+
+O progresso em direção a metas internacionais e nacionais pode ser medido calculando a percentagem de regiões e distritos que alcançaram essas metas. O objetivo é que todas as regiões e distritos tenham atingido a meta. Percentagens mais elevadas significam menos desigualdade (geográfica).
+
+#### Valores das metas
+
+O guia de vacinação Countdown de 2024 utiliza estas metas:
+
+| Indicador | Meta | Fonte |
+| --- | --- | --- |
+| Parto institucional | 80% dos distritos com cobertura de pelo menos 80% | EPMM / ENAP |
+| Vacinação de rotina | Cobertura de 90% para todas as vacinas de rotina | IA2030 |
+| DTP3 (Penta3) | Equidade geográfica: cobertura nos 20% de distritos com a cobertura mais baixa | IA2030 |
+| DTP3 (Penta3) | Pelo menos 80% em cada distrito | |
+
+As aplicações consideram que uma unidade atinge a meta quando:
+
+| Indicador | A unidade atinge a meta quando |
+| --- | --- |
+| BCG, Penta3, Sarampo 1 | A cobertura é de pelo menos 90% (nacional) ou de pelo menos 80% (região ou distrito) |
+| CPN4 | A cobertura é de pelo menos 70% |
+| Nados-vivos institucionais | A cobertura é de pelo menos 80% |
+| Abandono Penta1 a Penta3, Penta3 a Sarampo 1 | O abandono é inferior a 10% |
+
+As aplicações indicam a **percentagem de unidades** que atingem cada meta. Uma meta como «Penta3 de pelo menos 80% em cada distrito» é atingida quando essa percentagem chega a 100%. A medida de equidade geográfica (cobertura da Penta3 nos 20% de distritos com a cobertura mais baixa) não é calculada pelas aplicações.
+
+<Callout type="info">
+
+**As análises RMNCAH e de vacinação diferem aqui:** as metas de CPN4 e de nados-vivos institucionais aplicam-se às análises RMNCAH e as metas de evasão às análises de vacinação; as metas das vacinas aplicam-se a ambas. A página **Meta de cobertura** tem os separadores **4 Consultas de Pré-natal**, **Nascidos vivos em estabelecimento de saúde** e **Vacina** na aplicação RMNCAH, e **Vacina** e **Evasão** na aplicação Vaxx. Ver [Análises RMNCAH e de vacinação](/pt/docs/reference/rmncah-vs-vaccine).
+
+</Callout>
+
+## Interpretação
+
+### Cobertura subnacional[#leitura-da-cobertura-subnacional]
+
+<Callout type="warning">
+
+**Verifique a legenda de um mapa antes de o utilizar.** O guia: se a legenda mostrar apenas alguns pontos percentuais entre as classes, pequenas diferenças parecem grandes; não utilize o mapa.
+
+</Callout>
+
+- Compare a região com a linha nacional. Um ponto do inquérito muito afastado da linha do DHIS2 numa região sinaliza muitas vezes um problema de denominador ou de notificação aí. Verifique a taxa de notificação da região ([qualidade dos dados](/pt/docs/methodology/data-quality)) antes de tirar conclusões.
+
+<Callout type="warning">
+Os denominadores distritais são os menos fiáveis. Um distrito com cobertura acima de 100%, ou que oscila de um ano para o outro, tem mais probabilidade de ter um problema de população ou de notificação do que uma alteração real. Confirme-o com a qualidade dos dados do distrito.
+</Callout>
+
+### Desigualdade[#leitura-da-desigualdade]
+
+Nos gráficos de desigualdade, cada ponto é uma unidade subnacional e a linha é a cobertura nacional (ou regional).
+
+- Uma grande dispersão dos pontos significa elevada desigualdade: a média nacional esconde áreas fracas.
+- Uma dispersão que diminui ao longo dos anos significa que a desigualdade está a diminuir. O MADM resume esta dispersão.
+- Um distrito sempre baixo não é o mesmo que um distrito baixo apenas num ano mau: o segundo caso pode ser um problema de dados.
+- A desigualdade entre regiões nos dados das unidades de saúde pode resultar de diferenças de denominador ou de notificação, e não de diferenças reais no acesso.
+
+### Metas de cobertura global[#leitura-das-metas-de-cobertura]
+
+- Uma percentagem crescente de unidades a cumprir a meta só é boa notícia se a cobertura não exceder níveis plausíveis. Verifique as unidades muito acima de 100%: o denominador é suspeito.
+- Na evasão, lembre-se de que menos é melhor.
+
+### Armadilhas comuns
+
+- Ler o ano de um único distrito de forma isolada. Observe a tendência e os anos vizinhos.
+- Os distritos pequenos dão percentagens instáveis. Leia vários anos, não apenas um.
+- Comparar regiões com populações muito diferentes sem verificar os numeradores.
+- Comparar diretamente resultados do nível 1 e do nível 2: as unidades diferem em tamanho e fiabilidade.
+- Esquecer que o denominador selecionado para todo o país também determina os resultados regionais. Se uma região parecer impossível (acima de 100%), teste outro denominador antes de a assinalar.
+- Classificar as áreas apenas pelo último ano. Combine o nível, a evolução ao longo do tempo, a completude da notificação e a qualidade do denominador, como em [Cobertura nacional > Melhor e pior desempenho subnacional](/pt/docs/methodology/coverage#melhor-e-pior-desempenho-subnacional).
+
+## Nas aplicações
+
+O grupo **Análise subnacional** tem três páginas; [Análise subnacional](/pt/apps/countdown/subnational) tem o guia ecrã a ecrã. A desigualdade e as metas nacionais estão em [Cobertura, equidade e metas](/pt/apps/countdown/coverage-equity-targets). Na aplicação Vaxx, os separadores de indicadores e **Verificação Personalizada** abrangem os indicadores de vacinação.
+
+<Steps>
+
+### Cobertura subnacional[#implementação]
+
+Aceda ao separador **Análise subnacional** -> **Cobertura subnacional** e selecione o nível administrativo de interesse (Região (Nível Admin1) ou Distrito). Em seguida, selecione o indicador de interesse entre os principais indicadores (CPN4, Partos institucionais, Baixo peso à nascença, Penta 1 e Sarampo 1). Também pode utilizar o separador **Verificação Personalizada** para selecionar qualquer outro indicador de interesse.
+
+![Separador de cobertura subnacional com as estimativas de cobertura de nados-vivos em unidades de saúde ao longo do tempo](/images/pt-subnational-coverage.png)
+
+### Desigualdade subnacional[#implementação-1]
+
+Aceda ao separador **Análise subnacional** -> **Desigualdade subnacional** e inspecione os resultados representados graficamente a nível regional e distrital por ano, com o desvio absoluto da mediana (MADM), como a medida de resumo para avaliar se as desigualdades foram reduzidas.
+
+![Separador de desigualdade subnacional com o MADM por ano para nados-vivos em unidades de saúde](/images/pt-subnational-coverage-inequality.png)
+
+### Meta de cobertura[#implementação-2]
+
+Aceda ao separador **Análise subnacional** -> **Meta de cobertura** e leia a percentagem de distritos de uma região que atingem cada meta, por ano. A tabela lista os distritos que atingem a meta para o indicador e o ano selecionados.
+
+![Separador de meta de cobertura com a percentagem de unidades subnacionais que atingem a meta para vacinas](/images/pt-subnational-coverage-targets.png)
+
+</Steps>
+
+## Ver também
+
+- [Fórmulas: nível subnacional](/pt/docs/reference/formulas#nível-subnacional)
+- [Valores predefinidos e limiares: nível subnacional](/pt/docs/reference/defaults#nível-subnacional)
+- A análise nacional que este passo repete: [Cobertura nacional](/pt/docs/methodology/coverage)
+- Passo anterior: [Avaliação da equidade (equiplots)](/pt/docs/methodology/equity); passo seguinte: [Mortalidade](/pt/docs/methodology/mortality)

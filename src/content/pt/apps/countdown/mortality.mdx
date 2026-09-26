@@ -1,0 +1,78 @@
+---
+description: As páginas Mortalidade institucional, Mapeamento e Completude, sobre óbitos maternos, natimortalidade e óbitos neonatais registados nas unidades de saúde.
+---
+import { Steps, Callout } from 'nextra/components'
+
+# Mortalidade
+
+<Callout type="info">
+Esta página aplica-se apenas à **aplicação RMNCAH**.
+</Callout>
+
+O grupo **Mortalidade** analisa os óbitos registados nas unidades de saúde: mortalidade materna institucional, natimortalidade e óbitos neonatais antes da alta. Tem três páginas: **Mortalidade institucional**, **Mapeamento da mortalidade** e **Completude dos dados de mortalidade**. O método, as definições e as fórmulas encontram-se em [Mortalidade](/pt/docs/methodology/mortality).
+
+<Callout type="warning">
+Os valores de mortalidade utilizam o número de óbitos notificado, sem o ajuste de taxa de notificação e de valores discrepantes aplicado a outros indicadores (porquê: [Mortalidade > Revisão do iMMR e iSBR](/pt/docs/methodology/mortality#revisão-do-immr-e-isbr)). Continuam a depender do denominador que selecionou (nascimentos vivos ou nascimentos). Se um valor parecer um erro de introdução de dados, verifique-o na [Detecção de valores discrepantes](/pt/apps/countdown/data-quality) e trate-o segundo as orientações da metodologia ([Limiares de deteção de valores atípicos](/pt/docs/methodology/mortality#limiares-de-deteção-de-valores-atípicos)).
+</Callout>
+
+## Mortalidade institucional
+
+**Finalidade.** Mostrar o nível e a tendência da mortalidade institucional e verificar se é plausível.
+
+**Quando utilizar.** Em primeiro lugar, para ver as taxas; depois utilize o segundo cartão para testar a qualidade dos dados.
+
+<Steps>
+
+### Abra a Mortalidade institucional
+
+Encontra-se em **Mortalidade** no grupo **Análise**.
+
+### Leia o primeiro cartão, Mortalidade institucional
+
+Separadores: **Mortalidade Materna** (por 100 000 nascidos vivos nas unidades de saúde), **Taxa de Natimortalidade** e **Óbitos Neonatais**. Os pontos são regiões e a linha é o país, por ano.
+
+Como ler: [Mortalidade > Níveis de mortalidade institucional](/pt/docs/methodology/mortality#considerações-sobre-a-interpretação-de-dados).
+
+### Leia o segundo cartão, DQA da Mortalidade Institucional
+
+Separadores: **Mortinatos recentes** (mortinatos recentes como percentagem de todos os mortinatos), **Razão entre nascimentos mortos e mortes maternas** (mortinatos por óbito materno) e **Óbitos neonatais / maternos** (óbitos neonatais institucionais por óbito materno). Cada gráfico mostra a **Mediana** e um **Intervalo esperado**, e uma nota por baixo do gráfico indica o intervalo.
+
+Os intervalos e como os ler: [Mortalidade > Intervalos esperados nos gráficos DQA](/pt/docs/methodology/mortality#intervalos-esperados-nos-gráficos-dqa) e [Leitura das verificações DQA](/pt/docs/methodology/mortality#leitura-das-verificações-dqa).
+
+</Steps>
+
+![Mortalidade materna institucional por região e ano](/images/pt-mortality-institutional-mortality.png)
+
+![Mortinatos recentes como percentagem do total de mortinatos](/images/pt-mortality-institutional-freshsbr.png)
+
+**Como interpretar.** Ver [Mortalidade > Leitura das verificações DQA](/pt/docs/methodology/mortality#leitura-das-verificações-dqa); para os óbitos neonatais antes da alta, [Considerações sobre o iSBR](/pt/docs/methodology/mortality#considerações-sobre-o-isbr).
+
+## Mapeamento da mortalidade
+
+**Finalidade.** Mapear a mortalidade institucional pelas regiões.
+
+**Filtros.** **Selecionar Anos** (um ou vários) e **Paleta** (Verdes, Azuis, Vermelhos ou Roxos; a predefinição é Vermelhos).
+
+Separadores: **Mortalidade Materna** e **Taxa de Natimortalidade**. Cada mapa mostra os valores por região para os anos selecionados, o que torna visíveis os agrupamentos geográficos.
+
+![Mortalidade materna institucional por região](/images/pt-mortality-institutional-mmr-byregion.png)
+
+Como ler o mapa: [Mortalidade > Distribuição geográfica](/pt/docs/methodology/mortality#distribuição-geográfica).
+
+## Completude dos dados de mortalidade
+
+**Finalidade.** Estimar o grau de completude com que as unidades de saúde notificam os óbitos, comparando a taxa institucional notificada com uma taxa esperada construída a partir das estimativas da ONU.
+
+**Quando utilizar.** Depois dos gráficos de DQA, para avaliar se a mortalidade notificada pode ser utilizada.
+
+Separadores: **Razão de Mortalidade Materna Institucional** e **Taxa Institucional de Natimortalidade**. Cada gráfico representa a completude para o limite inferior, a mediana e o limite superior da estimativa da ONU, segundo vários pressupostos sobre quanto a mortalidade na comunidade excede a institucional. Utilize **Gerar Relatório** para abrir o relatório de mortalidade.
+
+Como é calculada: [Mortalidade > Cálculo da completude da notificação](/pt/docs/methodology/mortality#cálculo-da-completude-da-notificação). Como restringir os cenários com evidência local: [Cenários de avaliação e interpretação](/pt/docs/methodology/mortality#cenários-de-avaliação-e-interpretação).
+
+![Completude da notificação de mortes maternas nas unidades de saúde](/images/pt-mortality-completeness.png)
+
+A completude depende das estimativas de mortalidade da ONU. Utilize os dados integrados do país ou carregue os seus na etapa Carregar dados de [Primeiros passos](/pt/apps/countdown/getting-started).
+
+## Armadilhas comuns
+
+Armadilhas na interpretação da mortalidade institucional: [Mortalidade > Armadilhas comuns](/pt/docs/methodology/mortality#armadilhas-comuns).

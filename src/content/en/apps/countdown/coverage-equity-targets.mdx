@@ -1,0 +1,243 @@
+---
+description: Using the National Coverage, Coverage Target, National Inequality and Equity Assessment pages to estimate coverage, targets and inequalities from adjusted data.
+topics: [coverage, coverage-targets, inequality, equity]
+indicators: [anc1, anc4, ideliv, instlivebirths, sba, penta1, penta3, measles1, bcg, low_bweight, csection, measles2, opv3, pcv3, rota2, ipv1]
+reportKinds: [coverage, coverage_table, threshold, inequality, equity]
+cacheMembers: [calculate_coverage, get_filtered_coverage, generate_coverage_data, survey_estimates, national_survey, regional_survey, wuenic_estimates, check_coverage_params, calculate_inequality, get_filtered_inequality, get_filtered_threshold, wiq_survey]
+appPages: [national_coverage, national_target, national_inequality, equity_assessment]
+ai:
+  status: draft
+  summary: >-
+    Four National Analysis pages: National Coverage, Coverage Target, National Inequality (routine data) and Equity
+    Assessment (survey data; Survey Data under National Inequality in Vaxx). All need adjusted data and use the
+    denominators chosen on Denominator Selection (one vaccination denominator in Vaxx).
+  options:
+    - "Vaxx Custom Check indicators: ANC 1, institutional deliveries and live births; BCG, IPV, Measles, OPV, Pentavalent, PCV, Rotavirus doses; dropout Penta 1 to Penta 3, Penta 1 to Measles 1, Penta 3 to Measles 1, Measles 1 to Measles 2; Zero-dose and Under-vaccinated (#indicators-available)"
+    - "Coverage Target tabs: ANC 4 Visits, Institutional Live Births and Vaccine (RMNCAH); Vaccine and Dropout (Vaxx); filter Admin Level (Admin 1 or Admin 2) (#coverage-target)"
+  rules:
+    - "Record which denominator a result used (the chart caption shows it); the equity pages rely on the survey files and survey year from Load Data (#common-pitfalls)"
+    - "Coverage and dropout definitions and how to read National Coverage are in National coverage (/en/docs/methodology/coverage#interpreting-the-national-trend)"
+    - "The target thresholds are in Subnational analysis (/en/docs/methodology/subnational#target-values)"
+    - "How to read inequality and targets is in Subnational analysis (/en/docs/methodology/subnational#reading-inequality)"
+    - "Equity methods and how to read equiplots are in Equity analysis (/en/docs/methodology/equity#interpretation-of-equiplots)"
+  interpretation:
+    - "National Coverage: DHIS2, WUENIC and Survey (95% CI) lines per indicator tab; the caption names the denominator (#read-the-chart)"
+    - "National Inequality: each dot is an Admin 1 region by year, the line is national coverage (#national-inequality-routine-data)"
+    - "Equity Assessment: an equiplot per Equity Type (Area, Maternal Education, Wealth Quintile), coverage for each group (#read-the-equiplot)"
+    - "Coverage Target: bars show the percentage of units meeting the target by year and indicator; the chart title states the rule applied (#coverage-target)"
+---
+
+import { Tabs, Steps, Callout } from 'nextra/components'
+
+# Coverage, equity and targets
+
+These four pages sit in the **National Analysis** group of the sidebar: **National Coverage**, **Coverage Target**, **National Inequality** (routine data) and **Equity Assessment** (survey data). All of them need Data Adjustment to have been run (adjusted data) and use the denominators chosen on [Denominator Selection](/en/apps/countdown/denominators). Sub-national versions are in **[Sub-national analysis](/en/apps/countdown/subnational)**. Methods are in [National coverage](/en/docs/methodology/coverage) and [Equity assessment](/en/docs/methodology/equity).
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+The pages use the maternal and vaccination denominators chosen on Denominator Selection.
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+Under **National Inequality** the Vaxx app has two pages: **Routine Data** (inequality between regions) and **Survey Data** (the Equity Assessment). All pages use the vaccination denominator you chose in **[Denominators](/en/apps/countdown/denominators)**.
+
+</Tabs.Tab>
+</Tabs>
+
+## Indicators available
+
+Each page shows a strip of tabs, one indicator per tab, and most strips end with a tab for any other indicator.
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+The default indicator tabs are **ANC 4 Visits**, **Institutional Live Births**, **Low Birth Weight**, **Pentavalent 3** and **Measles 1** (National Coverage also has **FP Projection**). The **Custom** tab covers any other indicator.
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+Most tab strips end with a **Custom Check** tab that opens an **Indicator** selector listing every Vaxx analysis indicator:
+
+- ANC 1, Institutional Deliveries and Institutional Live Births.
+- BCG, IPV 1 and 2, Measles 1 and 2, OPV 1 to 3, Pentavalent 1 to 3, PCV 1 to 3, Rotavirus 1 and 2.
+- Dropout: Penta 1 to Penta 3, Penta 1 to Measles 1, Penta 3 to Measles 1, Measles 1 to Measles 2.
+- **Zero-dose** and **Under-vaccinated**.
+
+What dropout, zero-dose and under-vaccinated measure: [National coverage > Immunization](/en/docs/methodology/coverage#immunization).
+
+</Tabs.Tab>
+</Tabs>
+
+## National Coverage
+
+**Purpose.** Compare facility-based (DHIS2) coverage with survey and WUENIC estimates of national coverage for each indicator.
+
+**When to use it.** After denominators are chosen, to judge whether facility trends are believable.
+
+<Steps>
+
+### Open National Coverage
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+There are no filters. The page uses the national level and the denominators you selected.
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+It is the first page of the **National Analysis** section.
+
+</Tabs.Tab>
+</Tabs>
+
+### Pick an indicator tab
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+Tabs: **ANC 4 Visits**, **Institutional Live Births**, **Low Birth Weight**, **Pentavalent 3**, **Measles 1**, **FP Projection** (see [Advanced analysis](/en/apps/countdown/advanced-analysis)) and **Custom** for any other indicator.
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+Choose a headline indicator, or **Custom Check** for any other.
+
+</Tabs.Tab>
+</Tabs>
+
+### Read the chart
+
+The chart is titled "National ... Coverage Estimates" and plots by year the **DHIS2 estimate**, the **WUENIC estimate** and the **Survey estimate** with its **95% CI**, from 2010. The caption names the denominator that the DHIS2 values use.
+
+### Use the chart tools
+
+Each chart has a toolbar to edit labels, change view or style, download the image (**Download Plot**) and download the data (**Download Data**). See **[Exports, reports and AI](/en/apps/countdown/exports-and-ai)**.
+
+</Steps>
+
+![National coverage](/images/national-coverage.png)
+
+### How to interpret National Coverage
+
+What agreement or a gap between the lines means: [National coverage > Interpreting the national trend](/en/docs/methodology/coverage#interpreting-the-national-trend). To follow up a gap, return to **[data quality](/en/apps/countdown/data-quality)** and **[denominators](/en/apps/countdown/denominators)**.
+
+## Coverage Target
+
+**Purpose.** Show the percentage of regions or districts (sub-national units) that reach a global coverage target, by year.
+
+**Filter.** **Admin Level** (Admin 1 or Admin 2).
+
+The chart title states the rule or threshold that was applied, for example the percentage of units meeting the target, and the bars show the percentage of units meeting it by year and indicator. The thresholds applied to regions and districts are in [Subnational analysis > Target values](/en/docs/methodology/subnational#target-values).
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+Tabs are **ANC 4 Visits**, **Institutional Live Births** and **Vaccine** (BCG, Pentavalent 3 and Measles 1). Dropout targets are in the Vaxx app only.
+
+Below the chart a table, **Target Rate by Region** (Admin 1) or **Districts Meeting the Coverage Target** (Admin 2), lists the units that reach the target for the indicator you choose in the *This table only* control.
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+Two tabs:
+
+| Tab | Indicators |
+| --- | --- |
+| **Vaccine** | BCG, Pentavalent 3, Measles 1 |
+| **Dropout** | Penta 1 to Penta 3, Penta 3 to Measles 1 |
+
+The table below the chart (**Target Rate by Region** at Admin 1, **Districts Meeting the Coverage Target** for Admin 2) lists the units that reach the vaccine threshold for the indicator and year chosen in its own selectors. It can be downloaded as an Excel file.
+
+</Tabs.Tab>
+</Tabs>
+
+The same page for regions and districts is described under [Sub-national analysis](/en/apps/countdown/subnational). Read the chart title for the direction of the rule (for dropout, lower is better). How to read the percentages: [Subnational analysis > Global coverage targets](/en/docs/methodology/subnational#reading-coverage-targets).
+
+![Coverage against targets](/images/national-coverage-targets.png)
+
+## National Inequality (routine data)
+
+**Purpose.** See how much regions differ from the national figure, using facility data.
+
+The card **National Inequality** (in the Vaxx app, the **Routine Data** page) has one tab per default indicator plus the Custom (Custom Check) tab, as above. Each chart shows coverage in every Admin 1 region by year (subtitle "Subnational unit: admin 1 level"): each dot is an Admin 1 region and the line is **National Coverage**. How to read the spread: [Subnational analysis > Inequality](/en/docs/methodology/subnational#reading-inequality). Investigate the weak areas in **[Sub-national analysis](/en/apps/countdown/subnational)**.
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+Tabs: ANC 4 Visits, Institutional Live Births, Low Birth Weight, Pentavalent 3, Measles 1 and **Custom**.
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+Tabs and the Custom Check tab as above.
+
+</Tabs.Tab>
+</Tabs>
+
+Under it, choose **Select Years** and a **Palette** (Greens, Blues, Reds or Purples) for the **Sub-National Mapping** card, which maps the coverage of each region for the selected years. In the Vaxx app each tab of the mapping card draws a map titled "Distribution of ... by Regions" from DHIS2 data, and the map follows the tab selected in the inequality card.
+
+![National inequality](/images/national-coverage-inequality.png)
+
+## Equity Assessment (survey data)
+
+**Purpose.** Show inequality between population groups (household groups), using household survey data from the survey files loaded in the wizard.
+
+**When to use it.** When survey files were loaded (or the built-in ones cover your country) and you want to know who is being left behind. In the Vaxx app this is the **Survey Data** page under **National Inequality**.
+
+<Steps>
+
+### Choose the Equity Type
+
+**Area** (Rural, Urban), **Maternal Education** (No education, Primary, Secondary or higher) or **Wealth Quintile**.
+
+### Choose the indicator
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+ANC 4 Visits, Institutional Live Births, Low Birth Weight, Pentavalent 3, Measles 1 or **Custom**.
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+Tabs are **Pentavalent 3**, **Measles 1**, and the dropouts Penta 1 to Penta 3 and Penta 3 to Measles 1, plus **Custom Check**.
+
+</Tabs.Tab>
+</Tabs>
+
+### Read the equiplot
+
+The chart is titled "Inequalities in ... coverage by ..." and shows coverage for each group. How to read it: [Equity assessment > Interpretation of equiplots](/en/docs/methodology/equity#interpretation-of-equiplots).
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+Each group has its own line over time, with the national trend for comparison. **Generate Report** opens the national inequality report.
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+If a survey file was not uploaded, the built-in reference data are used. Upload the country's files in the **[Load Data](/en/apps/countdown/getting-started)** wizard for a real assessment.
+
+</Tabs.Tab>
+</Tabs>
+
+</Steps>
+
+![Equity by area of residence](/images/national-coverage-equity-area.png)
+
+![Equity by wealth quintile](/images/national-coverage-wealth.png)
+
+![Equity by maternal education](/images/national-coverage-education.png)
+
+## Common pitfalls
+
+- The equity pages rely on the survey files and the survey year from Load Data.
+- Coverage and target pages change when you change the denominator. Record which denominator a result used (the chart caption shows it).
+
+Pitfalls in reading these results: [National coverage > Interpreting the national trend](/en/docs/methodology/coverage#interpreting-the-national-trend) and [Common pitfalls](/en/docs/methodology/coverage#common-pitfalls); [Subnational analysis > Inequality](/en/docs/methodology/subnational#reading-inequality); [Equity assessment > Common pitfalls](/en/docs/methodology/equity#common-pitfalls).
+
+Next: **[Sub-national analysis](/en/apps/countdown/subnational)**.

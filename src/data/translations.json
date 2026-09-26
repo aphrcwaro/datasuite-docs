@@ -1,0 +1,231 @@
+{
+  "englishOnly": [
+    "docs/reference/glossary"
+  ],
+  "pages": {
+    "apps/ai-assistant": {
+      "fr": "3600ea74c8802daf",
+      "pt": "3600ea74c8802daf"
+    },
+    "apps/countdown/advanced-analysis": {
+      "fr": "eb758c98f768f7dc",
+      "pt": "eb758c98f768f7dc"
+    },
+    "apps/countdown/analysis-steps": {
+      "fr": "45f8d77b16df1fc4",
+      "pt": "45f8d77b16df1fc4"
+    },
+    "apps/countdown/coverage-equity-targets": {
+      "fr": "69b77d166bb6d84e",
+      "pt": "69b77d166bb6d84e"
+    },
+    "apps/countdown/data-preparation": {
+      "fr": "409c1d76b5862a49",
+      "pt": "409c1d76b5862a49"
+    },
+    "apps/countdown/data-quality": {
+      "fr": "c1eada6a1f18502c",
+      "pt": "c1eada6a1f18502c"
+    },
+    "apps/countdown/denominators": {
+      "fr": "979214316cab89ed",
+      "pt": "979214316cab89ed"
+    },
+    "apps/countdown/exports-and-ai": {
+      "fr": "85ce2f5a3a30471f",
+      "pt": "85ce2f5a3a30471f"
+    },
+    "apps/countdown/getting-started": {
+      "fr": "e239967b6121b550",
+      "pt": "e239967b6121b550"
+    },
+    "apps/countdown/index": {
+      "fr": "fb0c0aca43a3efae",
+      "pt": "fb0c0aca43a3efae"
+    },
+    "apps/countdown/mortality": {
+      "fr": "e542d07a634d7cb5",
+      "pt": "e542d07a634d7cb5"
+    },
+    "apps/countdown/reports": {
+      "fr": "768ee9479de53dc3",
+      "pt": "768ee9479de53dc3"
+    },
+    "apps/countdown/service-utilization-health-system": {
+      "fr": "f90f2853ffed534f",
+      "pt": "f90f2853ffed534f"
+    },
+    "apps/countdown/subnational": {
+      "fr": "a0090c5d223474c5",
+      "pt": "a0090c5d223474c5"
+    },
+    "apps/data-extractor/data-download": {
+      "fr": "4216a322a01b2b98",
+      "pt": "4216a322a01b2b98"
+    },
+    "apps/data-extractor/dhis2-login": {
+      "fr": "61b80c85797cc3c5",
+      "pt": "61b80c85797cc3c5"
+    },
+    "apps/data-extractor/index": {
+      "fr": "84198575f6ff9dd0",
+      "pt": "84198575f6ff9dd0"
+    },
+    "apps/data-extractor/mapping": {
+      "fr": "e0ad6ed9e0e5b062",
+      "pt": "e0ad6ed9e0e5b062"
+    },
+    "apps/index": {
+      "fr": "8d375bcd5d551e8c",
+      "pt": "8d375bcd5d551e8c"
+    },
+    "apps/pooled/exporting-results": {
+      "fr": "153fc73c7641eece",
+      "pt": "153fc73c7641eece"
+    },
+    "apps/pooled/index": {
+      "fr": "4584a34f49e26b42",
+      "pt": "4584a34f49e26b42"
+    },
+    "apps/pooled/preparing-caches": {
+      "fr": "33ccaebfd3737911",
+      "pt": "33ccaebfd3737911"
+    },
+    "apps/pooled/using-the-app": {
+      "fr": "eaaaa1dd08a8cba7",
+      "pt": "eaaaa1dd08a8cba7"
+    },
+    "docs/getting-started/index": {
+      "fr": "39f0730b1f575fbd",
+      "pt": "39f0730b1f575fbd"
+    },
+    "docs/getting-started/user-interface": {
+      "fr": "b735cb01cd6cc3a3",
+      "pt": "b735cb01cd6cc3a3"
+    },
+    "docs/index": {
+      "fr": "bda5222acc60806f",
+      "pt": "bda5222acc60806f"
+    },
+    "docs/methodology/analysis-setup": {
+      "fr": "a4643988d6f1c956",
+      "pt": "a4643988d6f1c956"
+    },
+    "docs/methodology/bayesian-coverage": {
+      "fr": "981ab8b65daa389f",
+      "pt": "981ab8b65daa389f"
+    },
+    "docs/methodology/coverage": {
+      "fr": "370702fad6026a6d",
+      "pt": "370702fad6026a6d"
+    },
+    "docs/methodology/data-adjustment": {
+      "fr": "6b4ae08b1392eb56",
+      "pt": "6b4ae08b1392eb56"
+    },
+    "docs/methodology/data-quality": {
+      "fr": "ead59c39e3053951",
+      "pt": "ead59c39e3053951"
+    },
+    "docs/methodology/denominators": {
+      "fr": "2ef67fd2560285aa",
+      "pt": "2ef67fd2560285aa"
+    },
+    "docs/methodology/dissemination": {
+      "fr": "f947f5335bc87fe1",
+      "pt": "f947f5335bc87fe1"
+    },
+    "docs/methodology/equity": {
+      "fr": "b067d247247d01c2",
+      "pt": "b067d247247d01c2"
+    },
+    "docs/methodology/health-system": {
+      "fr": "d810541f84d654d9",
+      "pt": "d810541f84d654d9"
+    },
+    "docs/methodology/index": {
+      "fr": "6cfefde24bb5956d",
+      "pt": "6cfefde24bb5956d"
+    },
+    "docs/methodology/mortality": {
+      "fr": "9c349be0fe107483",
+      "pt": "9c349be0fe107483"
+    },
+    "docs/methodology/service-utilisation": {
+      "fr": "9434873c009f0a0b",
+      "pt": "9434873c009f0a0b"
+    },
+    "docs/methodology/subnational": {
+      "fr": "76b7126787d08624",
+      "pt": "76b7126787d08624"
+    },
+    "docs/reference/abbreviations": {
+      "fr": "e5d87a3fde8dc0d7",
+      "pt": "e5d87a3fde8dc0d7"
+    },
+    "docs/reference/defaults": {
+      "fr": "b90a52ba6fcf6227",
+      "pt": "b90a52ba6fcf6227"
+    },
+    "docs/reference/formulas": {
+      "fr": "130c4e6ffb5830dd",
+      "pt": "130c4e6ffb5830dd"
+    },
+    "docs/reference/index": {
+      "fr": "acdc56d1a1a4f4d1",
+      "pt": "acdc56d1a1a4f4d1"
+    },
+    "docs/reference/indicator-definitions": {
+      "fr": "052bb3afd274d58c",
+      "pt": "052bb3afd274d58c"
+    },
+    "docs/reference/rationale": {
+      "fr": "6613a1046c1d2a64",
+      "pt": "6613a1046c1d2a64"
+    },
+    "docs/reference/rmncah-vs-vaccine": {
+      "fr": "e44ec9d85559a96c",
+      "pt": "e44ec9d85559a96c"
+    },
+    "docs/setup/index": {
+      "fr": "16ae9bef01570a66",
+      "pt": "16ae9bef01570a66"
+    },
+    "docs/setup/portable": {
+      "fr": "43124844083d0cbb",
+      "pt": "43124844083d0cbb"
+    },
+    "docs/setup/requirements": {
+      "fr": "d3cc61927a9454d8",
+      "pt": "d3cc61927a9454d8"
+    },
+    "docs/setup/uninstall": {
+      "fr": "6d459776a81ad36a",
+      "pt": "6d459776a81ad36a"
+    },
+    "docs/setup/windows": {
+      "fr": "fec3459cdc719272",
+      "pt": "fec3459cdc719272"
+    },
+    "downloads": {
+      "fr": "0734c1bab1efc55e",
+      "pt": "0734c1bab1efc55e"
+    },
+    "index": {
+      "fr": "a25583d5bbc60420",
+      "pt": "a25583d5bbc60420"
+    },
+    "resources": {
+      "fr": "1e42d4d4dc53064e",
+      "pt": "1e42d4d4dc53064e"
+    },
+    "thank-you": {
+      "fr": "dd3e1d2c674d85db",
+      "pt": "dd3e1d2c674d85db"
+    },
+    "troubleshooting/index": {
+      "fr": "c0277ebb367e5d61",
+      "pt": "c0277ebb367e5d61"
+    }
+  }
+}

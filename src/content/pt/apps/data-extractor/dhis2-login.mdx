@@ -1,3 +1,6 @@
+---
+description: Como abrir o CD2030 DHIS2 Data Extractor, iniciar sessão no servidor DHIS2 do seu país com as suas credenciais e guardar em cache os metadados a que tem acesso.
+---
 import { Callout, Steps } from 'nextra/components'
 
 # Início de sessão no DHIS2
@@ -7,6 +10,8 @@ import { Callout, Steps } from 'nextra/components'
 <Steps>
 
 ### Abrir o CD2030 DHIS2 Data Extractor
+
+Abra-o a partir da página inicial com **Open Data Extractor** (ver [Primeiros passos](/pt/docs/getting-started#abrir-o-data-extractor-open-data-extractor)).
 
 O primeiro passo é ligar a aplicação ao servidor DHIS2 pretendido. Os utilizadores introduzem o **URL da instância DHIS2**, juntamente com o **nome de utilizador** e a **palavra-passe**.
 Depois de autenticado, o extrator só consegue ler os metadados e os dados a que o utilizador com sessão iniciada já tem autorização de acesso nesse ambiente DHIS2.
@@ -21,7 +26,7 @@ Depois de autenticado, o extrator só consegue ler os metadados e os dados a que
 
 ### Introduzir credenciais de início de sessão válidas
 
-- Comece por escrever as três primeiras letras do nome do país. Se o URL estiver indexado, será apresentado e poderá selecioná-lo. Se o URL da instância DHIS2 do país não aparecer, escreva-o por completo.
+- Comece por escrever o nome do país. A partir da segunda letra, são apresentados os servidores DHIS2 conhecidos cujo URL, nome ou país correspondem, e pode selecionar o seu. Se o URL da instância DHIS2 do país não aparecer, escreva-o por completo.
 - Em seguida, introduza o **DHIS2 Username** e a palavra-passe e clique em **Login**.
 
 ![Sugestões de URL do servidor no ecrã de início de sessão](/images/extractor_login_url.jpg)

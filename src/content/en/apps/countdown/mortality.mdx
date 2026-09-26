@@ -1,0 +1,99 @@
+---
+description: The Institutional Mortality, Mortality Mapping and Mortality Completeness pages for maternal deaths, stillbirths and neonatal deaths recorded in facilities.
+topics: [mortality]
+indicators: [maternal_deaths, stillbirth_f, stillbirth_m, total_stillbirth, neonatal_deaths, instlivebirths]
+reportKinds: [mortality_trend, mortality_region, mortality_plausibility, mortality_ratio, mort_nn_trend]
+cacheMembers: [mortality_summary, mortality_ratios, filter_mortality_summary, un_mortality_estimates, mortality_mapping_years, check_mortality_params]
+appPages: [mortality_institutional, mortality_mapping, mortality_completeness]
+ai:
+  status: draft
+  summary: >-
+    The Mortality pages look at deaths recorded in health facilities: institutional maternal mortality, stillbirths
+    and neonatal deaths before discharge. Institutional Mortality shows rates and plausibility checks, Mortality
+    Mapping maps them, Mortality Completeness estimates how completely deaths are reported. Mortality uses reported
+    deaths without the reporting-rate and outlier adjustment applied to other indicators, but still depends on the
+    selected denominator.
+  rules:
+    - "The method, definitions, formulas, expected ranges and how to read the results are in Mortality (/en/docs/methodology/mortality/)"
+  interpretation:
+    - "Institutional Mortality: first card tabs Maternal Mortality, Still Birth Rate and Neonatal Deaths, regions as dots and the country as a line, by year (#read-the-first-card-institutional-mortality)"
+    - "Institutional Mortality DQA card: tabs Fresh Stillbirths, SBR to Maternal Death Ratio and Neonatal / Maternal Deaths, each with the Median and an Expected range (#read-the-second-card-institutional-mortality-dqa)"
+    - "Mortality Mapping: Select Years and Palette filters; maps of Maternal Mortality and Still Birth Rate by region (#mortality-mapping)"
+    - "Mortality Completeness: tabs Institutional MMR and Institutional SBR; completeness for the UN lower bound, median and upper bound across community-to-institutional ratios; UN estimates built in or uploaded (#mortality-completeness)"
+---
+
+import { Steps, Callout } from 'nextra/components'
+
+# Mortality
+
+<Callout type="info">
+This page applies to the **RMNCAH app** only.
+</Callout>
+
+The **Mortality** group looks at deaths recorded in health facilities: institutional maternal mortality, stillbirths and neonatal deaths before discharge. It has three pages: **Institutional Mortality**, **Mortality Mapping** and **Mortality Completeness**. The method, definitions and formulas are in [Mortality](/en/docs/methodology/mortality).
+
+<Callout type="warning">
+Mortality figures use the reported numbers of deaths without the reporting-rate and outlier adjustment applied to other indicators (why: [Mortality > iMMR and iSBR review](/en/docs/methodology/mortality#immr-and-isbr-review)). They still depend on the denominator you selected (live births or births). If a value looks like a data entry error, check it in [Outlier Detection](/en/apps/countdown/data-quality) and treat it with the methodology's guidance ([Outlier detection thresholds](/en/docs/methodology/mortality#outlier-detection-thresholds)).
+</Callout>
+
+## Institutional Mortality
+
+**Purpose.** Show the level and trend of institutional mortality and check whether it is plausible.
+
+**When to use it.** First, to see the rates; then use the second card to test data quality.
+
+<Steps>
+
+### Open Institutional Mortality
+
+It is under **Mortality** in the **Analysis** group.
+
+### Read the first card, Institutional Mortality
+
+Tabs: **Maternal Mortality** (per 100,000 live births in facilities), **Still Birth Rate** and **Neonatal Deaths**. Dots are regions and the line is the country, by year.
+
+How to read it: [Mortality > Institutional mortality levels](/en/docs/methodology/mortality#data-interpretation-considerations).
+
+### Read the second card, Institutional Mortality DQA
+
+Tabs: **Fresh Stillbirths** (fresh stillbirths as a percentage of all stillbirths), **SBR to Maternal Death Ratio** (stillbirths per maternal death) and **Neonatal / Maternal Deaths** (institutional neonatal deaths per maternal death). Each chart shows the **Median** and an **Expected range**, and a note under the chart gives the range.
+
+The ranges and how to read them: [Mortality > Expected ranges on the DQA charts](/en/docs/methodology/mortality#expected-ranges-on-the-dqa-charts) and [Reading the DQA checks](/en/docs/methodology/mortality#reading-the-dqa-checks).
+
+</Steps>
+
+![Institutional maternal mortality by region and year](/images/mortality-institutional-mortality.png)
+
+![Fresh stillbirths as a percentage of total stillbirths](/images/mortality-institutional-freshsbr.png)
+
+**How to interpret.** See [Mortality > Reading the DQA checks](/en/docs/methodology/mortality#reading-the-dqa-checks); for neonatal deaths before discharge, [Considerations for iSBR](/en/docs/methodology/mortality#considerations-for-isbr).
+
+## Mortality Mapping
+
+**Purpose.** Map institutional mortality across regions.
+
+**Filters.** **Select Years** (one or several) and **Palette** (Greens, Blues, Reds or Purples; the default is Reds).
+
+Tabs: **Maternal Mortality** and **Still Birth Rate**. Each map shows the values by region for the selected years, which makes geographic clusters visible.
+
+![Institutional maternal mortality by region](/images/mortality-institutional-mmr-byregion.png)
+
+How to read the map: [Mortality > Geographic distribution](/en/docs/methodology/mortality#geographic-distribution).
+
+## Mortality Completeness
+
+**Purpose.** Estimate how completely facilities report deaths, by comparing the reported institutional rate with an expected rate built from UN estimates.
+
+**When to use it.** After the DQA charts, to judge whether reported mortality can be used at all.
+
+Tabs: **Institutional MMR** and **Institutional SBR**. Each chart draws completeness for the lower bound, median and upper bound of the UN estimate, across several assumptions about how much higher community mortality is than institutional mortality. Use **Generate Report** to open the mortality report.
+
+How it is computed: [Mortality > Computing reporting completeness](/en/docs/methodology/mortality#computing-reporting-completeness). How to narrow the scenarios with local evidence: [Evaluation scenarios and interpretation](/en/docs/methodology/mortality#evaluation-scenarios-and-interpretation).
+
+![Completeness of facility maternal death reporting](/images/mortality-completeness.png)
+
+Completeness relies on the UN mortality estimates. Use the built-in country data, or upload your own in the Upload Data step of [Getting started](/en/apps/countdown/getting-started).
+
+## Common pitfalls
+
+Pitfalls in interpreting institutional mortality: [Mortality > Common pitfalls](/en/docs/methodology/mortality#common-pitfalls).

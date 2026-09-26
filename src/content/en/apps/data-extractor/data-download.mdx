@@ -1,3 +1,6 @@
+---
+description: How to create a download task in the Data Extractor's Downloads Manager, set its parameters and export DHIS2 data that is extracted in smaller batches.
+---
 import { Callout, Steps } from 'nextra/components'
 
 # Downloading data
@@ -26,7 +29,7 @@ This approach lowers the risk of timeouts for large download requests, thus redu
 
 ### Configure the download parameters
 
-Select the name of the mapping (in case you have multiple mappings), the period (start and end dates), and the admin level, then click **Start Download**.
+Select the mapping (**Mapping Configuration**, in case you have multiple mappings), the period (**Date Range**, start and end dates), the **Frequency** (monthly or yearly; shown for Custom mappings only), the **Admin Level** and, optionally, a **Sub-region** to limit the download to one area, then click **Start Download**.
 
 ![Configure Download Task dialog](/images/extractor_download_config.jpg)
 
@@ -38,6 +41,10 @@ Select the name of the mapping (in case you have multiple mappings), the period 
 - **Admin Level:** use Level 3.
 
 </Callout>
+
+### Export the data
+
+When the task is complete, it moves to **Recent History**. In its **Actions** column, click **Export to Excel** to save the workbook that the [RMNCAH and Vaxx apps](/en/apps/countdown/getting-started) load (sheets `Service_data`, `Population_data`, `Reporting_completeness` and `Admin_data`), or **Export to JSON**. A failed task can be restarted with **Retry Download**. On a DHIS2 server that uses the Ethiopian calendar, **Excel labels** chooses Ethiopic or Gregorian period labels for the Excel file.
 
 </Steps>
 

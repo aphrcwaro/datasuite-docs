@@ -1,0 +1,333 @@
+---
+description: How to judge whether facility-reported maternal deaths, stillbirths and neonatal deaths are plausible, and how complete facility death reporting is.
+topics: [mortality]
+indicators: [maternal_deaths, stillbirth_f, stillbirth_m, total_stillbirth, neonatal_deaths, instlivebirths]
+reportKinds: [mortality_trend, mortality_region, mortality_plausibility, mortality_ratio, mort_nn_trend]
+cacheMembers: [mortality_summary, mortality_ratios, filter_mortality_summary, un_mortality_estimates, mortality_mapping_years, check_mortality_params]
+appPages: [mortality_institutional, mortality_mapping, mortality_completeness]
+ai:
+  status: draft
+  summary: >-
+    Institutional mortality (iMMR, iSBR, neonatal deaths before discharge) is computed from unadjusted facility
+    data, checked for plausibility, compared with population estimates, and used to estimate the completeness of
+    facility death reporting.
+  definitions:
+    - "iMMR: maternal deaths in facilities per 100,000 facility live births; iSBR: stillbirths per 1,000 facility births; neonatal deaths before discharge per 1,000 facility live births (#institutional-mortality-in-the-cd2030-analytical-approach)"
+    - "Expected iMMR = population MMR / (P_i + (M_c/M_i) x (1 - P_i)), with P_i the share of live births in facilities (#calculating-expected-institutional-mortality)"
+    - "Completeness of facility reporting = reported iMMR / expected iMMR (#computing-reporting-completeness)"
+  rules:
+    - "Rates use unadjusted reported deaths and births, with no adjustment for reporting rates or outliers; replace clear annual entry-error outliers with the average of the surrounding years (#immr-and-isbr-review)"
+    - "Implausibly low iMMR: under 25 per 100,000 live births (#considerations-for-immr)"
+    - "Implausibly low iSBR: under 6 per 1,000 births (#considerations-for-isbr)"
+    - "Low rates in less-developed regions indicate under-reporting rather than better outcomes (#considerations-for-immr)"
+    - "Neonatal deaths before discharge should be at least half of population neonatal mortality (#considerations-for-isbr)"
+    - "Stillbirth to maternal death ratio expected 5-25 (sub-Saharan Africa); outside it, raise a data quality flag (#ratio-of-stillbirths-to-maternal-deaths-at-national-level)"
+    - "Fresh stillbirths: plausible range 30%-55% of all stillbirths (#stillbirth)"
+    - "Expected ranges on the apps' Institutional Mortality DQA charts: fresh stillbirths 30 to 55% of stillbirths; 6 to 15 stillbirths per maternal death; 5 to 10 neonatal deaths per maternal death (#expected-ranges-on-the-dqa-charts)"
+    - "Outliers: an annual value more than 3 SD from the long-term mean; a monthly value more than 5 x MAD from the median (#outlier-detection-thresholds)"
+  interpretation:
+    - "A very low maternal mortality ratio with a low stillbirth-to-maternal-death ratio can point to under-reporting; fresh-stillbirth shares far outside the range suggest misclassification; regions outside the range every year are the priority for data review (#reading-the-dqa-checks)"
+    - "High values on the map are not always high mortality: small regions swing widely, and good reporters can look worse (#geographic-distribution)"
+    - "Institutional mortality is not population mortality; a low completeness makes the reported rate a lower bound (#common-pitfalls)"
+    - "Ratio below 5: stillbirths more under-reported; 25 or more: maternal deaths the main under-reporting; 5-25: both possible, or both well reported (#reading-the-stillbirth-to-maternal-death-ratio)"
+    - "Completeness is modelled for lower, median and upper population MMR across community-to-institutional ratios; narrow the scenarios with local evidence (#evaluation-scenarios-and-interpretation)"
+    - "Maternity ward or MPDSR sources miss deaths outside the labour ward; all-cause facility registries reduce this bias (#mpdsr-vs-all-cause-facility-reporting)"
+  notCovered:
+    - "How to choose among the modelled completeness scenarios beyond the two examples given (#evaluation-scenarios-and-interpretation)"
+---
+
+import { Callout, Steps } from 'nextra/components'
+
+# Mortality
+
+This step asks whether the maternal deaths, stillbirths and neonatal deaths reported by health facilities are plausible, and how complete facility death reporting is. It produces the institutional mortality rates (iMMR, iSBR and neonatal deaths before discharge), data quality checks, and modelled completeness of facility reporting.
+
+<Callout type="info">
+**At a glance**
+- **Answers:** Are the institutional mortality rates plausible? Is under-reporting more likely for stillbirths or for maternal deaths? How complete is the facilities' reporting of deaths?
+- **Uses:** the unadjusted reported deaths and births/live births in health facilities (no [data adjustment](/en/docs/methodology/data-adjustment) for reporting rates or outliers), and population mortality estimates (UN estimates, or a recent national survey or census).
+- **Produces:** iMMR, iSBR and neonatal deaths before discharge by region and year, data quality flags, and the completeness of facility reporting across modelled scenarios; used in the Mortality report ([Reports](/en/apps/countdown/reports)).
+- **In the apps:** [Mortality](/en/apps/countdown/mortality) (RMNCAH app only).
+- **Defaults:** [Mortality](/en/docs/reference/defaults#mortality)
+</Callout>
+
+## Why it matters
+
+Maternal deaths and stillbirths are few and fluctuate, and low institutional mortality in less-developed regions is more likely to signal under-reporting than better outcomes. Checking the rates for plausibility, and comparing them with population estimates, shows how complete facility reporting is before the rates are used. The scientific basis is in [Rationale: institutional mortality](/en/docs/reference/rationale#mortality-rationale).
+
+## Method
+
+### Institutional mortality in the CD2030 analytical approach
+
+The definitions for institutional, community, and population maternal mortality and for stillbirths are outlined in the matrix below.
+
+| Indicator | Numerator | Denominator |
+| --- | --- | --- |
+| Institutional maternal mortality ratio (iMMR) | Number of maternal deaths in health facilities | $\frac{\text{Number of live births in health facilities}}{\text{100,000}}$ |
+| Population maternal mortality (MMR) | Number of maternal deaths in the population | $\frac{\text{Number of live births in the population}}{\text{100,000}}$ |
+| Community maternal mortality ratio (cMMR) | Number of maternal deaths in the community | $\frac{\text{Number of live births in the community}}{\text{100,000}}$ |
+| Institutional stillbirth rate (iSBR) | Number of stillbirths in health facilities | $\frac{\text{Number of births in health facilities}}{\text{1,000}}$ |
+| Population stillbirth rate (SBR) | Number of stillbirths in the population | $\frac{\text{Number of births in the population}}{\text{1,000}}$ |
+| Community stillbirth rate (cSBR) | Number of stillbirths in the community | $\frac{\text{Number of births in the community}}{\text{1,000}}$ |
+| Neonatal mortality (before discharge) | Number of neonatal deaths before discharge | $\frac{\text{Number of live births in health facilities}}{\text{1,000}}$ |
+
+### iMMR and iSBR review
+
+The annual mortality rates are computed using the unadjusted data on reported deaths and births/live births in health facilities.
+We do not adjust for reporting rates and outliers (as is done for other interventions) because it is difficult to adjust maternal deaths and stillbirths, where the number of deaths is small and fluctuating.
+
+It is however advisable to check the data for any extreme outliers in the annual data (e.g., numbers of deaths that clearly indicate data entry errors) and replace these with the average of the surrounding years.
+
+### Data quality metrics
+
+#### Ratio of stillbirths to maternal deaths at national level
+
+We expect maternal mortality and stillbirth to be positively correlated given the commonalities in causes.
+Based on a review of the global estimates, historical data, and health facility studies, we expect the ratio of stillbirth to maternal death to be in the range of 5 to 25 for countries in sub-Saharan Africa.
+We compute the ratio as the number of reported stillbirths divided by the number of reported maternal deaths in DHIS2 or MPDSR, in a specific time period (usually a year) and raise a "data quality flag" if the ratio is outside the 5-25 range.
+
+#### Expected ranges on the DQA charts
+
+The **Institutional Mortality DQA** charts in the apps check three ratios, each against an expected range, and show the median:
+
+| Check | What it measures | Expected range |
+| --- | --- | --- |
+| Fresh stillbirths | Fresh stillbirths as a percentage of all stillbirths | 30 to 55 |
+| Stillbirth to maternal death ratio | Stillbirths per maternal death | 6 to 15 |
+| Neonatal / maternal deaths | Institutional neonatal deaths per maternal death | 5 to 10 |
+
+The stillbirth-to-maternal-death band on the chart (6 to 15) is narrower than the range used to flag national data (5 to 25, see [Ratio of stillbirths to maternal deaths at national level](#ratio-of-stillbirths-to-maternal-deaths-at-national-level)); the question in the Mortality report asks whether the ratio is in the range of 5 to 15. The three values are the apps' as they stand.
+
+#### Consistency of iMMR with population and community estimates
+
+The completeness of reporting by health facilities can be estimated by comparing the reported iMMR based on facility data with an expected iMMR.
+The population MMR, community MMR, and iMMR must be mathematically consistent.
+While variations will occur between different populations, it is statistically improbable to observe a community MMR of 1,000 when the institutional MMR is reported at 100.
+
+An expected MMR in health facilities can be modeled based on two primary sets of parameters:
+
+1. **Maternal mortality ratio in the whole population ($M_p$):** This accounts for both community and institutional deaths. Teams can utilize the lower bound, median, or upper bounds of global estimates for each country *(e.g., UN estimates)*, or results from a recent national household survey.
+2. **Ratio of community to institutional maternal mortality ($\frac{M_c}{M_i}$):** This model evaluates assumptions ranging from `0.5` *(where community MMR is half the institutional MMR)* through `1.0` *(where they are equal)* up to `2.0` *(where $M_c$ is twice $M_i$)*. The selection of this ratio depends on the local proportion of births occurring in health facilities ($P_i$). Evidence suggests that the community-to-institutional ratio tends to expand as institutional birth rates and overall facility utilization rates increase.
+
+### Mathematical modeling and formulations
+
+The total population MMR ($M_p$) represents the sum of the institutional and community mortality ratios, weighted by the proportion of live births occurring in each respective setting:
+
+$$M_p = (M_i \times P_i) + (M_c \times (1 - P_i))$$
+
+Where:
+
+- $M_p$: Maternal mortality ratio in the population
+- $M_i$: Institutional maternal mortality ratio
+- $M_c$: Maternal mortality ratio in the community
+- $P_i$: The proportion of live births occurring in a health institution
+
+#### Back-calculating community mortality
+
+Given that $M_i$ is derived from raw DHIS2 data and $M_p$ is provided by independent UN population estimates, the true community MMR ($M_c$) can be isolated and solved as:
+
+$$M_c = \frac{M_p - (M_i \times P_i)}{1 - P_i}$$
+
+**Example:** If $M_i = 100$, $M_c = 200$, and $75\%$ of births take place within health facilities ($P_i = 0.75$), the absolute population MMR is calculated as:
+
+$$M_p = (100 \times 0.75) + (200 \times 0.25) = 75 + 50 = 125$$
+
+In this scenario, the community-to-institutional mortality ratio ($\frac{M_c}{M_i}$) equals $\frac{200}{100} = 2.0$.
+
+#### Calculating expected institutional mortality
+
+Conversely, if we establish a baseline estimate for the population MMR ($M_p$) and assume a specific community-to-institutional variance ratio ($R = \frac{M_c}{M_i}$), we can calculate the mathematically expected institutional MMR using the following formula:
+
+$$\text{Expected } M_i = \frac{M_p}{P_i + \left( \frac{M_c}{M_i} \times (1 - P_i) \right)}$$
+
+**Example:** If $75\%$ of women deliver in health facilities ($P_i = 0.75$), the true population $M_p$ is known to be 200, and the assumed community-to-institutional ratio ($\frac{M_c}{M_i}$) is 2, the expected institutional MMR is:
+
+$$\text{Expected } M_i = \frac{200}{0.75 + (2 \times 0.25)} = \frac{200}{1.25} = 160$$
+
+#### Computing reporting completeness
+
+Finally, the estimated level of completeness of facility reporting is calculated by dividing the raw reported $iMMR$ (from DHIS2) by the expected $iMMR$:
+
+$$\text{Completeness of Facility Reporting} = \frac{\text{Reported } M_i}{\text{Expected } M_i}$$
+
+**Example:** If the raw reported MMR in DHIS2 was 100, but the modeled expected MMR was 160, the final facility reporting completeness level is:
+
+$$\text{Completeness} = \frac{100}{160} = 62.5\%$$
+
+### Methodological footnotes and technical definitions
+
+This section compiles the core clinical definitions, mathematical assumptions, and data-cleaning guardrails referenced throughout the institutional mortality and data quality modules.
+
+### Clinical definitions
+
+#### Maternal death
+
+**Definition:** The death of a woman from any cause related to or aggravated by pregnancy or its management (excluding accidental or incidental causes) during pregnancy and childbirth or within 42 days of termination of pregnancy, irrespective of the duration and site of the pregnancy.
+
+#### Stillbirth
+
+**Definition:** A baby who dies after 28 weeks of pregnancy (gestation), but before or during birth.
+
+**Classification:** Clinical records typically distinguish between:
+
+- **Ante-partum stillbirths (macerated):** Deaths occurring before the onset of labor, showing signs of tissue deterioration.
+- **Intra-partum stillbirths (fresh):** Deaths occurring during labor or delivery.
+
+The figure below shows the institutional fresh stillbirths as a percentage of total stillbirths by region (dots) and the national median (red line), with the plausible range of 30% to 55% marked by dashed lines.
+
+![Institutional fresh stillbirths as a percentage of total stillbirths](/images/mortality-institutional-freshsbr.png)
+
+### Data quality and imputation guardrails
+
+#### Outlier detection thresholds
+
+While annual mortality inputs are generally kept unadjusted due to small, fluctuating case numbers, users must manually inspect the raw data for extreme entry errors. Outliers are defined using two statistical thresholds:
+
+1. Any annual data point deviating by more than **3 standard deviations** ($\sigma$) from the long-term annual mean.
+2. Any monthly data point exceeding **5 times** the Median Absolute Deviation ($MAD$) from the calculated baseline median.
+
+### Modeling assumptions and system limitations
+
+#### Community-to-institutional MMR ratios
+
+The baseline ratios ($\frac{M_c}{M_i}$) pre-configured into the modeling engine (0.5, 1.0, 1.5 and 2.0) are derived from empirical field studies. These studies cross-referenced institutional deaths against total population mortality estimates, accounting for:
+
+- The absolute proportion of all national maternal deaths that occurred within formal health infrastructure.
+- The matching percentage of total births that took place inside health facilities.
+
+#### MPDSR vs. all-cause facility reporting
+
+A primary structural factor skewing institutional maternal mortality ratios ($iMMR$) is the physical location of the death within a hospital complex:
+
+- If data collection relies strictly on Maternity Ward logs or Maternal and Perinatal Death Surveillance and Response (MPDSR) audits, deaths occurring upon clinical re-admission or outside the labor ward (e.g., intensive care, emergency blocks, or general surgical wards due to post-abortal sepsis or delayed hemorrhage) are frequently omitted.
+- If the data engine draws from a comprehensive, facility-wide **all-cause mortality registry** where underlying maternal causes are accurately coded, this systemic under-reporting bias is mitigated.
+
+## Interpretation
+
+### Institutional mortality levels[#data-interpretation-considerations]
+
+#### Considerations for iMMR
+
+The figure below displays the institutional maternal mortality per 100,000 live births for regions (dots) and for the country as a whole (line and annual values) by year.
+
+![Institutional maternal mortality per 100,000 live births by region and year](/images/mortality-institutional-mortality.png)
+
+When interpreting the institutional maternal mortality ratio (iMMR), several critical data quality and structural considerations must be made:
+
+- **Extreme high outliers:** Assess if there are any extreme outliers on the high side that may be due to major data entry errors. These should be flagged for potential correction or exclusion.
+- **Implausibly low rates:** Identify how many regions have an implausibly low $iMMR$, which is arbitrarily defined as **less than 25 per 100,000 live births** *(25 is roughly two times the average MMR in high-income countries of 12.5)*.
+- **Contextual validation:** Determine if these low-rate regions are more advanced areas where lower mortality is demographically expected, or if they are less-developed regions. Low mortality in less-developed regions strongly indicates a major under-reporting of institutional deaths rather than superior clinical outcomes.
+
+To complement this analysis, a geographic mapping of the indicator is highly recommended.
+
+#### Geographic distribution
+
+A map displaying the $iMMR$ by region is a useful addition to guide the interpretation of the data, helping teams quickly focus on spatial patterns and identify potential under-reporting or data quality issues across sub-national units.
+
+![Map of the institutional maternal mortality ratio by region](/images/mortality-institutional-mmr-byregion.png)
+
+High values on a map are not always high mortality. Regions with few births can swing widely, and regions that report well can look worse than regions that under-report.
+
+#### Considerations for iSBR
+
+The figure below presents the stillbirth rate per 1,000 births for regions and the country, using the same format as for maternal mortality.
+
+![Institutional stillbirth rate per 1,000 births by region and year](/images/sbr-rate.png)
+
+When analyzing the institutional stillbirth rate (iSBR), the written interpretation should explicitly address the following evaluation questions:
+
+- **Implausibly low rates:** How many regions have an implausibly low iSBR, which is defined as **less than 6 per 1,000 births** *(6 is approximately two times the average SBR in high-income countries)*?
+- **Data quality vs. development:** Are these identified areas more advanced regions where mortality is expected to be lower due to better clinical infrastructure, or is this a clear sign of major under-reporting of deaths in less-developed regions of the country?
+
+In addition, the institutional mortality levels can be compared to the most recent mortality estimates for the population. These population estimates could be coming from a recent national survey or census, or we can use the UN estimates for maternal mortality (for 2020) and stillbirth rates (for 2021).
+
+This is to obtain an idea of the difference between the institutional mortality and the population mortality. Interpretation should seek to explain:
+
+- How far is the iMMR (or iSBR) from the UN estimates of the population mortality, including the uncertainty range of the global estimates: this difference will be used further to assess the data quality.
+
+The institutional neonatal mortality rates (per 1,000 live births) based on reported neonatal deaths may also be graphed similar to iMMR and iSBR, but have to be interpreted with additional caution. Almost all babies stay at least 24 hours after delivery in the hospital but after that many are discharged and the observation time in health facilities is variable. Therefore, the statistic is mostly referred to as neonatal deaths before discharge per 1,000 live births, which includes day 1, some deaths on day 2, fewer deaths on day 3 etc. Because they are deaths of live-born babies before discharge, they understate community neonatal mortality.
+
+A rough guide to assess reporting completeness is that expected mortality of neonatal deaths before discharge in health facilities should be at least half of neonatal mortality in the population. So for instance, if population neonatal mortality is 20 per 1,000 live births, we expect institutional neonatal mortality at least 10 per 1,000 live births in the health facilities.
+
+![Institutional neonatal deaths before discharge per 1,000 live births](/images/neonatal-mortality.png)
+
+### Stillbirth to maternal death ratio[#reading-the-stillbirth-to-maternal-death-ratio]
+
+<Callout type="info">
+
+**Interpretation:**
+
+- **If the ratio is lower than 5:** under-reporting of stillbirths is likely greater than under-reporting of maternal deaths.
+- **If the ratio is equal or greater than 25:** under-reporting of maternal deaths is likely to be the main issue, under-reporting of stillbirth less serious than for maternal deaths.
+- **If the ratio is between 5 and 25:** under-reporting of maternal deaths and under-reporting of stillbirths are both possible, or reporting of both is of good quality (this requires that the level is also in the expected range - component 1).
+
+</Callout>
+
+![Ratio of stillbirths to maternal deaths in health facilities](/images/sbr-maternal-death-ratio.png)
+
+### Reading the DQA checks
+
+How to read the [expected ranges on the DQA charts](#expected-ranges-on-the-dqa-charts):
+
+- A very low maternal mortality ratio with a low stillbirth-to-maternal-death ratio can point to under-reporting of deaths, not to good care.
+- A share of fresh stillbirths far outside its range suggests that fresh and macerated stillbirths are misclassified.
+- Regions that sit outside the range in every year are the priority for data review.
+
+### Evaluation scenarios and interpretation
+
+DataSuite models completeness of reporting across multiple scenarios simultaneously.
+The diagnostic chart below illustrates reporting completeness across three distinct population MMR levels (lower bound, median/best estimate, and upper bound) mapped against a varying range of community-to-institutional mortality ratios (0.5 to 2.0) on the X-axis.
+
+![Completeness of facility maternal death reporting by community-to-institutional ratio](/images/mortality-completeness.png)
+
+<Callout type="info">
+
+**Interpretation guidelines**
+
+Not all modeled scenarios apply equally to every country context. Teams should evaluate and narrow down the outputs based on local evidence:
+
+- If external validation indicates that the true national population MMR sits below the UN median baseline, pick the scenario corresponding to the lowest population MMR boundary (the lower-bound line).
+- If contextual country data indicates that community maternal mortality is roughly 1.5 to 2.0 times higher than facility mortality, the corresponding reporting completeness range is narrowed to **62%–69%**.
+
+By default, DataSuite processes calculations using community-to-institutional ratios of **0.5, 1.0, 1.5 and 2.0** to establish baseline tracking boundaries.
+
+</Callout>
+
+A similar approach can be used for stillbirths using all births instead of live births.
+The UN global stillbirth estimates for 2021 with uncertainty ranges can be used (lower and upper bound are 90% uncertainty intervals from the model). There is little research on the community to institutional stillbirth ratio (partly because community level stillbirth reporting is more uncertain) but it is likely that the ratios are lower than for maternal mortality, as institutional mortality levels are much higher for stillbirth rates than for MMR. A range of 0.5-2.0 may be used for the estimation of the level of completeness of facility reporting.
+
+![Completeness of facility stillbirth reporting by community-to-institutional ratio](/images/mortalitysbr_completeness11.png)
+
+### Common pitfalls
+
+- Treating institutional mortality as population mortality. Facilities capture only part of deaths.
+- Comparing regions with very different shares of institutional births.
+- Ignoring completeness. A low completeness means the reported rate is a lower bound.
+
+## In the apps
+
+The **Mortality** group is in the RMNCAH app only; [Mortality](/en/apps/countdown/mortality) has the screen-by-screen guide.
+
+<Steps>
+
+### Institutional Mortality
+
+Under **Mortality** in the **Analysis** group. The first card shows the rates (**Maternal Mortality**, **Still Birth Rate**, **Neonatal Deaths**), with regions as dots and the country as a line, by year. The second card, **Institutional Mortality DQA**, shows fresh stillbirths as a percentage of all stillbirths, the stillbirth to maternal death ratio, and neonatal deaths per maternal death.
+
+### Mortality Mapping
+
+Maps **Maternal Mortality** and **Still Birth Rate** by region for the selected years.
+
+### Mortality Completeness
+
+The **Institutional MMR** and **Institutional SBR** tabs show the completeness of facility reporting for the lower bound, median and upper bound of the UN estimate, across community-to-institutional ratios.
+
+</Steps>
+
+## See also
+
+- [Rationale: institutional mortality](/en/docs/reference/rationale#institutional-mortality)
+- [Formulas: mortality](/en/docs/reference/formulas#mortality)
+- [Defaults and thresholds: mortality](/en/docs/reference/defaults#mortality)
+- Glossary: [Institutional mortality](/en/docs/reference/glossary#institutional-mortality-immr-isbr-neonatal-deaths-before-discharge), [Expected iMMR](/en/docs/reference/glossary#expected-institutional-maternal-mortality-ratio-expected-immr), [Completeness of facility death reporting](/en/docs/reference/glossary#completeness-of-facility-death-reporting)
+- Previous step: [Subnational analysis](/en/docs/methodology/subnational); next step: [Curative health services utilization for sick children](/en/docs/methodology/service-utilisation)

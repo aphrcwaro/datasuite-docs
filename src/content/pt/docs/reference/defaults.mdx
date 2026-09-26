@@ -1,0 +1,55 @@
+---
+description: Os valores predefinidos, limiares e intervalos esperados do método Countdown, por etapa, e se se aplicam às análises RMNCAH, de vacinação ou a ambas.
+title: Valores predefinidos e limiares
+---
+
+import { MethodDefaults, MethodDefaultsNote } from '@/components/MethodDefaults'
+
+# Valores predefinidos e limiares
+
+Os números que o método utiliza -- valores predefinidos, limiares e intervalos esperados -- reunidos num só lugar, agrupados por etapa da análise. Cada linha indica o que é o valor, se se aplica às análises RMNCAH, às análises de vacinação ou a ambas, como as aplicações o utilizam e que secção da [metodologia Countdown](/pt/docs/methodology) o explica.
+
+Os valores são gerados a partir do código das aplicações (cd2030.core), pelo que são os que as aplicações utilizam. Quando o guia de vacinação Countdown de 2024 difere, a página da metodologia indica-o.
+
+<MethodDefaultsNote lang="pt" />
+
+## Qualidade dos dados
+
+As verificações da completude dos relatórios, dos valores atípicos e da consistência interna, e a pontuação geral de qualidade: [Avaliação da qualidade dos dados](/pt/docs/methodology/data-quality).
+
+<MethodDefaults lang="pt" step="data_quality" />
+
+## Ajuste de dados
+
+O ajuste para a notificação incompleta (o fator $k$), as taxas de notificação baixas e os valores atípicos extremos: [Ajuste de dados](/pt/docs/methodology/data-adjustment).
+
+<MethodDefaults lang="pt" step="adjustment" />
+
+## Denominadores
+
+Os pressupostos dos denominadores derivados e as verificações das projeções populacionais: [Avaliação e seleção do denominador](/pt/docs/methodology/denominators).
+
+<MethodDefaults lang="pt" step="denominators" />
+
+## Cobertura
+
+A cobertura nacional e a sua comparação com os inquéritos e as metas: [Cobertura nacional](/pt/docs/methodology/coverage).
+
+<MethodDefaults lang="pt" step="coverage" />
+
+## Nível subnacional
+
+A cobertura subnacional, a desigualdade e as metas de cobertura: [Análise subnacional](/pt/docs/methodology/subnational).
+
+<MethodDefaults lang="pt" step="subnational" />
+
+## Mortalidade
+
+A mortalidade institucional, as suas verificações de plausibilidade e a completude da notificação de óbitos: [Mortalidade](/pt/docs/methodology/mortality).
+
+<MethodDefaults lang="pt" step="mortality" />
+
+## Ver também
+
+- [Fórmulas](/pt/docs/reference/formulas): as fórmulas que o método utiliza, com o significado de cada símbolo
+- [Referência rápida](/pt/docs/reference): cada etapa da análise, a sua página de método e onde está nas aplicações

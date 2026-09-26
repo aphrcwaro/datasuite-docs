@@ -1,0 +1,196 @@
+---
+description: The five data quality pages (reporting rate, outliers, missingness, internal consistency and overall score) that show whether facility data can be trusted.
+topics: [data-quality, reporting-completeness, outliers, internal-consistency, data-missingness, dq-ratios, dq-score]
+reportKinds: [reporting_rate, overall_score, consistency, dq_ratios, dq_reporting_units, dq_completeness_units, dq_completeness_districts, dq_outliers_units, dq_outlier_trend]
+cacheMembers: [reporting_rate_national, reporting_rate_admin1, reporting_rate_district, district_reporting_rate, calculate_reporting_rate, calculate_district_reporting_rate, completeness_national, completeness_admin1, completeness_district, district_completeness, calculate_completeness_summary, list_missing_units, outliers_national, outliers_admin1, outliers_district, district_outliers_summary, list_outlier_units, calculate_outliers_summary, ratios_summary, adequacy_ratios, calculate_ratios_and_adequacy, overall_score, calculate_overall_score, performance_threshold]
+appPages: [reporting_rate, data_completeness, outlier_detection, internal_consistency, overall_score]
+ai:
+  status: draft
+  summary: >-
+    The five data quality pages (Data quality in the RMNCAH app, Data Quality Assessment in the Vaxx app) answer
+    whether the facility data can be trusted before any coverage is calculated; their results decide whether to
+    remove years and how to adjust. Review them after loading, in order: Reporting Rate, Outlier Detection, Data
+    Missingness, Internal Consistency, Overall Data Quality Score.
+  rules:
+    - "Performance Threshold defaults to 90% (quick picks 70, 80, 90, 95), is stored in the dataset and reused by the Overall Data Quality Score and, in RMNCAH, the Service Utilization DQA (#reporting-rate)"
+    - "RMNCAH: the expected ratios in the Ratio Plots use the survey coverage values entered in National Rates (#internal-consistency)"
+    - "The method (the outlier test, the expected ratios and district range, the score's formula) is in Data quality assessment (/en/docs/methodology/data-quality/)"
+    - "How to read the results, and the pitfalls in interpreting them, are in Data quality assessment > Interpretation (/en/docs/methodology/data-quality/#interpretation)"
+  interpretation:
+    - "Reporting Rate: Sub-National Reporting Rate (Heat Map, Bar Graph), National Reporting Rate (percent of districts below the threshold) and Sub-National Units with Low Reporting (#reporting-rate)"
+    - "Outlier Detection: Indicators with Outliers (Heat Map, Indicator Bar Graph, Region Bar Graph), Sub-National Units with Extreme Outliers, Sub-National Trends (#outlier-detection)"
+    - "Data Missingness: Indicators with Missing Data (Heat Map, Complete Indicators, Missing Indicators by Region) and Sub-National Units with Missing Data (#data-missingness)"
+    - "Internal Consistency: Ratio Plots (ANC1/Penta1, Penta1/Penta3, and OPV1/OPV3 in Vaxx, against the expected ratio) and Consistency Checks (one point per district, with a linear fit and a diagonal) (#internal-consistency)"
+    - "Overall Data Quality Score: completeness, extreme outliers and consistency blocks; the last row is the Annual data quality score (#overall-data-quality-score)"
+---
+
+import { Tabs, Steps, Callout } from 'nextra/components'
+
+# Data quality
+
+Data quality is the first analysis stage. It answers one question before any coverage is calculated: can the facility data be trusted? Five pages, under **Data quality** in the RMNCAH app and **Data Quality Assessment** in the Vaxx app, show how complete, plausible and consistent the routine data are. Their results decide whether you remove years and how you adjust the data in [Data preparation](/en/apps/countdown/data-preparation). The method is explained in [Data quality assessment](/en/docs/methodology/data-quality).
+
+## When to use it
+
+Use these pages right after loading the data, and again whenever you upload a corrected file. Load Data must be finished first; these pages do not need Data Adjustment. Review them in this order: Reporting Rate, Outlier Detection, Data Missingness, Internal Consistency, Overall Data Quality Score. Then move on to [Data preparation](/en/apps/countdown/data-preparation).
+
+## Common filters
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+Most pages have an **Indicator** chip, an **Admin Level** chip (**Admin 1** or **Admin 2**) and, when Admin 1 is selected, a region chip with **Select All** to focus on one region. The Reporting Rate page adds a **Performance Threshold** (see [Reporting Rate](#reporting-rate)).
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+- **Indicator**: pick what to assess. Outlier, missingness and consistency pages list all Vaxx indicators (ANC1, Institutional Deliveries, Institutional Live Births, BCG, IPV 1-2, Measles 1-2, OPV 1-3, Pentavalent 1-3, PCV 1-3, Rotavirus 1-2). Reporting Rate uses three service groups: ANC, Institutional Delivery and Vaccination.
+- **Admin Level**: Admin 1 (regions) or Admin 2 (districts). A region selector lets you focus on the districts of one region.
+- **Performance Threshold** (Reporting Rate only): a percentage, 90 by default with quick picks of 70, 80, 90 and 95. It is saved in the dataset and reused by the Overall Data Quality Score.
+
+</Tabs.Tab>
+</Tabs>
+
+## How to use the pages
+
+<Steps>
+
+### Open the page from the sidebar
+
+The pages are under **Data quality** (RMNCAH) or **Data Quality Assessment** (Vaxx). Load Data must be finished first.
+
+### Set the filters
+
+Choose the indicator, the admin level and, if you want, a region, as described in [Common filters](#common-filters).
+
+### Read the chart, then the table below it
+
+Charts show the pattern. Tables list the districts and months behind it. Use the toolbar of a card for **Download Plot** (PNG) and **Download Data** (Excel), and the *This table only* year selector for tables.
+
+</Steps>
+
+## Reporting Rate
+
+Shows how completely facilities reported, by service, year and area.
+
+<Steps>
+
+### Choose the service, threshold and admin level
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+- **Indicator:** ANC, Institutional Delivery, Vaccination, OPD.
+- **Performance Threshold:** default 90%; quick picks 70, 80, 90, 95.
+- **Admin Level.**
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+Select ANC, Institutional Delivery or Vaccination, set the threshold, then the admin level.
+
+</Tabs.Tab>
+</Tabs>
+
+### Read Sub-National Reporting Rate
+
+The **Heat Map** tab shows the reporting rate of the selected service for each area and year. The **Bar Graph** tab shows the rate by year.
+
+### Read the National Reporting Rate card and the table
+
+The **National Reporting Rate** card (in the RMNCAH app, **District Reporting Rate in** a region when a region is chosen) shows the percentage of districts whose reporting rate is below the threshold (low reporting), one panel per service, by year. **Sub-National Units with Low Reporting** lists the districts or regions below the threshold for the selected year and service.
+
+</Steps>
+
+What the reporting rate measures and how to read it: [Data quality > Reporting completeness](/en/docs/methodology/data-quality#reporting-completeness) and [Reporting rates](/en/docs/methodology/data-quality#reporting-rates).
+
+<Callout type="info">
+The Performance Threshold you set here is stored in the dataset and reused by the Overall Data Quality Score and, in the RMNCAH app, the Service Utilization DQA.
+</Callout>
+
+![Sub-national reporting rate heat map](/images/dqa-reporting-rate.png)
+
+## Outlier Detection
+
+Finds extreme monthly values that may be data entry errors. What counts as an extreme outlier: [Data quality > Outlier detection](/en/docs/methodology/data-quality#outlier-detection).
+
+- **Filters:** **Indicator** and **Admin Level**.
+- **Indicators with Outliers** card: tabs **Heat Map** (percent of monthly values that are not outliers, by area and year), **Indicator Bar Graph** (by year and indicator) and **Region Bar Graph** (by year and region).
+- **Sub-National Units with Extreme Outliers:** every flagged district and month, in a table of year, month, area, reported value, median and MAD. Pick the year with the *This table only* control.
+- **Sub-National Trends:** pick a region and read the month-by-month plot for the selected year: the reported value against the median, the outlier bounds (plus or minus 5 MAD) and the outliers.
+
+How to read it (the expected share of values free of outliers, campaigns): [Data quality > Outliers](/en/docs/methodology/data-quality#outliers).
+
+![Outlier detection heat map](/images/dqa-outlier-detection.png)
+
+## Data Missingness
+
+Shows which indicators and areas have missing reports.
+
+- **Filters:** **Indicator** (with **Select All**) and **Admin Level**.
+- **Indicators with Missing Data:** tabs **Heat Map** (percent of missing reports by year and area), **Complete Indicators** (percent of districts with complete data for the indicator) and **Missing Indicators by Region** (trend in completeness by region).
+- **Sub-National Units with Missing Data:** a table of the districts with gaps (incomplete data) for the selected indicator and year.
+
+How missing values are measured and handled: [Data quality > Data missingness](/en/docs/methodology/data-quality#data-missingness).
+
+![Data missingness heat map](/images/dqa-missingness.png)
+
+## Internal Consistency
+
+Checks that related indicators move together and agree over time. Two cards are shown: **Ratio Plots** and **Consistency Checks**. The expected ratios and the range a district must fall in: [Data quality > Internal consistency](/en/docs/methodology/data-quality#internal-consistency). How to read the plots: [Data quality > Consistency and ratios](/en/docs/methodology/data-quality#consistency-and-ratios).
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+- **Ratio Plots:** the yearly ratios ANC1 / Penta1 and Penta1 / Penta3 against the expected ratio. Expected ratios come from the survey coverage values entered in National Rates.
+- **Consistency Checks:** tabs **ANC1 and Penta1**, **Penta1 and Penta3** and **Custom Check** (choose an **X axis** and a **Y axis**). Each dot is a district, shown with a **Linear fit** and a **Diagonal**.
+
+![Ratio plots](/images/dqa-internal-consistency.png)
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+- **Ratio Plots:** ratios ANC1 / Penta1, Penta1 / Penta3 and OPV1 / OPV3 by year, compared with the expected ratios.
+- **Consistency Checks:** tabs **ANC1 and Penta1**, **Penta1 and Penta3**, **OPV1 and OPV3**, **IPV1 and IPV2**, and **Custom Check** where you choose the X and Y indicators. Each plot draws one point per district and year, with a linear fit and a diagonal.
+
+</Tabs.Tab>
+</Tabs>
+
+![Consistency checks between ANC1 and Penta1](/images/dqa-conistency-checks.png)
+
+## Overall Data Quality Score
+
+One annual score across all checks: one table per year, with a region filter to see a single Admin 1 area, or the national level. How the score is computed: [Data quality > Overall quality score](/en/docs/methodology/data-quality#overall-quality-score).
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+| Block | Rows |
+| --- | --- |
+| 1. Completeness | % of expected monthly facility reports (national); % of districts at or above the threshold; % of districts with no missing values for the 4 forms |
+| 2. Extreme outliers | % of monthly values that are not extreme outliers; % of districts with no extreme outliers |
+| 3. Consistency | Ratios ANC1 / Penta1 and Penta1 / Penta3; % of districts within the expected range |
+
+The last row is the **Annual data quality score**. Use **Download Plot** and **Download Data**. **Generate Report** opens the data quality report.
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+The table has three blocks:
+
+1. **Completeness of monthly facility reporting** (mean of ANC, delivery, immunization): percent of expected monthly reports nationally, and percent of districts with completeness at or above the threshold, and percent of districts with no missing values (mean for common vaccines).
+2. **Extreme outliers**: percent of monthly values that are not extreme outliers, and percent of districts with no extreme outliers in the year.
+3. **Consistency of annual reporting**: the three ratios and the percent of districts with ANC1/Penta1, Penta1/Penta3 and OPV1/OPV3 in the expected range.
+
+The last row is the **Annual data quality score**. Use the two download buttons on the card to save the plot and the data.
+
+</Tabs.Tab>
+</Tabs>
+
+![Overall data quality score](/images/dqa-overall-score.png)
+
+## Interpretation and pitfalls
+
+How to read the results, and what to watch for before you remove years or adjust: [Data quality > Interpretation](/en/docs/methodology/data-quality#interpretation), including its [Common pitfalls](/en/docs/methodology/data-quality#common-pitfalls).
+
+Next: **[Data preparation](/en/apps/countdown/data-preparation)**.

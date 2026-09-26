@@ -1,3 +1,6 @@
+---
+description: Como produzir na aplicação RMNCAH ou Vaxx as caches .rds que a Pooled App lê, e o que torna uma cache carregável e comparável entre países.
+---
 import { Callout } from 'nextra/components'
 
 # Preparar as caches
@@ -6,8 +9,8 @@ A Pooled lê as **caches** que as aplicações por país guardam. Uma cache é u
 
 ## Produzir uma cache
 
-1. Abra a **[RMNCAH App](/pt/apps/rmncah)** (ou a **[Vaxx App](/pt/apps/vaxx)**) e carregue os dados do país. Os dados vêm normalmente do **[Data Extractor](/pt/apps/data-extractor)**.
-2. Percorra a análise: verificações de qualidade dos dados, preparação e ajuste dos dados e seleção de denominadores. Consulte o **[quadro analítico](/pt/docs/framework/0-workflow)**.
+1. Abra a **[RMNCAH App](/pt/apps/countdown)** (ou a **[Vaxx App](/pt/apps/countdown)**) e carregue os dados do país. Os dados vêm normalmente do **[Data Extractor](/pt/apps/data-extractor)**.
+2. Percorra a análise: verificações de qualidade dos dados, preparação e ajuste dos dados e seleção de denominadores. Consulte o **[quadro analítico](/pt/docs/methodology)**.
 3. A aplicação guarda a cache como ficheiro `.rds`. Quando os dados foram carregados a partir de uma folha de cálculo ou de um ficheiro Stata, a cache é escrita junto ao ficheiro de origem, com o mesmo nome e a extensão `.rds`. Se esse `.rds` já existir, é carregado de novo em vez de ser criado outro.
 
 Repita para cada país, com a mesma aplicação e o mesmo domínio.

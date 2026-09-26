@@ -1,0 +1,373 @@
+{
+  "headers": {
+    "fr": { "what": "Quoi", "value": "Valeur", "group": "S'applique à", "use": "Utilisation dans l'application", "method": "Page de méthode" },
+    "pt": { "what": "O quê", "value": "Valor", "group": "Aplica-se a", "use": "Como a aplicação o utiliza", "method": "Página do método" }
+  },
+  "groups": {
+    "fr": { "both": "Les deux", "rmncah": "RMNCAH", "vaccine": "Vaccination" },
+    "pt": { "both": "Ambos", "rmncah": "RMNCAH", "vaccine": "Vacinação" }
+  },
+  "ui": {
+    "fr": {
+      "empty": "Aucune valeur pour cette étape dans le fichier généré.",
+      "source": "Généré à partir de {package} {version} le {date}.",
+      "placeholder": "Provisoire : ce sont quelques exemples, pas encore le fichier généré à partir de cd2030.core. La liste complète les remplacera lorsque src/data/methodology-defaults.json sera généré."
+    },
+    "pt": {
+      "empty": "Sem valores para esta etapa no ficheiro gerado.",
+      "source": "Gerado a partir de {package} {version} em {date}.",
+      "placeholder": "Provisório: estes são alguns exemplos, ainda não o ficheiro gerado a partir do cd2030.core. A lista completa substitui-los-á quando src/data/methodology-defaults.json for gerado."
+    }
+  },
+  "units": {
+    "fr": {
+      "x MAD": "× MAD",
+      "per 100,000 live births": "pour 100 000 naissances vivantes",
+      "per 1,000 births": "pour 1 000 naissances"
+    },
+    "pt": {
+      "x MAD": "× MAD",
+      "per 100,000 live births": "por 100 000 nados-vivos",
+      "per 1,000 births": "por 1 000 nascimentos"
+    }
+  },
+  "sections": {},
+  "fr": {
+    "dq_reporting_threshold": {
+      "label": "Seuil d'exhaustivité des rapports des districts (1b)",
+      "note": "L'élément 1b du score est le pourcentage de districts dont le taux de notification des établissements est au moins égal à cette valeur ; l'application part de 90 % et la page Taux de notification permet de le modifier."
+    },
+    "dq_reporting_threshold_picks": {
+      "label": "Choix rapides du seuil de notification",
+      "note": "Les valeurs que la page Taux de notification propose comme choix rapides pour le seuil de notification des districts."
+    },
+    "dq_outlier_mad_multiplier": {
+      "label": "Borne des valeurs aberrantes extrêmes",
+      "note": "Une valeur mensuelle est une valeur aberrante extrême lorsqu'elle s'écarte de plus de 5 écarts absolus médians (MAD) de la médiane de son district (Hampel X84)."
+    },
+    "dq_outlier_baseline": {
+      "label": "Années de référence des valeurs aberrantes",
+      "value": "toutes les années sauf la plus récente",
+      "note": "La médiane et le MAD du district utilisés pour les bornes des valeurs aberrantes sont calculés sur toutes les années sauf la plus récente, de sorte que la dernière année ne peut pas masquer ses propres valeurs aberrantes."
+    },
+    "dq_ratio_adequate_range": {
+      "label": "Plage adéquate des ratios de cohérence",
+      "note": "Le ratio de cohérence d'un district (le rapport de ses totaux annuels) est adéquat lorsqu'il est compris entre 1 et 1,5 inclus."
+    },
+    "dq_ratio_pairs": {
+      "label": "Ratios de cohérence contrôlés",
+      "value": "CPN1/Penta1 ; Penta1/Penta3",
+      "note": "Les ratios de cohérence interne contrôlés pour tous les groupes d'indicateurs (numérateur/dénominateur)."
+    },
+    "dq_ratio_pairs_vaccine": {
+      "label": "Ratios de cohérence ajoutés pour la vaccination",
+      "value": "VPO1/VPO3",
+      "note": "Les ratios de cohérence ajoutés aux ratios communs lorsque le groupe d'indicateurs est la vaccination."
+    },
+    "dq_ratio_anc1_penta1_mortality": {
+      "label": "Multiplicateur du ratio attendu CPN1/Penta1",
+      "note": "Le ratio CPN1/Penta1 attendu est multiplié par ce facteur pour tenir compte de la mortalité entre la première visite prénatale et la première dose de Penta."
+    },
+    "dq_ratio_expected_coverage_anc1": {
+      "label": "Couverture CPN1 supposée pour les ratios attendus",
+      "note": "Lorsqu'aucune couverture d'enquête n'est fournie, calculate_ratios_summary() calcule les ratios attendus à partir d'une couverture CPN1 supposée de 98 % (l'application transmet à la place les estimations d'enquête du pays)."
+    },
+    "dq_ratio_expected_coverage_penta1": {
+      "label": "Couverture Penta1 supposée pour les ratios attendus",
+      "note": "Lorsqu'aucune couverture d'enquête n'est fournie, calculate_ratios_summary() calcule les ratios attendus à partir d'une couverture Penta1 supposée de 97 % (l'application transmet à la place les estimations d'enquête du pays)."
+    },
+    "dq_ratio_expected_coverage_penta3": {
+      "label": "Couverture Penta3 supposée pour les ratios attendus",
+      "note": "Lorsqu'aucune couverture d'enquête n'est fournie, calculate_ratios_summary() calcule les ratios attendus à partir d'une couverture Penta3 supposée de 89 % (l'application transmet à la place les estimations d'enquête du pays)."
+    },
+    "dq_ratio_expected_coverage_opv1": {
+      "label": "Couverture VPO1 supposée pour les ratios attendus",
+      "note": "Lorsqu'aucune couverture d'enquête n'est fournie, calculate_ratios_summary() calcule les ratios attendus à partir d'une couverture VPO1 supposée de 97 % (l'application transmet à la place les estimations d'enquête du pays)."
+    },
+    "dq_ratio_expected_coverage_opv3": {
+      "label": "Couverture VPO3 supposée pour les ratios attendus",
+      "note": "Lorsqu'aucune couverture d'enquête n'est fournie, calculate_ratios_summary() calcule les ratios attendus à partir d'une couverture VPO3 supposée de 78 % (l'application transmet à la place les estimations d'enquête du pays)."
+    },
+    "dq_ratio_expected_coverage_pcv1": {
+      "label": "Couverture PCV1 supposée pour les ratios attendus",
+      "note": "Lorsqu'aucune couverture d'enquête n'est fournie, calculate_ratios_summary() calcule les ratios attendus à partir d'une couverture PCV1 supposée de 97 % (l'application transmet à la place les estimations d'enquête du pays)."
+    },
+    "dq_ratio_expected_coverage_rota1": {
+      "label": "Couverture Rota1 supposée pour les ratios attendus",
+      "note": "Lorsqu'aucune couverture d'enquête n'est fournie, calculate_ratios_summary() calcule les ratios attendus à partir d'une couverture Rota1 supposée de 96 % (l'application transmet à la place les estimations d'enquête du pays)."
+    },
+    "dq_score_components_rmncah": {
+      "label": "Composantes du score global (RMNCAH)",
+      "note": "Le score annuel de qualité des données est la moyenne de ces lignes du tableau du score global : notification, exhaustivité, valeurs aberrantes et part des districts dont les ratios sont adéquats."
+    },
+    "dq_score_components_vaccine": {
+      "label": "Composantes du score global (vaccination)",
+      "note": "Le score annuel de qualité des données est la moyenne de ces lignes du tableau du score global : notification, exhaustivité, valeurs aberrantes et part des districts dont les ratios sont adéquats."
+    },
+    "adj_k_default": {
+      "label": "Facteur d'ajustement de l'exhaustivité k (ajustement par défaut)",
+      "note": "adjust_service_data(adjustment = \"default\") utilise k = 0,25 pour tous les groupes d'indicateurs (anc, idelv, pnc, vacc, opd, ipd)."
+    },
+    "adj_k_start": {
+      "label": "Valeur de k au départ dans l'application",
+      "note": "Un nouveau jeu de données commence avec k = 0 pour tous les groupes d'indicateurs : l'application n'ajuste donc rien tant que l'utilisateur n'a pas choisi un k sur la page Ajustement des données."
+    },
+    "adj_k_options": {
+      "label": "Valeurs de k proposées",
+      "note": "Les valeurs de k que la page Ajustement des données propose pour chaque groupe d'indicateurs."
+    },
+    "adj_reporting_rate_cutoff": {
+      "label": "Seuil du taux de notification",
+      "note": "Avant l'ajustement, un taux de notification inférieur à 75 % (ou manquant) est remplacé par le taux de notification médian du district."
+    },
+    "adj_reporting_rate_window": {
+      "label": "Taux de notification utilisés pour la médiane de remplacement",
+      "note": "La médiane de remplacement est calculée sur les taux de notification du district compris entre 75 % et 100 % inclus."
+    },
+    "adj_outlier_mad_multiplier": {
+      "label": "Valeurs aberrantes remplacées après l'ajustement",
+      "note": "Après l'ajustement par k, les valeurs à plus de 5 MAD de la valeur médiane mensuelle du district (référence : toutes les années sauf la plus récente) sont remplacées par la médiane des autres mois (non aberrants) du district la même année ; les mois manquants reçoivent la médiane du district pour l'année."
+    },
+    "den_nmr": {
+      "label": "Taux de mortalité néonatale",
+      "note": "Taux de mortalité néonatale par défaut (2,5 %) de calculate_indicator_coverage() lorsqu'aucun taux n'est fourni ; le taux fourni sert aussi pour les régions pour lesquelles l'enquête n'a pas de valeur."
+    },
+    "den_pnmr": {
+      "label": "Taux de mortalité post-néonatale",
+      "note": "Taux de mortalité post-néonatale par défaut (2,4 %) de calculate_indicator_coverage() lorsqu'aucun taux n'est fourni ; le taux fourni sert aussi pour les régions pour lesquelles l'enquête n'a pas de valeur."
+    },
+    "den_sbr": {
+      "label": "Taux de mortinatalité",
+      "note": "Taux de mortinatalité par défaut (2 %) de calculate_indicator_coverage() lorsqu'aucun taux n'est fourni ; le taux fourni sert aussi pour les régions pour lesquelles l'enquête n'a pas de valeur."
+    },
+    "den_twin": {
+      "label": "Taux de gémellité",
+      "note": "Taux de gémellité par défaut (1,5 %) de calculate_indicator_coverage() lorsqu'aucun taux n'est fourni ; le taux fourni sert aussi pour les régions pour lesquelles l'enquête n'a pas de valeur."
+    },
+    "den_preg_loss": {
+      "label": "Taux de pertes de grossesse",
+      "note": "Taux de pertes de grossesse par défaut (3 %) de calculate_indicator_coverage() lorsqu'aucun taux n'est fourni ; le taux fourni sert aussi pour les régions pour lesquelles l'enquête n'a pas de valeur."
+    },
+    "den_anc1survey": {
+      "label": "Couverture CPN1 de l'enquête",
+      "note": "Couverture CPN1 de l'enquête par défaut (98 %) de calculate_indicator_coverage() lorsqu'aucune valeur n'est fournie ; la valeur fournie sert aussi pour les régions pour lesquelles l'enquête n'a pas de valeur."
+    },
+    "den_dpt1survey": {
+      "label": "Couverture Penta1 (DTC1) de l'enquête",
+      "note": "Couverture Penta1 (DTC1) de l'enquête par défaut (97 %) de calculate_indicator_coverage() lorsqu'aucune valeur n'est fournie ; la valeur fournie sert aussi pour les régions pour lesquelles l'enquête n'a pas de valeur."
+    },
+    "den_survey_year": {
+      "label": "Année de l'enquête",
+      "note": "Année d'enquête par défaut de calculate_indicator_coverage() ; l'application utilise l'année de la dernière enquête du pays."
+    },
+    "den_app_twin_preg_loss": {
+      "label": "Taux de gémellité et de pertes de grossesse au départ dans l'application",
+      "note": "Un nouveau jeu de données commence avec un taux de gémellité de 1,5 % et un taux de pertes de grossesse de 3 % ; les taux de mortalité néonatale, post-néonatale et de mortinatalité proviennent de l'enquête."
+    },
+    "cov_target_vaccine_national": {
+      "label": "Cible de couverture vaccinale (nationale)",
+      "note": "Au niveau national, un vaccin (BCG, Penta3, rougeole 1) atteint la cible lorsque sa couverture est au moins égale à cette valeur."
+    },
+    "cov_target_anc4": {
+      "label": "Cible de couverture CPN4",
+      "note": "Les unités atteignent la cible CPN4 lorsque leur couverture est au moins égale à cette valeur."
+    },
+    "cov_target_instlivebirths": {
+      "label": "Cible de couverture des naissances vivantes en établissement",
+      "note": "Les unités atteignent la cible des naissances vivantes en établissement lorsque leur couverture est au moins égale à cette valeur."
+    },
+    "cov_target_dropout": {
+      "label": "Cible du taux d'abandon",
+      "note": "Les unités atteignent la cible d'abandon (Penta1-Penta3, Penta3-rougeole 1) lorsque leur taux d'abandon est inférieur à cette valeur."
+    },
+    "cov_target_other": {
+      "label": "Seuil de haute performance (autres indicateurs)",
+      "note": "CacheConnection$get_high_performers() liste les unités dont la couverture est au moins égale à cette valeur pour les indicateurs sans cible spécifique."
+    },
+    "sub_target_vaccine": {
+      "label": "Cible de couverture vaccinale (régions et districts)",
+      "note": "En dessous du niveau national, un vaccin (BCG, Penta3, rougeole 1) atteint la cible lorsque sa couverture est au moins égale à cette valeur."
+    },
+    "mort_mmr_low": {
+      "label": "MMR en établissement très faible",
+      "note": "Une unité dont le ratio de mortalité maternelle en établissement est inférieur à cette valeur est signalée comme très faible, signe de décès non déclarés."
+    },
+    "mort_sbr_low": {
+      "label": "Taux de mortinatalité en établissement très faible",
+      "note": "Une unité dont le taux de mortinatalité en établissement est inférieur à cette valeur est signalée comme très faible, signe de mortinaissances non déclarées."
+    },
+    "mort_completeness_ratios": {
+      "label": "Ratios d'exhaustivité comparés",
+      "note": "Les ratios d'exhaustivité auxquels la mortalité en établissement est comparée aux estimations des Nations Unies."
+    }
+  },
+  "pt": {
+    "dq_reporting_threshold": {
+      "label": "Limiar de completude dos relatórios dos distritos (1b)",
+      "note": "O item 1b da pontuação é a percentagem de distritos cuja taxa de notificação das unidades é pelo menos este valor; a aplicação começa em 90% e a página Taxa de notificação permite alterá-lo."
+    },
+    "dq_reporting_threshold_picks": {
+      "label": "Escolhas rápidas do limiar de notificação",
+      "note": "Os valores que a página Taxa de notificação oferece como escolhas rápidas para o limiar de notificação dos distritos."
+    },
+    "dq_outlier_mad_multiplier": {
+      "label": "Limite dos valores atípicos extremos",
+      "note": "Um valor mensal é um valor atípico extremo quando se afasta mais de 5 desvios absolutos da mediana (MAD) da mediana do seu distrito (Hampel X84)."
+    },
+    "dq_outlier_baseline": {
+      "label": "Anos de referência dos valores atípicos",
+      "value": "todos os anos exceto o mais recente",
+      "note": "A mediana e o MAD do distrito usados para os limites dos valores atípicos são calculados a partir de todos os anos exceto o mais recente, pelo que o último ano não pode esconder os seus próprios valores atípicos."
+    },
+    "dq_ratio_adequate_range": {
+      "label": "Intervalo adequado dos rácios de consistência",
+      "note": "O rácio de consistência de um distrito (o rácio dos seus totais anuais) é adequado quando está entre 1 e 1,5, inclusive."
+    },
+    "dq_ratio_pairs": {
+      "label": "Rácios de consistência verificados",
+      "value": "CPN1/Penta1; Penta1/Penta3",
+      "note": "Os rácios de consistência interna verificados para todos os grupos de indicadores (numerador/denominador)."
+    },
+    "dq_ratio_pairs_vaccine": {
+      "label": "Rácios de consistência acrescentados para a imunização",
+      "value": "VOP1/VOP3",
+      "note": "Os rácios de consistência acrescentados aos comuns quando o grupo de indicadores é a vacinação."
+    },
+    "dq_ratio_anc1_penta1_mortality": {
+      "label": "Multiplicador do rácio esperado CPN1/Penta1",
+      "note": "O rácio CPN1/Penta1 esperado é multiplicado por este fator para ter em conta a mortalidade entre a primeira consulta pré-natal e a primeira dose de Penta."
+    },
+    "dq_ratio_expected_coverage_anc1": {
+      "label": "Cobertura da CPN1 assumida para os rácios esperados",
+      "note": "Quando não é fornecida a cobertura do inquérito, calculate_ratios_summary() calcula os rácios esperados a partir de uma cobertura da CPN1 assumida de 98% (a aplicação passa, em vez disso, as estimativas do inquérito do país)."
+    },
+    "dq_ratio_expected_coverage_penta1": {
+      "label": "Cobertura da Penta1 assumida para os rácios esperados",
+      "note": "Quando não é fornecida a cobertura do inquérito, calculate_ratios_summary() calcula os rácios esperados a partir de uma cobertura da Penta1 assumida de 97% (a aplicação passa, em vez disso, as estimativas do inquérito do país)."
+    },
+    "dq_ratio_expected_coverage_penta3": {
+      "label": "Cobertura da Penta3 assumida para os rácios esperados",
+      "note": "Quando não é fornecida a cobertura do inquérito, calculate_ratios_summary() calcula os rácios esperados a partir de uma cobertura da Penta3 assumida de 89% (a aplicação passa, em vez disso, as estimativas do inquérito do país)."
+    },
+    "dq_ratio_expected_coverage_opv1": {
+      "label": "Cobertura da VOP1 assumida para os rácios esperados",
+      "note": "Quando não é fornecida a cobertura do inquérito, calculate_ratios_summary() calcula os rácios esperados a partir de uma cobertura da VOP1 assumida de 97% (a aplicação passa, em vez disso, as estimativas do inquérito do país)."
+    },
+    "dq_ratio_expected_coverage_opv3": {
+      "label": "Cobertura da VOP3 assumida para os rácios esperados",
+      "note": "Quando não é fornecida a cobertura do inquérito, calculate_ratios_summary() calcula os rácios esperados a partir de uma cobertura da VOP3 assumida de 78% (a aplicação passa, em vez disso, as estimativas do inquérito do país)."
+    },
+    "dq_ratio_expected_coverage_pcv1": {
+      "label": "Cobertura da PCV1 assumida para os rácios esperados",
+      "note": "Quando não é fornecida a cobertura do inquérito, calculate_ratios_summary() calcula os rácios esperados a partir de uma cobertura da PCV1 assumida de 97% (a aplicação passa, em vez disso, as estimativas do inquérito do país)."
+    },
+    "dq_ratio_expected_coverage_rota1": {
+      "label": "Cobertura da Rota1 assumida para os rácios esperados",
+      "note": "Quando não é fornecida a cobertura do inquérito, calculate_ratios_summary() calcula os rácios esperados a partir de uma cobertura da Rota1 assumida de 96% (a aplicação passa, em vez disso, as estimativas do inquérito do país)."
+    },
+    "dq_score_components_rmncah": {
+      "label": "Componentes da pontuação geral (RMNCAH)",
+      "note": "A pontuação anual de qualidade dos dados é a média destas linhas da tabela da pontuação geral: notificação, completude, valores atípicos e a percentagem de distritos com rácios adequados."
+    },
+    "dq_score_components_vaccine": {
+      "label": "Componentes da pontuação geral (imunização)",
+      "note": "A pontuação anual de qualidade dos dados é a média destas linhas da tabela da pontuação geral: notificação, completude, valores atípicos e a percentagem de distritos com rácios adequados."
+    },
+    "adj_k_default": {
+      "label": "Fator de ajuste da completude k (ajuste predefinido)",
+      "note": "adjust_service_data(adjustment = \"default\") usa k = 0,25 para todos os grupos de indicadores (anc, idelv, pnc, vacc, opd, ipd)."
+    },
+    "adj_k_start": {
+      "label": "Valor inicial de k na aplicação",
+      "note": "Um novo conjunto de dados começa com k = 0 para todos os grupos de indicadores, pelo que a aplicação não ajusta nada até o utilizador escolher um k na página Ajuste de dados."
+    },
+    "adj_k_options": {
+      "label": "Valores de k oferecidos",
+      "note": "Os valores de k que a página Ajuste de dados oferece para cada grupo de indicadores."
+    },
+    "adj_reporting_rate_cutoff": {
+      "label": "Limiar da taxa de notificação",
+      "note": "Antes do ajuste, uma taxa de notificação abaixo de 75% (ou em falta) é substituída pela taxa de notificação mediana do distrito."
+    },
+    "adj_reporting_rate_window": {
+      "label": "Taxas de notificação usadas para a mediana de substituição",
+      "note": "A mediana de substituição é calculada sobre as taxas de notificação do distrito entre 75% e 100%, inclusive."
+    },
+    "adj_outlier_mad_multiplier": {
+      "label": "Valores atípicos substituídos após o ajuste",
+      "note": "Após o ajuste com k, os valores a mais de 5 MAD do valor mediano mensal do distrito (referência: todos os anos exceto o mais recente) são substituídos pela mediana dos outros meses (não atípicos) do distrito no mesmo ano; os meses em falta recebem a mediana do distrito para esse ano."
+    },
+    "den_nmr": {
+      "label": "Taxa de mortalidade neonatal",
+      "note": "Taxa de mortalidade neonatal predefinida (2,5%) de calculate_indicator_coverage() quando não é fornecida nenhuma taxa; a taxa fornecida também preenche as regiões para as quais o inquérito não tem valor."
+    },
+    "den_pnmr": {
+      "label": "Taxa de mortalidade pós-neonatal",
+      "note": "Taxa de mortalidade pós-neonatal predefinida (2,4%) de calculate_indicator_coverage() quando não é fornecida nenhuma taxa; a taxa fornecida também preenche as regiões para as quais o inquérito não tem valor."
+    },
+    "den_sbr": {
+      "label": "Taxa de natimortalidade",
+      "note": "Taxa de natimortalidade predefinida (2%) de calculate_indicator_coverage() quando não é fornecida nenhuma taxa; a taxa fornecida também preenche as regiões para as quais o inquérito não tem valor."
+    },
+    "den_twin": {
+      "label": "Taxa de gemelaridade",
+      "note": "Taxa de gemelaridade predefinida (1,5%) de calculate_indicator_coverage() quando não é fornecida nenhuma taxa; a taxa fornecida também preenche as regiões para as quais o inquérito não tem valor."
+    },
+    "den_preg_loss": {
+      "label": "Taxa de perdas de gravidez",
+      "note": "Taxa de perdas de gravidez predefinida (3%) de calculate_indicator_coverage() quando não é fornecida nenhuma taxa; a taxa fornecida também preenche as regiões para as quais o inquérito não tem valor."
+    },
+    "den_anc1survey": {
+      "label": "Cobertura da CPN1 no inquérito",
+      "note": "Cobertura da CPN1 no inquérito predefinida (98%) de calculate_indicator_coverage() quando não é fornecido nenhum valor; o valor fornecido também preenche as regiões para as quais o inquérito não tem valor."
+    },
+    "den_dpt1survey": {
+      "label": "Cobertura da Penta1 (DTP1) no inquérito",
+      "note": "Cobertura da Penta1 (DTP1) no inquérito predefinida (97%) de calculate_indicator_coverage() quando não é fornecido nenhum valor; o valor fornecido também preenche as regiões para as quais o inquérito não tem valor."
+    },
+    "den_survey_year": {
+      "label": "Ano do inquérito",
+      "note": "Ano do inquérito predefinido de calculate_indicator_coverage(); a aplicação usa o ano do inquérito mais recente do país."
+    },
+    "den_app_twin_preg_loss": {
+      "label": "Taxas iniciais de gemelaridade e de perdas de gravidez na aplicação",
+      "note": "Um novo conjunto de dados começa com uma taxa de gemelaridade de 1,5% e uma taxa de perdas de gravidez de 3%; as taxas de mortalidade neonatal, pós-neonatal e de natimortalidade vêm do inquérito."
+    },
+    "cov_target_vaccine_national": {
+      "label": "Meta de cobertura vacinal (nacional)",
+      "note": "A nível nacional, uma vacina (BCG, Penta3, sarampo 1) atinge a meta quando a sua cobertura é pelo menos este valor."
+    },
+    "cov_target_anc4": {
+      "label": "Meta de cobertura da CPN4",
+      "note": "As unidades atingem a meta da CPN4 quando a sua cobertura é pelo menos este valor."
+    },
+    "cov_target_instlivebirths": {
+      "label": "Meta de cobertura de nados-vivos institucionais",
+      "note": "As unidades atingem a meta de nados-vivos institucionais quando a sua cobertura é pelo menos este valor."
+    },
+    "cov_target_dropout": {
+      "label": "Meta da taxa de abandono",
+      "note": "As unidades cumprem a meta de abandono (Penta1-Penta3, Penta3-sarampo 1) quando a sua taxa de abandono é inferior a este valor."
+    },
+    "cov_target_other": {
+      "label": "Limiar de alto desempenho (outros indicadores)",
+      "note": "CacheConnection$get_high_performers() lista as unidades com cobertura igual ou superior a este valor para os indicadores sem meta específica."
+    },
+    "sub_target_vaccine": {
+      "label": "Meta de cobertura vacinal (regiões e distritos)",
+      "note": "Abaixo do nível nacional, uma vacina (BCG, Penta3, sarampo 1) atinge a meta quando a sua cobertura é pelo menos este valor."
+    },
+    "mort_mmr_low": {
+      "label": "MMR institucional muito baixo",
+      "note": "Uma unidade cujo rácio de mortalidade materna institucional é inferior a este valor é assinalada como muito baixa, um sinal de óbitos não notificados."
+    },
+    "mort_sbr_low": {
+      "label": "Taxa de natimortalidade institucional muito baixa",
+      "note": "Uma unidade cuja taxa de natimortalidade institucional é inferior a este valor é assinalada como muito baixa, um sinal de natimortos não notificados."
+    },
+    "mort_completeness_ratios": {
+      "label": "Rácios de completude comparados",
+      "note": "Os rácios de completude com que a mortalidade institucional é comparada com as estimativas das Nações Unidas."
+    }
+  }
+}

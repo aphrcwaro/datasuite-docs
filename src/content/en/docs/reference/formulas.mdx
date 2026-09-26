@@ -1,0 +1,303 @@
+---
+description: Every formula stated in the Countdown methodology, in the order of the analysis, with the meaning of each symbol and a link to the section that explains it.
+title: Formulas
+---
+
+# Formulas
+
+Every formula the [Countdown methodology](/en/docs/methodology) states, in one place, in the order of the analysis. Each one has what its symbols mean and a link to the section that explains it; the section is the reference if the wording here and there differ. For the default values and thresholds themselves, see [Defaults and thresholds](/en/docs/reference/defaults).
+
+## Data quality
+
+### Reporting completeness (1a, 1b, 1c)
+
+$$\text{1a} = \frac{\text{monthly facility reports received}}{12 \times \text{number of facilities}}$$
+
+$$\text{1b} = \frac{\text{districts with reporting completeness} \ge 90\%}{\text{total districts}} \qquad \text{1c} = \frac{\text{districts with no missing values across all forms}}{\text{total districts}}$$
+
+- 1a and 1b are the mean over the analysis's reporting forms: ANC, delivery, immunization and OPD in RMNCAH analyses; ANC, delivery and immunization in vaccine analyses.
+- 1c counts a district with no missing monthly value in the year for any reporting form.
+
+Explained in: [Reporting completeness](/en/docs/methodology/data-quality#reporting-completeness).
+
+### Extreme outliers (2a, 2b)
+
+A monthly value $x$ is an extreme outlier when it lies outside
+
+$$\tilde{x} \pm 5 \times MAD$$
+
+$$\text{2a} = \frac{\text{monthly values not classified as outliers}}{\text{total monthly values}} \qquad \text{2b} = \frac{\text{districts with no outliers}}{\text{total districts}}$$
+
+- $\tilde{x}$: the median monthly value of the same series (the district's, or the national or admin-1 series being assessed).
+- $MAD$: the median absolute deviation of that series.
+- Baseline: $\tilde{x}$ and $MAD$ are computed from all years except the most recent one, so the latest year is judged against the earlier years.
+
+Explained in: [Outlier detection](/en/docs/methodology/data-quality#outlier-detection).
+
+### Internal consistency: national ratios (3a, 3b, 3c)
+
+$$\text{3a} = \frac{\text{ANC1 reported}}{\text{Penta1 reported}}, \quad E_{3a} = 1.07 \times \frac{\text{ANC1}_{s}}{\text{Penta1}_{s}}$$
+
+$$\text{3b} = \frac{\text{Penta1 reported}}{\text{Penta3 reported}}, \quad E_{3b} = \frac{\text{Penta1}_{s}}{\text{Penta3}_{s}} \qquad \text{3c} = \frac{\text{OPV1 reported}}{\text{OPV3 reported}}, \quad E_{3c} = \frac{\text{OPV1}_{s}}{\text{OPV3}_{s}}$$
+
+A national ratio $r$ is acceptable when
+
+$$\lvert r - E \rvert \le 0.05$$
+
+- $E$: the expected ratio; $\text{ANC1}_{s}$, $\text{Penta1}_{s}$, ...: coverage in the most recent survey.
+- 1.07: the expected ANC1 to Penta1 ratio with the same survey coverage for both, from 3% pregnancy loss, 2% stillbirths, 1.5% twins and 3% neonatal mortality before Penta1.
+- 3c (OPV1 / OPV3) is for vaccine analyses.
+
+Explained in: [Internal consistency](/en/docs/methodology/data-quality#internal-consistency) and [Ratio calculations](/en/docs/methodology/data-quality#ratio-calculations).
+
+### Internal consistency: district ratios
+
+$$\text{district check} = \frac{\text{districts with } 1.0 \le r_d \le 1.5}{\text{total districts}}$$
+
+- $r_d$: the district's ratio -- ANC1 / Penta1 (3c in RMNCAH analyses, 3f in vaccine analyses), Penta1 / Penta3 (3d; 3g), OPV1 / OPV3 (vaccine analyses, 3h).
+
+Explained in: [Internal consistency](/en/docs/methodology/data-quality#internal-consistency).
+
+### Overall data quality score
+
+$$\text{Score}_{\text{RMNCAH}} = \operatorname{mean}(\text{1a}, \text{1b}, \text{1c}, \text{2a}, \text{2b}, \text{3c}, \text{3d})$$
+
+$$\text{Score}_{\text{vaccine}} = \operatorname{mean}(\text{1a}, \text{1b}, \text{1c}, \text{2a}, \text{2b}, \text{3f}, \text{3g}, \text{3h})$$
+
+- The components are the metrics above; the district ratio checks are 3c, 3d (RMNCAH) or 3f, 3g, 3h (vaccine). The 2024 guidebook left 1c out of the score; the apps include it.
+
+Explained in: [Overall quality score](/en/docs/methodology/data-quality#overall-quality-score).
+
+## Data adjustment
+
+### Adjustment for incomplete reporting
+
+$$N_{\text{adj}} = N_{\text{rep}} + N_{\text{rep}} \times \left( \frac{1}{C} - 1 \right) \times k$$
+
+- $N_{\text{adj}}$: the number of events adjusted for incomplete reporting.
+- $N_{\text{rep}}$: the raw number of events reported.
+- $C$: reporting completeness, the proportion of expected facility reports received.
+- $k$: the ratio of the volume of services in non-reporting facilities to that in reporting facilities (set by the analyst per service: the app starts at 0; the guidebook's default is 0.25).
+
+Explained in: [Numerator adjustment formulas and parameters](/en/docs/methodology/data-adjustment#numerator-adjustment-formulas-and-parameters) and [Configuring the k-factor](/en/docs/methodology/data-adjustment#configuring-the-k-factor).
+
+### Low reporting rates
+
+$$C = \begin{cases} C_{\text{reported}} & \text{if } 75\% \le C_{\text{reported}} \le 100\% \\ \operatorname{median}\{\, C_{\text{district}} : 75\% \le C_{\text{district}} \le 100\% \,\} & \text{if } C_{\text{reported}} < 75\% \text{ or missing} \end{cases}$$
+
+- $C_{\text{reported}}$: a district's reporting rate for a service in a month.
+- $C_{\text{district}}$: the district's reporting rates for that service. The month's count is then adjusted with $k$ as usual; the count itself is kept.
+
+Explained in: [Critical data threshold rules](/en/docs/methodology/data-adjustment#critical-data-threshold-rules).
+
+### Replacing outliers and missing values
+
+$$x_{\text{outlier}} \rightarrow \operatorname{median}(\text{the district's non-outlier months in the same year})$$
+
+$$x_{\text{missing}} \rightarrow \operatorname{median}(\text{the district's monthly values in the same year})$$
+
+- An outlier is a monthly value outside $\tilde{x} \pm 5 \times MAD$ of the district's series (see [Extreme outliers](#extreme-outliers-2a-2b)).
+
+Explained in: [Summary of data adjustment business rules](/en/docs/methodology/data-adjustment#summary-of-data-adjustment-business-rules).
+
+## Denominators
+
+### Coverage
+
+$$\text{Coverage} = \frac{\text{population who received the service}}{\text{population who need the service}}$$
+
+- The numerator is the adjusted number from the facility data; the denominator is the target population, estimated with the selected denominator option.
+
+Explained in: [Denominator assessment and selection](/en/docs/methodology/denominators#objective).
+
+### Denominators derived from ANC-1
+
+$$
+\begin{aligned}
+\text{pregnancies} &= \frac{\text{ANC-1}}{\text{survey ANC-1 coverage}} \\
+\text{deliveries} &= \text{pregnancies} \times (1 - \text{pregnancy loss}) \\
+\text{births} &= \frac{\text{deliveries}}{1 - 0.5 \times \text{twin rate}} \\
+\text{live births} &= \text{births} \times (1 - \text{stillbirth rate}) \\
+\text{infants} &= \text{live births} \times (1 - \text{NMR}) \\
+\text{measles 1 target} &= \text{infants} \times (1 - \text{PNMR}) \\
+\text{measles 2 target} &= \text{infants} \times (1 - 2 \times \text{PNMR})
+\end{aligned}
+$$
+
+- NMR, PNMR: neonatal and post-neonatal mortality rates; infants: the infants eligible for Penta (under 1).
+- Each indicator uses the population that matches it: pregnancies for ANC, deliveries for institutional deliveries, live births for institutional live births and BCG, infants for Penta, the measles targets for measles.
+
+Explained in: [Computing the derived denominators](/en/docs/methodology/denominators#computing-the-derived-denominators).
+
+### Denominators derived from Penta-1
+
+$$
+\begin{aligned}
+\text{infants} &= \frac{\text{Penta-1}}{\text{survey Penta-1 coverage}} \\
+\text{live births} &= \frac{\text{infants}}{1 - \text{NMR}} \\
+\text{births} &= \frac{\text{live births}}{1 - \text{stillbirth rate}} \\
+\text{deliveries} &= \text{births} \times (1 - 0.5 \times \text{twin rate}) \\
+\text{pregnancies} &= \frac{\text{deliveries}}{1 - \text{pregnancy loss}}
+\end{aligned}
+$$
+
+- The measles targets are computed from infants as for ANC-1.
+- The population-growth versions of the ANC-1 and Penta-1 options adjust these for annual population growth, using the population indicator chosen in the [population trend comparison](/en/docs/methodology/denominators#population-trend-comparison); the methodology page gives no formula for that adjustment.
+
+Explained in: [Computing the derived denominators](/en/docs/methodology/denominators#computing-the-derived-denominators).
+
+### Implied crude death rate (DHIS2 projection check)
+
+$$\text{CDR} = \text{CBR} - \text{growth rate}$$
+
+- CDR, CBR: crude death and birth rates (per 1,000). A DHIS2 projection is flagged when the implied CDR is negative or below 5 per 1,000.
+
+Explained in: [Population trend comparison](/en/docs/methodology/denominators#population-trend-comparison).
+
+### Survey comparison
+
+$$\text{best option} = \arg\min_{\text{option}} \; \lvert \text{coverage}_{\text{routine, option}} - \text{coverage}_{\text{survey}} \rvert$$
+
+- Compared for institutional live births and Penta-3 against the most recent survey (the gold standard), at national and subnational level.
+
+Explained in: [Denominator selection examination](/en/docs/methodology/denominators#denominator-selection-examination).
+
+## Coverage
+
+### Immunization denominators
+
+$$\text{Denominator} = \text{Live births} - \text{Neonatal deaths}$$
+
+$$\text{Measles 1 denominator} = \text{Live births} - \text{Neonatal deaths} - \text{Postneonatal deaths}$$
+
+$$\text{Measles 2 denominator} = \text{Live births} - \text{Neonatal deaths} - (2 \times \text{Postneonatal deaths})$$
+
+- The first is the denominator for BCG and the Penta doses (children eligible for vaccination); measles 1 uses the children who survive the first year; measles 2 the children aged 24-35 months.
+
+Explained in: [Immunization](/en/docs/methodology/coverage#immunization).
+
+### Family planning demand satisfied
+
+$$\text{Demand satisfied} = \frac{\text{Use of modern contraceptives}}{\text{Unmet need} + \text{Use of modern contraceptives}}$$
+
+Explained in: [Family planning](/en/docs/methodology/coverage#family-planning).
+
+## Subnational
+
+### Composite coverage index
+
+$$\text{CCI} = \frac{\text{ANC4} + \text{institutional live births} + \text{SBA} + \text{IPT2} + \text{PNC} + \text{Penta3} + \text{Measles 1}}{7}$$
+
+- Coverage of each indicator, with equal weight.
+
+Explained in: [Subnational statistical summaries (one-pager)](/en/docs/methodology/subnational#subnational-statistical-summaries-one-pager).
+
+### Units meeting a target
+
+$$\text{Units meeting the target} = \frac{\text{regions or districts meeting the target}}{\text{total regions or districts}} \times 100$$
+
+- A target such as "Penta-3 at least 80% in every district" is met when this reaches 100%.
+
+Explained in: [Target values](/en/docs/methodology/subnational#target-values).
+
+### Inequality (MADM)
+
+The median absolute deviation from the median (MADM) of district coverage within an admin-1 unit measures the spread between districts; the methodology page defines it in words and gives no formula.
+
+Explained in: [Inequality](/en/docs/methodology/subnational#inequality).
+
+## Mortality
+
+### Institutional mortality rates
+
+$$\text{iMMR} = \frac{\text{maternal deaths in health facilities}}{\text{live births in health facilities} / 100{,}000}$$
+
+$$\text{iSBR} = \frac{\text{stillbirths in health facilities}}{\text{births in health facilities} / 1{,}000}$$
+
+$$\text{Neonatal deaths before discharge} = \frac{\text{neonatal deaths before discharge}}{\text{live births in health facilities} / 1{,}000}$$
+
+- The population (MMR, SBR) and community (cMMR, cSBR) rates are the same with the deaths and births in the population or the community. They are computed from unadjusted data.
+
+Explained in: [Institutional mortality in the CD2030 analytical approach](/en/docs/methodology/mortality#institutional-mortality-in-the-cd2030-analytical-approach).
+
+### Stillbirths to maternal deaths
+
+$$\text{ratio} = \frac{\text{reported stillbirths}}{\text{reported maternal deaths}}$$
+
+- Usually for a year; a data quality flag is raised when the ratio is outside 5-25.
+
+Explained in: [Ratio of stillbirths to maternal deaths at national level](/en/docs/methodology/mortality#ratio-of-stillbirths-to-maternal-deaths-at-national-level).
+
+### Population, community and institutional MMR
+
+$$M_p = (M_i \times P_i) + (M_c \times (1 - P_i))$$
+
+$$M_c = \frac{M_p - (M_i \times P_i)}{1 - P_i}$$
+
+- $M_p$: maternal mortality ratio in the population; $M_i$: institutional maternal mortality ratio; $M_c$: maternal mortality ratio in the community.
+- $P_i$: the proportion of live births in health facilities.
+
+Explained in: [Mathematical modeling and formulations](/en/docs/methodology/mortality#mathematical-modeling-and-formulations) and [Back-calculating community mortality](/en/docs/methodology/mortality#back-calculating-community-mortality).
+
+### Expected institutional MMR and completeness of reporting
+
+$$\text{Expected } M_i = \frac{M_p}{P_i + \left( \frac{M_c}{M_i} \times (1 - P_i) \right)}$$
+
+$$\text{Completeness of facility reporting} = \frac{\text{Reported } M_i}{\text{Expected } M_i}$$
+
+- $\frac{M_c}{M_i}$: the assumed ratio of community to institutional maternal mortality.
+- The same approach applies to stillbirths, with all births instead of live births.
+
+Explained in: [Calculating expected institutional mortality](/en/docs/methodology/mortality#calculating-expected-institutional-mortality) and [Computing reporting completeness](/en/docs/methodology/mortality#computing-reporting-completeness).
+
+### Neonatal deaths before discharge: rough completeness check
+
+$$\text{institutional neonatal mortality (before discharge)} \ge 0.5 \times \text{population neonatal mortality}$$
+
+Explained in: [Considerations for iSBR](/en/docs/methodology/mortality#considerations-for-isbr).
+
+### Outliers in mortality data
+
+$$\lvert x_{\text{year}} - \bar{x} \rvert > 3\sigma \qquad \text{or} \qquad \lvert x_{\text{month}} - \tilde{x} \rvert > 5 \times MAD$$
+
+- $\bar{x}$, $\sigma$: the long-term annual mean and standard deviation; $\tilde{x}$, $MAD$: the baseline median and median absolute deviation of the monthly values.
+
+Explained in: [Outlier detection thresholds](/en/docs/methodology/mortality#outlier-detection-thresholds).
+
+## Service utilization and health system
+
+### Outpatient and inpatient utilization
+
+$$\text{OPD visits per child per year} = \frac{\text{adjusted under-5 OPD visits in the year}}{\text{under-5 population (DHIS2 projection)}}$$
+
+$$\text{Admissions per 100 children under 5} = \frac{\text{under-5 admissions in the year}}{\text{under-5 population}} \times 100$$
+
+$$\text{Discharges} = \text{Admissions} - \text{Deaths}$$
+
+- The shares of OPD visits and of admissions contributed by children under five are under-5 visits (admissions) divided by all visits (admissions).
+
+Explained in: [Outpatient service utilization](/en/docs/methodology/service-utilisation#outpatient-service-utilization) and [Inpatient service utilization](/en/docs/methodology/service-utilisation#inpatient-service-utilization).
+
+### Case fatality rate
+
+$$\text{Pediatric case fatality rate} = \frac{\text{Number of children who die in hospital}}{\text{Total number of admissions (Discharges + Deaths)}}$$
+
+- Computed from unadjusted data only.
+
+Explained in: [Case fatality rate](/en/docs/methodology/service-utilisation#case-fatality-rate).
+
+### Health system density
+
+$$\text{Health facility density} = \left( \frac{\text{Total number of health facilities}}{\text{Total population}} \right) \times 10{,}000$$
+
+$$\text{Hospital density} = \left( \frac{\text{Total number of hospitals}}{\text{Total population}} \right) \times 100{,}000$$
+
+$$\text{Inpatient bed density} = \left( \frac{\text{Total inpatient beds}}{\text{Total population}} \right) \times 10{,}000$$
+
+Explained in: [Number of health facilities per 10,000 population](/en/docs/methodology/health-system#number-of-health-facilities-per-10000-population), [Number of hospitals per 100,000 population](/en/docs/methodology/health-system#number-of-hospitals-per-100000-population) and [Inpatient bed density per 10,000 population](/en/docs/methodology/health-system#inpatient-bed-density-per-10000-population).
+
+## See also
+
+- [Defaults and thresholds](/en/docs/reference/defaults): the values the formulas use
+- [Indicator definitions](/en/docs/reference/indicator-definitions): the data elements behind each indicator
+- [Glossary](/en/docs/reference/glossary): the terms the methodology uses

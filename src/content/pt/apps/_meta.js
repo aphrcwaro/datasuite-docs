@@ -8,16 +8,8 @@ export default {
     }
   },
   'data-extractor': 'CD2030 Data Extractor',
-  rmncah: {
-    title: 'RMNCAH App',
-    theme: {
-      layout: 'full',
-      copyPage: false,
-      toc: true
-    }
-  },
-  vaxx: {
-    title: 'Vaxx App',
+  countdown: {
+    title: 'Aplicações RMNCAH e Vaxx',
     theme: {
       layout: 'full',
       copyPage: false,

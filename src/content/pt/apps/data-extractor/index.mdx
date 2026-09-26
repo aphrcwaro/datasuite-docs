@@ -1,3 +1,6 @@
+---
+description: O CD2030 DHIS2 Data Extractor, que se liga ao DHIS2, guarda metadados em cache, mapeia indicadores e transfere dados de rotina de forma reprodutível.
+---
 import { Callout, Steps } from 'nextra/components'
 
 # CD2030 DHIS2 Data Extractor
@@ -22,13 +25,15 @@ flowchart TD
   A["1. Iniciar sessão no DHIS2"]
   B["2. Sincronizar, ler e guardar em cache os metadados"]
   C["3. Mapear os metadados de origem para os indicadores"]
-  D["4. Transferir os dados de rotina"]
-  E["5. Guardar o mapeamento para exportação ou reutilização"]
+  D["4. Guardar o mapeamento para exportação ou reutilização"]
+  E["5. Transferir os dados de rotina"]
   A --> B --> C --> D --> E
 `}
 />
 
 Este processo ajuda os analistas a obter um ponto de partida mais limpo e mais reproduzível para as análises seguintes no DataSuite.
+
+O livro Excel que exporta é o ficheiro de dados de rotina que as [aplicações RMNCAH e Vaxx](/pt/apps/countdown) carregam; para saber o que esses dados devem conter, ver a [Configuração da análise](/pt/docs/methodology/analysis-setup#dados-do-hmis) na metodologia e as [Definições de indicadores](/pt/docs/reference/indicator-definitions).
 
 ## Etapas de início rápido
 
@@ -38,11 +43,11 @@ Este processo ajuda os analistas a obter um ponto de partida mais limpo e mais r
 
 Ligue-se à instância correta do DHIS2 utilizando o URL do servidor e credenciais de conta válidas.
 
-### [Guardar os metadados em cache](/pt/apps/data-extractor/dhis2-login#read-and-cache-metadata)
+### [Guardar os metadados em cache](/pt/apps/data-extractor/dhis2-login#guardar-os-metadados-em-cache)
 
 Guarde temporariamente (em cache) os metadados localmente, para um acesso rápido e uma transferência eficiente.
 
-### [Escolher um modo de mapeamento](/pt/apps/data-extractor/mapping#map-metadata)
+### [Escolher um modo de mapeamento](/pt/apps/data-extractor/mapping#selecionar-o-modo-de-mapeamento)
 
 Utilize o mapeamento **Countdown** para o modelo MNCH harmonizado ou o mapeamento **Custom** para outros programas.
 

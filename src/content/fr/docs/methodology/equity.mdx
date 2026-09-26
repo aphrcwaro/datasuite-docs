@@ -1,0 +1,106 @@
+---
+description: Comment les equiplots issus des enquêtes auprès des ménages montrent les écarts de couverture selon la résidence, la richesse et l'éducation de la mère.
+---
+
+import { Callout, Steps } from 'nextra/components'
+
+# Évaluation de l'équité (equiplots)
+
+Les moyennes nationales de couverture masquent des disparités critiques qui déterminent si les systèmes de santé ne laissent vraiment personne de côté. Ce module utilise les données des enquêtes auprès des ménages pour évaluer les inégalités à travers trois dimensions principales : le lieu de résidence (urbain/rural), la richesse (quintiles des plus riches aux plus pauvres) et l'éducation maternelle. En visualisant les trajectoires de couverture séparément pour chaque sous-groupe de population parallèlement à la tendance nationale, les equiplots révèlent si les écarts se réduisent ou se creusent — une information essentielle pour cibler équitablement les investissements en santé.
+
+<Callout type="info">
+**En bref**
+- **Répond à :** Les écarts de couverture entre sous-groupes de population (milieu de résidence urbain/rural, quintile de richesse des ménages, éducation de la mère) se réduisent-ils ou se creusent-ils, et quel type d'inégalité les quintiles de richesse révèlent-ils ?
+- **Utilise :** les données des enquêtes auprès des ménages sur le milieu de résidence, les quintiles de richesse des ménages et l'éducation de la mère, avec la tendance de la couverture nationale pour comparaison ([Couverture nationale](/fr/docs/methodology/coverage)).
+- **Produit :** des equiplots de la couverture de chaque sous-groupe au fil du temps parallèlement à la tendance nationale, et le modèle d'inégalité (par le haut, linéaire ou par le bas) pour la richesse. Étape suivante : [Analyse infranationale](/fr/docs/methodology/subnational).
+- **Dans les applications :** [Évaluation de l'équité](/fr/apps/countdown/coverage-equity-targets#évaluation-de-léquité-données-denquête) (dans l'application Vaxx, la page Données d'enquête sous Inégalités nationales).
+</Callout>
+
+## Pourquoi c'est important
+
+Trois modèles d'inégalité distincts émergent des données : *l'inégalité par le haut* (seuls les plus riches s'en sortent), *l'inégalité linéaire* (gradients associés à la richesse) et *l'inégalité par le bas* (les plus pauvres sont laissés pour compte). Chaque modèle signale des priorités de programmation différentes : respectivement, des campagnes d'accès de masse, un ciblage pro-pauvres ou des initiatives d'éducation. Le suivi de ces modèles au fil du temps révèle si les interventions en faveur de l'équité fonctionnent et si votre système de santé progresse vers une couverture universelle pour tous les groupes de population, et non seulement pour les moyennes nationales.
+
+Les fondements scientifiques sont présentés dans la [justification](/fr/docs/reference/rationale#equity-analysis).
+
+## Méthode
+
+### Justification et approche
+
+**Base scientifique de l'analyse :**
+
+Les enquêtes auprès des ménages fournissent des informations critiques sur les inégalités. Nous nous concentrons sur trois dimensions principales de l'inégalité : le milieu de résidence, la richesse et l'éducation.
+
+Pour le milieu de résidence, nous nous concentrons sur les zones urbaines/rurales, pour la richesse, nous utilisons les quintiles de richesse des ménages et pour l'éducation, nous nous concentrons sur l'éducation de la mère. Les equiplots sont utilisés pour évaluer si le pays a fait des progrès depuis 2010 dans la réduction de l'écart pauvres-riches ou de l'écart entre les femmes sans éducation ou avec un faible niveau d'éducation et les femmes avec un niveau d'éducation plus élevé.
+
+Pour les quintiles de richesse, il est possible d'évaluer quel est le type d'inégalité, car toutes les catégories sont de la même taille. Chaque modèle nécessite une stratégie différente de programmation et de ciblage en matière de santé :
+
+- **Inégalité par le haut (privation de masse) :** Si les plus riches sont bien en avance sur tous les autres quintiles de richesse, seuls les riches s'en sortent.
+- **Inégalité linéaire :** Si les différences de couverture sont équidistantes, il s'agit d'un modèle linéaire où l'augmentation de la richesse des ménages est linéairement associée à une couverture plus élevée.
+- **Inégalité par le bas (marginalisation) :** Si les plus pauvres sont laissés pour compte, cela signifie la marginalisation des plus pauvres.
+
+## Interprétation
+
+### Interprétation des equiplots
+
+Voir la justification : [Analyse de l'équité (equiplots)](/fr/docs/reference/rationale/#equity-analysis).
+
+L'interprétation doit se concentrer sur la question de savoir si les inégalités se sont réduites au fil du temps et dans quelle mesure les cibles mondiales de couverture ont été atteintes. Tenez compte de votre (vos) public(s) et des messages clés et informations que vous souhaitez transmettre.
+
+<Callout type="info">
+
+Les questions suivantes doivent guider l'interprétation et y trouver réponse :
+
+- Quel est le niveau d'inégalité dans le point de données le plus récent ?
+- Comment les inégalités ont-elles évolué au fil du temps ?
+- Y a-t-il un modèle d'inégalité qui peut être observé ?
+- Quelles seront les meilleures approches pour réduire les inégalités ?
+
+</Callout>
+
+Comment lire un equiplot :
+
+- La distance entre les points mesure l'inégalité.
+- Pour la richesse, lisez le schéma : seuls les plus riches en tête signifie une inégalité au sommet, des groupes régulièrement espacés signifient une inégalité linéaire, et les plus pauvres loin derrière signifient une inégalité à la base (marginalisation). Chacune appelle une réponse programmatique différente.
+- Concentrez-vous sur le dernier point de données, l'évolution depuis 2010 et la réduction ou non de l'écart.
+
+### Pièges courants
+
+- Les graphiques d'équité proviennent des fichiers d'enquête et peuvent avoir plusieurs années. Comparez-les aux tendances de routine, pas à une seule année de données DHIS2.
+
+## Dans les applications
+
+<Steps>
+
+### Ouvrez Évaluation de l'équité[#mise-en-œuvre]
+
+Ceci sera analysé dans la section **Analyse nationale** -> **Évaluation de l'équité** de l'application Shiny. Dans l'application Vaxx, c'est la page **Données d'enquête** sous **Inégalités nationales**.
+
+### Choisissez le type d'équité et l'indicateur
+
+**Milieu de résidence**, **Éducation maternelle** ou **Quintile de richesse**, puis un onglet d'indicateur (**Personnalisé**, ou **Vérification personnalisée** dans l'application Vaxx, pour tout autre indicateur).
+
+<Callout type="info">
+
+**Les analyses RMNCAH et de vaccination diffèrent ici :** les onglets d'indicateurs sont CPN4, naissances vivantes en établissement, faible poids de naissance, Penta3 et Rougeole 1 dans les analyses RMNCAH ; Penta3, Rougeole 1 et les abandons Penta1 à Penta3 et Penta3 à Rougeole 1 dans les analyses de vaccination. Voir [Analyses RMNCAH et vaccination](/fr/docs/reference/rmncah-vs-vaccine).
+
+</Callout>
+
+### Lisez les equiplots
+
+Écran par écran : [Évaluation de l'équité](/fr/apps/countdown/coverage-equity-targets#évaluation-de-léquité-données-denquête).
+
+Vous devriez voir les résultats ci-dessous :
+
+![Equiplot de la couverture du Pentavalent 3 selon le milieu de résidence](/images/fr-national-coverage-equity-area.png)
+
+![Equiplot de la couverture du Pentavalent 3 selon le quintile de richesse](/images/fr-national-coverage-wealth.png)
+
+![Equiplot de la couverture du Pentavalent 3 selon l'éducation de la mère](/images/fr-national-coverage-education.png)
+
+</Steps>
+
+## Voir aussi
+
+- [Justification : analyse de l'équité (equiplots)](/fr/docs/reference/rationale#equity-analysis)
+- Étape précédente : [Approche de modélisation bayésienne](/fr/docs/methodology/bayesian-coverage)
+- Étape suivante : [Analyse infranationale](/fr/docs/methodology/subnational)

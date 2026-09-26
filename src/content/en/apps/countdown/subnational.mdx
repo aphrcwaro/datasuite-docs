@@ -1,0 +1,189 @@
+---
+description: The Sub-National Coverage, Sub-National Inequality and Coverage Target pages, which repeat the national analysis for regions (Admin 1) and districts (Admin 2).
+topics: [subnational-coverage, inequality, coverage-targets]
+indicators: [bcg, penta1, penta3, measles1, measles2, opv3, pcv3, rota2, ipv1]
+reportKinds: [region_coverage, district_table, inequality, map, threshold, natcov_continuum_region]
+cacheMembers: [calculate_coverage, get_filtered_coverage, calculate_inequality, get_filtered_inequality, inequality_admin1, inequality_district, get_filtered_threshold, get_high_performers, get_mapping_data, get_filtered_mapping_data, admin1_estimates, check_inequality_params]
+appPages: [subnational_coverage, subnational_inequality, subnational_target]
+ai:
+  status: draft
+  summary: >-
+    Three Sub-National Analysis pages, Sub-National Coverage, Sub-National Inequality and Coverage Target, repeat the
+    national analysis for regions (Admin 1) and districts (Admin 2), where programme action is usually targeted. They
+    use the same adjusted data and denominators as the national pages (in Vaxx, the chosen vaccination denominator).
+    Expect more noise at district level than at region level.
+  options:
+    - "Coverage Target tabs: ANC 4 Visits, Institutional Live Births and Vaccine (RMNCAH); Vaccine (BCG, Pentavalent 3, Measles 1) and Dropout (Penta 1 to Penta 3, Penta 3 to Measles 1) (Vaxx); region selector, level fixed to districts (#coverage-target)"
+  rules:
+    - "RMNCAH: the region's Reporting Rate is on the Data quality page; check it before drawing conclusions (#sub-national-coverage)"
+    - "Cross-check a district that looks implausible in Data quality (#interpretation-and-pitfalls)"
+    - "Vaxx: changing the admin level resets the region selection (#interpretation-and-pitfalls)"
+    - "The target thresholds are in Subnational analysis (/en/docs/methodology/subnational#target-values)"
+    - "How to read these pages, and the pitfalls, are in Subnational analysis (/en/docs/methodology/subnational#interpretation)"
+  interpretation:
+    - "Sub-National Coverage: DHIS2 and survey lines for the chosen area (in Vaxx also WUENIC, only where they exist for that geography); the caption names the denominator (#read-the-chart)"
+    - "Sub-National Inequality: dots are sub-national units, the line is national or regional coverage (#sub-national-inequality)"
+    - "Coverage Target: percentage of districts in a region meeting the target, by year; the table lists the districts meeting it (#coverage-target)"
+---
+
+import { Tabs, Steps, Callout } from 'nextra/components'
+
+# Sub-national analysis
+
+The **Sub-National Analysis** group repeats the national analysis for regions (Admin 1) and districts (Admin 2) (why: [Subnational analysis > Subnational coverage](/en/docs/methodology/subnational#subnational-coverage-in-cd2030-analytical-approach)). It has three pages: **Sub-National Coverage**, **Sub-National Inequality** and **Coverage Target**. The method is described in [Subnational analysis](/en/docs/methodology/subnational).
+
+These pages need adjusted data and use the same denominators as the national pages (see [Denominators](/en/apps/countdown/denominators)); in the Vaxx app, this is the vaccination denominator chosen there. In the Vaxx app, their indicator tabs and the Custom Check tab work as described in **[Coverage, equity and targets](/en/apps/countdown/coverage-equity-targets)**.
+
+<Callout type="info">
+Expect more noise at district level than at region level: see [Subnational analysis > Coverage estimates at Admin1 and Admin2](/en/docs/methodology/subnational#rationale-and-approach).
+</Callout>
+
+## Sub-National Coverage
+
+**Purpose.** Compare DHIS2 and survey coverage estimates for each region or district.
+
+**When to use it.** After National Coverage, to find the areas behind the national figure.
+
+<Steps>
+
+### Open Sub-National Coverage
+
+It is in the **Sub-National Analysis** group.
+
+### Set the geography
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+Choose the **Admin Level**. With **Admin 1** a region selector appears, and with **Admin 2** a district selector, so that you can focus on one area.
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+Use **Admin Level** (Admin 1 or Admin 2) and the region selector. Choose Admin 1 with no region to see regions, or pick a region to see its districts. At Admin 2 the selector can also pick a district.
+
+</Tabs.Tab>
+</Tabs>
+
+### Pick an indicator
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+Pick an indicator tab: **ANC 4 Visits**, **Institutional Live Births**, **Low Birth Weight**, **Pentavalent 3**, **Measles 1**, **FP Projection** or **Custom** for any other indicator.
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+Choose a tab, or **Custom Check** for any Vaxx indicator, including dropout, zero-dose and under-vaccinated.
+
+</Tabs.Tab>
+</Tabs>
+
+### Read the chart
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+The title names the area, for example the coverage estimates of the selected region. Lines show the DHIS2 estimate and the survey estimate, and the caption names the denominator used. **Download Plot** and **Download Data** are in the toolbar.
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+The chart is titled "... Coverage Estimates" for the selected area and shows the DHIS2 estimate, with the WUENIC and survey estimates where they exist for that geography. The caption gives the denominator.
+
+</Tabs.Tab>
+</Tabs>
+
+</Steps>
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+![Sub-national coverage](/images/Subnational_coverage.png)
+
+**How to interpret.** See [Subnational analysis > Subnational coverage](/en/docs/methodology/subnational#reading-subnational-coverage). The region's [Reporting Rate](/en/apps/countdown/data-quality) is on the data quality pages; check it before drawing conclusions.
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+![Sub-national coverage](/images/subnational-coverage-targets.png)
+
+Survey and WUENIC estimates appear only where they exist for the selected geography, so some charts show DHIS2 alone.
+
+</Tabs.Tab>
+</Tabs>
+
+## Sub-National Inequality
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+**Purpose.** Show how far each region (or each district inside a region) is from the national or regional figure, year by year.
+
+**Filters.** **Admin Level** and, at Admin 1, a region selector to zoom in on one region.
+
+Tabs are **ANC 4 Visits**, **Institutional Live Births**, **Low Birth Weight**, **Pentavalent 3**, **Measles 1** and **Custom**. Each dot is a sub-national unit (**Coverage at subnational unit**) and the line is the national or, when a region is chosen, the regional coverage. How to read the spread, and the MADM that summarises it: [Subnational analysis > Inequality](/en/docs/methodology/subnational#reading-inequality).
+
+![Sub-national inequality](/images/subnational-coverage-inequality.png)
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+Shows how coverage differs between units inside one geography.
+
+- Filters: **Admin Level** and region. Each chart plots the coverage of every sub-national unit by year (legend "Coverage at subnational unit") against the coverage of the selected region or the country (legend "National Coverage", or the region name followed by "Coverage").
+- The subtitle says which units are shown: "Subnational unit: admin 1 level", "district level" or the region name.
+- Tabs and the Custom Check tab work as on the national page.
+
+Use it to find districts that sit far below their region, and to see whether the gap narrows over time. How to read it: [Subnational analysis > Inequality](/en/docs/methodology/subnational#reading-inequality).
+
+</Tabs.Tab>
+</Tabs>
+
+## Coverage Target
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+**Purpose.** Show the percentage of districts in a region that meet a coverage target, by year.
+
+**Filter.** A region selector. The level is fixed to districts.
+
+Tabs are **ANC 4 Visits**, **Institutional Live Births** and **Vaccine**. The targets are the same as on the national page ([Subnational analysis > Target values](/en/docs/methodology/subnational#target-values)). A table under the chart lists the districts that reach the target for the indicator chosen in its *This table only* control.
+
+How to read the percentages: [Subnational analysis > Progress towards targets](/en/docs/methodology/subnational#rationale-and-approach-2).
+
+![Sub-national coverage against targets](/images/subnational-coverage-targets.png)
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+The share of districts in a region meeting the global targets.
+
+1. Choose the **region** (this page has no admin level filter: the unit is always the district).
+2. Read the two tabs. **Vaccine** covers BCG, Pentavalent 3 and Measles 1. **Dropout** covers Penta 1 to Penta 3 and Penta 3 to Measles 1. The thresholds are in [Subnational analysis > Target values](/en/docs/methodology/subnational#target-values).
+3. The chart title, "Percentage of districts in (region name) meeting the ... target", shows the threshold used. Bars are percentages by year and indicator.
+4. The table lists the districts meeting the target for the indicator and year you select. Download it as Excel with the table's download button.
+
+</Tabs.Tab>
+</Tabs>
+
+## Interpretation and pitfalls
+
+How to read these results and the pitfalls to avoid: [Subnational analysis > Interpretation](/en/docs/methodology/subnational#interpretation) and [Common pitfalls](/en/docs/methodology/subnational#common-pitfalls). To cross-check a district that looks implausible, use **[Data quality](/en/apps/countdown/data-quality)**; to test another denominator, go back to [Denominators](/en/apps/countdown/denominators).
+
+- In the Vaxx app, changing the admin level resets the region selection.
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+Next: **[Advanced analysis](/en/apps/countdown/advanced-analysis)**.
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+Next: **[Exports, reports and AI](/en/apps/countdown/exports-and-ai)**.
+
+</Tabs.Tab>
+</Tabs>

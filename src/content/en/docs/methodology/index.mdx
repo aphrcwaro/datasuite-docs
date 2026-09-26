@@ -1,0 +1,146 @@
+---
+description: "Overview of the CD2030 DataSuite analytical framework: from data quality and adjustment to denominators, coverage and subnational inequality."
+topics: [workflow]
+ai:
+  status: draft
+  summary: >-
+    Overview of the CD2030 DataSuite analytical framework: an end-to-end workflow that takes country teams from raw
+    facility and survey data to defensible national and sub-national coverage findings. Facility data are abundant but
+    often unreliable, while surveys are the gold standard for coverage but infrequent and expensive; the workflow vets
+    facility data, calibrates them against survey benchmarks, and produces continuous trend lines with quantified
+    uncertainty. The findings are meant to inform country review processes, planning discussions and technical working
+    groups rather than stand alone as a report.
+  options:
+    - "Data quality assessment: reporting completeness, outliers, missingness, internal consistency, annual quality scores (#framework-modules)"
+    - "Data adjustment: remove unreliable periods, apply adjustment factors, compare values before and after cleaning (#framework-modules)"
+    - "Denominator selection: compare DHIS2, UN, ANC1-derived and Penta1-derived denominator options (#framework-modules)"
+    - "Coverage estimation: levels and trends, comparison with survey benchmarks, progress toward targets (#framework-modules)"
+    - "Equity analysis: inequality by residence, wealth and maternal education from surveys (#framework-modules)"
+    - "Sub-national analysis: regional and district variation, target attainment, geographic inequality (#framework-modules)"
+    - "Also: analysis setup, Bayesian coverage, mortality, service utilization, health system performance, and dissemination, decisions and action (#framework-modules)"
+  steps:
+    - "Load and configure facility and survey data (/en/docs/methodology/analysis-setup) (#end-to-end-workflow)"
+    - "Calibrate the national benchmark rates (/en/docs/methodology/analysis-setup#survey-params) (#end-to-end-workflow)"
+    - "Assess data quality before estimating coverage (/en/docs/methodology/data-quality) (#end-to-end-workflow)"
+    - "Adjust incomplete, unstable or unreliable data (/en/docs/methodology/data-adjustment) (#end-to-end-workflow)"
+    - "Select the best-performing denominator (/en/docs/methodology/denominators) (#end-to-end-workflow)"
+    - "Generate and interpret coverage (including Bayesian coverage), equity, sub-national, mortality, service utilization and health system performance results, in that order (#end-to-end-workflow)"
+    - "Plan dissemination, decisions and action (/en/docs/methodology/dissemination) (#end-to-end-workflow)"
+  rules:
+    - "Facility data are systematically vetted and calibrated against survey benchmarks before coverage is reported (#)"
+  interpretation:
+    - "The aim is confidence that coverage numbers reflect reality rather than data artifacts (#)"
+  notCovered:
+    - "How each step is carried out: see the module pages linked from the workflow and the module cards (#end-to-end-workflow)"
+---
+
+import { HomeCards } from '@/components/HomeCards'
+
+# Framework overview
+
+This page summarizes the CD2030 DataSuite analytical framework.
+It is intended to help teams move from raw facility and survey data to defensible national and sub-national coverage findings.
+
+The CD2030 DataSuite implements an end-to-end analytical workflow that transforms raw health facility data into credible, actionable coverage estimates.
+The workflow follows a logical sequence: assess data quality, correct for incompleteness and errors, select evidence-based denominators, calculate coverage, and examine inequality patterns at national and geographic levels.
+
+![Countdown analysis workflow](/images/methods_cd_approach.png)
+
+This structured approach addresses a universal challenge in RMNCAH monitoring: facility data are abundant but often unreliable, while surveys provide gold-standard coverage estimates but are infrequent and expensive.
+The CD2030 DataSuite bridges this gap by systematically vetting facility data, calibrating them against survey benchmarks, and producing continuous trend lines with quantified uncertainty.
+The result is confidence that your coverage numbers reflect reality rather than data artifacts.
+
+## End-to-end workflow
+
+The framework follows a practical sequence:
+
+1. [Load and configure](/en/docs/methodology/analysis-setup) facility and survey data.
+2. [Calibrate key national benchmark rates](/en/docs/methodology/analysis-setup#survey-params).
+3. [Assess data quality](/en/docs/methodology/data-quality) before estimating coverage.
+4. [Adjust](/en/docs/methodology/data-adjustment) incomplete, unstable, or unreliable data.
+5. [Select the best-performing denominator](/en/docs/methodology/denominators).
+6. Generate and interpret **[coverage](/en/docs/methodology/coverage)** (including **[Bayesian coverage estimation](/en/docs/methodology/bayesian-coverage)**), **[equity](/en/docs/methodology/equity)**, **[sub-national](/en/docs/methodology/subnational)**, **[mortality](/en/docs/methodology/mortality)**, **[service utilization](/en/docs/methodology/service-utilisation)** and **[health system performance](/en/docs/methodology/health-system)** results, in that order.
+7. Plan **[dissemination, decisions and action](/en/docs/methodology/dissemination)**.
+
+In the apps, the same sequence is followed page by page: see [Analysis steps](/en/apps/countdown/analysis-steps) (RMNCAH app).
+
+## Framework modules
+
+<HomeCards
+  items={[
+    {
+      title: 'Analysis Setup',
+      description: 'Set up the analysis: the data and national parameters it needs, and how to load them in the apps.',
+      href: '/en/docs/methodology/analysis-setup',
+      icon: 'tools'
+    },
+    {
+      title: 'Data Quality Assessment',
+      description: 'Review reporting completeness, outliers, missingness, internal consistency, and annual quality scores.',
+      href: '/en/docs/methodology/data-quality',
+      icon: 'checklist'
+    },
+    {
+      title: 'Data Adjustment',
+      description: 'Remove unreliable periods, apply adjustment factors, and compare values before and after cleaning.',
+      href: '/en/docs/methodology/data-adjustment',
+      icon: 'settings-gear'
+    },
+    {
+      title: 'Denominator Selection',
+      description: 'Compare DHIS2, UN, ANC1-derived, and Penta1-derived denominator options.',
+      href: '/en/docs/methodology/denominators',
+      icon: 'symbol-number'
+    },
+    {
+      title: 'Coverage Estimation',
+      description: 'Estimate levels and trends, compare with survey benchmarks, and review progress toward targets.',
+      href: '/en/docs/methodology/coverage',
+      icon: 'graph'
+    },
+    {
+      title: 'Bayesian Coverage Estimation',
+      description: 'Model national and subnational coverage up to the most recent year with data, with short-term forecasts.',
+      href: '/en/docs/methodology/bayesian-coverage',
+      icon: 'symbol-operator'
+    },
+    {
+      title: 'Equity Analysis',
+      description: 'Assess inequality by residence, wealth, and maternal education using survey-based comparisons.',
+      href: '/en/docs/methodology/equity',
+      icon: 'graph-scatter'
+    },
+    {
+      title: 'Sub-National Analysis',
+      description: 'Examine regional and district variation, target attainment, and geographic inequality.',
+      href: '/en/docs/methodology/subnational',
+      icon: 'globe'
+    },
+    {
+      title: 'Mortality',
+      description: 'Check whether facility-reported maternal deaths, stillbirths and neonatal deaths are plausible, and how complete death reporting is.',
+      href: '/en/docs/methodology/mortality',
+      icon: 'pulse'
+    },
+    {
+      title: 'Service Utilization',
+      description: 'Measure how far children under 5 reach curative services, with facility case fatality as a proxy for quality of care.',
+      href: '/en/docs/methodology/service-utilisation',
+      icon: 'person'
+    },
+    {
+      title: 'Health System Performance',
+      description: 'Analyze health system inputs and outputs -- services, workforce, financing -- and the private sector\'s role in RMNCAH-N services.',
+      href: '/en/docs/methodology/health-system',
+      icon: 'layers'
+    },
+    {
+      title: 'Dissemination, Decisions & Action',
+      description: 'Turn the findings into concrete actions, from review meetings to planning and data-driven decisions.',
+      href: '/en/docs/methodology/dissemination',
+      icon: 'book'
+    }
+  ]}
+/>
+
+The final purpose of the framework is practical use. Findings should inform country review processes, planning discussions, and technical working groups so that the analysis leads to concrete RMNCAH action rather than standing alone as a report.

@@ -1,0 +1,178 @@
+---
+description: Como comparar as opções de denominador na Avaliação do denominador e escolher uma na Seleção do denominador, que determina cada estimativa de cobertura.
+---
+import { Tabs, Steps, Callout } from 'nextra/components'
+
+# Denominadores
+
+A cobertura é o número de pessoas que receberam um serviço dividido pelo número de pessoas que precisavam dele; o denominador tem de ser estimado (ver [Denominadores > Cobertura de serviços](/pt/docs/methodology/denominators#objetivo)). A secção **Denominadores** tem duas páginas, **Avaliação do denominador** e **Seleção do denominador**. O método está descrito em [Avaliação e seleção do denominador](/pt/docs/methodology/denominators).
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+Ambas são desbloqueadas depois da [Preparação dos dados](/pt/apps/countdown/data-preparation).
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+A página Avaliação do denominador chama-se **Tendência populacional** no menu. Ambas exigem dados ajustados.
+
+</Tabs.Tab>
+</Tabs>
+
+## Quando usar
+
+Use estas páginas depois do ajuste e antes de ler qualquer resultado de cobertura. Repita-as se alterar o ajuste ou os dados de inquérito. A Avaliação do denominador vem em primeiro lugar, antes da Seleção do denominador.
+
+## Opções de denominador
+
+A projeção da ONU de nascimentos vivos é apresentada apenas nos gráficos de comparação; não faz parte das escolhas dos seletores. As outras opções são:
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+Os seletores **Denominador materno** e **Denominador de vacinação** oferecem as outras cinco opções.
+
+| Opção na aplicação | Significado |
+| --- | --- |
+| ONU | Projeção da ONU de nascimentos vivos |
+| DHIS2 | Projeção do DHIS2 de nascimentos vivos |
+| CPN 1 | Derivado das mulheres que fazem a primeira consulta pré-natal |
+| Pentavalente 1 | Derivado das crianças que recebem a primeira dose de pentavalente |
+| Crescimento da população ANC 1 | CPN 1 derivado, ajustado ao crescimento anual da população |
+| Crescimento da população Penta 1 | Penta 1 derivado, ajustado ao crescimento anual da população |
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+O seletor **Denominador de vacinação** oferece estas opções.
+
+| Opção | Ideia |
+| --- | --- |
+| DHIS2 | A população projetada nos dados DHIS2 (nascidos vivos, total de nascimentos, população total ou menores de 1 ano, conforme a definição Selecionar a melhor população). |
+| CPN 1 | Denominador derivado da utilização dos serviços de CPN-1. |
+| Pentavalente 1 | Denominador derivado da vacinação Penta-1. |
+| Crescimento da população ANC 1, Penta1-derivado | A derivação a partir de CPN-1 ou de Penta-1 com ajuste para o crescimento populacional anual. |
+
+A projeção da ONU também é traçada nos gráficos para comparação, mas não faz parte das escolhas do seletor.
+
+</Tabs.Tab>
+</Tabs>
+
+O que é cada opção, e como as populações derivadas são calculadas a partir das taxas de inquérito: **[Denominadores > Opções de denominador](/pt/docs/methodology/denominators#opções-de-denominador)** e **[Cálculo dos denominadores derivados](/pt/docs/methodology/denominators#cálculo-dos-denominadores-derivados)**.
+
+## Avaliação do denominador
+
+**Finalidade.** Comparar as tendências da população entre as fontes disponíveis e decidir que indicador de população é consistente entre as projeções da ONU e do DHIS2 (o que essa escolha determina: [Denominadores > Comparação da tendência populacional](/pt/docs/methodology/denominators#comparação-da-tendência-populacional)).
+
+<Steps>
+
+### Abra a Avaliação do denominador
+
+É a primeira página da secção **Denominadores** (**Tendência populacional** na aplicação Vaxx).
+
+### Compare os três separadores
+
+O cartão **Comparação populacional** tem os separadores **População**, **Nascimentos** e **Menores de 1 ano**. Cada um representa a projeção da ONU face à projeção do DHIS2, em milhares, por ano. O separador Nascimentos mostra os nascimentos vivos do DHIS2 e o total de nascimentos do DHIS2.
+
+### Selecionar a melhor população
+
+Na barra de filtros escolha a fonte de população mais consistente com a ONU: **Nascidos vivos (DHIS2)**, **Total de nascimentos (DHIS2)**, **População total (DHIS2)** ou **Menores de 1 ano (DHIS2)**.
+
+</Steps>
+
+Como escolher, e o que significam as diferenças ou quebras entre as linhas: [Denominadores > Comparação da tendência populacional](/pt/docs/methodology/denominators#comparação-da-tendência-populacional) e [Leitura das tendências da população](/pt/docs/methodology/denominators#leitura-das-tendências-da-população).
+
+![Comparação da população entre a ONU e o DHIS2](/images/pt-denominator-population-trend.png)
+
+## Seleção do denominador
+
+**Finalidade.** Comparar a cobertura sob cada opção de denominador e escolher o melhor denominador. A escolha é a que o resto da análise utiliza; aparece depois na linha Denominador (o seletor de denominador) de todas as páginas de análise.
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+Escolher o melhor denominador para os indicadores de vacinação e para os indicadores maternos.
+
+**Filtros.** **Denominador materno**, **Denominador de vacinação** e **Nível Administrativo** (Nacional, Nível Administrativo 1 ou Nível Administrativo 2, com uma etiqueta de região). As duas escolhas de denominador são as que o resto da análise utiliza.
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+Escolher um único denominador de vacinação. O **Nível Administrativo** (Nacional, Nível Administrativo 1, Nível Administrativo 2) e o seletor de região são usados no cartão da tendência.
+
+</Tabs.Tab>
+</Tabs>
+
+Três cartões apoiam a decisão:
+
+<Steps>
+
+### Ler a comparação com o inquérito (Cobertura nacional)
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+Para cada separador de indicador (**Nascidos vivos em estabelecimento de saúde** e **Pentavalente 3**), as barras mostram a cobertura baseada nas unidades de saúde no ano do inquérito com cada denominador, comparada com a cobertura nacional do inquérito.
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+O cartão **Cobertura nacional** tem os separadores **Nascidos vivos em estabelecimento de saúde**, **BCG**, **Pentavalente 3** e **Sarampo 1**. Cada gráfico mostra a cobertura baseada em instalações a partir do DHIS2 sob cada denominador, ao lado da cobertura do inquérito nacional para o ano do inquérito.
+
+</Tabs.Tab>
+</Tabs>
+
+Como ler: [Denominadores > Exame da seleção do denominador](/pt/docs/methodology/denominators#exame-da-seleção-do-denominador) (a).
+
+Se faltarem as estimativas do inquérito, o cartão mostra *Ainda não há cobertura para mostrar* e um botão **Ir para Carregar Dados**. Adicione os valores do inquérito no passo Taxas nacionais.
+
+### Verificar o padrão regional (Cobertura derivada subnacional)
+
+**Cobertura derivada subnacional** compara a cobertura por região e por denominador no ano do inquérito. Como ler: [Denominadores > Exame da seleção do denominador](/pt/docs/methodology/denominators#exame-da-seleção-do-denominador) (b).
+
+Na aplicação Vaxx, os separadores são **Pentavalente 1**, **Pentavalente 3** e **Sarampo 1**.
+
+### Verificar a tendência (Tendência populacional)
+
+O cartão **Tendência populacional** (nesta página, é a cobertura ao longo do tempo) mostra a cobertura nacional ao longo do tempo, ou a da área selecionada, para cada denominador, incluindo a população da ONU na aplicação Vaxx. Use o filtro **Nível Administrativo** (Nacional, Nível Administrativo 1, Nível Administrativo 2) e o seletor de região para analisar uma área. Como ler: [Denominadores > Exame da seleção do denominador](/pt/docs/methodology/denominators#exame-da-seleção-do-denominador) (c).
+
+Na aplicação Vaxx, os separadores são **Pentavalente 1**, **Pentavalente 3** e **Sarampo 1**.
+
+### Escolher o denominador
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+Defina o **Denominador materno** e o **Denominador de vacinação**, e registe o motivo nas suas notas. Como combinar as três vistas: [Denominadores > Seleção final e síntese](/pt/docs/methodology/denominators#seleção-final-e-síntese).
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+Defina o seletor **Denominador de vacinação**. As opções são **DHIS2**, **CPN 1**, **Pentavalente 1**, **Penta1-derivado** e **Crescimento da população ANC 1**. A escolha é guardada no conjunto de dados e usada por todas as páginas de cobertura, desigualdade e metas. A Vaxx App tem um único denominador de vacinação, sem denominador materno separado. Como combinar as três vistas: [Denominadores > Seleção final e síntese](/pt/docs/methodology/denominators#seleção-final-e-síntese).
+
+</Tabs.Tab>
+</Tabs>
+
+</Steps>
+
+![Melhor seleção do denominador](/images/pt-denominator-best-selection.png)
+
+![Cobertura nacional ao longo do tempo por denominador](/images/pt-denominator-national-coverage-overtime.png)
+
+## Como interpretar os resultados
+
+O que torna um denominador o melhor, e o que vigiar: [Denominadores > Seleção final e síntese](/pt/docs/methodology/denominators#seleção-final-e-síntese) e [Armadilhas comuns](/pt/docs/methodology/denominators#armadilhas-comuns).
+
+- O rótulo do denominador aparece em todas as páginas de análise (na aplicação Vaxx, o seletor do denominador de vacinação). Se os resultados parecerem estranhos, verifique-o primeiro e depois volte a [Qualidade dos dados](/pt/apps/countdown/data-quality).
+
+<Callout type="warning">
+O denominador que seleciona altera todos os gráficos de cobertura, desigualdade, metas, mortalidade e sistema de saúde. Se o alterar mais tarde, reveja as páginas que dele dependem e gere novamente as figuras exportadas.
+</Callout>
+
+## Armadilhas comuns
+
+- Valores de cobertura do inquérito em falta em Carregar dados, o que deixa vazia a comparação com o inquérito.
+- Definir de novo o denominador para cada gráfico: define-se uma única vez, na Seleção do denominador, para toda a análise. Para as armadilhas na sua escolha, ver [Denominadores > Armadilhas comuns](/pt/docs/methodology/denominators#armadilhas-comuns).
+
+Seguinte: **[Cobertura, equidade e metas](/pt/apps/countdown/coverage-equity-targets)**.

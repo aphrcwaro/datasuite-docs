@@ -1,0 +1,206 @@
+---
+description: How to compare denominator options on Denominator Assessment and choose one on Denominator Selection, since the denominator shapes every coverage estimate.
+topics: [denominators]
+indicators: [anc1, penta1, instlivebirths]
+reportKinds: [derived_coverage, denominator_trend, derived_coverage_trend]
+cacheMembers: [denominator, derivation_population, denominator_metrics, maternal_denominator, get_denominator, calculate_derived_coverage, calculate_indicator_coverage, indicator_coverage_national, indicator_coverage_admin1, indicator_coverage_district, national_estimates, un_estimates]
+appPages: [denominator_assessment, denominator_selection]
+ai:
+  status: draft
+  summary: >-
+    Coverage divides a facility numerator by an estimated denominator, so the denominator matters as much as data
+    quality. Denominator Assessment (Population Trend in Vaxx) picks the DHIS2 population series most consistent with
+    the UN projection; Denominator Selection compares coverage under each option and records the denominator the whole
+    analysis uses: a maternal and a vaccination one in RMNCAH, one vaccination denominator in Vaxx.
+  options:
+    - "UN projection of live births: plotted in the comparison charts only, not selectable (#denominator-options)"
+    - "RMNCAH: DHIS2, ANC 1, Pentavalent 1, ANC 1 Population Growth, Penta 1 population Growth (Maternal and Vaccination denominator selectors) (#denominator-options)"
+    - "Vaxx: DHIS2, ANC 1, Pentavalent 1, Penta1-derived, ANC 1 Population Growth (Vaccination denominator chip) (#choose-the-denominator)"
+    - "Select Best Population: Live births, Total births, Total population or Under 1 year (DHIS2) (#select-best-population)"
+  steps:
+    - "Denominator Assessment first: compare UN and DHIS2 on the Population, Births and Under 1 tabs, then set Select Best Population (#select-best-population)"
+    - "Denominator Selection: read the survey comparison (National Coverage), the regional pattern (Subnational Derived Coverage), then the trend over time (#denominator-selection)"
+    - "Set the denominator selector(s) and record why in your notes (#choose-the-denominator)"
+  rules:
+    - "The denominator label appears on every analysis page (in Vaxx, the vaccination denominator chip); if results look odd, check it first (#how-to-interpret-the-results)"
+    - "The selected denominator changes every coverage, inequality, target, mortality and health system chart; if you change it later, review the pages that depend on it and regenerate any exported figures (#how-to-interpret-the-results)"
+    - "Missing survey coverage values in Load Data leave the survey comparison empty (#common-pitfalls)"
+    - "Vaxx: one vaccination denominator, no separate maternal one (#choose-the-denominator)"
+    - "The method, and how to read these charts, is in Denominator assessment and selection (/en/docs/methodology/denominators/)"
+---
+
+import { Tabs, Steps, Callout } from 'nextra/components'
+
+# Denominators
+
+Coverage is the number of people who received a service divided by the number who needed it; the denominator has to be estimated (see [Denominators > Service coverage](/en/docs/methodology/denominators#objective)). The **Denominators** section has two pages, **Denominator Assessment** and **Denominator Selection**. The method is described in [Denominator assessment and selection](/en/docs/methodology/denominators).
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+Both pages unlock after [Data preparation](/en/apps/countdown/data-preparation).
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+The Denominator Assessment page is labelled **Population Trend** in the menu. Both pages need adjusted data.
+
+</Tabs.Tab>
+</Tabs>
+
+## When to use it
+
+Use these pages after adjustment and before reading any coverage result. Repeat them if you change the adjustment or the survey inputs. Denominator Assessment comes first, before Denominator Selection.
+
+## Denominator options
+
+The UN projection of live births is shown in the comparison charts only; it is not one of the choices in the selectors. The other options are:
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+The **Maternal denominator** and **Vaccination denominator** selectors offer the other five options.
+
+| Option in the app | Meaning |
+| --- | --- |
+| UN | UN projection of live births |
+| DHIS2 | DHIS2 projection of live births |
+| ANC 1 | Derived from women attending a first antenatal visit |
+| Pentavalent 1 | Derived from children receiving the first pentavalent dose |
+| ANC 1 Population Growth | ANC 1 derived, adjusted for annual population growth |
+| Penta 1 population Growth | Penta 1 derived, adjusted for annual population growth |
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+The **Vaccination denominator** chip offers these options.
+
+| Option | Idea |
+| --- | --- |
+| DHIS2 | The population projected in the DHIS2 data (live births, total births, total population or under 1, per the Select Best Population setting). |
+| ANC 1 | Denominator derived from ANC-1 service utilization. |
+| Pentavalent 1 | Denominator derived from Penta-1 immunization. |
+| ANC 1 Population Growth, Penta1-derived | The ANC-1 or Penta-1 derivation with an adjustment for annual population growth. |
+
+The UN projection is also plotted on the charts for comparison, but it is not one of the choices in the chip.
+
+</Tabs.Tab>
+</Tabs>
+
+What each option is, and how the derived populations are computed from the survey rates: **[Denominators > Denominator options](/en/docs/methodology/denominators#denominator-options)** and **[Computing the derived denominators](/en/docs/methodology/denominators#computing-the-derived-denominators)**.
+
+## Denominator Assessment
+
+**Purpose.** Compare population trends across the available sources and decide which population indicator is consistent between the UN and DHIS2 projections (what that choice drives: [Denominators > Population trend comparison](/en/docs/methodology/denominators#population-trend-comparison)).
+
+<Steps>
+
+### Open Denominator Assessment
+
+It is the first page of the **Denominators** section (**Population Trend** in the Vaxx app).
+
+### Compare the three tabs
+
+The card **Population Comparison** has the tabs **Population**, **Births** and **Under 1**. Each plots the UN projection against the DHIS2 projection in thousands, by year. The Births tab shows DHIS2 live births and DHIS2 total births.
+
+### Select Best Population
+
+In the filter bar choose the population source that is most consistent with the UN: **Live births (DHIS2)**, **Total births (DHIS2)**, **Total population (DHIS2)** or **Under 1 year (DHIS2)**.
+
+</Steps>
+
+How to choose, and what gaps or breaks between the lines mean: [Denominators > Population trend comparison](/en/docs/methodology/denominators#population-trend-comparison) and [Reading the population trends](/en/docs/methodology/denominators#reading-the-population-trends).
+
+![Population comparison between UN and DHIS2](/images/denominator-population-trend.png)
+
+## Denominator Selection
+
+**Purpose.** Compare coverage under each denominator option and choose the best denominator. The choice is what the rest of the analysis uses; it appears afterwards in the Denominator row (the denominator chip) of every analysis page.
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+Choose the best denominator for vaccination indicators and for maternal indicators.
+
+**Filters.** **Maternal denominator**, **Vaccination denominator** and **Admin Level** (National, Admin 1 or Admin 2, with a region chip). The two denominator choices are what the rest of the analysis uses.
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+Choose one vaccination denominator. **Admin Level** (National, Admin 1, Admin 2) and the region selector are used on the trend card.
+
+</Tabs.Tab>
+</Tabs>
+
+Three cards support the decision:
+
+<Steps>
+
+### Read the survey comparison (National Coverage)
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+For each indicator tab (**Institutional Live Births** and **Pentavalent 3**) the bars show facility-based coverage in the survey year under each denominator, compared with the national survey coverage.
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+The **National Coverage** card has tabs **Institutional Live Births**, **BCG**, **Pentavalent 3** and **Measles 1**. Each chart shows the facility-based coverage from DHIS2 under each denominator, next to the national survey coverage for the survey year.
+
+</Tabs.Tab>
+</Tabs>
+
+How to read it: [Denominators > Denominator selection examination](/en/docs/methodology/denominators#denominator-selection-examination) (a).
+
+If survey estimates are missing, the card shows *No coverage to show yet* and a **Go to Load Data** button. Add the survey values in the National Rates step.
+
+### Check the regional pattern (Subnational Derived Coverage)
+
+**Subnational Derived Coverage** compares coverage by region and denominator in the survey year. How to read it: [Denominators > Denominator selection examination](/en/docs/methodology/denominators#denominator-selection-examination) (b).
+
+In the Vaxx app its tabs are **Pentavalent 1**, **Pentavalent 3** and **Measles 1**.
+
+### Check the trend (Population Trend)
+
+The **Population Trend** card (on this page it means coverage over time) shows national coverage over time, or coverage for the selected area, for each denominator, including the UN population in the Vaxx app. Use the **Admin Level** filter (National, Admin 1, Admin 2) and the region selector to look at one area. How to read it: [Denominators > Denominator selection examination](/en/docs/methodology/denominators#denominator-selection-examination) (c).
+
+In the Vaxx app its tabs are **Pentavalent 1**, **Pentavalent 3** and **Measles 1**.
+
+### Choose the denominator
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+Set the **Maternal denominator** and the **Vaccination denominator**, and record why in your notes. How to combine the three views: [Denominators > Final selection and synthesis](/en/docs/methodology/denominators#final-selection-and-synthesis).
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+Set the **Vaccination denominator** chip. Options are **DHIS2**, **ANC 1**, **Pentavalent 1**, **Penta1-derived** and **ANC 1 Population Growth**. The choice is saved in the dataset and used by every coverage, inequality and target page. The Vaxx App has one vaccination denominator, with no separate maternal one. How to combine the three views: [Denominators > Final selection and synthesis](/en/docs/methodology/denominators#final-selection-and-synthesis).
+
+</Tabs.Tab>
+</Tabs>
+
+</Steps>
+
+![Best denominator selection](/images/denominator-best-selection.png)
+
+![National coverage over time by denominator](/images/denominator-national-coverage-overtime.png)
+
+## How to interpret the results
+
+What makes a denominator the best one, and what to watch for: [Denominators > Final selection and synthesis](/en/docs/methodology/denominators#final-selection-and-synthesis) and [Common pitfalls](/en/docs/methodology/denominators#common-pitfalls).
+
+- The denominator label appears on every analysis page (in the Vaxx app, the vaccination denominator chip). If results look odd, check it first, then return to [Data quality](/en/apps/countdown/data-quality).
+
+<Callout type="warning">
+The denominator you select changes every coverage, inequality, target, mortality and health system chart. If you change it later, review the pages that depend on it and regenerate any exported figures.
+</Callout>
+
+## Common pitfalls
+
+- Missing survey coverage values in Load Data, which leaves the survey comparison empty.
+- Setting the denominator again for each chart: it is set once, on Denominator Selection, for the whole analysis. For pitfalls in choosing it, see [Denominators > Common pitfalls](/en/docs/methodology/denominators#common-pitfalls).
+
+Next: **[Coverage, equity and targets](/en/apps/countdown/coverage-equity-targets)**.

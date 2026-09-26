@@ -1,0 +1,173 @@
+---
+description: "Les cinq pages de qualité des données (taux de notification, valeurs aberrantes, données manquantes, cohérence interne, score global) : sont-elles fiables ?"
+---
+import { Tabs, Steps, Callout } from 'nextra/components'
+
+# Qualité des données
+
+La qualité des données est la première étape de l'analyse. Elle répond à une question avant tout calcul de couverture : peut-on se fier aux données des établissements ? Cinq pages, sous **Qualité des données** dans l'application RMNCAH et **Évaluation de la Qualité des Données** dans l'application Vaxx, montrent à quel point les données de routine sont complètes, plausibles et cohérentes. Leurs résultats déterminent si vous supprimez des années et comment vous ajustez les données dans la [Préparation des données](/fr/apps/countdown/data-preparation). La méthode est expliquée dans [Évaluation de la qualité des données](/fr/docs/methodology/data-quality).
+
+## Quand l'utiliser
+
+Utilisez ces pages juste après le chargement des données, puis chaque fois que vous téléversez un fichier corrigé. Le chargement des données doit d'abord être terminé ; ces pages n'exigent pas l'ajustement des données. Examinez-les dans cet ordre : Taux de notification, Détection des valeurs aberrantes, Données manquantes, Cohérence interne, Score global de qualité des données. Passez ensuite à la [Préparation des données](/fr/apps/countdown/data-preparation).
+
+## Filtres communs
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+La plupart des pages ont une pastille **Indicateur**, une pastille **Niveau administratif** (**Niveau administratif 1** ou **Niveau administratif 2**) et, lorsque le niveau administratif 1 est sélectionné, une pastille de région avec **Tout sélectionner** pour cibler une seule région. La page Taux de notification ajoute un **Seuil de performance** (voir [Taux de notification](#taux-de-notification)).
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+- **Indicateur** : choisissez ce que vous évaluez. Les pages de valeurs aberrantes, de données manquantes et de cohérence listent tous les indicateurs de Vaxx (CPN 1, Accouchements en établissement de santé, Naissances vivantes en établissement de santé, BCG, VPI 1-2, Rougeole 1-2, VPO 1-3, Pentavalent 1-3, PCV 1-3, Rotavirus 1-2). Le Taux de notification utilise trois groupes de services : CPN, Accouchement en établissement de santé et Vaccination.
+- **Niveau administratif** : Niveau administratif 1 (régions) ou Niveau administratif 2 (districts). Un sélecteur de région permet de se concentrer sur les districts d'une région.
+- **Seuil de performance** (Taux de notification uniquement) : un pourcentage, 90 par défaut, avec des choix rapides de 70, 80, 90 et 95. Il est enregistré dans le jeu de données et réutilisé par le Score Global de Qualité des Données.
+
+</Tabs.Tab>
+</Tabs>
+
+## Comment utiliser les pages
+
+<Steps>
+
+### Ouvrez la page depuis la barre latérale
+
+Les pages se trouvent sous **Qualité des données** (RMNCAH) ou **Évaluation de la Qualité des Données** (Vaxx). Le chargement des données doit d'abord être terminé.
+
+### Définissez les filtres
+
+Choisissez l'indicateur, le niveau administratif et, si vous le souhaitez, une région, comme décrit dans [Filtres communs](#filtres-communs).
+
+### Lisez le graphique, puis le tableau en dessous
+
+Les graphiques montrent la tendance. Les tableaux listent les districts et les mois qui la composent. Utilisez la barre d'outils d'une carte pour **Télécharger le graphique** (PNG) et **Télécharger les données** (Excel), ainsi que le sélecteur d'année *Ce tableau uniquement* pour les tableaux.
+
+</Steps>
+
+## Taux de notification
+
+Montre à quel point les établissements ont notifié de façon complète, par service, année et zone.
+
+<Steps>
+
+### Choisir le service, le seuil et le niveau administratif
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+- **Indicateur :** CPN, accouchement en établissement, vaccination, consultations externes.
+- **Seuil de performance :** 90 % par défaut ; choix rapides 70, 80, 90, 95.
+- **Niveau administratif.**
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+Sélectionnez CPN, Accouchement en établissement de santé ou Vaccination, réglez le seuil, puis le niveau administratif.
+
+</Tabs.Tab>
+</Tabs>
+
+### Lire le Taux de notification infranational
+
+L'onglet **Carte thermique** affiche le taux de notification du service sélectionné pour chaque zone et chaque année. L'onglet **Diagramme en barres** affiche le taux par année.
+
+### Lire la carte Taux de notification national et le tableau
+
+La carte **Taux de notification national** (dans l'application RMNCAH, **Taux de notification des districts** d'une région lorsqu'une région est choisie) affiche le pourcentage de districts dont le taux de notification est inférieur au seuil (faible notification), un panneau par service, par année. **Unités infranationales à faible notification** liste les districts ou régions sous le seuil pour l'année et le service choisis.
+
+</Steps>
+
+Ce que mesure le taux de notification et comment le lire : [Qualité des données > Exhaustivité des rapports](/fr/docs/methodology/data-quality#exhaustivité-des-rapports) et [Taux de notification](/fr/docs/methodology/data-quality#taux-de-notification).
+
+<Callout type="info">
+Le seuil de performance défini ici est conservé dans le jeu de données et réutilisé par le Score global de qualité des données et, dans l'application RMNCAH, par les indicateurs de DQA des services.
+</Callout>
+
+![Carte thermique du taux de notification infranational](/images/fr-dqa-reporting-rate.png)
+
+## Détection des valeurs aberrantes
+
+Repère les valeurs mensuelles extrêmes qui peuvent être des erreurs de saisie. Ce qui constitue une valeur aberrante extrême : [Qualité des données > Détection des valeurs aberrantes](/fr/docs/methodology/data-quality#détection-des-valeurs-aberrantes).
+
+- **Filtres :** **Indicateur** et **Niveau administratif**.
+- Carte **Indicateurs avec des valeurs aberrantes** : onglets **Carte thermique** (pourcentage de valeurs mensuelles non aberrantes par zone et par année), **Graphique en barres des indicateurs** (par année et par indicateur) et **Graphique en barres des régions** (par année et par région).
+- **Unités infranationales avec des valeurs extrêmes :** chaque district et mois signalé, dans un tableau de l'année, du mois, de la zone, de la valeur rapportée, de la médiane et du MAD. Choisissez l'année avec le contrôle « Ce tableau uniquement ».
+- **Tendances infranationales :** choisissez une région et lisez la courbe mois par mois pour l'année sélectionnée : la valeur rapportée par rapport à la médiane, aux bornes des valeurs aberrantes (plus ou moins 5 MAD) et les valeurs aberrantes.
+
+Comment le lire (part attendue de valeurs sans valeur aberrante, campagnes) : [Qualité des données > Valeurs aberrantes](/fr/docs/methodology/data-quality#valeurs-aberrantes).
+
+![Carte thermique de détection des valeurs aberrantes](/images/fr-dqa-outlier-detection.png)
+
+## Données manquantes
+
+Montre quels indicateurs et quelles zones ont des rapports manquants.
+
+- **Filtres :** **Indicateur** (avec **Tout sélectionner**) et **Niveau administratif**.
+- **Indicateurs avec des données manquantes :** les onglets **Carte thermique** (pourcentage de rapports manquants par année et par zone), **Indicateurs complets** (pourcentage de districts avec des données complètes pour l'indicateur) et **Indicateurs manquants par région** (tendance de la complétude par région).
+- **Unités infranationales avec des données manquantes :** un tableau des districts présentant des lacunes (données incomplètes) pour l'indicateur et l'année sélectionnés.
+
+Comment les valeurs manquantes sont mesurées et traitées : [Qualité des données > Données manquantes](/fr/docs/methodology/data-quality#données-manquantes).
+
+![Carte thermique des données manquantes](/images/fr-dqa-missingness.png)
+
+## Cohérence interne
+
+Vérifie que les indicateurs apparentés évoluent ensemble et concordent au fil du temps. Deux cartes sont affichées : **Graphiques des ratios** et **Vérifications de cohérence**. Les ratios attendus et la plage dans laquelle un district doit se situer : [Qualité des données > Cohérence interne](/fr/docs/methodology/data-quality#cohérence-interne). Comment lire les graphiques : [Qualité des données > Cohérence et ratios](/fr/docs/methodology/data-quality#cohérence-et-ratios).
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+- **Graphiques des ratios :** les ratios annuels CPN1 / Penta1 et Penta1 / Penta3 par rapport au ratio attendu. Les ratios attendus proviennent des valeurs de couverture d'enquête saisies dans Taux nationaux.
+- **Vérifications de cohérence :** les onglets **CPN1 et Penta1**, **Penta1 et Penta3** et **Vérification personnalisée** (choisissez un **Axe X** et un **Axe Y**). Chaque point est un district, affiché avec un **Ajustement linéaire** et une **Diagonale**.
+
+![Graphiques des ratios](/images/fr-dqa-internal-consistency.png)
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+- **Graphiques des ratios** : ratios CPN1 / Penta1, Penta1 / Penta3 et OPV1 / OPV3 par année, comparés aux ratios attendus.
+- **Vérifications de cohérence** : onglets **CPN1 et Penta1**, **Penta1 et Penta3**, **OPV1 et OPV3**, **IPV1 et IPV2**, et **Vérification personnalisée** où vous choisissez les indicateurs des axes X et Y. Chaque graphique trace un point par district et par année, avec un ajustement linéaire et une diagonale.
+
+</Tabs.Tab>
+</Tabs>
+
+![Vérifications de cohérence entre CPN1 et Penta1](/images/fr-dqa-conistency-checks.png)
+
+## Score global de qualité des données
+
+Un score annuel qui résume tous les contrôles : un tableau par année, avec un filtre de région pour voir une seule zone de niveau administratif 1, ou le niveau national. Comment le score est calculé : [Qualité des données > Score de qualité global](/fr/docs/methodology/data-quality#score-de-qualité-global).
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+| Bloc | Lignes |
+| --- | --- |
+| 1. Complétude | % de rapports mensuels attendus des établissements (national) ; % de districts à ou au-dessus du seuil ; % de districts sans valeur manquante pour les 4 formulaires |
+| 2. Valeurs aberrantes extrêmes | % de valeurs mensuelles qui ne sont pas des valeurs aberrantes extrêmes ; % de districts sans valeur aberrante extrême |
+| 3. Cohérence | Ratios CPN1 / Penta1 et Penta1 / Penta3 ; % de districts dans la plage attendue |
+
+La dernière ligne est le **Score annuel de qualité des données**. Utilisez **Télécharger le graphique** et **Télécharger les données**. **Générer le rapport** ouvre le rapport sur la qualité des données.
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+Le tableau comporte trois blocs :
+
+1. **Complétude des rapports mensuels des formations sanitaires** (moyenne de CPN, accouchement, vaccination) : pourcentage de rapports mensuels attendus au niveau national, pourcentage de districts dont la complétude atteint au moins le seuil, et pourcentage de districts sans valeurs manquantes (moyenne pour les vaccins courants).
+2. **Valeurs aberrantes extrêmes** : pourcentage de valeurs mensuelles qui ne sont pas des valeurs aberrantes extrêmes, et pourcentage de districts sans valeurs aberrantes extrêmes dans l'année.
+3. **Cohérence des rapports annuels** : les trois ratios et le pourcentage de districts avec CPN1/Penta1, Penta1/Penta3 et VPO1/VPO3 dans la plage attendue.
+
+La dernière ligne est le **Score annuel de qualité des données**. Utilisez les deux boutons de téléchargement de la carte pour enregistrer le graphique et les données.
+
+</Tabs.Tab>
+</Tabs>
+
+![Score global de qualité des données](/images/fr-dqa-overall-score.png)
+
+## Interprétation et pièges
+
+Comment lire les résultats, et à quoi faire attention avant de supprimer des années ou d'ajuster : [Qualité des données > Interprétation](/fr/docs/methodology/data-quality#interprétation), y compris ses [Pièges courants](/fr/docs/methodology/data-quality#pièges-courants).
+
+Suite : **[Préparation des données](/fr/apps/countdown/data-preparation)**.

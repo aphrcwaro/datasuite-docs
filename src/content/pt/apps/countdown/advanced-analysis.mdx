@@ -1,0 +1,76 @@
+---
+description: Como usar a Análise bayesiana, o Contínuo de cuidados e a Projeção de PF com FPET da aplicação RMNCAH, que assentam nos dados ajustados e nos denominadores.
+---
+import { Steps, Callout } from 'nextra/components'
+
+# Análise avançada
+
+<Callout type="info">
+Esta página aplica-se apenas à **aplicação RMNCAH**.
+</Callout>
+
+Três análises vão além dos gráficos de cobertura básicos: **Análise bayesiana**, **Contínuo de cuidados** e **Projeção de PF com FPET**. Assentam nos dados ajustados e nos denominadores que selecionou, pelo que deve concluir primeiro a [Preparação dos dados](/pt/apps/countdown/data-preparation) e os [Denominadores](/pt/apps/countdown/denominators). Métodos: [Abordagem de modelação bayesiana](/pt/docs/methodology/bayesian-coverage) e [Cobertura nacional](/pt/docs/methodology/coverage).
+
+## Análise bayesiana
+
+**Finalidade.** Combinar dados de inquérito e dados de rotina das unidades de saúde numa única estimativa por ano, com um intervalo de incerteza e uma previsão de curto prazo. Como o modelo utiliza cada fonte: [Abordagem de modelação bayesiana > Como são utilizados os dados de inquérito?](/pt/docs/methodology/bayesian-coverage#como-são-utilizados-os-dados-de-inquérito) e [Como são utilizados os dados de rotina?](/pt/docs/methodology/bayesian-coverage#como-são-utilizados-os-dados-de-rotina)
+
+**Quando utilizar.** Ver [Abordagem de modelação bayesiana > Porque é importante](/pt/docs/methodology/bayesian-coverage#porque-é-importante).
+
+Existem duas entradas no grupo **Análise bayesiana** da barra lateral: **Análise nacional** e **Análise subnacional** (regiões).
+
+<Steps>
+
+### Abra a Análise bayesiana
+
+Escolha Análise nacional ou Análise subnacional.
+
+### Escolha um separador de indicador
+
+**4 Consultas de Pré-natal**, **Pré-natal 1º Trimestre**, **Partos institucionais**, **Sarampo 1** ou **Pentavalente 3**. O modelo está definido para estes cinco indicadores.
+
+### Leia o gráfico
+
+O título é *Estimativas do modelo de cobertura bayesiano* seguido do indicador, e a nota de fonte indica *Fonte: Dados de inquérito e dados de rotina DHIS2*. A linha central é a melhor estimativa; a faixa é o intervalo de incerteza. Utilize **Baixar Gráfico** e **Baixar Dados** na barra de ferramentas.
+
+</Steps>
+
+![Estimativas bayesianas de CPN4 a nível nacional](/images/bayesian-ANC4-national.png)
+
+![Estimativas bayesianas de CPN4 por região](/images/bayesian-ANC4-subnational.png)
+
+**Como interpretar.** Ver [Abordagem de modelação bayesiana > Leitura das estimativas](/pt/docs/methodology/bayesian-coverage#leitura-das-estimativas) e os [exemplos ilustrativos](/pt/docs/methodology/bayesian-coverage#exemplos-ilustrativos).
+
+## Contínuo de cuidados
+
+**Finalidade.** Acompanhar a cobertura ao longo do percurso de cuidados e ver onde as mulheres e as crianças abandonam.
+
+**Onde.** **Análise nacional**, **Contínuo de cuidados** na barra lateral. A página tem dois cartões, ambos intitulados *Cobertura Nacional e Contínuo*, cada um com os separadores **Contínuo materno** e **Contínuo infantil**.
+
+- **Cartão superior, perfil do contínuo.** *Perfil nacional do contínuo de cuidados*: o valor mais recente das unidades de saúde, o valor mais recente do inquérito e, quando aplicável, o valor do WUENIC para cada etapa do percurso selecionado, por exemplo Pré-natal 1º Trimestre, 4 Consultas de Pré-natal, Partos institucionais e PNC nas primeiras 48 horas no contínuo materno, ou Pentavalente 3 e Sarampo 1 no contínuo infantil.
+- **Cartão inferior, mapa de calor do contínuo.** *Mapa de calor do contínuo subnacional*: as mesmas etapas para cada região de Nível Administrativo 1. Leia ao longo de uma linha para ver uma região e ao longo de uma coluna para ver um indicador. As células vermelhas indicam cobertura baixa, as amarelas intermédia e as verdes elevada.
+
+A página pode gerar o relatório de cobertura nacional com **Gerar Relatório**.
+
+![Perfil do contínuo de cuidados](/images/pt-national-coverage-continuum-care-profile.png)
+
+![Mapa de calor do contínuo materno por região](/images/national-admin1-maternal-continuum-heatmap.png)
+
+**Como interpretar.** Ver [Cobertura nacional > Interpretar o continuum materno-neonatal](/pt/docs/methodology/coverage#interpretação-1), [Interpretar o continuum da criança](/pt/docs/methodology/coverage#interpretação-2) e [Continuum de cuidados a nível subnacional](/pt/docs/methodology/coverage#continuum-de-cuidados-a-nível-subnacional).
+
+## Projeção de PF com FPET
+
+**Finalidade.** Mostrar as tendências de planeamento familiar para mulheres atualmente casadas de 15 a 49 anos, a partir da Family Planning Estimation Tool (FPET, Track20).
+
+**Onde.** É o separador **Projeção de PF** em **Cobertura nacional** e em **Cobertura subnacional**.
+
+O título do gráfico é *Planejamento familiar entre mulheres atualmente casadas de 15 a 49 anos*. Representa dois indicadores: **Prevalência de Métodos Modernos (mCPR)** e **Demanda satisfeita com método moderno**.
+
+![Projeção FPET](/images/pt-national-coverage-fpet.png)
+
+**Como interpretar.** Ver [Cobertura nacional > Projeções de planeamento familiar](/pt/docs/methodology/coverage#projeções-de-planeamento-familiar); origem dos dados: [Planeamento familiar](/pt/docs/methodology/coverage#planeamento-familiar).
+
+## Armadilhas comuns
+
+- Armadilhas na utilização das estimativas bayesianas: [Abordagem de modelação bayesiana > Armadilhas comuns](/pt/docs/methodology/bayesian-coverage#armadilhas-comuns).
+- Armadilhas na leitura da Projeção de PF e do mapa de calor do contínuo: [Cobertura nacional > Armadilhas comuns](/pt/docs/methodology/coverage#armadilhas-comuns).

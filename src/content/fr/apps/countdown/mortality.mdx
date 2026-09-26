@@ -1,0 +1,78 @@
+---
+description: Les pages Mortalité institutionnelle, Cartographie de la mortalité et Complétude, pour les décès maternels, mortinaissances et décès néonatals en établissement.
+---
+import { Steps, Callout } from 'nextra/components'
+
+# Mortalité
+
+<Callout type="info">
+Cette page concerne uniquement l'**application RMNCAH**.
+</Callout>
+
+Le groupe **Mortalité** examine les décès enregistrés dans les établissements de santé : mortalité maternelle institutionnelle, mortinaissances et décès néonatals avant la sortie. Il comprend trois pages : **Mortalité institutionnelle**, **Cartographie de la mortalité** et **Complétude des données de mortalité**. La méthode, les définitions et les formules figurent dans [Mortalité](/fr/docs/methodology/mortality).
+
+<Callout type="warning">
+Les chiffres de mortalité utilisent les nombres de décès notifiés sans l'ajustement pour le taux de notification et les valeurs aberrantes appliqué aux autres indicateurs (pourquoi : [Mortalité > Examen de l'iMMR et de l'iSBR](/fr/docs/methodology/mortality#examen-de-limmr-et-de-lisbr)). Ils dépendent toutefois du dénominateur que vous avez sélectionné (naissances vivantes ou naissances). Si une valeur ressemble à une erreur de saisie, vérifiez-la dans la [Détection des valeurs aberrantes](/fr/apps/countdown/data-quality) et traitez-la selon les indications de la méthodologie ([Seuils de détection des valeurs aberrantes](/fr/docs/methodology/mortality#seuils-de-détection-des-valeurs-aberrantes)).
+</Callout>
+
+## Mortalité institutionnelle
+
+**Objectif.** Montrer le niveau et la tendance de la mortalité institutionnelle et vérifier si elle est plausible.
+
+**Quand l'utiliser.** D'abord pour voir les taux ; utilisez ensuite la seconde carte pour tester la qualité des données.
+
+<Steps>
+
+### Ouvrez la Mortalité institutionnelle
+
+Elle se trouve sous **Mortalité** dans le groupe **Analyse**.
+
+### Lisez la première carte, Mortalité institutionnelle
+
+Onglets : **Mortalité maternelle** (pour 100 000 naissances vivantes en établissement), **Taux de mortinatalité** et **Décès néonatals**. Les points sont les régions et la ligne est le pays, par année.
+
+Comment la lire : [Mortalité > Niveaux de mortalité en établissement](/fr/docs/methodology/mortality#considérations-relatives-à-linterprétation-des-données).
+
+### Lisez la seconde carte, DQA de la mortalité institutionnelle
+
+Onglets : **Mortinaissances fraîches** (mortinaissances fraîches en pourcentage de toutes les mortinaissances), **Ratio mortinatalité / décès maternels** (mortinaissances par décès maternel) et **Décès néonatals / maternels** (décès néonatals institutionnels par décès maternel). Chaque graphique montre la **Médiane** et une **Plage attendue**, et une note sous le graphique donne la plage.
+
+Les plages et leur lecture : [Mortalité > Plages attendues sur les graphiques DQA](/fr/docs/methodology/mortality#plages-attendues-sur-les-graphiques-dqa) et [Lecture des contrôles DQA](/fr/docs/methodology/mortality#lecture-des-contrôles-dqa).
+
+</Steps>
+
+![Mortalité maternelle institutionnelle par région et par année](/images/fr-mortality-institutional-mortality.png)
+
+![Mortinaissances fraîches en pourcentage du total des mortinaissances](/images/fr-mortality-institutional-freshsbr.png)
+
+**Comment interpréter.** Voir [Mortalité > Lecture des contrôles DQA](/fr/docs/methodology/mortality#lecture-des-contrôles-dqa) ; pour les décès néonatals avant la sortie, [Considérations pour l'iSBR](/fr/docs/methodology/mortality#considérations-pour-lisbr).
+
+## Cartographie de la mortalité
+
+**Objectif.** Cartographier la mortalité institutionnelle entre les régions.
+
+**Filtres.** **Sélectionner les années** (une ou plusieurs) et **Palette** (Verts, Bleus, Rouges ou Violets ; Rouges par défaut).
+
+Onglets : **Mortalité maternelle** et **Taux de mortinatalité**. Chaque carte montre les valeurs par région pour les années sélectionnées, ce qui rend visibles les regroupements géographiques.
+
+![Mortalité maternelle institutionnelle par région](/images/fr-mortality-institutional-mmr-byregion.png)
+
+Comment lire la carte : [Mortalité > Distribution géographique](/fr/docs/methodology/mortality#distribution-géographique).
+
+## Complétude des données de mortalité
+
+**Objectif.** Estimer dans quelle mesure les établissements notifient les décès, en comparant le taux institutionnel notifié à un taux attendu construit à partir des estimations de l'ONU.
+
+**Quand l'utiliser.** Après les graphiques de DQA, pour juger si la mortalité notifiée est exploitable.
+
+Onglets : **MMR institutionnel** et **SBR institutionnel**. Chaque graphique trace la complétude pour la borne inférieure, la médiane et la borne supérieure de l'estimation de l'ONU, selon plusieurs hypothèses sur l'écart entre mortalité communautaire et mortalité institutionnelle. Utilisez **Générer le rapport** pour ouvrir le rapport sur la mortalité.
+
+Mode de calcul : [Mortalité > Calcul de l'exhaustivité des rapports](/fr/docs/methodology/mortality#calcul-de-lexhaustivité-des-rapports). Comment restreindre les scénarios à partir des données locales : [Scénarios d'évaluation et interprétation](/fr/docs/methodology/mortality#scénarios-dévaluation-et-interprétation).
+
+![Complétude de la notification des décès maternels en établissement](/images/fr-mortality-completeness.png)
+
+La complétude repose sur les estimations de mortalité de l'ONU. Utilisez les données intégrées du pays, ou téléversez les vôtres à l'étape Téléverser les données de [Démarrage](/fr/apps/countdown/getting-started).
+
+## Pièges courants
+
+Pièges dans l'interprétation de la mortalité institutionnelle : [Mortalité > Pièges courants](/fr/docs/methodology/mortality#pièges-courants).

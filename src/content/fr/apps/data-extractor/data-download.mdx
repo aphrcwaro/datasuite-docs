@@ -1,3 +1,6 @@
+---
+description: Créer une tâche de téléchargement dans le Downloads Manager du Data Extractor, la paramétrer et exporter les données DHIS2 extraites par petits lots.
+---
 import { Callout, Steps } from 'nextra/components'
 
 # Téléchargement des données
@@ -26,7 +29,7 @@ Cette approche réduit le risque de dépassement de délai pour les demandes de 
 
 ### Configurer les paramètres de téléchargement
 
-Sélectionnez le nom du mappage (si vous avez plusieurs mappages), la période (dates de début et de fin) et le niveau administratif, puis cliquez sur **Start Download**.
+Sélectionnez le mappage (**Mapping Configuration**, si vous avez plusieurs mappages), la période (**Date Range**, dates de début et de fin), la **Frequency** (mensuelle ou annuelle ; affichée uniquement pour les mappages Custom), le niveau administratif (**Admin Level**) et, facultativement, une **Sub-region** pour limiter le téléchargement à une zone, puis cliquez sur **Start Download**.
 
 ![Boîte de dialogue Configure Download Task](/images/extractor_download_config.jpg)
 
@@ -38,6 +41,10 @@ Sélectionnez le nom du mappage (si vous avez plusieurs mappages), la période (
 - **Admin Level :** utilisez le niveau 3.
 
 </Callout>
+
+### Exporter les données
+
+Une fois la tâche terminée, elle passe dans **Recent History**. Dans sa colonne **Actions**, cliquez sur **Export to Excel** pour enregistrer le classeur que chargent les [applications RMNCAH et Vaxx](/fr/apps/countdown/getting-started) (feuilles `Service_data`, `Population_data`, `Reporting_completeness` et `Admin_data`), ou sur **Export to JSON**. Une tâche en échec peut être relancée avec **Retry Download**. Sur un serveur DHIS2 qui utilise le calendrier éthiopien, **Excel labels** permet de choisir des libellés de période éthiopiens (Ethiopic) ou grégoriens (Gregorian) pour le fichier Excel.
 
 </Steps>
 

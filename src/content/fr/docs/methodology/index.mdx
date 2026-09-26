@@ -1,0 +1,114 @@
+---
+description: "Vue d'ensemble du cadre analytique de CD2030 DataSuite : qualité et ajustement des données, dénominateurs, couverture et inégalités infranationales."
+---
+
+import { HomeCards } from '@/components/HomeCards'
+
+# Aperçu du cadre
+
+Cette page résume le cadre analytique du CD2030 DataSuite.
+Elle est conçue pour aider les équipes à passer des données brutes des établissements et des enquêtes à des résultats de couverture nationaux et infranationaux justifiables.
+
+Le CD2030 DataSuite met en œuvre un flux de travail analytique de bout en bout qui transforme les données brutes des établissements de santé en estimations de couverture crédibles et exploitables.
+Le flux de travail suit une séquence logique : évaluer la qualité des données, corriger les lacunes et les erreurs, sélectionner des dénominateurs fondés sur des preuves, calculer la couverture et examiner les modèles d'inégalité aux niveaux national et géographique.
+
+![Flux de travail de l'analyse Countdown](/images/methods_cd_approach.png)
+
+Cette approche structurée répond à un défi universel dans le suivi RMNCAH : les données des établissements sont abondantes mais souvent peu fiables, tandis que les enquêtes fournissent des estimations de couverture de référence mais sont rares et coûteuses.
+Le CD2030 DataSuite comble cette lacune en examinant systématiquement les données des établissements, en les calibrant par rapport aux références des enquêtes et en produisant des lignes de tendance continues avec une incertitude quantifiée.
+Le résultat est la certitude que vos chiffres de couverture reflètent la réalité plutôt que des artefacts de données.
+
+## Flux de travail de bout en bout
+
+Le cadre suit une séquence pratique :
+
+1. [Charger et configurer](/fr/docs/methodology/analysis-setup) les données des établissements et des enquêtes.
+2. [Calibrer les taux de référence nationaux clés](/fr/docs/methodology/analysis-setup#survey-params).
+3. [Évaluer la qualité des données](/fr/docs/methodology/data-quality) avant d'estimer la couverture.
+4. [Ajuster](/fr/docs/methodology/data-adjustment) les données incomplètes, instables ou peu fiables.
+5. [Sélectionner le dénominateur le plus performant](/fr/docs/methodology/denominators).
+6. Générer et interpréter les résultats de **[couverture](/fr/docs/methodology/coverage)** (y compris l'**[estimation bayésienne de la couverture](/fr/docs/methodology/bayesian-coverage)**), d'**[équité](/fr/docs/methodology/equity)**, **[infranationaux](/fr/docs/methodology/subnational)**, de **[mortalité](/fr/docs/methodology/mortality)**, d'**[utilisation des services](/fr/docs/methodology/service-utilisation)** et de **[performance du système de santé](/fr/docs/methodology/health-system)**, dans cet ordre.
+7. Planifier la **[diffusion, les décisions et l'action](/fr/docs/methodology/dissemination)**.
+
+Dans les applications, la même séquence est suivie page par page : voir [Étapes de l'analyse](/fr/apps/countdown/analysis-steps) (RMNCAH App).
+
+## Modules du cadre
+
+<HomeCards
+  items={[
+    {
+      title: 'Configuration de l\'analyse',
+      description: 'Configurer l\'analyse : les données et les paramètres nationaux nécessaires, et leur chargement dans les applications.',
+      href: '/fr/docs/methodology/analysis-setup',
+      icon: 'tools'
+    },
+    {
+      title: 'Évaluation de la qualité des données',
+      description: 'Examiner l\'exhaustivité des rapports, les valeurs aberrantes, les données manquantes, la cohérence interne et les scores de qualité annuels.',
+      href: '/fr/docs/methodology/data-quality',
+      icon: 'checklist'
+    },
+    {
+      title: 'Ajustement des données',
+      description: 'Supprimer les périodes non fiables, appliquer des facteurs d\'ajustement et comparer les valeurs avant et après nettoyage.',
+      href: '/fr/docs/methodology/data-adjustment',
+      icon: 'settings-gear'
+    },
+    {
+      title: 'Sélection du dénominateur',
+      description: 'Comparer les options de dénominateurs DHIS2, ONU, dérivés de la CPN1 et dérivés du Penta1.',
+      href: '/fr/docs/methodology/denominators',
+      icon: 'symbol-number'
+    },
+    {
+      title: 'Estimation de la couverture',
+      description: 'Estimer les niveaux et les tendances, comparer avec les références d\'enquête et examiner les progrès vers les cibles.',
+      href: '/fr/docs/methodology/coverage',
+      icon: 'graph'
+    },
+    {
+      title: 'Estimation de la couverture bayésienne',
+      description: 'Modéliser la couverture nationale et infranationale jusqu\'à l\'année la plus récente disposant de données, avec des prévisions à court terme.',
+      href: '/fr/docs/methodology/bayesian-coverage',
+      icon: 'symbol-operator'
+    },
+    {
+      title: 'Analyse de l\'équité',
+      description: 'Évaluer l\'inégalité selon la résidence, la richesse et l\'éducation maternelle à l\'aide de comparaisons basées sur des enquêtes.',
+      href: '/fr/docs/methodology/equity',
+      icon: 'graph-scatter'
+    },
+    {
+      title: 'Analyse infranationale',
+      description: 'Examiner les variations régionales et de district, l\'atteinte des cibles et les inégalités géographiques.',
+      href: '/fr/docs/methodology/subnational',
+      icon: 'globe'
+    },
+    {
+      title: 'Mortalité',
+      description: 'Vérifier si les décès maternels, les mortinaissances et les décès néonatals notifiés par les établissements sont plausibles, et l\'exhaustivité de la déclaration des décès.',
+      href: '/fr/docs/methodology/mortality',
+      icon: 'pulse'
+    },
+    {
+      title: 'Utilisation des services',
+      description: 'Mesurer dans quelle mesure les enfants de moins de 5 ans accèdent aux services curatifs, la létalité en établissement servant d\'indicateur de la qualité des soins.',
+      href: '/fr/docs/methodology/service-utilisation',
+      icon: 'person'
+    },
+    {
+      title: 'Performance du système de santé',
+      description: 'Analyser les intrants et les extrants du système de santé -- services, personnel, financement -- et le rôle du secteur privé dans les services SRMNIA-N.',
+      href: '/fr/docs/methodology/health-system',
+      icon: 'layers'
+    },
+    {
+      title: 'Diffusion, décisions et action',
+      description: 'Transformer les résultats en actions concrètes, des réunions de revue à la planification et aux décisions fondées sur les données.',
+      href: '/fr/docs/methodology/dissemination',
+      icon: 'book'
+    }
+  ]}
+/>
+
+L'objectif final du cadre est une utilisation pratique. Les conclusions doivent éclairer les processus d'examen des pays, les discussions de planification et les groupes de travail techniques afin que l'analyse débouche sur des actions concrètes en matière de SRMNIA (RMNCAH) plutôt que de rester un simple rapport isolé.

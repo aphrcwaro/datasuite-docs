@@ -8,9 +8,9 @@ name: AI links
 on:
   push:
     branches: [main]
-    paths: ['src/content/**', 'src/ai/**', 'scripts/check-ai-links.mjs', 'scripts/build-ai-corpus.mjs', '.github/workflows/ai-links.yml']
+    paths: ['src/content/**', 'src/ai/**', 'scripts/*.mjs', 'src/data/**', '.github/workflows/ai-links.yml']
   pull_request:
-    paths: ['src/content/**', 'src/ai/**', 'scripts/check-ai-links.mjs', 'scripts/build-ai-corpus.mjs', '.github/workflows/ai-links.yml']
+    paths: ['src/content/**', 'src/ai/**', 'scripts/*.mjs', 'src/data/**', '.github/workflows/ai-links.yml']
   workflow_dispatch:
 
 permissions:
@@ -36,3 +36,10 @@ jobs:
 
       - name: Build the AI corpus from the content
         run: node scripts/build-ai-corpus.mjs src/content corpus-check
+
+      - name: Check internal links and heading anchors
+        run: node scripts/check-anchors.mjs corpus-check
+
+      # a report, not a gate: a stale translation shouldn't block an English fix (add --strict to make it one)
+      - name: Report out-of-date translations
+        run: npm run translations

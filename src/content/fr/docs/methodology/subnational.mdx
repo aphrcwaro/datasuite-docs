@@ -1,0 +1,182 @@
+---
+description: "Comment la couverture varie entre régions et districts : estimations infranationales, résumé régional, mesure d'inégalité MADM et cibles atteintes."
+---
+
+import { Callout, Steps } from 'nextra/components'
+
+# Analyse infranationale
+
+L'analyse infranationale examine comment la couverture varie entre les régions (Admin1) et les districts (Admin2), si les inégalités géographiques diminuent et combien d'unités atteignent les cibles de couverture. Elle produit les estimations de couverture infranationales, le résumé régional d'une page, la mesure d'inégalité MADM et le pourcentage d'unités atteignant chaque cible.
+
+<Callout type="info">
+**En bref**
+- **Répond à :** Comment la couverture varie-t-elle entre les régions et les districts ? Les inégalités entre unités infranationales ont-elles diminué ? Quel pourcentage de régions et de districts atteint chaque cible ?
+- **Utilise :** le même ajustement ([Ajustement des données](/fr/docs/methodology/data-adjustment)) et le dénominateur le plus performant ([Sélection du dénominateur](/fr/docs/methodology/denominators)) que l'analyse nationale ([Couverture nationale](/fr/docs/methodology/coverage)).
+- **Produit :** la couverture par région et par district, le résumé statistique infranational régional (résumé d'une page) avec l'indice de couverture composite, le MADM et le pourcentage d'unités atteignant chaque cible ; utilisés dans les rapports ([Rapports](/fr/apps/countdown/reports)).
+- **Dans les applications :** [Analyse infranationale](/fr/apps/countdown/subnational) ; inégalités et cibles nationales dans [Couverture, équité et objectifs](/fr/apps/countdown/coverage-equity-targets).
+- **Valeurs par défaut :** [Niveau infranational](/fr/docs/reference/defaults#niveau-infranational)
+</Callout>
+
+## Pourquoi c'est important
+
+L'analyse infranationale révèle la distribution géographique de l'accès aux services de santé — un élément essentiel pour identifier les districts sous-performants qui tirent vers le bas les moyennes nationales et pour cibler les ressources là où elles sont le plus nécessaires. Ce module estime la couverture aux niveaux régional (Admin1) et du district (Admin2) en utilisant le même dénominateur et la même méthodologie d'ajustement que l'analyse nationale, puis visualise la façon dont la couverture varie géographiquement. Attendez-vous à plus de volatilité au niveau du district en raison de la petite taille des populations, des modèles de référence et des choix d'emplacement des établissements (les hôpitaux des villes desservent les zones rurales environnantes), mais ce « bruit » contient des informations exploitables sur les défaillances des systèmes de santé.
+
+DataSuite génère des « résumés d'une page » (one-pagers) au niveau des districts — des résumés visuels associant des courbes de tendance basées sur les établissements (2020-2024) à des aperçus d'enquêtes récentes, des diagrammes à barres de comparaison montrant les performances de chaque district par rapport à ses pairs, et des indices de couverture composites faisant la moyenne de sept indicateurs de santé maternelle et infantile. Ces résumés communiquent la réalité de la couverture aux décideurs dans des formats accessibles et contextualisés localement, rendant impossible d'ignorer les inégalités géographiques et facilitant l'allocation fondée sur des données probantes des investissements visant à renforcer le système de santé.
+
+### Couverture infranationale[#la-couverture-infranationale-dans-lapproche-analytique-cd2030]
+
+L'analyse infranationale de la couverture des interventions de santé est essentielle pour faire progresser la couverture sanitaire universelle (CSU), qui vise à garantir un accès équitable à des services de santé de qualité pour toutes les populations. Les moyennes nationales masquent souvent les disparités critiques qui existent entre les régions, les districts ou les sous-groupes de population.
+
+Les moyennes nationales masquent les régions et les districts laissés de côté, et c'est au niveau des régions et des districts que l'action des programmes est généralement ciblée. Le suivi des données infranationales aide à identifier les zones géographiques où la couverture est faible, signalant des inégalités potentielles dans l'accès aux services de santé et incitant à des interventions ciblées. Cela est particulièrement important pour attirer l'attention sur les populations laissées pour compte et s'assurer que les ressources sont dirigées là où elles sont le plus nécessaires.
+
+### Inégalité et cibles mondiales de couverture[#linégalité-dans-lapproche-analytique-cd2030]
+
+La réduction des inégalités géographiques est essentielle pour des systèmes de santé équitables et la réalisation des ODD. Les inégalités infranationales révèlent des incohérences dans la prestation des services et mettent en évidence les obstacles systémiques à l'accès aux soins de santé. Le suivi des indicateurs d'inégalité permet d'évaluer si les systèmes de santé deviennent plus équitables et si les interventions ciblées fonctionnent.
+
+## Méthode
+
+### Couverture infranationale[#couverture-infranationale]
+
+#### Estimations de couverture aux niveaux Admin1 et Admin2[#justification-et-approche]
+
+L'objectif ici est d'évaluer les estimations de couverture (par exemple, CPN4, accouchements en établissement, Penta3) aux niveaux Admin1 et Admin2 en utilisant le dénominateur le plus performant pour les calculs de couverture, tel que décidé à partir de l'analyse de la section 2 sur les dénominateurs.
+
+Il y aura plus de « bruit » dans les données infranationales, avec des taux de couverture improbablement élevés ou faibles par rapport aux analyses nationales, et encore plus dans les analyses de district que dans les analyses régionales (Admin1). Cela s'explique par le fait que les analyses de district sont affectées par de petits nombres (plus de fluctuations qui peuvent être aléatoires ou dues à des problèmes de qualité des données) et par les modèles d'utilisation des services de santé par les femmes et les enfants. Par exemple, un district municipal peut enregistrer plus d'accouchements qu'un district rural adjacent en raison de l'emplacement des hôpitaux dans le district municipal. Les petits effectifs, les déplacements de patients entre districts et les lacunes de notification produisent des valeurs invraisemblablement élevées ou basses.
+
+#### Résumés statistiques infranationaux (résumé d'une page)
+
+L'objectif est de produire un résumé d'une page (one-pager) pour chaque unité Admin1 (généralement la région, la province ou le comté) qui contient les informations régionales ainsi qu'un résumé des districts au sein de la région. Nous appelons cela le résumé statistique infranational régional.
+
+Les éléments suivants sont inclus :
+
+- **Résumé des informations démographiques clés pour la région et les districts :** Un tableau avec le nombre attendu de naissances en 2024 selon les projections du DHIS2 et selon les dénominateurs privilégiés dérivés des données des établissements de santé (basés sur la CPN1 pour les naissances vivantes, et sur le penta1 pour les indicateurs de vaccination).
+- **Graphiques linéaires avec la tendance de la couverture des accouchements en établissement et de la vaccination penta3 :** Ceux-ci incluent les meilleures estimations pour 2020-2024 basées sur les données des établissements de santé, ainsi que les estimations des enquêtes les plus récentes (de 2015) pour les mêmes indicateurs (avec des intervalles de confiance si possible).
+- **Diagrammes à barres qui comparent la situation de la couverture de 2024 dans la région par rapport à toutes les autres régions :** Cela place la région dans le tiers inférieur, intermédiaire ou supérieur des régions en termes de couverture. Ceci est fait pour les accouchements en établissement et la vaccination penta3.
+- **Tableau qui résume la couverture des accouchements en établissement et de la vaccination penta3 en 2024 par district :** Une ventilation localisée des performances à travers la zone infranationale.
+
+D'autres indicateurs peuvent être utilisés selon les priorités du pays (par exemple, CPN4, rougeole1).
+
+Modèle de mise en page du résumé statistique infranational régional d'une page :
+
+![Modèle du résumé statistique infranational régional d'une page](/images/admin-1.png)
+
+Résumer la situation de la couverture selon les statistiques des établissements de santé pour 2024 peut être fait au niveau régional et affiché sur une carte. Un indice de couverture composite est calculé comme une moyenne de sept indicateurs de santé maternelle et infantile : CPN4, couverture des naissances vivantes en établissement, SBA (assistance par du personnel qualifié à la naissance), TPI2, soins postnatals, 3e dose de vaccin pentavalent et couverture vaccinale rougeole 1. Un poids égal est accordé à tous les indicateurs.
+
+### Inégalité[#inégalité]
+
+#### MADM et unités au-dessus d'une cible[#justification-et-approche-1]
+
+Ici, nous calculons l'écart absolu médian par rapport à la médiane (MADM) pour quantifier la dispersion de la couverture parmi les districts au sein d'un niveau Admin1, en comparaison avec la couverture de cette unité infranationale Admin1 spécifique.
+
+Les principales mesures statistiques des inégalités infranationales sont :
+
+- **MADM (Écart absolu médian par rapport à la médiane) :** Cette mesure donne une indication de la réussite du pays à réduire les inégalités entre les unités infranationales.
+- **Pourcentage d'unités infranationales ayant une couverture supérieure à une cible ou un seuil spécifique :** Cet indicateur fournit des informations sur la mesure dans laquelle un pays a réussi à atteindre la couverture universelle au niveau infranational.
+
+### Cibles mondiales de couverture[#cibles-mondiales-de-couverture]
+
+#### Progrès vers les cibles[#justification-et-approche-2]
+
+**Résumé des performances des districts et des régions :**
+
+Les progrès vers les cibles internationales et nationales peuvent être mesurés en calculant le pourcentage de régions et de districts qui ont atteint ces cibles. L'objectif est que toutes les régions et tous les districts aient atteint la cible. Des pourcentages plus élevés signifient moins d'inégalités (géographiques).
+
+#### Valeurs cibles
+
+Le guide de vaccination Countdown de 2024 utilise ces cibles :
+
+| Indicateur | Cible | Source |
+| --- | --- | --- |
+| Accouchement en établissement | 80 % des districts avec une couverture d'au moins 80 % | EPMM / ENAP |
+| Vaccination de routine | Couverture de 90 % pour tous les vaccins de routine | IA2030 |
+| DTC3 (Penta3) | Équité géographique : couverture dans les 20 % de districts ayant la couverture la plus faible | IA2030 |
+| DTC3 (Penta3) | Au moins 80 % dans chaque district | |
+
+Les applications considèrent qu'une unité atteint la cible lorsque :
+
+| Indicateur | L'unité atteint la cible lorsque |
+| --- | --- |
+| BCG, Penta3, Rougeole 1 | La couverture est d'au moins 90 % (national) ou d'au moins 80 % (région ou district) |
+| CPN4 | La couverture est d'au moins 70 % |
+| Naissances vivantes en établissement | La couverture est d'au moins 80 % |
+| Abandon Penta1 à Penta3, Penta3 à Rougeole 1 | L'abandon est inférieur à 10 % |
+
+Les applications indiquent le **pourcentage d'unités** atteignant chaque cible. Une cible telle que « Penta3 d'au moins 80 % dans chaque district » est atteinte lorsque ce pourcentage atteint 100 %. La mesure d'équité géographique (couverture Penta3 dans les 20 % de districts ayant la couverture la plus faible) n'est pas calculée par les applications.
+
+<Callout type="info">
+
+**Les analyses RMNCAH et de vaccination diffèrent ici :** les cibles CPN4 et naissances vivantes en établissement s'appliquent aux analyses RMNCAH et les cibles d'abandon aux analyses de vaccination ; les cibles vaccinales s'appliquent aux deux. La page **Objectif de couverture** a les onglets **CPN 4 visites**, **Naissances vivantes en établissement** et **Vaccin** dans l'application RMNCAH, et **Vaccin** et **Abandon** dans l'application Vaxx. Voir [Analyses RMNCAH et vaccination](/fr/docs/reference/rmncah-vs-vaccine).
+
+</Callout>
+
+## Interprétation
+
+### Couverture infranationale[#lecture-de-la-couverture-infranationale]
+
+<Callout type="warning">
+
+**Vérifiez la légende d'une carte avant de l'utiliser.** Le guide : si la légende ne montre que quelques points de pourcentage entre les classes, de petites différences paraissent grandes ; n'utilisez pas la carte.
+
+</Callout>
+
+- Comparez la région à la ligne nationale. Un point d'enquête éloigné de la courbe DHIS2 dans une région signale souvent un problème de dénominateur ou de notification dans cette région. Vérifiez le taux de notification de la région ([qualité des données](/fr/docs/methodology/data-quality)) avant de tirer des conclusions.
+
+<Callout type="warning">
+Les dénominateurs des districts sont les moins fiables. Un district dont la couverture dépasse 100 %, ou qui oscille d'une année à l'autre, a plus de chances de présenter un problème de population ou de notification qu'un vrai changement. Recoupez avec la qualité des données du district.
+</Callout>
+
+### Inégalités[#lecture-des-inégalités]
+
+Dans les graphiques d'inégalités, chaque point est une unité infranationale et la ligne est la couverture nationale (ou régionale).
+
+- Une large dispersion des points signifie de fortes inégalités : la moyenne nationale masque des zones faibles.
+- Une dispersion qui se réduit au fil des années signifie que les inégalités diminuent. Le MADM résume cette dispersion.
+- Un district toujours bas n'est pas comparable à un district bas seulement une mauvaise année : ce second cas peut être un problème de données.
+- Les inégalités entre régions fondées sur les données des établissements peuvent provenir de différences de dénominateur ou de notification, et non de différences réelles d'accès.
+
+### Cibles mondiales de couverture[#lecture-des-cibles-de-couverture]
+
+- Un pourcentage croissant d'unités atteignant la cible n'est une bonne nouvelle que si la couverture ne dépasse pas des niveaux plausibles. Vérifiez les unités très supérieures à 100 % : le dénominateur est en cause.
+- Pour l'abandon, rappelez-vous que plus bas est mieux.
+
+### Pièges courants
+
+- Lire une année de district isolément. Regardez la tendance et les années voisines.
+- Les petits districts donnent des pourcentages bruités. Lisez plusieurs années, pas une seule.
+- Comparer des régions de populations très différentes sans vérifier les numérateurs.
+- Comparer directement les résultats des niveaux 1 et 2 : les unités diffèrent par la taille et la fiabilité.
+- Oublier que le dénominateur sélectionné pour tout le pays détermine aussi les résultats régionaux. Si une région semble impossible (au-dessus de 100 %), testez un autre dénominateur avant de la signaler.
+- Classer les zones sur la seule dernière année. Combinez niveau, évolution dans le temps, complétude de la notification et qualité du dénominateur, comme dans [Couverture nationale > Meilleures et moins bonnes performances infranationales](/fr/docs/methodology/coverage#meilleures-et-moins-bonnes-performances-infranationales).
+
+## Dans les applications
+
+Le groupe **Analyse infranationale** comprend trois pages ; [Analyse infranationale](/fr/apps/countdown/subnational) donne le guide écran par écran. Les inégalités et les cibles nationales se trouvent dans [Couverture, équité et objectifs](/fr/apps/countdown/coverage-equity-targets). Dans l'application Vaxx, les onglets d'indicateurs et **Vérification personnalisée** couvrent les indicateurs de vaccination.
+
+<Steps>
+
+### Couverture infranationale[#mise-en-œuvre]
+
+Naviguez vers l'onglet **Analyse infranationale** -> **Couverture infranationale** et sélectionnez le niveau administratif d'intérêt (Région (Niveau Admin1) ou District). Ensuite, sélectionnez l'indicateur d'intérêt parmi les indicateurs clés (CPN4, Accouchements en établissement, Insuffisance pondérale à la naissance, Penta 1 et Rougeole 1). Vous pouvez également utiliser l'onglet **Vérification personnalisée** pour sélectionner tout autre indicateur d'intérêt.
+
+![Onglet de couverture infranationale montrant les estimations de couverture des naissances vivantes en établissement au fil du temps](/images/Subnational_coverage.png)
+
+### Inégalités infranationales[#mise-en-œuvre-1]
+
+Naviguez vers l'onglet **Analyse infranationale** -> **Inégalités infranationales** et inspectez les résultats régionaux et de district tracés par année, avec l'écart absolu médian par rapport à la médiane (MADM), comme mesure de synthèse pour évaluer si les inégalités ont diminué.
+
+![Onglet d'inégalités infranationales montrant le MADM par année pour les naissances vivantes en établissement](/images/subnational-coverage-inequality.png)
+
+### Objectif de couverture[#mise-en-œuvre-2]
+
+Naviguez vers l'onglet **Analyse infranationale** -> **Objectif de couverture** et lisez le pourcentage de districts d'une région atteignant chaque cible, par année. Le tableau liste les districts atteignant la cible pour l'indicateur et l'année sélectionnés.
+
+![Onglet d'objectif de couverture montrant le pourcentage d'unités infranationales atteignant la cible pour le vaccin](/images/fr-subnational-coverage-targets.png)
+
+</Steps>
+
+## Voir aussi
+
+- [Formules : niveau infranational](/fr/docs/reference/formulas#niveau-infranational)
+- [Valeurs par défaut et seuils : niveau infranational](/fr/docs/reference/defaults#niveau-infranational)
+- L'analyse nationale que cette étape reprend : [Couverture nationale](/fr/docs/methodology/coverage)
+- Étape précédente : [Évaluation de l'équité (equiplots)](/fr/docs/methodology/equity) ; étape suivante : [Mortalité](/fr/docs/methodology/mortality)

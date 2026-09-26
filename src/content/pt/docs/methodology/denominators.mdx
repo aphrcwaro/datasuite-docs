@@ -1,0 +1,187 @@
+---
+description: Como comparar as opções de denominador, baseadas nas projeções populacionais e em valores de inquérito, e escolher a que dá a cobertura mais plausível.
+---
+
+import { Callout, Steps } from 'nextra/components'
+
+# Avaliação e seleção do denominador
+
+Esta secção sobre a **seleção do denominador** ajuda a escolher a abordagem mais adequada para a estimativa do denominador no cálculo dos indicadores de cobertura a nível nacional e subnacional. Para mais informações, consulte o guia do DataSuite do Countdown.
+
+<Callout type="info">
+**Em resumo**
+- **Responde a:** Que opção de denominador dá a cobertura mais plausível, em comparação com o inquérito, a nível nacional e subnacional?
+- **Utiliza:** os números ajustados do [ajuste de dados](/pt/docs/methodology/data-adjustment), as projeções populacionais da ONU e do DHIS2, e os valores do inquérito (cobertura da CPN1 e da Penta1, taxa de natimortalidade, TMN, TMPN) da [configuração da análise](/pt/docs/methodology/analysis-setup#survey-params).
+- **Produz:** o denominador ou denominadores selecionados (um ou dois, consoante a análise: ver [Seleção da melhor opção de denominador](#seleção-da-melhor-opção-de-denominador)), utilizados para os indicadores de cobertura na [cobertura nacional](/pt/docs/methodology/coverage).
+- **Nas aplicações:** [Denominadores](/pt/apps/countdown/denominators) (**Avaliação do denominador** e **Seleção do denominador**).
+- **Valores predefinidos:** [Valores predefinidos e limiares: denominadores](/pt/docs/reference/defaults#denominadores)
+</Callout>
+
+## Porque é importante
+
+Os numeradores das estatísticas de cobertura (por exemplo, o número de nados-vivos nas unidades de saúde) são derivados dos dados das unidades de saúde e devem ser ajustados conforme demonstrado na secção anterior. O denominador das estatísticas de cobertura (por exemplo, o número de nados-vivos na população) precisa de ser estimado a nível nacional e subnacional (regiões/províncias e distritos). O numerador vem dos dados das unidades de saúde; o denominador tem de ser estimado, pelo que a escolha do denominador é tão importante como a qualidade dos dados.
+
+Para a base científica da cobertura calculada a partir dos dados das unidades de saúde e dos seus denominadores, aceda a **[Análise da cobertura: fundamentação](/pt/docs/reference/rationale#coverage-rationale)**.
+
+## Método
+
+### Cobertura de serviços[#objetivo]
+
+A **cobertura de serviços** é definida como a população que recebeu o serviço dividida pela população que necessita desse serviço (também referida como população-alvo). Numa análise de vacinação, é um número de crianças vacinadas dividido por uma população-alvo.
+
+### Opções de denominador
+
+São analisadas seis opções de denominador para determinar a linha de base mais precisa:
+
+1. **As estimativas da ONU de nados-vivos** (projeções da ONU)
+2. **A projeção do DHIS2 de nados-vivos** (projeções do DHIS2)
+3. **Derivação de denominadores a partir da utilização dos serviços de CPN1** (derivado da CPN1)
+4. **Derivação de denominadores a partir da imunização Penta1** (derivado da Penta1)
+5. **Derivação de denominadores a partir da utilização dos serviços de CPN1, com ajuste para o crescimento populacional anual** (CPN1 com crescimento populacional)
+6. **Derivação de denominadores a partir da imunização Penta1, com ajuste para o crescimento populacional anual** (Penta1 com crescimento populacional)
+
+<Callout type="warning">
+
+**As projeções da ONU são apenas nacionais.** O guia de vacinação Countdown de 2024: «A nível subnacional, não existem projeções da ONU disponíveis.» Abaixo do nível nacional, compare as projeções do DHIS2 e as opções derivadas da CPN1 e da Penta1. Nas aplicações, as projeções da ONU aparecem na comparação nacional; os denominadores que pode selecionar são DHIS2, CPN1, Penta1, CPN1 com crescimento populacional e Penta1 com crescimento populacional.
+
+</Callout>
+
+### Cálculo dos denominadores derivados
+
+A opção derivada da CPN1 parte do número de mulheres com uma primeira consulta pré-natal e avança, ao longo da gravidez, até às crianças elegíveis; a opção derivada da Penta1 parte do número de crianças vacinadas com a Penta1 e recua.
+
+| População | A partir da CPN1 | A partir da Penta1 |
+| --- | --- | --- |
+| Gravidezes | CPN1 ÷ cobertura da CPN1 no inquérito | partos ÷ (1 − perdas de gravidez) |
+| Partos | gravidezes × (1 − perdas de gravidez) | nascimentos × (1 − 0,5 × taxa de gemelaridade) |
+| Nascimentos | partos ÷ (1 − 0,5 × taxa de gemelaridade) | nados-vivos ÷ (1 − taxa de natimortalidade) |
+| Nados-vivos | nascimentos × (1 − taxa de natimortalidade) | crianças ÷ (1 − TMN) |
+| Crianças elegíveis para a Penta (menos de 1 ano) | nados-vivos × (1 − TMN) | Penta1 ÷ cobertura da Penta1 no inquérito |
+| Alvo do sarampo 1 | crianças × (1 − TMPN) | crianças × (1 − TMPN) |
+| Alvo do sarampo 2 | crianças × (1 − 2 × TMPN) | crianças × (1 − 2 × TMPN) |
+
+Cada indicador de cobertura utiliza a população correspondente: as gravidezes para a CPN, os partos para os partos institucionais, os nados-vivos para os nados-vivos institucionais e a BCG, as crianças para a Penta, e os alvos do sarampo para o sarampo. As projeções de nados-vivos do DHIS2 e da ONU são convertidas para as outras populações com os mesmos pressupostos.
+
+**Pressupostos por defeito (guia):**
+
+| Pressuposto | Valor por defeito |
+| --- | --- |
+| Perdas de gravidez | 3% |
+| Taxa de natimortalidade | 2% |
+| Taxa de gemelaridade | 1,5% |
+| Taxa de mortalidade neonatal (TMN) | 3% |
+| Taxa de mortalidade pós-neonatal (TMPN) | 2,4% |
+
+<Callout type="info">
+
+As aplicações utilizam os valores do inquérito mais recente do país quando estão disponíveis: cobertura da CPN1 e da Penta1 (caso contrário, 98% e 97%), taxa de natimortalidade, TMN e TMPN. Quando o inquérito não indica a TMN, as aplicações utilizam 2,5%, e não os 3% do guia. As perdas de gravidez e a taxa de gemelaridade utilizam sempre os valores por defeito.
+
+</Callout>
+
+### Seleção da melhor opção de denominador
+
+O objetivo aqui é identificar a melhor opção de denominador para o cálculo dos indicadores de cobertura. O número de denominadores a escolher depende da análise.
+
+<Callout type="info">
+
+**As análises RMNCAH e de vacinação diferem aqui:** uma análise de vacinação utiliza um único denominador para todos os indicadores de imunização (o **Denominador de vacinação** da aplicação Vaxx); uma análise RMNCAH utiliza dois: um **denominador materno** para os indicadores de CPN e de parto e um **denominador de imunização** para os indicadores de imunização (o **Denominador materno** e o **Denominador de vacinação** da aplicação RMNCAH). Ver [Análises RMNCAH e de vacinação](/pt/docs/reference/rmncah-vs-vaccine).
+
+</Callout>
+
+Para identificar a melhor opção, siga estes passos: (1) a [comparação da tendência populacional](#comparação-da-tendência-populacional), abaixo; depois, em [Interpretação](#interpretação), (2) o [exame da seleção do denominador](#exame-da-seleção-do-denominador) e (3) a [seleção final e síntese](#seleção-final-e-síntese).
+
+### Comparação da tendência populacional
+
+Na secção **Tendência populacional**, compare as tendências da população total, do total de nados-vivos e da população com menos de 1 ano entre as projeções da ONU e as do DHIS2.
+
+Selecione as tendências dos indicadores (população total, nados-vivos ou população com menos de 1 ano) que sejam consistentes entre as duas fontes, com estimativas geralmente próximas: as duas fontes estão próximas e seguem a mesma direção, com uma diferença estável e plausível entre a ONU e o DHIS2.
+
+- **Exemplo:** pode selecionar a população com menos de 1 ano se as estimativas da ONU e as projeções do DHIS2 para essa grupo demográfico forem muito próximas.
+
+![Comparação da população entre as projeções da ONU e do DHIS2](/images/pt-denominator-population-trend.png)
+
+<Callout type="info">
+
+O indicador selecionado neste passo define a população DHIS2 a partir da qual se constroem os denominadores derivados, e será utilizado para ajustar, em função do crescimento populacional, as opções derivadas da CPN1 e da Penta1.
+
+</Callout>
+
+**Verifique a qualidade das projeções do DHIS2.** O guia considera uma projeção do DHIS2 inconsistente quando:
+
+- **Ao longo do tempo:** a taxa de crescimento populacional ou a taxa bruta de natalidade (TBN) varia 2 por 1000 ou mais de um ano para o outro.
+- **Em relação às projeções da ONU:** a população difere mais de 5% (diferença relativa), a taxa de crescimento mais de 0,3% (diferença absoluta), ou a TBN mais de 5 por 1000.
+- **Taxa bruta de mortalidade implícita:** TBM = TBN − taxa de crescimento é negativa ou inferior a 5 por 1000.
+
+As aplicações mostram as tendências; estas verificações são feitas pelo analista.
+
+## Interpretação
+
+### Leitura das tendências da população
+
+- Grandes diferenças entre a ONU e o DHIS2 sugerem uma base censitária desatualizada ou um valor de população errado no livro Excel.
+- Uma quebra súbita numa das linhas indica geralmente uma alteração na forma como a população foi projetada, não uma variação real dos nascimentos.
+- As projeções do DHIS2 tendem a divergir quando assentam num censo antigo.
+
+### Exame da seleção do denominador
+
+Na secção **Seleção do denominador**, examine a consistência entre as estimativas do inquérito e a estimativa calculada a partir dos dados do DHIS2 utilizando cada método de denominador. Para isso, compare três conjuntos de gráficos a nível nacional e subnacional:
+
+**a. Comparação das estimativas nacionais:** comece por comparar a estimativa nacional de cada indicador entre os dados de rotina e os dados do inquérito, examinando o primeiro gráfico de barras para o ano do inquérito. A figura mostra uma linha horizontal tracejada que indica a estimativa do inquérito e uma barra correspondente à estimativa de rotina. Um denominador que dê uma cobertura próxima da do inquérito, sem ultrapassar 100%, é um bom candidato. Ao fazer esta comparação, anote as melhores opções de denominador (pode haver mais do que uma opção viável).
+
+![Cobertura nacional por opção de denominador comparada com a estimativa do inquérito](/images/pt-denominator-best-selection.png)
+
+**b. Comparação subnacional no ano do inquérito:** no segundo conjunto de figuras, as barras horizontais representam a estimativa de cobertura dos dados de rotina comparada com o «diamante», que representa a estimativa do inquérito. É produzida uma figura para cada opção de denominador. Reveja cada figura e identifique a melhor opção de denominador com base na proximidade entre a estimativa de cobertura do inquérito e a dos dados de rotina. Procure a opção que melhor concorda com o inquérito nas várias regiões. Do mesmo modo, examine as estimativas que são implausíveis (por exemplo, estimativas de cobertura acima, ou muito acima, de 100%). Anote a melhor opção de denominador.
+
+**c. Tendências das estimativas nacionais:** examine a estimativa de tendência de cada opção de denominador, procurando consistência e plausibilidade geral nas tendências históricas: tendências plausíveis e regulares.
+
+![Cobertura nacional ao longo do tempo por opção de denominador](/images/pt-denominator-national-coverage-overtime.png)
+
+<Callout type="info">
+
+**O inquérito é a referência.** O guia compara a cobertura dos **nados-vivos institucionais** e da **Penta3** obtida com cada opção com o inquérito mais recente, e seleciona o método com a menor diferença absoluta entre a cobertura de rotina e a do inquérito, a nível nacional e subnacional.
+
+</Callout>
+
+### Seleção final e síntese
+
+**Combine as suas anotações** dos subpassos (a), (b) e (c) acima para selecionar o denominador com melhor desempenho (um ou dois, consoante a análise: ver [Seleção da melhor opção de denominador](#seleção-da-melhor-opção-de-denominador)).
+
+**Resuma a sua escolha** num parágrafo curto, documentando a justificação de cada denominador selecionado.
+
+- O melhor denominador não é o que dá a cobertura mais alta, mas o que melhor concorda com o inquérito (o mais próximo dele) e se mantém estável e consistente ao longo do tempo.
+- Os denominadores derivados de CPN 1 ou de Penta 1 pressupõem que a maior parte da população utiliza o serviço e que as unidades notificam completamente. São mais fracos onde a notificação é deficiente; se os resultados parecerem estranhos, volte à [qualidade dos dados](/pt/docs/methodology/data-quality).
+- Os denominadores subnacionais podem ser menos fiáveis do que os nacionais. Leia-os em conjunto com a qualidade dos dados dos distritos.
+
+<Callout type="warning">
+Um denominador derivado de Penta1 faz com que a cobertura de Penta1 pareça próxima de 100% por construção. Avalie-o com Penta3 e Sarampo 1, e face ao inquérito.
+</Callout>
+
+### Armadilhas comuns
+
+- Comparar com o inquérito quando o ano do inquérito está longe dos anos da análise. Pondere isso no seu julgamento.
+- Escolher um denominador por gráfico em vez de uma única vez para toda a análise. O denominador que seleciona altera todos os resultados de cobertura, desigualdade, metas, mortalidade e sistema de saúde.
+
+## Nas aplicações
+
+<Steps>
+
+### Avalie as tendências da população
+
+Na página **Avaliação do denominador** (**Tendência populacional** na aplicação Vaxx), compare as projeções da ONU e do DHIS2 e selecione a melhor população (ver [Avaliação do denominador](/pt/apps/countdown/denominators#avaliação-do-denominador)).
+
+### Compare as opções de denominador
+
+Na página **Seleção do denominador**, compare a cobertura obtida com cada opção com o inquérito, a nível nacional, a nível subnacional e ao longo do tempo (ver [Seleção do denominador](/pt/apps/countdown/denominators#seleção-do-denominador)).
+
+### Escolha o denominador
+
+Defina o denominador ou denominadores que o resto da análise utiliza (ver [Escolher o denominador](/pt/apps/countdown/denominators#escolher-o-denominador)).
+
+</Steps>
+
+## Ver também
+
+- [Análise da cobertura: fundamentação](/pt/docs/reference/rationale#coverage-rationale)
+- [Fórmulas: denominadores](/pt/docs/reference/formulas#denominadores)
+- [Valores predefinidos e limiares: denominadores](/pt/docs/reference/defaults#denominadores)
+- Etapa anterior: [Ajuste de dados](/pt/docs/methodology/data-adjustment) · Etapa seguinte: [Cobertura nacional](/pt/docs/methodology/coverage)

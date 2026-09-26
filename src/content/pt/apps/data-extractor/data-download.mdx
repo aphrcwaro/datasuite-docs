@@ -1,3 +1,6 @@
+---
+description: Como criar uma tarefa de transferência no Downloads Manager do Data Extractor, definir os parâmetros e exportar dados do DHIS2 extraídos em lotes.
+---
 import { Callout, Steps } from 'nextra/components'
 
 # Transferência de dados
@@ -26,7 +29,7 @@ Esta abordagem reduz o risco de tempo limite excedido em transferências grandes
 
 ### Configurar os parâmetros da transferência
 
-Selecione o nome do mapeamento (caso existam vários mapeamentos), o período (datas de início e de fim) e o nível administrativo e, em seguida, clique em **Start Download**.
+Selecione o mapeamento (**Mapping Configuration**, caso existam vários mapeamentos), o período (**Date Range**, datas de início e de fim), a **Frequency** (mensal ou anual; apresentada apenas para mapeamentos Custom), o nível administrativo (**Admin Level**) e, opcionalmente, uma **Sub-region** para limitar a transferência a uma área e, em seguida, clique em **Start Download**.
 
 ![Caixa de diálogo Configure Download Task](/images/extractor_download_config.jpg)
 
@@ -38,6 +41,10 @@ Selecione o nome do mapeamento (caso existam vários mapeamentos), o período (d
 - **Admin Level:** utilize o nível 3.
 
 </Callout>
+
+### Exportar os dados
+
+Quando a tarefa termina, passa para **Recent History**. Na respetiva coluna **Actions**, clique em **Export to Excel** para guardar o livro que as [aplicações RMNCAH e Vaxx](/pt/apps/countdown/getting-started) carregam (folhas `Service_data`, `Population_data`, `Reporting_completeness` e `Admin_data`), ou em **Export to JSON**. Uma tarefa falhada pode ser reiniciada com **Retry Download**. Num servidor DHIS2 que utilize o calendário etíope, **Excel labels** permite escolher etiquetas de período etíopes (Ethiopic) ou gregorianas (Gregorian) para o ficheiro Excel.
 
 </Steps>
 

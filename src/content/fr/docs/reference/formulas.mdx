@@ -1,0 +1,302 @@
+---
+description: Toutes les formules de la méthodologie Countdown, dans l'ordre de l'analyse, avec la signification de chaque symbole et un lien vers la section qui l'explique.
+title: Formules
+---
+
+# Formules
+
+Toutes les formules qu'énonce la [méthodologie Countdown](/fr/docs/methodology), réunies en un seul endroit, dans l'ordre de l'analyse. Chacune indique la signification de ses symboles et renvoie à la section qui l'explique ; c'est cette section qui fait foi si la formulation diffère. Pour les valeurs par défaut et les seuils eux-mêmes, voir [Valeurs par défaut et seuils](/fr/docs/reference/defaults).
+
+## Qualité des données
+
+### Exhaustivité des rapports (1a, 1b, 1c)
+
+$$\text{1a} = \frac{\text{rapports mensuels des établissements reçus}}{12 \times \text{nombre d'établissements}}$$
+
+$$\text{1b} = \frac{\text{districts dont l'exhaustivité des rapports est} \ge 90\,\%}{\text{nombre total de districts}} \qquad \text{1c} = \frac{\text{districts sans valeur manquante dans aucun formulaire}}{\text{nombre total de districts}}$$
+
+- 1a et 1b sont la moyenne sur les formulaires de rapport de l'analyse : CPN, accouchement, vaccination et consultations externes (OPD) pour les analyses RMNCAH ; CPN, accouchement et vaccination pour les analyses de vaccination.
+- 1c compte un district qui n'a aucune valeur mensuelle manquante dans l'année, pour aucun formulaire.
+
+Expliqué dans : [Exhaustivité des rapports](/fr/docs/methodology/data-quality#exhaustivité-des-rapports).
+
+### Valeurs aberrantes extrêmes (2a, 2b)
+
+Une valeur mensuelle $x$ est une valeur aberrante extrême lorsqu'elle se situe en dehors de
+
+$$\tilde{x} \pm 5 \times MAD$$
+
+$$\text{2a} = \frac{\text{valeurs mensuelles non classées comme aberrantes}}{\text{nombre total de valeurs mensuelles}} \qquad \text{2b} = \frac{\text{districts sans valeur aberrante}}{\text{nombre total de districts}}$$
+
+- $\tilde{x}$ : la valeur mensuelle médiane de la même série (celle du district, ou la série nationale ou de niveau admin-1 évaluée).
+- $MAD$ : l'écart absolu médian de cette série.
+- Référence : $\tilde{x}$ et $MAD$ sont calculés sur toutes les années sauf la plus récente, de sorte que la dernière année est jugée par rapport aux années précédentes.
+
+Expliqué dans : [Détection des valeurs aberrantes](/fr/docs/methodology/data-quality#détection-des-valeurs-aberrantes).
+
+### Cohérence interne : ratios nationaux (3a, 3b, 3c)
+
+$$\text{3a} = \frac{\text{CPN1 déclarées}}{\text{Penta1 déclarés}}, \quad E_{3a} = 1{,}07 \times \frac{\text{CPN1}_{s}}{\text{Penta1}_{s}}$$
+
+$$\text{3b} = \frac{\text{Penta1 déclarés}}{\text{Penta3 déclarés}}, \quad E_{3b} = \frac{\text{Penta1}_{s}}{\text{Penta3}_{s}} \qquad \text{3c} = \frac{\text{VPO1 déclarés}}{\text{VPO3 déclarés}}, \quad E_{3c} = \frac{\text{VPO1}_{s}}{\text{VPO3}_{s}}$$
+
+Un ratio national $r$ est acceptable lorsque
+
+$$\lvert r - E \rvert \le 0{,}05$$
+
+- $E$ : le ratio attendu ; $\text{CPN1}_{s}$, $\text{Penta1}_{s}$, ... : la couverture dans l'enquête la plus récente.
+- 1,07 : le ratio CPN1 / Penta1 attendu lorsque la couverture de l'enquête est la même pour les deux, avec 3 % de pertes de grossesse, 2 % de mortinaissances, 1,5 % de jumeaux et 3 % de mortalité néonatale avant Penta1.
+- 3c (VPO1 / VPO3) concerne les analyses de vaccination.
+
+Expliqué dans : [Cohérence interne](/fr/docs/methodology/data-quality#cohérence-interne) et [Calculs de ratios](/fr/docs/methodology/data-quality#calculs-de-ratios).
+
+### Cohérence interne : ratios des districts
+
+$$\text{contrôle de district} = \frac{\text{districts avec } 1{,}0 \le r_d \le 1{,}5}{\text{nombre total de districts}}$$
+
+- $r_d$ : le ratio du district -- CPN1 / Penta1 (3c dans les analyses RMNCAH, 3f dans les analyses de vaccination), Penta1 / Penta3 (3d ; 3g), VPO1 / VPO3 (analyses de vaccination, 3h).
+
+Expliqué dans : [Cohérence interne](/fr/docs/methodology/data-quality#cohérence-interne).
+
+### Score global de qualité des données
+
+$$\text{Score}_{\text{RMNCAH}} = \text{moyenne}\,(\text{1a}, \text{1b}, \text{1c}, \text{2a}, \text{2b}, \text{3c}, \text{3d})$$
+
+$$\text{Score}_{\text{vaccination}} = \text{moyenne}\,(\text{1a}, \text{1b}, \text{1c}, \text{2a}, \text{2b}, \text{3f}, \text{3g}, \text{3h})$$
+
+- Les composantes sont les mesures ci-dessus ; les contrôles des ratios de district sont 3c, 3d (RMNCAH) ou 3f, 3g, 3h (vaccination). Le guide de 2024 excluait 1c du score ; les applications l'incluent.
+
+Expliqué dans : [Score de qualité global](/fr/docs/methodology/data-quality#score-de-qualité-global).
+
+## Ajustement des données
+
+### Ajustement pour les rapports incomplets
+
+$$N_{\text{adj}} = N_{\text{rep}} + N_{\text{rep}} \times \left( \frac{1}{C} - 1 \right) \times k$$
+
+- $N_{\text{adj}}$ : le nombre d'événements ajusté pour les rapports incomplets.
+- $N_{\text{rep}}$ : le nombre brut d'événements déclarés.
+- $C$ : l'exhaustivité des rapports, la proportion de rapports d'établissements attendus réellement reçus.
+- $k$ : le rapport entre le volume de services des établissements non déclarants et celui des établissements déclarants (fixé par l'analyste pour chaque service : l'application commence à 0 ; la valeur par défaut du guide est 0,25).
+
+Expliqué dans : [Formules et paramètres d'ajustement du numérateur](/fr/docs/methodology/data-adjustment#formules-et-paramètres-dajustement-du-numérateur) et [Configuration du facteur k](/fr/docs/methodology/data-adjustment#configuration-du-facteur-k).
+
+### Faibles taux de notification
+
+$$C = \begin{cases} C_{\text{déclaré}} & \text{si } 75\,\% \le C_{\text{déclaré}} \le 100\,\% \\ \text{médiane}\,\{\, C_{\text{district}} : 75\,\% \le C_{\text{district}} \le 100\,\% \,\} & \text{si } C_{\text{déclaré}} < 75\,\% \text{ ou manquant} \end{cases}$$
+
+- $C_{\text{déclaré}}$ : le taux de notification d'un district pour un service au cours d'un mois.
+- $C_{\text{district}}$ : les taux de notification du district pour ce service. Le nombre du mois est ensuite ajusté avec $k$ comme d'habitude ; le nombre lui-même est conservé.
+
+Expliqué dans : [Règles de seuil de données critiques](/fr/docs/methodology/data-adjustment#règles-de-seuil-de-données-critiques).
+
+### Remplacement des valeurs aberrantes et manquantes
+
+$$x_{\text{aberrante}} \rightarrow \text{médiane}\,(\text{mois non aberrants du district la même année})$$
+
+$$x_{\text{manquante}} \rightarrow \text{médiane}\,(\text{valeurs mensuelles du district la même année})$$
+
+- Une valeur aberrante est une valeur mensuelle en dehors de $\tilde{x} \pm 5 \times MAD$ de la série du district (voir [Valeurs aberrantes extrêmes](#valeurs-aberrantes-extrêmes-2a-2b)).
+
+Expliqué dans : [Résumé des règles de gestion de l'ajustement des données](/fr/docs/methodology/data-adjustment#résumé-des-règles-de-gestion-de-lajustement-des-données).
+
+## Dénominateurs
+
+### Couverture
+
+$$\text{Couverture} = \frac{\text{population ayant reçu le service}}{\text{population ayant besoin du service}}$$
+
+- Le numérateur est le nombre ajusté issu des données des établissements ; le dénominateur est la population cible, estimée avec l'option de dénominateur retenue.
+
+Expliqué dans : [Évaluation et sélection du dénominateur](/fr/docs/methodology/denominators#objectif).
+
+### Dénominateurs dérivés de la CPN1
+
+$$
+\begin{aligned}
+\text{grossesses} &= \frac{\text{CPN1}}{\text{couverture CPN1 de l'enquête}} \\
+\text{accouchements} &= \text{grossesses} \times (1 - \text{pertes de grossesse}) \\
+\text{naissances} &= \frac{\text{accouchements}}{1 - 0{,}5 \times \text{taux de gémellité}} \\
+\text{naissances vivantes} &= \text{naissances} \times (1 - \text{taux de mortinatalité}) \\
+\text{nourrissons} &= \text{naissances vivantes} \times (1 - \text{TMN}) \\
+\text{cible rougeole 1} &= \text{nourrissons} \times (1 - \text{TMPN}) \\
+\text{cible rougeole 2} &= \text{nourrissons} \times (1 - 2 \times \text{TMPN})
+\end{aligned}
+$$
+
+- TMN, TMPN : taux de mortalité néonatale et post-néonatale ; nourrissons : les nourrissons éligibles au Penta (moins d'un an).
+- Chaque indicateur utilise la population qui lui correspond : grossesses pour la CPN, accouchements pour les accouchements en établissement, naissances vivantes pour les naissances vivantes en établissement et le BCG, nourrissons pour le Penta, cibles rougeole pour la rougeole.
+
+Expliqué dans : [Calcul des dénominateurs dérivés](/fr/docs/methodology/denominators#calcul-des-dénominateurs-dérivés).
+
+### Dénominateurs dérivés du Penta1
+
+$$
+\begin{aligned}
+\text{nourrissons} &= \frac{\text{Penta1}}{\text{couverture Penta1 de l'enquête}} \\
+\text{naissances vivantes} &= \frac{\text{nourrissons}}{1 - \text{TMN}} \\
+\text{naissances} &= \frac{\text{naissances vivantes}}{1 - \text{taux de mortinatalité}} \\
+\text{accouchements} &= \text{naissances} \times (1 - 0{,}5 \times \text{taux de gémellité}) \\
+\text{grossesses} &= \frac{\text{accouchements}}{1 - \text{pertes de grossesse}}
+\end{aligned}
+$$
+
+- Les cibles rougeole sont calculées à partir des nourrissons, comme pour la CPN1.
+- Les versions « croissance démographique » des options CPN1 et Penta1 ajustent ces valeurs pour la croissance annuelle de la population, à l'aide de l'indicateur de population choisi lors de la [comparaison des tendances de la population](/fr/docs/methodology/denominators#comparaison-des-tendances-de-la-population) ; la page de méthodologie ne donne pas de formule pour cet ajustement.
+
+Expliqué dans : [Calcul des dénominateurs dérivés](/fr/docs/methodology/denominators#calcul-des-dénominateurs-dérivés).
+
+### Taux brut de mortalité implicite (contrôle des projections DHIS2)
+
+$$\text{TBM} = \text{TBN} - \text{taux de croissance}$$
+
+- TBM, TBN : taux bruts de mortalité et de natalité (pour 1 000). Une projection DHIS2 est signalée lorsque le TBM implicite est négatif ou inférieur à 5 pour 1 000.
+
+Expliqué dans : [Comparaison des tendances de la population](/fr/docs/methodology/denominators#comparaison-des-tendances-de-la-population).
+
+### Comparaison avec l'enquête
+
+$$\text{meilleure option} = \arg\min_{\text{option}} \; \lvert \text{couverture}_{\text{routine, option}} - \text{couverture}_{\text{enquête}} \rvert$$
+
+- Comparée pour les naissances vivantes en établissement et le Penta3 avec l'enquête la plus récente (la référence), aux niveaux national et infranational.
+
+Expliqué dans : [Examen de la sélection du dénominateur](/fr/docs/methodology/denominators#examen-de-la-sélection-du-dénominateur).
+
+## Couverture
+
+### Dénominateurs de la vaccination
+
+$$\text{Dénominateur} = \text{Naissances vivantes} - \text{Décès néonatals}$$
+
+$$\text{Dénominateur rougeole 1} = \text{Naissances vivantes} - \text{Décès néonatals} - \text{Décès postnéonatals}$$
+
+$$\text{Dénominateur rougeole 2} = \text{Naissances vivantes} - \text{Décès néonatals} - (2 \times \text{Décès postnéonatals})$$
+
+- Le premier est le dénominateur du BCG et des doses de Penta (enfants éligibles à la vaccination) ; rougeole 1 utilise les enfants qui survivent à la première année ; rougeole 2 les enfants de 24 à 35 mois.
+
+Expliqué dans : [Vaccination](/fr/docs/methodology/coverage#vaccination).
+
+### Demande satisfaite en planification familiale
+
+$$\text{Demande satisfaite} = \frac{\text{Utilisation de contraceptifs modernes}}{\text{Besoins non satisfaits} + \text{Utilisation de contraceptifs modernes}}$$
+
+Expliqué dans : [Planification familiale](/fr/docs/methodology/coverage#planification-familiale).
+
+## Niveau infranational
+
+### Indice de couverture composite
+
+$$\text{Indice} = \frac{\text{CPN4} + \text{naissances vivantes en établissement} + \text{SBA} + \text{TPI2} + \text{soins postnatals} + \text{Penta3} + \text{Rougeole 1}}{7}$$
+
+- La couverture de chaque indicateur, avec un poids égal (SBA : assistance par du personnel qualifié à la naissance).
+
+Expliqué dans : [Résumés statistiques infranationaux (résumé d'une page)](/fr/docs/methodology/subnational#résumés-statistiques-infranationaux-résumé-dune-page).
+
+### Unités atteignant une cible
+
+$$\text{Unités atteignant la cible} = \frac{\text{régions ou districts atteignant la cible}}{\text{nombre total de régions ou de districts}} \times 100$$
+
+- Une cible telle que « Penta3 d'au moins 80 % dans chaque district » est atteinte lorsque ce pourcentage atteint 100 %.
+
+Expliqué dans : [Valeurs cibles](/fr/docs/methodology/subnational#valeurs-cibles).
+
+### Inégalité (MADM)
+
+L'écart absolu médian par rapport à la médiane (MADM) de la couverture des districts au sein d'une unité admin-1 mesure la dispersion entre districts ; la page de méthodologie le définit en mots et ne donne pas de formule.
+
+Expliqué dans : [Inégalité](/fr/docs/methodology/subnational#inégalité).
+
+## Mortalité
+
+### Taux de mortalité en établissement
+
+$$\text{iMMR} = \frac{\text{décès maternels en établissement}}{\text{naissances vivantes en établissement} / 100\,000}$$
+
+$$\text{iSBR} = \frac{\text{mortinaissances en établissement}}{\text{naissances en établissement} / 1\,000}$$
+
+$$\text{Décès néonatals avant la sortie} = \frac{\text{décès néonatals avant la sortie}}{\text{naissances vivantes en établissement} / 1\,000}$$
+
+- Les taux de la population (MMR, SBR) et de la communauté (cMMR, cSBR) sont les mêmes, avec les décès et les naissances de la population ou de la communauté. Ils sont calculés à partir de données non ajustées.
+
+Expliqué dans : [Mortalité institutionnelle dans l'approche analytique CD2030](/fr/docs/methodology/mortality#mortalité-institutionnelle-dans-lapproche-analytique-cd2030).
+
+### Mortinaissances par rapport aux décès maternels
+
+$$\text{ratio} = \frac{\text{mortinaissances déclarées}}{\text{décès maternels déclarés}}$$
+
+- Généralement sur une année ; un signal de qualité des données est levé lorsque le ratio est en dehors de 5-25.
+
+Expliqué dans : [Ratio des mortinaissances par rapport aux décès maternels au niveau national](/fr/docs/methodology/mortality#ratio-des-mortinaissances-par-rapport-aux-décès-maternels-au-niveau-national).
+
+### MMR de la population, de la communauté et en établissement
+
+$$M_p = (M_i \times P_i) + (M_c \times (1 - P_i))$$
+
+$$M_c = \frac{M_p - (M_i \times P_i)}{1 - P_i}$$
+
+- $M_p$ : ratio de mortalité maternelle dans la population ; $M_i$ : ratio de mortalité maternelle en établissement ; $M_c$ : ratio de mortalité maternelle dans la communauté.
+- $P_i$ : la proportion des naissances vivantes en établissement.
+
+Expliqué dans : [Modélisation mathématique et formulations](/fr/docs/methodology/mortality#modélisation-mathématique-et-formulations) et [Calcul rétroactif de la mortalité communautaire](/fr/docs/methodology/mortality#calcul-rétroactif-de-la-mortalité-communautaire).
+
+### MMR en établissement attendu et exhaustivité des rapports
+
+$$M_i \text{ attendu} = \frac{M_p}{P_i + \left( \frac{M_c}{M_i} \times (1 - P_i) \right)}$$
+
+$$\text{Exhaustivité des rapports des établissements} = \frac{M_i \text{ signalé}}{M_i \text{ attendu}}$$
+
+- $\frac{M_c}{M_i}$ : le rapport supposé entre la mortalité maternelle communautaire et celle en établissement.
+- La même approche s'applique aux mortinaissances, avec toutes les naissances au lieu des naissances vivantes.
+
+Expliqué dans : [Calcul de la mortalité en établissement attendue](/fr/docs/methodology/mortality#calcul-de-la-mortalité-en-établissement-attendue) et [Calcul de l'exhaustivité des rapports](/fr/docs/methodology/mortality#calcul-de-lexhaustivité-des-rapports).
+
+### Décès néonatals avant la sortie : contrôle approximatif de l'exhaustivité
+
+$$\text{mortalité néonatale en établissement (avant la sortie)} \ge 0{,}5 \times \text{mortalité néonatale de la population}$$
+
+Expliqué dans : [Considérations pour l'iSBR](/fr/docs/methodology/mortality#considérations-pour-lisbr).
+
+### Valeurs aberrantes des données de mortalité
+
+$$\lvert x_{\text{année}} - \bar{x} \rvert > 3\sigma \qquad \text{ou} \qquad \lvert x_{\text{mois}} - \tilde{x} \rvert > 5 \times MAD$$
+
+- $\bar{x}$, $\sigma$ : la moyenne annuelle à long terme et l'écart-type ; $\tilde{x}$, $MAD$ : la médiane de référence et l'écart absolu médian des valeurs mensuelles.
+
+Expliqué dans : [Seuils de détection des valeurs aberrantes](/fr/docs/methodology/mortality#seuils-de-détection-des-valeurs-aberrantes).
+
+## Utilisation des services et système de santé
+
+### Utilisation des consultations externes et de l'hospitalisation
+
+$$\text{Visites OPD par enfant et par an} = \frac{\text{visites OPD ajustées des moins de 5 ans dans l'année}}{\text{population des moins de 5 ans (projection DHIS2)}}$$
+
+$$\text{Admissions pour 100 enfants de moins de 5 ans} = \frac{\text{admissions des moins de 5 ans dans l'année}}{\text{population des moins de 5 ans}} \times 100$$
+
+$$\text{Sorties} = \text{Admissions} - \text{Décès}$$
+
+- Les parts des visites OPD et des admissions imputables aux enfants de moins de cinq ans sont les visites (admissions) des moins de 5 ans divisées par l'ensemble des visites (admissions).
+
+Expliqué dans : [Utilisation des services de consultation externe](/fr/docs/methodology/service-utilisation#utilisation-des-services-de-consultation-externe) et [Utilisation des services d'hospitalisation](/fr/docs/methodology/service-utilisation#utilisation-des-services-dhospitalisation).
+
+### Taux de létalité
+
+$$\text{Taux de létalité pédiatrique} = \frac{\text{Nombre d'enfants qui décèdent à l'hôpital}}{\text{Nombre total d'admissions (Sorties + Décès)}}$$
+
+- Calculé uniquement à partir de données non ajustées.
+
+Expliqué dans : [Taux de létalité](/fr/docs/methodology/service-utilisation#taux-de-létalité).
+
+### Densités du système de santé
+
+$$\text{Densité des établissements de santé} = \left( \frac{\text{Nombre total d'établissements de santé}}{\text{Population totale}} \right) \times 10\,000$$
+
+$$\text{Densité hospitalière} = \left( \frac{\text{Nombre total d'hôpitaux}}{\text{Population totale}} \right) \times 100\,000$$
+
+$$\text{Densité des lits d'hospitalisation} = \left( \frac{\text{Nombre total de lits d'hospitalisation}}{\text{Population totale}} \right) \times 10\,000$$
+
+Expliqué dans : [Nombre d'établissements de santé pour 10 000 habitants](/fr/docs/methodology/health-system#nombre-détablissements-de-santé-pour-10-000-habitants), [Nombre d'hôpitaux pour 100 000 habitants](/fr/docs/methodology/health-system#nombre-dhôpitaux-pour-100-000-habitants) et [Densité de lits d'hospitalisation pour 10 000 habitants](/fr/docs/methodology/health-system#densité-de-lits-dhospitalisation-pour-10-000-habitants).
+
+## Voir aussi
+
+- [Valeurs par défaut et seuils](/fr/docs/reference/defaults) : les valeurs qu'utilisent les formules
+- [Définitions des indicateurs](/fr/docs/reference/indicator-definitions) : les éléments de données derrière chaque indicateur

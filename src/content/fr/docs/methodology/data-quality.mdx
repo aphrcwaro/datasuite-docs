@@ -1,0 +1,196 @@
+---
+description: "Les contrôles de qualité des données des établissements : exhaustivité des rapports, valeurs aberrantes, cohérence interne, données manquantes et score global."
+---
+
+import { Callout, Steps } from 'nextra/components'
+
+# Évaluation de la qualité des données
+
+Ce module évalue systématiquement les données des établissements de santé en tenant compte des mesures standard de qualité des données, qui incluent :
+
+- L'exhaustivité des rapports
+- La détection des valeurs aberrantes
+- La cohérence interne
+- Les données manquantes
+- Les calculs de ratios
+- Le score de qualité global
+
+<Callout type="info">
+**En bref**
+- **Répond à :** Dans quelle mesure les données des établissements de santé sont-elles complètes, plausibles et cohérentes, avant l'estimation de la couverture ?
+- **Utilise :** les données mensuelles des établissements de santé (rapports reçus et nombres de services) et, pour les ratios attendus, les couvertures CPN1, Penta1 et Penta3 (et VPO1, VPO3) de l'enquête la plus récente.
+- **Produit :** les mesures 1a-1c, 2a-2b et 3a-3h et le score de qualité global ; les valeurs manquantes et les valeurs aberrantes extrêmes sont ensuite corrigées, et les années non fiables peuvent être supprimées, à l'étape d'[ajustement des données](/fr/docs/methodology/data-adjustment).
+- **Dans les applications :** [Qualité des données](/fr/apps/countdown/data-quality) (**Qualité des données** dans l'application RMNCAH, **Évaluation de la Qualité des Données** dans l'application Vaxx).
+- **Valeurs par défaut :** [Valeurs par défaut et seuils : qualité des données](/fr/docs/reference/defaults#qualité-des-données)
+</Callout>
+
+## Pourquoi c'est important
+
+Des données d'établissements de santé de haute qualité constituent le fondement d'estimations de couverture fiables.
+Pour les bases scientifiques de chaque mesure, consultez **[Évaluation de la qualité des données : justification](/fr/docs/reference/rationale#data-quality-assessment)**.
+
+## Méthode
+
+### [Exhaustivité des rapports](/fr/docs/reference/rationale#reporting-completeness)
+
+Pour en savoir plus sur les bases scientifiques et les méthodes utilisées pour évaluer l'exhaustivité des rapports, consultez **[Exhaustivité des rapports : justification](/fr/docs/reference/rationale#reporting-completeness)**.
+
+| Mesure | Numérateur | Dénominateur | Interprétation |
+| --- | --- | --- | --- |
+| **1a** | Nombre de rapports mensuels d'établissements reçus | Total des rapports attendus *(12 × nombre d'établissements)* | ≥ 90 % est bon ; affecte l'interprétation des tendances |
+| **1b** | Districts avec ≥ 90 % d'exhaustivité des rapports | Total des districts | Identifie les districts peu performants |
+| **1c** | Districts sans valeurs manquantes dans tous les formulaires | Total des districts | Identifie la distribution des valeurs manquantes entre les districts |
+
+<Callout type="info">
+
+**Les analyses RMNCAH et de vaccination diffèrent ici :** les statistiques pour **1a** et **1b** sont la moyenne des formulaires de rapport de l'analyse : les analyses **RMNCAH** utilisent la CPN, l'accouchement, la vaccination et les consultations externes (hospitalisations exclues) ; les analyses de **vaccination** utilisent la CPN, l'accouchement et la vaccination. Le guide Countdown 2024 sur la vaccination les calculait sur le seul formulaire de vaccination. Voir [Analyses RMNCAH et vaccination](/fr/docs/reference/rmncah-vs-vaccine).
+
+</Callout>
+
+### [Détection des valeurs aberrantes](/fr/docs/reference/rationale#outlier-detection)
+
+Une valeur aberrante extrême est définie comme une **valeur mensuelle qui s'écarte de plus de 5 fois l'écart absolu médian (MAD) de la valeur médiane mensuelle de la même série** (méthode de Hampel) -- celle du district, ou la série nationale ou de niveau admin-1 évaluée. La médiane et le MAD sont calculés sur toutes les années sauf la plus récente : la dernière année est donc jugée par rapport aux années précédentes.
+Pour en savoir plus sur les bases scientifiques et les méthodes utilisées pour évaluer et corriger les valeurs aberrantes extrêmes, consultez **[Valeurs aberrantes extrêmes : justification](/fr/docs/reference/rationale#outlier-detection)**.
+
+| Mesure | Numérateur | Dénominateur | Interprétation |
+| --- | --- | --- | --- |
+| **2a** | Valeurs mensuelles non classées comme aberrantes | Total des valeurs mensuelles | ≥ 99 % attendu |
+| **2b** | Districts sans valeurs aberrantes | Total des districts | ≥ 90 % attendu |
+
+### [Cohérence interne](/fr/docs/reference/rationale#internal-consistency)
+
+- La cohérence interne évalue le degré d'alignement des indicateurs liés au sein du jeu de données, sur la base des relations épidémiologiques et de prestation de services attendues.
+- Dans le cadre analytique CD2030, cette étape complète d'autres mesures DQA en évaluant si les indicateurs qui sont biologiquement ou programmatiquement liés suivent des modèles plausibles.
+- Contrairement aux vérifications d'indicateurs isolés, la cohérence interne se concentre sur les **relations entre les indicateurs**, en s'assurant que les valeurs déclarées reflètent des parcours de prestation de services réalistes tout au long du continuum de soins.
+
+Les mesures suivantes sont prises en compte lors de l'évaluation de la cohérence interne :
+
+Ratios nationaux :
+
+| Indicateur | Numérateur | Dénominateur | Interprétation |
+| --- | --- | --- | --- |
+| **3a** | CPN1 déclaré (national) | Penta1 déclaré | Ratio attendu 1,07 × (couverture CPN1 ÷ couverture Penta1 dans l'enquête), ± 0,05 (voir [Calculs de ratios](#calculs-de-ratios)) |
+| **3b** | Penta1 déclaré (national) | Penta3 déclaré | Ratio attendu couverture Penta1 ÷ couverture Penta3 dans l'enquête, ± 0,05 |
+| **3c** *(analyses de vaccination)* | VPO1 déclaré (national) | VPO3 déclaré | Ratio attendu couverture VPO1 ÷ couverture VPO3 dans l'enquête, ± 0,05 |
+
+Ratios des districts : la part des districts dont le ratio est compris entre **1,0 et 1,5** (une plage plus large, car les ratios des districts varient davantage) :
+
+| Ratio | Analyses RMNCAH | Analyses de vaccination | Numérateur | Dénominateur |
+| --- | --- | --- | --- | --- |
+| CPN1 / Penta1 | **3c** | **3f** | Districts dont le ratio est compris entre 1,0 et 1,5 | Total des districts |
+| Penta1 / Penta3 | **3d** | **3g** | Districts dont le ratio est compris entre 1,0 et 1,5 | Total des districts |
+| VPO1 / VPO3 | – | **3h** | Districts dont le ratio est compris entre 1,0 et 1,5 | Total des districts |
+
+<Callout type="info">
+
+**Les analyses RMNCAH et de vaccination diffèrent ici :** les analyses de vaccination ajoutent le ratio VPO1/VPO3 (**3c** au niveau national, **3h** pour les districts) ; les contrôles des districts sont donc **3c** et **3d** dans les analyses RMNCAH et **3f**, **3g** et **3h** dans les analyses de vaccination. La page Cohérence interne de l'application Vaxx trace aussi VPI1 contre VPI2, sans score. Voir [Analyses RMNCAH et vaccination](/fr/docs/reference/rmncah-vs-vaccine).
+
+</Callout>
+
+### Données manquantes
+
+- Les valeurs mensuelles manquantes sont mesurées par **1c** : la part des districts sans valeur mensuelle manquante dans l'année, pour aucun formulaire de rapport (voir [Exhaustivité des rapports](#exhaustivité-des-rapports)).
+- À l'étape d'[ajustement des données](/fr/docs/methodology/data-adjustment/), une valeur mensuelle manquante est remplacée par la valeur mensuelle médiane du district pour l'année.
+
+### Calculs de ratios
+
+- **CPN1 sur Penta1 (3a).** Entre la première visite prénatale (vers 20 semaines de grossesse) et le Penta1 (6 à 8 semaines après la naissance), la méthode suppose une perte de grossesse de 3 %, une mortinatalité de 2 %, un taux de gémellité de 1,5 % et une mortalité néonatale avant le Penta1 de 3 %. Avec la même couverture de CPN1 et de Penta1 dans l'enquête, le ratio CPN1 sur Penta1 attendu est de **1,07** ; en général, le ratio attendu est 1,07 × (couverture CPN1 ÷ couverture Penta1), toutes deux tirées de l'enquête la plus récente.
+- **Penta1 sur Penta3 (3b).** La mortalité joue un rôle mineur entre 6 et 14 semaines d'âge ; le ratio attendu dépend donc de l'abandon entre les doses : couverture Penta1 ÷ couverture Penta3 dans la dernière enquête (par ex. 0,95 ÷ 0,85 = 1,12). Le ratio **VPO1 sur VPO3** (3c, analyses de vaccination) s'évalue de la même façon.
+- **Plage acceptable.** Un ratio national à **± 0,05** de sa valeur attendue est acceptable ; en dehors, signalez le ratio et discutez des explications possibles. Les ratios des districts varient davantage : un ratio compris entre **1,0 et 1,5** est considéré comme dans la plage.
+
+### Score de qualité global
+
+| Mesure | Numérateur | Dénominateur | Interprétation |
+| --- | --- | --- | --- |
+| **Score global** | Calculé automatiquement | Calculé automatiquement | Moyenne de **1a, 1b, 1c, 2a, 2b** et des contrôles de ratios des districts (voir ci-dessous) |
+
+<Callout type="info">
+
+**Les analyses RMNCAH et de vaccination diffèrent ici :** les contrôles de ratios des districts du score sont **3c, 3d** dans les analyses RMNCAH et **3f, 3g, 3h** dans les analyses de vaccination. Dans les analyses de vaccination, le 1c du score est la moyenne sur les vaccins traceurs (BCG, Penta1-3, VPO1-3, Rougeole 1) et le 2b la moyenne sur les seuls vaccins ; les analyses RMNCAH calculent les deux sur tous les indicateurs. Voir [Analyses RMNCAH et vaccination](/fr/docs/reference/rmncah-vs-vaccine).
+
+</Callout>
+
+Le guide Countdown 2024 sur la vaccination excluait 1c du score ; les applications l'incluent.
+
+## Interprétation
+
+### Taux de notification
+
+<Callout type="warning">
+Un taux de notification national élevé peut cacher de nombreux districts à faible notification. Vérifiez toujours la vue par district et le score par région.
+</Callout>
+
+- Le taux de notification mesure si les rapports sont arrivés, non si les chiffres sont exacts. Utilisez ensemble la détection des valeurs aberrantes et la cohérence interne.
+
+![Carte thermique du taux de notification infranational](/images/fr-dqa-reporting-rate.png)
+
+![Taux de notification national et unités infranationales à faible notification](/images/fr-dqa-national-repoting.png)
+
+### Valeurs aberrantes
+
+<Callout type="warning">
+
+Les valeurs aberrantes sont identifiées de manière statistique. Évaluez toujours si les écarts reflètent des événements du monde réel (par exemple, des campagnes) ou des erreurs de données.
+
+</Callout>
+
+- Au moins 99 % des valeurs mensuelles (2a) et 90 % des districts (2b) devraient être exempts de valeurs aberrantes extrêmes.
+- Un pic soudain peut être une campagne, non une erreur. Examinez la tendance avant de décider.
+
+![Carte thermique de détection des valeurs aberrantes par région et par année](/images/fr-dqa-outlier-detection.png)
+
+### Cohérence et ratios
+
+- Réfléchissez aux écarts importants d'une année à l'autre (par ex. plus de 0,10).
+- Dans une vérification de cohérence, les points éloignés de la diagonale indiquent un rapportage incohérent et méritent un examen.
+- Les graphiques de cohérence montrent la plausibilité, pas la vérité : un rapport Penta1/Penta3 inhabituel peut refléter un vrai problème d'abandon ou un problème de données.
+- Les ratios attendus proviennent des valeurs de couverture d'enquête ; de mauvaises valeurs d'enquête faussent donc cette vérification.
+
+![Vérifications de cohérence entre CPN1 et Penta1 par année](/images/fr-dqa-conistency-checks.png)
+
+![Graphiques des ratios CPN1/Penta1 et Penta1/Penta3 par année](/images/fr-dqa-internal-consistency.png)
+
+### Valeurs manquantes
+
+![Carte thermique des données manquantes par indicateur et par région](/images/fr-dqa-missingness.png)
+
+### Score global
+
+![Tableau du score global de qualité des données par année](/images/fr-dqa-overall-score.png)
+
+### Pièges courants
+
+- Un score faible est une raison d'enquêter, pas toujours d'écarter une année. Comparez avec les événements locaux avant d'utiliser [Supprimer les années](/fr/apps/countdown/data-preparation). Une année avec beaucoup de valeurs aberrantes ou une faible complétude est candidate à la **suppression d'années** ou à un ajustement prudent (voir [Ajustement des données](/fr/docs/methodology/data-adjustment#supprimer-les-années)).
+- Les résultats par district sont plus bruités que les résultats régionaux, car ils reposent sur des effectifs plus faibles.
+- Modifier le seuil de performance modifie le score : convenez-en avec votre équipe avant de comparer des années ou des pays.
+
+## Dans les applications
+
+<Steps>
+
+### Ouvrez les pages de qualité des données
+
+Elles se trouvent sous **Qualité des données** dans l'application RMNCAH et **Évaluation de la Qualité des Données** dans l'application Vaxx : voir [Qualité des données](/fr/apps/countdown/data-quality) pour chaque page et ses filtres.
+
+### Examinez les mesures
+
+Parcourez [Taux de notification](/fr/apps/countdown/data-quality#taux-de-notification), [Détection des valeurs aberrantes](/fr/apps/countdown/data-quality#détection-des-valeurs-aberrantes), [Données manquantes](/fr/apps/countdown/data-quality#données-manquantes), [Cohérence interne](/fr/apps/countdown/data-quality#cohérence-interne) et le [Score global de qualité des données](/fr/apps/countdown/data-quality#score-global-de-qualité-des-données).
+
+<Callout type="info">
+
+DataSuite calcule automatiquement le score global de qualité des données.
+
+</Callout>
+
+### Passez à la préparation des données
+
+Supprimez les années non fiables et ajustez les données dans la [Préparation des données](/fr/apps/countdown/data-preparation).
+
+</Steps>
+
+## Voir aussi
+
+- [Évaluation de la qualité des données : justification](/fr/docs/reference/rationale#data-quality-assessment)
+- [Formules : qualité des données](/fr/docs/reference/formulas#qualité-des-données)
+- [Valeurs par défaut et seuils : qualité des données](/fr/docs/reference/defaults#qualité-des-données)
+- Étape précédente : [Configuration de l'analyse](/fr/docs/methodology/analysis-setup) · Étape suivante : [Ajustement des données](/fr/docs/methodology/data-adjustment)

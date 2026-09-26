@@ -1,3 +1,6 @@
+---
+description: How to create a mapping in the Data Extractor that defines which DHIS2 data to extract, choose the Countdown or custom mode, and configure the indicators.
+---
 import { Callout, Steps } from 'nextra/components'
 
 # Mapping configuration
@@ -57,7 +60,7 @@ The **Mappings Manager** is the central place to:
 
 - **New Mapping:** start a new configuration
 - **Search bar:** locate existing mappings
-- **Actions column:** edit, download, clone, or delete the selected mapping
+- **Actions column:** edit, export as JSON, clone, or delete the selected mapping
 
 ### Downloads Manager
 
@@ -144,7 +147,7 @@ There are currently two mapping modes:
 
 <Callout type="warning">
 
-Changing the mapping mode midway will reset your progress if the mapping is not saved. Always save your mapping before switching mapping modes.
+Changing the mapping mode clears all the indicators and their configuration from the mapping you are editing, whether or not it was saved; the app asks you to confirm first (**Yes, Clear Indicators**). Choose the mapping mode before you add indicators.
 
 </Callout>
 

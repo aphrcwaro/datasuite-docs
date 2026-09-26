@@ -1,0 +1,130 @@
+---
+description: O que pode exportar das aplicações RMNCAH e Vaxx (imagens, tabelas, conjuntos de dados e relatórios) e como o assistente do DataSuite analisa os mesmos dados.
+---
+import { Tabs, Steps, Callout } from 'nextra/components'
+
+# Exportações, relatórios e IA
+
+Esta página cobre o que pode retirar da aplicação (imagens, tabelas, conjuntos de dados e relatórios), como construir um relatório e como o assistente de conversação do DataSuite pode analisar o mesmo conjunto de dados guardado. Para planear o que fazer com os resultados, consulte [Disseminação, decisões e ação](/pt/docs/methodology/dissemination) e [Aproveitar a IA para análise e interpretação](/pt/apps/ai-assistant).
+
+## Gráficos e tabelas
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+| Onde | O que obtém |
+| --- | --- |
+| Barra de ferramentas do gráfico, **Baixar Gráfico** | O gráfico como imagem PNG |
+| Barra de ferramentas do gráfico, **Baixar Dados** | Os números subjacentes ao gráfico como ficheiro Excel `.xlsx`, com folhas tituladas |
+| Tabela, **Baixar Dados** | A tabela em Excel, para o ano ou indicador escolhido em *Apenas esta tabela* |
+| Pontuação Geral da Qualidade dos Dados, Indicadores de DQA dos serviços, Sistema Nacional de Saúde | **Baixar Gráfico** (PNG) e **Baixar Dados** (Excel) para toda a tabela |
+
+Alguns gráficos oferecem também ferramentas na barra de ferramentas do cartão: editar as etiquetas de um gráfico, alterar a orientação, o tamanho do texto ou a posição da legenda, ajustar o estilo (tipos de letra, cores, linhas de grelha) e expandir o gráfico. **Personalizar este gráfico** permite aplicar uma definição a este gráfico, a todos os gráficos do cartão, a todos os gráficos do mesmo tipo ou a todos os gráficos, e ao ecrã, ao relatório ou a ambos. As definições ficam guardadas com o conjunto de dados.
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+Cada gráfico tem uma barra de ferramentas no cabeçalho do seu cartão:
+
+| Ferramenta | O que faz |
+| --- | --- |
+| Perguntar à IA | Espaço reservado para uma funcionalidade futura ("em breve"). |
+| Opções de visualização | Apenas para este gráfico: orientação (Auto ou Trocar eixos), tamanho do texto, posição da legenda (Direita, Em baixo, Oculta). |
+| Editar rótulos | Altere o título, o subtítulo, a nota, os títulos dos eixos e da legenda deste gráfico. Um campo vazio mantém o texto original. Aplica-se ao gráfico e à sua imagem transferida. O texto editado não é traduzido. |
+| Opções de estilo | Fontes, cores, ângulos, legenda, eixos, grelha e fundo deste gráfico. Guardado com o conjunto de dados. |
+| Baixar Gráfico | Guarda o gráfico como imagem PNG. |
+| Baixar Dados | Guarda os dados do gráfico num ficheiro Excel. |
+| Expandir gráfico | Amplia o gráfico. |
+
+As tabelas têm um botão **Baixar Dados** (Excel). As tabelas com um seletor de ano ou de indicador filtram apenas essa tabela, como indica a nota "Somente esta tabela". O cartão da Pontuação Geral da Qualidade dos Dados tem um botão para o gráfico e outro para os dados.
+
+As transferências seguem o que vê: o indicador, o nível administrativo, a região e o denominador atuais. O nome do ficheiro inclui o indicador e o denominador, por exemplo `penta3_...`.
+
+</Tabs.Tab>
+</Tabs>
+
+<Callout type="info">
+Como partilhar um gráfico para que os leitores o possam verificar: [Disseminação > Partilhar gráficos e tabelas](/pt/docs/methodology/dissemination#partilhar-gráficos-e-tabelas).
+</Callout>
+
+## Conjuntos de dados
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+| Onde | O que obtém |
+| --- | --- |
+| Carregar dados, **Baixar Conjunto de Dados Principal** | O conjunto de dados combinado como ficheiro Stata `.dta` |
+| Ajuste de dados, **Baixar Conjunto de Dados Ajustado** | O conjunto de dados ajustado como ficheiro `.dta` |
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+| Transferência | Onde | Ficheiro |
+| --- | --- | --- |
+| Baixar Conjunto de Dados Principal | Carregar dados, passo Carregar dados | `master_dataset.dta`, os dados combinados tal como carregados |
+| Baixar Conjunto de Dados Ajustado | Ajuste de dados, depois de **Ajustar Dados** | `master_adj_dataset.dta`, os dados ajustados |
+
+O assistente guarda também toda a análise como `nome_vaccine.rds` (consulte **[Primeiros passos](/pt/apps/countdown/getting-started)**). Esse ficheiro é a cache usada pelas ferramentas de IA abaixo e pela **[Pooled App](/pt/apps/pooled)**.
+
+</Tabs.Tab>
+</Tabs>
+
+## Relatórios
+
+A página **Relatórios**, na secção **Resultados**, constrói documentos (Word ou PDF) e apresentações (PowerPoint ou PDF) a partir do conjunto de dados carregado, começando pelos relatórios padrão desta aplicação ou por uma página em branco. Na aplicação Vaxx, exige dados ajustados. Os gráficos e as tabelas são redesenhados a partir dos dados de cada vez, e cada relatório fica guardado no conjunto de dados. O guia completo, com cada relatório padrão, o editor, os formatos de exportação e a resolução de problemas, está na página [Relatórios](/pt/apps/countdown/reports).
+
+## O assistente de conversa do DataSuite
+
+O assistente de conversação do DataSuite trabalha sobre o mesmo conjunto de dados guardado que a aplicação, sabe em que página está e responde a partir dos seus dados e da metodologia Countdown, indicando as fontes. O que pode e não pode fazer, e as boas práticas, estão na página **[Assistente de IA](/pt/apps/ai-assistant)**.
+
+<Steps>
+
+### Guardar o seu trabalho
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+Conclua o carregamento do conjunto de dados. O assistente trabalha sobre o conjunto de dados `_rmncah.rds` guardado, que é criado quando conclui o assistente de Carregar dados.
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+Conclua o assistente para que o conjunto de dados seja guardado como cache `.rds` e ajuste os dados.
+
+</Tabs.Tab>
+</Tabs>
+
+### Fazer uma pergunta
+
+Abra a conversação e pergunte.
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+Exemplos: *Lista as páginas da aplicação RMNCAH e o que cada uma lê*, *Que regiões têm cobertura de Penta3 abaixo de 80% no último ano, com o denominador selecionado?*, *Redige uma interpretação do contínuo de cuidados nacional para a reunião de revisão*.
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+Por exemplo: "Que distritos têm evasão de Penta1 para Penta3 acima de 10% no último ano?" ou "Explica por que razão a cobertura de Sarampo 1 do inquérito e a do DHIS2 diferem."
+
+</Tabs.Tab>
+</Tabs>
+
+### Verificar a resposta
+
+O assistente termina a resposta com as suas fontes: os dados que usou e as secções da metodologia. Compare os números com a página correspondente e os gráficos da aplicação antes de os citar e consulte o **[capítulo sobre IA](/pt/apps/ai-assistant)** para boas instruções.
+
+</Steps>
+
+## Armadilhas comuns
+
+- Partilhar resultados: ver [Disseminação > Armadilhas comuns](/pt/docs/methodology/dissemination#armadilhas-comuns).
+- Questionar o assistente sobre resultados antes de o Ajuste de dados ter sido executado e guardado na aplicação.
+- Aceitar uma interpretação da IA sem verificar a qualidade dos dados. O assistente lê os mesmos dados, pelo que dados fracos originam conclusões fracas. Os resultados da IA têm de ser verificados por um analista. Consulte **[Aproveitar a IA para análise e interpretação](/pt/apps/ai-assistant)**.
+
+## Limites
+
+- Na aplicação Vaxx, a referência de dados lista as 18 páginas de análise da Vaxx (carregamento, qualidade dos dados, preparação, denominadores, cobertura, desigualdade, equidade e metas). Não descreve as páginas Introdução e Relatórios.
+- Na aplicação Vaxx, os botões Perguntar à IA das barras de ferramentas dos gráficos ainda não estão ativos. Use o assistente de conversa.

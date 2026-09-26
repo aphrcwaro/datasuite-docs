@@ -1,0 +1,174 @@
+---
+description: Como abrir o RMNCAH App ou a Vaxx App no DataSuite, que ficheiros são aceites e como seguir o assistente de carregamento até ter dados prontos para análise.
+---
+import { Tabs, Steps, Callout } from 'nextra/components'
+
+# Primeiros passos
+
+Este guia leva-o desde a abertura do RMNCAH App ou da Vaxx App no DataSuite até um conjunto de dados pronto para análise. A metodologia por detrás destas etapas está descrita em [Configuração da análise](/pt/docs/methodology/analysis-setup).
+
+## Abrir a aplicação
+
+<Steps>
+
+### Iniciar a aplicação a partir do DataSuite
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+Na página de boas-vindas do DataSuite escolha **Abrir no RMNCAH** (ver [Navegar pela interface do DataSuite](/pt/docs/getting-started)). A aplicação precisa de um ficheiro para trabalhar, pelo que o DataSuite pede-lhe que escolha um. Os tipos aceites são `.xls`, `.xlsx`, `.dta` e `.rds`.
+
+Utilize o livro Excel do [Data Extractor](/pt/apps/data-extractor) na primeira vez e o `.rds` guardado nas vezes seguintes.
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+Abra o DataSuite, vá à página Início e escolha **Vaxx**. A aplicação abre na página Introdução, que apresenta o projeto Countdown sobre cobertura vacinal e desigualdades em inglês, francês ou português. Use **Carregar dados** na navegação à esquerda para começar.
+
+Se iniciar a aplicação ao abrir um ficheiro de dados no DataSuite, esse ficheiro é carregado por si.
+
+</Tabs.Tab>
+</Tabs>
+
+### Verificar se o ficheiro foi lido
+
+Abra **Carregar dados** na barra lateral. Quando o DataSuite entrega o ficheiro à aplicação, este é lido automaticamente e uma faixa verde **Carregamento concluído** indica o nome do ficheiro. Se a página mostrar, em vez disso, uma caixa **Carregar dados HFD**, escolha o ficheiro aí.
+
+</Steps>
+
+![Carregamento de dados de rotina](/images/rmncah-loading-data.jpg)
+
+## Ficheiros aceites
+
+| Formato | Notas |
+| --- | --- |
+| `.xlsx`, `.xls` | Um livro com as folhas obrigatórias (ver [Configuração da análise > Dados do HMIS](/pt/docs/methodology/analysis-setup#dados-do-hmis)). Inicia o percurso completo. |
+| `.dta` | Um único ficheiro Stata, já combinado. |
+| `.rds` | Um conjunto de dados guardado por esta aplicação. Já está validado, pelo que a aplicação abre um resumo do conjunto de dados em vez do percurso. |
+
+As outras extensões são recusadas com "Falha no carregamento: Formato de arquivo não suportado."
+
+Quando carrega um ficheiro Excel ou Stata, a aplicação procura a sua cópia guardada e, se existir, carrega-a em seu lugar. É assim que o trabalho é retomado.
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+A cópia guardada tem o nome do seu ficheiro acrescido de `_rmncah.rds`, na mesma pasta.
+
+<Callout type="info">
+Quando volta a abrir o mesmo ficheiro Excel ou Stata, é utilizada a cópia `_rmncah.rds` guardada junto a ele. Elimine essa cópia se alterou o livro Excel e pretende carregá-lo de novo.
+</Callout>
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+São aceites ficheiros até 2 GB. A cópia guardada tem o nome `nome_vaccine.rds`. Numa sessão de ambiente de trabalho, a cópia fica junto do seu ficheiro; num navegador, fica numa pasta local fixa.
+
+<Callout type="info">
+Se não for possível ler uma cópia `.rds` guardada, a aplicação volta automaticamente ao ficheiro Excel ou Stata original.
+</Callout>
+
+</Tabs.Tab>
+</Tabs>
+
+## Dois percursos em Carregar dados
+
+- **Um ficheiro `.rds` retomado** já foi validado. O assistente é substituído por uma página **Pronto para análise** com uma linha por etapa (por exemplo *15 de 15 campos definidos*, *A utilizar o ficheiro de forma integrado*) e uma ligação **Editar** que reabre qualquer etapa. **Continuar para a análise** leva-o à Taxa de notificação.
+- **Um ficheiro Excel ou Stata novo** passa pelo percurso guiado abaixo. O assistente tem uma lista de passos. Os passos desbloqueiam-se por ordem: uma etapa só abre depois de premir **Continuar** (ou **Saltar para**) na anterior, e um passo obrigatório tem de estar concluído antes de o seguinte abrir. As etapas marcadas como *opcional* podem ser saltadas.
+
+## O assistente Carregar dados
+
+<Steps>
+
+### Carregar dados
+
+Largue ou procure o seu ficheiro no cartão **Conjunto de dados** ("Procurar ou Soltar..."). O cartão mostra o ficheiro carregado. **Baixar Conjunto de Dados Principal** guarda o conjunto de dados combinado como ficheiro `.dta` (`master_dataset.dta`). Limpar o ficheiro limpa também tudo o que dele deriva.
+
+O cartão **Dados de referência adicionais (opcional)** permite substituir os conjuntos de referência integrados do país pelos seus próprios ficheiros `.dta`:
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+**Carregar dados das estimativas da ONU**, **Carregar estimativas WUENIC** e **Carregar estimativas de mortalidade da ONU**. **Restaurar padrão** volta aos dados integrados.
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+As suas próprias **estimativas da ONU** e **estimativas WUENIC**.
+
+</Tabs.Tab>
+</Tabs>
+
+### Qualidade dos dados
+
+As verificações são executadas automaticamente nas folhas carregadas. Uma faixa indica *Todas as verificações foram aprovadas — nenhum problema bloqueante encontrado* ou *Algumas verificações encontraram problemas a corrigir antes de poder continuar*. A página lista as **verificações bloqueantes** (têm de ser aprovadas para que **Continuar** funcione), as **verificações informativas** (não bloqueiam) e as **verificações de mapeamento** (diferenças nos nomes das regiões, corrigidas nas etapas de mapeamento).
+
+O que cada verificação testa: [Configuração da análise > Verificações dos dados carregados](/pt/docs/methodology/analysis-setup#verificações-dos-dados-carregados).
+
+Corrija os problemas bloqueantes no livro Excel (o ficheiro de origem) e carregue-o novamente.
+
+### Ficheiros de inquérito (opcional)
+
+Carregue, um de cada vez, até cinco ficheiros `.dta` no cartão **Pasta de dados da pesquisa**: **Dados nacionais**, **Dados regionais**, **Dados por área**, **Dados de educação materna** e **Dados por quintil do índice de riqueza**. Para que servem, e o que acontece sem eles: [Configuração da análise > Ficheiros de inquérito e ficheiro de forma](/pt/docs/methodology/analysis-setup#ficheiros-de-inquérito-e-ficheiro-de-forma). Um ficheiro que não possa ser lido mostra *Falha no carregamento* com o motivo.
+
+### Taxas nacionais
+
+Introduza ou confirme os valores do inquérito utilizados para obter os denominadores. Todos os campos são obrigatórios e **Continuar** permanece desativado enquanto for apresentado *Campos obrigatórios restantes*.
+
+- **Referência do inquérito:** **Ano recente da pesquisa** e **Ano de Início dos Dados da Pesquisa**.
+
+<Tabs items={['RMNCAH', 'Vaxx']} storageKey="countdown-app">
+<Tabs.Tab>
+
+- **Materno e neonatal:** cobertura de CPN1, CPN4, parto institucional, cesariana e baixo peso ao nascer, e perda de gravidez, nascimentos gemelares, natimortalidade, mortalidade neonatal e mortalidade pós-neonatal.
+- **Imunização:** cobertura de BCG, Penta1, Penta3 e Sarampo 1.
+
+![Taxas nacionais para o cálculo do denominador](/images/pt-national-surveys.png)
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+- **Cobertura do inquérito** para CPN1, parto institucional, BCG, Penta1, Penta3, VOP1, VOP3 e Sarampo 1.
+- **Taxas nacionais** de perda gestacional, nascimentos gemelares, natimortalidade, mortalidade neonatal e mortalidade pós-neonatal.
+
+</Tabs.Tab>
+</Tabs>
+
+Se carregou um ficheiro de inquérito nacional, os valores ficam pré-preenchidos e uma faixa indica-o. Verifique-os. O que significa cada valor, a sua unidade e o intervalo permitido (percentagens ou proporções), e como escolher os anos dos inquéritos: [Configuração da análise > Parâmetros nacionais](/pt/docs/methodology/analysis-setup#survey-params).
+
+### Ficheiro de forma (opcional)
+
+Por omissão, a aplicação utiliza um ficheiro de forma integrado (padrão) para o país ([Configuração da análise > Ficheiros de inquérito e ficheiro de forma](/pt/docs/methodology/analysis-setup#ficheiros-de-inquérito-e-ficheiro-de-forma)). Para utilizar o seu, carregue os ficheiros `.shp`, `.dbf`, `.shx` e `.prj`, escolha a coluna que contém os nomes das regiões (admin-1) e prima **Usar este ficheiro de forma**.
+
+### Mapear inquérito e Mapear ficheiro de forma
+
+Se carregou ficheiros de inquérito ou um ficheiro de forma personalizado e os nomes das regiões diferem dos do seu conjunto de dados, associe-os. Os nomes são associados automaticamente sempre que possível. Prima **Associar nomes de região**, corrija as correspondências e guarde. Reveja e guarde pelo menos uma vez, mesmo que nada precise de ser alterado. **Limpar mapeamento** recomeça.
+
+### Concluir o carregamento dos dados
+
+Na última etapa prima **Concluir o carregamento dos dados**. A aplicação combina as folhas, guarda o conjunto de dados (ver [Ficheiros aceites](#ficheiros-aceites) para o nome e o local da cópia guardada) e mostra **Pronto para análise**, com um resumo (linhas carregadas, verificações aprovadas, campos definidos, ficheiros carregados, regiões mapeadas). Escolha **Continuar para a análise**. Use **Editar** no resumo para voltar a qualquer passo.
+
+</Steps>
+
+## Resolução de problemas
+
+| Mensagem ou sintoma | Causa e solução |
+| --- | --- |
+| Upload failed: Unsupported file format. (Falha no carregamento: Formato de arquivo não suportado.) | O ficheiro não é `.xls`, `.xlsx`, `.dta` nem `.rds`. Converta-o ou exporte-o novamente. |
+| Upload failed: The file provided does not exist (Falha no carregamento: o ficheiro indicado não existe) | O caminho selecionado não existe ou o ficheiro foi movido. Selecione o ficheiro novamente. |
+| Falha no carregamento seguida de um detalhe | Não foi possível ler o livro Excel, por exemplo porque falta uma folha ou coluna obrigatória. Compare-o com a lista de folhas em Qualidade dos dados. |
+| Falha no carregamento: missing sheet(s) | Falta uma folha obrigatória no livro. Os nomes em falta são listados. |
+| Key Columns ... missing in ... | Falta uma coluna-chave numa folha, por exemplo a coluna do país ou do primeiro nível administrativo de `Admin_data`. |
+| Sheet ... is empty. | Uma folha obrigatória não tem linhas. |
+| Country contains multiple names. Please clean the data | A folha Admin indica mais do que um país. |
+| The country in the document is not supported | Não foi possível associar o nome do país. É apresentada uma sugestão "Did you mean": corrija a grafia. |
+| This dataset was built for the 'vaccine' indicator group, but this app is for 'rmncah'. (Este conjunto de dados foi criado para o grupo de indicadores 'vaccine', mas esta aplicação é para 'rmncah'.) | No RMNCAH App: foi aberto um conjunto de dados guardado de outra aplicação Countdown (Vaxx). Utilize a aplicação correspondente ou carregue o livro Excel. |
+| This dataset was built for the 'rmncah' indicator group, but this app is for 'vaccine'. | Na Vaxx App: carregou um conjunto de dados guardado pelo RMNCAH App. Use essa aplicação ou recomece a partir dos dados originais. |
+| Algumas verificações encontraram problemas a corrigir (antes de poder continuar) | Falhou uma verificação bloqueante de Qualidade dos dados. Leia a linha a vermelho, corrija o livro Excel (ficheiro de origem) e carregue-o novamente. |
+| Arquivos obrigatórios ausentes, ou o arquivo não corresponde a nenhum padrão conhecido | Falta um ficheiro de inquérito ou não foi reconhecido. |
+| Conclua primeiro as etapas anteriores | Tentou avançar. Conclua ou salte a etapa atual. |
+| Alguns nomes de região do inquérito não coincidem com o seu conjunto de dados | Utilize **Associar nomes de região** na etapa de mapeamento. |
+| Revisão necessária | As correspondências de nomes de região têm de ser revistas e guardadas antes de continuar. |
+| Carregue e conclua um conjunto de dados para desbloquear esta página | As páginas de análise permanecem bloqueadas até o carregamento estar concluído. |
+
+Depois de carregar, continue com **[Qualidade dos dados](/pt/apps/countdown/data-quality)**. Para saber como o livro é produzido, consulte o **[Data Extractor](/pt/apps/data-extractor)** e o capítulo **[configuração da análise](/pt/docs/methodology/analysis-setup)**.
